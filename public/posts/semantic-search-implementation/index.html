@@ -10,22 +10,19 @@
     <header class="site-header">
         <div class="header-content">
             <a href="/" class="site-title">My New Hugo Site</a>
+            <div class="header-links">
+                <a href="/docs" class="header-link">Documentation</a>
+                <a href="/pricing" class="header-link">Pricing</a>
+                <a href="/get-started" class="header-link get-started">Get Started</a>
+            </div>
         </div>
     </header>
-    <main>
-        <article class="single-post">
-            <div class="post-header">
-                <h1>Implementing Semantic Search: A Practical Guide</h1>
-                <div class="post-date">March 22, 2024</div>
-            </div>
-            <img src="/assets/posts/preview.png" alt="Implementing Semantic Search: A Practical Guide" class="preview-image">
-            
-            <div class="post-layout">
-                
-                <div class="toc-container">
-                    <div class="toc">
-                        <h2>Table of Contents</h2>
-                        <nav id="TableOfContents">
+    <div class="content-wrapper">
+        
+        <div class="toc-container">
+            <div class="toc">
+                <h2>Table of Contents</h2>
+                <nav id="TableOfContents">
   <ul>
     <li><a href="#what-is-semantic-search">What is Semantic Search?</a></li>
     <li><a href="#implementation-steps">Implementation Steps</a>
@@ -41,13 +38,19 @@
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
-                    </div>
+            </div>
+        </div>
+        
+        <main>
+            <article class="single-post">
+                <div class="post-header">
+                    <h1>Implementing Semantic Search: A Practical Guide</h1>
+                    <div class="post-date">March 22, 2024</div>
                 </div>
+                <img src="/assets/posts/preview.png" alt="Implementing Semantic Search: A Practical Guide" class="preview-image">
                 
-                
-                <div class="post-main">
-                    <div class="post-content">
-                        <h1 id="implementing-semantic-search-a-practical-guide">Implementing Semantic Search: A Practical Guide</h1>
+                <div class="post-content">
+                    <h1 id="implementing-semantic-search-a-practical-guide">Implementing Semantic Search: A Practical Guide</h1>
 <p>Semantic search has revolutionized how we find information by understanding the meaning behind queries rather than just matching keywords. Let&rsquo;s explore how to implement it.</p>
 <h2 id="what-is-semantic-search">What is Semantic Search?</h2>
 <p>Semantic search goes beyond traditional keyword matching to understand the intent and contextual meaning of search queries. It uses:</p>
@@ -117,13 +120,12 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>Semantic search implementation requires careful consideration of various components, but the results can significantly improve search quality and user experience.</p>
 
-                    </div>
-                    <div class="post-navigation">
-                        <a href="/" class="back-link">← Back to Home</a>
-                    </div>
                 </div>
-            </div>
-        </article>
-    </main>
+                <div class="post-navigation">
+                    <a href="/" class="back-link">← Back to Home</a>
+                </div>
+            </article>
+        </main>
+    </div>
 </body>
 </html> 

@@ -10,36 +10,38 @@
     <header class="site-header">
         <div class="header-content">
             <a href="/" class="site-title">{{ .Site.Title }}</a>
+            <div class="header-links">
+                <a href="/docs" class="header-link">Documentation</a>
+                <a href="/pricing" class="header-link">Pricing</a>
+                <a href="/get-started" class="header-link get-started">Get Started</a>
+            </div>
         </div>
     </header>
-    <main>
-        <article class="single-post">
-            <div class="post-header">
-                <h1>{{ .Title }}</h1>
-                <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
+    <div class="content-wrapper">
+        {{ if .TableOfContents }}
+        <div class="toc-container">
+            <div class="toc">
+                <h2>Table of Contents</h2>
+                {{ .TableOfContents }}
             </div>
-            <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-            
-            <div class="post-layout">
-                {{ if .TableOfContents }}
-                <div class="toc-container">
-                    <div class="toc">
-                        <h2>Table of Contents</h2>
-                        {{ .TableOfContents }}
-                    </div>
+        </div>
+        {{ end }}
+        <main>
+            <article class="single-post">
+                <div class="post-header">
+                    <h1>{{ .Title }}</h1>
+                    <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
                 </div>
-                {{ end }}
+                <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                 
-                <div class="post-main">
-                    <div class="post-content">
-                        {{ .Content }}
-                    </div>
-                    <div class="post-navigation">
-                        <a href="/" class="back-link">← Back to Home</a>
-                    </div>
+                <div class="post-content">
+                    {{ .Content }}
                 </div>
-            </div>
-        </article>
-    </main>
+                <div class="post-navigation">
+                    <a href="/" class="back-link">← Back to Home</a>
+                </div>
+            </article>
+        </main>
+    </div>
 </body>
 </html> 

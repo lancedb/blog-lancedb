@@ -170,6 +170,54 @@ main {
     font-size: 0.95rem;
 }
 
+/* Content wrapper */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+}
+
+/* Table of Contents */
+.toc-container {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    padding-right: 2rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.toc {
+    font-size: 0.95rem;
+}
+
+.toc h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-accent);
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toc li {
+    margin-bottom: 0.5rem;
+}
+
+.toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.toc a:hover {
+    color: var(--text-accent);
+}
+
 /* Single post */
 .single-post {
     background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
@@ -177,10 +225,6 @@ main {
     padding: 3rem 2.5rem 2.5rem 2.5rem;
     box-shadow: var(--shadow);
     margin-bottom: 2.5rem;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
 }
 
 .post-header {
@@ -223,57 +267,6 @@ main {
 
 .post-main {
     min-width: 0;
-}
-
-/* Table of Contents */
-.toc-container {
-    position: sticky;
-    top: 2rem;
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
-    padding-right: 1.2rem;
-    border-right: 1px solid var(--border-color);
-    background: rgba(24,26,27,0.98);
-    border-radius: 10px;
-}
-
-.toc {
-    background: none;
-    border-radius: 0;
-    padding: 0.5rem 0 0.5rem 0.5rem;
-    border: none;
-}
-
-.toc h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.7rem;
-    color: var(--text-accent);
-    font-family: 'Roboto Slab', serif;
-    letter-spacing: 0.5px;
-}
-
-.toc ul {
-    list-style: none;
-    padding-left: 0.5rem;
-}
-
-.toc li {
-    margin: 0.4rem 0;
-    font-size: 0.98rem;
-}
-
-.toc a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s;
-    display: block;
-    padding: 0.18rem 0;
-    border-radius: 4px;
-}
-
-.toc a:hover {
-    color: var(--text-accent);
-    background: rgba(79,209,197,0.08);
 }
 
 /* Post content */
@@ -378,9 +371,10 @@ a:hover {
     }
 }
 @media (max-width: 1024px) {
-    .post-layout {
+    .content-wrapper {
         grid-template-columns: 1fr;
     }
+    
     .toc-container {
         position: static;
         max-height: none;
@@ -392,7 +386,7 @@ a:hover {
     }
 }
 @media (max-width: 768px) {
-    main {
+    .content-wrapper {
         padding: 1rem;
     }
     .post-grid {
