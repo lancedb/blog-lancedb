@@ -29,13 +29,13 @@
         </div>
         {{ end }}
         <main>
+            <h1>{{ .Title }}</h1>
+            <div class="post-meta">
+                <span class="post-author">{{ .Params.author }}</span>
+                <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+            </div>
             <article class="single-post">
-                <div class="post-header">
-                    <h1>{{ .Title }}</h1>
-                    <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
-                </div>
                 <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-                
                 <div class="post-content">
                     {{ .Content }}
                 </div>
@@ -43,6 +43,21 @@
                     <a href="/" class="back-link">← Back to Home</a>
                 </div>
             </article>
+            <div class="related-posts">
+                <h2>Related Posts</h2>
+                <div class="related-posts-grid">
+                    {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+                        <article class="related-post">
+                            <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
+                            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                            <div class="post-meta">
+                                <span class="post-author">{{ .Params.author }}</span>
+                                <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                            </div>
+                        </article>
+                    {{ end }}
+                </div>
+            </div>
         </main>
     </div>
 </body>

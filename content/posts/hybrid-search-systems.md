@@ -7,8 +7,6 @@ description: "Discover how to combine vector and keyword search for optimal resu
 author: "David Myriel"
 ---
 
-# Building Hybrid Search Systems: Combining Vector and Keyword Search
-
 Hybrid search systems combine the best of both worlds: traditional keyword-based search and modern vector search. Let's explore how to implement and optimize these systems.
 
 ## What is Hybrid Search?

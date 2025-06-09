@@ -19,6 +19,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    font-size: 0.95rem;
 }
 
 /* Site header */
@@ -355,7 +356,11 @@ main {
 }
 
 .toc li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.toc ul ul > li {
+    margin-top: 0.7rem;
 }
 
 .toc a {
@@ -366,6 +371,13 @@ main {
 
 .toc a:hover {
     color: var(--text-accent);
+}
+
+.toc ul ul {
+    margin-left: 1.2rem;
+}
+.toc ul ul ul {
+    margin-left: 2.2rem;
 }
 
 /* Single post */
@@ -381,14 +393,29 @@ main {
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1rem;
+    background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
+    border-radius: 10px;
+    padding: 1.5rem;
 }
 
-.single-post h1 {
-    font-family: 'Roboto Slab', serif;
-    font-size: 2.7rem;
-    margin-bottom: 0.5rem;
+main h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
     color: var(--text-accent);
     line-height: 1.1;
+    text-align: center;
+}
+
+main .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    font-weight: 400;
 }
 
 .single-post .post-date {
@@ -407,6 +434,43 @@ main {
     box-shadow: 0 2px 12px rgba(0,0,0,0.10);
 }
 
+.single-post .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.single-post .post-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.single-post .share-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.single-post .share-button {
+    padding: 0.5rem 1rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    color: var(--text-accent);
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.single-post .share-button:hover {
+    background: var(--bg-hover);
+    color: #fff;
+}
+
 /* Post layout */
 .post-layout {
     display: grid;
@@ -421,10 +485,12 @@ main {
 
 /* Post content */
 .post-content {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     color: var(--text-primary);
     padding-bottom: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .post-content h2 {
@@ -898,5 +964,86 @@ a:hover {
         min-width: 70px;
         font-size: 0.92rem;
         padding: 0.5rem 0.7rem;
+    }
+}
+
+/* Related posts section */
+.related-posts {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.related-posts h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-accent);
+    font-family: 'Roboto Slab', serif;
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.related-post {
+    background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.related-post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.related-post .related-preview-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.related-post:hover .related-preview-image {
+    transform: scale(1.02);
+}
+
+.related-post h3 {
+    font-size: 1.2rem;
+    margin: 1rem 1rem 0.5rem 1rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.related-post h3 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.related-post h3 a:hover {
+    color: var(--text-accent);
+}
+
+.related-post .post-meta {
+    margin: 0 1rem 1rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.related-post:hover .post-meta {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .related-posts-grid {
+        grid-template-columns: 1fr;
     }
 } 
