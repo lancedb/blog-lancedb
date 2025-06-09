@@ -40,6 +40,12 @@ body {
     justify-content: space-between;
 }
 
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .site-title {
     font-family: 'Roboto Slab', serif;
     font-size: 2rem;
@@ -51,6 +57,30 @@ body {
 }
 .site-title:hover {
     color: #38b2ac;
+}
+
+.header-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.header-link:hover {
+    color: var(--text-accent);
+}
+
+.header-link.get-started {
+    background: var(--text-accent);
+    color: var(--bg-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.header-link.get-started:hover {
+    background: #38b2ac;
+    color: var(--bg-primary);
 }
 
 /* Main container */
@@ -393,5 +423,11 @@ a:hover {
         margin-bottom: 2rem;
         padding-bottom: 1rem;
         padding-right: 0;
+    }
+    .header-links {
+        gap: 1rem;
+    }
+    .header-link {
+        font-size: 0.9rem;
     }
 } 
