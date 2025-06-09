@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
+    {{ partial "announcement.html" . }}
     <header class="site-header">
         <div class="header-content">
             <a href="/" class="site-title">
@@ -60,5 +61,17 @@
             </div>
         </main>
     </div>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <a href="/" class="site-title">
+                <img src="/assets/blog/logo.png" alt="{{ .Site.Title }}" class="site-logo">
+            </a>
+            <div class="footer-links">
+                <a href="https://lancedb.com/documentation" class="footer-link">Documentation</a>
+                <a href="https://lancedb.com/pricing" class="footer-link">Pricing</a>
+                <a href="/get-started" class="footer-link get-started">Get Started</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

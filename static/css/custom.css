@@ -667,7 +667,7 @@ a:hover {
 
 /* Footer Styles */
 .site-footer {
-    background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
+    background: #000000;
     padding: 2rem 0;
     margin-top: 4rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
