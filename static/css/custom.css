@@ -98,37 +98,74 @@ main {
     padding: 2rem 1rem;
 }
 
-/* Featured post */
-.featured-post {
+/* Featured section */
+.featured-section {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
     margin-bottom: 3rem;
+}
+
+.main-featured {
     background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
     border-radius: 18px;
     overflow: hidden;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
-.featured-post .preview-image {
+.main-featured .preview-image {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
     object-position: center;
-    border-radius: 0 0 18px 18px;
 }
 
-.featured-post h2 {
+.main-featured h2 {
     font-family: 'Roboto Slab', serif;
-    font-size: 2.5rem;
-    margin: 2rem 2rem 0.5rem 2rem;
+    font-size: 2rem;
+    margin: 1.5rem 1.5rem 0.5rem 1.5rem;
     color: var(--text-accent);
 }
 
-.featured-post .post-date {
-    margin: 0 2rem 2rem 2rem;
+.main-featured .post-date {
+    margin: 0 1.5rem 1.5rem 1.5rem;
     color: var(--text-secondary);
     font-size: 1rem;
+}
+
+.side-featured {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-featured-post {
+    background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+
+.side-featured-post .preview-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+}
+
+.side-featured-post h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.2rem;
+    margin: 1rem 1rem 0.5rem 1rem;
+    color: var(--text-primary);
+}
+
+.side-featured-post .post-date {
+    margin: 0 1rem 1rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
 /* Post grid */
@@ -392,6 +429,13 @@ a:hover {
         padding-bottom: 1rem;
         margin-bottom: 2rem;
     }
+    .featured-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .side-featured {
+        margin-top: 2rem;
+    }
 }
 @media (max-width: 768px) {
     .content-wrapper {
@@ -434,5 +478,12 @@ a:hover {
     }
     .site-logo {
         height: 24px;
+    }
+    .side-featured {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-featured h2 {
+        font-size: 1.5rem;
     }
 } 

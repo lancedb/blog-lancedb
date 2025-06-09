@@ -20,31 +20,35 @@
         </div>
     </header>
     <main>
-        {{ if .Pages }}
-            {{ $featured := index .Pages 0 }}
-            {{ $remaining := after 1 .Pages }}
+        {{ $posts := where .Site.RegularPages "Section" "posts" }}
+        {{ if $posts }}
+            {{ $featured := index $posts 0 }}
+            {{ $remaining := after 1 $posts }}
             
-            <!-- Featured Post -->
-            <article class="featured-post">
-                <img src="{{ $featured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $featured.Title }}" class="preview-image">
-                <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
-                <div class="post-date">{{ $featured.Date.Format "January 2, 2006" }}</div>
-            </article>
+            <!-- Featured Section -->
+            <div class="featured-section">
+                <!-- Main Featured Post -->
+                <article class="main-featured">
+                    <img src="{{ $featured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $featured.Title }}" class="preview-image">
+                    <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
+                    <div class="post-date">{{ $featured.Date.Format "January 2, 2006" }}</div>
+                </article>
 
-            <!-- First Row of Posts -->
-            <div class="post-grid">
-                {{ range first 3 $remaining }}
-                    <article class="post-card">
-                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-                        <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
-                    </article>
-                {{ end }}
+                <!-- Side Featured Post -->
+                <div class="side-featured">
+                    {{ with index $remaining 0 }}
+                        <article class="side-featured-post">
+                            <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                            <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
+                        </article>
+                    {{ end }}
+                </div>
             </div>
 
-            <!-- Second Row of Posts -->
+            <!-- Remaining Posts Grid -->
             <div class="post-grid">
-                {{ range first 3 (after 3 $remaining) }}
+                {{ range after 1 $remaining }}
                     <article class="post-card">
                         <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
