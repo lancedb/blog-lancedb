@@ -559,4 +559,41 @@ a:hover {
         width: 100%;
         text-align: center;
     }
+}
+
+/* Announcement Bar */
+.announcement-bar {
+    background: linear-gradient(90deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    color: white;
+    padding: 0.4rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.announcement-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.announcement-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.announcement-link:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .announcement-content {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
 } 
