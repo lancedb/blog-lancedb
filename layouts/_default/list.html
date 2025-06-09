@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ .Site.Title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Site.Title }}</title>
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-  <main>
-    <h1>{{ .Site.Title }}</h1>
-    <ul>
-      {{ range .Pages }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-      {{ end }}
-    </ul>
-  </main>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="site-title">{{ .Site.Title }}</a>
+        </div>
+    </header>
+    <main>
+        {{ if .Pages }}
+            {{ $featured := index .Pages 0 }}
+            {{ $remaining := after 1 .Pages }}
+            
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <img src="{{ $featured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $featured.Title }}" class="preview-image">
+                <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
+                <div class="post-date">{{ $featured.Date.Format "January 2, 2006" }}</div>
+            </article>
+
+            <!-- First Row of Posts -->
+            <div class="post-grid">
+                {{ range first 3 $remaining }}
+                    <article class="post-card">
+                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
+                    </article>
+                {{ end }}
+            </div>
+
+            <!-- Second Row of Posts -->
+            <div class="post-grid">
+                {{ range first 3 (after 3 $remaining) }}
+                    <article class="post-card">
+                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
+                    </article>
+                {{ end }}
+            </div>
+        {{ end }}
+    </main>
 </body>
 </html> 
