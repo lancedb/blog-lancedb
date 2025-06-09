@@ -1,11 +1,13 @@
 ---
-title: "AI Embeddings Explained: From Text to Vectors"
-date: 2024-03-21
+title: "AI Embeddings Explained: The Building Blocks of Vector Search"
+date: 2024-03-14
 draft: false
 image: "/assets/posts/preview.png"
+description: "Dive into the world of AI embeddings, understanding how they transform text, images, and other data into vector representations for powerful similarity search."
+author: "David Myriel"
 ---
 
-# AI Embeddings Explained: From Text to Vectors
+# AI Embeddings Explained: The Building Blocks of Vector Search
 
 AI embeddings have become a fundamental concept in modern machine learning and natural language processing. Let's dive into what they are and how they work.
 

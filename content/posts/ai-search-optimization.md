@@ -1,11 +1,13 @@
 ---
-title: "Optimizing AI-Powered Search: Best Practices and Tips"
-date: 2024-03-24
+title: "Optimizing AI Search: Performance and Accuracy Best Practices"
+date: 2024-03-13
 draft: false
 image: "/assets/posts/preview.png"
+description: "Learn essential techniques for optimizing AI-powered search systems, from index tuning to query optimization and performance monitoring strategies."
+author: "David Myriel"
 ---
 
-# Optimizing AI-Powered Search: Best Practices and Tips
+# Optimizing AI Search: Performance and Accuracy Best Practices
 
 Optimizing AI-powered search systems requires careful consideration of various factors. Let's explore the best practices and tips for achieving optimal performance.
 

@@ -1,11 +1,13 @@
 ---
-title: "Understanding Vector Databases: A Beginner's Guide"
-date: 2024-03-20
+title: "Understanding Vector Databases: The Foundation of Modern AI Search"
+date: 2024-03-18
 draft: false
 image: "/assets/posts/preview.png"
+description: "Learn how vector databases power modern AI applications, from their fundamental concepts to practical implementations in search and recommendation systems."
+author: "David Myriel"
 ---
 
-# Understanding Vector Databases: A Beginner's Guide
+# Understanding Vector Databases: The Foundation of Modern AI Search
 
 Vector databases have emerged as a crucial technology in the era of AI and machine learning. But what exactly are they, and why are they becoming increasingly important?
 

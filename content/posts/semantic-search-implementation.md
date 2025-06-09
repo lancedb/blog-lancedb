@@ -3,6 +3,8 @@ title: "Implementing Semantic Search: A Practical Guide"
 date: 2024-03-22
 draft: false
 image: "/assets/posts/preview.png"
+description: "A hands-on guide to implementing semantic search, covering data preparation, vector database setup, and practical code examples using modern embedding models."
+author: "David Myriel"
 ---
 
 # Implementing Semantic Search: A Practical Guide

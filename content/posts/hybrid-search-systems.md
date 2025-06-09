@@ -1,11 +1,13 @@
 ---
-title: "Hybrid Search Systems: Combining Traditional and Vector Search"
-date: 2024-03-26
+title: "Building Hybrid Search Systems: Combining Vector and Keyword Search"
+date: 2024-03-16
 draft: false
 image: "/assets/posts/preview.png"
+description: "Discover how to combine vector and keyword search for optimal results, with practical examples and implementation strategies for hybrid search systems."
+author: "David Myriel"
 ---
 
-# Hybrid Search Systems: Combining Traditional and Vector Search
+# Building Hybrid Search Systems: Combining Vector and Keyword Search
 
 Hybrid search systems combine the best of both worlds: traditional keyword-based search and modern vector search. Let's explore how to implement and optimize these systems.
 

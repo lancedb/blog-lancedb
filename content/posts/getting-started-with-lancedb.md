@@ -1,8 +1,10 @@
 ---
-title: "Getting Started with LanceDB: A Practical Guide"
-date: 2024-03-20
+title: "Getting Started with LanceDB: Your First Vector Database Project"
+date: 2024-03-15
 draft: false
 image: "/assets/posts/preview.png"
+description: "A beginner-friendly guide to setting up and using LanceDB, with practical examples and best practices for your first vector database project."
+author: "David Myriel"
 ---
 
 # Getting Started with LanceDB: A Practical Guide
