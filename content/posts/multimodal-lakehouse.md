@@ -1,9 +1,7 @@
 ---
-title: 'What is a Multimodal Lakehouse?'
-date: 2024-06-24T17:18:05+01:00
+date: 2025-06-09T17:30:15+02:00
 draft: false
+title: "What is a Multimodal Lakehouse?"
 ---
 
-# Hugo on Vercel
-
-## Hello World
+# What is a Multimodal Lakehouse?
