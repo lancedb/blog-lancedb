@@ -4,15 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Implementing Semantic Search: A Practical Guide - My New Hugo Site</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="site-title">My New Hugo Site</a>
+        </div>
+    </header>
     <main>
-        <article class="post-content">
-            <h1>Implementing Semantic Search: A Practical Guide</h1>
-            <div class="post-date">March 22, 2024</div>
+        <article class="single-post">
+            <div class="post-header">
+                <h1>Implementing Semantic Search: A Practical Guide</h1>
+                <div class="post-date">March 22, 2024</div>
+            </div>
             <img src="/assets/posts/preview.png" alt="Implementing Semantic Search: A Practical Guide" class="preview-image">
-            <h1 id="implementing-semantic-search-a-practical-guide">Implementing Semantic Search: A Practical Guide</h1>
+            
+            <div class="post-layout">
+                
+                <div class="toc-container">
+                    <div class="toc">
+                        <h2>Table of Contents</h2>
+                        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-semantic-search">What is Semantic Search?</a></li>
+    <li><a href="#implementation-steps">Implementation Steps</a>
+      <ul>
+        <li><a href="#1-data-preparation">1. Data Preparation</a></li>
+        <li><a href="#2-vector-database-setup">2. Vector Database Setup</a></li>
+        <li><a href="#3-search-implementation">3. Search Implementation</a></li>
+      </ul>
+    </li>
+    <li><a href="#code-example">Code Example</a></li>
+    <li><a href="#best-practices">Best Practices</a></li>
+    <li><a href="#performance-optimization">Performance Optimization</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                    </div>
+                </div>
+                
+                
+                <div class="post-main">
+                    <div class="post-content">
+                        <h1 id="implementing-semantic-search-a-practical-guide">Implementing Semantic Search: A Practical Guide</h1>
 <p>Semantic search has revolutionized how we find information by understanding the meaning behind queries rather than just matching keywords. Let&rsquo;s explore how to implement it.</p>
 <h2 id="what-is-semantic-search">What is Semantic Search?</h2>
 <p>Semantic search goes beyond traditional keyword matching to understand the intent and contextual meaning of search queries. It uses:</p>
@@ -82,8 +117,11 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>Semantic search implementation requires careful consideration of various components, but the results can significantly improve search quality and user experience.</p>
 
-            <div class="post-navigation">
-                <a href="/">← Back to Home</a>
+                    </div>
+                    <div class="post-navigation">
+                        <a href="/" class="back-link">← Back to Home</a>
+                    </div>
+                </div>
             </div>
         </article>
     </main>
