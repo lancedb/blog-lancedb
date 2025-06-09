@@ -23,7 +23,7 @@ body {
 
 /* Site header */
 .site-header {
-    background: var(--bg-secondary);
+    background: #000000;
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -54,7 +54,15 @@ body {
     text-decoration: none;
     letter-spacing: 1px;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
 }
+
+.site-logo {
+    height: 28px;
+    width: auto;
+}
+
 .site-title:hover {
     color: #38b2ac;
 }
@@ -423,5 +431,8 @@ a:hover {
     }
     .header-link {
         font-size: 0.9rem;
+    }
+    .site-logo {
+        height: 24px;
     }
 } 
