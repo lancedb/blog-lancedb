@@ -2,7 +2,7 @@
 title: "Building Hybrid Search Systems: Combining Vector and Keyword Search"
 date: 2024-03-16
 draft: false
-image: "/assets/posts/preview.png"
+image: "/assets/posts/6.png"
 description: "Discover how to combine vector and keyword search for optimal results, with practical examples and implementation strategies for hybrid search systems."
 author: "David Myriel"
 ---

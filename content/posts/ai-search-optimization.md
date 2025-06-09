@@ -2,7 +2,7 @@
 title: "Optimizing AI Search: Performance and Accuracy Best Practices"
 date: 2024-03-13
 draft: false
-image: "/assets/posts/preview.png"
+image: "/assets/posts/2.png"
 description: "Learn essential techniques for optimizing AI-powered search systems, from index tuning to query optimization and performance monitoring strategies."
 author: "David Myriel"
 ---

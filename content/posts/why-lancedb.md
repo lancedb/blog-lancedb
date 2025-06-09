@@ -2,7 +2,7 @@
 title: "Why LanceDB? A Deep Dive into the Next-Gen Vector Database"
 date: 2024-03-20
 draft: false
-image: "/assets/posts/preview.png"
+image: "/assets/posts/5.png"
 description: "Explore what makes LanceDB stand out in the vector database landscape - from its Apache Arrow foundation to its developer-friendly features and cost-effective architecture."
 author: "David Myriel"
 ---

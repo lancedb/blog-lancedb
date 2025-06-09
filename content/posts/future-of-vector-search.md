@@ -2,7 +2,7 @@
 title: "The Future of Vector Search: Trends and Innovations"
 date: 2024-03-12
 draft: false
-image: "/assets/posts/preview.png"
+image: "/assets/posts/4.png"
 description: "Explore emerging trends in vector search technology, from multi-modal embeddings to real-time updates and the integration of large language models."
 author: "David Myriel"
 ---

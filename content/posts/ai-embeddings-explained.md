@@ -2,7 +2,8 @@
 title: "AI Embeddings Explained: The Building Blocks of Vector Search"
 date: 2024-03-14
 draft: false
-image: "/assets/posts/preview.png"
+featured: true
+image: "/assets/posts/1.png"
 description: "Dive into the world of AI embeddings, understanding how they transform text, images, and other data into vector representations for powerful similarity search."
 author: "David Myriel"
 ---

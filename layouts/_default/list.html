@@ -21,27 +21,27 @@
         </div>
     </header>
     <main>
-        {{ $posts := where .Site.RegularPages "Section" "posts" }}
-        {{ if $posts }}
-            {{ $featured := index $posts 0 }}
-            {{ $remaining := after 1 $posts }}
-            
+        {{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+        {{ $featuredPosts := where $allPosts ".Params.featured" true }}
+        {{ $nonFeaturedPosts := where $allPosts ".Params.featured" "ne" true }}
+        {{ if $featuredPosts }}
+            {{ $mainFeatured := index $featuredPosts 0 }}
+            {{ $sideFeatured := after 1 $featuredPosts }}
             <!-- Featured Section -->
             <div class="featured-section">
                 <!-- Main Featured Post -->
                 <article class="main-featured">
-                    <img src="{{ $featured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $featured.Title }}" class="preview-image">
-                    <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
+                    <img src="{{ $mainFeatured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
+                    <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
                     <div class="post-meta">
-                        <span class="post-author">{{ $featured.Params.author }}</span>
-                        <span class="post-date">{{ $featured.Date.Format "January 2, 2006" }}</span>
+                        <span class="post-author">{{ $mainFeatured.Params.author }}</span>
+                        <span class="post-date">{{ $mainFeatured.Date.Format "January 2, 2006" }}</span>
                     </div>
-                    <p class="post-description">{{ $featured.Description | default (truncate 160 $featured.Summary) }}</p>
+                    <p class="post-description">{{ $mainFeatured.Description | default (truncate 160 $mainFeatured.Summary) }}</p>
                 </article>
-
-                <!-- Side Featured Post -->
+                <!-- Side Featured Posts -->
                 <div class="side-featured">
-                    {{ with index $remaining 0 }}
+                    {{ range first 2 $sideFeatured }}
                         <article class="side-featured-post">
                             <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
@@ -49,28 +49,27 @@
                                 <span class="post-author">{{ .Params.author }}</span>
                                 <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
                             </div>
-                            <p class="post-description">{{ .Description | default (truncate 120 .Summary) }}</p>
                         </article>
                     {{ end }}
                 </div>
             </div>
-
-            <!-- Remaining Posts Grid -->
-            <div class="post-grid">
-                {{ range after 1 $remaining }}
-                    <article class="post-card">
-                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-                        <div class="post-meta">
-                            <span class="post-author">{{ .Params.author }}</span>
-                            <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
-                        </div>
-                        <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
-                    </article>
-                {{ end }}
-            </div>
         {{ end }}
+        <!-- Remaining Posts Grid -->
+        <div class="post-grid">
+            {{ range $nonFeaturedPosts }}
+                <article class="post-card">
+                    <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="post-meta">
+                        <span class="post-author">{{ .Params.author }}</span>
+                        <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    </div>
+                    <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
+                </article>
+            {{ end }}
+        </div>
     </main>
+    {{ partial "newsletter.html" . }}
     <footer class="site-footer">
         <div class="footer-content">
             <a href="/" class="site-title">
