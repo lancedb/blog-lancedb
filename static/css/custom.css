@@ -294,12 +294,21 @@ main {
     color: var(--accent-color);
 }
 
+.post-card .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+}
+
+.post-card .post-author {
+    text-align: left;
+    flex: 1;
+}
+
 .post-card .post-date {
-    margin: 0 1.25rem;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.8;
+    text-align: right;
+    flex: 1;
 }
 
 .post-card .post-description {
@@ -314,7 +323,7 @@ main {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: -0.01em;
     opacity: 0.9;
-    flex-grow: 1;
+    max-width: 90%;
 }
 
 .post-card:hover .post-description {
@@ -342,12 +351,20 @@ main {
 
 .toc {
     font-size: 0.95rem;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 1.2rem;
+    opacity: 0.7;
 }
 
 .toc h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: var(--text-accent);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
 }
 
 .toc ul {
@@ -365,12 +382,12 @@ main {
 
 .toc a {
     color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s;
+    opacity: 0.8;
 }
 
 .toc a:hover {
     color: var(--text-accent);
+    opacity: 1;
 }
 
 .toc ul ul {
@@ -1046,4 +1063,30 @@ a:hover {
     .related-posts-grid {
         grid-template-columns: 1fr;
     }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fff !important;
+}
+
+.breadcrumbs {
+    font-size: 0.97rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.breadcrumbs a {
+    color: var(--text-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.breadcrumbs a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+.breadcrumb-separator {
+    color: var(--text-secondary);
+    margin: 0 0.2rem;
 } 

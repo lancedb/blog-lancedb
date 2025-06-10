@@ -31,7 +31,9 @@
             <div class="featured-section">
                 <!-- Main Featured Post -->
                 <article class="main-featured">
-                    <img src="{{ $mainFeatured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
+                    <a href="{{ $mainFeatured.RelPermalink }}">
+                        <img src="{{ $mainFeatured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
+                    </a>
                     <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
                     <div class="post-meta">
                         <span class="post-author">{{ $mainFeatured.Params.author }}</span>
@@ -43,7 +45,9 @@
                 <div class="side-featured">
                     {{ range first 2 $sideFeatured }}
                         <article class="side-featured-post">
-                            <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                            <a href="{{ .RelPermalink }}">
+                                <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                            </a>
                             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                             <div class="post-meta">
                                 <span class="post-author">{{ .Params.author }}</span>
@@ -58,7 +62,9 @@
         <div class="post-grid">
             {{ range $nonFeaturedPosts }}
                 <article class="post-card">
-                    <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                    <a href="{{ .RelPermalink }}">
+                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                    </a>
                     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                     <div class="post-meta">
                         <span class="post-author">{{ .Params.author }}</span>
