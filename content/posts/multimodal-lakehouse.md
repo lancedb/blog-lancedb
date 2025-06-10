@@ -1,6 +1,6 @@
 ---
 title: "Building a Multimodal Lakehouse with Vector Databases"
-date: 2024-03-11
+date: 2025-03-11
 draft: false
 featured: true
 image: "/assets/posts/2.png"

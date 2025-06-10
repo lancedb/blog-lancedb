@@ -1,14 +1,12 @@
 ---
 title: "Vector Database Comparison: Finding the Right Fit for Your AI Applications"
-date: 2024-03-19
+date: 2025-04-19
 draft: false
 featured: true
-image: "/assets/posts/4.png"
+image: "/assets/posts/2.png"
 description: "A comprehensive comparison of leading vector databases, analyzing performance, scalability, and use cases to help you choose the right solution for your AI needs."
 author: "David Myriel"
 ---
-
-# Vector Database Comparison: Finding the Right Fit for Your AI Applications
 
 Choosing the right vector database is crucial for your AI applications. Let's compare the most popular options available today.
 

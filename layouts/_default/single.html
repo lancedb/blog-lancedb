@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }} - {{ .Site.Title }}</title>
     <link rel="stylesheet" href="/css/custom.css">
+    <script src="/js/toc-progress.js"></script>
+    <script src="/js/heading-links.js"></script>
+    <script src="/js/announcement.js"></script>
 </head>
 <body>
     {{ partial "announcement.html" . }}
@@ -46,10 +49,7 @@
             <article class="single-post">
                 <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                 <div class="post-content">
-                    {{ .Content }}
-                </div>
-                <div class="post-navigation">
-                    <a href="/" class="back-link">← Back to Home</a>
+                    {{ .Content | replaceRE "<h2 id=\"([^\"]*)\">" "<h2 id=\"$1\">" | replaceRE "<h3 id=\"([^\"]*)\">" "<h3 id=\"$1\">" | safeHTML }}
                 </div>
             </article>
             <div class="related-posts">
