@@ -57,7 +57,9 @@
                 <div class="related-posts-grid">
                     {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
                         <article class="related-post">
-                            <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
+                            <a href="{{ .RelPermalink }}">
+                                <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
+                            </a>
                             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                             <div class="post-meta">
                                 <span class="post-author">{{ .Params.author }}</span>
