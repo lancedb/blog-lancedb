@@ -662,6 +662,29 @@ main .post-meta {
     color: inherit;
 }
 
+/* Image width constraints for all post images */
+.post-content img,
+.main-featured img,
+.side-featured-post img,
+.post-card img,
+article img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    object-fit: contain;
+}
+
+/* Specific handling for post content images */
+.post-content img {
+    max-width: 100%;
+    width: auto;
+    margin: 2rem auto;
+}
+
 /* Post navigation */
 .post-navigation {
     margin-top: 3rem;

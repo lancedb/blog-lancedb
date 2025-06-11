@@ -14,17 +14,15 @@ We’re thrilled to be speaking at several top-tier events this month — alongs
 
 If you’re attending the **AI Engineering World Fair (June 3–5)**, **Data + AI Summit (June 9–12)**, or the **Toronto Machine Learning Summit (June 13–18)**, don’t miss our sessions across multiple tracks. Come say hi and learn what we’ve been building!
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcxObVKgXQS62CFGnypyVF4gJoWzEQ1UjAiZWLgfF-0Sf2tNhz25Ysa0dJLApewTGZZDUM7S4Yrm5vdbcgqmLpm5t3LZSXlFDDLzEASyfN7QyiPjWV8D9MMd2OhmoWn-8BRPufw?key=KvdVauO0TI5I2R9O9akh7g)
+![AI Engineering World Fair](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/ai-engineering-world-fair.png)
 
-![](__GHOST_URL__/content/images/2025/06/Screenshot-2025-06-02-at-7.54.23---PM-1.png)
+![Data + AI Summit](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/data-ai-summit.png)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXctNzvrMU8wJ6C2H2FXMaAsLlkHcnLoMWJGbRId3sBQ1Qy3AiIpTTa5NTW2A2zdrb2HDrf-DUPutWZJQLEVRfTXWPZywlqD1_rQ8ComtQjr5Tyd5IeQI-gHfaVoyOAZREZ7Tkst?key=KvdVauO0TI5I2R9O9akh7g)
+![Toronto Machine Learning Summit](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/toronto-ml-summit.png)
 
-![](__GHOST_URL__/content/images/2025/06/Screenshot-2025-06-03-at-2.50.16---PM.png)
+![LanceDB Speaking Events](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/lancedb-speaking-events.png)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXebzbjdu_XnnjhckwnaO6aQ2z2_80bd_4BD_ebf3SAt_tbxWgfy1NkaiJx_PaHOCu6iNKh0MgyLUGbQkj9tiRjiuVDX1KlEOePvK9h7QKCgENlvNwpmqNopgyIbYWzG714CPmMokA?key=KvdVauO0TI5I2R9O9akh7g)
-
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfpVfvgHjUDujRoscVYegeO6tMCKCQCKPUQgJwtHqmu-5DUKntcPuw1_t7YYZdfrqKdf7-7qkyIGtveQpXvCTRyHhVT7UMBDxcJhwFFy0RucwMUkzLol7Pqi5eVJjKDem1lEl_e?key=KvdVauO0TI5I2R9O9akh7g)
+![Summer Tech Events](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/summer-tech-events.png)
 
 ---
 
