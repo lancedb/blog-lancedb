@@ -1,3 +1,8 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'LanceDB Blog'
+
+# Pagination settings (updated for Hugo v0.147.7+)
+[pagination]
+pagerSize = 9
+path = "page"

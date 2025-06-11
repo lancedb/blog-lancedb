@@ -1172,4 +1172,257 @@ h1, h2, h3, h4, h5, h6 {
 
 .announcement-bar.hidden {
     display: none;
+}
+
+/* Pagination Styles - Enhanced & Stylish */
+main .pagination,
+nav.pagination {
+    margin: 4rem 0 3rem 0 !important;
+    padding: 3rem 2rem !important;
+    background: linear-gradient(135deg, rgba(35, 38, 39, 0.3) 0%, rgba(35, 43, 43, 0.5) 100%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(79, 209, 197, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+main .pagination::before,
+nav.pagination::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.3), transparent);
+}
+
+/* Remove test style and apply proper fancy styling */
+
+main .pagination-info,
+nav.pagination .pagination-info {
+    text-align: center !important;
+    margin-bottom: 2rem !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+}
+
+main .pagination-info .posts-count,
+nav.pagination .pagination-info .posts-count {
+    opacity: 0.6 !important;
+    margin-left: 0.75rem !important;
+    font-size: 0.85rem !important;
+    color: var(--text-accent) !important;
+}
+
+main .pagination-links,
+nav.pagination .pagination-links {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    flex-wrap: wrap !important;
+}
+
+main .pagination-link,
+nav.pagination .pagination-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 3rem !important;
+    height: 3rem !important;
+    padding: 0 0.85rem !important;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(35, 38, 39, 0.8) 100%) !important;
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid rgba(79, 209, 197, 0.15) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+main .pagination-link::before,
+nav.pagination .pagination-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+    transition: left 0.5s ease !important;
+}
+
+main .pagination-link:hover::before,
+nav.pagination .pagination-link:hover::before {
+    left: 100% !important;
+}
+
+main .pagination-link:hover,
+nav.pagination .pagination-link:hover {
+    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(79, 209, 197, 0.1) 100%) !important;
+    color: var(--text-primary) !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(79, 209, 197, 0.2), 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(79, 209, 197, 0.4) !important;
+}
+
+main .pagination-link.current,
+nav.pagination .pagination-link.current {
+    background: linear-gradient(135deg, #f43f5e 0%, #f97316 50%, #4fd1c5 100%) !important;
+    color: white !important;
+    border-color: transparent !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+    animation: currentPagePulse 2s ease-in-out infinite !important;
+    transform: scale(1.1) !important;
+}
+
+@keyframes currentPagePulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(244, 63, 94, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 6px 25px rgba(244, 63, 94, 0.4), 0 0 0 3px rgba(79, 209, 197, 0.2); }
+}
+
+.pagination-link.current:hover {
+    transform: translateY(-2px) scale(1.15);
+    animation: none;
+}
+
+.pagination-link.prev,
+.pagination-link.next {
+    gap: 0.6rem;
+    padding: 0 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(79, 209, 197, 0.1) 0%, rgba(79, 209, 197, 0.05) 100%);
+    border-color: rgba(79, 209, 197, 0.3);
+    color: var(--text-accent);
+}
+
+.pagination-link.prev:hover,
+.pagination-link.next:hover {
+    background: linear-gradient(135deg, var(--text-accent) 0%, rgba(79, 209, 197, 0.9) 100%);
+    color: var(--bg-primary);
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 12px 30px rgba(79, 209, 197, 0.3);
+}
+
+.pagination-arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.pagination-link.prev:hover .pagination-arrow {
+    transform: translateX(-3px);
+}
+
+.pagination-link.next:hover .pagination-arrow {
+    transform: translateX(3px);
+}
+
+.pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--text-accent);
+    font-size: 1.1rem;
+    opacity: 0.5;
+    animation: ellipsisPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ellipsisPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Responsive pagination - Enhanced */
+@media (max-width: 768px) {
+    .pagination {
+        margin: 3rem 0 2rem 0;
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .pagination-links {
+        gap: 0.5rem;
+    }
+    
+    .pagination-link {
+        min-width: 2.75rem;
+        height: 2.75rem;
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+    
+    .pagination-link.prev .pagination-text,
+    .pagination-link.next .pagination-text {
+        display: none;
+    }
+    
+    .pagination-link.prev,
+    .pagination-link.next {
+        padding: 0;
+        width: 2.75rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .pagination-link.current {
+        transform: scale(1.05);
+    }
+    
+    .pagination-link.current:hover {
+        transform: translateY(-2px) scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination {
+        padding: 1.5rem 1rem;
+        margin: 2rem 0 1.5rem 0;
+    }
+    
+    .pagination-links {
+        justify-content: space-between;
+        gap: 0.25rem;
+    }
+    
+    .pagination-link {
+        min-width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .pagination-link.page-number {
+        display: none;
+    }
+    
+    .pagination-link.current {
+        display: inline-flex;
+        transform: scale(1);
+    }
+    
+    .pagination-link.current:hover {
+        transform: translateY(-1px) scale(1.05);
+    }
+    
+    .pagination-ellipsis {
+        display: none;
+    }
+    
+    .pagination-info {
+        font-size: 0.85rem;
+        margin-bottom: 1.25rem;
+    }
 } 
