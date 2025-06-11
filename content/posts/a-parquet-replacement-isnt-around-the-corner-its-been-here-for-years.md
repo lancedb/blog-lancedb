@@ -3,6 +3,7 @@ title: A Parquet Replacement isn't Around the Corner (it's been here for years)
 date: 2024-05-15
 draft: false
 featured: false
+categories: ["Engineering"]
 image: /assets/posts/1.png
 description: Explore a parquet replacement isn't around the corner (it's been here for years) with practical insights and expert guidance from the LanceDB team.
 author: Weston Pace

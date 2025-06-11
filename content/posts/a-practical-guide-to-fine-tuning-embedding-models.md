@@ -3,6 +3,7 @@ title: A Practical Guide to Fine-tuning Embedding Models
 date: 2025-04-23
 draft: false
 featured: false
+categories: ["Engineering"]
 image: /assets/posts/1.png
 description: Explore a practical guide to fine-tuning embedding models with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia

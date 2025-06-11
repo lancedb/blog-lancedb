@@ -6,3 +6,15 @@ title = 'LanceDB Blog'
 [pagination]
 pagerSize = 9
 path = "page"
+
+# Taxonomy Configuration
+[taxonomies]
+category = "categories"
+
+# Category Configuration
+[params]
+categories = [
+    { name = "Engineering", slug = "engineering", description = "Technical deep dives, architecture insights, and engineering solutions" },
+    { name = "Case Study", slug = "case-study", description = "Real-world implementations and customer success stories" },
+    { name = "Announcement", slug = "announcement", description = "Product updates, releases, and company news" }
+]

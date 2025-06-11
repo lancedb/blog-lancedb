@@ -3,6 +3,7 @@ title: A Practical Guide to Training Custom Rerankers
 date: 2025-04-10
 draft: false
 featured: false
+categories: ["Engineering"]
 image: /assets/posts/1.png
 description: Explore a practical guide to training custom rerankers with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia

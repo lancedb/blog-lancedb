@@ -3,6 +3,7 @@ title: Lance Format Deep Dive, Samsara & Summer Events Circuit
 date: 2025-06-04
 draft: false
 featured: true
+categories: ["Announcement"]
 image: /assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit.png
 description: Join us for a deep dive into the Lance format, learn about our partnership with Samsara, and catch us at major summer tech events. Get expert insights on building scalable AI systems with LanceDB.
 author: Jasmine Wang
