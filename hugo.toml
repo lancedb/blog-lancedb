@@ -18,3 +18,10 @@ categories = [
     { name = "Case Study", slug = "case-study", description = "Real-world implementations and customer success stories" },
     { name = "Announcement", slug = "announcement", description = "Product updates, releases, and company news" }
 ]
+
+# Table of Contents Configuration
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
