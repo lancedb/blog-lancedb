@@ -6,7 +6,6 @@
     <title>{{ .Site.Title }}</title>
     <link rel="stylesheet" href="/css/custom.css">
     <script src="/js/announcement.js"></script>
-    <script src="/js/category-filter.js"></script>
 </head>
 <body>
     {{ partial "announcement.html" . }}
@@ -33,16 +32,12 @@
             {{ $sideFeatured := after 1 $featuredPosts }}
             <div class="featured-section">
                 <!-- Main Featured Post -->
-                <article class="main-featured" data-categories="{{ if $mainFeatured.Params.categories }}{{ delimit $mainFeatured.Params.categories "," }}{{ else }}uncategorized{{ end }}">
+                <article class="main-featured">
                     <a href="{{ $mainFeatured.RelPermalink }}">
                         <img src="{{ $mainFeatured.Params.image | default "/assets/posts/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
                     </a>
                     <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
                     <div class="post-meta">
-                        {{ if $mainFeatured.Params.categories }}
-                            <span class="post-category">{{ index $mainFeatured.Params.categories 0 }}</span>
-                            <span class="meta-divider">•</span>
-                        {{ end }}
                         <span class="post-author">{{ $mainFeatured.Params.author }}</span>
                         <span class="meta-divider">•</span>
                         <span class="post-date">{{ $mainFeatured.Date.Format "January 2, 2006" }}</span>
@@ -52,7 +47,7 @@
                 <!-- Side Featured Posts -->
                 <div class="side-featured">
                     {{ range first 2 $sideFeatured }}
-                        <article class="side-featured-post" data-categories="{{ if .Params.categories }}{{ delimit .Params.categories "," }}{{ else }}uncategorized{{ end }}">
+                        <article class="side-featured-post">
                             <a href="{{ .RelPermalink }}">
                                 <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                             </a>
@@ -67,44 +62,15 @@
             </div>
         {{ end }}
         
-        <!-- Category Filters -->
-        <div class="category-filters">
-            <button class="filter-link active" data-category="all">All Posts</button>
-            {{ range .Site.Params.categories }}
-                <button class="filter-link inactive" data-category="{{ .slug }}">{{ .name }}</button>
-            {{ end }}
-        </div>
-        
-        <!-- Posts Grid with Pagination -->
-        <div class="post-grid">
-            {{ $paginator := .Paginate $nonFeaturedPosts }}
-            {{ range $paginator.Pages }}
-                <article class="post-card" data-categories="{{ if .Params.categories }}{{ delimit .Params.categories "," }}{{ else }}uncategorized{{ end }}">
-                    <a href="{{ .RelPermalink }}">
-                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-                    </a>
-                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-                    <div class="post-meta">
-                        {{ if .Params.categories }}
-                            <span class="post-category">{{ index .Params.categories 0 }}</span>
-                            <span class="meta-divider">•</span>
-                        {{ end }}
-                        <span class="post-author">{{ .Params.author }}</span>
-                        <span class="meta-divider">•</span>
-                        <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
-                    </div>
-                    <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
-                </article>
-            {{ end }}
-        </div>
+        <!-- Newsletter Section - Show at top for subsequent pages -->
+        {{ if ne .Paginator.PageNumber 1 }}
+            {{ partial "newsletter.html" . }}
+        {{ end }}
         
         <!-- Pagination Navigation -->
+        {{ $paginator := .Paginate $nonFeaturedPosts }}
         {{ if gt $paginator.TotalPages 1 }}
         <nav class="pagination">
-            <div class="pagination-info">
-                <span>Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
-                <span class="posts-count">({{ len $nonFeaturedPosts }} posts total)</span>
-            </div>
             <div class="pagination-links">
                 {{ if $paginator.HasPrev }}
                     <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
@@ -154,8 +120,31 @@
             </div>
         </nav>
         {{ end }}
+        
+        <!-- Posts Grid -->
+        <div class="post-grid">
+            {{ range $paginator.Pages }}
+                <article class="post-card">
+                    <a href="{{ .RelPermalink }}">
+                        <img src="{{ .Params.image | default "/assets/posts/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                    </a>
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="post-meta">
+                        <span class="post-author">{{ .Params.author }}</span>
+                        <span class="meta-divider">•</span>
+                        <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    </div>
+                    <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
+                </article>
+            {{ end }}
+        </div>
     </main>
-    {{ partial "newsletter.html" . }}
+    
+    <!-- Newsletter Section - Show at bottom only for first page -->
+    {{ if eq .Paginator.PageNumber 1 }}
+        {{ partial "newsletter.html" . }}
+    {{ end }}
+    
     <footer class="site-footer">
         <div class="footer-content">
             <a href="/" class="site-title">
