@@ -3,11 +3,10 @@ title: LLMs, RAG, & the missing storage layer for AI
 date: 2023-09-05
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore llms, rag, & the missing storage layer for ai with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---
-by Ayush Chaurasia
 
 In the rapidly evolving landscape of artificial intelligence, Generative AI, especially Language Model Machines (LLMs) have emerged as the veritable backbone of numerous applications, from natural language processing and machine translation to virtual assistants and content generation. The advent of GPT-3 and its successors marked a significant milestone in AI development, ushering in an era where machines could not only understand but also generate human-like text with astonishing proficiency. However, beneath the surface of this AI revolution lies a crucial missing element, one that has the potential to unlock even greater AI capabilities: the storage layer.
 

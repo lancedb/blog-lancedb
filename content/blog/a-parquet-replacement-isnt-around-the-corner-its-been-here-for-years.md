@@ -4,14 +4,14 @@ date: 2024-05-15
 draft: false
 featured: false
 categories: ["Engineering"]
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore a parquet replacement isn't around the corner (it's been here for years) with practical insights and expert guidance from the LanceDB team.
 author: Weston Pace
 ---
 
 At Lance we use a custom file format for storage instead of using [Parquet](https://parquet.apache.org/). This can be quite a terrifying prospect for developers. To understand why this fear is unfounded, let's look at an example data solution that you might find in practice today (or, as we will see, a few years ago).
 
-![Parquet is everywhere](/assets/posts/data-ecosystem-and-parquet.png)
+![Parquet is everywhere](/assets/blog/data-ecosystem-and-parquet.png)
 
 ## Parquet is (was) Everywhere
 
@@ -22,7 +22,7 @@ Parquet is used all throughout this solution. It is used for everything from tem
 
 If you were to tell someone developing that solution that you wanted to replace Parquet they would understandably be terrified. The reality though, is that this has been happening already. Let's take a more modern look at the above solution.
 
-![Arrow has replaced Parquet for IPC and in-memory](/assets/posts/data-ecosystem-and-arrow.png)
+![Arrow has replaced Parquet for IPC and in-memory](/assets/blog/data-ecosystem-and-arrow.png)
 
 ## The Arrow Ecosystem
 
@@ -36,7 +36,7 @@ This is important because it means that developers can spread these technologies
 
 There remains one big spot that Arrow has not replaced. This is **bulk storage of data that must be efficiently retrieved**. Parquet has support for statistics pushdown, storage-first encodings like bit-packing, and rich powerful streaming readers. This has made parquet the choice for storage technology in table formats like Iceberg and Delta Lake.
 
-![Data is hard and Parquet is not a panacea](/assets/posts/data-is-hard.png)
+![Data is hard and Parquet is not a panacea](/assets/blog/data-is-hard.png)
 
 However, as it turns out, efficient retrieval from a large dataset is a hard problem. The best solution can often depend on the query workload. This has led to several behaviors.
 
@@ -56,7 +56,7 @@ Parquet took off originally because there was a huge demand for a universal form
 
 The best way to store data is closely related to how you plan on querying the data. As an example, both Lance and Nimble are columnar storage formats but they were both designed with different primary use cases. It may be that one format is flexible enough to tackle all of the use cases but it will be some time before these new formats evolve enough to do so. In the meantime, users may have to pick the appropriate format based on their need.
 
-![Parquet Split](/assets/posts/parquet-split.png)
+![Parquet Split](/assets/blog/parquet-split.png)
 
 ## What to do?
 

@@ -4,7 +4,7 @@ date: 2025-06-04
 draft: false
 featured: true
 categories: ["Announcement"]
-image: /assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit.png
+image: /assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit.png
 description: Join us for a deep dive into the Lance format, learn about our partnership with Samsara, and catch us at major summer tech events. Get expert insights on building scalable AI systems with LanceDB.
 author: Jasmine Wang
 ---
@@ -14,15 +14,15 @@ We’re thrilled to be speaking at several top-tier events this month — alongs
 
 If you’re attending the **AI Engineering World Fair (June 3–5)**, **Data + AI Summit (June 9–12)**, or the **Toronto Machine Learning Summit (June 13–18)**, don’t miss our sessions across multiple tracks. Come say hi and learn what we’ve been building!
 
-![AI Engineering World Fair](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/ai-engineering-world-fair.png)
+![AI Engineering World Fair](/assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/ai-engineering-world-fair.png)
 
-![Data + AI Summit](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/data-ai-summit.png)
+![Data + AI Summit](/assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/data-ai-summit.png)
 
-![Toronto Machine Learning Summit](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/toronto-ml-summit.png)
+![Toronto Machine Learning Summit](/assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/toronto-ml-summit.png)
 
-![LanceDB Speaking Events](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/lancedb-speaking-events.png)
+![LanceDB Speaking Events](/assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/lancedb-speaking-events.png)
 
-![Summer Tech Events](/assets/posts/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/summer-tech-events.png)
+![Summer Tech Events](/assets/blog/lance-format-deep-dive-samsara-lancedb-summer-events-circuit/summer-tech-events.png)
 
 ---
 

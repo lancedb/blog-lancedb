@@ -3,7 +3,7 @@ title: Speaker Identification and Transcription Mapping Using Vector Search
 date: 2025-02-26
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore speaker identification and transcription mapping using vector search with practical insights and expert guidance from the LanceDB team.
 author: Shresth Shukla
 ---

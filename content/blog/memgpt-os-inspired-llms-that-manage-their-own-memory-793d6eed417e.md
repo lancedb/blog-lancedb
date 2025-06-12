@@ -1,15 +1,11 @@
 ---
+title: "MemGPT: OS inspired LLMs that manage their own memory"
 date: 2023-12-12
-author: Ayush Chaurasia
----
----
-title: MemGPT: OS inspired LLMs that manage their own memory
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore memgpt: os inspired llms that manage their own memory with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore memgpt: os inspired llms that manage their own memory with practical insights and expert guidance from the LanceDB team."
+author: Ayush Chaurasia
 ---
 
 by Ayush Chaurasia

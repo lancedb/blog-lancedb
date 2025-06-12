@@ -3,7 +3,7 @@ title: Sentiment Analysis powered by semantic search using LanceDB
 date: 2023-11-19
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore sentiment analysis powered by semantic search using lancedb with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

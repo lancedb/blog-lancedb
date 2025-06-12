@@ -3,7 +3,7 @@ title: Using column statistics to make Lance scans 30x faster
 date: 2023-12-21
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore using column statistics to make lance scans 30x faster with practical insights and expert guidance from the LanceDB team.
 author: Will Jobes
 ---

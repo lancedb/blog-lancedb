@@ -3,7 +3,7 @@ title: Chat with your stats using Langchain dataframe agent & LanceDB hybrid sea
 date: 2024-06-30
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore chat with your stats using langchain dataframe agent & lancedb hybrid search with practical insights and expert guidance from the LanceDB team.
 author: Akash Desai
 ---

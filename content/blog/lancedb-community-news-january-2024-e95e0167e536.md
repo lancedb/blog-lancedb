@@ -3,7 +3,7 @@ title: LanceDB Community News  January 2024
 date: 2024-01-31
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lancedb community news  january 2024 with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

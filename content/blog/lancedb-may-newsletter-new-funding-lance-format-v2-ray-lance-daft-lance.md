@@ -3,7 +3,7 @@ title: New Funding, Lance Format v2, Ray-Lance & Daft-Lance
 date: 2024-06-05
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore new funding, lance format v2, ray-lance & daft-lance with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

@@ -3,7 +3,7 @@ title: "Lance Research Paper, Newly Knighted Lancelot, Practical AI Engineering"
 date: 2025-05-05
 draft: false
 featured: false
-image: /assets/posts/lance-research-paper-newly-knighted-lancelot-practical-ai-engineering.png
+image: /assets/blog/lance-research-paper-newly-knighted-lancelot-practical-ai-engineering.png
 description: "Explore lance research paper, newly knighted lancelot, practical ai engineering with practical insights and expert guidance from the LanceDB team."
 author: Jasmine Wang
 ---
@@ -22,7 +22,7 @@ A new drop in the Columnar File Reader Deep Dive series. Now read on!
 
 Conventional wisdom states that compression and random access do not go well together. However, there are many ways you can compress data, and some of them support random access better than others. Figuring out which compression we can use, and when, and why, has been an interesting challenge.
 
-![Blog thumbnail](/assets/posts/compression-transparency-thumbnail.png)
+![Blog thumbnail](/assets/blog/compression-transparency-thumbnail.png)
 *By Weston Pace*
 
 ## 🛡️ Meet the Newly Knighted Lancelot
@@ -31,9 +31,9 @@ Back in January, we announced the inaugural [Lancelot Round Table](https://githu
 
 ⚔️ **Hail to the Knights of the Lancelot Roundtable!** 🐎
 
-![LinkedIn post 1](/assets/posts/lancelot-knight-1.png)
-![LinkedIn post 2](/assets/posts/lancelot-knight-2.png)
-![LinkedIn post 3](/assets/posts/lancelot-knight-3.png)
+![LinkedIn post 1](/assets/blog/lancelot-knight-1.png)
+![LinkedIn post 2](/assets/blog/lancelot-knight-2.png)
+![LinkedIn post 3](/assets/blog/lancelot-knight-3.png)
 
 ---
 
@@ -45,14 +45,14 @@ We've published two new in-depth guides on advanced techniques for optimizing AI
 
 A report on reranking, training, & fine-tuning rerankers for retrieval. This report offers practical insights for improving a retriever by reranking results. We'll tackle the important questions, like: When should you implement a reranker? Should you opt for a pre-trained solution, fine-tune an existing model, or build one from scratch?
 
-![Rerankers guide thumbnail](/assets/posts/rerankers-guide-thumbnail.png)
+![Rerankers guide thumbnail](/assets/blog/rerankers-guide-thumbnail.png)
 *By Ayush Chaurasia*
 
 ### [A Practical Guide to Fine-tuning Embedding Models](/blog/a-practical-guide-to-fine-tuning-embedding-models/)
 
 This is a follow up to the previous report that deals with improving retrievers by training and fine-tuning reranker models. A comprehensive guide to embedding model optimization.
 
-![Embedding guide thumbnail](/assets/posts/embedding-guide-thumbnail.png)
+![Embedding guide thumbnail](/assets/blog/embedding-guide-thumbnail.png)
 *By Ayush Chaurasia*
 
 ---
@@ -68,7 +68,7 @@ Focused on reshaping the future of AI-native development, [Continue](https://con
 > *"Thanks for all the work that you do! When I found LanceDB, it was exactly what we needed, and has played its role perfectly since then :)" 
 > – Nate Sesti, Cofounder & CTO @Continue*
 
-[![Continue case study](/assets/posts/continue-case-study.png)](/blog/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution/)
+[![Continue case study](/assets/blog/continue-case-study.png)](/blog/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution/)
 *Continue's LanceDB-Powered Evolution*
 
 ### 💼 AnythingLLM's Competitive Edge: LanceDB for Seamless RAG and Agent Workflows
@@ -78,7 +78,7 @@ To build a competitive RAG and agent orchestration platform, [AnythingLLM](https
 > *"With support for Windows ARM, LanceDB is the only VectorDB with seamless experience across platforms and able to run fully on CoPilot AI PCs - something no other vector databases can do at this time. This only affirmed our choice that LanceDB is the best VectorDB provider for on-device AI with AnythingLLM."*
 > - Timothy Carambat, Founder & CEO @ AnythingLLM, Mintplex Labs
 
-[![AnythingLLM case study](/assets/posts/anythingllm-case-study.png)](/blog/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows/)
+[![AnythingLLM case study](/assets/blog/anythingllm-case-study.png)](/blog/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows/)
 *LanceDB for Seamless RAG and Agent Workflows at AnythingLLM*
 
 ---

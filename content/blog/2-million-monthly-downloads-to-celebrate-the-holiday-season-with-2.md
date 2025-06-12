@@ -4,7 +4,7 @@ date: 2024-12-03
 draft: false
 featured: false
 categories: ["Announcement"]
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore 2 million monthly downloads to celebrate the holiday season with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---
@@ -13,7 +13,7 @@ We are so excited to announce that we surpassed **2 Million Downloads** per mont
 
 ❤️ We're so grateful for our community, for contributions, feedback, and insights all along the journey. Drop us a line in discord and give us a star on GitHub.
 
-![Counter Animation](/assets/posts/counter.gif)
+![Counter Animation](/assets/blog/counter.gif)
 
 ## Community contributions
 

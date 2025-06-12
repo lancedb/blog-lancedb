@@ -3,7 +3,7 @@ title: "Lancelot Round Table, 100x Reduction in S3 Requests, VoyageAI LanceDB"
 date: 2025-02-06
 draft: false
 featured: false
-image: /assets/posts/the-lancelot-chronicles-your-quest-in-the-realm-of-open-source.png
+image: /assets/blog/the-lancelot-chronicles-your-quest-in-the-realm-of-open-source.png
 description: Explore lancelot round table, 100x reduction in s3 requests, voyageailancedb with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

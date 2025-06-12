@@ -3,7 +3,7 @@ title: Enhancing Search Relevance with Linear Combination Rerankers
 date: 1970-01-01
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore enhancing search relevance with linear combination rerankers with practical insights and expert guidance from the LanceDB team.
 author: Ishan Dutta
 ---

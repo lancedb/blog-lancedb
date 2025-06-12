@@ -3,7 +3,7 @@ title: Reduce Hallucinations from LLM-powered Agents using Long-Term Memory
 date: 2023-07-19
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore reduce hallucinations from llm-powered agents using long-term memory with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

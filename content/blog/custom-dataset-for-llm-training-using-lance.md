@@ -3,7 +3,7 @@ title: Custom Datasets for efficient LLM training using Lance
 date: 2024-03-08
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore custom datasets for efficient llm training using lance with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

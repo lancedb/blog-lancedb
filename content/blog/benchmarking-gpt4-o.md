@@ -3,7 +3,7 @@ title: Benchmarking GPT4-o
 date: 2024-05-23
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore benchmarking gpt4-o with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

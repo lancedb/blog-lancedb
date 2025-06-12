@@ -3,7 +3,7 @@ title: Advanced RAG with context enrichment window
 date: 2024-10-17
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore advanced rag with context enrichment window with practical insights and expert guidance from the LanceDB team.
 author: Mahesh Deshwal
 ---

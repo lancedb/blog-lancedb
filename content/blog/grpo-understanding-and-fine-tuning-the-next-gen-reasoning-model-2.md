@@ -3,7 +3,7 @@ title: RAG with GRPO Fine-Tuned Reasoning Model
 date: 2025-03-24
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore rag with grpo fine-tuned reasoning model with practical insights and expert guidance from the LanceDB team.
 author: Mahesh Deshwal
 ---

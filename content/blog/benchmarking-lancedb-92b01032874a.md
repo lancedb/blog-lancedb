@@ -3,7 +3,7 @@ title: Benchmarking LanceDB
 date: 2023-12-18
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore benchmarking lancedb with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

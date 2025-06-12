@@ -1,15 +1,11 @@
 ---
+title: "Langroid: Multi-Agent Programming framework for LLMs"
 date: 2024-01-08
-author: Prashant Kumar
----
----
-title: Langroid: Multi-Agent Programming framework for LLMs
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore langroid: multi-agent programming framework for llms with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore langroid: multi-agent programming framework for llms with practical insights and expert guidance from the LanceDB team."
+author: Prashant Kumar
 ---
 
 In this era of Large Language Models (LLMs), there is unprecedented demand to create intelligent applications powered by this transformative technology. What is the best way for developers to harness the potential of LLMs in complex application scenarios?

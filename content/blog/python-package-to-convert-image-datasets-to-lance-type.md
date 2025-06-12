@@ -3,7 +3,7 @@ title: Python Package to convert image datasets to lance type
 date: 2024-12-09
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore python package to convert image datasets to lance type with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

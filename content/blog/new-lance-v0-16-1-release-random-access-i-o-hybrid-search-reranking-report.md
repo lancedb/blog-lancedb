@@ -3,7 +3,7 @@ title: New Lance v0.16.1 Release, Random Access IO, Hybrid SearchReranking Repor
 date: 2024-09-04
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore new lance v0.16.1 release, random access io, hybrid searchreranking report with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

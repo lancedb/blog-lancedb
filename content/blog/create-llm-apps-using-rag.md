@@ -3,7 +3,7 @@ title: Create LLM apps using RAG
 date: 2024-03-21
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore create llm apps using rag with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

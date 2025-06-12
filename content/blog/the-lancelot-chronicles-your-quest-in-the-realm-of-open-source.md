@@ -3,7 +3,7 @@ title: "The Lancelot Chronicles: Your Quest in the Realm of Open Source"
 date: 2025-01-15
 draft: false
 featured: false
-image: /assets/posts/the-lancelot-chronicles-your-quest-in-the-realm-of-open-source.png
+image: /assets/blog/the-lancelot-chronicles-your-quest-in-the-realm-of-open-source.png
 description: "Explore the lancelot chronicles: your quest in the realm of open source with practical insights and expert guidance from the LanceDB team."
 author: Jasmine Wang
 ---

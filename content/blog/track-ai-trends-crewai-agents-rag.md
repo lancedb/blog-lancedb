@@ -3,7 +3,7 @@ title: "Track AI Trends: CrewAI Agents & RAG"
 date: 2024-03-25
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore track ai trends: crewai agents & rag with practical insights and expert guidance from the LanceDB team."
 author: Prashant Kumar
 ---

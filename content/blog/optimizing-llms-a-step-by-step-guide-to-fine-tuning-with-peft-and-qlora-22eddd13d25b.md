@@ -1,15 +1,11 @@
 ---
+title: "Optimizing LLMs: A Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
 date: 2023-09-28
-author: Akash Desai
----
----
-title: Optimizing LLMs: A Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore optimizing llms: a step-by-step guide to fine-tuning with peft and qlora with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore optimizing llms: a step-by-step guide to fine-tuning with peft and qlora with practical insights and expert guidance from the LanceDB team."
+author: Akash Desai
 ---
 
 **A Practical Guide to Fine-Tuning LLM using QLora**

@@ -1,15 +1,11 @@
 ---
+title: "Developers, Ditch the Black Box: Welcome to Continue"
 date: 2024-05-23
-author: Nate Sesti
----
----
-title: Developers, Ditch the Black Box: Welcome to Continue
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore developers, ditch the black box: welcome to continue with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore developers, ditch the black box: welcome to continue with practical insights and expert guidance from the LanceDB team."
+author: Nate Sesti
 ---
 
 Remember flipping through coding manuals? Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for developer queries. Now, the tides are turning again as LLMs are rapidly becoming the primary source for coding assistance.

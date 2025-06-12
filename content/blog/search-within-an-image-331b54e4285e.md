@@ -3,7 +3,7 @@ title: Search within an Image with Segment Anything
 date: 2023-12-12
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore search within an image with segment anything with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

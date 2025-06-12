@@ -1,18 +1,12 @@
 ---
+title: "Modified RAG: Parent Document & Bigger chunk Retriever"
 date: 2023-12-16
-author: Chang She
----
----
-title: Modified RAG: Parent Document & Bigger chunk Retriever
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore modified rag: parent document & bigger chunk retriever with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore modified rag: parent document & bigger chunk retriever with practical insights and expert guidance from the LanceDB team."
+author: Mahesh Deshwal
 ---
-
-by Mahesh Deshwal
 
 In case you’re interested in modifying and improving retrieval accuracy of RAG pipelines, you should check [Re-ranking post](https://medium.com/p/cf6eaec6d544).
 

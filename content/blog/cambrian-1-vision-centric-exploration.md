@@ -7,7 +7,7 @@ title: Cambrian-1: Vision-Centric Search
 date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore cambrian-1: vision-centric search with practical insights and expert guidance from the LanceDB team.
 author: David Myriel
 ---

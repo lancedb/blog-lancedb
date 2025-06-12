@@ -3,7 +3,7 @@ title: Implement contextual retrieval and prompt caching with LanceDB
 date: 2024-10-08
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore implement contextual retrieval and prompt caching with lancedb with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

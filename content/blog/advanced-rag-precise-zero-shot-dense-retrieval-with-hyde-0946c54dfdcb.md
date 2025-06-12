@@ -3,7 +3,7 @@ title: "Advanced RAG: Precise Zero-Shot Dense Retrieval with HyDE"
 date: 2023-11-28
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore advanced rag: precise zero-shot dense retrieval with hyde with practical insights and expert guidance from the LanceDB team."
 author: "Akash Desai"
 ---

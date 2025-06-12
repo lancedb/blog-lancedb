@@ -3,7 +3,7 @@ title: You can now delete rows in Lance and LanceDB!
 date: 2023-06-28
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore you can now delete rows in lance and lancedb! with practical insights and expert guidance from the LanceDB team.
 author: Will Jones
 ---

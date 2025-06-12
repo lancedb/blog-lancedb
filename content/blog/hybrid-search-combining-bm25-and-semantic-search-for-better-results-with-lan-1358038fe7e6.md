@@ -1,15 +1,11 @@
 ---
+title: "Hybrid Search: Combining BM25 and Semantic Search for Better Results with Langchain"
 date: 2023-12-10
-author: Akash Desai
----
----
-title: Hybrid Search: Combining BM25 and Semantic Search for Better Results with Langchain
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore hybrid search: combining bm25 and semantic search for better results with langchain with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore hybrid search: combining bm25 and semantic search for better results with langchain with practical insights and expert guidance from the LanceDB team."
+author: Akash Desai
 ---
 
 Have you ever thought about how search engines find exactly what you're looking for? They usually use a mix of looking for specific words and understanding the meaning behind them. This is called a hybrid search. Now, let's see how we can make a simple way to find documents using this mix.

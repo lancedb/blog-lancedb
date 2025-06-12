@@ -3,7 +3,7 @@ title: Chunking techniques with Langchain and LlamaIndex
 date: 2024-04-21
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore chunking techniques with langchain and llamaindex with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

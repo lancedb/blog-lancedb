@@ -3,11 +3,10 @@ title: Maximizing Developer Workflows using Lance and Claude 2
 date: 2023-08-06
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore maximizing developer workflows using lance and claude 2 with practical insights and expert guidance from the LanceDB team.
-author: Chang She
+author: Leon Yee
 ---
-by Leon Yee
 
 **Introduction**
 

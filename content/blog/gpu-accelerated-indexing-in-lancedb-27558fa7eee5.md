@@ -3,7 +3,7 @@ title: GPU-accelerated Indexing in LanceDB
 date: 2023-11-02
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore gpu-accelerated indexing in lancedb with practical insights and expert guidance from the LanceDB team.
 author: Lei Xu
 ---

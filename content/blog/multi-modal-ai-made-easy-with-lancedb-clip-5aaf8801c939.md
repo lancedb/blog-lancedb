@@ -3,7 +3,7 @@ title: Multi-Modal AI made easy with LanceDB & CLIP
 date: 2023-11-27
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore multi-modal ai made easy with lancedb & clip with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

@@ -3,7 +3,7 @@ title: Efficient RAG with Compression and Filtering
 date: 2024-01-09
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore efficient rag with compression and filtering with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

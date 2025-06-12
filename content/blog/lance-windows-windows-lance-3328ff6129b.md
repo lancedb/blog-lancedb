@@ -3,7 +3,7 @@ title: Lance, Windows. Windows, Lance
 date: 2023-05-31
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lance, windows. windows, lance with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

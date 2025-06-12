@@ -3,7 +3,7 @@ title: My SIMD is faster than Yours
 date: 2023-04-24
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore my simd is faster than yours with practical insights and expert guidance from the LanceDB team.
 author: Lei Xu
 ---

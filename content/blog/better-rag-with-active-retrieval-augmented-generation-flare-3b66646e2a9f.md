@@ -3,7 +3,7 @@ title: Better RAG with Active Retrieval Augmented Generation FLARE
 date: 2023-11-17
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore better rag with active retrieval augmented generation flare with practical insights and expert guidance from the LanceDB team.
 author: Akash Desai
 ---

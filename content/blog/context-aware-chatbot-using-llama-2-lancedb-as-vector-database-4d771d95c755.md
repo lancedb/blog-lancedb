@@ -3,7 +3,7 @@ title: Context-aware chatbot using Llama 2 & lanceDB serverless vector database
 date: 2023-09-19
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore context-aware chatbot using llama 2 & lancedb serverless vector database with practical insights and expert guidance from the LanceDB team.
 author: Akash Desai
 ---

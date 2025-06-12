@@ -3,7 +3,7 @@ title: Convert any Image dataset to Lance
 date: 2024-04-10
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore convert any image dataset to lance with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

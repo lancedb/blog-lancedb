@@ -3,7 +3,7 @@ title: "Vector Arithmetic with LanceDB: An intro to Vector Embeddings"
 date: 2024-07-02
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore vector arithmetic with lancedb: an intro to vector embeddings with practical insights and expert guidance from the LanceDB team."
 author: Aritra Roy Gosthipaty
 ---

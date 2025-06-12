@@ -3,7 +3,7 @@ title: Demystifying LLM Apps with Lance
 date: 2023-05-22
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore demystifying llm apps with lance with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

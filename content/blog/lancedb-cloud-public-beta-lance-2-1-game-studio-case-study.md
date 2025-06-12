@@ -3,7 +3,7 @@ title: LanceDB Cloud Public Beta, Lance 2.1 , Game Studio Case Study
 date: 2025-04-03
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lancedb cloud public beta, lance 2.1 , game studio case study with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

@@ -3,7 +3,7 @@ title: Substrait Powered Filter Pushdown in Lance
 date: 2024-01-31
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore substrait powered filter pushdown in lance with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

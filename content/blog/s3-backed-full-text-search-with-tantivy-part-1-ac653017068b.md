@@ -3,7 +3,7 @@ title: S3 Backed Full-Text Search with Tantivy (Part 1)
 date: 2023-08-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore s3 backed full-text search with tantivy (part 1) with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

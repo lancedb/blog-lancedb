@@ -3,7 +3,7 @@ title: Using Prediction Guard and LanceDB to Prevent Medical Hallucinations
 date: 2024-01-02
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore using prediction guard and lancedb to prevent medical hallucinations with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

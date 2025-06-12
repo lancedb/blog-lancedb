@@ -3,7 +3,7 @@ title: Movie recommendation system using Doc2Vec and genre classification
 date: 2024-05-27
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore movie recommendation system using doc2vec and genre classification with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

@@ -3,7 +3,7 @@ title: Multimodal Myntra Fashion Search Engine using LanceDB
 date: 2024-03-20
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore multimodal myntra fashion search engine using lancedb with practical insights and expert guidance from the LanceDB team.
 author: Ishan Dutta
 ---

@@ -3,7 +3,7 @@ title: Improve (almost) every retriever with LanceDB hybrid search and Reranking
 date: 2024-08-26
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore improve (almost) every retriever with lancedb hybrid search and reranking with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

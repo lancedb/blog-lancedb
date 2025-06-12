@@ -1,18 +1,12 @@
 ---
+title: "Simplest Method to improve RAG pipeline: Re-Ranking"
 date: 2023-11-21
-author: Chang She
----
----
-title: Simplest Method to improve RAG pipeline: Re-Ranking
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore simplest method to improve rag pipeline: re-ranking with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore simplest method to improve rag pipeline: re-ranking with practical insights and expert guidance from the LanceDB team."
+author: Mahesh Deshwal
 ---
-
-by Mahesh Deshwal
 
 # Problem Statement:
 

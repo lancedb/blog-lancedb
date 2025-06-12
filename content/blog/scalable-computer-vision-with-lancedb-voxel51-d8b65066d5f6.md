@@ -3,7 +3,7 @@ title: Scalable Computer Vision with LanceDB & Voxel51
 date: 2023-07-13
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore scalable computer vision with lancedb & voxel51 with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

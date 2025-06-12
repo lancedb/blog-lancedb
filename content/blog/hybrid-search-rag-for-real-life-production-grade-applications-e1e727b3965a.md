@@ -1,18 +1,12 @@
 ---
+title: "Hybrid search: RAG for real-life production-grade applications"
 date: 2024-02-19
-author: Chang She
----
----
-title: Hybrid search: RAG for real-life production-grade applications
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
-description: Explore hybrid search: rag for real-life production-grade applications with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/1.png
+description: "Explore hybrid search: rag for real-life production-grade applications with practical insights and expert guidance from the LanceDB team."
+author: Mahesh Deshwal
 ---
-
-by Mahesh Deshwal
 
 # What is Hybrid Search, and what’s the need for it?
 

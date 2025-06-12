@@ -3,7 +3,7 @@ title: InfraRed 100, Vector Datalake, Lance  Mosaic Streaming Dataset
 date: 2024-07-02
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore infrared 100, vector datalake, lance  mosaic streaming dataset with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

@@ -3,7 +3,7 @@ title: Serverless Multi-Modal search engine application
 date: 2023-09-25
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore serverless multi-modal search engine application with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

@@ -1,9 +1,9 @@
 ---
-title: Hybrid search and custom reranking with LanceDB
+title: "Hybrid search and custom reranking with LanceDB"
 date: 2024-02-19
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore hybrid search and custom reranking with lancedb with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

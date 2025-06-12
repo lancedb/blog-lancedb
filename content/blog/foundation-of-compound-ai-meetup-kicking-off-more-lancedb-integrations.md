@@ -3,7 +3,7 @@ title: Foundation of Compound AI Meetup Kicking Off, More LanceDB Integrations
 date: 2024-10-10
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore foundation of compound ai meetup kicking off, more lancedb integrations with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

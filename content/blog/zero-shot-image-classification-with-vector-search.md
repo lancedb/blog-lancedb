@@ -3,7 +3,7 @@ title: Zero shot image classification with vector search
 date: 2024-07-12
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore zero shot image classification with vector search with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

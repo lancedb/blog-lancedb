@@ -3,7 +3,7 @@ title: GTA5 Multimodal RAG application
 date: 2024-03-07
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore gta5 multimodal rag application with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

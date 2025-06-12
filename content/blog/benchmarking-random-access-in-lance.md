@@ -3,7 +3,7 @@ title: Benchmarking random access in Lance
 date: 2023-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore benchmarking random access in lance with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

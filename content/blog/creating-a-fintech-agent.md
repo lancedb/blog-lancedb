@@ -3,7 +3,7 @@ title: Fintech AI Agent From Scratch
 date: 2025-02-27
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

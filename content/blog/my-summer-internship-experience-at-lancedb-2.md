@@ -3,7 +3,7 @@ title: My summer internship experience at LanceDB
 date: 2024-08-15
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore my summer internship experience at lancedb with practical insights and expert guidance from the LanceDB team.
 author: Raunak Shah
 ---

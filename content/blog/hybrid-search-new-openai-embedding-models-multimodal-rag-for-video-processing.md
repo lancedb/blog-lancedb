@@ -2,8 +2,7 @@
 title: Hybrid search, New OpenAI Embedding Models, Multimodal RAG for Video Processing
 date: 2024-03-06
 draft: false
-featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore hybrid search, new openai embedding models, multimodal rag for video processing with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

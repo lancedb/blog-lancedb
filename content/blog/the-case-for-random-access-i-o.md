@@ -3,7 +3,7 @@ title: The case for random access IO
 date: 2024-08-20
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore the case for random access io with practical insights and expert guidance from the LanceDB team.
 author: Weston Pace
 ---

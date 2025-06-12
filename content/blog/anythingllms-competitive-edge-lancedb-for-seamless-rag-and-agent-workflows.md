@@ -4,7 +4,7 @@ date: 2025-04-02
 draft: false
 featured: false
 categories: ["Case Study"]
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore anythingllm's competitive edge: lancedb for seamless rag and agent workflows with practical insights and expert guidance from the LanceDB team."
 author: Ayush Chaurasia
 ---

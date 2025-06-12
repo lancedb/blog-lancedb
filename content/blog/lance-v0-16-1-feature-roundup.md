@@ -3,7 +3,7 @@ title: Lance v0.16.1 Feature Roundup
 date: 2024-08-26
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lance v0.16.1 feature roundup with practical insights and expert guidance from the LanceDB team.
 author: Will Jones
 ---

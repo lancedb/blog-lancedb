@@ -3,7 +3,7 @@ title: Implementing Corrective RAG in the Easiest Way
 date: 2024-03-04
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore implementing corrective rag in the easiest way with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

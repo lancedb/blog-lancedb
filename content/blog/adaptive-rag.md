@@ -3,7 +3,7 @@ title: Practical introduction to Adaptive-RAG
 date: 2024-04-24
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore practical introduction to adaptive-rag with practical insights and expert guidance from the LanceDB team.
 author: Akash Desai
 ---

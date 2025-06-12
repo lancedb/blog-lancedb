@@ -7,7 +7,7 @@ title: Chunking Analysis: Which is the right chunking approach for your language
 date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore chunking analysis: which is the right chunking approach for your language? with practical insights and expert guidance from the LanceDB team.
 author: David Myriel
 ---

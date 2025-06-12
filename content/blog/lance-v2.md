@@ -3,7 +3,7 @@ title: "Lance v2: A New Columnar Container Format"
 date: 2024-04-13
 draft: false
 featured: true
-image: /assets/posts/lance-v2.png
+image: /assets/blog/lance-v2.png
 description: "Explore lance v2: a new columnar container format with practical insights and expert guidance from the LanceDB team."
 author: "Weston Pace"
 ---
@@ -16,21 +16,21 @@ Lance was invented because readers and writers for existing column formats did n
 
 A point lookup is a query that accesses a small set of rows. This is essential whenever you are using a secondary index. For example, both semantic search and full text search end up as point lookups in LanceDB. Parquet's main challenge with point lookups is that its encodings are not designed to be "sliceable" and you typically need to load an entire page of data to access a single row. This is especially bad for multi-modal workloads because our values are typically quite large and coalescing is much harder.
 
-![Parquet point lookups challenge](/assets/posts/parquet-point-lookups.png)
+![Parquet point lookups challenge](/assets/blog/parquet-point-lookups.png)
 *Parquet faces challenges satisfying point lookups*
 
 ### Wide Columns
 
 Wide columns are columns where each value is very large. Traditional db workloads use fairly small columns (floats, doubles, etc.) Strings are often the largest column but even they are usually quite small in practice. In ML workloads we often want to store tensors like semantic search embeddings (e.g. 4KiB CLIP embeddings) or even images (much larger).
 
-![Wide columns challenge](/assets/posts/wide-columns-row-group.png)
+![Wide columns challenge](/assets/blog/wide-columns-row-group.png)
 *Picking a good row group size is impossible when a file has a wide column*
 
 ### Very Wide Schemas
 
 Many user workloads involve very wide schemas. These can range from finance workloads (which sometimes have a column per ticker) to feature stores (where there can be thousands of features for a given record). Parquet and other columnar formats help by giving us powerful column projection but we still need to load the schema metadata for all columns in the file. This is a significant cost for low-latency workloads and potentially memory intensive when caching metadata across many files.
 
-![Wide schemas performance](/assets/posts/wide-schemas-performance.png)
+![Wide schemas performance](/assets/blog/wide-schemas-performance.png)
 *Many Parquet readers do not perform well on very wide schemas, even with highly selective column projection*
 
 ### Flexible Encodings
@@ -41,7 +41,7 @@ Parquet supports a powerful set of encodings, but it doesn't keep up with the de
 
 In Parquet, an encoding can only control what goes into the data page. This means that encodings have no access to the column or file metadata. For example, consider dictionary encoding, where we know the dictionary will be constant throughout a column. We would ideally like to put the dictionary in the column metadata but we are instead forced to put it into every single row group. Another use case is skip tables for run length encoded columns. If we can put these in the column metadata then we can trade slightly larger metadata for much faster point lookups into RLE encoded columns.
 
-![Metadata flexibility issues](/assets/posts/metadata-flexibility.png)
+![Metadata flexibility issues](/assets/blog/metadata-flexibility.png)
 *A lack of metadata flexibility forces some unfortunate encoding decisions in various cases*
 
 ### And More
@@ -59,7 +59,7 @@ We have considered more use cases, some of them perhaps a bit esoteric, when bui
 
 Now let me describe the [Lance v2 format](https://github.com/westonpace/lance/blob/821eb0461e7e474155485db32ac589b1933ef251/protos/file2.proto) (take a look, it's less than 50 lines of protobuf) and explain how it solves the various use cases I have mentioned above.
 
-![Lance v2 format overview](/assets/posts/lance-v2-overview.png)
+![Lance v2 format overview](/assets/blog/lance-v2-overview.png)
 *A high level overview of the Lance v2 format*
 
 🥱
@@ -76,7 +76,7 @@ The Lance format itself does not have a type system. From Lance's perspective, e
 
 The primary benefit is that it keeps the specification of the format simple. I do not have to tell you what types are supported and waste time describing them. It also helps avoid creating "yet another type system"
 
-![Lance v2 conceptual overview](/assets/posts/lance-v2-conceptual.png)
+![Lance v2 conceptual overview](/assets/blog/lance-v2-conceptual.png)
 *Conceptually, Lance v2 is quite simple*
 
 ### Corollary 2: Empowering encoding developers
@@ -91,11 +91,11 @@ Row groups (or stripes) are a clever idea that have outlived their usefulness. S
 
 If the row group size is too large then, at a minimum, you are going to require a significant amount of RAM to be buffered in your file writer. However, many existing Parquet readers (e.g. pyarrow) treat the row group size as the unit of computation. This means that you end up using way too much RAM when reading a file too.
 
-![Row group conundrum](/assets/posts/row-group-conundrum.png)
+![Row group conundrum](/assets/blog/row-group-conundrum.png)
 
 Row groups are a bad choice for multi-thread parallelism (within a process). Imagine you have 10 cores and so you try to read 10 row groups at once. Each row group reader now has to read (let's say) 5 columns. This means you will launch 50 IOPS simultaneously. First, this is possibly over-scheduling your I/O. Second, in the average / expected case you won't start compute until roughly all 50 of these IOPS complete. There are much better ways to do multi-thread parallelism (pipeline parallelism instead of data parallelism).
 
-![Row group multithreading issues](/assets/posts/row-group-multithreading.png)
+![Row group multithreading issues](/assets/blog/row-group-multithreading.png)
 
 Row groups are a reasonable choice for multi-process parallelism. But…so are files. From our perspective, a file with 10 row groups is no different than 10 files. If you need multi-process parallelism then just make 10 files. This will be easier to manage anyways (e.g. sharding)
 
@@ -115,7 +115,7 @@ Now, imagine we are reading that file, let's pretend there are only those two co
 
 We get to choose the batch size for our read, completely independent of our I/O size. Let's assume we decided we want to process 10Ki rows at a time. Once those two pages arrive we can launch 100 decode tasks, one for each 10Ki rows we have. While those decode tasks are running we can fetch the remaining double pages.
 
-![Lance read architecture](/assets/posts/lance-read-architecture.png)
+![Lance read architecture](/assets/blog/lance-read-architecture.png)
 *Lance uses a two-thread read algorithm to decouple I/O parallelism from compute parallelism*
 
 ## Feature 3: Flexibility
@@ -132,7 +132,7 @@ Back when Arrow-cpp was initially being developed there was some confusion on ho
 
 Lance v2 allows the writer to choose the most appropriate location. If the dictionary can be provided up front then the writer should put it in the column metadata. If it differs from page to page then the writer should write page specific dictionaries. This fluidity goes way beyond dictionaries however. Skip tables for RLE and zone maps (discussed further soon) can also be placed in column metadata. Even nullability information can be stored in the column metadata (e.g. if a column only has a few nulls the put the nullability in the metadata to avoid another IOP on point lookups).
 
-![Flexible metadata approaches](/assets/posts/flexible-metadata.png)
+![Flexible metadata approaches](/assets/blog/flexible-metadata.png)
 *Lance supports all approaches, allowing the encoder to choose which is most appropriate*
 
 What's more, any piece of information that is truly file-wide (e.g. the arrow schema of the data or a common dictionary shared by several columns) can be stored into a space for file-wide buffers. Encodings can make this decision (where to store a piece of data) on-the-fly based on the data they are writing.
@@ -141,7 +141,7 @@ What's more, any piece of information that is truly file-wide (e.g. the arrow sc
 
 In Parquet, file statistics (e.g. zone maps) are a 1st-class entity and part of the top-level format. However, this means a format change is required to support a new kind of statistics. It turns out, there are many ways to store statistics (e.g. skip tables in RLE, histograms, bloom filters, etc.) and so this is kind of inconvenient. Also, making them part of the top-level format means your zone map resolution is tied to your data page size, encouraging either small pages or large zones (this is not as bad as it seems, as tiny pages in big column chunks can be coalesced, unlike tiny pages in tiny column chunks discussed earlier, but the two concepts still don't need to be related).
 
-![Statistics as metadata](/assets/posts/stats-as-metadata.png)
+![Statistics as metadata](/assets/blog/stats-as-metadata.png)
 *Traditional min/max/null count zone maps become a column metadata buffer*
 
 In Lance v2, statistics are just a part of the encoding process. A zone map is just a proxy layer in the encoding and the resulting zone maps can be stored in the column metadata (in the same way any piece of information can be stored in the column metadata). These can then be utilized on read to apply pushdown filters the same way zone maps are used today. Switching to a different statistics format is simply another encoding and doesn't require a change in the format.

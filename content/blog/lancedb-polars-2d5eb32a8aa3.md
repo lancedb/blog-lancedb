@@ -1,9 +1,9 @@
 ---
-title: LanceDB  Polars
+title: LanceDB Polars
 date: 2024-01-19
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lancedb  polars with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

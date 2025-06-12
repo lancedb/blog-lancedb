@@ -3,7 +3,7 @@ title: "WeRide's Data Platform Transformation: How LanceDB Fuels Model Developme
 date: 2024-12-10
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore weride's data platform transformation: how lancedb fuels model development velocity with practical insights and expert guidance from the LanceDB team."
 author: Qian Zhu
 ---

@@ -3,7 +3,7 @@ title: Lance v2 is now in Beta
 date: 2024-06-05
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lance v2 is now in beta with practical insights and expert guidance from the LanceDB team.
 author: Weston Pace
 ---

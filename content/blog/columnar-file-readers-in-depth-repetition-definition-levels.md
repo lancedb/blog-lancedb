@@ -3,7 +3,7 @@ title: "Columnar File Readers in Depth: Repetition & Definition Levels"
 date: 2025-06-02
 draft: false
 featured: false
-image: /assets/posts/columnar-file-readers-in-depth-repetition-definition-levels.png
+image: /assets/blog/columnar-file-readers-in-depth-repetition-definition-levels.png
 description: "Explore columnar file readers in depth: repetition & definition levels with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---

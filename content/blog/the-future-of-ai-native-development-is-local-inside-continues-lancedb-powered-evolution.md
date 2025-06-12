@@ -3,7 +3,7 @@ title: "The Future of AI-Native Development is Local: Inside Continue's LanceDB-
 date: 2025-04-16
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: "Explore the future of ai-native development is local: inside continue's lancedb-powered evolution with practical insights and expert guidance from the LanceDB team."
 author: "Ty Dunn"
 ---

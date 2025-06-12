@@ -3,7 +3,7 @@ title: GraphRAG, Full-Text Search, LanceDBCharacter.AI
 date: 2024-08-06
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore graphrag, full-text search, lancedbcharacter.ai with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

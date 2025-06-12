@@ -3,7 +3,7 @@ title: LanceDB Enterprise Architecture, Lance Community Office Hour, Petabyte Sc
 date: 2024-11-05
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lancedb enterprise architecture, lance community office hour, petabyte scale multimodal ai with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

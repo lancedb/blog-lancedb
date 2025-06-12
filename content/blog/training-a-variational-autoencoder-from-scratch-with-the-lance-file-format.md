@@ -3,7 +3,7 @@ title: Training a Variational AutoEncoder from scratch with Lance file format
 date: 2024-09-02
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore training a variational autoencoder from scratch with lance file format with practical insights and expert guidance from the LanceDB team.
 author: Aritra Roy Gosthipaty
 ---

@@ -7,7 +7,7 @@ title: Columnar File Readers in Depth: Parallelism without Row Groups
 date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore columnar file readers in depth: parallelism without row groups with practical insights and expert guidance from the LanceDB team.
 author: David Myriel
 ---

@@ -3,7 +3,7 @@ title: An attempt to build cursor's codebase feature - RAG on codebases - part 2
 date: 2024-11-07
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore an attempt to build cursor's codebase feature - rag on codebases - part 22 with practical insights and expert guidance from the LanceDB team.
 author: Sankalp Shubham
 ---

@@ -3,7 +3,7 @@ title: What is LanceDB?
 date: 1970-01-01
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore what is lancedb with practical insights and expert guidance from the LanceDB team.
 author: Weston Pace
 ---

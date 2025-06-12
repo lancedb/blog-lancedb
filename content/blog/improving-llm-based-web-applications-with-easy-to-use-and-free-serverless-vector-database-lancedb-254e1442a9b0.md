@@ -3,7 +3,7 @@ title: Improving LLM-based web applications with easy-to-use and free serverless
 date: 2023-08-16
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore improving llm-based web applications with easy-to-use and free serverless vector database lancedb with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---

@@ -3,7 +3,7 @@ title: Geospatial Restaurant Recommendation System
 date: 2024-12-31
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore geospatial restaurant recommendation system with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---

@@ -3,7 +3,7 @@ title: Streamlining Our SDKs
 date: 2024-07-16
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore streamlining our sdks with practical insights and expert guidance from the LanceDB team.
 author: cory grinstead
 ---

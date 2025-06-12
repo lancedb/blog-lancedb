@@ -3,7 +3,7 @@ title: Accelerating deep learning workflows with Lance
 date: 2024-04-30
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore accelerating deep learning workflows with lance with practical insights and expert guidance from the LanceDB team.
 author: Ayush Chaurasia
 ---

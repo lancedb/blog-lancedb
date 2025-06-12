@@ -3,7 +3,7 @@ title: A Primer on Text Chunking and its Types
 date: 2023-10-24
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore a primer on text chunking and its types with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

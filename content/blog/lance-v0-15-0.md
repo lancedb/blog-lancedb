@@ -3,7 +3,7 @@ title: Lance v0.15.0
 date: 2024-07-30
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore lance v0.15.0 with practical insights and expert guidance from the LanceDB team.
 author: Will Jones
 ---

@@ -3,7 +3,7 @@ title: Multi-Speaker, Context-Aware AI Podcast Generation
 date: 1970-01-01
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore multi-speaker, context-aware ai podcast generation with practical insights and expert guidance from the LanceDB team.
 author: Shresth Shukla
 ---

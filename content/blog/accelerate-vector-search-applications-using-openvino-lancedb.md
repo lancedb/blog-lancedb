@@ -3,7 +3,7 @@ title: Accelerate Vector Search Applications Using OpenVINO & LanceDB
 date: 2023-12-06
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore accelerate vector search applications using openvino & lancedb with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---

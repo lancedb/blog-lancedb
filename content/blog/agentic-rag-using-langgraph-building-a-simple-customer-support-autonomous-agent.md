@@ -7,7 +7,7 @@ title: Agentic RAG using LangGraph: Build autonomous Customer support agent
 date: 2024-03-14
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore agentic rag using langgraph: build autonomous customer support agent with practical insights and expert guidance from the LanceDB team.
 author: David Myriel
 ---

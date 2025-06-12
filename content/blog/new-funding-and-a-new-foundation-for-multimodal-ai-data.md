@@ -3,7 +3,7 @@ title: New Funding and A New Foundation for Multimodal AI Data
 date: 2024-05-15
 draft: false
 featured: false
-image: /assets/posts/1.png
+image: /assets/blog/1.png
 description: Explore new funding and a new foundation for multimodal ai data with practical insights and expert guidance from the LanceDB team.
 author: Chang She
 ---
