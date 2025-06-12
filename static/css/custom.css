@@ -228,16 +228,13 @@ main {
     transition: transform 0.3s ease;
 }
 
-.side-featured-post:hover .preview-image {
-    transform: scale(1.02);
-}
-
 .side-featured-post h2 {
     font-family: 'Roboto Slab', serif;
     font-size: 1rem;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
     line-height: 1.3;
+    text-align: left !important;
 }
 
 .side-featured-post h2 a {
@@ -246,36 +243,13 @@ main {
     transition: color 0.2s ease;
 }
 
-.side-featured-post h2 a:hover {
-    color: var(--accent-color);
-}
-
-.side-featured-post .post-date {
-    margin: 0 1.25rem;
+.side-featured-post .post-meta {
+    display: block !important;
+    text-align: left !important;
+    margin: 0.4rem 0.8rem 0.8rem !important;
     color: var(--text-secondary);
     font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.8;
-}
-
-.side-featured-post .post-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin: 0 1rem 0.4rem 1rem;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 400;
-    opacity: 0.8;
-}
-
-.side-featured-post .post-meta .post-author {
-    text-align: left;
-}
-
-.side-featured-post .post-meta .post-date {
-    text-align: right;
+    line-height: 1.4;
 }
 
 /* Post grid */
@@ -293,10 +267,6 @@ main {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
 }
 
 .post-card:hover {
@@ -319,9 +289,10 @@ main {
 .post-card h2 {
     font-family: 'Roboto Slab', serif;
     font-size: 1.1rem;
-    margin: 1rem 1rem 0.4rem 1rem;
+    margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
-    line-height: 1.4;
+    line-height: 1.3;
+    text-align: left !important;
 }
 
 .post-card h2 a {
@@ -335,41 +306,25 @@ main {
 }
 
 .post-card .post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-    margin: 0 1rem 0.4rem 1rem;
+    display: block !important;
+    text-align: left !important;
+    margin: 0.4rem 0.8rem 0.8rem !important;
+    color: var(--text-secondary);
     font-size: 0.85rem;
-}
-
-.post-card .post-author {
-    text-align: left;
-    flex: 1;
-}
-
-.post-card .post-date {
-    text-align: right;
-    flex: 1;
+    line-height: 1.4;
 }
 
 .post-card .post-description {
     color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.4;
-    margin: 0 1rem 1rem 1rem;
+    margin: 0 0.8rem 1rem;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    letter-spacing: -0.01em;
-    opacity: 0.9;
-    max-width: 90%;
-}
-
-.post-card:hover .post-description {
-    opacity: 1;
+    opacity: 0.8;
+    text-align: left;
 }
 
 /* Content wrapper */
@@ -980,8 +935,10 @@ a:hover {
 }
 
 .main-featured .post-meta {
-    margin: 0 1rem 0.4rem 1rem;
+    margin: 0.5rem 1rem 1rem;
+    color: var(--text-secondary);
     font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .main-featured .post-meta .meta-divider {
@@ -989,9 +946,9 @@ a:hover {
 }
 
 .side-featured-post .post-meta {
-    margin: 0 0.8rem 0.8rem 0.8rem;
+    margin: 0.4rem 0.8rem 0.8rem;
     font-size: 0.85rem;
-    gap: 0.8rem;
+    text-align: left;
 }
 
 .side-featured-post .post-meta .meta-divider {
@@ -2023,4 +1980,50 @@ nav.pagination .pagination-link.current {
     background: none;
     -webkit-text-fill-color: inherit;
     color: inherit;
+}
+
+/* Featured section styles */
+.main-featured .post-meta,
+.side-featured-post .post-meta {
+    margin: 0.5rem 1rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.main-featured .meta-left,
+.side-featured-post .meta-left {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.main-featured .category-tag,
+.side-featured-post .category-tag,
+.main-featured .post-author,
+.side-featured-post .post-author,
+.main-featured .post-date,
+.side-featured-post .post-date,
+.main-featured .meta-divider,
+.side-featured-post .meta-divider {
+    color: var(--text-secondary);
+    font-weight: normal;
+}
+
+/* Adjust spacing for side featured posts */
+.side-featured-post .post-meta {
+    margin: 0.4rem 0.8rem 0.8rem;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-featured .post-meta,
+    .side-featured-post .post-meta {
+        margin: 0.4rem 0.8rem 0.8rem;
+        font-size: 0.85rem;
+    }
 } 

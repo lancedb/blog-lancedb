@@ -24,7 +24,8 @@
     <main>
         {{ $allPosts := where .Site.RegularPages "Section" "posts" }}
         {{ $featuredPosts := where $allPosts ".Params.featured" true }}
-        {{ $nonFeaturedPosts := where $allPosts ".Params.featured" "ne" true }}
+        {{ $regularPosts := where $allPosts "Params.featured" false }}
+        {{ $nonFeaturedPosts := $regularPosts | union (where $allPosts ".Params.featured" nil) }}
         
         <!-- Featured Section - Only show on first page -->
         {{ if and $featuredPosts (eq .Paginator.PageNumber 1) }}
@@ -38,9 +39,12 @@
                     </a>
                     <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
                     <div class="post-meta">
-                        <span class="post-author">{{ $mainFeatured.Params.author }}</span>
-                        <span class="meta-divider">•</span>
-                        <span class="post-date">{{ $mainFeatured.Date.Format "January 2, 2006" }}</span>
+                        {{- range $index, $category := $mainFeatured.Params.categories -}}
+                            {{- if $index }} / {{ end -}}
+                            {{- $category -}}
+                        {{- end -}}
+                        {{- if $mainFeatured.Params.categories }} / {{ end -}}
+                        {{- $mainFeatured.Params.author }} / {{ $mainFeatured.Date.Format "January 2, 2006" -}}
                     </div>
                     <p class="post-description">{{ $mainFeatured.Description | default (truncate 160 $mainFeatured.Summary) }}</p>
                 </article>
@@ -53,8 +57,12 @@
                             </a>
                             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                             <div class="post-meta">
-                                <span class="post-author">{{ .Params.author }}</span>
-                                <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                                {{- range $index, $category := .Params.categories -}}
+                                    {{- if $index }} / {{ end -}}
+                                    {{- $category -}}
+                                {{- end -}}
+                                {{- if .Params.categories }} / {{ end -}}
+                                {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
                             </div>
                         </article>
                     {{ end }}
@@ -130,9 +138,12 @@
                     </a>
                     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                     <div class="post-meta">
-                        <span class="post-author">{{ .Params.author }}</span>
-                        <span class="meta-divider">•</span>
-                        <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                        {{- range $index, $category := .Params.categories -}}
+                            {{- if $index }} / {{ end -}}
+                            {{- $category -}}
+                        {{- end -}}
+                        {{- if .Params.categories }} / {{ end -}}
+                        {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
                     </div>
                     <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
                 </article>
