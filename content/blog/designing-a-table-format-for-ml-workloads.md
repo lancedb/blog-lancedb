@@ -4,7 +4,7 @@ date: 2025-02-25
 draft: false
 featured: true
 categories: ["Engineering"]
-image: /assets/posts/designing-a-table-format-for-ml-workloads/designing-a-table-format-for-ml-workloads.png
+image: /assets/blog/designing-a-table-format-for-ml-workloads/designing-a-table-format-for-ml-workloads.png
 description: "Explore designing a table format for ml workloads with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 author_avatar: "/assets/authors/weston-pace.jpg"
@@ -37,13 +37,13 @@ As data science gets more sophisticated, scientists are bringing their work to b
 As I've worked with wide data I've come to an interesting observation that I am going to start referring to as *the curse of wide data* (because that's a fun sounding name). **If some of your data is wide then most of your data is wide.** One of our team cats has agreed to assist with a demonstration:
 
 {{< image-grid >}}
-![Wide Data Demonstration](/assets/posts/designing-a-table-format-for-ml-workloads/chunky_lance-1.png)
+![Wide Data Demonstration](/assets/blog/designing-a-table-format-for-ml-workloads/chunky_lance-1.png)
 *Visualizing Data Width: A playful demonstration of how a single wide column can dominate data storage requirements, featuring our team mascot.*
 {{< /image-grid >}}
 
 If cats are not convincing then we can try a simple example. If you take the TPC-H line items table (the kind of thing all your favorite databases are optimized against) and add a single 3KiB vector embedding column then that table will go from 16 columns to 17 columns...and will go from 0% wide data to 99% wide data.
 
-![TPC-H with Wide Data](/assets/posts/designing-a-table-format-for-ml-workloads/TPCH-with-wide.png)
+![TPC-H with Wide Data](/assets/blog/designing-a-table-format-for-ml-workloads/TPCH-with-wide.png)
 *Data Distribution Analysis: Adding a 3KB vector embedding to the TPC-H line items table shifts the data distribution dramatically, with the embedding consuming 99% of the total storage.*
 
 ### Tables Grow Horizontally *and* Vertically
@@ -52,15 +52,13 @@ Your internal model of a database table is probably something that grows mostly 
 
 Once you put data scientists into the mix, something strange starts to happen. The table starts to grow horizontally, often growing outward from a single column. For example, let's consider a research project that starts by scraping Wikipedia and creating one fat column "article text" which contains the Wikipedia markup. Then the data scientists get to work. They add a new column, "sentiment analysis", that measures if the article has a positive or negative tone. Then they add "political bias". Then they go and scrape some more data and add an "edit count" column. This process repeats and repeats until, in some frightening cases, we can have hundreds or thousands of columns!
 
-![Growing in 2D](/assets/posts/designing-a-table-format-for-ml-workloads/growing-in-2d.png)
+![Growing in 2D](/assets/blog/designing-a-table-format-for-ml-workloads/growing-in-2d.png)
 *ML data starts with a core collection of observances. Over time both new observances AND new features are added to the data.*
 
 This process of adding columns repeats again and again as scientists discover new interesting things about the underlying data and make more and more sophisticated observations. Some researchers are now even starting to worry about datasets with [tens of thousands of columns](https://arxiv.org/abs/2404.08901) (although we find most users are more in the hundreds-to-thousands scenario).
 
-![Feature Engineering](/assets/posts/designing-a-table-format-for-ml-workloads/so-many-features.png)
+![Feature Engineering](/assets/blog/designing-a-table-format-for-ml-workloads/so-many-features.png)
 *Feature Engineering Complexity: The exponential growth of feature columns in ML datasets, illustrating how sophisticated analysis can lead to an ever-expanding set of data attributes.*
-
-"Do we really need the image_has_professor_with_shorts_and_sweater feature?" "That's the core of our $64 million season detection algorithm."
 
 ### Data is Messy
 
@@ -74,30 +72,30 @@ I'll now explain the problems we encountered with existing table formats. For ea
 
 Table formats offer "zero copy schema evolution". This means you can add columns to your table after you've already added data to your table. This is great but there is one problem and it's in the fine print.
 
-![Schema Evolution Fine Print](/assets/posts/designing-a-table-format-for-ml-workloads/schema-evolution-not-free.png)
+![Schema Evolution Fine Print](/assets/blog/designing-a-table-format-for-ml-workloads/schema-evolution-not-free.png)
 *FREE Schema Evolution (existing rows not included)*
 
 That's right, new columns can only be populated going forwards. All existing rows will either be NULL or will be given a default value. This makes perfect sense in the classic "data grows vertically" scenario. If our sales team started rewarding "loyalty bucks" with each purchase then the new "loyalty bucks" column doesn't make sense for all past transactions and we can set it to zero.
 
-![Vertical Table Schema Evolution](/assets/posts/designing-a-table-format-for-ml-workloads/vertical-table-schema-evolution.png)
+![Vertical Table Schema Evolution](/assets/blog/designing-a-table-format-for-ml-workloads/vertical-table-schema-evolution.png)
 *Datasets that grow vertically have no meaningful value for new columns and a default value (or NULL) is all you need to use.*
 
 However, this is NOT what we want when our table is growing horizontally. The entire reason we added a new column is because we've calculated some new feature value for all of our rows! So, how do we add this new column in a classic table format? It's simple, we copy all of our data.
 
 {{< image-grid >}}
-![Data Copy Meme](/assets/posts/designing-a-table-format-for-ml-workloads/one-banana-meme.png)
+![Data Copy Meme](/assets/blog/designing-a-table-format-for-ml-workloads/one-banana-meme.png)
 *I mean, it's one billion rows Michael, what could it require, 50 gigabytes?*
 {{< /image-grid >}}
 
 Well, that's ok...a data copy isn't that expensive. Unless...
 
-![One Billion Rows Comparison](/assets/posts/designing-a-table-format-for-ml-workloads/one-billion-rows.png)
+![One Billion Rows Comparison](/assets/blog/designing-a-table-format-for-ml-workloads/one-billion-rows.png)
 *Scale comparison: 1B rows TPC-H ~45 GB vs 1B rows FineWeb Prompt Data ~2,100 GB vs 1B rows small images w/ Captions ~250,100 GB*
 
 Well, that's ok...how many new columns are we really going to be adding...
 
 {{< image-grid >}}
-![More Features](/assets/posts/designing-a-table-format-for-ml-workloads/moar-features.png)
+![More Features](/assets/blog/designing-a-table-format-for-ml-workloads/moar-features.png)
 *"Don't forget the has_weird_pink_tree feature, we use that one to detect springtime."*
 {{< /image-grid >}}
 
@@ -107,12 +105,12 @@ Ok, maybe this is a problem we actually need to solve...
 
 So how does Lance solve this? With more complexity magic. Lance has a *two-dimensional storage layout*. Rows are divided (vertically) into fragments. Fragments are divided (horizontally) into data files. Each data file in a fragment has the same number of rows and provides one or more columns of data. This is different from traditional table formats which only have one dimension.
 
-![2D Storage Layout](/assets/posts/designing-a-table-format-for-ml-workloads/2d-storage.png)
+![2D Storage Layout](/assets/blog/designing-a-table-format-for-ml-workloads/2d-storage.png)
 *Each fragment can have any number of data files. Each data file in a fragment must have the same number of rows.*
 
 Initially, as we write new rows, we create one data file per fragment. When we add a new column, instead of rewriting the fragment, we add a new data file to the fragment. In fact, we can use this trick to do a lot of cool things, like splitting a fragment when we update it, but we'll save the advanced tricks for a future blog post. For now, let's focus on our horizontally growing table.
 
-![2D Schema Evolution](/assets/posts/designing-a-table-format-for-ml-workloads/2d-schema-evolution.png)
+![2D Schema Evolution](/assets/blog/designing-a-table-format-for-ml-workloads/2d-schema-evolution.png)
 *Two-Dimensional Storage Evolution: Visualization of Lance's storage strategy, where new columns (green) are added as separate files while existing data (red) remains untouched, enabling efficient schema evolution.*
 
 Every time users add a new column, we write a new data file for each fragment. We don't need to rewrite any data (keep in mind that the "fragments" are not files, just lists in the manifest, so we can modify those). At some point, as we start to get hundreds or thousands of files per fragment, we may want to merge some of these together, which *will* require a rewrite (tbh, I haven't experienced this need yet but I'm playing devil's advocate). However, that rewrite can be done strategically. The large columns (remember: 90%+ of our data) can be left alone and we only need to combine and rewrite the smaller columns.
@@ -141,12 +139,12 @@ We got our start building vector search and so it's no surprise we handle that c
 
 The humble index has been synonymous with databases since...forever. However, as OLAP processing moved into columnar storage (and into the cloud) a strange thing happened. It turned out that sequential access of columnar data was so fast, and random access to column data was so slow, that indices were no longer required. Even if you could identify exactly what bits of data you wanted, there was little benefit from reducing the total amount of I/O.
 
-![S3 Read Amplification](/assets/posts/designing-a-table-format-for-ml-workloads/S3-Read-Amplification.png)
+![S3 Read Amplification](/assets/blog/designing-a-table-format-for-ml-workloads/S3-Read-Amplification.png)
 *There might be some extra room in the truck.*
 
 LanceDB (the company, not the table format) has changed this equation in a number of different ways. The Lance file format minimizes the number of IOPs and amount of data that needs read. We've also embraced the fact that many of our users are either running locally or have some kind of filesystem caching layer. In fact, a page cache is a big part of our enterprise architecture. As a result, the access patterns have swapped, and the forgotten index has once become essential.
 
-![S3 No Amplification with Cache](/assets/posts/designing-a-table-format-for-ml-workloads/S3-No-Amplification-Cause-Cache-4-.png)
+![S3 No Amplification with Cache](/assets/blog/designing-a-table-format-for-ml-workloads/S3-No-Amplification-Cause-Cache-4-.png)
 *No refunds for drones throwing results in your face*
 
 Fortunately, while Lance obviously has vector indices, we also have a variety of indices for non-vector data. We use these indices internally, when available, to speed up a number of table format tasks. Let's look at the examples above.
@@ -161,7 +159,7 @@ In the **tags filtering** example we run into a general expectation our users ha
 
 In the last, example, involving **captions**, we encounter a surprising relationship. Nearest neighbor search, in threshold mode, can turn "search indices" (like vector indices or full text indices) into a tool that can be used for filtering. We wanted to find all relevant images (cat or kitten or feline). This is exactly the kind of problem that full text search is good at solving. You can either discover a threshold that gives you the correct results or simply pull back a large number of results in FTS order and find the point the results are no longer relevant.
 
-![FTS Thresholds](/assets/posts/designing-a-table-format-for-ml-workloads/FTS-Thresholds-1-.png)
+![FTS Thresholds](/assets/blog/designing-a-table-format-for-ml-workloads/FTS-Thresholds-1-.png)
 *Search Threshold Analysis: Comparison of semantic search versus full-text search approaches, demonstrating how different search strategies handle variations in query terms and context.*
 
 Existing table formats will often tackle these problems with clustering (a.k.a *primary indices*). They've even come up with some pretty cool innovations here like liquid clustering and z-order clustering which make it easier to handle multiple columns. However, these approaches are often limited in the number of scenarios they can address, there are only so many columns that you can use as primary indices. They also would rely on rewrites for new columns. Even if you were to add two-dimensional storage, you would need a rewrite if you wanted your new column to participate in a primary index.
@@ -172,7 +170,7 @@ I think there is a lot of good in primary indices. They have better I/O patterns
 
 The final issue we encountered is that most table libraries we tried had focused most their time and effort on the query problem. This makes a lot of sense. OLAP is big and complicated. Distributed query engines are cool and fun. Unfortunately, we end up with a bit of an unbalanced implementation.
 
-![Unbalanced Query Engine](/assets/posts/designing-a-table-format-for-ml-workloads/Unbalanced-Query-Engine-1-.png)
+![Unbalanced Query Engine](/assets/blog/designing-a-table-format-for-ml-workloads/Unbalanced-Query-Engine-1-.png)
 *Yes, those are consummate V's (IYKYK).*
 
 At LanceDB, we've discovered that working with big data means that *everything is hard*. Importing initial data needs to be done in parallel and distributed because even small numbers of rows can mean tons of data. Adding a new column might need to be a task that runs in parallel because we're using a complex model to calculate our features and it can be expensive to calculate even a single row's value. Calculating an index needs to be something we can partition across multiple workers. The list goes on.
@@ -196,6 +194,6 @@ If you're interested in adding an integration to Lance or learning more about ou
 Special thanks to the pets from LanceDB who would like to mention that these photos were perhaps not taken from the most flattering angles.
 
 {{< image-grid >}}
-![Pet Bibliography](/assets/posts/designing-a-table-format-for-ml-workloads/Pets-Biliography.png)
+![Pet Bibliography](/assets/blog/designing-a-table-format-for-ml-workloads/Pets-Biliography.png)
 *Meet the Team: Uni (orange and white) and Lance (white) - our feline quality assurance specialists. And yes, Lance's name truly is a delightful coincidence!*
 {{< /image-grid >}}
