@@ -7,19 +7,24 @@ categories: ["Engineering"]
 image: /assets/posts/designing-a-table-format-for-ml-workloads/designing-a-table-format-for-ml-workloads.png
 description: "Explore designing a table format for ml workloads with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
+author_avatar: "/assets/authors/weston-pace.jpg"
+author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
+author_twitter: "westonpace"
+author_github: "westonpace"
+author_linkedin: "westonpace"
 ---
 
-In recent years the concept of a **table format** has really taken off, with explosive growth in technologies like Iceberg, Delta, and Hudi. With so many great options, one question I hear a lot is variations of "why can't Lance use an existing format like ...?"
+In recent years the concept of a **table format** has really taken off, with explosive growth in technologies like [Iceberg](https://en.wikipedia.org/wiki/Apache_Iceberg), Delta, and Hudi. With so many great options, one question I hear a lot is variations of "why can't Lance use an existing format like ...?"
 
 In this blog post I will describe the Lance table format and hopefully answer that question. The very short TL;DR: **existing table formats don't handle our customer's workflows. Basic operations require too much data copy, are too slow, or cannot be parallelized.**
 
-## What is a table format?
+## What is a Table Format?
 
 A table format is probably more accurately thought of as a protocol. It describes how the basic table operations (adding rows, deleting rows, etc.) happen. In other words, it tells us how data files change, what metadata we need to record, what extra structures (e.g. deletion files) are needed, and so on. In the interest of brevity I'm not going to fully describe every operation in the Lance table format in this article. A more complete description can be found in [our docs](https://lancedb.github.io/lance/format.html). If you are familiar with Iceberg or Delta, then Lance is not very different. In the following sections I'll focus on what is different.
 
-> 💡 **Fun Fact**
-> 
-> "Table formats stuff the CRUD into file formats" is a questionable tagline
+{{< admonition fun-fact >}}
+"Table formats stuff the CRUD into file formats" is a questionable tagline
+{{< /admonition >}}
 
 ## Modern Workloads
 
@@ -31,13 +36,15 @@ As data science gets more sophisticated, scientists are bringing their work to b
 
 As I've worked with wide data I've come to an interesting observation that I am going to start referring to as *the curse of wide data* (because that's a fun sounding name). **If some of your data is wide then most of your data is wide.** One of our team cats has agreed to assist with a demonstration:
 
+{{< image-grid >}}
 ![Wide Data Demonstration](/assets/posts/designing-a-table-format-for-ml-workloads/chunky_lance-1.png)
-*Boss: don't worry, there's only one tensor column. The tensor column:*
+*Visualizing Data Width: A playful demonstration of how a single wide column can dominate data storage requirements, featuring our team mascot.*
+{{< /image-grid >}}
 
 If cats are not convincing then we can try a simple example. If you take the TPC-H line items table (the kind of thing all your favorite databases are optimized against) and add a single 3KiB vector embedding column then that table will go from 16 columns to 17 columns...and will go from 0% wide data to 99% wide data.
 
 ![TPC-H with Wide Data](/assets/posts/designing-a-table-format-for-ml-workloads/TPCH-with-wide.png)
-*If you add a 3KB vector embedding to the TPC-H line items table then suddenly 99% of your data is vector embedding.*
+*Data Distribution Analysis: Adding a 3KB vector embedding to the TPC-H line items table shifts the data distribution dramatically, with the embedding consuming 99% of the total storage.*
 
 ### Tables Grow Horizontally *and* Vertically
 
@@ -51,7 +58,9 @@ Once you put data scientists into the mix, something strange starts to happen. T
 This process of adding columns repeats again and again as scientists discover new interesting things about the underlying data and make more and more sophisticated observations. Some researchers are now even starting to worry about datasets with [tens of thousands of columns](https://arxiv.org/abs/2404.08901) (although we find most users are more in the hundreds-to-thousands scenario).
 
 ![Feature Engineering](/assets/posts/designing-a-table-format-for-ml-workloads/so-many-features.png)
-*"Do we really need the image_has_professor_with_shorts_and_sweater feature?" "That's the core of our $64 million season detection algorithm."*
+*Feature Engineering Complexity: The exponential growth of feature columns in ML datasets, illustrating how sophisticated analysis can lead to an ever-expanding set of data attributes.*
+
+"Do we really need the image_has_professor_with_shorts_and_sweater feature?" "That's the core of our $64 million season detection algorithm."
 
 ### Data is Messy
 
@@ -66,7 +75,7 @@ I'll now explain the problems we encountered with existing table formats. For ea
 Table formats offer "zero copy schema evolution". This means you can add columns to your table after you've already added data to your table. This is great but there is one problem and it's in the fine print.
 
 ![Schema Evolution Fine Print](/assets/posts/designing-a-table-format-for-ml-workloads/schema-evolution-not-free.png)
-*FREE* Schema Evolution (*existing rows not included)*
+*FREE Schema Evolution (existing rows not included)*
 
 That's right, new columns can only be populated going forwards. All existing rows will either be NULL or will be given a default value. This makes perfect sense in the classic "data grows vertically" scenario. If our sales team started rewarding "loyalty bucks" with each purchase then the new "loyalty bucks" column doesn't make sense for all past transactions and we can set it to zero.
 
@@ -75,8 +84,10 @@ That's right, new columns can only be populated going forwards. All existing row
 
 However, this is NOT what we want when our table is growing horizontally. The entire reason we added a new column is because we've calculated some new feature value for all of our rows! So, how do we add this new column in a classic table format? It's simple, we copy all of our data.
 
+{{< image-grid >}}
 ![Data Copy Meme](/assets/posts/designing-a-table-format-for-ml-workloads/one-banana-meme.png)
 *I mean, it's one billion rows Michael, what could it require, 50 gigabytes?*
+{{< /image-grid >}}
 
 Well, that's ok...a data copy isn't that expensive. Unless...
 
@@ -85,8 +96,10 @@ Well, that's ok...a data copy isn't that expensive. Unless...
 
 Well, that's ok...how many new columns are we really going to be adding...
 
+{{< image-grid >}}
 ![More Features](/assets/posts/designing-a-table-format-for-ml-workloads/moar-features.png)
 *"Don't forget the has_weird_pink_tree feature, we use that one to detect springtime."*
+{{< /image-grid >}}
 
 Ok, maybe this is a problem we actually need to solve...
 
@@ -100,7 +113,7 @@ So how does Lance solve this? With more complexity magic. Lance has a *two-dimen
 Initially, as we write new rows, we create one data file per fragment. When we add a new column, instead of rewriting the fragment, we add a new data file to the fragment. In fact, we can use this trick to do a lot of cool things, like splitting a fragment when we update it, but we'll save the advanced tricks for a future blog post. For now, let's focus on our horizontally growing table.
 
 ![2D Schema Evolution](/assets/posts/designing-a-table-format-for-ml-workloads/2d-schema-evolution.png)
-*Adding a new column only requires that we write the green files. The red files remain exactly as they were.*
+*Two-Dimensional Storage Evolution: Visualization of Lance's storage strategy, where new columns (green) are added as separate files while existing data (red) remains untouched, enabling efficient schema evolution.*
 
 Every time users add a new column, we write a new data file for each fragment. We don't need to rewrite any data (keep in mind that the "fragments" are not files, just lists in the manifest, so we can modify those). At some point, as we start to get hundreds or thousands of files per fragment, we may want to merge some of these together, which *will* require a rewrite (tbh, I haven't experienced this need yet but I'm playing devil's advocate). However, that rewrite can be done strategically. The large columns (remember: 90%+ of our data) can be left alone and we only need to combine and rewrite the smaller columns.
 
@@ -112,9 +125,9 @@ There is nothing particularly wrong here but we find that it ends up being more 
 
 It also quickly becomes difficult to know when a column is "for the big table" and when a column is "for the little table". For example, you might want to put your vector embeddings in the large table with your images so you can avoid rewriting those when you add new features. However, vector embeddings are actually something that are regularly replaced (when a new model comes long) or added and removed (to support different search models). You probably want to make sure you're not rewriting your images every time you change your embedding model. This means you either need a third table, your "big data table" needs to utilize two-dimensional storage, or you give up and put the embeddings back in the small table.
 
-> 💡 **Note**
-> 
-> *Quad-table storage format* sounds cool but I hope it never exists.
+{{< admonition note "💡 Note" >}}
+*Quad-table storage format* sounds cool but I hope it never exists.
+{{< /admonition >}}
 
 ### "Search" is Everywhere
 
@@ -140,16 +153,16 @@ Fortunately, while Lance obviously has vector indices, we also have a variety of
 
 Indices on **foreign key columns** make it super fast to find matching rows and apply updates. Classically, this kind of task would be done with a hash join on the foreign key column. If we have a btree index on the foreign key column we can skip this step entirely. In fact, we can do key-deduplicating writes without any I/O into the old data. This makes things faster even if you don't have any kind of caching layer.
 
-> 💡 **Fun fact**
-> 
-> A hash join on the foreign key column is pretty much the same thing as building a btree index on the fly. In other words, the old approach was to rebuild a btree index on every single operation!
+{{< admonition fun-fact "💡 Fun fact" >}}
+A hash join on the foreign key column is pretty much the same thing as building a btree index on the fly. In other words, the old approach was to rebuild a btree index on every single operation!
+{{< /admonition >}}
 
 In the **tags filtering** example we run into a general expectation our users have. "It's just a small chunk of the data so it shouldn't take long to load". Unfortunately, string filtering, and string loading, can be surprisingly expensive. Let's say we have one billion rows, a "tags" column might easily be 50-80GB, and performing billions of string comparison operations can be pretty time consuming. However, if there's an index (in this case a label_list index), then we can quickly start returning results and the entire query will likely be much faster, especially if the data is in-cache.
 
 In the last, example, involving **captions**, we encounter a surprising relationship. Nearest neighbor search, in threshold mode, can turn "search indices" (like vector indices or full text indices) into a tool that can be used for filtering. We wanted to find all relevant images (cat or kitten or feline). This is exactly the kind of problem that full text search is good at solving. You can either discover a threshold that gives you the correct results or simply pull back a large number of results in FTS order and find the point the results are no longer relevant.
 
 ![FTS Thresholds](/assets/posts/designing-a-table-format-for-ml-workloads/FTS-Thresholds-1-.png)
-*Semantic search vs. Full text search - "Cats? Kittens? Felines? Furry spawn of the void? Cats, the musical?" "Yep. Yep. Yep. I Guess. We're done here."*
+*Search Threshold Analysis: Comparison of semantic search versus full-text search approaches, demonstrating how different search strategies handle variations in query terms and context.*
 
 Existing table formats will often tackle these problems with clustering (a.k.a *primary indices*). They've even come up with some pretty cool innovations here like liquid clustering and z-order clustering which make it easier to handle multiple columns. However, these approaches are often limited in the number of scenarios they can address, there are only so many columns that you can use as primary indices. They also would rely on rewrites for new columns. Even if you were to add two-dimensional storage, you would need a rewrite if you wanted your new column to participate in a primary index.
 
@@ -182,5 +195,7 @@ If you're interested in adding an integration to Lance or learning more about ou
 
 Special thanks to the pets from LanceDB who would like to mention that these photos were perhaps not taken from the most flattering angles.
 
+{{< image-grid >}}
 ![Pet Bibliography](/assets/posts/designing-a-table-format-for-ml-workloads/Pets-Biliography.png)
-*Meet our team: Uni (orange and white cat) and Lance (white cat) - we swear the name is a coincidence!*
+*Meet the Team: Uni (orange and white) and Lance (white) - our feline quality assurance specialists. And yes, Lance's name truly is a delightful coincidence!*
+{{< /image-grid >}}

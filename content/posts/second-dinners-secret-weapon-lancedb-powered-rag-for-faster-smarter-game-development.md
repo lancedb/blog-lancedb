@@ -1,15 +1,11 @@
 ---
+title: "Second Dinner's Secret Weapon: LanceDB-Powered RAG for Faster, Smarter Game Development"
 date: 2025-03-25
-author: Qian Zhu
----
----
-title: Second Dinner's Secret Weapon: LanceDB-Powered RAG for Faster, Smarter Game Development
-date: 2024-03-14
 draft: false
 featured: false
 image: /assets/posts/1.png
-description: Explore second dinner's secret weapon: lancedb-powered rag for faster, smarter game development with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+description: "Explore second dinner's secret weapon: lancedb-powered rag for faster, smarter game development with practical insights and expert guidance from the LanceDB team."
+author: Qian Zhu
 ---
 
 💡
