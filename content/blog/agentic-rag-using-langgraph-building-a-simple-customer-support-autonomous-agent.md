@@ -1,15 +1,11 @@
 ---
+title: "Agentic RAG using LangGraph: Build autonomous Customer support agent"
 date: 2025-01-26
-author: Mahesh Deshwal
----
----
-title: Agentic RAG using LangGraph: Build autonomous Customer support agent
-date: 2024-03-14
 draft: false
 featured: false
 image: /assets/blog/1.png
-description: Explore agentic rag using langgraph: build autonomous customer support agent with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+description: "Explore agentic rag using langgraph: build autonomous customer support agent with practical insights and expert guidance from the LanceDB team."
+author: Mahesh Deshwal
 ---
 
 ### Agent? What's that?

@@ -1,20 +1,12 @@
 ---
+title: "Customer Support Bot : RASA x LanceDB"
 date: 2024-12-31
-author: Rithik Kumar
----
----
-title: Customer Support Bot : RASA x LanceDB
-date: 2024-03-14
 draft: false
 featured: false
 image: /assets/blog/1.png
-description: Explore customer support bot : rasa x lancedb with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+description: "Explore customer support bot : rasa x lancedb with practical insights and expert guidance from the LanceDB team."
+author: Rithik Kumar
 ---
-
-💡
-
-This is a community blog by Rithik Kumar
 
 Have you ever wondered how businesses manage to provide instant, accurate, and personalized customer support around the clock? This article will teach us how to make an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI’s Large Language Models (LLMs)**. 
 
