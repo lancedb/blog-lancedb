@@ -1,7 +1,9 @@
 {{ $type := .Get 0 | default "note" }}
 {{ $title := .Get 1 | default (title $type) }}
+{{ $defaultTitle := title $type }}
+{{ $isInline := eq $title $defaultTitle }}
 
-<div class="admonition {{ $type }}">
+<div class="admonition {{ $type }}{{ if $isInline }} inline{{ end }}">
     <div class="admonition-content">
         <div class="admonition-title">{{ $title }}</div>
         {{ .Inner | markdownify }}

@@ -25,7 +25,7 @@
     --bg-secondary: #232627;
     --text-primary: #f5f6fa;
     --text-secondary: #b2becd;
-    --text-accent: #4fd1c5;
+    --text-accent: #f97316;
     --border-color: #2d3133;
     --bg-hover: #232b2b;
     --shadow: 0 4px 24px rgba(0,0,0,0.15);
@@ -86,7 +86,7 @@ body {
 }
 
 .site-title:hover {
-    color: #38b2ac;
+    color: #f43f5e;
 }
 
 .header-link {
@@ -628,22 +628,39 @@ main .post-meta {
 
 .post-content h2 {
     font-family: 'Aeonik', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 1.2rem 0 0.6rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
     color: var(--text-accent);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.3rem;
+    border-bottom: 3px solid var(--text-accent);
+    padding-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
 }
 
 .post-content h3 {
     font-family: 'Aeonik', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin: 1rem 0 0.4rem;
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.8rem;
+    color: #e2e8f0;
+    border-bottom: 2px solid rgba(226, 232, 240, 0.3);
+    padding-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.post-content h4 {
+    font-family: 'Aeonik', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.2rem 0 0.6rem;
+    color: #cbd5e1;
+    border-left: 4px solid var(--text-accent);
+    padding-left: 1rem;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
 }
 
 .post-content p {
@@ -1058,9 +1075,9 @@ a:hover {
 }
 
 .newsletter-input-group input[type="email"]:focus {
-    border-color: #4fd1c5;
+    border-color: #f97316;
     background: rgba(255,255,255,0.04);
-    box-shadow: 0 0 0 2px rgba(79,209,197,0.08);
+    box-shadow: 0 0 0 2px rgba(249,115,22,0.08);
 }
 
 .newsletter-input-group button {
@@ -1222,7 +1239,7 @@ nav.pagination {
     padding: 1.5rem 1rem !important;
     background: linear-gradient(135deg, rgba(35, 38, 39, 0.3) 0%, rgba(35, 43, 43, 0.5) 100%) !important;
     border-radius: 12px !important;
-    border: 1px solid rgba(79, 209, 197, 0.1) !important;
+    border: 1px solid rgba(249, 115, 22, 0.1) !important;
     position: relative !important;
     overflow: hidden !important;
 }
@@ -1235,7 +1252,7 @@ nav.pagination::before {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
 }
 
 main .pagination-links,
@@ -1262,7 +1279,7 @@ nav.pagination .pagination-link {
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    border: 1px solid rgba(79, 209, 197, 0.15) !important;
+    border: 1px solid rgba(249, 115, 22, 0.15) !important;
     position: relative !important;
     overflow: hidden !important;
     backdrop-filter: blur(10px) !important;
@@ -1287,16 +1304,16 @@ nav.pagination .pagination-link:hover::before {
 
 main .pagination-link:hover,
 nav.pagination .pagination-link:hover {
-    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(79, 209, 197, 0.1) 100%) !important;
+    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(249, 115, 22, 0.1) 100%) !important;
     color: var(--text-primary) !important;
     transform: translateY(-1px) scale(1.03) !important;
-    box-shadow: 0 4px 15px rgba(79, 209, 197, 0.2), 0 2px 5px rgba(0, 0, 0, 0.3) !important;
-    border-color: rgba(79, 209, 197, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2), 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(249, 115, 22, 0.4) !important;
 }
 
 main .pagination-link.current,
 nav.pagination .pagination-link.current {
-    background: linear-gradient(135deg, #f43f5e 0%, #f97316 50%, #4fd1c5 100%) !important;
+    background: linear-gradient(135deg, #f43f5e 0%, #f97316 100%) !important;
     color: white !important;
     border-color: transparent !important;
     font-weight: 700 !important;
@@ -1307,7 +1324,7 @@ nav.pagination .pagination-link.current {
 
 @keyframes currentPagePulse {
     0%, 100% { box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1); }
-    50% { box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4), 0 0 0 2px rgba(79, 209, 197, 0.2); }
+    50% { box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4), 0 0 0 2px rgba(249, 115, 22, 0.2); }
 }
 
 .pagination-link.current:hover {
@@ -1320,17 +1337,17 @@ nav.pagination .pagination-link.current {
     gap: 0.4rem;
     padding: 0 0.75rem;
     font-weight: 600;
-    background: linear-gradient(135deg, rgba(79, 209, 197, 0.1) 0%, rgba(79, 209, 197, 0.05) 100%);
-    border-color: rgba(79, 209, 197, 0.3);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%);
+    border-color: rgba(249, 115, 22, 0.3);
     color: var(--text-accent);
 }
 
 .pagination-link.prev:hover,
 .pagination-link.next:hover {
-    background: linear-gradient(135deg, var(--text-accent) 0%, rgba(79, 209, 197, 0.9) 100%);
+    background: linear-gradient(135deg, var(--text-accent) 0%, rgba(249, 115, 22, 0.9) 100%);
     color: var(--bg-primary);
     transform: translateY(-1px) scale(1.03);
-    box-shadow: 0 8px 20px rgba(79, 209, 197, 0.3);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
 }
 
 .pagination-arrow {
@@ -1490,7 +1507,7 @@ nav.pagination .pagination-link.current {
     padding: 2.5rem 2rem;
     background: linear-gradient(135deg, rgba(24, 26, 27, 0.95) 0%, rgba(35, 38, 39, 0.9) 100%);
     border-radius: 20px;
-    border: 1px solid rgba(79, 209, 197, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.15);
     backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
     position: relative;
@@ -1505,7 +1522,7 @@ nav.pagination .pagination-link.current {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent, rgba(79, 209, 197, 0.05), transparent);
+    background: linear-gradient(45deg, transparent, rgba(249, 115, 22, 0.05), transparent);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
@@ -1529,7 +1546,7 @@ nav.pagination .pagination-link.current {
     font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(79, 209, 197, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.15);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -1554,7 +1571,7 @@ nav.pagination .pagination-link.current {
 }
 
 .filter-link.active {
-    background: linear-gradient(135deg, #f43f5e 0%, #f97316 50%, #4fd1c5 100%);
+    background: linear-gradient(135deg, #f43f5e 0%, #f97316 100%);
     color: white;
     border-color: transparent;
     font-weight: 700;
@@ -1568,22 +1585,22 @@ nav.pagination .pagination-link.current {
         box-shadow: 0 4px 20px rgba(244, 63, 94, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1);
     }
     50% { 
-        box-shadow: 0 6px 25px rgba(244, 63, 94, 0.4), 0 0 0 3px rgba(79, 209, 197, 0.2);
+        box-shadow: 0 6px 25px rgba(244, 63, 94, 0.4), 0 0 0 3px rgba(249, 115, 22, 0.2);
     }
 }
 
 .filter-link.inactive:hover {
-    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(79, 209, 197, 0.1) 100%);
+    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(249, 115, 22, 0.1) 100%);
     color: var(--text-primary);
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(79, 209, 197, 0.2), 0 4px 10px rgba(0, 0, 0, 0.3);
-    border-color: rgba(79, 209, 197, 0.4);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.2), 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-color: rgba(249, 115, 22, 0.4);
 }
 
 .filter-link.active:hover {
     transform: translateY(-2px) scale(1.1);
     animation: none;
-    box-shadow: 0 8px 30px rgba(244, 63, 94, 0.4), 0 0 0 3px rgba(79, 209, 197, 0.3);
+    box-shadow: 0 8px 30px rgba(244, 63, 94, 0.4), 0 0 0 3px rgba(249, 115, 22, 0.3);
 }
 
 /* Category Tags */
@@ -1870,39 +1887,146 @@ nav.pagination .pagination-link.current {
     }
 }
 
-/* Admonitions */
+/* Admonitions - Enhanced with Cool Shadows & Effects */
 .admonition {
-    background: linear-gradient(120deg, rgba(35, 38, 39, 0.7) 60%, rgba(35, 38, 39, 0.4) 100%);
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1.5rem 0;
+    background: linear-gradient(135deg, rgba(35, 38, 39, 0.95) 0%, rgba(45, 49, 51, 0.8) 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
     border-left: 4px solid #f97316;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Epic shadow stack */
+    box-shadow: 
+        0 4px 20px rgba(249, 115, 22, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 16px 64px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Subtle glow border */
+    border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.admonition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(249, 115, 22, 0.03), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.admonition:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 
+        0 8px 32px rgba(249, 115, 22, 0.25),
+        0 16px 48px rgba(0, 0, 0, 0.4),
+        0 24px 80px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(249, 115, 22, 0.4);
+}
+
+.admonition:hover::before {
+    opacity: 1;
 }
 
 .admonition-content {
     flex: 1;
+    position: relative;
+    z-index: 2;
 }
 
 .admonition-title {
     font-family: 'Aeonik', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
     letter-spacing: 0.5px;
     color: #f97316;
+    text-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+    position: relative;
+}
+
+/* Inline layout for default admonitions - add class "inline" to admonition for this behavior */
+.admonition.inline .admonition-content {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.admonition.inline .admonition-title {
+    margin: 0;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.admonition.inline .admonition-title::after {
+    content: ':';
+    margin-left: 0.2rem;
+}
+
+.admonition.inline p {
+    margin: 0;
+    display: inline;
+    flex: 1;
+}
+
+/* Remove the decorative underline for inline admonitions and add colon */
+.admonition.inline .admonition-title::after {
+    content: ':';
+    margin-left: 0.2rem;
+    width: auto;
+    height: auto;
+    background: none;
+    bottom: auto;
+    left: auto;
+    border-radius: 0;
+    opacity: 1;
+    position: static;
+}
+
+.admonition-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+    border-radius: 1px;
+    opacity: 0.7;
+    transition: width 0.3s ease;
+}
+
+.admonition:hover .admonition-title::after {
+    width: 60px;
+    opacity: 1;
+}
+
+.admonition p {
+    position: relative;
+    z-index: 2;
 }
 
 .admonition p:last-child {
     margin-bottom: 0;
 }
 
-/* All admonition types use the same warning color */
+/* All admonition types use enhanced orange styling */
 .admonition.info,
 .admonition.tip,
 .admonition.warning,
 .admonition.note,
 .admonition.fun-fact {
-    border-color: #f97316;
+    border-left-color: #f97316;
 }
 
 .admonition.info .admonition-title,
@@ -1913,13 +2037,45 @@ nav.pagination .pagination-link.current {
     color: #f97316;
 }
 
+/* Pulse animation for extra attention */
+@keyframes admonitionPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 4px 20px rgba(249, 115, 22, 0.15),
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            0 16px 64px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    50% { 
+        box-shadow: 
+            0 6px 24px rgba(249, 115, 22, 0.2),
+            0 12px 40px rgba(0, 0, 0, 0.35),
+            0 20px 72px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+}
+
+.admonition:focus-within {
+    animation: admonitionPulse 2s ease-in-out infinite;
+}
+
 @media (max-width: 768px) {
     .admonition {
-        padding: 0.75rem;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 10px;
+        box-shadow: 
+            0 3px 15px rgba(249, 115, 22, 0.12),
+            0 6px 24px rgba(0, 0, 0, 0.25),
+            0 12px 48px rgba(0, 0, 0, 0.15);
     }
 
     .admonition-title {
-        font-size: 0.95rem;
+        font-size: 1rem;
+    }
+    
+    .admonition:hover {
+        transform: translateY(-1px) scale(1.005);
     }
 }
 
@@ -2014,11 +2170,7 @@ nav.pagination .pagination-link.current {
 .post-content strong {
     font-family: 'Aeonik', sans-serif;
     font-weight: 700;
-    background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    background-position: 100% 0;
+    color: var(--text-primary);
 }
 
 /* Ensure strong text within links doesn't double up the gradient effect */

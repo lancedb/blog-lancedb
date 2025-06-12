@@ -123,7 +123,7 @@ There is nothing particularly wrong here but we find that it ends up being more 
 
 It also quickly becomes difficult to know when a column is "for the big table" and when a column is "for the little table". For example, you might want to put your vector embeddings in the large table with your images so you can avoid rewriting those when you add new features. However, vector embeddings are actually something that are regularly replaced (when a new model comes long) or added and removed (to support different search models). You probably want to make sure you're not rewriting your images every time you change your embedding model. This means you either need a third table, your "big data table" needs to utilize two-dimensional storage, or you give up and put the embeddings back in the small table.
 
-{{< admonition note "💡 Note" >}}
+{{< admonition >}}
 *Quad-table storage format* sounds cool but I hope it never exists.
 {{< /admonition >}}
 
@@ -151,7 +151,7 @@ Fortunately, while Lance obviously has vector indices, we also have a variety of
 
 Indices on **foreign key columns** make it super fast to find matching rows and apply updates. Classically, this kind of task would be done with a hash join on the foreign key column. If we have a btree index on the foreign key column we can skip this step entirely. In fact, we can do key-deduplicating writes without any I/O into the old data. This makes things faster even if you don't have any kind of caching layer.
 
-{{< admonition fun-fact "💡 Fun fact" >}}
+{{< admonition fun-fact "💡 Fun Fact:" >}}
 A hash join on the foreign key column is pretty much the same thing as building a btree index on the fly. In other words, the old approach was to rebuild a btree index on every single operation!
 {{< /admonition >}}
 
