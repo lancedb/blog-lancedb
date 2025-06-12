@@ -18,14 +18,10 @@
 
         <div class="categories-grid">
             {{ range .Data.Terms.Alphabetical }}
-                {{ $categoryInfo := index $.Site.Params.categories (sub .Count 1) }}
                 <div class="category-card">
                     <h2>
                         <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
                     </h2>
-                    {{ with $categoryInfo.description }}
-                        <p class="category-description">{{ . }}</p>
-                    {{ end }}
                     <div class="category-stats">
                         <span class="post-count">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}</span>
                     </div>
