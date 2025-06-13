@@ -1,11 +1,11 @@
 ---
-title: A Practical Guide to Fine-tuning Embedding Models
-date: 2025-04-23
+title: "A Practical Guide to Fine-Tuning Embedding Models"
+date: 2024-03-25
 draft: false
 featured: false
 categories: ["Engineering"]
-image: /assets/blog/1.png
-description: Explore a practical guide to fine-tuning embedding models with practical insights and expert guidance from the LanceDB team.
+image: /assets/blog/a-practical-guide-to-fine-tuning-embedding-models/a-practical-guide-to-fine-tuning-embedding-models.png
+description: "Explore a practical guide to fine-tuning embedding models with practical insights and expert guidance from the LanceDB team."
 author: Ayush Chaurasia
 ---
 This is a follow up to the following report that deals with improving retrievers by training and fine-tuning reranker models
@@ -13,7 +13,7 @@ This is a follow up to the following report that deals with improving retrievers
 
 A Practical Guide to Training Custom Rerankers
 
-A report on reranking, training, & fine-tuning rerankers for retrieval This report offers practical insights for improving a retriever by reranking results. We’ll tackle the important questions, like: When should you implement a reranker? Should you opt for a pre-trained solution, fine-tune an existing model, or build one from scratch? The
+A report on reranking, training, & fine-tuning rerankers for retrieval This report offers practical insights for improving a retriever by reranking results. We'll tackle the important questions, like: When should you implement a reranker? Should you opt for a pre-trained solution, fine-tune an existing model, or build one from scratch? The
 
 ![](__GHOST_URL__/content/images/icon/lancedb-symbol--1--3.png)LanceDB BlogAyush Chaurasia
 
@@ -125,7 +125,7 @@ You can read the entire report here for more details on reranking process and tr
 
 A Practical Guide to Training Custom Rerankers
 
-A report on reranking, training, & fine-tuning rerankers for retrieval This report offers practical insights for improving a retriever by reranking results. We’ll tackle the important questions, like: When should you implement a reranker? Should you opt for a pre-trained solution, fine-tune an existing model, or build one from scratch? The
+A report on reranking, training, & fine-tuning rerankers for retrieval This report offers practical insights for improving a retriever by reranking results. We'll tackle the important questions, like: When should you implement a reranker? Should you opt for a pre-trained solution, fine-tune an existing model, or build one from scratch? The
 
 ![](__GHOST_URL__/content/images/icon/lancedb-symbol--1--2.png)LanceDB BlogAyush Chaurasia
 

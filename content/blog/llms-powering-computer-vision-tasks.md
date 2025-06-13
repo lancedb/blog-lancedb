@@ -3,7 +3,7 @@ title: LLMs powering Computer Vision tasks
 date: 2024-12-01
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/llms-powering-computer-vision-tasks/llms-powering-computer-vision-tasks.png
 description: Explore llms powering computer vision tasks with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---
@@ -11,7 +11,7 @@ author: Prashant Kumar
 
 This is a community post by Prashant Kumar
 
-Computer vision turns visual data into valuable insights, making it exciting. Now, with Large Language Models (LLMs), combining vision and language opens up even more possibilities. Before we explore how LLMs are powering computer vision, let’s first take a quick look at how they differ.
+Computer vision turns visual data into valuable insights, making it exciting. Now, with Large Language Models (LLMs), combining vision and language opens up even more possibilities. Before we explore how LLMs are powering computer vision, let's first take a quick look at how they differ.
 
 ### What are LLMs and Computer Vision models?
 
@@ -57,7 +57,7 @@ This example is about how to perform object detection on images using CLIP and v
 Object detection with CLIP follows a process similar to YOLO. Here's a simple breakdown:
 **1. Split the Image into Patches**: The image is divided into smaller sections for easier analysis.
 **2. Analyze Patches with CLIP**: CLIP processes each patch using a sliding window approach to understand the features.
-**3. Calculate Coordinates**: CLIP determines the coordinates (Xmin, Ymin, Xmax, Ymax) for the object’s bounding box.
+**3. Calculate Coordinates**: CLIP determines the coordinates (Xmin, Ymin, Xmax, Ymax) for the object's bounding box.
 **4. Draw the Bounding Box**: Finally, the bounding box is drawn on the image to highlight the detected object.
 
 This process helps CLIP accurately detect and locate objects within an image.
@@ -68,8 +68,8 @@ This process helps CLIP accurately detect and locate objects within an image.
 
 This example explores images through a Vision-Centric approach using vector search. The process involves two simple steps:
 
-1. Performing Vector Search: We’ll first search for images that match the query.
-2. Vision-Centric Exploration: Then, we’ll use the retrieved images for further exploration and analysis.
+1. Performing Vector Search: We'll first search for images that match the query.
+2. Vision-Centric Exploration: Then, we'll use the retrieved images for further exploration and analysis.
 
 Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach. While stronger language models can boost multimodal capabilities, the design choices for vision components are often insufficiently explored and disconnected from visual representation learning research.
 ![](__GHOST_URL__/content/images/2024/11/image-2.png)
@@ -92,4 +92,4 @@ These are just a few examples of how Computer Vision and LLMs work together. Lan
 
 ### Conclusion
 
-There’s a lot of research on models that combine LLMs and computer vision, but the big hype around computer vision with LLMs hasn’t happened yet. While there’s progress, we’re still in the early stages, kind of like where LLMs were before ChatGPT took off.
+There's a lot of research on models that combine LLMs and computer vision, but the big hype around computer vision with LLMs hasn't happened yet. While there's progress, we're still in the early stages, kind of like where LLMs were before ChatGPT took off.

@@ -1,9 +1,9 @@
 ---
 title: "Columnar File Readers in Depth: Backpressure"
-date: 2024-10-25
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/columnar-file-readers-in-depth-backpressure/columnar-file-readers-in-depth-backpressure.png
 description: "Explore columnar file readers in depth: backpressure with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---

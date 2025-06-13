@@ -3,7 +3,7 @@ title: An attempt to build cursor's codebase feature - RAG on codebases - part 2
 date: 2024-11-07
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/building-rag-on-codebases-part-2/building-rag-on-codebases-part-2.png
 description: Explore an attempt to build cursor's codebase feature - rag on codebases - part 22 with practical insights and expert guidance from the LanceDB team.
 author: Sankalp Shubham
 ---
@@ -36,7 +36,7 @@ Key topics covered in this part:
 
 If you have ever worked with embeddings, you will know that embedding search is not as effective and one needs to follow some additional steps in the retrieval pipeline like HyDE, hybrid vector-search and re-ranking.
 
-![Screenshot 2024-11-04 at 2.17.02 PM.png](__GHOST_URL__/content/images/2024/11/Screenshot-2024-11-04-at-2.17.02-PM-1.png)
+![Screenshot 2024-11-04 at 2.17.02 PM.png](__GHOST_URL__/content/images/2024/11/Screenshot-2024-11-04-at-2.17.02-PM-1.png)
 
 In next few sections, we discuss methods to improve our overall search and the relevant implementation details. Refer to the diagram (CodeQA's retrieval pipeline) for an overview of the building blocks involved.
 
@@ -49,7 +49,7 @@ This is part of codebase indexing too but it felt more in line with part 2.
 Update: I decided to do away with LLM comments in the current version of codeQA because it slows down the indexing process. The relevant file
 `llm_comments.py` is still there on repo.
 
-Since our queries will be in natural language, I decided to integrate a natural language component by adding 2-3 line documentation for each method. This creates an annotated codebase, with each LLM-generated comment providing a concise overview. These annotations enhance keyword and semantic search, allowing for more efficient searches based on both ‘what the code does’ and ‘what the code is.’
+Since our queries will be in natural language, I decided to integrate a natural language component by adding 2-3 line documentation for each method. This creates an annotated codebase, with each LLM-generated comment providing a concise overview. These annotations enhance keyword and semantic search, allowing for more efficient searches based on both 'what the code does' and 'what the code is.'
 
 I found a cool blogpost which validated my thoughts later on. I quote them below.
 
@@ -97,7 +97,7 @@ Privacy for data is a major concern for several people and companies. For my pro
 
 I quote a Sourcegraph blogpost here.
 
-> While embeddings worked for retrieving context, they had some drawbacks for our purposes. Embeddings require all of your code to be represented in the vector space and to do this, we need to send source code to an OpenAI API for embedding. Then, those vectors need to be stored, maintained, and updated. This isn’t ideal for three reasons:
+> While embeddings worked for retrieving context, they had some drawbacks for our purposes. Embeddings require all of your code to be represented in the vector space and to do this, we need to send source code to an OpenAI API for embedding. Then, those vectors need to be stored, maintained, and updated. This isn't ideal for three reasons:
 > 
 > - Your code has to be sent to a 3rd party (OpenAI) for processing, and not everyone wants their code to be relayed in this way.
 > - The process of creating embeddings and keeping them up-to-date introduces complexity that Sourcegraph admins have to manage.
@@ -109,7 +109,7 @@ I recommend reading the blogpost [How Cody understands your codebase](https://so
 
 ## VectorDB
 
-I use [LanceDB](https://lancedb.com/) because it’s fast, easy to use - you can just pip install and import, no API key required. They support integration for almost all embeddings (available on Hugging Face) and most major players like OpenAI, Jina etc. There's easy support for integration for rerankers, algorithms, embeddings, third-party libraries for RAG etc.
+I use [LanceDB](https://lancedb.com/) because it's fast, easy to use - you can just pip install and import, no API key required. They support integration for almost all embeddings (available on Hugging Face) and most major players like OpenAI, Jina etc. There's easy support for integration for rerankers, algorithms, embeddings, third-party libraries for RAG etc.
 
 ### Things to consider for VDB
 
@@ -125,7 +125,7 @@ Code for embedding the codebase and making the tables can be found in `create_ta
 
 [create_tables.py](https://github.com/sankalp1999/code_qa/blob/main/create_tables.py)
 
-If you see the implementation, you will notice I don’t generate embeddings manually. That part is handled by LanceDB itself. I just add my chunks and LanceDB handles all the batch embedding generation with retry logic in the background.
+If you see the implementation, you will notice I don't generate embeddings manually. That part is handled by LanceDB itself. I just add my chunks and LanceDB handles all the batch embedding generation with retry logic in the background.
 
 ## Retrieval
 
@@ -149,7 +149,7 @@ Another effective approach to enhance semantic search is to use metadata filteri
 
 Using re-rankers after the vector search is an easy way to improve results significantly. In short, re-rankers do a cross-attention between query tokens and embedding search result tokens.
 
-Let’s try to understand how they work on a high level. In CodeQA v2, I use `answerdotai/answerai-colbert-small-v1` as it is the best performing local re-ranker model based on [benchmarks](__GHOST_URL__/hybrid-search-and-reranking-report/) with performance close to Cohere Re-ranker 3 (which I used in CodeQA v1).
+Let's try to understand how they work on a high level. In CodeQA v2, I use `answerdotai/answerai-colbert-small-v1` as it is the best performing local re-ranker model based on [benchmarks](__GHOST_URL__/hybrid-search-and-reranking-report/) with performance close to Cohere Re-ranker 3 (which I used in CodeQA v1).
 
 ### Cross-encoding (re-ranking) vs bi-encoding (embeddings based search)
 
@@ -182,11 +182,11 @@ Each pair of concatenated query+doc is passed through the pre-trained model (lik
 
 We get the output from a  hidden layer (usually the last one) to get contextualised embeddings. These embeddings are pooled to obtain a fixed size representation. These are then passed through a linear layer and then softmax/sigmoid to obtain logits → relevance scores → [0.5, 0.6, 0.8, 0.1, …]
 
-Let’s say we have D documents and Q queries. To calculate relevance score for 1 query, we will have D (query+doc) passes. through the model. For Q queries, we will have **D * Q passes** since ****each concat of D and Q is unique.
+Let's say we have D documents and Q queries. To calculate relevance score for 1 query, we will have D (query+doc) passes. through the model. For Q queries, we will have **D * Q passes** since ****each concat of D and Q is unique.
 
 ---
 
-A bi-encoder approach (or the **embeddings search approach)** encoding documents and queries separately, and calculates the dot product. Let’s say you have D docs and Q queries.
+A bi-encoder approach (or the **embeddings search approach)** encoding documents and queries separately, and calculates the dot product. Let's say you have D docs and Q queries.
 
 Precompute D embeddings. We can reuse the embedding instead of calculating again. Now for each query, compute dot product of D and Q. Dot product can be considered an O(1) operation.
 
@@ -206,7 +206,7 @@ Thus, we can stick to a bi-encoder approach (generating embeddings, encode query
 
 ## Reranking demonstration
 
-In the below example, note that `How many people live in New Delhi? No idea.` has the most lexical similarity so cos similarity / bi-encoder approach will say it’s most relevant.
+In the below example, note that `How many people live in New Delhi? No idea.` has the most lexical similarity so cos similarity / bi-encoder approach will say it's most relevant.
 
     from sentence_transformers import SentenceTransformer, CrossEncoder
     import numpy as np
@@ -275,7 +275,7 @@ Outputs after better formatting to demonstrate the effectiveness of cross-encode
 
 ### Initial Retrieval Scores (Bi-Encoder)
 DocumentSentenceScoreDoc1New Delhi has a population of 33,807,000 registered inhabitants in an area of 42.7 square kilometers.**0.77**Doc2In 2020, the population of India's capital city surpassed 33,807,000.0.58Doc3How many people live in New Delhi? No idea.0.97Doc4I visited New Delhi last year; it seemed overcrowded. Lots of people.0.75Doc5New Delhi, the capital of India, is known for its cultural landmarks.0.54
-The answer to our question was Doc1 but due to lexical similarity, doc3 is has highest score. Now cosine similarity is kinda dumb so we can’t help it.
+The answer to our question was Doc1 but due to lexical similarity, doc3 is has highest score. Now cosine similarity is kinda dumb so we can't help it.
 
 ### Reranked Scores (Cross-Encoder)
 DocumentSentenceScoreDoc1New Delhi has a population of 33,807,000 registered inhabitants in an area of 42.7 square kilometers.**9.91**Doc2In 2020, the population of India's capital city surpassed 33,807,000.3.74Doc3How many people live in New Delhi? No idea.5.64Doc4I visited New Delhi last year; it seemed overcrowded. Lots of people.1.67Doc5New Delhi, the capital of India, is known for its cultural landmarks.-2.20
@@ -285,7 +285,7 @@ Reference:
 
 ## HyDE (hypothetical document embeddings)
 
-The user’s query is most likely going to be in English and less of code. But our embeddings are mostly made up of code. Now if you think about the latent space, code would be nearer to code than english (natural language) being nearer to code. This is the idea of [HyDE paper](https://arxiv.org/abs/2212.10496).
+The user's query is most likely going to be in English and less of code. But our embeddings are mostly made up of code. Now if you think about the latent space, code would be nearer to code than english (natural language) being nearer to code. This is the idea of [HyDE paper](https://arxiv.org/abs/2212.10496).
 
 ![Untitled 2.png](__GHOST_URL__/content/images/2024/11/Untitled-2.png)
 

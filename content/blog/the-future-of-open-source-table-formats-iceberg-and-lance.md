@@ -3,7 +3,7 @@ title: "The Future of Open Source Table Formats: Apache Iceberg and Lance"
 date: 2025-04-08
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/the-future-of-open-source-table-formats-iceberg-and-lance/the-future-of-open-source-table-formats-iceberg-and-lance.png
 description: "Explore the future of open source table formats: apache iceberg and lance with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---

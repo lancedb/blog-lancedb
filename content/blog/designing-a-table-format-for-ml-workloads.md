@@ -1,11 +1,11 @@
 ---
 title: "Designing a Table Format for ML Workloads"
-date: 2025-02-25
+date: 2024-03-25
 draft: false
 featured: true
 categories: ["Engineering"]
 image: /assets/blog/designing-a-table-format-for-ml-workloads/designing-a-table-format-for-ml-workloads.png
-description: "Explore designing a table format for ml workloads with practical insights and expert guidance from the LanceDB team."
+description: "Explore designing a table format for ML workloads with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."

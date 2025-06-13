@@ -3,7 +3,7 @@ title: Customer support bot with OpenAI's Swarm Agent
 date: 2024-11-04
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/customer-support-bot-with-openais-swarm-agent/customer-support-bot-with-openais-swarm-agent.png
 description: Explore customer support bot with openai's swarm agent with practical insights and expert guidance from the LanceDB team.
 author: Prashant Kumar
 ---
@@ -19,7 +19,7 @@ OpenAI Swarm is a framework for efficiently managing multiple AI agents. Its mos
 
 Swarm focuses on two key ideas: ***Agents***, which perform specific functions, and ***Handoffs***, which allow one agent to pass a task to another based on the situation. This setup makes building flexible and complex AI systems with straightforward logic easier.
 
-OpenAI Swarm is built for developers and researchers interested in exploring multi-agent systems. It is particularly well-suited for those working on AI assistants and task automation. While still, "*OpenAI’s Swarm is not intended for production use, this experimental framework for multi-agent systems could potentially revolutionize how tasks are distributed and executed in various industries".*
+OpenAI Swarm is built for developers and researchers interested in exploring multi-agent systems. It is particularly well-suited for those working on AI assistants and task automation. While still, "*OpenAI's Swarm is not intended for production use, this experimental framework for multi-agent systems could potentially revolutionize how tasks are distributed and executed in various industries".*
 
 Swarm is designed for specific real-world use cases:
 
@@ -70,7 +70,7 @@ To implement a customer support bot for OpenAI using data in JSON format and ing
     table = db.create_table("help-center", schema=Article, mode="overwrite")
     table.add(article_df)
 
-Now we have data ingested in the table. To create a customer service bot, we need two agents: a user Interface agent and a help center agent, both equipped with different tools. We’ll use the helper function `run_demo_loop` to set up an interactive Swarm session.
+Now we have data ingested in the table. To create a customer service bot, we need two agents: a user Interface agent and a help center agent, both equipped with different tools. We'll use the helper function `run_demo_loop` to set up an interactive Swarm session.
 
 1. **User Interface Agent:** Manages initial user interactions and directs users to the help center agent based on their needs.
 2. **Help Center Agent:** Offers detailed help and support, using various tools and integrating with a LanceDB VectorDB for retrieving documentation.

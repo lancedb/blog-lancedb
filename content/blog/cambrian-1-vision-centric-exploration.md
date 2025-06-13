@@ -1,15 +1,11 @@
 ---
+title: "Cambrian-1: Vision-Centric Search"
 date: 2024-07-25
-author: Prashant Kumar
----
----
-title: Cambrian-1: Vision-Centric Search
-date: 2024-03-14
 draft: false
 featured: false
 image: /assets/blog/1.png
-description: Explore cambrian-1: vision-centric search with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+description: "Explore cambrian-1: vision-centric search with practical insights and expert guidance from the LanceDB team."
+author: Prashant Kumar
 ---
 
 Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach. While stronger language models can boost multimodal capabilities, the design choices for vision components are often insufficiently explored and disconnected from visual representation learning research.

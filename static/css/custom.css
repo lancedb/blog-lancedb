@@ -1242,6 +1242,9 @@ nav.pagination {
     border: 1px solid rgba(249, 115, 22, 0.1) !important;
     position: relative !important;
     overflow: hidden !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 main .pagination::before,
@@ -1262,6 +1265,8 @@ nav.pagination .pagination-links {
     align-items: center !important;
     gap: 0.5rem !important;
     flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 main .pagination-link,

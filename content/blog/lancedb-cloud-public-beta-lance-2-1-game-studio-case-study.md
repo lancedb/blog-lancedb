@@ -3,7 +3,7 @@ title: LanceDB Cloud Public Beta, Lance 2.1 , Game Studio Case Study
 date: 2025-04-03
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/lancedb-cloud-public-beta-lance-2-1-game-studio-case-study/lancedb-cloud-public-beta-lance-2-1-game-studio-case-study.png
 description: Explore lancedb cloud public beta, lance 2.1 , game studio case study with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---
@@ -21,15 +21,15 @@ The wait is over! LanceDB Cloud is now in Public Beta! No more wait list; just s
 
 If you think Lance Format 2.0 was magic, wait till you see Lance 2.1(beta).  We are achieving faster full scans than Parquet and gained support for storing large binary data like audio, image, and video.
 [![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeo6pIleHnELadSTFv1gJk9ND2JjF1klt2O9g8xiP7uXqMYhhXvfuC6IPix1BS6JY4i0BBjFXUYocCsJj0Zgx2gUKEWQBLKC9pRzxp-1FWvlnmOlpDroO3_KHfkjl7QtThC_kyG?key=RTVI5Pv23Ppl3wh7-hRqhXlJ)](__GHOST_URL__/lance-file-2-1-smaller-and-simpler/)*Lance FIle 2.1 Engineering Blog*
-### 🎮Second Dinner’s Secret Weapon: LanceDB-Powered RAG for Faster, Smarter Game Development
+### 🎮Second Dinner's Secret Weapon: LanceDB-Powered RAG for Faster, Smarter Game Development
 
-What if you could go from months of development to hours? That’s exactly what award winning game studio **Second Dinner** achieved with **LanceDB Cloud**:
+What if you could go from months of development to hours? That's exactly what award winning game studio **Second Dinner** achieved with **LanceDB Cloud**:
 
 - ✅ Prototyping new features in **hours** (instead of months)
 - ✅ **100x faster QA** with a simple API call
 - ✅ AI-driven workflows **3 to 5x more cost-effective** than alternatives
 
-> “LanceDB isn’t just a tool—it’s our cheat code.” – Xiaoyang Yang, VP of AI, Data, Security at Second Dinner
+> "LanceDB isn't just a tool—it's our cheat code." – Xiaoyang Yang, VP of AI, Data, Security at Second Dinner
 
 [![](__GHOST_URL__/content/images/2025/04/Screenshot-2025-03-20-at-9.48.05-PM.png)](__GHOST_URL__/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development/)*Second Dinner Case Study*
 ---
@@ -66,7 +66,7 @@ Our updated pricing ensures a **fair, scalable, and value-aligned** cost structu
 
 💡
 
-Check out Isaac Flath’s insights on semantic search for technical content in his new [blog](https://isaacflath.com/blog/blog_post?fpath=posts%2F2025-03-17-Retrieval101.ipynb), where he explains: 1. Why traditional search fails; 2. Vector embeddings with LanceDB; 3. Why that's not enough; 4. Chunking, hybrid search, and re-ranking. 
+Check out Isaac Flath's insights on semantic search for technical content in his new [blog](https://isaacflath.com/blog/blog_post?fpath=posts%2F2025-03-17-Retrieval101.ipynb), where he explains: 1. Why traditional search fails; 2. Vector embeddings with LanceDB; 3. Why that's not enough; 4. Chunking, hybrid search, and re-ranking. 
 
 💡
 
@@ -83,7 +83,7 @@ On April 17th, LanceDB is co-hosting an in-person meetup with Anyscale,  learn h
 ## Open Source Releases Spotlight 
 
 - TypeScript SDK: 
-- Binary vector support: LanceDB’s TypeScript SDK now natively supports binary vector indexing and querying with production-grade efficiency.
+- Binary vector support: LanceDB's TypeScript SDK now natively supports binary vector indexing and querying with production-grade efficiency.
 - Accepts Arrow data type in *`alterColumns`*.
 
 - Python users can utilize the PyArrow schema to add a new column to the table schema.

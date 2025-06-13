@@ -1,11 +1,11 @@
 ---
-title: Zero shot image classification with vector search
-date: 2024-07-12
+title: "Zero-Shot Image Classification with Vector Search"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore zero shot image classification with vector search with practical insights and expert guidance from the LanceDB team.
-author: Vipul Maheshwari
+image: /assets/blog/zero-shot-image-classification-with-vector-search/zero-shot-image-classification-with-vector-search.png
+description: "Explore zero-shot image classification with vector search with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 
 This post covers the concept of zero-shot image classification with an example. It is the process where a model can classify images without being trained on a particular use case. 
@@ -57,7 +57,7 @@ Let's take a look at an example. For this demonstration, I'll use the [**uoft-cs
     
     imagedata
 
-Let’s see original label names
+Let's see original label names
 
     # labels names 
     labels = imagedata.info.features['fine_label'].names
@@ -101,13 +101,13 @@ Let’s see original label names
 
 Looks good! We have 100 classes to classify images from, which would require a lot of computing power if you go for traditional CNN. However, let's proceed with our zero-shot image classification approach.
 
-Let’s generate the relevant textual descriptions for our labels. (This step is optional recommendation covered in previous section.)
+Let's generate the relevant textual descriptions for our labels. (This step is optional recommendation covered in previous section.)
 
     # generate sentences
     clip_labels = [f"a photo of a {label}" for label in labels]
     clip_labels
 
-Now let’s initialize our CLIP embedding model, I will use the CLIP implementation from Hugging face.
+Now let's initialize our CLIP embedding model, I will use the CLIP implementation from Hugging face.
 
     import torch
     from transformers import CLIPProcessor, CLIPModel
@@ -140,7 +140,7 @@ We'll convert our text descriptions into integer representations called input ID
     Token ID : tensor([49406,   320,  1125,   539,   320,  4298, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a bear <|endoftext|><|endoftext|><|endoftext|>
     Token ID : tensor([49406,   320,  1125,   539,   320, 22874, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a beaver <|endoftext|><|endoftext|><|endoftext|>
 
-Now let’s get the CLIP embeddings
+Now let's get the CLIP embeddings
 
     # encode tokens to sentence embeddings from CLIP
     
@@ -163,7 +163,7 @@ Normalization helps ensure that all vectors are on the same scale, preventing lo
     label_emb = label_emb / np.linalg.norm(label_emb, axis=0)
     label_emb.min(), label_emb.max()
 
-Ok, let’s see a random image from our dataset
+Ok, let's see a random image from our dataset
 
     import random
     
@@ -239,7 +239,7 @@ We'll use LanceDB to store our labels, with their corresponding embeddings to al
     
     
 
-Here are the results. Our initial accurate prediction is a whale, demonstrating the closest resemblance between the label and the image with minimal distance, just as we had hoped. What's truly remarkable is that we achieved this without running a single epoch for a CNN model. That’s zero shot classification for you fellas. Here is the [colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/zero-shot-image-classification/main.ipynb) for your reference. See you in next one.
+Here are the results. Our initial accurate prediction is a whale, demonstrating the closest resemblance between the label and the image with minimal distance, just as we had hoped. What's truly remarkable is that we achieved this without running a single epoch for a CNN model. That's zero shot classification for you fellas. Here is the [colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/zero-shot-image-classification/main.ipynb) for your reference. See you in next one.
 [
 
 Google Colab

@@ -3,7 +3,7 @@ title: An attempt to build cursor's codebase feature - RAG on codebases - part 1
 date: 2024-11-06
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/rag-codebase-1/rag-codebase-1.png
 description: Explore an attempt to build cursor's codebase feature - rag on codebases - part 12 with practical insights and expert guidance from the LanceDB team.
 author: Sankalp Shubham
 ---
@@ -39,7 +39,7 @@ Knowledge assumed - Python programming, word embeddings
 
 Terminology - query means questions, LLM = Large Language Model, natural language = languages we speak like English
 
-In next few sections, let’s try to break down the problem into sub-problems and see what we can do to make things work.
+In next few sections, let's try to break down the problem into sub-problems and see what we can do to make things work.
 
 ## Problem Statement
 
@@ -186,7 +186,7 @@ The process works as follows:
 
 **We need to figure out how to embed our codebase for best possible semantic search.**
 
-Providing context to LLM via semantic search or other retrieval techniques (could be SQL) to aid it in generation (and avoid hallucination) is called **Retrieval Augmented Generation**. I recommend reading [**Hrishi’s three part series on RAG**](https://olickel.com/retrieval-augmented-research-1-basics) going from basics to somewhat advanced RAG techniques (but first finish reading my post, thanks). My posts are application of part 1 and part 3.
+Providing context to LLM via semantic search or other retrieval techniques (could be SQL) to aid it in generation (and avoid hallucination) is called **Retrieval Augmented Generation**. I recommend reading [**Hrishi's three part series on RAG**](https://olickel.com/retrieval-augmented-research-1-basics) going from basics to somewhat advanced RAG techniques (but first finish reading my post, thanks). My posts are application of part 1 and part 3.
 
 > Images from the paper **[Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/abs/2312.10997)**
 

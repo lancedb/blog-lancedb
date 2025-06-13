@@ -3,7 +3,7 @@ title: Interning at LanceDB
 date: 2024-12-20
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/interning-at-lancedb/interning-at-lancedb.png
 description: Explore interning at lancedb with practical insights and expert guidance from the LanceDB team.
 author: Jun Wang
 ---

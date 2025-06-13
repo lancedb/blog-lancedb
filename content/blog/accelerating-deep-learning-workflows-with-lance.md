@@ -1,13 +1,13 @@
 ---
-title: Accelerating deep learning workflows with Lance
-date: 2024-04-30
+title: "Accelerating Deep Learning Workflows with Lance"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore accelerating deep learning workflows with lance with practical insights and expert guidance from the LanceDB team.
-author: Ayush Chaurasia
+image: /assets/blog/accelerating-deep-learning-workflows-with-lance/accelerating-deep-learning-workflows-with-lance.png
+description: "Explore accelerating deep learning workflows with Lance with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
-Lance is a columnar data format that is easy and fast to version, query and train on. It’s designed to be used with images, videos, 3D point clouds, audio, and, of course, tabular data.
+Lance is a columnar data format that is easy and fast to version, query and train on. It's designed to be used with images, videos, 3D point clouds, audio, and, of course, tabular data.
 
 ## Why Lance?
 
@@ -72,15 +72,15 @@ Lance also provides utility features like switching versions, rollbacks, etc. Yo
 For brevity, let's say you decided to follow the [Creating Instruction dataset for LLM fine-tuning](https://github.com/lancedb/lance-deeplearning-recipes/tree/main/examples/alpaca-dataset) example and created your own version of Alpaca dataset in Lance format. After some fine-tuning runs of your favourite LLM, you decided that your examples are too few and you decided to add a few more examples.
 
 Assuming your new examples follow the same format as the rest of your dataset (in this case, the variable `examples` is a Pyarrow table consisting of 4 columns, with each column containing a list of tokens), the process of adding new samples to your dataset is as easy as executing the write dataset method with `append` mode!
-![Screenshot 2024-04-29 at 4.56.43 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-4.56.43-PM.png)
+![Screenshot 2024-04-29 at 4.56.43 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-4.56.43-PM.png)
 Well that was easy! You can also see all the versions of this dataset along with their timestamp!
-![Screenshot 2024-04-29 at 5.02.03 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-5.02.03-PM.png)
+![Screenshot 2024-04-29 at 5.02.03 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-5.02.03-PM.png)
 Lance versioning has zero-copy logic built-in. It's like giving a dataset the powers of Git!
 
 Let's say you now did some more fine-tuning runs and your model performance started decreasing instead of increasing. After some deep debugging, you found out that the new examples you just added were of low quality.
 
 You now want to use the older version of the dataset for your fine-tuning run. With Lance, you can do this by just passing in the `version` argument to your `lance.dataset()` call.
-![Screenshot 2024-04-29 at 5.06.39 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-5.06.39-PM.png)
+![Screenshot 2024-04-29 at 5.06.39 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-5.06.39-PM.png)
 ## Performance and Benchmarks
 
 Thanks to lightning-fast random access, Lance enables fast dataloading for your deep learning runs so little time is spent on loading data, allowing for higher GPU utilisation.
@@ -106,7 +106,7 @@ The vanilla PyTorch approach uses Torchvision's [ImageFolder](https://pytorch.or
 The Lance + PyTorch approach is to make a custom dataset to load the images (stored in Binary format) from the Lance dataset along with corresponding labels.
 
 Thanks to fast random access that Lance provides, the latter is faster than PyTorch's Dataset!
-![Screenshot 2024-04-29 at 7.19.36 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-30-at-12.06.25-PM.png)
+![Screenshot 2024-04-29 at 7.19.36 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-30-at-12.06.25-PM.png)
 The above chart shows the average training time (in seconds) for Lance Dataset vs ImageFolder dataset on the CINIC-10 dataset.
 
 ### Image Segmentation
@@ -114,7 +114,7 @@ The above chart shows the average training time (in seconds) for Lance Dataset v
 For this task, we measured the time it took to load all batches using our COCOLance dataset vs Torchvision's COCODetection dataset. These numbers were averaged over 5 epochs.
 
 For the COCOLance Dataset, we used the [coco2017 Lance (train)](https://www.kaggle.com/datasets/heyytanay/coco2017-train-lance) dataset from the community.
-![Screenshot 2024-04-29 at 3.45.45 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-3.45.45-PM.png)
+![Screenshot 2024-04-29 at 3.45.45 PM.png](__GHOST_URL__/content/images/2024/04/Screenshot-2024-04-29-at-3.45.45-PM.png)
 The time difference we observe in the above comparison (in seconds) is closer to 3 minutes per epoch. For 50 epochs, that's over 150 minutes (or 2.5 hours 🤯) saved just by loading data from a Lance dataset (stored on the disc just like other data) instead of loading data from a directory!
 
 As you can see, not only does using a Lance dataset provide speed improvements over Vanilla PyTorch datasets, it also provides functionalities for efficient and fast data management, so you can scale your deep learning workflows as fast as you want without worrying about managing the dataset!

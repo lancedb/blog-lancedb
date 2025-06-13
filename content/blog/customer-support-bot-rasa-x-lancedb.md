@@ -3,30 +3,30 @@ title: "Customer Support Bot : RASA x LanceDB"
 date: 2024-12-31
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/customer-support-bot-rasa-x-lancedb/customer-support-bot-rasa-x-lancedb.png
 description: "Explore customer support bot : rasa x lancedb with practical insights and expert guidance from the LanceDB team."
 author: Rithik Kumar
 ---
 
-Have you ever wondered how businesses manage to provide instant, accurate, and personalized customer support around the clock? This article will teach us how to make an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI’s Large Language Models (LLMs)**. 
+Have you ever wondered how businesses manage to provide instant, accurate, and personalized customer support around the clock? This article will teach us how to make an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI's Large Language Models (LLMs)**. 
 
 ## What is RASA? 
 
-**Rasa** is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants. Unlike some one-size-fits-all solutions, Rasa offers the flexibility to customize your bot’s behavior, making it perfectly tailored to your business needs. 
+**Rasa** is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants. Unlike some one-size-fits-all solutions, Rasa offers the flexibility to customize your bot's behavior, making it perfectly tailored to your business needs. 
 
 1. **Open-Source Goodness:** Free to use and highly customizable.
 2. **Natural Language Understanding (NLU):** Rasa interprets user inputs to identify intents and extract relevant entities, enabling the chatbot to understand the purpose behind each query.
 3. **Dialogue Management:** Rasa manages the flow of conversation, maintaining context across multiple interactions and ensuring coherent and context-aware responses.
-4. **Custom Actions:** Through its `actions.py` file, Rasa executes custom actions that perform specific tasks, such as connecting with databases, APIs, and other services like LanceDB and OpenAI’s LLMs.
+4. **Custom Actions:** Through its `actions.py` file, Rasa executes custom actions that perform specific tasks, such as connecting with databases, APIs, and other services like LanceDB and OpenAI's LLMs.
 
 ## Quick Overview
 
-This guide explains the process of building an **Advanced Customer Support Chatbot** by integrating **Rasa**, a robust conversational framework; **LanceDB**, a high-performance vector database; and **OpenAI’s LLM**, a state-of-the-art language model. 
+This guide explains the process of building an **Advanced Customer Support Chatbot** by integrating **Rasa**, a robust conversational framework; **LanceDB**, a high-performance vector database; and **OpenAI's LLM**, a state-of-the-art language model. 
 ![](__GHOST_URL__/content/images/2024/12/NLU--2--1.jpg)How RASA performs custom actions to do the query on Lance Table and then perform API call to LLM to generate refined response
-So, you’ve got Rasa, LanceDB, and OpenAI LLMs ready to join forces. How do these components work together to create a seamless customer support chatbot? Let’s break it down:
+So, you've got Rasa, LanceDB, and OpenAI LLMs ready to join forces. How do these components work together to create a seamless customer support chatbot? Let's break it down:
 
 1. **User Interaction:**
-- A customer sends a query to the chatbot, such as *“How do I reset my password?”*
+- A customer sends a query to the chatbot, such as *"How do I reset my password?"*
 
 2. **Rasa NLU and Core:**
 - Rasa NLU interprets the intent and extracts relevant entities (if any) and then Rasa core decides if it's time to trigger custom action or give direct response.
@@ -35,7 +35,7 @@ So, you’ve got Rasa, LanceDB, and OpenAI LLMs ready to join forces. How do the
 - Using the intent and entities, Rasa triggers a custom action that queries LanceDB for specific support information related to user query (password resets).
 
 4. **Generating a Smart Response with OpenAI:**
-- The retrieved information from LanceDB is then fed into OpenAI’s LLM, which crafts a comprehensive and personalized response for the customer.
+- The retrieved information from LanceDB is then fed into OpenAI's LLM, which crafts a comprehensive and personalized response for the customer.
 
 5. **Delivering the Response:**
 - The chatbot sends the generated response back to the customer, ensuring they receive clear and helpful guidance.
@@ -125,7 +125,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
 
 #### Step 2 - Configure RASA files according to our use case
 
-- **domain.yml** - The domain.yml file serves as the core configuration for your Rasa chatbot. It defines the chatbot’s intents, entities, slots, responses, actions, forms, and policies.
+- **domain.yml** - The domain.yml file serves as the core configuration for your Rasa chatbot. It defines the chatbot's intents, entities, slots, responses, actions, forms, and policies.
 
     version: "3.0"
     language: "en"
@@ -200,7 +200,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
           - action: action_search_knowledge
     
 
-- **data/nlu.yml** - The nlu.yml file contains Natural Language Understanding (NLU) training data. It includes examples of user inputs categorized by intents and annotated with entities to train Rasa’s NLU component.
+- **data/nlu.yml** - The nlu.yml file contains Natural Language Understanding (NLU) training data. It includes examples of user inputs categorized by intents and annotated with entities to train Rasa's NLU component.
 
     version: "3.0"
     nlu:
@@ -327,7 +327,7 @@ We will implement 3 functions in this class
 
 - **Run Method (`run`):**
 - **Get User Message:** Retrieve user message from the tracker.
-- **Knowledge Retrieval:** Performs a semantic search in LanceDB to find the most relevant piece of information based on the user’s query.
+- **Knowledge Retrieval:** Performs a semantic search in LanceDB to find the most relevant piece of information based on the user's query.
 - **Response Generation:** Sends the retrieved information to generate_response(...) or gives direct response decided by relevance of the user's query on LanceDB table.
 - **Error Handling:** Gracefully manages any errors by informing the user and logging the issue for further investigation.
 
@@ -372,8 +372,8 @@ We will implement 3 functions in this class
         return []
 
 - **`generate_response` Method:**
-- Constructs a prompt combining the user’s question and the relevant knowledge base content.
-- Calls OpenAI’s API to generate a refined response.
+- Constructs a prompt combining the user's question and the relevant knowledge base content.
+- Calls OpenAI's API to generate a refined response.
 - Implements a fallback mechanism in case of API failures.
 
       def generate_response(self, user_message: Text, relevant_content: Text) -> Text:
@@ -418,7 +418,7 @@ After setting up the configuration and integrating necessary components, the nex
 
 #### Step 5 - Run Rasa Server and Action Server
 
-To operationalize the chatbot, both the **Rasa Server** and the **Action Server** must be running concurrently. In environments like **Google Colab**, where running multiple persistent processes is challenging, leveraging Python’s threading capabilities facilitates simultaneous server execution.
+To operationalize the chatbot, both the **Rasa Server** and the **Action Server** must be running concurrently. In environments like **Google Colab**, where running multiple persistent processes is challenging, leveraging Python's threading capabilities facilitates simultaneous server execution.
 
     rasa run
     rasa run actions
@@ -474,4 +474,4 @@ Google Colab
 ](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/RASA_Customer-support-bot/main.ipynb)
 ## Conclusion
 
-Congratulations! 🎉 You’ve just navigated through the exciting process of building an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI’s LLM**. By integrating these powerful tools, you’ve created a chatbot that delivers accurate, timely, and personalized support to the customer.
+Congratulations! 🎉 You've just navigated through the exciting process of building an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI's LLM**. By integrating these powerful tools, you've created a chatbot that delivers accurate, timely, and personalized support to the customer.

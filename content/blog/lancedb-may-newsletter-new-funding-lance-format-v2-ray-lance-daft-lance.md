@@ -1,17 +1,17 @@
 ---
-title: New Funding, Lance Format v2, Ray-Lance & Daft-Lance
-date: 2024-06-05
+title: "LanceDB May Newsletter: New Funding, Lance Format v2, Ray-Lance, Daft-Lance"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore new funding, lance format v2, ray-lance & daft-lance with practical insights and expert guidance from the LanceDB team.
-author: Jasmine Wang
+image: /assets/blog/lancedb-may-newsletter-new-funding-lance-format-v2-ray-lance-daft-lance/lancedb-may-newsletter-new-funding-lance-format-v2-ray-lance-daft-lance.png
+description: "Explore LanceDB May newsletter: new funding, Lance format v2, Ray-Lance, Daft-Lance with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 ## 🔥 Milestone Achieved with $8 Million Seed Round🔥
 
-We’re proud to announce that LanceDB has closed an $8 million seed round led by CRV, with additional backing from Y Combinator, Essence Venture Capital, and Swift Ventures. This brings total funding to $11M, enabling us to grow our team and better serve our customers and our community.
+We're proud to announce that LanceDB has closed an $8 million seed round led by CRV, with additional backing from Y Combinator, Essence Venture Capital, and Swift Ventures. This brings total funding to $11M, enabling us to grow our team and better serve our customers and our community.
 
-As the Database for Multimodal AI, we’re on a mission to empower AI teams to easily search over billions of vectors, process petabytes of images, and train on trillions of tokens.
+As the Database for Multimodal AI, we're on a mission to empower AI teams to easily search over billions of vectors, process petabytes of images, and train on trillions of tokens.
 
 [Read more](__GHOST_URL__/new-funding-and-a-new-foundation-for-multimodal-ai-data/)
 

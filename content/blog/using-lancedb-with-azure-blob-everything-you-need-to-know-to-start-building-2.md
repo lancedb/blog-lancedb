@@ -1,11 +1,11 @@
 ---
-title: Speaker Identification and Transcription Mapping Using Vector Search
-date: 2025-02-26
+title: "Using LanceDB with Azure Blob: Everything You Need to Know to Start Building"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore speaker identification and transcription mapping using vector search with practical insights and expert guidance from the LanceDB team.
-author: Shresth Shukla
+image: /assets/blog/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2.png
+description: "Explore using LanceDB with Azure Blob: everything you need to know to start building with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 
 I'm sure you all have used LanceDB on Colab a lot, building complex RAG applications and proofs of concept. But often, when it comes to building these applications in production, we might need to store these embeddings somewhere on the cloud for data security and faster performance. I have worked with many clients, and the majority of them preferred Azure services over AWS, especially enterprise clients. That's when I thought, why not use LanceDB with Azure instead of building it locally? And how about building something combining this feature?
@@ -32,7 +32,7 @@ Let's do this step by step. The first step is to define the following details in
     os.environ["AZURE_STORAGE_ACCOUNT_NAME"] = <your storage account name>
     os.environ["AZURE_STORAGE_ACCOUNT_KEY"] = <your storage account key>
 
-It is crucial to do this as your very first step because if you don’t, there’s a possibility that LanceDB won’t get the account credentials properly, even if you pass them inside the `"storage_options"` parameter as shown in the documentation. Adding these details with the correct parameter names is a must for establishing a connection with Azure Blob. (you don't need to pass *storage_options if using env variables*)
+It is crucial to do this as your very first step because if you don't, there's a possibility that LanceDB won't get the account credentials properly, even if you pass them inside the `"storage_options"` parameter as shown in the documentation. Adding these details with the correct parameter names is a must for establishing a connection with Azure Blob. (you don't need to pass *storage_options if using env variables*)
 
 Once you do this, the next step is to connect to the container. You need to pass the container name as a parameter and use the following code to establish the connection–
 
@@ -104,13 +104,13 @@ You need to follow the same steps and load the environment variables before maki
 
 Now that we know how to connect LanceDB with Azure, let's build an interesting application by combining this feature. These days, we see different models being used for transcription. A common use case is generating a transcription of a meeting recording. Companies often have internal meetings and create minutes of the meeting afterward. Don't you think we can automate this? 
 
-Well, people have already started doing it. The main challenge is getting the transcription right. While transcription itself has been automated, there's a catch—most meeting transcriptions don’t include the speaker's name, just the timestamp (unless you partner with the tool providers, which obviously many don't xd).
+Well, people have already started doing it. The main challenge is getting the transcription right. While transcription itself has been automated, there's a catch—most meeting transcriptions don't include the speaker's name, just the timestamp (unless you partner with the tool providers, which obviously many don't xd).
 ![](__GHOST_URL__/content/images/2025/02/image-14.png)blurry meme for a blurry transcript xd
-Generally, models provide a transcript, but we never know who is actually speaking those words and sentences. That’s where diarization comes in. ***Speaker diarization*** is the process of separating an audio signal into different segments based on who is speaking at any given time.
+Generally, models provide a transcript, but we never know who is actually speaking those words and sentences. That's where diarization comes in. ***Speaker diarization*** is the process of separating an audio signal into different segments based on who is speaking at any given time.
 
 It helps identify the number of speakers in the audio (in simple terms). So, if your meeting has three members, diarization models can map transcriptions to these speakers. But there's a small problem—while diarization can detect the probable number of speakers, it can't tell who is speaking unless we provide that information externally. This is where vector search and vector databases come in. 
 
-You can have a database of known speakers, typically employees in a company, and use it to compare voices in a meeting to accurately map each speaker with their name. There's no need to train a separate speaker identification model for this. Instead, you can simply create embeddings and use them to find the correct match. The best part? You don’t need to generate embeddings multiple times—only when adding new speakers to the database (for example when a new candidate joins the company). This can be managed through a separate pipeline. 
+You can have a database of known speakers, typically employees in a company, and use it to compare voices in a meeting to accurately map each speaker with their name. There's no need to train a separate speaker identification model for this. Instead, you can simply create embeddings and use them to find the correct match. The best part? You don't need to generate embeddings multiple times—only when adding new speakers to the database (for example when a new candidate joins the company). This can be managed through a separate pipeline. 
 
 Ready to test this? Here's what we'll do to validate our approach–
 ![](__GHOST_URL__/content/images/2025/02/image-24.png)
@@ -200,7 +200,7 @@ Since we can store both audio and its embedding in LanceDB, we have designed our
 ![](__GHOST_URL__/content/images/2025/02/image-18.png)length of embedding vector created
 Now we have completed the major part. The next step is to query this database using an audio input to identify speakers. This is when you should think about your use case again.
 
-For building a meeting transcription tool that converts audio or video recordings into a well-structured transcript with accurate speaker names. Can you think of how you’d approach this? Plenty of tools and techniques are available for different stages of the process. For example:
+For building a meeting transcription tool that converts audio or video recordings into a well-structured transcript with accurate speaker names. Can you think of how you'd approach this? Plenty of tools and techniques are available for different stages of the process. For example:
 
 - **Whisper** is great for transcription.
 - **Demucs** help separate speech from background music and noise, improving transcription and diarization accuracy.
@@ -252,7 +252,7 @@ Here's a code snippet to use Nemo-MSDD for diarization –
 
 After word and speaker mapping and alignment, the final output looks like this (without speaker names). We can replace speaker IDs with their correct names at this stage(after RTTM) or after obtaining the final transcript—both approaches work, but using the RTTM file is the preferred choice.
 ![](__GHOST_URL__/content/images/2025/02/image-20.png)
-We can see that it works perfectly, but we don’t just need these speaker IDs—we want our transcript to have the correct names of the speakers, right? 
+We can see that it works perfectly, but we don't just need these speaker IDs—we want our transcript to have the correct names of the speakers, right? 
 
 We can extract audio for different speakers and use it to compare with our vector database. How do we do that? It's simple. You can extract audio for a particular speaker from the original audio using the diarization output (RTTM file) and compare it with known speakers. You don't need the full audio—just a 10-second clip per speaker is enough for the search to work. Now our flow would look something like this – 
 ![](__GHOST_URL__/content/images/2025/02/image-26.png)

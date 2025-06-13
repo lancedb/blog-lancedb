@@ -1,37 +1,33 @@
 ---
+title: "Chunking Analysis: Which is the right chunking approach for your language?"
 date: 2025-01-27
-author: Shresth Shukla
----
----
-title: Chunking Analysis: Which is the right chunking approach for your language?
-date: 2024-03-14
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore chunking analysis: which is the right chunking approach for your language? with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/chunking-analysis-which-is-the-right-chunking-approach-for-your-language.png
+description: "Explore chunking analysis: which is the right chunking approach for your language? with practical insights and expert guidance from the LanceDB team."
+author: Shresth Shukla
 ---
 
 Before we even start discussing the right chunking approach for your language, the first question that should come to mind is **whether the chunking approach depends on the language or not**. Also, how much do you think the chunking method affects retrieval across languages when building RAG applications?
 
-You’ll find people using the same approach in all languages, and often it works, but is it the right approach? Do we have any analysis to back this approach? Have you ever thought of trying out new chunking methods, especially when working on a language-specific project? We’ll do that today. By the end of this blog, you’ll have answers to two questions:
+You'll find people using the same approach in all languages, and often it works, but is it the right approach? Do we have any analysis to back this approach? Have you ever thought of trying out new chunking methods, especially when working on a language-specific project? We'll do that today. By the end of this blog, you'll have answers to two questions:
 
 1. Does chunking depend on the language?
 2. Which is the right chunking approach for your language?
 
-In this blog, we’ll analyze and compare major chunking approaches like fixed character splitting, semantic, and clustering methods. We’ll test if specific chunking approaches suit certain languages, using text in English, Hindi, French, and Spanish.
+In this blog, we'll analyze and compare major chunking approaches like fixed character splitting, semantic, and clustering methods. We'll test if specific chunking approaches suit certain languages, using text in English, Hindi, French, and Spanish.
 
-We’ll review the basics and explore how chunking impacts retrieval in RAGs. First, we’ll examine how chunk sizes affect the number of chunks across languages. Next, we’ll analyze how chunking the same text in Hindi, French, or Spanish produces different results and similarity scores. Finally, we’ll cover advanced chunking methods like semantic and clustering approaches.
+We'll review the basics and explore how chunking impacts retrieval in RAGs. First, we'll examine how chunk sizes affect the number of chunks across languages. Next, we'll analyze how chunking the same text in Hindi, French, or Spanish produces different results and similarity scores. Finally, we'll cover advanced chunking methods like semantic and clustering approaches.
 
-*This analysis highlights that chunking significantly impacts retrieval, especially in a multilingual context.* I’ve attached the link to the Colab notebook at the end of the blog if you want to try it yourself and discover the best approach for your needs.
+*This analysis highlights that chunking significantly impacts retrieval, especially in a multilingual context.* I've attached the link to the Colab notebook at the end of the blog if you want to try it yourself and discover the best approach for your needs.
 
 ### Quick Intro
 
 We have come a long way from when chunking and RAG were just buzzwords. Today, they are a reality, with more companies building RAG systems using advanced strategies across multiple languages. Almost every day (hehe), a new paper with "RAG" in its title gets published.
 ![](__GHOST_URL__/content/images/2025/01/image-2.png)
-In case you’re unaware, chunking in the context of building retrieval systems generally refers to **breaking down longer texts into smaller pieces** (chunks) and saving them as dense vector representations using techniques like transformer-based models or word embeddings. I'm assuming you already know this.
+In case you're unaware, chunking in the context of building retrieval systems generally refers to **breaking down longer texts into smaller pieces** (chunks) and saving them as dense vector representations using techniques like transformer-based models or word embeddings. I'm assuming you already know this.
 ![](__GHOST_URL__/content/images/2025/01/image-3.png)Image from OpenAI Blog
-We’ll be using *sentence transformers'*,* multilingual embeddings* for this analysis, but you can definitely experiment with other multilingual embeddings available in the market for this. It maps sentences & paragraphs to a 384-dimensional dense vector space and can be used for tasks like clustering or semantic search. There’s no specific reason behind choosing this model but I wanted an embedding model that I could use for these 4 languages (Hindi, English, Spanish and French), and turned out it could serve the purpose.
+We'll be using *sentence transformers'*,* multilingual embeddings* for this analysis, but you can definitely experiment with other multilingual embeddings available in the market for this. It maps sentences & paragraphs to a 384-dimensional dense vector space and can be used for tasks like clustering or semantic search. There's no specific reason behind choosing this model but I wanted an embedding model that I could use for these 4 languages (Hindi, English, Spanish and French), and turned out it could serve the purpose.
 
 I looked over the internet to see if there is any analysis I can read to understand how different languages behave when it comes to chunking, but sadly I wasn't able to find one. To understand why we even need such analysis, we need to understand how languages behave, and that's exactly what we'll do today. We'll see how languages behave differently, which confirms that we might need to process texts in different languages separately. Then we'll move on to trying out chunking approaches on these texts.
 ![](__GHOST_URL__/content/images/2025/01/image-4.png)
@@ -119,13 +115,13 @@ The summary of processing English language chunks across these 4 sizes looks lik
 ![](__GHOST_URL__/content/images/2025/01/image-7.png)
 When we used a chunk size of 100, the English text was divided into 227 chunks. As we increase the chunk size, the number of chunks starts reducing, which is expected since more text fits into a single chunk.
 
-But what happens when we process the same text in multiple languages? Let’s say we take four languages: English, Hindi, French, and Spanish. We processed the same text as in English across all these languages, and the results turned out to be quite interesting. 👀
+But what happens when we process the same text in multiple languages? Let's say we take four languages: English, Hindi, French, and Spanish. We processed the same text as in English across all these languages, and the results turned out to be quite interesting. 👀
 ![](__GHOST_URL__/content/images/2025/01/image-9.png)Distribution of no. of chunks vs chunk sizes across languages 
-There’s a noticeable difference with smaller chunk sizes. With a chunk size of 100, all four languages were split into multiple chunks (i.e., 227, 236, 253, and 238). The same piece of information was stored in fewer or more chunks depending on the language. This pattern changes as we increase the chunk size. When the chunk size increases from 100 to 400, we observe that the difference in the number of chunks becomes less significant with the Recursive Character Text Splitter. English and Hindi texts were split into almost the same number of chunks after a size of 100, while French and Spanish behaved somewhat similarly after 100.
+There's a noticeable difference with smaller chunk sizes. With a chunk size of 100, all four languages were split into multiple chunks (i.e., 227, 236, 253, and 238). The same piece of information was stored in fewer or more chunks depending on the language. This pattern changes as we increase the chunk size. When the chunk size increases from 100 to 400, we observe that the difference in the number of chunks becomes less significant with the Recursive Character Text Splitter. English and Hindi texts were split into almost the same number of chunks after a size of 100, while French and Spanish behaved somewhat similarly after 100.
 
-An initial observation is that English and Hindi are quite similar in nature, both in how they contain and present information. While this isn’t a generalization, similar analyses could be conducted to understand how other languages behave and how they store the same information.
+An initial observation is that English and Hindi are quite similar in nature, both in how they contain and present information. While this isn't a generalization, similar analyses could be conducted to understand how other languages behave and how they store the same information.
 
-We can’t judge which chunk size to choose until we test the retrieval process and analyze how it is affected by increasing chunk size. Our embedding data is stored in LanceDB as tables for each language and each chunk size.
+We can't judge which chunk size to choose until we test the retrieval process and analyze how it is affected by increasing chunk size. Our embedding data is stored in LanceDB as tables for each language and each chunk size.
 ![](__GHOST_URL__/content/images/2025/01/image-10.png)
 Code to query from tables stored in LanceDB–
 
@@ -166,9 +162,9 @@ Code to query from tables stored in LanceDB–
 
 Refer notebook for implementation.
 
-Before we move on to comparisons, here’s what the result for one chunk size looks like. I searched for the question “**एजीआई क्या है?**”. For a chunk size of 400 in the Hindi language, we have the following results:
+Before we move on to comparisons, here's what the result for one chunk size looks like. I searched for the question "**एजीआई क्या है?**". For a chunk size of 400 in the Hindi language, we have the following results:
 ![](__GHOST_URL__/content/images/2025/01/image-11.png)
-If we examine the combined results for a chunk size of 400 for the same question — “What is AGI?” across all the other languages, they look like this. Note that this plot is based solely on the results for a chunk size of 400. Do you notice anything unusual? Any strange behavior?
+If we examine the combined results for a chunk size of 400 for the same question — "What is AGI?" across all the other languages, they look like this. Note that this plot is based solely on the results for a chunk size of 400. Do you notice anything unusual? Any strange behavior?
 ![](__GHOST_URL__/content/images/2025/01/image-13.png)
 Let's take a pause and look at the results we got through the retrieval. 
 ![](__GHOST_URL__/content/images/2025/01/image-14.png)Results for English![](__GHOST_URL__/content/images/2025/01/image-15.png)Results for Hindi![](__GHOST_URL__/content/images/2025/01/image-16.png)Results for French![](__GHOST_URL__/content/images/2025/01/image-17.png)Results for Spanish
@@ -176,13 +172,13 @@ If you look at the retrieved results for chunk size 400, English and Hindi clear
 
 Quick note — We are using the cosine distance metric provided by **LanceDB** to compare vectors. It also offers other distance metrics that you can use per your use case or experimentation.
 ![](__GHOST_URL__/content/images/2025/01/image-18-1.png)Other metrics provided by LanceDB
-Starting with the **Hindi** language, for the query — “**एजीआई क्या है?**”, the similarity scores for multiple chunk sizes look like this:
+Starting with the **Hindi** language, for the query — "**एजीआई क्या है?**", the similarity scores for multiple chunk sizes look like this:
 ![](__GHOST_URL__/content/images/2025/01/image-19.png)
 The top (first) retrieved chunk consistently has the highest similarity score. However, **the average score reveals that smaller chunk sizes generally yield better results with higher similarity scores compared to larger chunk sizes.** This suggests that smaller chunk sizes may improve overall retrieval precision, though they risk losing context. (check the line chart which represents the average score for the top 3 chunks). On the other hand, larger chunks contain more context and information but might not achieve the best average similarity search score.  
 
 What about English? — look at this chart below.
 ![](__GHOST_URL__/content/images/2025/01/image-20.png)
-Let’s take a look at the combined plot for all four languages.
+Let's take a look at the combined plot for all four languages.
 ![](__GHOST_URL__/content/images/2025/01/image-21.png)
 The initial interpretation of this plot shows that we get different results with different chunk sizes for each language. Even though we used the same text and queried on the same chunk sizes, in each language, **one chunk size performed better than the others, and there is no direct solution to determine the best size universally.**
 
@@ -198,7 +194,7 @@ In our case, if you notice, English and Hindi share certain grammatical structur
 
 While, at the same time both **French** and **Spanish** have more complex morphology compared to **English** or **Hindi**, meaning they have a larger number of word forms depending on factors such as gender, number, verb conjugation, and case. These features make chunking and text segmentation different in these languages.
 
-Let’s take an example to understand this better. For the sentence, ***“I eat apples”***, in English language, the subject (“I”) comes first, followed by the verb (“eat”), and then the object (“apples”). This structure is simple and consistent. In Hindi it would be — **“मैं सेब खाता हूँ।”. **Here, the subject (“मैं”) comes first, followed by the object (“सेब”), and finally the verb (“खाता हूँ”). The verb is always at the end, which makes it different from English. In French, it’d be — **“Je mange des pommes”. **French follows the SVO order, just like English. However, when adjectives are involved, they often come **after** the noun. While in Spanish, it’d be — **“Yo como manzanas”. **Spanish also follows SVO but with some flexibility. Spanish allows dropping the subject (“Yo”), while English, Hindi, and French typically do not.
+Let's take an example to understand this better. For the sentence, ***"I eat apples"***, in English language, the subject ("I") comes first, followed by the verb ("eat"), and then the object ("apples"). This structure is simple and consistent. In Hindi it would be — **"मैं सेब खाता हूँ।". **Here, the subject ("मैं") comes first, followed by the object ("सेब"), and finally the verb ("खाता हूँ"). The verb is always at the end, which makes it different from English. In French, it'd be — **"Je mange des pommes". **French follows the SVO order, just like English. However, when adjectives are involved, they often come **after** the noun. While in Spanish, it'd be — **"Yo como manzanas". **Spanish also follows SVO but with some flexibility. Spanish allows dropping the subject ("Yo"), while English, Hindi, and French typically do not.
 
 Note that these (French and Spanish) also follow SVO, but with more frequent adjective-noun inversion and **different punctuation rules**, which can make chunking different because the chunks may need to account for these structural nuances.
 
@@ -439,7 +435,7 @@ Usually, there are two common approaches available on the internet–
 1. You give your entire text and ask it to split it into N number of chunks. (which doesn't make sense practically.)
 2. You use LLM to create propositions that add meaning to individual sentences and then you create chunks from those sentences.
 
-The second approach is quite popular these days. You use **LLM to create propositions** for your sentences. When we do this, the sentences can stand on their own meaning, meaning you don’t necessarily need much context to understand what is being talked about or who the sentence is referring to.
+The second approach is quite popular these days. You use **LLM to create propositions** for your sentences. When we do this, the sentences can stand on their own meaning, meaning you don't necessarily need much context to understand what is being talked about or who the sentence is referring to.
 
 For example, if our text looks like this – "Aman is a good guy. He recently met a boy named Akhil. They started playing chess. Aman liked chess. He plays chess at grandmaster level."
 
@@ -484,11 +480,11 @@ Code to create propositions–
 
 Check Colab for full code
 
-Once we have these propositions, we can follow the same steps as in the semantic or clustering approaches to group them and create the final chunks. But I wouldn’t recommend this approach, as using it on a large corpus of text would cost you heavy $$$. Similarly, passing the whole text to LLMs and asking it to provide stopping points or chunks directly won’t be cost-efficient either.
+Once we have these propositions, we can follow the same steps as in the semantic or clustering approaches to group them and create the final chunks. But I wouldn't recommend this approach, as using it on a large corpus of text would cost you heavy $$$. Similarly, passing the whole text to LLMs and asking it to provide stopping points or chunks directly won't be cost-efficient either.
 
-If you believe token costs will eventually drop to zero, you’d love this approach. But until then, I think it’s better to go for a cost-effective and quality option. While this approach might give better chunks, it’s not worth spending too much on chunking instead of querying. Still, I’ve included the code to create propositions if you want to try it yourself.
+If you believe token costs will eventually drop to zero, you'd love this approach. But until then, I think it's better to go for a cost-effective and quality option. While this approach might give better chunks, it's not worth spending too much on chunking instead of querying. Still, I've included the code to create propositions if you want to try it yourself.
 
-We have tested multiple approaches, and we’ve done enough analysis to call it a day. But what do you think? Do you find something that might help you start working on that language-specific project? Well, read further.
+We have tested multiple approaches, and we've done enough analysis to call it a day. But what do you think? Do you find something that might help you start working on that language-specific project? Well, read further.
 
 ### What could be interpreted now?
 
@@ -498,9 +494,9 @@ We also saw how using semantic or clustering-based approaches gives better chunk
 
 I hope this [notebook](https://colab.research.google.com/drive/1DRT5e4_up84afkCMJtP_uTUjvNvPuVWW?usp=sharing) helps you get started with your experimentation. But if you are someone who's not interested in doing research and just want to start with some approach, the following content is for you.
 
-Clearly, there’s no “one-size-fits-all” formula here. If you are using Recursive, you might want to play with chunk sizes. If you are using another approach, you might need to experiment with other parameters.
+Clearly, there's no "one-size-fits-all" formula here. If you are using Recursive, you might want to play with chunk sizes. If you are using another approach, you might need to experiment with other parameters.
 
-**What can be done:** To find the best chunk size for each language, we need to explore more (on the same notebook xd) and consider the language’s structure and the type of content being processed. The way to split content depends largely on the context in which we are splitting it.
+**What can be done:** To find the best chunk size for each language, we need to explore more (on the same notebook xd) and consider the language's structure and the type of content being processed. The way to split content depends largely on the context in which we are splitting it.
 
 The choice of embedding model also plays a big role in how well the retrieval works. Multilingual embeddings may treat different languages in different ways, leading to variations in chunking and retrieval results. I tried using another embedding model from Sentence Transformers, and *while the overall results were similar, there were slight differences in the similarity scores.* We also have some good multilingual embedding models, like those from Cohere, which we can explore further.
 

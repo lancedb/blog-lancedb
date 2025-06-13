@@ -1,11 +1,11 @@
 ---
-title: "Multi document agentic RAG: A walkthrough"
-date: 2024-08-28
+title: "Multi-Document Agentic RAG: A Walkthrough"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: "Explore multi document agentic rag: a walkthrough with practical insights and expert guidance from the LanceDB team."
-author: Vipul Maheshwari
+image: /assets/blog/multi-document-agentic-rag-a-walkthrough/multi-document-agentic-rag-a-walkthrough.png
+description: "Explore multi-document agentic RAG: a walkthrough with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 
 💡
@@ -24,13 +24,13 @@ Agentic RAG is built on this same idea. Unlike regular RAG systems that just ret
 
 ### How to use it?
 
-Here’s how we can build a specialized RAG agent for automotive needs. Imagine you’re facing car troubles and need guidance—this agent would help you to:
+Here's how we can build a specialized RAG agent for automotive needs. Imagine you're facing car troubles and need guidance—this agent would help you to:
 
 1. **Diagnose Issues**: Understand and analyze your car's symptoms.
 2. **Provide Solutions**: Offer possible causes and suggest fixes.
 3. **Organize Maintenance**: Keep track of your car's upkeep needs.
 
-To help our agent quickly access and use the information, we’ll store pieces of data from six JSON files. Here’s a summary of what each file contains:
+To help our agent quickly access and use the information, we'll store pieces of data from six JSON files. Here's a summary of what each file contains:
 
 - **car_maintenance.json**: Maintenance schedules and tasks based on mileage.
 - **car_problems.json**: Descriptions of common car issues, including required parts and repair time.
@@ -52,12 +52,12 @@ High quality resources & applications for LLMs, multi-modal models and VectorDBs
 ](https://github.com/lancedb/vectordb-recipes/tree/main/examples/multi-document-agentic-rag/json_files)
 ### How to: Tech Stack
 
-To build our Agentic agent, we’ll be using a few key tools to make things run smoothly:
+To build our Agentic agent, we'll be using a few key tools to make things run smoothly:
 
 1. [**LlamaIndex**](https://www.llamaindex.ai/)**:** This framework will serve as the core of our agent. It helps manage the agent's logic and operations. While the details might seem vague now, their role will become clearer as we implement the system.
 2. **Memory Management:** Our agent will need to remember past interactions. Currently, it processes each question in isolation without tracking previous conversations. To fix this, we'll use memory to record the chat history. This history will be stored in a conversational memory buffer, managed by LlamaIndex, allowing the agent to refer back to both past and current interactions when making decisions.
 3. **Vector Databases:** We'll use VectorDBs to retrieve information. Queries will be embedded and matched semantically with the relevant VectorDB through our retrievers. 
-4. LLM Integration: On the language model side, we’ll go with OpenAI’s GPT-4 for generating responses. For embeddings, we’re using `sentence-transformers/all-MiniLM-L6-v2`
+4. LLM Integration: On the language model side, we'll go with OpenAI's GPT-4 for generating responses. For embeddings, we're using `sentence-transformers/all-MiniLM-L6-v2`
 
 Make sure your `.env` file includes the `OPENAI_API_KEY`. You can adjust and use different LLMs and embedding models as needed. The key is to have an LLM for reasoning and an embedding model to handle data embedding
 
@@ -72,7 +72,7 @@ Google Colab
 ](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multi-document-agentic-rag/main.ipynb)
 ### Step 1: Creating our DBs
 
-Let's set up our vector database to store the data. Here’s an example of creating a singleton LanceDB vector store with multiple tables, each storing different types of embedded data.
+Let's set up our vector database to store the data. Here's an example of creating a singleton LanceDB vector store with multiple tables, each storing different types of embedded data.
 
     # Vector store setup
     problems_vector_store = LanceDBVectorStore(
@@ -113,9 +113,9 @@ In case the bot misses information or seems to hallucinate, it might be due to m
 Well, LlamaIndex agents are built to process natural language inputs and execute actions, rather than just generating responses. The effectiveness of these agents depends on how well we abstract and utilize tools. But what does 'tool' mean in this context? Think of tools as the specialized equipment a warrior uses in battle. Just as a warrior selects different weapons based on the situation, tools for our agent are specialized API interfaces that enable the agent to interact with data sources or reason through queries to provide the best possible responses.
 In LlamaIndex, tools come in various types. 
 
-There is this one `FunctionTool`, which turns any user-defined function into a tool, making it capable of understanding the function’s schema and usage. These tools are crucial for enabling our agents to reason about queries and take effective actions.
+There is this one `FunctionTool`, which turns any user-defined function into a tool, making it capable of understanding the function's schema and usage. These tools are crucial for enabling our agents to reason about queries and take effective actions.
 
-As we use different tools, it’s important to clearly describe its purpose and functionality so the agent can use it effectively. To get started, we’ll create tools that leverage the retriever objects we defined earlier. For reference, let’s create our first tool, which will help us retrieve relevant problems for a specific car.
+As we use different tools, it's important to clearly describe its purpose and functionality so the agent can use it effectively. To get started, we'll create tools that leverage the retriever objects we defined earlier. For reference, let's create our first tool, which will help us retrieve relevant problems for a specific car.
 
     max_context_information = 200
     
@@ -157,7 +157,7 @@ Google Colab
 
 ![](https://colab.research.google.com/img/colab_favicon_256px.png)
 ](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multi-document-agentic-rag/main.ipynb)
-Additionally, we’ll implement some helper functions that, while not tools themselves, will be used internally within the tools to support the logic and enhance their functionality. Like a tool that can get us information about a car based on the mileage, its care make year, model, and all. 
+Additionally, we'll implement some helper functions that, while not tools themselves, will be used internally within the tools to support the logic and enhance their functionality. Like a tool that can get us information about a car based on the mileage, its care make year, model, and all. 
 
 Here are the additional tools in their complete form
 
@@ -184,7 +184,7 @@ Now, let's combine all these tools into a comprehensive tools list, which we wil
 
 ### Step 4: Creating the Agent
 
-Now that we’ve defined the tools, we’re ready to create the agent. With LlamaIndex, this involves setting up an Agent reasoning loop. Basically, this loop allows our agent to handle complex questions that might require multiple steps or clarifications. Essentially, our agent can reason through tools and complete tasks across several stages.
+Now that we've defined the tools, we're ready to create the agent. With LlamaIndex, this involves setting up an Agent reasoning loop. Basically, this loop allows our agent to handle complex questions that might require multiple steps or clarifications. Essentially, our agent can reason through tools and complete tasks across several stages.
 
 LlamaIndex provides two main components for creating an agent: `AgentRunner` and `AgentWorkers`. 
 
@@ -207,7 +207,7 @@ Now, let's set up both the `AgentRunner` and `AgentWorker` to bring our agent to
 
 Every time you call `reset_agent_memory()`, a new, fresh agent is created, ready to reason through and act on the user's query.
 
-With everything now set up—our tools, an agent for reasoning, and databases for retrieving relevant context—let’s test to see if our agent can handle simple questions effectively.
+With everything now set up—our tools, an agent for reasoning, and databases for retrieving relevant context—let's test to see if our agent can handle simple questions effectively.
 
 ### Step 5: D-Day
 

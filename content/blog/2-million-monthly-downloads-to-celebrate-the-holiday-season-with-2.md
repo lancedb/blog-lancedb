@@ -4,7 +4,7 @@ date: 2024-12-03
 draft: false
 featured: false
 categories: ["Announcement"]
-image: /assets/blog/1.png
+image: /assets/blog/2-million-monthly-downloads-to-celebrate-the-holiday-season-with-2/2-million-monthly-downloads-to-celebrate-the-holiday-season-with-2.png
 description: Explore 2 million monthly downloads to celebrate the holiday season with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---

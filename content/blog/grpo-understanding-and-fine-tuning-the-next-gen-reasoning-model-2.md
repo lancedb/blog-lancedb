@@ -3,7 +3,7 @@ title: RAG with GRPO Fine-Tuned Reasoning Model
 date: 2025-03-24
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/grpo-understanding-and-fine-tuning-the-next-gen-reasoning-model-2/grpo-understanding-and-fine-tuning-the-next-gen-reasoning-model-2.png
 description: Explore rag with grpo fine-tuned reasoning model with practical insights and expert guidance from the LanceDB team.
 author: Mahesh Deshwal
 ---
@@ -38,7 +38,7 @@ Code snippets below are referred from [HuggingFace `GRPOTrainer`](https://github
       
 - `self.sampling_params = SamplingParams(n=args.num_generations)`
 
-- Reference Policy (πref): This is the model that we fine-tuned using SFT. It serves as a base to ensure that the model’s updates do start giving weird answers.
+- Reference Policy (πref): This is the model that we fine-tuned using SFT. It serves as a base to ensure that the model's updates do start giving weird answers.
       
 - `self.ref_model = AutoModelForCausalLM.from_pretrained(model_id, **model_init_kwargs)`
 

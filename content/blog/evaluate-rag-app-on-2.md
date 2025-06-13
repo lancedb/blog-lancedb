@@ -3,7 +3,7 @@ title: End to End Evaluation Template for RAG Apps
 date: 2025-02-22
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/evaluate-rag-app-on-2/evaluate-rag-app-on-2.png
 description: Explore end to end evaluation template for rag apps with practical insights and expert guidance from the LanceDB team.
 author: Mahesh Deshwal
 ---

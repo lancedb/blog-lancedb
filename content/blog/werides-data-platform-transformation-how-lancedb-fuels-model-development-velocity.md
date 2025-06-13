@@ -3,7 +3,7 @@ title: "WeRide's Data Platform Transformation: How LanceDB Fuels Model Developme
 date: 2024-12-10
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity.png
 description: "Explore weride's data platform transformation: how lancedb fuels model development velocity with practical insights and expert guidance from the LanceDB team."
 author: Qian Zhu
 ---
@@ -46,7 +46,7 @@ Choosing LanceDB wasn't just about solving WeRide's immediate data mining challe
 
 To search for data that matches a rare scenario, for example, people lying on the ground, the pipeline would use text-to-image or image-to-image search. The images and videos collected from autonomous vehicles are converted as vectors. All embeddings along with metadata is ingested into LanceDB, backed by the in-house storage cluster built by the data infrastructure team. LanceDB then indexes the data for fast search. As new data gets added, the re-index is triggered on a weekly and monthly basis. During a search, the text or image will first be embedded then do a similar search with all embeddings. Usually, such search will be combined with applying filters on certain metadata fields. Returned search results, e.g. top 1000, will then go through the feature engineering process to be fed into models for training.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd4i5kSa3ZsGlut2W1geK5YtrP9-hl837Q4QSjqzv10vpYreccRRvw6yKimM9IZRzSvlSuCVAh1NMxzcfZR-Ku4wNBvldujhiNriOGVi4ycqkl712rjvQxBiqnNPWM1EUHxo6W0P9XeQVJLhN7gofw?key=63t2jg9puKtfcYMUck6UZzO1)
-> *“**Lance has helped us streamline our data analysis process, allowing us to quickly and efficiently identify valuable data to enhance our autonomous driving technology”**** - Fei Chen, Director of Data Infrastructure, WeRide***
+> *"**Lance has helped us streamline our data analysis process, allowing us to quickly and efficiently identify valuable data to enhance our autonomous driving technology"**** - Fei Chen, Director of Data Infrastructure, WeRide***
 
 ---
 
@@ -60,4 +60,4 @@ By integrating LanceDB as the vector database in their data platform, WeRide is 
 
 Beyond its technical advantages, LanceDB's ease of maintenance and seamless scalability have been crucial as WeRide's data volume expanded exponentially. 
 
-> *As Fei notes, “The strategic partnership with LanceDB has provided a robust foundation for future innovation, empowering WeRide's continued business growth.”*
+> *As Fei notes, "The strategic partnership with LanceDB has provided a robust foundation for future innovation, empowering WeRide's continued business growth."*

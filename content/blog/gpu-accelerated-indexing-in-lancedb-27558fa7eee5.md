@@ -1,25 +1,25 @@
 ---
-title: GPU-accelerated Indexing in LanceDB
-date: 2023-11-02
+title: "GPU-Accelerated Indexing in LanceDB"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore gpu-accelerated indexing in lancedb with practical insights and expert guidance from the LanceDB team.
-author: Lei Xu
+image: /assets/blog/gpu-accelerated-indexing-in-lancedb-27558fa7eee5/gpu-accelerated-indexing-in-lancedb-27558fa7eee5.png
+description: "Explore GPU-accelerated indexing in LanceDB with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
-Vector databases are extremely useful for RAG, RecSys, computer vision, and a whole host of other ML/AI applications. Because of the rise of LLMs, there has been a lot of focus on vector indices, query latency, as well as the tradeoffs between latency and recall of various indices. What’s often neglected is the time it takes to *build* a vector index. Building a vector index is a very computationally intensive process that increases quadratically with the number of vectors or vector dimensions. As you scale up in production, this becomes a much bigger bottleneck for your AI stack.
+Vector databases are extremely useful for RAG, RecSys, computer vision, and a whole host of other ML/AI applications. Because of the rise of LLMs, there has been a lot of focus on vector indices, query latency, as well as the tradeoffs between latency and recall of various indices. What's often neglected is the time it takes to *build* a vector index. Building a vector index is a very computationally intensive process that increases quadratically with the number of vectors or vector dimensions. As you scale up in production, this becomes a much bigger bottleneck for your AI stack.
 
-Over the past few months, we’ve made some pretty amazing improvements using CPUs to build vector indices. And now we’re making a much bigger leap by supporting GPU acceleration for index building. So if you have access to an Nvidia GPU or a Macbook that supports [MPS](https://developer.apple.com/documentation/metalperformanceshaders), you can now take advantage of the unparalleled computing power of GPUs when training large scale vector indices.
+Over the past few months, we've made some pretty amazing improvements using CPUs to build vector indices. And now we're making a much bigger leap by supporting GPU acceleration for index building. So if you have access to an Nvidia GPU or a Macbook that supports [MPS](https://developer.apple.com/documentation/metalperformanceshaders), you can now take advantage of the unparalleled computing power of GPUs when training large scale vector indices.
 
 # Training vector indices is expensive
 
 Common indexing techniques like IVF (InVerted File index) or compression like PQ (Product Quantization) divide up the vectors into clusters. To find the cluster centroids, we have to use KMeans. While there are various techniques to improve the performance of KMeans, at the end of the day, it scales quadratically. This means that index training time quickly becomes prohibitively expensive at high scale.
 
-The KMeans training algorithm is an iterative process where a ton of vector distance computations are performed to minimize the distance of vectors to their assigned clusters. It turns out that GPUs are amazingly good at this kind of math. Indexing libraries like FAISS, for example, support GPU-accelerated index training, but most vector databases have yet to add GPU support (and certainly haven’t made it easy).
+The KMeans training algorithm is an iterative process where a ton of vector distance computations are performed to minimize the distance of vectors to their assigned clusters. It turns out that GPUs are amazingly good at this kind of math. Indexing libraries like FAISS, for example, support GPU-accelerated index training, but most vector databases have yet to add GPU support (and certainly haven't made it easy).
 
 # LanceDB support for GPU-acceleration
 
-Since the beginning of LanceDB, users managing embeddings at scale have asked for GPU-acceleration to speed up their index training. In the most recent release of the Python package of LanceDB (v0.3.3), backed by Lance (v0.8.10), you can now use either CUDA or MPS by simply specifying the “accelerator” parameter when calling `create_index` :
+Since the beginning of LanceDB, users managing embeddings at scale have asked for GPU-acceleration to speed up their index training. In the most recent release of the Python package of LanceDB (v0.3.3), backed by Lance (v0.8.10), you can now use either CUDA or MPS by simply specifying the "accelerator" parameter when calling `create_index` :
 
 > Using GPU in Lancedb is as simple as specify the* ***accelerator **parameter** **on* ***create_index()**.
 
@@ -41,9 +41,9 @@ In general, GPU acceleration offers up to 20–26x speed up compared to their CP
 - Macbook Pro: 397s on CPU, and 21s on GPU
 
 ![](https://miro.medium.com/v2/resize:fit:770/1*9tRrnjLVnasYS1E9d1PRvA.png)IVF 4096 on 1 Million 1536D vectors. BLUE is CPU; RED is GPU.
-# What’s next
+# What's next
 
-Currently the IVF KMeans training is only one part of the whole index training process. We’re going to be working to add GPU acceleration for PQ training and also assigning the vectors to the correct centroids. Once this is completed, you’ll see even more drastic improvements in end-to-end index training time.
+Currently the IVF KMeans training is only one part of the whole index training process. We're going to be working to add GPU acceleration for PQ training and also assigning the vectors to the correct centroids. Once this is completed, you'll see even more drastic improvements in end-to-end index training time.
 
 In addition, PyTorch offers LanceDB an easy path for large-scale distributed GPU training, as well as access to even more hardware accelerators (i.e., TPU via XLA) in the future. Imagine being able to train a vector index in minutes on billions of vectors, on any hardware.
 
@@ -53,4 +53,4 @@ Finally, now that we have a mechanism to use the GPU effectively, we could also 
 
 You can start to benefit Cuda and Apple Silicon GPU support today via `pip install lancedb`. If you found this useful or interesting, please show us some love by starring [LanceDB](http://github.com/lancedb/lancedb) and [Lance format](http://github.com/lancedb/lance).
 
-And if you’re looking for a hosted vector database, sign up for a private preview of LanceDB Cloud at [https://lancedb.com/](https://lancedb.com/)
+And if you're looking for a hosted vector database, sign up for a private preview of LanceDB Cloud at [https://lancedb.com/](https://lancedb.com/)

@@ -3,7 +3,7 @@ title: Geospatial Restaurant Recommendation System
 date: 2024-12-31
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/geospatial-restaurant-recommendation-system/geospatial-restaurant-recommendation-system.png
 description: Explore geospatial restaurant recommendation system with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---
@@ -38,7 +38,7 @@ So, we need to extract these features from the dataset.
     restaurant_data.head()
 
 ![](__GHOST_URL__/content/images/2024/12/image-7.png)
-To keep things simple, we’re just going to focus on a few key details for now: the type of food a restaurant serves, how customers rate it on average, and where it's located. By sticking to these basics, we can quickly give people great recommendations without complicating things.
+To keep things simple, we're just going to focus on a few key details for now: the type of food a restaurant serves, how customers rate it on average, and where it's located. By sticking to these basics, we can quickly give people great recommendations without complicating things.
 
     data_points_vectors = []
     
@@ -83,7 +83,7 @@ Ok, this looks good! Next, we need to turn our query string into a vector. You c
 
 ### Setting up Vector Database
 
-So, we've got our `list_of_payloads` that includes all the relevant data we're going to store in our vector database. Let’s get LanceDB set up here:
+So, we've got our `list_of_payloads` that includes all the relevant data we're going to store in our vector database. Let's get LanceDB set up here:
 
     import lancedb
     
@@ -98,7 +98,7 @@ So, we've got our `list_of_payloads` that includes all the relevant data we're g
 ![](__GHOST_URL__/content/images/2024/12/image-8.png)
 ### Setting up the Geospatial Reference. 
 
-Now that our vector database is ready, the next step is to convert user queries into our specific query format. Essentially, what we will do here is to carefully extract key details from each user query to form a structured dictionary. This structured data will then be reformatted to match the pattern of our query strings. To achieve this, I’ll just use an LLM to decipher the user queries and identify the crucial entities we need.
+Now that our vector database is ready, the next step is to convert user queries into our specific query format. Essentially, what we will do here is to carefully extract key details from each user query to form a structured dictionary. This structured data will then be reformatted to match the pattern of our query strings. To achieve this, I'll just use an LLM to decipher the user queries and identify the crucial entities we need.
 
     import os
     from openai import OpenAI
@@ -172,7 +172,7 @@ Well, this user query is now formatted exactly like our `query_strings`. We can 
 
 ### Searching like a pro
 
-I'll be using the Full Text Search (FTS) feature from LanceDB to run the search. It's basically a semantic search. You can read more about what’s happening behind the scenes [here](https://lancedb.github.io/lancedb/fts/#example).
+I'll be using the Full Text Search (FTS) feature from LanceDB to run the search. It's basically a semantic search. You can read more about what's happening behind the scenes [here](https://lancedb.github.io/lancedb/fts/#example).
 
     # Create the FTS index and search
     lancedb_table.create_fts_index("query_string", replace=True)
@@ -182,7 +182,7 @@ I'll be using the Full Text Search (FTS) feature from LanceDB to run the search.
 ![](__GHOST_URL__/content/images/2024/12/image-9.png)
 ### Using the Geospatial data
 
-So basically when someone searches for nearby restaurants, maybe they're craving a specific type of cuisine or looking for highly-rated places, we first search up the places that fills there requirements. Now after identifying potential options, we use the [Geospatial API](https://developers.google.com/maps/documentation/geocoding/overview) to pinpoint their exact locations. The Google Maps API is perfect for this—it grabs the latitude and longitude so we know precisely where each restaurant is. With these coordinates, we can then easily figure out which places are closest to the user’s location, by just calculating the distance. 
+So basically when someone searches for nearby restaurants, maybe they're craving a specific type of cuisine or looking for highly-rated places, we first search up the places that fills there requirements. Now after identifying potential options, we use the [Geospatial API](https://developers.google.com/maps/documentation/geocoding/overview) to pinpoint their exact locations. The Google Maps API is perfect for this—it grabs the latitude and longitude so we know precisely where each restaurant is. With these coordinates, we can then easily figure out which places are closest to the user's place.
 
 If you didn't get that, Bear with me, this is going to be super cool. So first thing we need to do is to set our Geospatial function which takes a place and returns the coordinates:
 
@@ -207,7 +207,7 @@ If you didn't get that, Bear with me, this is going to be super cool. So first t
             print(f"Google API: Request failed for address: {address}")
             return None
 
-For the distance calculation, there's this thing called the `Haversine formula`. It uses the coordinates of two points and basically draws an imaginary straight line between them across the earth to measure how far they are from each other. There's a bit of math involved in how this formula works, but we can skip that part for now. Here’s what the formula looks like:
+For the distance calculation, there's this thing called the `Haversine formula`. It uses the coordinates of two points and basically draws an imaginary straight line between them across the earth to measure how far they are from each other. There's a bit of math involved in how this formula works, but we can skip that part for now. Here's what the formula looks like:
 
     def haversine(coord1, coord2):
         R = 6371.0  # Radius of the Earth in kilometers
@@ -220,7 +220,7 @@ For the distance calculation, there's this thing called the `Haversine formula`.
         distance = R * c
         return distance
 
-Well, everything seems solid now, the only thing left is the current location. Here’s what we can do: if a user asks about restaurants near a specific area like `nearby HSR layout` we can easily pull the current location from the postprocessing we did earlier.  If not, for now, we can just input the current location manually. Then, we’ll check how far our top-n restaurants are from our user's place.
+Well, everything seems solid now, the only thing left is the current location. Here's what we can do: if a user asks about restaurants near a specific area like `nearby HSR layout` we can easily pull the current location from the postprocessing we did earlier.  If not, for now, we can just input the current location manually. Then, we'll check how far our top-n restaurants are from our user's place.
 
 Well let's see what we get:
 

@@ -1,15 +1,11 @@
 ---
-date: 2024-08-21
-author: Akash Desai
----
----
-title: GraphRAG: Hierarchical approach to Retrieval Augmented Generation
-date: 2024-03-14
+title: "GraphRAG: Hierarchical Approach to Retrieval-Augmented Generation"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore graphrag: hierarchical approach to retrieval augmented generation with practical insights and expert guidance from the LanceDB team.
-author: David Myriel
+image: /assets/blog/graphrag-hierarchical-approach-to-retrieval-augmented-generation/graphrag-hierarchical-approach-to-retrieval-augmented-generation.png
+description: "Explore GraphRAG: hierarchical approach to retrieval-augmented generation with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 
 💡
@@ -24,7 +20,7 @@ This is a community blog by Akash Desai
 
 RAG operates through a few key steps to enhance the performance of generative AI:
 
-1. **Retrieval and Pre-processing:** RAG employs advanced search algorithms to access external data from sources such as websites, knowledge bases, and databases. The retrieved information is then pre-processed — cleaned, tokenized, and filtered — to ensure it’s ready for use.
+1. **Retrieval and Pre-processing:** RAG employs advanced search algorithms to access external data from sources such as websites, knowledge bases, and databases. The retrieved information is then pre-processed — cleaned, tokenized, and filtered — to ensure it's ready for use.
 2. **Generation:** The pre-processed data is integrated into the pre-trained LLM, enriching its context. This integration allows the LLM to generate responses that are more accurate, relevant, and informative.
 
 These steps work together to make RAG a powerful tool for generating high-quality responses based on real-time information.
@@ -75,7 +71,7 @@ We are going to see both in practice.
 
 **LLM Integration:** After retrieving relevant data from the knowledge graph, it is fed into a large language model (LLM). The LLM generates coherent and contextually relevant responses by leveraging the structured knowledge, allowing it to address complex queries with precision.
 
-**Prompt Tuning:** To achieve the best results with GraphRAG, it’s recommended to fine-tune your prompts according to the guidelines provided in the Prompt Tuning Guide. This step ensures that the model is optimally tailored to your specific data and query needs.
+**Prompt Tuning:** To achieve the best results with GraphRAG, it's recommended to fine-tune your prompts according to the guidelines provided in the Prompt Tuning Guide. This step ensures that the model is optimally tailored to your specific data and query needs.
 
 ### When to Use GraphRAG
 
@@ -155,7 +151,7 @@ Begin by installing the GraphRAG package using the following command:
 1. **Create and Organize Your Dataset**
 Start by creating your dataset and saving it in the following directory:    `/content/rag_exim/input/info.txt`
 2. **Supported File Types**
-Currently, GraphRAG supports only `.txt` and `.csv` file formats. If you need to add support for CSV files, you’ll need to modify the `settings.yml` file accordingly to include the necessary configurations.
+Currently, GraphRAG supports only `.txt` and `.csv` file formats. If you need to add support for CSV files, you'll need to modify the `settings.yml` file accordingly to include the necessary configurations.
 3. **Download and Format Your Data**
 Ensure that your dataset is properly downloaded and formatted for seamless processing by GraphRAG.
 

@@ -3,7 +3,7 @@ title: Fintech AI Agent From Scratch
 date: 2025-02-27
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/creating-a-fintech-agent/creating-a-fintech-agent.png
 description: Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team.
 author: Vipul Maheshwari
 ---
@@ -11,39 +11,39 @@ author: Vipul Maheshwari
 
 This is community post by Vipul Maheshwari
 
-AI agents are popping up everywhere, and they’re only going to become more common in the next few years. Think of them as a bunch of little digital assistants—agents—that keep an eye on things, make decisions, and get stuff done. It makes me wonder: how are we going to manage all these agents down the road? How do we trust them to handle decisions for us and let them run on their own?
+AI agents are popping up everywhere, and they're only going to become more common in the next few years. Think of them as a bunch of little digital assistants—agents—that keep an eye on things, make decisions, and get stuff done. It makes me wonder: how are we going to manage all these agents down the road? How do we trust them to handle decisions for us and let them run on their own?
 
-These days, many frameworks are out there to help you with AI agents quickly. Honestly, it feels like a new “low-code” tool shows up every other day, promising to make building agents a breeze. They’re all over the place—simple drag-and-drop setups or text boxes where you plug in a few prompts and some data, and just like that, your agent’s ready to go.
+These days, many frameworks are out there to help you with AI agents quickly. Honestly, it feels like a new "low-code" tool shows up every other day, promising to make building agents a breeze. They're all over the place—simple drag-and-drop setups or text boxes where you plug in a few prompts and some data, and just like that, your agent's ready to go.
 
 Every AI agent has three main pieces at its core: the Model, the Tools, and the Reasoning Loop.
 
-1. **The Model**: This is the Large Language Model (LLM) that drives the agent. It’s the brain behind it all, trained on piles of text to understand language and tackle tricky instructions. This is what lets the agent think and talk almost like a person.
+1. **The Model**: This is the Large Language Model (LLM) that drives the agent. It's the brain behind it all, trained on piles of text to understand language and tackle tricky instructions. This is what lets the agent think and talk almost like a person.
 
-2. **The Tools**: The agent uses specific skills to interact with the world and get things done. Whether it’s grabbing data, hitting up APIs, or working with other programs, the tools are what make the agent useful.
+2. **The Tools**: The agent uses specific skills to interact with the world and get things done. Whether it's grabbing data, hitting up APIs, or working with other programs, the tools are what make the agent useful.
 
-3.** The Reasoning Loop**: This is how the agent figures things out. It’s the process it uses to solve problems, pick the best path forward, and wrap up tasks.
+3.** The Reasoning Loop**: This is how the agent figures things out. It's the process it uses to solve problems, pick the best path forward, and wrap up tasks.
 
-In this post, I’m going to mix things up a little. Instead of leaning on a framework, I’ll walk you through building a fintech agent from scratch using Python. This one’s going to help with decisions about loans and insurance.
+In this post, I'm going to mix things up a little. Instead of leaning on a framework, I'll walk you through building a fintech agent from scratch using Python. This one's going to help with decisions about loans and insurance.
 ![](__GHOST_URL__/content/images/2025/02/Fintech-AI-Agent.excalidraw.png)
 #### What's the deal here?
 
-So how does this fintech agent work? Well, picture yourself running a FinTech company. Customers come at you with stuff like, “Can I borrow $10K for a new kitchen? I’m 26 years old,” or “I crashed my car—will you cover it?” Haha, I’d probably shut that insurance claim down real quick.
+So how does this fintech agent work? Well, picture yourself running a FinTech company. Customers come at you with stuff like, "Can I borrow $10K for a new kitchen? I'm 26 years old," or "I crashed my car—will you cover it?" Haha, I'd probably shut that insurance claim down real quick.
 
-The point is, that we need a system that’s fast, sharp, and reliable when it comes to deciding on loan requests and insurance claims. So, what I did is this: instead of one lone agent handling everything, I split it into three—Loan, Insurance, and a Kernel agent.
+The point is, that we need a system that's fast, sharp, and reliable when it comes to deciding on loan requests and insurance claims. So, what I did is this: instead of one lone agent handling everything, I split it into three—Loan, Insurance, and a Kernel agent.
 
-1. ***Loan Agent***: Takes a query, figures out what they want (like “home improvement”), and uses an ML model to predict if they’re good for the loan based on age, income, and the amount.
+1. ***Loan Agent***: Takes a query, figures out what they want (like "home improvement"), and uses an ML model to predict if they're good for the loan based on age, income, and the amount.
 
-2. ***Insurance Agent***: Reads a claim, checks it against past cases, and decides if it’s worth paying out—kind of like a semantic search over a claims database.
+2. ***Insurance Agent***: Reads a claim, checks it against past cases, and decides if it's worth paying out—kind of like a semantic search over a claims database.
 
 3. ***Kernel Agent***: The brains that tie it all together, sending queries to the right place.
 
-Now the question always comes of why raw Python? Well, the most viable reason is flexibility. I’m just putting together a proof of concept here, and companies can easily tweak it to fit their own data and needs—no black-box framework nonsense. The Credit Risk Dataset and synthetic claims are just placeholders; real firms would swap in their own loan histories and claim records.
+Now the question always comes of why raw Python? Well, the most viable reason is flexibility. I'm just putting together a proof of concept here, and companies can easily tweak it to fit their own data and needs—no black-box framework nonsense. The Credit Risk Dataset and synthetic claims are just placeholders; real firms would swap in their own loan histories and claim records.
 
 ### Big picture!
 
-Ok so what we’ve got is a Kernel Agent directing traffic, a Loan Agent predicting eligibility with machine learning, and an Insurance Agent checking claims against a vector database.
+Ok so what we've got is a Kernel Agent directing traffic, a Loan Agent predicting eligibility with machine learning, and an Insurance Agent checking claims against a vector database.
 
-I’m using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) as a demo for loans. In reality, companies could use something like a CIBIL score to see if someone’s eligible. But for this POC, I grabbed that dataset, trained a random forest model, and used it for predictive analysis. For the insurance agent, I built a synthetic pipeline to whip up a dataset of fake insurance queries. The target’s simple: if the claim gets approved based on the conversation, it’s a one. These are just placeholders to show how it works; companies can plug in their own data instead. Saying that, let's get started.
+I'm using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) as a demo for loans. In reality, companies could use something like a CIBIL score to see if someone's eligible. But for this POC, I grabbed that dataset, trained a random forest model, and used it for predictive analysis. For the insurance agent, I built a synthetic pipeline to whip up a dataset of fake insurance queries. The target's simple: if the claim gets approved based on the conversation, it's a one. These are just placeholders to show how it works; companies can plug in their own data instead. Saying that, let's get started.
 
 ### Step 1:  Setting up the stage - Libraries and Setup
 
@@ -103,7 +103,7 @@ As soon as a query comes in, the Loan Agent uses its ML tool to spin up the pred
     0          22          59000      35000     PERSONAL            1
     1          21           9600       1000    EDUCATION            0
 
-Why Credit Risk Dataset? : It’s public, well-structured, and mimics real loan data with features like loan_status (0 = approved, 1 = rejected). For demo purposes, it’s spot-on. Companies would swap this for their own credit records—same columns, different rows, or maybe other relevant benchmarks that can be utilized for setting up the target in terms of the loan status.
+Why Credit Risk Dataset? : It's public, well-structured, and mimics real loan data with features like loan_status (0 = approved, 1 = rejected). For demo purposes, it's spot-on. Companies would swap this for their own credit records—same columns, different rows, or maybe other relevant benchmarks that can be utilized for setting up the target in terms of the loan status.
 
 #### Building the ML model
 
@@ -140,9 +140,9 @@ For the sake of the demonstration, I have used a Random Forest Classifier here. 
     print(f"Model accuracy: {accuracy:.2f}")  # 0.84
     joblib.dump(model, 'loan_approval_model.pkl')
 
-- **Why Random Forest**? Well as we know, Random forest comes under the ensemble category, and it's robust in nature, handles mixed data (numbers and categories) well, and gives us probabilities—not just yes/no. For loans, that’s gold; banks love knowing the odds though.- 
+- **Why Random Forest**? Well as we know, Random forest comes under the ensemble category, and it's robust in nature, handles mixed data (numbers and categories) well, and gives us probabilities—not just yes/no. For loans, that's gold; banks love knowing the odds though.- 
 - **How It Works**: We preprocess `loan_intent` into numbers (e.g., "MEDICAL" becomes a categorical encoded number), split the data, train, and test. Got an 84% accuracy which is decent for a demo. Real data could boost or tweak that. 
-- **Swap It Out**: As I said earlier, companies can use their own loan data here—same features, their numbers. Train it fresh, and it’s tailored to them.
+- **Swap It Out**: As I said earlier, companies can use their own loan data here—same features, their numbers. Train it fresh, and it's tailored to them.
 
 #### Completing the Integration for the Loan Agent
 
@@ -179,7 +179,7 @@ Now comes the agent itself:
             response = self.llm(prompt)[0]['generated_text'].strip().upper()
             return response if response in valid_intents else 'PERSONAL'
 
-- **Why ML Here**? It’s predictive, which means it takes raw data and spits out a decision. LLM handles intent because it’s quick and decent for text, though companies might use something beefier or their own intent rules. I let the LLM decide what's the intent here.- How It Fits: Query → Intent (e.g., "school fees" → EDUCATION) → ML prediction. It's as simple as the tool’s the muscle, and the agent’s the coordinator.
+- **Why ML Here**? It's predictive, which means it takes raw data and spits out a decision. LLM handles intent because it's quick and decent for text, though companies might use something beefier or their own intent rules. I let the LLM decide what's the intent here.- How It Fits: Query → Intent (e.g., "school fees" → EDUCATION) → ML prediction. It's as simple as the tool's the muscle, and the agent's the coordinator.
 
 If the companies need a different logic to get the target status in terms if the loan can be provided to an individual or not, as I said earlier, they can easily replace the predictive ml modeling with another set of benchmarks or maybe thresholding some different set of metrics to figure out if that person is made for the loan or not.
 
@@ -196,11 +196,11 @@ Well, this is good, but let's not forget we now need to work on our Insurance ag
 
 ### Step 3: Insurance Agent - Vector Search with LanceDB
 
-Before diving in, I want to walk you through my thought process for creating the Insurance Agent. Picture this: you walk into an insurance company, sit down with someone, and start explaining why you need to file a claim—why it’s legit and why you deserve it. That conversation is key because it’s the starting point for deciding whether the claim gets processed or not.
+Before diving in, I want to walk you through my thought process for creating the Insurance Agent. Picture this: you walk into an insurance company, sit down with someone, and start explaining why you need to file a claim—why it's legit and why you deserve it. That conversation is key because it's the starting point for deciding whether the claim gets processed or not.
 
 I tried hunting down a dataset with those kinds of conversations and clear `yes` or `no` labels for claims, but I came up empty. So, to keep things moving, I built a simple synthetic dataset pipeline. It generates a fake dataset with text queries on one side and a target on the other—showing if the person filing the claim is eligible or not.
 
-Now, let’s talk about where the VectorDB comes in. Here’s the plan: we’ll embed those insurance claim queries first. Then, when a new claim pops up, we’ll pull the k-most similar queries from the database, look at their average eligibility scores, and use that to decide if the new query deserves a legitimate claim or not. With that in mind, let’s start by generating some synthetic claims for the automotive industry. This is just a quick demo—companies can swap in real conversations instead, and you can tweak the pipeline a bit to handle actual data.
+Now, let's talk about where the VectorDB comes in. Here's the plan: we'll embed those insurance claim queries first. Then, when a new claim pops up, we'll pull the k-most similar queries from the database, look at their average eligibility scores, and use that to decide if the new query deserves a legitimate claim or not. With that in mind, let's start by generating some synthetic claims for the automotive industry. This is just a quick demo—companies can swap in real conversations instead, and you can tweak the pipeline a bit to handle actual data.
 
     import random
     import csv
@@ -323,7 +323,7 @@ This is it, let's integrate our Insurance agent within our Kernel agent along wi
             else:
                 return "Error: Unable to classify query as 'loan' or 'insurance'."
 
-Now all you need to do is toss in a query—could be anything about loans or insurance. It’ll hit the Kernel Agent first, and based on what the query’s about, it’ll get handed off to either the Loan Agent or the Insurance Agent. From there, they’ll handle the rest of the decisions.
+Now all you need to do is toss in a query—could be anything about loans or insurance. It'll hit the Kernel Agent first, and based on what the query's about, it'll get handed off to either the Loan Agent or the Insurance Agent. From there, they'll handle the rest of the decisions.
 
     # Test Cases
     test_cases = [
@@ -352,7 +352,7 @@ Now all you need to do is toss in a query—could be anything about loans or ins
             print(f"Result: {result}")
         print("-" * 50)
 
-Think about the potential here: fintech companies can plug in their own tools and data to process loans and insurance claims. Picture how much manual work insurance folks put in, checking every little thing to figure out if a claim’s legit or not—or the same deal with loans, deciding if someone qualifies. This could cut out so much of that hassle.
+Think about the potential here: fintech companies can plug in their own tools and data to process loans and insurance claims. Picture how much manual work insurance folks put in, checking every little thing to figure out if a claim's legit or not—or the same deal with loans, deciding if someone qualifies. This could cut out so much of that hassle.
 
 Refer to this notebook for complete code implementation
 [

@@ -1,15 +1,15 @@
 ---
-title: Lance v0.16.1 Feature Roundup
-date: 2024-08-26
+title: "Lance v0.16.1 Feature Roundup"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore lance v0.16.1 feature roundup with practical insights and expert guidance from the LanceDB team.
-author: Will Jones
+image: /assets/blog/lance-v0-16-1-feature-roundup/lance-v0-16-1-feature-roundup.png
+description: "Explore Lance v0.16.1 feature roundup with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors. Lance is an OSS project that is open-to-contribution, so we are very pleased to have major features brought by community members.
 
-In this blog post, we’ll highlight some of the most important new features, which include:
+In this blog post, we'll highlight some of the most important new features, which include:
 
 - Version tagging
 - Update subschemas in `merge_insert`
@@ -20,7 +20,7 @@ In this blog post, we’ll highlight some of the most important new features, wh
 
 Lance uses multi-version concurrency control, which means each change you make to the dataset creates a new version. Many of these versions are temporary, and later cleaned up. But some you might want to keep around for a while and give a name. With the new Tags feature, you can now do this.
 ![](__GHOST_URL__/content/images/2024/08/versions_feature.png)
-Any version can be given one or more tags. Once tagged, a version of the dataset can’t be deleted, unless you delete the tag. When you load a dataset, you can pass the tag name to load that version.
+Any version can be given one or more tags. Once tagged, a version of the dataset can't be deleted, unless you delete the tag. When you load a dataset, you can pass the tag name to load that version.
 
 For example, we can create three versions of a dataset by applying three write operations:
 
@@ -72,7 +72,7 @@ Community contributor [dsgibbons](https://github.com/lancedb/lance/pulls?q=is%3A
 
 Merge insert lets you merge new data into a table, inserting new rows and updating existing row. However, right now, you need to supply all the columns in your new data. Sometimes, you want to update a subset of columns.
 
-One use case is where you have a table of documents, and you have a metrics column like “popularity” or “view” count. You would like to update those metrics, but don’t want to have to re-insert the documents or vectors. In Lance v0.16.1, you can do just this! Pass only the match on column and those you wish to update, and it will update only the subset of columns.
+One use case is where you have a table of documents, and you have a metrics column like "popularity" or "view" count. You would like to update those metrics, but don't want to have to re-insert the documents or vectors. In Lance v0.16.1, you can do just this! Pass only the match on column and those you wish to update, and it will update only the subset of columns.
 
     documents = pa.Table.from_pylist([
         dict(id=1, text="hello", popularity=100),
@@ -174,7 +174,7 @@ As we stabilize the current V2 file format, we are establishing a versioning sch
 - 2.0 (stable): The currently stable V2 format
 - 2.1 (next): V2 format with FSST and bitpacking
 
-As we roll out new features in the format, we’ll be adding new versions. An up-to-date version of this version list will be maintained in our docs at: [https://lancedb.github.io/lance/format.html#file-version](https://lancedb.github.io/lance/format.html#file-version)
+As we roll out new features in the format, we'll be adding new versions. An up-to-date version of this version list will be maintained in our docs at: [https://lancedb.github.io/lance/format.html#file-version](https://lancedb.github.io/lance/format.html#file-version)
 
 When creating new dataset, you can select any of these versions. The legacy / 0.1 version remains the default for now, until we announce the full stability of the 2.0 format. You can either request the file format version with a label ("stable", "legacy", or "next"):
 
@@ -340,7 +340,7 @@ The final step is to combine these shuffled files into an index file and commit 
        }}]
     
 
-Given the complexity of the steps, this is a low-level API we don’t expect any but the most motivated power users to call. Instead, these power users may wrap them in distributed frameworks familiar to users, such as Ray and Spark. This will allow users to leverage their existing cluster infrastructure for their large-scale indexing jobs.
+Given the complexity of the steps, this is a low-level API we don't expect any but the most motivated power users to call. Instead, these power users may wrap them in distributed frameworks familiar to users, such as Ray and Spark. This will allow users to leverage their existing cluster infrastructure for their large-scale indexing jobs.
 
 These features were developed by LanceDB engineer Weston Pace and our recent intern Raunak Shah.
 

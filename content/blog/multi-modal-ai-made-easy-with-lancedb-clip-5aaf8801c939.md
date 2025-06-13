@@ -1,11 +1,11 @@
 ---
-title: Multi-Modal AI made easy with LanceDB & CLIP
-date: 2023-11-27
+title: "Multi-Modal AI Made Easy with LanceDB & CLIP"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore multi-modal ai made easy with lancedb & clip with practical insights and expert guidance from the LanceDB team.
-author: Chang She
+image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939.png
+description: "Explore multi-modal AI made easy with LanceDB & CLIP with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 by Kaushal Choudhary
 
@@ -20,7 +20,7 @@ One of the most exciting areas of research in deep learning currently is multi-m
 
 In the above picture you can see the CLIP model(**Contrastive Language-Image Pre-Training**), which is trained on humongous corpus of image-text pairs. This is model on which we are going to focus on this blog.
 
-So, let’s jump right to Code.
+So, let's jump right to Code.
 
 First, we will discuss about the Multi-Modal Search using CLIP.
 
@@ -32,7 +32,7 @@ We will be using keywords, **SQL** commands and Embeddings to search the most re
 
 > Follow this* *[**Colab** ](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multimodal_search/main.ipynb)along.
 
-Let’s dive right into the code.
+Let's dive right into the code.
 
 This will help you understand CLIP model even better.
 
@@ -100,7 +100,7 @@ We are going to create a PyArrow schema and enter the data into LanceDB.
       ])
     tbl = db.create_table("animal_images", schema=schema)
 
-Let’s append the data to the table.
+Let's append the data to the table.
 
     import pyarrow as pa
     
@@ -189,7 +189,7 @@ Searching the table
     display(dataset[data_id]['img'])
 
 ![](https://miro.medium.com/v2/resize:fit:710/1*VbO8D0QwqqNhbOg7zjqviw.png)Irish Terrier(French Bulldog)
-Again, let’s combine everything into a function.
+Again, let's combine everything into a function.
 
     #making a text_search function to streamline the process
     def text_search(text):
@@ -242,13 +242,13 @@ Creating the CLIP Embeddings, for the text. If you want to know more about embed
         text_features = model.get_text_features(**inputs)
         return text_features.detach().numpy()[0]
 
-Let’s see the schema, and the data inside the LanceDB table.
+Let's see the schema, and the data inside the LanceDB table.
 
     tbl.schema
     tbl.to_pandas().head()
 
 ![](https://miro.medium.com/v2/resize:fit:1100/1*iIv9UPWBo8ixfgAhDJqRgg.png)
-Now, to properly visualize our embeddings and data, we will create a Gradio Interface. Let’s build some utility search functions beforehand.
+Now, to properly visualize our embeddings and data, we will create a Gradio Interface. Let's build some utility search functions beforehand.
 
     #find the image vectors from the database
     def find_image_vectors(query):
@@ -290,7 +290,7 @@ Now, to properly visualize our embeddings and data, we will create a Gradio Inte
         image_col = "image"
         return [(PIL.Image.open(io.BytesIO(row[image_col])), row["prompt"]) for _, row in df.iterrows()]
 
-Let’s set up the Gradio Interface.
+Let's set up the Gradio Interface.
 
     import gradio as gr
     
@@ -326,7 +326,7 @@ We can also search through **Image** and **Text.**
 
 We will now use it to **search videos**.
 
-For brevity, I’m going to focus on the essential part here.
+For brevity, I'm going to focus on the essential part here.
 
 > So, kindly follow along this** **[**Colab** ](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multimodal_video_search/main.ipynb)for full exposure.
 
@@ -361,7 +361,7 @@ CLIP model with tokenizer, processor, and the embedding function
         text_features = model.get_text_features(**inputs)
         return text_features.detach().numpy()[0]
 
-We will be using Gradio, so let’s define some search utility functions beforehand.
+We will be using Gradio, so let's define some search utility functions beforehand.
 
     #function to find the vectors most relevant to a video
     def find_video_vectors(query):

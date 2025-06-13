@@ -1,17 +1,17 @@
 ---
-title: My SIMD is faster than Yours
-date: 2023-04-24
+title: "My SIMD is Faster Than Yours"
+date: 2024-03-25
 draft: false
 featured: false
-image: /assets/blog/1.png
-description: Explore my simd is faster than yours with practical insights and expert guidance from the LanceDB team.
-author: Lei Xu
+image: /assets/blog/my-simd-is-faster-than-yours-fb2989bf25e7/my-simd-is-faster-than-yours-fb2989bf25e7.png
+description: "Explore my SIMD is faster than yours with practical insights and expert guidance from the LanceDB team."
+author: Weston Pace
 ---
 > An untold story about how we make LanceDB vector search fast.
 
-In January, the engineering team here at Eto [made the decision to rewrite the Lance columnar format in Rust](https://blog.eto.ai/please-pardon-our-appearance-during-renovations-da8c8f49b383). While this decision may seem like the usual “***Rewrite-X-In-Rust***” trend, there is an untold story behind it: Our goal was to achieve excellent performance in the recently announced SSD-resilient vector search in [LanceDB](https://github.com/lancedb/lancedb). Rust’s native code-generation, great toolchain for performance tuning ( `cargo asm` / `cargo flamegraph` ), as well as the vast amount of first-class CPU intrinsics/SIMD support in the standard library (`std::arch` ), heavily influenced our decision.
+In January, the engineering team here at Eto [made the decision to rewrite the Lance columnar format in Rust](https://blog.eto.ai/please-pardon-our-appearance-during-renovations-da8c8f49b383). While this decision may seem like the usual "***Rewrite-X-In-Rust***" trend, there is an untold story behind it: Our goal was to achieve excellent performance in the recently announced SSD-resilient vector search in [LanceDB](https://github.com/lancedb/lancedb). Rust's native code-generation, great toolchain for performance tuning ( `cargo asm` / `cargo flamegraph` ), as well as the vast amount of first-class CPU intrinsics/SIMD support in the standard library (`std::arch` ), heavily influenced our decision.
 
-The most fundamental query in vector search is “***finding K-nearest-neighbors (KNN) in a high-dimensional vector space***”. To execute this search, the distances between vectors must be computed. In this article, we will use the classic Euclidean Distance (L2) as an example. Other popular distance measures include Cosine Distance, Dot Product, and Hamming Distance.
+The most fundamental query in vector search is "***finding K-nearest-neighbors (KNN) in a high-dimensional vector space***". To execute this search, the distances between vectors must be computed. In this article, we will use the classic Euclidean Distance (L2) as an example. Other popular distance measures include Cosine Distance, Dot Product, and Hamming Distance.
 ![](https://miro.medium.com/v2/resize:fit:770/0*MPpRZ0O3tt4BJBg0.png)Euclidean (L2) Distance
 ## First attempt: Naive Implementation and Let Compiler do it
 
@@ -69,7 +69,7 @@ Rust compiler `rustc (1.68)`does a pretty decent code-generation for the above c
             jne     .LBB0_5
     ...
 
-People often say, “let the compiler optimize the code for you”. Unfortunately, `vsubss/vaddss/vmulss` are the scalar instructions on X86_64. It appears that LLVM does not auto-vectorization the loop. [It has been discovered that it would be quite challenging for LLVM/GCC to vectorize loops](https://stackoverflow.com/questions/73118583/auto-vectorization-with-rust) without a static length at compiling time. But our vector index ***MUST*** support any dimension of user vectors, did we just leave some performance on the table?
+People often say, "let the compiler optimize the code for you". Unfortunately, `vsubss/vaddss/vmulss` are the scalar instructions on X86_64. It appears that LLVM does not auto-vectorization the loop. [It has been discovered that it would be quite challenging for LLVM/GCC to vectorize loops](https://stackoverflow.com/questions/73118583/auto-vectorization-with-rust) without a static length at compiling time. But our vector index ***MUST*** support any dimension of user vectors, did we just leave some performance on the table?
 
 ## Second Attempt: Arrow Compute Kernel
 
@@ -93,7 +93,7 @@ LanceDB is built on top of Apache Arrow (Rust), can we do better by using Arrow 
         sum(&m).unwrap()
     }
 
-Running on the same `c6in.4xlarge` machine with `RUSTFLAGS=”-C target-cpu=native -C target-feature=+avx2”` , we got `2.81s` and `2.16s` respectively. Surprisingly, using arrow compute kernel is slower than our naive implementation. The reason being that, unlike the native L2 function that has zero memory allocation and only scan `x` and `y` once, which only invalid the L1 cache when it is absolutely necessary. `l2_arrow_1` requires scanning over `x, y, m, s`array once, invaliding L1/L2 cache twice, and two extra memory allocations for `s` and `m`. `l2_arrow_2` scans `x`, `y`once, thus better cache behavior, and only requires one extra memory allocation.
+Running on the same `c6in.4xlarge` machine with `RUSTFLAGS="-C target-cpu=native -C target-feature=+avx2"` , we got `2.81s` and `2.16s` respectively. Surprisingly, using arrow compute kernel is slower than our naive implementation. The reason being that, unlike the native L2 function that has zero memory allocation and only scan `x` and `y` once, which only invalid the L1 cache when it is absolutely necessary. `l2_arrow_1` requires scanning over `x, y, m, s`array once, invaliding L1/L2 cache twice, and two extra memory allocations for `s` and `m`. `l2_arrow_2` scans `x`, `y`once, thus better cache behavior, and only requires one extra memory allocation.
 
 ## Third Attempt: BLAS to rescue?
 
@@ -216,11 +216,11 @@ Apple M1/M2 chips are based on Arm `aarch64` architecture, with `NEON` instructi
 
 This NEON-accelerate L2 implementation only takes `0.299s` to compute 1 million distances on a M2 Max MacBook Pro.
 
-For the sake of completeness in benchmarking, we also ran the same numpy script on a Macbook Pro using the Apple Accelerate Framework for BLAS. We’ve seen similar 3–15x speed ups by manually tuning the SIMD instructions across the CPU architectures ( `x86_64` and `apple-silicon (aarch64)` ).
+For the sake of completeness in benchmarking, we also ran the same numpy script on a Macbook Pro using the Apple Accelerate Framework for BLAS. We've seen similar 3–15x speed ups by manually tuning the SIMD instructions across the CPU architectures ( `x86_64` and `apple-silicon (aarch64)` ).
 ![](https://miro.medium.com/v2/resize:fit:770/1*eylFuCRjMSnm2MPyN7t4MA.png)Relative speed-up on X86_64(AVX2) and Apple Silicon (NEON). Numpy uses intel MKL on AWS EC2 c6in.4xlarge instance, and Apple Accelerate Framework on a M2 Max Macbook Pro.
 ## What will the future of LanceDB look like
 
-Even though we’ve already significantly accelerated vector computations using our SIMD implementation, there’s still much more we can do to make LanceDB run even faster:
+Even though we've already significantly accelerated vector computations using our SIMD implementation, there's still much more we can do to make LanceDB run even faster:
 
 - Add AVX-512 routines for widen bit-width vectorization.
 - Support `bf16, f64`floats vectors.

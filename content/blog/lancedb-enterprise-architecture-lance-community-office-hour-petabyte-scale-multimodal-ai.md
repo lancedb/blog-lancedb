@@ -3,7 +3,7 @@ title: LanceDB Enterprise Architecture, Lance Community Office Hour, Petabyte Sc
 date: 2024-11-05
 draft: false
 featured: false
-image: /assets/blog/1.png
+image: /assets/blog/lancedb-enterprise-architecture-lance-community-office-hour-petabyte-scale-multimodal-ai/lancedb-enterprise-architecture-lance-community-office-hour-petabyte-scale-multimodal-ai.png
 description: Explore lancedb enterprise architecture, lance community office hour, petabyte scale multimodal ai with practical insights and expert guidance from the LanceDB team.
 author: Jasmine Wang
 ---
@@ -32,7 +32,7 @@ Another deep dive into the Lance file format and explain how Lance uses backpres
 
 Columnar File Readers in Depth: Backpressure
 
-Streaming data applications can be tricky. When you can read data faster than you can process the data then bad things tend to happen. The most common scenario is you run out of memory and your process crashes. When the process doesn’t crash, it often breaks performance (e.g. swapping
+Streaming data applications can be tricky. When you can read data faster than you can process the data then bad things tend to happen. The most common scenario is you run out of memory and your process crashes. When the process doesn't crash, it often breaks performance (e.g. swapping
 
 ![](__GHOST_URL__/content/images/size/w256h256/2024/04/lancedb-symbol--1-.png)LanceDB BlogWeston Pace
 
@@ -105,4 +105,4 @@ LanceDB + Databricks monthly meetup, Nov 19th, San Francisco
 
 - [v0.12.0 (2024-10-29)](https://github.com/lancedb/lancedb/releases/tag/v0.12.0)
 - [Python v0.15.0](https://github.com/lancedb/lancedb/releases/tag/python-v0.15.0)
-- LanceDB’s native tokenizer is now configurable in Python sync API, allowing you to choose whether to enable stemming and stop word removal, as well as other settings. The default tokenizer no longer performs stemming or stop word removal. This will come soon to Nodejs and async Python.
+- LanceDB's native tokenizer is now configurable in Python sync API, allowing you to choose whether to enable stemming and stop word removal, as well as other settings. The default tokenizer no longer performs stemming or stop word removal. This will come soon to Nodejs and async Python.
