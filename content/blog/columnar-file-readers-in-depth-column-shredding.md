@@ -3,7 +3,7 @@ title: "Columnar File Readers in Depth: Column Shredding"
 date: 2025-05-15
 draft: false
 featured: false
-image: /assets/blog/columnar-file-readers-in-depth-column-shredding.png
+image: /assets/blog/columnar-file-readers-in-depth-column-shredding/columnar-file-readers-in-depth-column-shredding.png
 description: "Explore columnar file readers in depth: column shredding with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---
