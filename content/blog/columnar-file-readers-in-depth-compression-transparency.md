@@ -3,7 +3,7 @@ title: "Columnar File Readers in Depth: Compression Transparency"
 date: 2025-04-29
 draft: false
 featured: false
-image: /assets/blog/columnar-file-readers-in-depth-compression-transparency.png
+image: /assets/blog/columnar-file-readers-in-depth-compression-transparency/columnar-file-readers-in-depth-compression-transparency.png
 description: "Explore columnar file readers in depth: compression transparency with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---
