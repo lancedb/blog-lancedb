@@ -4,7 +4,7 @@ date: 2025-03-27
 draft: false
 featured: true
 categories: ["Engineering"]
-image: /assets/blog/lance-file-2-1-smaller-and-simpler.png
+image: /assets/blog/lance-file-2-1-smaller-and-simpler/lance-file-2-1-smaller-and-simpler.png
 description: "Explore lance file 2.1: smaller and simpler with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
 ---

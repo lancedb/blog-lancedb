@@ -3,7 +3,7 @@ title: "Lance Research Paper, Newly Knighted Lancelot, Practical AI Engineering"
 date: 2025-05-05
 draft: false
 featured: false
-image: /assets/blog/lance-research-paper-newly-knighted-lancelot-practical-ai-engineering.png
+image: /assets/blog/lance-research-paper-newly-knighted-lancelot-practical-ai-engineering/lance-research-paper-newly-knighted-lancelot-practical-ai-engineering.png
 description: "Explore lance research paper, newly knighted lancelot, practical ai engineering with practical insights and expert guidance from the LanceDB team."
 author: Jasmine Wang
 ---
