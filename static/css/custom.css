@@ -1,11 +1,9 @@
-/* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 /* Custom Font Declarations - Aeonik */
 @font-face {
     font-family: 'Aeonik';
-    src: url('/fonts/aeonik-regular.woff2') format('woff2'),
-         url('/fonts/aeonik-regular.woff') format('woff');
+    src: url('../fonts/aeonik-regular.woff2') format('woff2'),
+         url('../fonts/aeonik-regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -13,23 +11,28 @@
 
 @font-face {
     font-family: 'Aeonik';
-    src: url('/fonts/aeonik-medium.woff2') format('woff2'),
-         url('/fonts/aeonik-medium.woff') format('woff');
+    src: url('../fonts/aeonik-medium.woff2') format('woff2'),
+         url('../fonts/aeonik-medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 
+
+
 :root {
-    --bg-primary: #181a1b;
-    --bg-secondary: #232627;
-    --text-primary: #f5f6fa;
-    --text-secondary: #b2becd;
+    --bg-primary: #171513;
+    --bg-secondary: #171513;
+    --text-primary: #F4EBE8;
+    --text-secondary: #F4EBE8;
     --text-accent: #f97316;
     --border-color: #2d3133;
     --bg-hover: #232b2b;
     --shadow: 0 4px 24px rgba(0,0,0,0.15);
+    --dark-800: #171513;
+    --offwhite: #F4EBE8;
 }
+
 
 body {
     background: var(--bg-primary);
@@ -38,7 +41,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    font-size: 0.95rem;
+    // font-size: 0.95rem;
 }
 
 /* Aeonik font successfully applied site-wide */
@@ -54,8 +57,8 @@ body {
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
+    /* max-width: 1200px; */
+    margin: 0;
     padding: 0.5rem 1.5rem;
     display: flex;
     align-items: center;

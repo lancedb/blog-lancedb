@@ -10,18 +10,7 @@
 </head>
 <body>
     {{ partial "announcement.html" . }}
-    <header class="site-header">
-        <div class="header-content">
-            <a href="/" class="site-title">
-                <img src="/assets/blog/logo.png" alt="{{ .Site.Title }}" class="site-logo">
-            </a>
-            <div class="header-links">
-                <a href="https://lancedb.com/documentation" class="header-link">Documentation</a>
-                <a href="https://lancedb.com/pricing" class="header-link">Pricing</a>
-                <a href="/get-started" class="header-link get-started">Get Started</a>
-            </div>
-        </div>
-    </header>
+    {{ partial "header.html" . }}
     <main>
         {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
         {{ $featuredPosts := where $allPosts ".Params.featured" true }}
@@ -163,17 +152,6 @@
     </main>
 
     
-    <footer class="site-footer">
-        <div class="footer-content">
-            <a href="/" class="site-title">
-                <img src="/assets/blog/logo.png" alt="{{ .Site.Title }}" class="site-logo">
-            </a>
-            <div class="footer-links">
-                <a href="https://lancedb.com/documentation" class="footer-link">Documentation</a>
-                <a href="https://lancedb.com/pricing" class="footer-link">Pricing</a>
-                <a href="/get-started" class="footer-link get-started">Get Started</a>
-            </div>
-        </div>
-    </footer>
+    {{ partial "footer.html" . }}
 </body>
 </html> 

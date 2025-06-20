@@ -1,6 +1,9 @@
-baseURL = 'https://blog.lancedb.com/'
+baseURL = 'https://lancedb.com/blog'
 languageCode = 'en-us'
 title = 'LanceDB Blog'
+
+relativeURLs = true
+canonifyURLs = true
 
 # Build settings
 buildFuture = true
@@ -16,6 +19,16 @@ category = "categories"
 
 # Category Configuration
 [params]
+mainLanceDBURL = "http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com"
+cloudLanceDBURL = "https://cloud.lancedb.com"
+privacyPdfURL = "https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf"
+termsPdfUrl = "https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf"
+discordURL = "https://discord.com/invite/G5DcmnZWKB"
+supportURL = "mailto:support@lancedb.com"
+githubURL = "https://github.com/lancedb"
+linkedInURL = "https://www.linkedin.com/company/lancedb/"
+xURL = "https://x.com/lancedb"
+
 categories = [
     { name = "Engineering", slug = "engineering", description = "Technical deep dives, architecture insights, and engineering solutions" },
     { name = "Case Study", slug = "case-study", description = "Real-world implementations and customer success stories" },
