@@ -2,7 +2,7 @@
 title: "Lance v2: A New Columnar Container Format"
 date: 2024-04-13
 draft: false
-featured: false
+featured: true
 image: /assets/blog/lance-v2.png
 description: "Explore lance v2: a new columnar container format with practical insights and expert guidance from the LanceDB team."
 author: "Weston Pace"
