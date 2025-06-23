@@ -69,10 +69,7 @@
             </div>
         {{ end }}
         
-        <!-- Newsletter Section - Show at top for subsequent pages -->
-        {{ if ne .Paginator.PageNumber 1 }}
-            {{ partial "newsletter.html" . }}
-        {{ end }}
+
         
         <!-- Pagination Navigation -->
         {{ $paginator := .Paginate $nonFeaturedPosts }}
@@ -86,36 +83,13 @@
                     </a>
                 {{ end }}
                 
-                {{ $currentPage := $paginator.PageNumber }}
-                {{ $totalPages := $paginator.TotalPages }}
-                {{ $showRange := 2 }}
-                
-                <!-- First page -->
-                {{ if gt $currentPage (add $showRange 2) }}
-                    <a href="{{ $paginator.First.URL }}" class="pagination-link page-number">1</a>
-                    {{ if gt $currentPage (add $showRange 3) }}
-                        <span class="pagination-ellipsis">...</span>
-                    {{ end }}
-                {{ end }}
-                
-                <!-- Page numbers around current page -->
+                <!-- All page numbers -->
                 {{ range $paginator.Pagers }}
-                    {{ $pageNum := .PageNumber }}
-                    {{ if and (ge $pageNum (sub $currentPage $showRange)) (le $pageNum (add $currentPage $showRange)) }}
-                        {{ if eq $pageNum $currentPage }}
-                            <span class="pagination-link current">{{ $pageNum }}</span>
-                        {{ else }}
-                            <a href="{{ .URL }}" class="pagination-link page-number">{{ $pageNum }}</a>
-                        {{ end }}
+                    {{ if eq .PageNumber $paginator.PageNumber }}
+                        <span class="pagination-link current">{{ .PageNumber }}</span>
+                    {{ else }}
+                        <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
                     {{ end }}
-                {{ end }}
-                
-                <!-- Last page -->
-                {{ if lt $currentPage (sub $totalPages (add $showRange 1)) }}
-                    {{ if lt $currentPage (sub $totalPages (add $showRange 2)) }}
-                        <span class="pagination-ellipsis">...</span>
-                    {{ end }}
-                    <a href="{{ $paginator.Last.URL }}" class="pagination-link page-number">{{ $totalPages }}</a>
                 {{ end }}
                 
                 {{ if $paginator.HasNext }}
@@ -148,12 +122,38 @@
                 </article>
             {{ end }}
         </div>
+        
+        <!-- Pagination Navigation (Bottom) -->
+        {{ if gt $paginator.TotalPages 1 }}
+        <nav class="pagination">
+            <div class="pagination-links">
+                {{ if $paginator.HasPrev }}
+                    <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                        <span class="pagination-arrow">←</span>
+                        <span class="pagination-text">Previous</span>
+                    </a>
+                {{ end }}
+                
+                <!-- All page numbers -->
+                {{ range $paginator.Pagers }}
+                    {{ if eq .PageNumber $paginator.PageNumber }}
+                        <span class="pagination-link current">{{ .PageNumber }}</span>
+                    {{ else }}
+                        <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+                    {{ end }}
+                {{ end }}
+                
+                {{ if $paginator.HasNext }}
+                    <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                        <span class="pagination-text">Next</span>
+                        <span class="pagination-arrow">→</span>
+                    </a>
+                {{ end }}
+            </div>
+        </nav>
+        {{ end }}
     </main>
-    
-    <!-- Newsletter Section - Show at bottom only for first page -->
-    {{ if eq .Paginator.PageNumber 1 }}
-        {{ partial "newsletter.html" . }}
-    {{ end }}
+
     
     <footer class="site-footer">
         <div class="footer-content">

@@ -676,6 +676,79 @@ main .post-meta {
     margin-bottom: 0.2rem;
 }
 
+/* ===== TABLE STYLING ===== */
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.post-content table th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+.post-content table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.post-content table tr:last-child td {
+    border-bottom: none;
+}
+
+.post-content table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.post-content table th:first-child,
+.post-content table td:first-child {
+    padding-left: 1.25rem;
+}
+
+.post-content table th:last-child,
+.post-content table td:last-child {
+    padding-right: 1.25rem;
+}
+
+/* Responsive table handling */
+@media (max-width: 768px) {
+    .post-content table {
+        font-size: 0.85rem;
+        margin: 1rem 0;
+    }
+    
+    .post-content table th,
+    .post-content table td {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .post-content table th:first-child,
+    .post-content table td:first-child {
+        padding-left: 1rem;
+    }
+    
+    .post-content table th:last-child,
+    .post-content table td:last-child {
+        padding-right: 1rem;
+    }
+}
+
 /* ===== ENHANCED CODE BLOCKS ===== */
 
 /* Inline code styling */
@@ -742,6 +815,11 @@ main .post-meta {
     z-index: 2;
 }
 
+/* Hide language strip for code blocks without language labels */
+.post-content pre[data-lang=""]::before {
+    display: none;
+}
+
 /* Language-specific styling */
 .post-content pre[data-lang="python"]::before {
     background: linear-gradient(135deg, #3776ab 0%, #4b8bbe 100%);
@@ -801,6 +879,11 @@ main .post-meta {
     border-radius: 0;
     position: relative;
     z-index: 1;
+}
+
+/* Adjust padding for code blocks without language headers */
+.post-content pre[data-lang=""] code {
+    padding-top: 1.25rem;
 }
 
 /* Scrollbar styling for code blocks */
@@ -1176,6 +1259,22 @@ article img {
     margin: 0;
 }
 
+/* Handle transparent images on dark backgrounds - specifically for column shredding diagrams */
+.post-content img[src*="columnar-file-readers-in-depth-column-shredding"],
+.post-content img[src*="Rows-to-Columns"],
+.post-content img[src*="Shredding-Level"],
+.post-content img[src*="What-is-a-List"],
+.post-content img[src*="Too-Much-Shredding"],
+.post-content img[src*="Too-much-shredding"],
+.post-content img[src*="Zipped-shredding"],
+.post-content img[src*="Unshredding"],
+.post-content img[src*="Data-Spreading"] {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
 /* Post navigation */
 .post-navigation {
     margin-top: 3rem;
@@ -1480,95 +1579,7 @@ a:hover {
     .logo-overlay img { width: 15px; height: 15px; }
 }
 
-.newsletter-section {
-    background: linear-gradient(120deg, #232b2b 60%, #232627 100%);
-    border-radius: 0.9rem;
-    margin: 1.5rem auto;
-    max-width: 720px;
-    width: 100%;
-    padding: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255,255,255,0.04);
-}
 
-.newsletter-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-}
-
-.newsletter-content h2 {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #e2e8f0;
-    margin: 0;
-}
-
-.newsletter-form {
-    width: 100%;
-    max-width: 400px;
-}
-
-.newsletter-input-group {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-.newsletter-input-group input[type="email"] {
-    flex: 1;
-    padding: 0.6rem 1rem;
-    border-radius: 0.6rem;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.02);
-    color: #e2e8f0;
-    font-size: 0.95rem;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.newsletter-input-group input[type="email"]::placeholder {
-    color: #64748b;
-}
-
-.newsletter-input-group input[type="email"]:focus {
-    border-color: #f97316;
-    background: rgba(255,255,255,0.04);
-    box-shadow: 0 0 0 2px rgba(249,115,22,0.08);
-}
-
-.newsletter-input-group button {
-    padding: 0.6rem 1.2rem;
-    border-radius: 0.6rem;
-    border: none;
-    background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.newsletter-input-group button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(244,63,94,0.15);
-}
-
-@media (max-width: 480px) {
-    .newsletter-section {
-        padding: 1.2rem;
-    }
-    .newsletter-input-group {
-        flex-direction: column;
-    }
-    .newsletter-input-group button {
-        width: 100%;
-    }
-}
 
 /* Related posts section */
 .related-posts {
