@@ -2,7 +2,7 @@
 title: "The Future of AI-Native Development is Local: Inside Continue's LanceDB-Powered Evolution"
 date: 2025-04-16
 draft: false
-featured: true
+featured: false
 categories: ["Case Studies"]
 image: /assets/blog/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution.png
 description: "Discover how Continue revolutionized AI-native development with LanceDB's embedded TypeScript library, enabling lightning-fast semantic code search while maintaining complete developer privacy and offline capability."

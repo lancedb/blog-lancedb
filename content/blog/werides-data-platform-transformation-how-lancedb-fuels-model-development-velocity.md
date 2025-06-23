@@ -2,7 +2,7 @@
 title: "WeRide's Data Platform Transformation: How LanceDB Fuels Model Development Velocity"
 date: 2024-12-10
 draft: false
-featured: true
+featured: false
 categories: ["Case Studies", "Autonomous Vehicles"]
 image: /assets/blog/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity.png
 description: "Discover how WeRide, a leading autonomous driving company, leveraged LanceDB to revolutionize their data platform, achieving 90x improvement in ML developer productivity and reducing data mining time from 1 week to 1 hour."

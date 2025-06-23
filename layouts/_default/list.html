@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
+    <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
     <link rel="stylesheet" href="/css/custom.css">
     <script src="/js/announcement.js"></script>
 </head>
@@ -24,10 +25,20 @@
     <main>
         {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
         {{ $featuredPosts := where $allPosts ".Params.featured" true }}
-        {{ $nonFeaturedPosts := where $allPosts ".Params.featured" "ne" true }}
+        
+        <!-- Build non-featured posts collection -->
+        {{ $nonFeaturedPosts := slice }}
+        {{ range $allPosts }}
+            {{ if not .Params.featured }}
+                {{ $nonFeaturedPosts = $nonFeaturedPosts | append . }}
+            {{ end }}
+        {{ end }}
+        
+        <!-- Create paginator -->
+        {{ $paginator := .Paginate $nonFeaturedPosts }}
         
         <!-- Featured Section - Only show on first page -->
-        {{ if and $featuredPosts (eq .Paginator.PageNumber 1) }}
+        {{ if and $featuredPosts (eq $paginator.PageNumber 1) }}
             {{ $mainFeatured := index $featuredPosts 0 }}
             {{ $sideFeatured := after 1 $featuredPosts }}
             <div class="featured-section">
@@ -69,10 +80,7 @@
             </div>
         {{ end }}
         
-
-        
         <!-- Pagination Navigation -->
-        {{ $paginator := .Paginate $nonFeaturedPosts }}
         {{ if gt $paginator.TotalPages 1 }}
         <nav class="pagination">
             <div class="pagination-links">

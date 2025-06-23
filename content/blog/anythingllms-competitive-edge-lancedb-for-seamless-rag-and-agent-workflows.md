@@ -2,7 +2,7 @@
 title: "AnythingLLM's Competitive Edge: LanceDB for Seamless RAG and Agent Workflows"
 date: 2025-04-02
 draft: false
-featured: true
+featured: false
 categories: ["Case Studies"]
 image: /assets/blog/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows.png
 description: "Discover how AnythingLLM leveraged LanceDB's serverless architecture to eliminate vector database setup complexity, enabling seamless cross-platform RAG and agent workflows with zero configuration required."
