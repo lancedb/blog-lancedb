@@ -43,3 +43,17 @@ categories = [
       table = true
       taskList = true
       typographer = true
+
+  # Syntax Highlighting Configuration
+  [markup.highlight]
+    style = "github-dark"
+    lineNos = false
+    lineNumbersInTable = false
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    hl_inline = false
+    anchorLineNos = false
+    lineAnchors = ""
+    tabWidth = 2

@@ -676,21 +676,481 @@ main .post-meta {
     margin-bottom: 0.2rem;
 }
 
+/* ===== ENHANCED CODE BLOCKS ===== */
+
+/* Inline code styling */
 .post-content code {
-    padding: 0.15rem 0.4rem;
-    font-size: 0.95em;
+    background: linear-gradient(135deg, #1a1d23 0%, #242831 100%);
+    color: #e2e8f0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid #2d3748;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.post-content code:hover {
+    background: linear-gradient(135deg, #242831 0%, #2d3748 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Code block container */
+.post-content pre {
+    background: linear-gradient(135deg, #0f1419 0%, #1a1d23 100%);
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.post-content pre:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.5),
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Code block header with language indicator */
+.post-content pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%);
+    color: #a0aec0;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+/* Language-specific styling */
+.post-content pre[data-lang="python"]::before {
+    background: linear-gradient(135deg, #3776ab 0%, #4b8bbe 100%);
+}
+
+.post-content pre[data-lang="javascript"]::before,
+.post-content pre[data-lang="js"]::before {
+    background: linear-gradient(135deg, #f7df1e 0%, #ffeb3b 100%);
+    color: #000;
+}
+
+.post-content pre[data-lang="typescript"]::before,
+.post-content pre[data-lang="ts"]::before {
+    background: linear-gradient(135deg, #3178c6 0%, #4a90e2 100%);
+}
+
+.post-content pre[data-lang="rust"]::before {
+    background: linear-gradient(135deg, #ce422b 0%, #f74c00 100%);
+}
+
+.post-content pre[data-lang="go"]::before {
+    background: linear-gradient(135deg, #00add8 0%, #5dc9e2 100%);
+}
+
+.post-content pre[data-lang="bash"]::before,
+.post-content pre[data-lang="shell"]::before {
+    background: linear-gradient(135deg, #4eaa25 0%, #6cc04a 100%);
+}
+
+.post-content pre[data-lang="sql"]::before {
+    background: linear-gradient(135deg, #336791 0%, #4a90e2 100%);
+}
+
+.post-content pre[data-lang="json"]::before {
+    background: linear-gradient(135deg, #292929 0%, #525252 100%);
+}
+
+.post-content pre[data-lang="yaml"]::before,
+.post-content pre[data-lang="yml"]::before {
+    background: linear-gradient(135deg, #cb171e 0%, #f43f5e 100%);
+}
+
+/* Code content styling */
+.post-content pre code {
+    display: block;
+    background: none;
+    color: #e2e8f0;
+    padding: 1.25rem;
+    padding-top: 2.5rem;
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: auto;
+    white-space: pre;
+    border-radius: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Scrollbar styling for code blocks */
+.post-content pre code::-webkit-scrollbar {
+    height: 8px;
+}
+
+.post-content pre code::-webkit-scrollbar-track {
+    background: #1a1d23;
+    border-radius: 4px;
+}
+
+.post-content pre code::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #f97316 0%, #f43f5e 100%);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.post-content pre code::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+}
+
+/* Copy button for code blocks */
+.post-content pre {
+    position: relative;
+}
+
+.post-content pre .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #a0aec0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+    z-index: 3;
+}
+
+.post-content pre:hover .copy-button {
+    opacity: 1;
+}
+
+.post-content pre .copy-button:hover {
+    background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+    border-color: #f97316;
+    color: white;
+    transform: scale(1.05);
+}
+
+.post-content pre .copy-button.copied {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+}
+
+/* Line numbers for code blocks */
+.post-content pre.line-numbers {
+    padding-left: 0;
+}
+
+.post-content pre.line-numbers code {
+    padding-left: 3.5rem;
+    position: relative;
+}
+
+.post-content pre.line-numbers code::before {
+    content: counter(line-number);
+    counter-increment: line-number;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3rem;
+    padding: 1.25rem 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-right: 1px solid #2d3748;
+    color: #64748b;
+    font-size: 0.8rem;
+    text-align: right;
+    user-select: none;
+    line-height: 1.6;
+}
+
+/* Terminal-style code blocks */
+.post-content pre.terminal {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    border: 2px solid #333;
+}
+
+.post-content pre.terminal::before {
+    content: "terminal";
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: #00ff00;
+}
+
+.post-content pre.terminal code {
+    color: #00ff00;
+    font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+}
+
+/* Highlighted lines in code blocks */
+.post-content pre code .highlight-line {
+    background: rgba(249, 115, 22, 0.1);
+    border-left: 3px solid #f97316;
+    padding-left: 0.5rem;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-right: 1.25rem;
+    display: block;
+}
+
+/* Code block animations */
+@keyframes codeBlockSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .post-content pre {
-    padding: 0.8rem;
-    margin: 1rem 0;
-    font-size: 0.95em;
+    animation: codeBlockSlideIn 0.4s ease-out;
 }
 
-.post-content pre code {
-    background: none;
-    padding: 0;
-    color: inherit;
+/* Responsive design for code blocks */
+@media (max-width: 768px) {
+    .post-content pre {
+        margin: 1rem -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .post-content pre code {
+        padding: 1rem;
+        padding-top: 2.2rem;
+        font-size: 0.85rem;
+    }
+    
+    .post-content pre::before {
+        font-size: 0.7rem;
+        padding: 0.4rem 1rem;
+    }
+    
+    .post-content pre .copy-button {
+        top: 0.4rem;
+        right: 1rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Focus states for accessibility */
+.post-content pre:focus-within {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+.post-content pre .copy-button:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* ===== PROFESSIONAL QUOTE STYLING ===== */
+
+/* Blockquote container */
+.post-content blockquote {
+    position: relative;
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #1a1d23 0%, #242831 100%);
+    border: 1px solid #2d3748;
+    border-left: 4px solid #f97316;
+    border-radius: 12px;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.post-content blockquote:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Simple quote icon */
+.post-content blockquote::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f97316;
+    opacity: 0.4;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* Quote content */
+.post-content blockquote p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    padding-left: 1rem;
+}
+
+.post-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Attribution styling for quotes with author info */
+.post-content blockquote p:last-child:has(em),
+.post-content blockquote p:last-child em {
+    font-style: normal;
+    font-weight: 600;
+    color: #f97316;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(249, 115, 22, 0.2);
+    text-align: right;
+}
+
+/* Special styling for testimonials */
+.post-content blockquote.testimonial {
+    background: linear-gradient(135deg, #0f1419 0%, #1a1d23 100%);
+    border-left-color: #22c55e;
+}
+
+.post-content blockquote.testimonial::before {
+    color: #22c55e;
+}
+
+.post-content blockquote.testimonial p:last-child em {
+    color: #22c55e;
+    border-top-color: rgba(34, 197, 94, 0.2);
+}
+
+/* Warning/Important quotes */
+.post-content blockquote.warning {
+    background: linear-gradient(135deg, #1a1410 0%, #2d2517 100%);
+    border-left-color: #f59e0b;
+}
+
+.post-content blockquote.warning::before {
+    color: #f59e0b;
+}
+
+/* Info quotes */
+.post-content blockquote.info {
+    background: linear-gradient(135deg, #0f1419 0%, #1a1d23 100%);
+    border-left-color: #3b82f6;
+}
+
+.post-content blockquote.info::before {
+    color: #3b82f6;
+}
+
+/* Nested quotes */
+.post-content blockquote blockquote {
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 2px solid #64748b;
+}
+
+.post-content blockquote blockquote::before {
+    font-size: 1.5rem;
+    color: #64748b;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+/* Animation for quotes */
+@keyframes quoteSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.post-content blockquote {
+    animation: quoteSlideIn 0.5s ease-out;
+}
+
+/* Responsive design for quotes */
+@media (max-width: 768px) {
+    .post-content blockquote {
+        margin: 1.5rem -1rem;
+        padding: 1.25rem 1.5rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        font-size: 1rem;
+    }
+    
+    .post-content blockquote::before {
+        font-size: 1.5rem;
+        top: 0.75rem;
+        left: 0.75rem;
+    }
+    
+    .post-content blockquote p {
+        padding-left: 0.75rem;
+    }
+    
+    .post-content blockquote p:last-child em {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+}
+
+/* Focus states for accessibility */
+.post-content blockquote:focus-within {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .post-content blockquote {
+        animation: none;
+        transition: none;
+    }
+    
+    .post-content blockquote:hover {
+        transform: none;
+    }
 }
 
 /* Image width constraints for all post images */
