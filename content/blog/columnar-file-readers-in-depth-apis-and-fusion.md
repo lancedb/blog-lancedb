@@ -4,7 +4,7 @@ date: 2024-06-18
 draft: false
 featured: false
 categories: ["Engineering"]
-image: /assets/blog/columnar-file-readers-in-depth-apis-and-fusion/Memory-fusion.png
+image: /assets/blog/columnar-file-readers-in-depth-apis-and-fusion/columnar-file-readers-in-depth-apis-and-fusion.png
 description: "The API used to read files has evolved over time, from simple full table reads to batch reads and eventually to iterative record batch readers. Lance takes this a step further to return a stream of read tasks."
 author: Weston Pace
 author_avatar: "/assets/authors/weston-pace.jpg"
