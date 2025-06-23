@@ -3,16 +3,22 @@ title: "Columnar File Readers in Depth: Compression Transparency"
 date: 2025-04-29
 draft: false
 featured: false
+categories: ["Engineering"]
 image: /assets/blog/columnar-file-readers-in-depth-compression-transparency/columnar-file-readers-in-depth-compression-transparency.png
 description: "Explore columnar file readers in depth: compression transparency with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
+author_avatar: "/assets/authors/weston-pace.jpg"
+author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
+author_twitter: "westonpace"
+author_github: "westonpace"
+author_linkedin: "westonpace"
 ---
 
 Conventional wisdom states that compression and random access do not go well together.  However, there are many ways you can compress data, and some of them support random access better than others.  Figuring out which compression we can use, and when, and why, has been an interesting challenge.  As we've been working on 2.1 we've developed a few terms to categorize different compression approaches.
 
-💡 **Series Note**
-
-This is part of a series of posts on building a columnar file reader. The series starts [here](/blog/file-readers-in-depth-parallelism-without-row-groups/) and the most recent entry was [here](/blog/columnar-file-readers-in-depth-backpressure/).
+{{< admonition info "📚 Series Navigation" >}}
+This is part of a series of posts on building a columnar file reader. The series starts [here](/blog/columnar-file-readers-in-depth-apis-and-fusion/) and the most recent entry was [here](/blog/columnar-file-readers-in-depth-backpressure/).
+{{< /admonition >}}
 
 ### Setting the stage
 
@@ -20,7 +26,7 @@ Compression in Lance happens on large chunks of data for a single array.  As bat
 
 We don't have row groups, so we can accumulate columns individually, and flushing one column does not mean that we will be flushing other columns.  This means, by the time we hit the compression stage, we typically have a large (8MB+ by default) block of column data that we need to compress.
 
-![Compression process flow](/assets/blog/compression-process.png)
+![Compression process flow](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Compression-Process.png)
 
 Each column accumulates arrays until it has enough data (8MB+) to justify creating a block.
 
@@ -32,7 +38,7 @@ As a simple example, we can consider delta encoding.  In delta encoding we only 
 
 Other opaque encodings include the "back referencing" family of encodings such as GZIP, LZ4, SNAPPY, and ZLIB.  These encodings encode a value by encoding a "backwards reference" to a previous occurrence of that sequence.  If you don't have the previous values you can't interpret this backward reference.
 
-![Opaque encoding example](/assets/blog/opaque-encoding.png)
+![Opaque encoding example](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Opaque-Encoding-2-.png)
 
 Delta encoding + bit packing gives great compression here. We go from 16 bytes to 3 bytes. However, our value gets "smeared" across a large portion of the data. We normally end up loading the entire block to decompress a single value.
 
@@ -40,7 +46,7 @@ To see an example of a transparent encoding we can look at bit packing.  In bit 
 
 This encoding is transparent (as long as we know the compressed width, more on that later) because, to get the 6th value, we know we simply need to read the bits `bits[bit_width * 5..bit_width * 6]`.  I hope it is clear why this property might be useful for random access reads but we will be expanding on this more in a future post.
 
-![Transparent encoding example](/assets/blog/transparent-encoding.png)
+![Transparent encoding example](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Transparent-Encoding-1-.png)
 
 Bit packing alone isn't as effective in this case, I end up with 4 bytes instead of 3, but it **is** transparent*. *If I want to load a single value I only need to read that one byte.
 
@@ -48,27 +54,25 @@ Bit packing alone isn't as effective in this case, I end up with 4 bytes instead
 
 Variable length layouts, for example, lists or strings, are not so straightforward.  We typically need to do a bit of indirection to get the value, even when there is no compression.  First, we look up the size of the value, then we look up the value itself.  For example, if we have the string array `["compression", "is", "fun"]` then we really (in Arrow world) have two buffers.  The offsets array and the values array.  Accessing a single value requires two read operations.
 
-![Variable length access pattern](/assets/blog/variable-length-access.png)
-
 Variable length layouts require two buffer reads to access a single value
 
 In our definition of transparent, *we still consider this to be random access*.  Intuitively we can see that we still don't need the entire block to access a single value.  As a result, we can have transparent variable length encodings.  A very useful compression here is FSST.  The details are complicated but FSST is basically partial dictionary encoding where the dictionary is a 256 byte symbol table.  As long as you have that symbol table (this is metadata, discussed later) then you can decode any individual substring. This means that FSST encoding is, in fact, transparent.
 
-![FSST style encoding example](/assets/blog/fsst-style-encoding.png)
+![FSST style encoding example](/assets/blog/columnar-file-readers-in-depth-compression-transparency/FSST-Style-Encoding.png)
 
 Using a symbol table we transparently create a compressed representation of a string array.
 
 A more complete definition, which is what we've ended up with in our compression [traits](https://github.com/lancedb/lance/blob/e6010729fad8a8581cc0b25411c22599bdbf3450/rust/lance-encoding/src/encoder.rs#L240-L253), is something like:
 
-💡 **Transparency Definition**
-
+{{< admonition tip "💡 Transparency Definition" >}}
 For an encoding to be transparent then the result of the encoding must either be an empty layout, fixed width layout, or a variable width layout. The layout must have the same number of elements as the array. There may also optionally be one or more buffers of metadata. When decoding, if we have the metadata, we must be able to decode any element in the compressed layout individually.
+{{< /admonition >}}
 
 We limit the layouts to empty, fixed width, and variable width because we know how to "schedule" those.  We can convert an offset into one of those layouts into a range of bytes representing the data.  We could potentially support additional layouts in the future.
 
-🔜 **Future Question**
-
+{{< admonition note "🔜 Future Question" >}}
 Just because we are given an 8MB chunk of data doesn't mean we have to compress the entire thing as one piece. We can break it up into smaller opaque chunks. Do we still get good compression with small chunks? Does this mean the opaque encoding can still be used with random access? How do we know which chunk to access? These are all valid questions and we will discuss these questions in a future post.
+{{< /admonition >}}
 
 ### Mysterious "metadata"
 
@@ -78,13 +82,13 @@ Now lets look at a different way we could approach bit packing.  To see why we m
 
 For simplicity let's pretend we compress it in eight 1MB chunks (chunks of 1024 values is far more common but this is a blog post and we don't want to think too hard).  The chunk that has our outlier won't compress well but the remaining chunks will.  However, each compressed chunk could have a different bit width.  That means we now have 8 bytes of metadata instead 1 byte of metadata.  Is this bad?  The answer is "it depends" and we will address it in a future blog post.
 
-![Bit packing with outlier handling](/assets/blog/bit-packing-outlier.png)
+![Bit packing with outlier handling](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Bit-Packing-Outlier.png)
 
 By chunking we can reduce the impact of an outlier. This is a general technique that applies to most compression algorithms. But now our bit width metadata is more extensive.
 
 We can even eliminate metadata completely by making the compression opaque.  All we need to do is inline the compressed bit width of a chunk into the compressed buffer of data itself.  This is, in fact, the most common technique in use today, because random access has not typically been a concern.  *Putting all of this together we can see that a single technique (bit packing) can be implemented in three different ways, with varying properties (transparent vs. opaque, size of metadata).*
 
-![Three approaches to bit packing](/assets/blog/bit-packing-3-ways.png)
+![Three approaches to bit packing](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Bit-Packing-3-Ways-1.png)
 
 Three different ways to compress with bitpacking showing tradeoffs between transparent/opaque and more/less metadata
 
@@ -92,23 +96,23 @@ Three different ways to compress with bitpacking showing tradeoffs between trans
 
 The next category considers how we handle nulls.  We can either **fill nulls** or **strip nulls**.  This is more or less independent of the compression we are using.  When we compress something in a *null stripped*manner we remove the nulls before we compress the values.  When we compress something in a *null filled *manner we insert garbage values in spots where nulls used to be.  Those values can be anything and, in some cases, a compression algorithm might have a particular preference (e.g. when bit packing we probably don't want to put huge outlier values in null spots).
 
-![Null handling approaches](/assets/blog/null-strip-fill.png)
+![Null handling approaches](/assets/blog/columnar-file-readers-in-depth-compression-transparency/Null-strip-fill-1.png)
 
 Two equally valid representations of the array [0, NULL, NULL, 3, NULL, NULL, NULL, NULL]
 
 We can also see that stripping out nulls makes our compression opaque.  In the above example we still have a fixed-width layout but we no longer have the right number of values.  We have to walk through our validity bitmap in order to find the offset into our values buffer.  This means we need the entire validity bitmap before we can decode any single value.
 
-❓ **Challenge Exercise**
-
+{{< admonition question "❓ Challenge Exercise" >}}
 What if we had a mostly-null array and we decided to speed things up by declaring the validity buffer to be metadata? After all, this could just a compressed bitmap, it's probably not *too* large. Would this be transparent? Does it meet our definition above? Is this good or bad? How large is too large?
+{{< /admonition >}}
 
-👾 **Implementation Note**
-
+{{< admonition note "👾 Implementation Note" >}}
 This garbage data is rarely very large. Fixed size types tend to be quite small. Variable-width types don't need "garbage bytes". They only need a garbage offset (and actually, it's not really garbage, it must equal the previous offset). 
 
 One curious exception to this rule is vector embeddings as they are both fixed-size and quite large (typically 3-6KB) 
 
 Another (perhaps obvious) exception is mostly-null arrays.
+{{< /admonition >}}
 
 ### Putting it in Action: Parquet & Arrow
 
@@ -122,8 +126,8 @@ I work on Lance, a file format that is aiming to achieve fast full scan **and** 
 
 See you next time.
 
-[![Join LanceDB Community](/assets/blog/lancedb-symbol.png)](https://discord.gg/G5DcmnZWKB)
-
+{{< admonition info "🚀 Join the Community" >}}
 LanceDB is upgrading the modern data lake (postmodern data lake?). Support for multimodal data, combining search and analytics, embracing embedded in-process workflows and more. If this sort of stuff is interesting then check us out and come join the conversation.
 
 [Join us on Discord](https://discord.gg/G5DcmnZWKB)
+{{< /admonition >}}

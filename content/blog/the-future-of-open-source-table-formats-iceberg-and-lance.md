@@ -3,9 +3,15 @@ title: "The Future of Open Source Table Formats: Apache Iceberg and Lance"
 date: 2025-04-08
 draft: false
 featured: false
+categories: ["Engineering"]
 image: /assets/blog/the-future-of-open-source-table-formats-iceberg-and-lance/the-future-of-open-source-table-formats-iceberg-and-lance.png
 description: "Explore the future of open source table formats: apache iceberg and lance with practical insights and expert guidance from the LanceDB team."
-author: Weston Pace
+author: Jack Ye
+author_avatar: "/assets/authors/jack-ye.jpg"
+author_bio: "Data engineer and table format specialist, working on distributed systems and modern data lake architectures."
+author_twitter: "jackye"
+author_github: "jackye"
+author_linkedin: "jackye"
 ---
 
 As the scale of data continues to grow, open-source table formats have become essential for efficient data lake management. Apache Iceberg has emerged as a leader in this space, while new formats like [Lance](https://github.com/lancedb/lance) are introducing optimizations for specific workloads. In this post, we'll explore how Iceberg and Lance address different challenges and complement each other in the evolving landscape of data lake table formats.

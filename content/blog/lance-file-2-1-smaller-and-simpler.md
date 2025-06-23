@@ -7,6 +7,11 @@ categories: ["Engineering"]
 image: /assets/blog/lance-file-2-1-smaller-and-simpler/lance-file-2-1-smaller-and-simpler.png
 description: "Explore lance file 2.1: smaller and simpler with practical insights and expert guidance from the LanceDB team."
 author: Weston Pace
+author_avatar: "/assets/authors/weston-pace.jpg"
+author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
+author_twitter: "westonpace"
+author_github: "westonpace"
+author_linkedin: "westonpace"
 ---
 
 Almost a year ago I announced we were going to be embarking on a journey to build a new 2.0 version of our file format. Several months later, we released a beta, and last fall it became our default file format. Overall, I've been super pleased with how well it worked. As we've been working with the community and stressing the format in production, we've identified a number of areas for improvement. We've been working on a 2.1 format for a few months to address these insights.
@@ -21,7 +26,7 @@ The most direct success of the 2.0 format, by far, was getting rid of row groups
 
 The most important performance concept in modern I/O, whether it is NVMe or cloud storage, is queue depth. If you do not have enough concurrent I/O requests in flight, you will leave bandwidth on the floor. In fact, it's even better to have too many I/O requests even though you face overhead and fairness issues. In 2.0 we built a scheduling algorithm to hit whatever queue depth we wanted, in priority order, without going over our parallelism budget. So we don't even have to pay those overhead and fairness costs.
 
-![Disk Utilization Comparison](/assets/blog/disk-utilization.png)
+![Disk Utilization Comparison](/assets/blog/lance-file-2-1-smaller-and-simpler/Disk-Utilization.png)
 *If your disk/NIC isn't screaming then we aren't working hard enough*
 
 I discussed most of this in depth [in an earlier post](/file-readers-in-depth-parallelism-without-row-groups/). However, I was not prepared for just how effective this was. I had hoped, originally, to match Parquet's scan speed while introducing random access. I figured this meant we would be slower than Parquet until we figured out compression. However, I was surprised to find that Lance often beats Parquet in full scans. This turned out to be true even when the file was 2-3 times bigger!
@@ -30,12 +35,12 @@ I discussed most of this in depth [in an earlier post](/file-readers-in-depth-pa
 
 The overall structure of the file format has worked great. Our encoding scheme for 2.0 evolved significantly as it was developed. In 2.1 we pretty much reworked everything related to encodings. The protobufs have been many, and they have been varied, and they have enabled extremely rapid prototyping. Through all of this, I have not once encountered any reason to change the overall file structure. Pages, column descriptors, and a file footer are a simple, consistent, and extremely flexible structure.
 
-![Lance File Format Structure](/assets/blog/high-level-structure.png)
+![Lance File Format Structure](/assets/blog/lance-file-2-1-smaller-and-simpler/High-Level-Structure.png)
 *Lance file format in four words*
 
-> 💡 **Victory Tour Complete**
-> 
-> Ok, the victory tour is over. I'm sure there's other cool 2.0 things I could talk about but this is a retrospective and I suspect everyone is really just here to read the juicy takes about what went wrong.
+{{< admonition fun-fact "💡 Victory Tour Complete" >}}
+Ok, the victory tour is over. I'm sure there's other cool 2.0 things I could talk about but this is a retrospective and I suspect everyone is really just here to read the juicy takes about what went wrong.
+{{< /admonition >}}
 
 ## 2.1: We're Squeezing out Compression via Structural Encoding
 
@@ -47,7 +52,7 @@ Integrating compression into Lance is trickier than it might seem. Compression i
 
 I'm going to be writing an entire blog post on this topic but structural encoding tells us how an "array" is split into a series of "buffers". Compressive encoding then focuses on how those buffers can be compressed. For example, in Arrow, we have a well defined standard for splitting an array into buffers. But...there are too many buffers! (this turns out to be bad for random access). In Parquet, we have a completely different standard for splitting an array into buffers that uses far fewer buffers, but can introduce read amplification. In Lance 2.1 we now have two different strategies that we switch between depending on the size of the value.
 
-![Structural Encoding Comparison](/assets/blog/structural-encoding.png)
+![Structural Encoding Comparison](/assets/blog/lance-file-2-1-smaller-and-simpler/Structural-Encoding.png)
 *Dividing structure into buffers can be important for random access*
 
 In fact, there was one more lesson for us. Once we figured out structural encoding we suddenly discovered a way to create a taxonomy for compression algorithms. For example, **transparent** compression algorithms (like bitpacking) support random access while **opaque** compression algorithms (like delta encoding) do not. You may think we obviously just use transparent compression everywhere but—and here is where the magic comes in—the structural encoding that you choose controls which category of compressive encodings you are allowed. There are times in Lance 2.1 where opaque compression is perfectly valid! I promise I will write a lot more about this later.
@@ -60,12 +65,12 @@ Unfortunately, it seems that someone has told customers about fancy data types. 
 
 What does this mean? Well, if you've been keeping up on your Arrow column format homework you know that we now have a struct validity buffer, a list validity buffer, a list offsets buffer, a string offsets buffer, a string validity buffer, and a string values buffer. In Lance 2.0 this, unfortunately, meant that we needed to perform 6 IOPS to fetch a single value. We have failed the 1-2 IOP challenge.
 
-![Bad Tag Access Pattern](/assets/blog/bad-tag-access.png)
+![Bad Tag Access Pattern](/assets/blog/lance-file-2-1-smaller-and-simpler/Bad-Tag-Access.png)
 *In 2.0 we spend too many IOPS to read a single value*
 
 In Lance 2.1 it turns out the answer is once again related to the idea of structural encodings. Recall that the structural encoding tells us how an array is split into buffers (that's important because it controls our IOPS). What's more, the structural encodings all have a concept known as a **repetition index**. The union of these two concepts turns out to be exactly what we need for the 1-2 IOP challenge and I am proud to say that we have solved it. No matter what data type you have, no matter how complex it is, no matter how many layers of validity you've stashed away, we can access any value in 1 or 2 IOPS. I'll definitely be writing more on this concept soon.
 
-![Good Tag Access Pattern](/assets/blog/good-tag-access.png)
+![Good Tag Access Pattern](/assets/blog/lance-file-2-1-smaller-and-simpler/Good-Tag-Access.png)
 *In Lance 2.1 we only need 2 IOPS (and sometimes just 1) for the same data!*
 
 ## 2.1: We're Pushing Statistics so Far Down they Fall Out
@@ -76,7 +81,7 @@ There's a lot of reasons for this but I'll boil them down to "introducing all th
 
 It turns out the answer, for us, is that statistics based pushdown is "just another index" (technically a *primary* index) and it is much easier for us to store this information **outside the file** (just like we do with all our other indices). This concept may sound strange but it has existed for a very long time, it just had a different name, the [zone map](https://docs.oracle.com/en/database/oracle/oracle-database/21/dwhsg/using-zone-maps.html#GUID-BEA5ACA1-6718-4948-AB38-1F2C0335FDE4) (just not the one you use for planting your garden).
 
-![External Indices Flow](/assets/blog/external-indices.png)
+![External Indices Flow](/assets/blog/lance-file-2-1-smaller-and-simpler/External-Indices.png)
 *Once you can read arbitrary ranges from files then many things become possible*
 
 By storing these indices outside the file we can pick which columns we want to index after we've already written the file. We can also retrain the index with a different block size without rewriting the file. What's more, we just so happen to have infrastructure for managing external indices lying around.
@@ -87,7 +92,7 @@ I can already hear you asking, "what if I don't have a query engine lying around
 
 One of the things we got right in 2.0 was I/O scheduling. It turns out this is one of the things we also got wrong. We could saturate the bandwidth on full scans but random access on NVMe is tricky. A good NVMe can perform close to a million reads a second (the $200 disk I have at home for playing games daily development can achieve ~800K reads/s). This means an average latency of almost 1 microsecond.
 
-![Synchronous I/O Issues](/assets/blog/sync-io.png)
+![Synchronous I/O Issues](/assets/blog/lance-file-2-1-smaller-and-simpler/Sync-I-O.png)
 *These gaps can be larger than the time it takes for the I/O to run!*
 
 At the risk of stating the obvious, this is not a lot of time. In 2.0 our poor little read request requires two thread transfers. First we put it in a queue to the I/O thread. Then we put the response back into a queue for the decode thread. As a result we were spending 2-3 microseconds of overhead for a request that only takes a single microsecond. Adding a fully synchronous blocking API brought our file reader from 40K values/second to 400K values/second in some low-level benchmarking! As part of the stabilization for 2.1 I'm hoping to look into this further, and make up new terms like "semi-synchronous I/O".
@@ -125,9 +130,9 @@ print(reader.metadata())
 
 If you'd prefer to work directly with Lance files for experimentation or lower-level access we have python bindings for a file reader/writer.
 
-> ⚠️ **Beta Warning**
-> 
-> By "beta" we mean "files you write with the beta may not be readable in the future". Please do NOT use unstable / beta versions with production data.
+{{< admonition warning "⚠️ Beta Warning" >}}
+By "beta" we mean "files you write with the beta may not be readable in the future". Please do NOT use unstable / beta versions with production data.
+{{< /admonition >}}
 
 Over the next few months we will be adding new tests, fixing some remaining todos, dogfooding, and tuning the performance. We encourage you all to try it out and do your own experiments. Feel free to start filing bugs about 2.1 and we will take a look. I'll also be writing additional blog posts going over the new features at a much lower level.
 

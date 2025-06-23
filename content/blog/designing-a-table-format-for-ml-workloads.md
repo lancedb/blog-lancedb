@@ -151,7 +151,7 @@ Fortunately, while Lance obviously has vector indices, we also have a variety of
 
 Indices on **foreign key columns** make it super fast to find matching rows and apply updates. Classically, this kind of task would be done with a hash join on the foreign key column. If we have a btree index on the foreign key column we can skip this step entirely. In fact, we can do key-deduplicating writes without any I/O into the old data. This makes things faster even if you don't have any kind of caching layer.
 
-{{< admonition fun-fact "💡 Fun Fact:" >}}
+{{< admonition >}}
 A hash join on the foreign key column is pretty much the same thing as building a btree index on the fly. In other words, the old approach was to rebuild a btree index on every single operation!
 {{< /admonition >}}
 
