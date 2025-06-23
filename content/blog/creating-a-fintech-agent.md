@@ -1,11 +1,11 @@
 ---
-title: Fintech AI Agent From Scratch
+title: "Creating a FinTech AI Agent From Scratch"
 date: 2025-02-27
 draft: false
 featured: false
-categories: ["Engineering"]
+categories: ["Engineering", "Machine Learning", "FinTech"]
 image: /assets/blog/creating-a-fintech-agent/creating-a-fintech-agent.png
-description: Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team.
+description: "Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team."
 author: Vipul Maheshwari
 author_avatar: "/assets/authors/community.jpg"
 author_bio: "ML Engineer and FinTech enthusiast specializing in AI agents, predictive modeling, and financial technology applications."
@@ -25,9 +25,7 @@ Every AI agent has three main pieces at its core: the Model, the Tools, and the 
 
 In this post, I'm going to mix things up a little. Instead of leaning on a framework, I'll walk you through building a fintech agent from scratch using Python. This one's going to help with decisions about loans and insurance.
 
-![Fintech AI Agent Architecture](https://via.placeholder.com/800x400/2563eb/ffffff?text=Fintech+AI+Agent+Architecture)
-
-#### What's the deal here?
+## What's the Deal Here?
 
 So how does this fintech agent work? Well, picture yourself running a FinTech company. Customers come at you with stuff like, "Can I borrow $10K for a new kitchen? I'm 26 years old," or "I crashed my car—will you cover it?" Haha, I'd probably shut that insurance claim down real quick.
 
@@ -41,13 +39,13 @@ The point is, that we need a system that's fast, sharp, and reliable when it com
 
 Now the question always comes of why raw Python? Well, the most viable reason is flexibility. I'm just putting together a proof of concept here, and companies can easily tweak it to fit their own data and needs—no black-box framework nonsense. The Credit Risk Dataset and synthetic claims are just placeholders; real firms would swap in their own loan histories and claim records.
 
-### Big picture!
+## Big Picture!
 
 Ok so what we've got is a Kernel Agent directing traffic, a Loan Agent predicting eligibility with machine learning, and an Insurance Agent checking claims against a vector database.
 
 I'm using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) as a demo for loans. In reality, companies could use something like a CIBIL score to see if someone's eligible. But for this POC, I grabbed that dataset, trained a random forest model, and used it for predictive analysis. For the insurance agent, I built a synthetic pipeline to whip up a dataset of fake insurance queries. The target's simple: if the claim gets approved based on the conversation, it's a one. These are just placeholders to show how it works; companies can plug in their own data instead. Saying that, let's get started.
 
-### Step 1: Setting up the stage - Libraries and Setup
+## Step 1: Setting Up the Stage - Libraries and Setup
 
 We start by grabbing our tools—libraries that handle data, models, and vectors
 
@@ -96,11 +94,11 @@ db = lancedb.connect('./lancedb_data')
 
 For the quick demonstration, I am going to use `mistral-large-latest` a model from the Mistral for LLM tasks and the intent classification in the Loan queries. The `Tool` class is our way to keep the agents modular - every tool gets a clear job.
 
-### Step 2: Loan Agent - Predictive analysis with ML
+## Step 2: Loan Agent - Predictive Analysis with ML
 
 As soon as a query comes in, the Loan Agent uses its ML tool to spin up the predictions. I am using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) here. 
 
-#### Loading the Demo Data
+### Loading the Demo Data
 
 ```python
 loan_data = pd.read_csv('./credit_risk_dataset.csv')
@@ -117,7 +115,7 @@ loan_data.head()
 It's public, well-structured, and mimics real loan data with features like loan_status (0 = approved, 1 = rejected). For demo purposes, it's spot-on. Companies would swap this for their own credit records—same columns, different rows, or maybe other relevant benchmarks that can be utilized for setting up the target in terms of the loan status.
 {{< /admonition >}}
 
-#### Building the ML model
+### Building the ML Model
 
 For the sake of the demonstration, I have used a Random Forest Classifier here. You can literally play around with different sets of these models, ensemble them, and get better in terms of accuracy and data processing.
 
@@ -158,7 +156,7 @@ joblib.dump(model, 'loan_approval_model.pkl')
 - **How It Works**: We preprocess `loan_intent` into numbers (e.g., "MEDICAL" becomes a categorical encoded number), split the data, train, and test. Got an 84% accuracy which is decent for a demo. Real data could boost or tweak that.
 - **Swap It Out**: As I said earlier, companies can use their own loan data here—same features, their numbers. Train it fresh, and it's tailored to them.
 
-#### Completing the Integration for the Loan Agent
+### Completing the Integration for the Loan Agent
 
 Now comes the agent itself:
 
@@ -213,7 +211,7 @@ class KernelAgent:
 
 Well, this is good, but let's not forget we now need to work on our Insurance agent.
 
-### Step 3: Insurance Agent - Vector Search with LanceDB
+## Step 3: Insurance Agent - Vector Search with LanceDB
 
 Before diving in, I want to walk you through my thought process for creating the Insurance Agent. Picture this: you walk into an insurance company, sit down with someone, and start explaining why you need to file a claim—why it's legit and why you deserve it. That conversation is key because it's the starting point for deciding whether the claim gets processed or not.
 
@@ -312,7 +310,7 @@ class InsuranceAgent:
 
 This is it, let's integrate our Insurance agent within our Kernel agent along with the Loan Agent.
 
-### Step 4: Completion of Kernel Agent
+## Step 4: Completion of Kernel Agent
 
 ```python
 # Kernel Agent

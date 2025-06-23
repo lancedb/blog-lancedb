@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Autonomous Vehicles on LanceDB Blog</title><link>https://example.org/categories/autonomous-vehicles/</link><description>Recent content in Autonomous Vehicles on LanceDB Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/categories/autonomous-vehicles/index.xml" rel="self" type="application/rss+xml"/><item><title>WeRide's Data Platform Transformation: How LanceDB Fuels Model Development Velocity</title><link>https://example.org/blog/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity/</link><pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate><guid>https://example.org/blog/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity/</guid><description>&lt;div class="admonition info">
+ &lt;div class="admonition-content">
+ &lt;div class="admonition-title">Case Study Collaboration&lt;/div>
+ &lt;p>This is a case study contributed by the following authors:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.linkedin.com/in/fei-chen-90364325/">&lt;strong>Fei Chen&lt;/strong>&lt;/a>, Director of Infrastructure @ WeRide&lt;/li>
+&lt;li>&lt;a href="https://www.linkedin.com/in/qianzhu56/">&lt;strong>Qian Zhu&lt;/strong>&lt;/a>, Software Engineer @ LanceDB&lt;/li>
+&lt;/ul>
+ &lt;/div>
+&lt;/div> 
+&lt;p>&lt;img src="https://example.org/assets/blog/werides-data-platform-transformation-how-lancedb-fuels-model-development-velocity/weride-quote.png" alt="WeRide Fleet">&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Established in 2017, &lt;a href="https://www.weride.ai/">WeRide&lt;/a> (Nasdaq: WRD) is a leading global commercial-stage company that develops autonomous driving technologies from level 2 to level 4. WeRide is the only tech company in the world that holds the driverless permits in China, the UAE, Singapore and the U.S., conducting autonomous driving R&amp;amp;D, tests and operations in over 30 cities of 7 countries around the world. WeRide has operated a self-driving fleet for more than 1,700 days.&lt;/p></description></item></channel></rss>
