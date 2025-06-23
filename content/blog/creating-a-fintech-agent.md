@@ -15,6 +15,9 @@ AI agents are popping up everywhere, and they're only going to become more commo
 
 These days, many frameworks are out there to help you with AI agents quickly. Honestly, it feels like a new "low-code" tool shows up every other day, promising to make building agents a breeze. They're all over the place—simple drag-and-drop setups or text boxes where you plug in a few prompts and some data, and just like that, your agent's ready to go.
 
+
+## The Architecture
+
 Every AI agent has three main pieces at its core: the Model, the Tools, and the Reasoning Loop.
 
 1. **The Model**: This is the Large Language Model (LLM) that drives the agent. It's the brain behind it all, trained on piles of text to understand language and tackle tricky instructions. This is what lets the agent think and talk almost like a person.
@@ -30,6 +33,8 @@ In this post, I'm going to mix things up a little. Instead of leaning on a frame
 So how does this fintech agent work? Well, picture yourself running a FinTech company. Customers come at you with stuff like, "Can I borrow $10K for a new kitchen? I'm 26 years old," or "I crashed my car—will you cover it?" Haha, I'd probably shut that insurance claim down real quick.
 
 The point is, that we need a system that's fast, sharp, and reliable when it comes to deciding on loan requests and insurance claims. So, what I did is this: instead of one lone agent handling everything, I split it into three—Loan, Insurance, and a Kernel agent.
+
+![Creating a FinTech AI Agent From Scratch](/assets/blog/creating-a-fintech-agent/creating-a-fintech-agent.png)
 
 1. **Loan Agent**: Takes a query, figures out what they want (like "home improvement"), and uses an ML model to predict if they're good for the loan based on age, income, and the amount.
 
