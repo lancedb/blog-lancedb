@@ -3,7 +3,7 @@ title: "GraphRAG: Hierarchical Approach to Retrieval-Augmented Generation"
 date: 2024-03-25
 draft: false
 featured: false
-categories: ["Engineering", "Machine Learning"]
+categories: ["Engineering"]
 image: /assets/blog/graphrag-hierarchical-approach-to-retrieval-augmented-generation/graphrag-hierarchical-approach-to-retrieval-augmented-generation.png
 description: "Explore GraphRAG: hierarchical approach to retrieval-augmented-generation with practical insights and expert guidance from the LanceDB team."
 author: Akash Desai

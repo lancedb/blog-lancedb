@@ -3,7 +3,7 @@ title: "Creating a FinTech AI Agent From Scratch"
 date: 2025-02-27
 draft: false
 featured: false
-categories: ["Engineering", "Machine Learning", "FinTech"]
+categories: ["Engineering", "FinTech"]
 image: /assets/blog/creating-a-fintech-agent/creating-a-fintech-agent.png
 description: "Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team."
 author: Vipul Maheshwari

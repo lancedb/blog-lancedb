@@ -3,7 +3,7 @@ title: "Late Interaction & Efficient Multi-modal Retrievers Need More Than a Vec
 date: 2024-09-18
 draft: false
 featured: false
-categories: ["Engineering", "Machine Learning"]
+categories: ["Engineering"]
 image: /assets/blog/late-interaction-efficient-multi-modal-retrievers-need-more-than-just-a-vector-index/late-interaction-efficient-multi-modal-retrievers-need-more-than-just-a-vector-index.jpg
 description: "Explore late interaction & efficient multi-modal retrievers need more than a vector index with practical insights and expert guidance from the LanceDB team."
 author: Ayush Chaurasia
