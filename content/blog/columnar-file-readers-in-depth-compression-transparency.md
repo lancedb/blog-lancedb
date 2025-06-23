@@ -17,7 +17,13 @@ author_linkedin: "westonpace"
 Conventional wisdom states that compression and random access do not go well together.  However, there are many ways you can compress data, and some of them support random access better than others.  Figuring out which compression we can use, and when, and why, has been an interesting challenge.  As we've been working on 2.1 we've developed a few terms to categorize different compression approaches.
 
 {{< admonition info "📚 Series Navigation" >}}
-This is part of a series of posts on building a columnar file reader. The series starts [here](/blog/columnar-file-readers-in-depth-apis-and-fusion/) and the most recent entry was [here](/blog/columnar-file-readers-in-depth-backpressure/).
+This is part of a series of posts on the details we've encountered building a columnar file reader:
+1. [Parallelism without Row Groups](/blog/file-readers-in-depth-parallelism-without-row-groups/)
+2. [APIs and Fusion](/blog/columnar-file-readers-in-depth-apis-and-fusion/)
+3. [Backpressure](/blog/columnar-file-readers-in-depth-backpressure/)
+4. **Compression Transparency** (this article)
+5. [Column Shredding](/blog/columnar-file-readers-in-depth-column-shredding/)
+6. [Repetition & Definition Levels](/blog/columnar-file-readers-in-depth-repetition-definition-levels/)
 {{< /admonition >}}
 
 ### Setting the stage

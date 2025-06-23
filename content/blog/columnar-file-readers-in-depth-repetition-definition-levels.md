@@ -18,7 +18,7 @@ Repetition and definition levels are a method of converting structural arrays in
 
 {{< admonition info "📚 Series Navigation" >}}
 This is part of a series of posts on the details we've encountered building a columnar file reader:
-1. Parallelism without Row Groups
+1. [Parallelism without Row Groups](/blog/file-readers-in-depth-parallelism-without-row-groups/)
 2. [APIs and Fusion](/blog/columnar-file-readers-in-depth-apis-and-fusion/)
 3. [Backpressure](/blog/columnar-file-readers-in-depth-backpressure/)
 4. [Compression Transparency](/blog/columnar-file-readers-in-depth-compression-transparency/)

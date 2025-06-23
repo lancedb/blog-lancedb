@@ -18,11 +18,12 @@ Record shredding is a classic method used to transpose rows of potentially neste
 
 {{< admonition info "📚 Series Navigation" >}}
 This is part of a series of posts on the details we've encountered building a columnar file reader:
-1. Parallelism without Row Groups
+1. [Parallelism without Row Groups](/blog/file-readers-in-depth-parallelism-without-row-groups/)
 2. [APIs and Fusion](/blog/columnar-file-readers-in-depth-apis-and-fusion/)
 3. [Backpressure](/blog/columnar-file-readers-in-depth-backpressure/)
 4. [Compression Transparency](/blog/columnar-file-readers-in-depth-compression-transparency/)
 5. **Column Shredding** (this article)
+6. [Repetition & Definition Levels](/blog/columnar-file-readers-in-depth-repetition-definition-levels/)
 {{< /admonition >}}
 
 ### Record Shredding Overview
