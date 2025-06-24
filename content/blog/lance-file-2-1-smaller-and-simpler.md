@@ -2,7 +2,7 @@
 title: "Lance File 2.1: Smaller and Simpler"
 date: 2025-03-27
 draft: false
-featured: true
+featured: false
 categories: ["Engineering"]
 image: /assets/blog/lance-file-2-1-smaller-and-simpler/lance-file-2-1-smaller-and-simpler.png
 description: "Explore lance file 2.1: smaller and simpler with practical insights and expert guidance from the LanceDB team."
