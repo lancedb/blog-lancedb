@@ -11,7 +11,7 @@
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
-    <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.image | default "/assets/blog/preview.png" }}">
+    <meta property="og:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     
     <!-- Twitter -->
@@ -19,7 +19,7 @@
     <meta property="twitter:url" content="{{ .Permalink }}">
     <meta property="twitter:title" content="{{ .Title }}">
     <meta property="twitter:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
-    <meta property="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.image | default "/assets/blog/preview.png" }}">
+    <meta property="twitter:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
     
     <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
     <link rel="stylesheet" href="/css/custom.css">

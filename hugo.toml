@@ -1,4 +1,4 @@
-baseURL = 'https://lancedb.com/blog'
+baseURL = 'https://lancedb.com'
 languageCode = 'en-us'
 title = 'LanceDB Blog'
 
