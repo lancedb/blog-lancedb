@@ -32,6 +32,14 @@ Since we started LanceDB, AI's rise has been nothing short of meteoric. In two d
 2. **Multimodal data volume** is 3-9 orders of magnitude larger than tabular data, surprising even small teams with petabytes to manage.  
 3. **The velocity** of data generation is no longer gated on manual human action; LLMs and VLMs create new data at thousands of tokens per second and are getting faster all the time.
 
+The generation and use of multimodal data is growing at an unprecedented pace, driven by the need to capture the full richness of meaning.
+
+By 2025, an estimated 156 zettabytes (ZB) of data will be video—representing 90% of all data generated. That’s nearly three times more than in 2022 (53.6 ZB) and over four times more than in 2018 (37 ZB).
+
+![multimodal-data-growth](/assets/blog/series-a-funding/data-size.jpg)
+
+Source: [Accelerating Model Development and Fine-Tuning on Databricks with TwelveLabs](https://www.youtube.com/watch?v=gdIrpWvPD1M)
+
 The data infrastructure we have today is not enough to meet this new challenge. Traditional data lakes are great for tabular data and BI tasks, but not great for AI workloads, online serving, and multimodal data. Simultaneously, vector databases are optimized for online search on vector data, but not appropriate for other needs. 
 
 Tasks like feature engineering, data exploration, and training that are critical for building great AI are not well served by any of the existing infrastructure tooling.
