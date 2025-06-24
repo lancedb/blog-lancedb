@@ -23,6 +23,23 @@ category = "categories"
 
 # Category Configuration
 [params]
+# Site-wide social media and SEO configuration
+description = "Technical insights, engineering deep dives, and real-world case studies from the LanceDB team. Learn about vector databases, columnar storage, and modern data infrastructure."
+images = ["assets/blog/logo.png"] # Default social media preview image
+author = "LanceDB Team"
+
+# Social media handles
+twitter = "lancedb"
+github = "lancedb"
+linkedin = "company/lancedb"
+
+# Open Graph and Twitter Card defaults
+[params.social]
+twitter_card = "summary_large_image"
+og_type = "website"
+og_locale = "en_US"
+
+# URLs (keeping existing ones)
 mainLanceDBURL = "http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com"
 cloudLanceDBURL = "https://cloud.lancedb.com"
 privacyPdfURL = "https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf"
