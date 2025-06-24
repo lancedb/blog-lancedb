@@ -9,8 +9,8 @@
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
-    <meta property="og:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | absURL }}">
-    <meta name="image" property="og:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | absURL }}">
+    <meta property="og:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | printf "/blog%s" | absURL }}">
+    <meta name="image" property="og:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | printf "/blog%s" | absURL }}">
     {{ if .Params.image_width }}<meta property="og:image:width" content="{{ .Params.image_width }}">{{ end }}
     {{ if .Params.image_height }}<meta property="og:image:height" content="{{ .Params.image_height }}">{{ end }}
     {{ if .Params.image_type }}<meta property="og:image:type" content="{{ .Params.image_type }}">{{ end }}
@@ -23,7 +23,7 @@
     <meta property="twitter:url" content="{{ .Permalink }}">
     <meta property="twitter:title" content="{{ .Title }}">
     <meta property="twitter:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
-    <meta property="twitter:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | absURL }}">
+    <meta property="twitter:image" content="{{ (.Params.image | default "/assets/blog/series-a-funding/preview-image.png") | printf "/blog%s" | absURL }}">
     
     <!-- Author meta tag -->
     <meta name="author" content="{{ .Params.author | default .Site.Params.author }}">
@@ -65,7 +65,7 @@
                 <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
             </div>
             <article class="single-post">
-                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                <img src="{{ .Params.image | default "/assets/blog/preview.png" | printf "../%s" }}" alt="{{ .Title }}" class="preview-image">
                 <div class="post-content">
                     {{ $content := .Content }}
                     {{ $content := $content | replaceRE "<h2 id=\"([^\"]*)\">" "<h2 id=\"$1\">" }}
@@ -111,7 +111,7 @@
                     {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
                         <article class="related-post">
                             <a href="{{ .RelPermalink }}">
-                                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
+                                <img src="{{ .Params.image | default "/assets/blog/preview.png" | printf "../%s" }}" alt="{{ .Title }}" class="related-preview-image">
                             </a>
                             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                             <div class="post-meta">
