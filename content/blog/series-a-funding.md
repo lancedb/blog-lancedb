@@ -58,13 +58,13 @@ As you scale from experimentation to petabytes of data and tens of thousands of 
 
 The Multimodal Lakehouse combines the best of data lakes and vector databases into a single platform optimized for AI workloads, eliminating the need to manage multiple disparate systems.
 
-To learn more about the Multimodal Lakehouse, [read our latest engineering blog](http://lancedb.com/blog/multimodal-lakehouse).
+To learn more about the Multimodal Lakehouse, [read our latest engineering blog](http://lancedb.com/blog/multimodal-lakehouse/).
 
 ## A Major Milestone
 
 This investment marks a pivotal step in our mission to redefine data infrastructure for the AI era. We will accelerate our work on the Multimodal Lakehouse, deepen our commitment to the Lance open-source community, and help teams everywhere build AI applications faster, cheaper and easier.
 
-Early Lakehouse features are already driving real-world production for our largest LanceDB Enterprise customers. To discover how it works for them, and what's coming next, [download our technical report on the Multimodal Lakehouse](http://lancedb.com/multimodal-lakehouse) with real-world learnings. 
+Early Lakehouse features are already driving real-world production for our largest LanceDB Enterprise customers. To discover how it works for them, and what's coming next, [download our technical report on the Multimodal Lakehouse](http://lancedb.com/multimodal-lakehouse.html) with real-world learnings. 
 
 With this funding, we're doubling down on:
 
