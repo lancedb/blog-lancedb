@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} - {{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
     
-    <!-- Open Graph / Facebook (moved higher for better crawler detection) -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
     <meta property="og:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
-    <meta name="image" property="og:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
-    {{ if .Params.image_width }}<meta property="og:image:width" content="{{ .Params.image_width }}">{{ end }}
-    {{ if .Params.image_height }}<meta property="og:image:height" content="{{ .Params.image_height }}">{{ end }}
-    {{ if .Params.image_type }}<meta property="og:image:type" content="{{ .Params.image_type }}">{{ end }}
     <meta property="og:site_name" content="{{ .Site.Title }}">
-    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-    {{ if .Lastmod }}<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -24,13 +20,6 @@
     <meta property="twitter:title" content="{{ .Title }}">
     <meta property="twitter:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
     <meta property="twitter:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
-    
-    <!-- Author meta tag -->
-    <meta name="author" content="{{ .Params.author | default .Site.Params.author }}">
-    
-    <!-- Standard HTML meta tags -->
-    <title>{{ .Title }} - {{ .Site.Title }}</title>
-    <meta name="description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
     
     <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
     <link rel="stylesheet" href="/css/custom.css">
