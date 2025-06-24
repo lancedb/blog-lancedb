@@ -34,7 +34,7 @@
                 <!-- Main Featured Post -->
                 <article class="main-featured">
                     <a href="{{ $mainFeatured.RelPermalink }}">
-                        <img src="{{ $mainFeatured.Params.image | default "/assets/blog/preview.png" | printf "./%s" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
+                        <img src="{{ $mainFeatured.Params.image | default "/assets/blog/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
                     </a>
                     <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
                     <div class="post-meta">
@@ -52,7 +52,7 @@
                     {{ range first 2 $sideFeatured }}
                         <article class="side-featured-post">
                             <a href="{{ .RelPermalink }}">
-                                <img src="{{ .Params.image | default "/assets/blog/preview.png" | printf "./%s" }}" alt="{{ .Title }}" class="preview-image">
+                                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                             </a>
                             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                             <div class="post-meta">
@@ -104,7 +104,7 @@
             {{ range $paginator.Pages }}
                 <article class="post-card">
                     <a href="{{ .RelPermalink }}">
-                        <img src="{{ .Params.image | default "/assets/blog/preview.png" | printf "./%s" }}" alt="{{ .Title }}" class="preview-image">
+                        <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                     </a>
                     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
                     <div class="post-meta">
