@@ -15,7 +15,7 @@ path = "page"
 
 # Permalinks Configuration
 [permalinks]
-blog = "/:slug/"
+blog = "/:filename/"
 
 # Taxonomy Configuration
 [taxonomies]
