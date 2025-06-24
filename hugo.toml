@@ -13,6 +13,10 @@ buildFuture = true
 pagerSize = 9
 path = "page"
 
+# Permalinks Configuration
+[permalinks]
+blog = "/:slug/"
+
 # Taxonomy Configuration
 [taxonomies]
 category = "categories"
