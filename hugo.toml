@@ -15,8 +15,8 @@ path = "page"
 
 # Permalinks Configuration
 [permalinks]
-blog = "/blog/:filename/"
-docs = "/docs/:filename/"
+docs = "/:sections/:slug/"
+blog = "/blog/:slug/"
 
 # Taxonomy Configuration
 [taxonomies]

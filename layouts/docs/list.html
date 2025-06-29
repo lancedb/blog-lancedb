@@ -36,6 +36,14 @@
                     </div>
                 </article>
             </div>
+            {{ if .TableOfContents }}
+            <aside class="docs-toc">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    {{ .TableOfContents }}
+                </div>
+            </aside>
+            {{ end }}
         </div>
     </main>
     
