@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - {{ .Site.Title }}</title>
+    <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/docs.css">
+    <script src="/js/announcement.js"></script>
+</head>
+<body>
+    {{ partial "announcement.html" . }}
+    {{ partial "header.html" . }}
+    <main class="docs-main">
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                <div class="docs-nav">
+                    <h2>Documentation</h2>
+                    <nav class="docs-menu">
+                        {{ $docs := where .Site.RegularPages "Section" "docs" }}
+                        {{ range $docs.ByWeight }}
+                            <a href="{{ .RelPermalink }}" class="docs-menu-item">
+                                {{ .Title }}
+                            </a>
+                        {{ end }}
+                    </nav>
+                </div>
+            </aside>
+            
+            <div class="docs-content">
+                <div class="docs-header">
+                    <h1>Documentation</h1>
+                    <p>Welcome to the LanceDB documentation. Find guides, tutorials, and reference materials to help you get started.</p>
+                </div>
+                
+                <div class="docs-grid">
+                    {{ $docs := where .Site.RegularPages "Section" "docs" }}
+                    {{ range $docs.ByWeight }}
+                        <article class="docs-card">
+                            <div class="docs-card-content">
+                                <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                                <p class="docs-description">{{ .Description | default .Summary }}</p>
+                            </div>
+                        </article>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    {{ partial "footer.html" . }}
+</body>
+</html> 

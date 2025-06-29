@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} - Documentation - {{ .Site.Title }}</title>
+    <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/docs.css">
+    <script src="/js/announcement.js"></script>
+</head>
+<body>
+    {{ partial "announcement.html" . }}
+    {{ partial "header.html" . }}
+    <main class="docs-main">
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                <div class="docs-nav">
+                    <h2>Documentation</h2>
+                    <nav class="docs-menu">
+                        {{ $docs := where .Site.RegularPages "Section" "docs" }}
+                        {{ range $docs.ByWeight }}
+                            <a href="{{ .RelPermalink }}" class="docs-menu-item {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
+                                {{ .Title }}
+                            </a>
+                        {{ end }}
+                    </nav>
+                </div>
+            </aside>
+            
+            <div class="docs-content">
+                <article class="docs-article">
+                    <header class="docs-article-header">
+                        <h1>{{ .Title }}</h1>
+                        {{ if .Description }}
+                            <p class="docs-description">{{ .Description }}</p>
+                        {{ end }}
+                    </header>
+                    
+                    <div class="docs-article-content">
+                        {{ .Content }}
+                    </div>
+                </article>
+            </div>
+
+            {{ if .TableOfContents }}
+            <aside class="docs-toc">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    {{ .TableOfContents }}
+                </div>
+            </aside>
+            {{ end }}
+        </div>
+    </main>
+    
+    {{ partial "footer.html" . }}
+</body>
+</html> 
