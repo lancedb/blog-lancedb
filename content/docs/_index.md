@@ -2,6 +2,7 @@
 title: "Documentation"
 description: "Welcome to LanceDB documentation"
 weight: 1
+hide: toc
 ---
 
 # Welcome to LanceDB Documentation

@@ -348,4 +348,63 @@
     .docs-card {
         padding: 1rem;
     }
+}
+
+.sidebar-nav {
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-section {
+    margin-bottom: 0.08rem;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 0.08rem 0.35rem;
+    color: var(--text-primary, #fff);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    font-size: 0.89rem;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background: var(--bg-hover, #23272b);
+    color: var(--text-accent, #ff9900);
+}
+
+.sidebar-sublist {
+    list-style: none;
+    padding-left: 0.5rem;
+    margin: 0.05rem 0 0 0;
+}
+
+.sidebar-subitem {
+    margin-bottom: 0.02rem;
+}
+
+.sidebar-sublink {
+    display: block;
+    padding: 0.05rem 0.35rem;
+    color: var(--text-secondary, #b0b6be);
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    font-size: 0.85rem;
+}
+
+.sidebar-sublink:hover,
+.sidebar-sublink.active {
+    background: var(--bg-hover, #23272b);
+    color: var(--text-accent, #ff9900);
 } 

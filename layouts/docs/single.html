@@ -18,11 +18,9 @@
                 <div class="docs-nav">
                     <h2>Documentation</h2>
                     <nav class="docs-menu">
-                        {{ $docs := where .Site.RegularPages "Section" "docs" }}
-                        {{ range $docs.ByWeight }}
-                            <a href="{{ .RelPermalink }}" class="docs-menu-item {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}">
-                                {{ .Title }}
-                            </a>
+                      {{ $docsSection := first 1 (where .Site.Sections "Section" "docs") }}
+                      {{ if $docsSection }}
+                        {{ partial "docs-sidebar.html" (dict "section" (index $docsSection 0) "current" .) }}
                         {{ end }}
                     </nav>
                 </div>
@@ -32,9 +30,6 @@
                 <article class="docs-article">
                     <header class="docs-article-header">
                         <h1>{{ .Title }}</h1>
-                        {{ if .Description }}
-                            <p class="docs-description">{{ .Description }}</p>
-                        {{ end }}
                     </header>
                     
                     <div class="docs-article-content">
