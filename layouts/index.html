@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .Title }}</title>
+  <link rel="icon" type="image/x-icon" href="/assets/misc/favicon.ico">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/docs.css">
+</head>
+<body>
+  {{ partial "announcement.html" . }}
+  {{ partial "header.html" . }}
+  <main class="homepage-main">
+    <div class="homepage-content">
+      {{ .Content }}
+    </div>
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html> 

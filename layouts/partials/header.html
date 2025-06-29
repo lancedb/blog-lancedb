@@ -256,16 +256,16 @@
 </style>
 
 <div class="navbar_container w-container">
-    <a href="{{ .Site.Params.mainLanceDBURL }}" class="navbar_brand w-nav-brand" aria-label="home">
+    <a href="/" class="navbar_brand w-nav-brand" aria-label="home">
         <div class="navbar_logo-icon w-embed">
         {{ partial "logo.html" . }}
         </div>
     </a>
     <nav role="navigation" class="navbar_menu w-nav-menu">
         <div class="navbar_menu-content"><div class="navbar_menu-middle">
-            <a href="{{ .Site.Params.mainLanceDBURL }}/pricing.html" class="navbar_navlink w-nav-link">Pricing</a>
-            <a href="{{ .Site.Params.mainLanceDBURL }}/documentation" class="navbar_navlink w-nav-link">Docs</a>
-            <a href="{{ .Site.Params.mainLanceDBURL }}/blog" aria-current="page" class="navbar_navlink w-nav-link w--current">Blog</a>
+            <a href="/pricing.html" class="navbar_navlink w-nav-link">Pricing</a>
+            <a href="/docs/" class="navbar_navlink w-nav-link">Docs</a>
+            <a href="/blog/" class="navbar_navlink w-nav-link">Blog</a>
         </div>
         <div class="navbar_right">
             <a href="{{ .Site.Params.discordURL }}" class="navbar_social-link w-inline-block">
