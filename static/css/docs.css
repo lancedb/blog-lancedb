@@ -407,4 +407,43 @@
 .sidebar-sublink.active {
     background: var(--bg-hover, #23272b);
     color: var(--text-accent, #ff9900);
+}
+
+.sidebar-section details {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+.sidebar-section summary {
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  font-weight: inherit;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-section details[open] > .sidebar-sublist {
+  max-height: 1000px;
+  opacity: 1;
+  transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+}
+
+.sidebar-sublist {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
 } 

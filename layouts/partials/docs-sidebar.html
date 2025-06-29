@@ -4,22 +4,26 @@
   <ul class="sidebar-list">
     {{- range $section.Sections }}
       <li class="sidebar-section">
-        <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-          {{ .Title }}
-        </a>
-        {{- $sectionPermalink := .RelPermalink -}}
-        {{- $children := where .Pages "RelPermalink" "ne" $sectionPermalink }}
-        {{- if $children }}
-          <ul class="sidebar-sublist">
-            {{- range $children }}
-              <li class="sidebar-subitem">
-                <a href="{{ .RelPermalink }}" class="sidebar-sublink{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-                  {{ .Title }}
-                </a>
-              </li>
-            {{- end }}
-          </ul>
-        {{- end }}
+        <details {{ if or (eq .RelPermalink $current.RelPermalink) (in $current.RelPermalink .RelPermalink) }}open{{ end }}>
+          <summary>
+            <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
+              {{ .Title }}
+            </a>
+          </summary>
+          {{- $sectionPermalink := .RelPermalink -}}
+          {{- $children := where .Pages "RelPermalink" "ne" $sectionPermalink }}
+          {{- if $children }}
+            <ul class="sidebar-sublist">
+              {{- range $children }}
+                <li class="sidebar-subitem">
+                  <a href="{{ .RelPermalink }}" class="sidebar-sublink{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
+                    {{ .Title }}
+                  </a>
+                </li>
+              {{- end }}
+            </ul>
+          {{- end }}
+        </details>
       </li>
     {{- end }}
   </ul>
