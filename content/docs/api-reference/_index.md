@@ -1,7 +1,7 @@
 ---
-title: "API Reference"
+title: "APIs & SDKs"
 description: "Welcome to LanceDB documentation"
-weight: 94
+weight: 6
 ---
 
 ## Hello

@@ -2,29 +2,46 @@
 {{- $section := .section -}}
 <nav class="sidebar-nav">
   <ul class="sidebar-list">
+    {{/* Combine top-level dividers and sections as pages, sort by weight */}}
+    {{- $topLevelDividers := where (where $section.Pages "Type" "!=" "section") "Params.layout" "divider" }}
+    {{- $sectionPages := slice }}
     {{- range $section.Sections }}
-      <li class="sidebar-section">
-        <details {{ if or (eq .RelPermalink $current.RelPermalink) (in $current.RelPermalink .RelPermalink) }}open{{ end }}>
-          <summary>
-            <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-              {{ .Title }}
-            </a>
-          </summary>
-          {{- $sectionPermalink := .RelPermalink -}}
-          {{- $children := where .Pages "RelPermalink" "ne" $sectionPermalink }}
-          {{- if $children }}
-            <ul class="sidebar-sublist">
-              {{- range $children }}
-                <li class="sidebar-subitem">
-                  <a href="{{ .RelPermalink }}" class="sidebar-sublink{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-                    {{ .Title }}
-                  </a>
-                </li>
-              {{- end }}
-            </ul>
-          {{- end }}
-        </details>
-      </li>
+      {{- $sectionPages = $sectionPages | append .Page }}
+    {{- end }}
+    {{- $sidebarItems := sort (append $topLevelDividers $sectionPages) "Weight" }}
+    {{- range $sidebarItems }}
+      {{- if eq .Params.layout "divider" }}
+        <li class="sidebar-subitem">
+          <div class="sidebar-divider">{{ .Title }}</div>
+        </li>
+      {{- else }}
+        <li class="sidebar-section">
+          <details {{ if or (eq .RelPermalink $current.RelPermalink) (in $current.RelPermalink .RelPermalink) }}open{{ end }}>
+            <summary>
+              <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
+                {{ .Title }}
+              </a>
+            </summary>
+            {{- $sectionPermalink := .RelPermalink -}}
+            {{- $children := where .Pages "RelPermalink" "ne" $sectionPermalink }}
+            {{- if $children }}
+              <ul class="sidebar-sublist">
+                {{- range $children }}
+                  <li class="sidebar-subitem">
+                    {{- if eq .Params.layout "divider" }}
+                      <div class="sidebar-divider">{{ .Title }}</div>
+                    {{- else }}
+                      <a href="{{ .RelPermalink }}" class="sidebar-sublink{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
+                        {{ .Title }}
+                      </a>
+                    {{- end }}
+                  </li>
+                {{- end }}
+              </ul>
+            {{- end }}
+          </details>
+        </li>
+      {{- end }}
     {{- end }}
   </ul>
 </nav> 

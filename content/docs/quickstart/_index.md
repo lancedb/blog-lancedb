@@ -1,7 +1,6 @@
 ---
 title: "Quickstart"
-description: "Welcome to LanceDB documentation"
-weight: 96
+weight: 5
 ---
 
 ## Hello

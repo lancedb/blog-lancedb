@@ -73,11 +73,12 @@
 }
 
 .docs-header h1 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 700;
     margin: 0 0 0.75rem 0;
     color: var(--text-primary);
     line-height: 1.2;
+    text-align: left;
 }
 
 .docs-header p {
@@ -133,10 +134,10 @@
 }
 
 .docs-article {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
 }
 
 .docs-article-header {
@@ -146,11 +147,12 @@
 }
 
 .docs-article-header h1 {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
     margin: 0 0 0.75rem 0;
     color: var(--text-primary);
     line-height: 1.2;
+    text-align: left;
 }
 
 .docs-article-content {
@@ -241,10 +243,10 @@
     position: sticky;
     top: 80px;
     height: fit-content;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    padding: 1rem;
-    border: 1px solid var(--border-color);
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    border: none;
 }
 
 .docs-toc .toc-container h3 {
@@ -355,7 +357,9 @@
     margin: 0;
 }
 
-.sidebar-list {
+.sidebar-list,
+.sidebar-sublist,
+.sidebar-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -365,48 +369,77 @@
     margin-bottom: 0.08rem;
 }
 
-.sidebar-link {
-    display: block;
-    padding: 0.08rem 0.35rem;
-    color: var(--text-primary, #fff);
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: background 0.15s, color 0.15s;
-    font-size: 0.89rem;
+.sidebar-link, .sidebar-sublink {
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.sidebar-link:hover,
-.sidebar-link.active {
-    background: var(--bg-hover, #23272b);
-    color: var(--text-accent, #ff9900);
+.sidebar-link {
+    display: block;
+    color: #b0b6be;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Aeonik', sans-serif;
+    padding: 0.12rem 0.5rem 0.12rem 0;
+    border-radius: 8px;
+    margin-bottom: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-link.active, .sidebar-link[aria-expanded="true"] {
+    background: #23272b;
+    color: #fff;
+    border-radius: 8px;
 }
 
 .sidebar-sublist {
-    list-style: none;
-    padding-left: 0.5rem;
-    margin: 0.05rem 0 0 0;
-}
-
-.sidebar-subitem {
-    margin-bottom: 0.02rem;
+    padding-left: 0;
+    margin: 0.02rem 0 0.1rem 0;
 }
 
 .sidebar-sublink {
-    display: block;
-    padding: 0.05rem 0.35rem;
-    color: var(--text-secondary, #b0b6be);
+    color: #8a8f98;
+    font-size: 0.97rem;
     font-weight: 400;
-    text-decoration: none;
-    border-radius: 2px;
+    font-family: 'Aeonik', sans-serif;
+    padding: 0.12rem 0.5rem 0.12rem 1.1rem;
+    border-radius: 6px;
+    margin-bottom: 0;
+    display: block;
     transition: background 0.15s, color 0.15s;
-    font-size: 0.85rem;
 }
 
-.sidebar-sublink:hover,
 .sidebar-sublink.active {
-    background: var(--bg-hover, #23272b);
-    color: var(--text-accent, #ff9900);
+    background: #23272b;
+    color: #fff;
+}
+
+.sidebar-divider {
+    margin: 0.5rem 0 0.5rem 0;
+    text-align: left;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Aeonik', sans-serif;
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: 0;
+}
+
+.sidebar-section-header {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Aeonik', sans-serif;
+    margin: 2rem 0 1rem 0;
+    letter-spacing: 0;
+}
+
+.sidebar-divider-line {
+    border: none;
+    border-top: 1px solid #23272b;
+    margin: 1.5rem 0 1.5rem 0;
 }
 
 .sidebar-section details {
@@ -446,4 +479,60 @@
   max-height: 0;
   opacity: 0;
   transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+}
+
+.docs-section-divider-labeled {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2.5rem 0 2rem 0;
+  width: 100%;
+}
+.docs-section-divider-labeled::before,
+.docs-section-divider-labeled::after {
+  content: "";
+  flex: 1;
+  border-top: 2px solid var(--border-color, #23272b);
+  opacity: 0.5;
+  margin: 0 1rem;
+}
+.docs-section-divider-labeled span {
+  font-size: 1.1rem;
+  color: var(--text-secondary, #b0b6be);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-arrow {
+  display: inline-block;
+  margin-left: auto;
+  font-size: 0.8em;
+  color: #6c6f75;
+  transition: transform 0.2s;
+  position: absolute;
+  right: 0.5rem;
+}
+
+.sidebar-section summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-section details .sidebar-arrow::after {
+  content: "\25BC";
+}
+
+.sidebar-section details:not([open]) .sidebar-arrow {
+  transform: rotate(-90deg);
+}
+
+.sidebar-section details[open] .sidebar-arrow {
+  transform: rotate(0deg);
+}
+
+main h1 {
+  text-align: left;
+  font-size: 2.4rem;
 } 

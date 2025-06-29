@@ -1,5 +1,5 @@
 ---
-title: "LanceDB"
+title: "Embedding"
 description: "Welcome to LanceDB documentation"
-weight: 1
+weight: 18
 ---

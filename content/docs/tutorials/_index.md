@@ -1,5 +1,5 @@
 ---
-title: "Tutorials"
+title: "Examples"
 description: "Welcome to LanceDB documentation"
-weight: 95
+weight: 22
 ---
