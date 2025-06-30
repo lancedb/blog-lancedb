@@ -13,8 +13,9 @@ With LanceDB's GPU-powered indexing you can create vector indexes for billions o
 
 ## Automatic GPU Indexing in LanceDB Enterprise
 
-!!! info "LanceDB Enterprise Only"
-    Automatic GPU Indexing is currently only available in LanceDB Enterprise. Please [contact us](mailto:contact@lancedb.com) to enable this feature for your deployment.
+{{< admonition "info" "LanceDB Enterprise Only" >}}
+Automatic GPU Indexing is currently only available in LanceDB Enterprise. Please [contact us](mailto:contact@lancedb.com) to enable this feature for your deployment.
+{{< /admonition >}}
 
 GPU indexing is automatic in LanceDB Enterprise and it is used to build either the IVF or HNSW indexes. 
 

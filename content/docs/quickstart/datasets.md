@@ -276,8 +276,9 @@ Let's see how it looks when we try to load a larger dataset.
 
 After creating a table with vector data, you'll want to create an index to enable fast similarity searches. The index creation process optimizes the data structure for efficient vector similarity lookups, significantly improving query performance for large datasets.
 
-!!! note Asynchronous Operation
-    As opposed to LanceDB OSS, the `create_index`/`createIndex` operation executes asynchronously in LanceDB Cloud/Enterprise. To ensure the index is fully built, you can use the `wait_timeout` parameter or call `wait_for_index` on the table.
+{{< admonition "note" "Asynchronous Operation" >}}
+As opposed to LanceDB OSS, the `create_index`/`createIndex` operation executes asynchronously in LanceDB Cloud/Enterprise. To ensure the index is fully built, you can use the `wait_timeout` parameter or call `wait_for_index` on the table.
+{{< /admonition >}}
 
 === "Python"
 

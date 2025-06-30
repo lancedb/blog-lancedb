@@ -7,8 +7,9 @@ weight: 4
 # Cross Encoder Reranker in LanceDB
 
 This reranker uses Cross Encoder models from sentence-transformers to rerank the search results. You can use this reranker by passing `CrossEncoderReranker()` to the `rerank()` method. 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
 
 ```python

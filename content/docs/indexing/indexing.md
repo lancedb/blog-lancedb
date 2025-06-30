@@ -12,13 +12,14 @@ LanceDB provides a comprehensive suite of indexing strategies to optimize query 
 - **Scalar Index**: Accelerates filtering and sorting of structured numeric or categorical data (e.g., timestamps, prices)
 - **Full-Text Search Index**: Enables fast keyword-based searches by indexing words and phrases
 
-!!! tip
-    Scalar indices serve as a foundational optimization layer, accelerating filtering across diverse search workloads. They can be combined with:
+{{< admonition "tip" >}}
+Scalar indices serve as a foundational optimization layer, accelerating filtering across diverse search workloads. They can be combined with:
 
-    - Vector search (prefilter or post-filter results using metadata)
-    - Full-text search (combining keyword matching with structured filters) 
-    - SQL scans (optimizing WHERE clauses on scalar columns)
-    - Key-value lookups (enabling rapid primary key-based retrievals)
+- Vector search (prefilter or post-filter results using metadata)
+- Full-text search (combining keyword matching with structured filters) 
+- SQL scans (optimizing WHERE clauses on scalar columns)
+- Key-value lookups (enabling rapid primary key-based retrievals)
+{{< /admonition >}}
 
 ## Understanding IVF-PQ Index
 
@@ -36,18 +37,18 @@ Quantization is a compression technique used to reduce the dimensionality of an 
 
 Product quantization (PQ) works by dividing a large, high-dimensional vector of size into equally sized subvectors. Each subvector is assigned a "reproduction value" that maps to the nearest centroid of points for that subvector. The reproduction values are then assigned to a codebook using unique IDs, which can be used to reconstruct the original vector.
 
-![](../assets/ivfpq_pq_desc.png)
+![](/assets/docs/ivfpq_pq_desc.png)
 
 It's important to remember that quantization is a *lossy process*, i.e., the reconstructed vector is not identical to the original vector. This results in a trade-off between the size of the index and the accuracy of the search results.
 
 As an example, consider starting with 128-dimensional vector consisting of 32-bit floats. Quantizing it to an 8-bit integer vector with 4 dimensions as in the image above, we can significantly reduce memory requirements.
 
-!!! example "Effect of quantization"
+{{< admonition "example" "Effect of quantization" >}}
+Original: `128 × 32 = 4096` bits
+Quantized: `4 × 8 = 32` bits
 
-    Original: `128 × 32 = 4096` bits
-    Quantized: `4 × 8 = 32` bits
-
-    Quantization results in a **128x** reduction in memory requirements for each vector in the index, which is substantial.
+Quantization results in a **128x** reduction in memory requirements for each vector in the index, which is substantial.
+{{< /admonition >}}
 
 ### Inverted File Index (IVF) Implementation
 
@@ -55,11 +56,11 @@ While PQ helps with reducing the size of the index, IVF primarily addresses sear
 
 In IVF, the PQ vector space is divided into *Voronoi cells*, which are essentially partitions that consist of all the points in the space that are within a threshold distance of the given region's seed point. These seed points are initialized by running K-means over the stored vectors. The centroids of K-means turn into the seed points which then each define a region. These regions are then are used to create an inverted index that correlates each centroid with a list of vectors in the space, allowing a search to be restricted to just a subset of vectors in the index.
 
-![](../assets/ivfpq_ivf_desc.webp)
+![](/assets/docs/ivfpq_ivf_desc.webp)
 
 During query time, depending on where the query lands in vector space, it may be close to the border of multiple Voronoi cells, which could make the top-k results ambiguous and span across multiple cells. To address this, the IVF-PQ introduces the `nprobe` parameter, which controls the number of Voronoi cells to search during a query. The higher the `nprobe`, the more accurate the results, but the slower the query.
 
-![](../assets/ivfpq_query_vector.webp)
+![](/assets/docs/ivfpq_query_vector.webp)
 
 ## HNSW Index Implementation
 
@@ -128,8 +129,9 @@ Embeddings for a given dataset are made searchable via an **index**. The index i
 
 Reindexing is the process of updating the index to account for new data, keeping good performance for queries. This applies to either a full-text search (FTS) index or a vector index. For ANN search, new data will always be included in query results, but queries on tables with unindexed data will fallback to slower search methods for the new parts of the table. This is another important operation to run periodically as your data grows, as it also improves performance. This is especially important if you're appending large amounts of data to an existing dataset.
 
-!!! tip
-    When adding new data to a dataset that has an existing index (either FTS or vector), LanceDB doesn't immediately update the index until a reindex operation is complete.
+{{< admonition "tip" >}}
+When adding new data to a dataset that has an existing index (either FTS or vector), LanceDB doesn't immediately update the index until a reindex operation is complete.
+{{< /admonition >}}
 
 > Both LanceDB OSS and Cloud support reindexing, but the process (at least for now) is different for each, depending on the type of index.
 

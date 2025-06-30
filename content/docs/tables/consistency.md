@@ -13,9 +13,9 @@ There are three possible settings for `read_consistency_interval`:
 2. **Zero seconds (Strong consistency)**: The database checks for updates on every read. This provides the strongest consistency guarantees, ensuring that all clients see the latest committed data. However, it has the most overhead. This setting is suitable when consistency matters more than having high QPS.
 3. **Custom interval (Eventual consistency)**: The database checks for updates at a custom interval, such as every 5 seconds. This provides eventual consistency, allowing for some lag between write and read operations. Performance wise, this is a middle ground between strong consistency and no consistency check. This setting is suitable for applications where immediate consistency is not critical, but clients should see updated data eventually.
 
-!!! tip "Consistency in LanceDB Cloud"
-
-    This is only tune-able in LanceDB OSS. In LanceDB Cloud, readers are always eventually consistent.
+{{< admonition "tip" "Consistency in LanceDB Cloud" >}}
+This is only tune-able in LanceDB OSS. In LanceDB Cloud, readers are always eventually consistent.
+{{< /admonition >}}
 
 ## Configuring Consistency Parameters
 

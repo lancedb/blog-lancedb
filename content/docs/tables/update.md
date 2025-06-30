@@ -13,8 +13,9 @@ Once you have created a table, there are several ways to modify its data. You ca
 
 These operations allow you to keep your table data current and maintain it exactly as needed for your use case. Let's look at each of these operations in detail.
 
-!!! note
-    These examples demonstrate common usage patterns. For complete API details and advanced options, refer to our [Python](/docs/api/python/python/) and [TypeScript](/docs/js/globals/) SDK documentation.
+{{< admonition "note" >}}
+These examples demonstrate common usage patterns. For complete API details and advanced options, refer to our [Python](/docs/api/python/python/) and [TypeScript](/docs/js/globals/) SDK documentation.
+{{< /admonition >}}
 
 [^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](../../migration.md) for more information.
 
@@ -151,8 +152,9 @@ Before performing any operations, you'll need to connect to LanceDB. The connect
     await table.add(data);
     ```
 
-!!! info "Vector Column Type"
-    The vector column needs to be a pyarrow.FixedSizeList type.
+{{< admonition "info" "Vector Column Type" >}}
+The vector column needs to be a pyarrow.FixedSizeList type.
+{{< /admonition >}}
 
 ### Using Pydantic Models
 
@@ -307,13 +309,13 @@ This can be used to update zero to all rows depending on how many rows match the
 | `values` | `dict` | The values to update. The keys are the column names and the values are the values to set. |
 | `values_sql` | `dict` | The values to update. The keys are the column names and the values are the SQL expressions to set. For example, `{'x': 'x + 1'}` will increment the value of the `x` column by 1. |
 
-!!! info "SQL syntax"
+{{< admonition "info" "SQL syntax" >}}
+See [SQL filters](../sql.md) for more information on the supported SQL syntax.
+{{< /admonition >}}
 
-    See [SQL filters](../sql.md) for more information on the supported SQL syntax.
-
-!!! warning "Warning"
-
-    Updating nested columns is not yet supported.
+{{< admonition "warning" "Warning" >}}
+Updating nested columns is not yet supported.
+{{< /admonition >}}
 
 === "Python"
 
@@ -395,9 +397,9 @@ This can be used to update zero to all rows depending on how many rows match the
 
         Coming Soon!
 
-!!! info "Note"
-
-    When rows are updated, they are moved out of the index. The row will still show up in ANN queries, but the query will not be as fast as it would be if the row was in the index. If you update a large proportion of rows, consider rebuilding the index afterwards.
+{{< admonition "info" "Note" >}}
+When rows are updated, they are moved out of the index. The row will still show up in ANN queries, but the query will not be as fast as it would be if the row was in the index. If you update a large proportion of rows, consider rebuilding the index afterwards.
+{{< /admonition >}}
 
 ### Delete Operations
 
@@ -421,26 +423,24 @@ Remove rows that match a condition.
     await table.delete(predicate);
     ```
 
-!!! warning "Permanent Deletion"
-    Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
+{{< admonition "warning" "Permanent Deletion" >}}
+Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
+{{< /admonition >}}
 
 ## Merge Operations
 
 The merge insert command is a flexible API that can be used to perform `upsert`, 
 `insert_if_not_exists`, and `replace_range_ operations`.
 
-!!! tip "Use scalar indexes to speed up merge insert"
-    The merge insert command performs a join between the input data and the target 
-    table `on` the key you provide. This requires scanning that entire column, which can be 
-    expensive for large tables. To speed up this operation, create a scalar index 
-    on the join column, which will allow LanceDB to find matches without scanning the whole table.
+{{< admonition "tip" "Use scalar indexes to speed up merge insert" >}}
+The merge insert command performs a join between the input data and the target table `on` the key you provide. This requires scanning that entire column, which can be expensive for large tables. To speed up this operation, create a scalar index on the join column, which will allow LanceDB to find matches without scanning the whole table.
 
-    Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
+Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
+{{< /admonition >}}
 
-!!! info "Embedding Functions"
-    Like the create table and add APIs, the merge insert API will automatically compute embeddings 
-    if the table has an embedding definition in its schema. If the input data doesn't contain the 
-    source column, or the vector column is already filled, the embeddings won't be computed.
+{{< admonition "info" "Embedding Functions" >}}
+Like the create table and add APIs, the merge insert API will automatically compute embeddings if the table has an embedding definition in its schema. If the input data doesn't contain the source column, or the vector column is already filled, the embeddings won't be computed.
+{{< /admonition >}}
 
 ### Upsert
 

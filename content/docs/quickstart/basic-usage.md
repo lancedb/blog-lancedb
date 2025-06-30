@@ -23,27 +23,27 @@ For the **LanceDB Cloud/Enterprise** API Reference, check the [**HTTP REST API S
     ```shell
     npm install @lancedb/lancedb
     ```
-    !!! note "Bundling `@lancedb/lancedb` apps with Webpack"
+    {{< admonition "note" "Bundling `@lancedb/lancedb` apps with Webpack" >}}
+Since LanceDB contains a prebuilt Node binary, you must configure `next.config.js` to exclude it from webpack. This is required for both using Next.js and deploying a LanceDB app on Vercel.
 
-        Since LanceDB contains a prebuilt Node binary, you must configure `next.config.js` to exclude it from webpack. This is required for both using Next.js and deploying a LanceDB app on Vercel.
+```javascript
+/** @type {import('next').NextConfig} */
+module.exports = ({
+webpack(config) {
+    config.externals.push({ '@lancedb/lancedb': '@lancedb/lancedb' })
+    return config;
+}
+})
+```
+{{< /admonition >}}
 
-        ```javascript
-        /** @type {import('next').NextConfig} */
-        module.exports = ({
-        webpack(config) {
-            config.externals.push({ '@lancedb/lancedb': '@lancedb/lancedb' })
-            return config;
-        }
-        })
-        ```
+    {{< admonition "note" "Yarn users" >}}
+Unlike other package managers, Yarn does not automatically resolve peer dependencies. If you are using Yarn, you will need to manually install 'apache-arrow':
 
-    !!! note "Yarn users"
-
-        Unlike other package managers, Yarn does not automatically resolve peer dependencies. If you are using Yarn, you will need to manually install 'apache-arrow':
-
-        ```shell
-        yarn add apache-arrow
-        ```
+```shell
+yarn add apache-arrow
+```
+{{< /admonition >}}
 
 === "Rust"
 
@@ -51,7 +51,8 @@ For the **LanceDB Cloud/Enterprise** API Reference, check the [**HTTP REST API S
     cargo add lancedb
     ```
 
-    !!! info "To use the lancedb crate, you first need to install protobuf."
+    {{< admonition "info" "To use the lancedb crate, you first need to install protobuf." >}}
+{{< /admonition >}}
 
     === "macOS"
 
@@ -65,7 +66,8 @@ For the **LanceDB Cloud/Enterprise** API Reference, check the [**HTTP REST API S
         sudo apt install -y protobuf-compiler libssl-dev
         ```
 
-    !!! info "Please also make sure you're using the same version of Arrow as in the [lancedb crate](https://github.com/lancedb/lancedb/blob/main/Cargo.toml)"
+    {{< admonition "info" "Please also make sure you're using the same version of Arrow as in the [lancedb crate](https://github.com/lancedb/lancedb/blob/main/Cargo.toml)" >}}
+{{< /admonition >}}
 
 ### **Preview Releases**
 
@@ -203,7 +205,8 @@ For this tutorial, we use some common libraries to help us work with data.
     }
     ```
 
-    !!! info "See [examples/simple.rs](https://github.com/lancedb/lancedb/tree/main/rust/lancedb/examples/simple.rs) for a full working example."
+    {{< admonition "info" "See [examples/simple.rs](https://github.com/lancedb/lancedb/tree/main/rust/lancedb/examples/simple.rs) for a full working example." >}}
+{{< /admonition >}}
 
 LanceDB will create the directory if it doesn't exist (including parent directories).
 
@@ -263,16 +266,16 @@ table.
     [the mode option](https://docs.rs/lancedb/latest/lancedb/connection/struct.CreateTableBuilder.html#method.mode)
     for details on how to overwrite (or open) existing tables instead.
 
-    !!! Providing table records in Rust
+    {{< admonition "note" "Providing table records in Rust" >}}
+The Rust SDK currently expects data to be provided as an Arrow [RecordBatchReader](https://docs.rs/arrow-array/latest/arrow_array/trait.RecordBatchReader.html). Support for additional formats (such as serde or polars) is on the roadmap.
+{{< /admonition >}}
 
-        The Rust SDK currently expects data to be provided as an Arrow
-        [RecordBatchReader](https://docs.rs/arrow-array/latest/arrow_array/trait.RecordBatchReader.html)
-        Support for additional formats (such as serde or polars) is on the roadmap.
+{{< admonition "info" "Under the hood, LanceDB reads in the Apache Arrow data and persists it to disk using the [Lance format](https://www.github.com/lancedb/lance)." >}}
+{{< /admonition >}}
 
-!!! info "Under the hood, LanceDB reads in the Apache Arrow data and persists it to disk using the [Lance format](https://www.github.com/lancedb/lance)."
-
-!!! info "Automatic embedding generation with Embedding API"
-    When working with embedding models, you should use the LanceDB Embedding API to automatically create vector representations of the data and queries in the background. See the [**Embedding Guide**](../embeddings/index.md) for more detail.
+{{< admonition "info" "Automatic embedding generation with Embedding API" >}}
+When working with embedding models, you should use the LanceDB Embedding API to automatically create vector representations of the data and queries in the background. See the [**Embedding Guide**](../embeddings/index.md) for more detail.
+{{< /admonition >}}
 
 ### **Create an Empty Table**
 
@@ -294,8 +297,9 @@ similar to a `CREATE TABLE` statement in SQL.
         --8<-- "python/python/tests/docs/test_basic.py:create_empty_table_async"
         ```
 
-    !!! note "You can define schema in Pydantic"
-        LanceDB comes with Pydantic support, which lets you define the schema of your data using Pydantic models. This makes it easy to work with LanceDB tables and data. Learn more about all supported types in the [tables guide](./guides/tables.md).
+    {{< admonition "note" "You can define schema in Pydantic" >}}
+LanceDB comes with Pydantic support, which lets you define the schema of your data using Pydantic models. This makes it easy to work with LanceDB tables and data. Learn more about all supported types in the [tables guide](./guides/tables.md).
+{{< /admonition >}}
 
 === "TypeScript"
 
@@ -409,12 +413,12 @@ LanceDB supports data in several formats: `pyarrow`, `pandas`, `polars` and `pyd
 
 The data will be appended to the existing table. By default, data is added in append mode, but you can also use `mode="overwrite"` to replace existing data.
 
-!!! note "Key things to remember"
-
-    - Vector columns must have consistent dimensions
-    - Schema must match the table's schema
-    - Data types must be compatible
-    - Null values are supported for optional fields
+{{< admonition "note" "Key things to remember" >}}
+- Vector columns must have consistent dimensions
+- Schema must match the table's schema
+- Data types must be compatible
+- Null values are supported for optional fields
+{{< /admonition >}}
 
 === "Python"
 
@@ -526,11 +530,11 @@ Once you've embedded the query, you can find its nearest neighbors as follows. L
     --8<-- "rust/lancedb/examples/simple.rs:search"
     ```
 
-    !!! Query vectors in Rust
-        Rust does not yet support automatic execution of embedding functions. You will need to calculate embeddings yourself. Support for this is on the roadmap and can be tracked at https://github.com/lancedb/lancedb/issues/994
+    {{< admonition "note" "Query vectors in Rust" >}}
+Rust does not yet support automatic execution of embedding functions. You will need to calculate embeddings yourself. Support for this is on the roadmap and can be tracked at https://github.com/lancedb/lancedb/issues/994
 
-        Query vectors can be provided as Arrow arrays or a Vec/slice of Rust floats.
-        Support for additional formats (e.g. `polars::series::Series`) is on the roadmap.
+Query vectors can be provided as Arrow arrays or a Vec/slice of Rust floats. Support for additional formats (e.g. `polars::series::Series`) is on the roadmap.
+{{< /admonition >}}
 
 
 ## **Build an Index**
@@ -564,8 +568,9 @@ By default, LanceDB runs a brute-force scan over the dataset to find the K neare
     --8<-- "rust/lancedb/examples/simple.rs:create_index"
     ```
 
-!!! question "Why is index creation manual?"
-    LanceDB does not automatically create the ANN index for two reasons. **First**, it's optimized for really fast retrievals via a disk-based index, and **second**, data and query workloads can be very diverse, so there's no one-size-fits-all index configuration. LanceDB provides many parameters to fine-tune index size, query latency, and accuracy.
+{{< admonition "question" "Why is index creation manual?" >}}
+LanceDB does not automatically create the ANN index for two reasons. **First**, it's optimized for really fast retrievals via a disk-based index, and **second**, data and query workloads can be very diverse, so there's no one-size-fits-all index configuration. LanceDB provides many parameters to fine-tune index size, query latency, and accuracy.
+{{< /admonition >}}
 
 ## **Embedding Data**
 

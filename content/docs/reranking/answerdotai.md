@@ -8,8 +8,9 @@ weight: 1
 
 This integration uses [AnswersDotAI's rerankers](https://github.com/AnswerDotAI/rerankers) to rerank the search results, providing a lightweight, low-dependency, unified API to use all common reranking and cross-encoder models.
 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
 
 ```python

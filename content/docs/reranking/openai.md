@@ -7,11 +7,13 @@ weight: 10
 # OpenAI Reranker (Experimental) in LanceDB
 
 This reranker uses OpenAI chat model to rerank the search results. You can use this reranker by passing `OpenAI()` to the `rerank()` method. 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
-!!! warning
-    This reranker is experimental. OpenAI doesn't have a dedicated reranking model, so we are using the chat model for reranking. 
+{{< admonition "warning" >}}
+This reranker is experimental. OpenAI doesn't have a dedicated reranking model, so we are using the chat model for reranking.
+{{< /admonition >}}
 
 ```python
 import numpy

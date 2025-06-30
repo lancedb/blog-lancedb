@@ -6,8 +6,9 @@ weight: 4
 
 # **How to Use This Documentation Site**
 
-!!! note "Welcome to LanceDB documentation!"
-    This guide will help you navigate through our documentation based on your needs and experience level.
+{{< admonition "note" "Welcome to LanceDB documentation!" >}}
+This guide will help you navigate through our documentation based on your needs and experience level.
+{{< /admonition >}}
 
 ## **Finding What You Need**
 

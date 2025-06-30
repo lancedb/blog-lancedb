@@ -9,8 +9,9 @@ weight: 11
 This is the default reranker used by LanceDB hybrid search. Reciprocal Rank Fusion (RRF) is an algorithm that evaluates the search scores by leveraging the positions/rank of the documents. The implementation follows this [paper](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf).
 
 
-!!! note
-    Supported Query Types: Hybrid
+{{< admonition "note" >}}
+Supported Query Types: Hybrid
+{{< /admonition >}}
 
 
 ```python

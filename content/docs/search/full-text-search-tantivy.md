@@ -62,8 +62,9 @@ Your result will contain the queried word.
 
 It would search on all indexed columns by default, so it's useful when there are multiple indexed columns.
 
-!!! note
-    LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
+{{< admonition "note" >}}
+LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
+{{< /admonition >}}
 
 ## **Advanced Usage**
 
@@ -115,19 +116,17 @@ table.create_fts_index(["content"], use_tantivy=True, ordering_field_names=["id"
  .to_list())
 ```
 
-!!! note
-    If you wish to specify an ordering field at query time, you must also
-    have specified it during indexing time. Otherwise at query time, an
-    error will be raised that looks like `ValueError: The field does not exist: xxx`
+{{< admonition "note" >}}
+If you wish to specify an ordering field at query time, you must also have specified it during indexing time. Otherwise at query time, an error will be raised that looks like `ValueError: The field does not exist: xxx`
+{{< /admonition >}}
 
-!!! note
-    The fields to sort on must be of typed unsigned integer, or else you will see
-    an error during indexing that looks like
-    `TypeError: argument 'value': 'float' object cannot be interpreted as an integer`.
+{{< admonition "note" >}}
+The fields to sort on must be of typed unsigned integer, or else you will see an error during indexing that looks like `TypeError: argument 'value': 'float' object cannot be interpreted as an integer`.
+{{< /admonition >}}
 
-!!! note
-    You can specify multiple fields for ordering at indexing time.
-    But at query time only one ordering field is supported.
+{{< admonition "note" >}}
+You can specify multiple fields for ordering at indexing time. But at query time only one ordering field is supported.
+{{< /admonition >}}
 
 
 ### **Phrase vs. Terms Queries**
@@ -136,21 +135,21 @@ For full-text search you can specify either a **phrase** query like `"the old ma
 or a **terms** search query like `"(Old AND Man) AND Sea"`. For more details on the terms
 query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/tantivy/query/struct.QueryParser.html).
 
-!!! tip "Note"
-    The query parser will raise an exception on queries that are ambiguous. For example, in the query `they could have been dogs OR cats`, `OR` is capitalized so it's considered a keyword query operator. But it's ambiguous how the left part should be treated. So if you submit this search query as is, you'll get `Syntax Error: they could have been dogs OR cats`.
+{{< admonition "tip" "Note" >}}
+The query parser will raise an exception on queries that are ambiguous. For example, in the query `they could have been dogs OR cats`, `OR` is capitalized so it's considered a keyword query operator. But it's ambiguous how the left part should be treated. So if you submit this search query as is, you'll get `Syntax Error: they could have been dogs OR cats`.
 
-    ```py
-    # This raises a syntax error
-    table.search("they could have been dogs OR cats")
-    ```
+```py
+# This raises a syntax error
+table.search("they could have been dogs OR cats")
+```
 
-    On the other hand, lowercasing `OR` to `or` will work, because there are no capitalized logical operators and
-    the query is treated as a phrase query.
+On the other hand, lowercasing `OR` to `or` will work, because there are no capitalized logical operators and the query is treated as a phrase query.
 
-    ```py
-    # This works!
-    table.search("they could have been dogs or cats")
-    ```
+```py
+# This works!
+table.search("they could have been dogs or cats")
+```
+{{< /admonition >}}
 
 It can be cumbersome to have to remember what will cause a syntax error depending on the type of
 query you want to perform. To make this simpler, when you want to perform a phrase query, you can

@@ -9,8 +9,9 @@ weight: 2
 This reranker uses the [Cohere](https://cohere.ai/) API to rerank the search results. You can use this reranker by passing `CohereReranker()` to the `rerank()` method. Note that you'll either need to set the `COHERE_API_KEY` environment variable or pass the `api_key` argument to use this reranker.
 
 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
 ```shell
 pip install cohere

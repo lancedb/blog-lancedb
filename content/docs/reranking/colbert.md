@@ -7,8 +7,9 @@ weight: 3
 # ColBERT Reranker in LanceDB
 
 This reranker uses ColBERT model to rerank the search results. You can use this reranker by passing `ColbertReranker()` to the `rerank()` method. 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
 
 ```python

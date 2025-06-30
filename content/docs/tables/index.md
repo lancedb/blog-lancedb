@@ -25,5 +25,6 @@ LanceDB provides comprehensive table management capabilities:
 - **Consistency Control**: Configure read consistency settings for your use case
 
 
-!!! note "Legacy Javascript SDK"
-    The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. 
+{{< admonition "note" "Legacy Javascript SDK" >}}
+The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. 
+{{< /admonition >}}

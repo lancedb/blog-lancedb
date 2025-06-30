@@ -83,9 +83,9 @@ You can always filter your data without search. This is useful when you need to 
       .toArray();
     ```
 
-!!! warning "Limit Output"
-
-    If your table is large, this could potentially return a very large amount of data. Please be sure to use a `limit` clause unless you're sure you want to return the whole result set.
+{{< admonition "warning" "Limit Output" >}}
+If your table is large, this could potentially return a very large amount of data. Please be sure to use a `limit` clause unless you're sure you want to return the whole result set.
+{{< /admonition >}}
 
 ### **Pre-Filtering with Vector Search**
 
@@ -160,8 +160,9 @@ You can always filter your data without search. This is useful when you need to 
       .toArray();
     ```
 
-!!! warning "Resource Usage Warning"
-    When querying large tables, omitting a `limit` clause may overwhelm resources and return excessive data. It can also increase costs as query pricing scales with data scanned and data returned ([LanceDB Cloud pricing](https://lancedb.com/pricing)).
+{{< admonition "warning" "Resource Usage Warning" >}}
+When querying large tables, omitting a `limit` clause may overwhelm resources and return excessive data. It can also increase costs as query pricing scales with data scanned and data returned ([LanceDB Cloud pricing](https://lancedb.com/pricing)).
+{{< /admonition >}}
 
 ## **Filtering with SQL**
 
@@ -228,8 +229,9 @@ path must be wrapped in backticks.
     AND `nested with space`.`inner with space` < 2
     ```
 
-!!! warning "Field Name Limitation"
-    Field names containing periods (.) are NOT supported.
+{{< admonition "warning" "Field Name Limitation" >}}
+Field names containing periods (.) are NOT supported.
+{{< /admonition >}}
 
 ### **Dates, Timestamps, Decimals**
 

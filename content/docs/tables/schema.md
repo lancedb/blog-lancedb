@@ -21,9 +21,9 @@ LanceDB supports three primary schema evolution operations:
 3. **Dropping columns**: Remove unnecessary columns from your schema
 
 
-!!! tip "Schema Evolution Performance"
-    Schema evolution operations are applied immediately but do not typically require rewriting all data. 
-    However, data type changes may involve more substantial operations.
+{{< admonition "tip" "Schema Evolution Performance" >}}
+Schema evolution operations are applied immediately but do not typically require rewriting all data. However, data type changes may involve more substantial operations.
+{{< /admonition >}}
 
 ## Adding New Columns
 
@@ -135,9 +135,9 @@ New columns are populated based on SQL expressions you provide.
     ]);
     ```
 
-!!! warning "NULL Values in New Columns"
-    When adding columns that should contain NULL values, be sure to cast the NULL 
-    to the appropriate type, e.g., `cast(NULL as timestamp)`.
+{{< admonition "warning" "NULL Values in New Columns" >}}
+When adding columns that should contain NULL values, be sure to cast the NULL to the appropriate type, e.g., `cast(NULL as timestamp)`.
+{{< /admonition >}}
 
 ## Altering Existing Columns
 
@@ -292,9 +292,9 @@ method in Python or [`alterColumns`](https://lancedb.github.io/lancedb/js/classe
     ]);
     ```
 
-!!! warning "Data Type Changes"
-    Changing data types requires rewriting the column data and may be resource-intensive for large tables.
-    Renaming columns or changing nullability is more efficient as it only updates metadata.
+{{< admonition "warning" "Data Type Changes" >}}
+Changing data types requires rewriting the column data and may be resource-intensive for large tables. Renaming columns or changing nullability is more efficient as it only updates metadata.
+{{< /admonition >}}
 
 ## Dropping Columns
 
@@ -381,9 +381,9 @@ You can remove columns using the [`drop_columns`](https://lancedb.github.io/lanc
     await table.dropColumns(["temp_col2"]);
     ```
 
-!!! warning "Irreversible Column Deletion"
-    Dropping columns cannot be undone. Make sure you have backups or are certain
-    before removing columns.
+{{< admonition "warning" "Irreversible Column Deletion" >}}
+Dropping columns cannot be undone. Make sure you have backups or are certain before removing columns.
+{{< /admonition >}}
 
 ## Vector Column Considerations
 

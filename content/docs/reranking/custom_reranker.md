@@ -90,7 +90,8 @@ class ModifiedCohereReranker(CohereReranker):
 
 ```
 
-!!! tip
-    The `vector_results` and `fts_results` are pyarrow tables. Lean more about pyarrow tables [here](https://arrow.apache.org/docs/python). It can be converted to other data types like pandas dataframe, pydict, pylist etc.
+{{< admonition "tip" >}}
+The `vector_results` and `fts_results` are pyarrow tables. Lean more about pyarrow tables [here](https://arrow.apache.org/docs/python). It can be converted to other data types like pandas dataframe, pydict, pylist etc.
 
-    For example, You can convert them to pandas dataframes using `to_pandas()` method and perform any operations you want. After you are done, you can convert the dataframe back to pyarrow table using `pa.Table.from_pandas()` method and return it.
+For example, You can convert them to pandas dataframes using `to_pandas()` method and perform any operations you want. After you are done, you can convert the dataframe back to pyarrow table using `pa.Table.from_pandas()` method and return it.
+{{< /admonition >}}

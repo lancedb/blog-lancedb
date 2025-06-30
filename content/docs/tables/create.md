@@ -74,12 +74,11 @@ LanceDB allows ingesting data from various sources - `dict`, `list[dict]`, `pd.D
         --8<-- "python/python/tests/docs/test_guide_tables.py:create_table_async"
         ```
 
-    !!! info "Note"
-        If the table already exists, LanceDB will raise an error by default.
+    {{< admonition "info" "Note" >}}
+If the table already exists, LanceDB will raise an error by default.
 
-        `create_table` supports an optional `exist_ok` parameter. When set to True
-        and the table exists, then it simply opens the existing table. The data you
-        passed in will NOT be appended to the table in that case.
+`create_table` supports an optional `exist_ok` parameter. When set to True and the table exists, then it simply opens the existing table. The data you passed in will NOT be appended to the table in that case.
+{{< /admonition >}}
 
     === "Sync API"
 
@@ -122,10 +121,9 @@ LanceDB allows ingesting data from various sources - `dict`, `list[dict]`, `pd.D
         --8<-- "nodejs/examples/basic.test.ts:create_table_with_schema"
         ```
 
-        !!! info "Note"
-            `createTable` supports an optional `existsOk` parameter. When set to true
-            and the table exists, then it simply opens the existing table. The data you
-            passed in will NOT be appended to the table in that case.
+        {{< admonition "info" "Note" >}}
+`createTable` supports an optional `existsOk` parameter. When set to true and the table exists, then it simply opens the existing table. The data you passed in will NOT be appended to the table in that case.
+{{< /admonition >}}
 
         ```ts
         --8<-- "nodejs/examples/basic.test.ts:create_table_exists_ok"
@@ -152,14 +150,11 @@ LanceDB allows ingesting data from various sources - `dict`, `list[dict]`, `pd.D
         --8<-- "docs/src/basic_legacy.ts:create_table_with_schema"
         ```
 
-        !!! warning
-            `existsOk` is not available in `vectordb`
+        {{< admonition "warning" >}}
+`existsOk` is not available in `vectordb`
 
-
-
-            If the table already exists, vectordb will raise an error by default.
-            You can use `writeMode: WriteMode.Overwrite` to overwrite the table.
-            But this will delete the existing table and create a new one with the same name.
+If the table already exists, vectordb will raise an error by default. You can use `writeMode: WriteMode.Overwrite` to overwrite the table. But this will delete the existing table and create a new one with the same name.
+{{< /admonition >}}
 
 
         Sometimes you want to make sure that you start fresh.
@@ -188,10 +183,13 @@ LanceDB allows ingesting data from various sources - `dict`, `list[dict]`, `pd.D
     --8<-- "python/python/tests/docs/test_guide_tables.py:create_table_async_from_pandas"
     ```
 
-!!! info "Note"
-    Data is converted to Arrow before being written to disk. For maximum control over how data is saved, either provide the PyArrow schema to convert to or else provide a PyArrow Table directly.
+{{< admonition "info" "Note" >}}
+Data is converted to Arrow before being written to disk. For maximum control over how data is saved, either provide the PyArrow schema to convert to or else provide a PyArrow Table directly.
+{{< /admonition >}}
 
+{{< admonition "info" "Vector Column Type" >}}
 The **`vector`** column needs to be a [Vector](../python/pydantic.md#vector-field) (defined as [pyarrow.FixedSizeList](https://arrow.apache.org/docs/python/generated/pyarrow.list_.html)) type.
+{{< /admonition >}}
 
 === "Sync API"
 

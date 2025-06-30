@@ -9,8 +9,9 @@ weight: 1
 
 LanceDB Cloud and Enterprise provide performant full-text search based on BM25, allowing you to incorporate keyword-based search in your retrieval solutions.
 
-!!! note
-    The `create_fts_index` API returns immediately, but the building of the FTS index is asynchronous.
+{{< admonition "note" >}}
+The `create_fts_index` API returns immediately, but the building of the FTS index is asynchronous.
+{{< /admonition >}}
 
 === "Python"
     ```python
@@ -73,10 +74,11 @@ LanceDB supports the following configurable parameters for full-text search:
 | stem              | bool | True     | Apply stemming (e.g., "running" → "run")                                                                                                      |
 | remove_stop_words | bool | True     | Remove common stop words                                                                                                                      |
 | ascii_folding     | bool | True     | Normalize accented characters                                                                                                                 |
-!!! note
-    - The `max_token_length` parameter helps optimize indexing performance by filtering out non-linguistic content like base64 data and long URLs
-    - When `with_position` is disabled, phrase queries will not work, but index size is reduced and indexing is faster
-    - `ascii_folding` is useful for handling international text (e.g., "café" → "cafe")
+{{< admonition "note" >}}
+- The `max_token_length` parameter helps optimize indexing performance by filtering out non-linguistic content like base64 data and long URLs
+- When `with_position` is disabled, phrase queries will not work, but index size is reduced and indexing is faster
+- `ascii_folding` is useful for handling international text (e.g., "café" → "cafe")
+{{< /admonition >}}
 
 To enable phrase queries, you must modify these parameters from their default values:
 

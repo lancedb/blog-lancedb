@@ -13,8 +13,9 @@ weight: 4
 
 > While indexes are being rebuilt, queries use brute force methods on unindexed rows, which may temporarily increase latency. To avoid this, set `fast_search=True` to search only indexed data.
 
-!!! note "Checking Index Status"
-    Use `index_stats()` to view the number of unindexed rows. This will be zero when indexes are fully up-to-date.
+{{< admonition "note" "Checking Index Status" >}}
+Use `index_stats()` to view the number of unindexed rows. This will be zero when indexes are fully up-to-date.
+{{< /admonition >}}
 
 ## Incremental Indexing in LanceDB OSS
 
@@ -45,8 +46,9 @@ This can make the query more efficient, especially when the table is large and t
     tbl.optimize(OptimizeAction::All).execute().await?;
     ```
 
-!!! note "Performance Considerations"
-    New data added after creating the FTS index will appear in search results while the incremental index is still in progress, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud & Enterprise automate this merging process, minimizing the impact on search speed.
+{{< admonition "note" "Performance Considerations" >}}
+New data added after creating the FTS index will appear in search results while the incremental index is still in progress, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud & Enterprise automate this merging process, minimizing the impact on search speed.
+{{< /admonition >}}
 
 ## FTS Index Reindexing
 

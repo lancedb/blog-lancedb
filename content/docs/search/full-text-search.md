@@ -7,8 +7,9 @@ description: "Learn how to implement full-text search in LanceDB. Includes text 
 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
 
-!!! note
-    The Python SDK uses our native FTS implementation by default, you need to pass `use_tantivy=True` to use tantivy-based FTS.
+{{< admonition "note" >}}
+The Python SDK uses our native FTS implementation by default, you need to pass `use_tantivy=True` to use tantivy-based FTS.
+{{< /admonition >}}
 
 ## **Basic Usage**
 
@@ -165,8 +166,9 @@ The search is conducted on all indexed columns by default, so it's useful when t
 
 If you want to specify which columns to search us `fts_columns="text"`
 
-!!! note
-    LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
+{{< admonition "note" >}}
+LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
+{{< /admonition >}}
 
 ## **Advanced Usage**
 
@@ -293,8 +295,9 @@ With post-filtering:
 
 ### **Phrase vs. Terms Queries**
 
-!!! warning "Warn"
-    Lance-based FTS doesn't support queries using boolean operators `OR`, `AND`.
+{{< admonition "warning" "Warn" >}}
+Lance-based FTS doesn't support queries using boolean operators `OR`, `AND`.
+{{< /admonition >}}
 
 For full-text search you can specify either a **phrase** query like `"the old man and the sea"`,
 or a **terms** search query like `old man sea`. For more details on the terms
@@ -732,17 +735,18 @@ in your queries. This feature is particularly useful when you need to:
       .toArray();
     ```
 
-!!! tip "Best Practices"
-    - Use fuzzy search when handling user input that may contain typos or variations
-    - Apply field boosting to prioritize matches in more important columns
-    - Combine fuzzy search with boosting for robust and precise search results
+{{< admonition "tip" "Best Practices" >}}
+- Use fuzzy search when handling user input that may contain typos or variations
+- Apply field boosting to prioritize matches in more important columns
+- Combine fuzzy search with boosting for robust and precise search results
 
-    **Recommendations for optimal FTS performance:**
+**Recommendations for optimal FTS performance:**
 
-    - Create full-text search indices on text columns that will be frequently searched
-    - For hybrid search combining text and vectors, see our [hybrid search guide](./hybrid-search.md)
-    - For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
-    - For complex queries, use SQL to combine FTS with other filter conditions
+- Create full-text search indices on text columns that will be frequently searched
+- For hybrid search combining text and vectors, see our [hybrid search guide](./hybrid-search.md)
+- For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
+- For complex queries, use SQL to combine FTS with other filter conditions
+{{< /admonition >}}
 
 ### **Boolean Queries**
 LanceDB supports boolean logic in full-text search, allowing you to combine multiple queries using `and` and `or` operators. This is useful when you want to match documents that satisfy multiple conditions (intersection) or at least one of several conditions (union).
@@ -758,8 +762,9 @@ In TypeScript, boolean queries are constructed using the `BooleanQuery` class wi
           ])`)
 This approach allows you to specify complex boolean logic by combining multiple subqueries with different Occur values (such as Must, Should, or MustNot).
 
-!!! note
-    A boolean query must include at least one `SHOULD` or `MUST` clause. Queries that contain only a `MUST_NOT` clause are not allowed.
+{{< admonition "note" >}}
+A boolean query must include at least one `SHOULD` or `MUST` clause. Queries that contain only a `MUST_NOT` clause are not allowed.
+{{< /admonition >}}
 
 === "Python"
     ```python
@@ -823,9 +828,10 @@ This approach allows you to specify complex boolean logic by combining multiple 
     console.log(shouldResults);
     ```
 
-!!! tip 
-    - Use `and`/`&`(Python), `Occur.Must`(Typescript) for intersection (documents must match all queries).
-    - Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
+{{< admonition "tip" >}}
+- Use `and`/`&`(Python), `Occur.Must`(Typescript) for intersection (documents must match all queries).
+- Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
+{{< /admonition >}}
 
 
 ## **Full-Text Search on Array Fields**

@@ -24,10 +24,11 @@ Here is what happens in the background - when a table contains a single vector c
 
 Finally, LanceDB Cloud/Enterprise will analyze your data distribution to **automatically configure indexing parameters**.
 
-!!! note "Manual Index Creation"
-  You can create a new index with different parameters using `create_index` - this replaces any existing index
+{{< admonition "note" "Manual Index Creation" >}}
+You can create a new index with different parameters using `create_index` - this replaces any existing index
 
-  Although the `create_index` API returns immediately, the building of the vector index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter.
+Although the `create_index` API returns immediately, the building of the vector index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter.
+{{< /admonition >}}
 
 ## **Example: Construct IVF Index**
 

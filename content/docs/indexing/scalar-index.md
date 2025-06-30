@@ -57,9 +57,9 @@ You can create multiple scalar indexes within a table. By default, the index wil
         await tbl.create_index("publisher", { config: lancedb.Index.bitmap() })
         ```
 
-!!! note "LanceDB Cloud and Enterprise"
-
-    If you are using Cloud or Enterprise, the `create_scalar_index` API returns immediately, but the building of the scalar index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter on `create_scalar_index()` or call `wait_for_index()` on the table.
+{{< admonition "note" "LanceDB Cloud and Enterprise" >}}
+If you are using Cloud or Enterprise, the `create_scalar_index` API returns immediately, but the building of the scalar index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter on `create_scalar_index()` or call `wait_for_index()` on the table.
+{{< /admonition >}}
 
 ### **2. Check Index Status**
 
@@ -109,9 +109,9 @@ Updating the table data (adding, deleting, or modifying records) requires that y
     tbl.optimize(OptimizeAction::All).execute().await?;
     ```
 
-!!! note "LanceDB Cloud"
-
-    New data added after creating the scalar index will still appear in search results if optimize is not used, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud automates the optimize process, minimizing the impact on search speed.
+{{< admonition "note" "LanceDB Cloud" >}}
+New data added after creating the scalar index will still appear in search results if optimize is not used, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud automates the optimize process, minimizing the impact on search speed.
+{{< /admonition >}}
 
 ### **4. Run Indexed Search**
 
@@ -182,12 +182,12 @@ Scalar indexes can also speed up scans containing a vector search or full text s
 
 LanceDB supports scalar indexes on UUID columns (stored as `FixedSizeBinary(16)`), enabling efficient lookups and filtering on UUID-based primary keys.
 
-!!! note
+{{< admonition "note" >}}
+To use FixedSizeBinary, ensure you have:
 
-    To use FixedSizeBinary, ensure you have:
-
-    - Python SDK version [0.22.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/python-v0.22.0-beta.4) or later
-    - TypeScript SDK version [0.19.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/v0.19.0-beta.4) or later
+- Python SDK version [0.22.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/python-v0.22.0-beta.4) or later
+- TypeScript SDK version [0.19.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/v0.19.0-beta.4) or later
+{{< /admonition >}}
 
 ### **1. Define UUID Type**
 

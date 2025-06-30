@@ -527,7 +527,6 @@ Each version represents a distinct state of your data, allowing you to:
 - Revert to previous states
 - Maintain data lineage for ML reproducibility
 
-!!! note "System Operations"
-    System operations like index updates and table compaction automatically increment
-    the table version number. These background processes are tracked in the version history,
-    though their version numbers are omitted from this example for clarity.
+{{< admonition "note" "System Operations" >}}
+System operations like index updates and table compaction automatically increment the table version number. These background processes are tracked in the version history, though their version numbers are omitted from this example for clarity.
+{{< /admonition >}}

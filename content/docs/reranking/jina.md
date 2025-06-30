@@ -9,8 +9,9 @@ weight: 8
 This reranker uses the [Jina](https://jina.ai/reranker/) API to rerank the search results. You can use this reranker by passing `JinaReranker()` to the `rerank()` method. Note that you'll either need to set the `JINA_API_KEY` environment variable or pass the `api_key` argument to use this reranker.
 
 
-!!! note
-    Supported Query Types: Hybrid, Vector, FTS
+{{< admonition "note" >}}
+Supported Query Types: Hybrid, Vector, FTS
+{{< /admonition >}}
 
 
 ```python

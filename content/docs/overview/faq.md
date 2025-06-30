@@ -62,7 +62,7 @@ For example, if you're retrieving the top 10 results and set `refine_factor` to 
 
 When using an IVF-PQ index, there's a trade-off between recall and latency at query time. You can improve recall by increasing the number of probes and the `refine_factor`. In our benchmark on the GIST-1M dataset, we show that it's possible to achieve >0.95 recall with a latency of under 10 ms on most systems, using ~50 probes and a `refine_factor` of 50. This is, of course, subject to the dataset at hand and a quick sensitivity study can be performed on your own data. You can find more details on the benchmark in our [blog post](https://blog.lancedb.com/benchmarking-lancedb-92b01032874a).
 
-![](../assets/recall-vs-latency.webp)
+![](/assets/docs/recall-vs-latency.webp)
 
 ### How do I connect to MinIO?
 
@@ -84,6 +84,6 @@ We target good performance on ~10-50 billion rows and ~10-30 TB of data.
 
 LanceDB can handle concurrent reads very well, and can scale horizontally. The main constraint is how well the [storage layer](https://lancedb.github.io/lancedb/concepts/storage/) you've chosen scales. For writes, we support concurrent writing, though too many concurrent writers can lead to failing writes as there is a limited number of times a writer retries a commit
 
-!!! info "Multiprocessing with LanceDB"
-
-    For multiprocessing you should probably not use ```fork``` as lance is multi-threaded internally and ```fork``` and multi-thread do not work well.[Refer to this discussion](https://discuss.python.org/t/concerns-regarding-deprecation-of-fork-with-alive-threads/33555)
+{{< admonition "info" "Multiprocessing with LanceDB" >}}
+For multiprocessing you should probably not use ```fork``` as lance is multi-threaded internally and ```fork``` and multi-thread do not work well.[Refer to this discussion](https://discuss.python.org/t/concerns-regarding-deprecation-of-fork-with-alive-threads/33555)
+{{< /admonition >}}

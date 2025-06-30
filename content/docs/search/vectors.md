@@ -11,7 +11,7 @@ Modern machine learning models can be trained to convert raw data into embedding
 
 Large datasets of multi-modal data (text, audio, images, etc.) can be converted into embeddings with the appropriate model. Projecting the vectors' principal components in 2D space results in groups of vectors that represent similar concepts clustering together, as shown below.
 
-![](../assets/embedding_intro.png)
+![](/assets/docs/embedding_intro.png)
 
 ## Multivector Type
 

@@ -17,9 +17,10 @@ The following concepts are important to keep in mind:
 - Data is divided into fragments that represent a subset of the data
 - Data is versioned, with each insert operation creating a new version of the dataset and an update to the manifest that tracks versions via metadata
 
-!!! note
-    1. First, each version contains metadata and just the new/updated data in your transaction. So if you have 100 versions, they aren't 100 duplicates of the same data. However, they do have 100x the metadata overhead of a single version, which can result in slower queries.  
-    2. Second, these versions exist to keep LanceDB scalable and consistent. We do not immediately blow away old versions when creating new ones because other clients might be in the middle of querying the old version. It's important to retain older versions for as long as they might be queried.
+{{< admonition "note" >}}
+1. First, each version contains metadata and just the new/updated data in your transaction. So if you have 100 versions, they aren't 100 duplicates of the same data. However, they do have 100x the metadata overhead of a single version, which can result in slower queries.  
+2. Second, these versions exist to keep LanceDB scalable and consistent. We do not immediately blow away old versions when creating new ones because other clients might be in the middle of querying the old version. It's important to retain older versions for as long as they might be queried.
+{{< /admonition >}}
 
 ## Understanding Data Fragments
 

@@ -6,13 +6,15 @@ weight: 20
 
 # Linear Combination Reranker in LanceDB
 
-!!! note
-    This is deprecated. It is recommended to use the `RRFReranker` instead, if you want to use a score-based reranker.
+{{< admonition "note" >}}
+This is deprecated. It is recommended to use the `RRFReranker` instead, if you want to use a score-based reranker.
+{{< /admonition >}}
 
 The Linear Combination Reranker combines the results of semantic and full-text search using a linear combination of the scores. The weights for the linear combination can be specified, and defaults to 0.7, i.e, 70% weight for semantic search and 30% weight for full-text search.
 
-!!! note
-    Supported Query Types: Hybrid
+{{< admonition "note" >}}
+Supported Query Types: Hybrid
+{{< /admonition >}}
 
 
 ```python

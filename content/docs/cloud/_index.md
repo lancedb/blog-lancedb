@@ -4,9 +4,9 @@ description: Learn about LanceDB Cloud, a serverless vector database service. In
 weight: 3
 ---
 
-# **What is LanceDB Cloud?**
-
 LanceDB Cloud is a serverless vector database service that makes it easy to build, deploy, and scale AI-powered applications.
+
+![](/assets/docs/lancedb_cloud.png)
 
 LanceDB Cloud provides the same underlying fast vector store that powers the OSS version, but without the need to maintain your own infrastructure. Because it's serverless, you only pay for the storage you use, and you can scale compute up and down as needed depending on the size of your data and its associated index.
 
@@ -29,6 +29,8 @@ It's designed to be cost-effective and highly scalable without breaking the bank
 ## Upgrading from OSS to Cloud
 
 The OSS version of LanceDB is designed to be embedded in your application, and it runs in-process. This makes it incredibly simple to self-host your own AI retrieval workflows for RAG and more and build and test out your concepts on your own infrastructure. The OSS version is forever free, and you can continue to build and integrate LanceDB into your existing backend applications without any added costs.
+
+![](/assets/docs/lancedb_oss_and_cloud.png)
 
 Should you decide that you need a managed deployment in production, it's possible to seamlessly transition from the OSS to the cloud version by changing the connection string to point to a remote database instead of a local one. With LanceDB Cloud, you can take your AI application from development to production without major code changes or infrastructure burden.
 
