@@ -1,10 +1,8 @@
 ---
-title: "Embedding"
+title: "Embedding API"
 description: "Welcome to LanceDB documentation"
 weight: 18
 ---
-
-# **Embedding API in LanceDB**
 
 LanceDB provides a powerful Embedding API that makes it easy to work with various embedding models and integrate them into your vector search workflow.
 

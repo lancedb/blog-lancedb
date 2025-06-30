@@ -1,10 +1,8 @@
 ---
-title: "LanceDB Enterprise Deployment | Production Setup Guide"
+title: "Deployment"
 description: "Learn how to deploy LanceDB Enterprise in production environments. Includes deployment options, configuration, and best practices for enterprise installations."
 weight: 3
 ---
-
-# Available Deployment Models
 
 There are two deployment models available for LanceDB Enterprise: **Managed** and **BYOC**.
 Both models support AWS, GCP, and Azure cloud platforms.

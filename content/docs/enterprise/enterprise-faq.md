@@ -1,11 +1,9 @@
 ---
-title: "LanceDB Enterprise FAQ | Frequently Asked Questions"
+title: "LanceDB Enterprise FAQ"
 description: "Find answers to common questions about LanceDB Enterprise, including connection management, indexing, querying, architecture, and monitoring. Comprehensive guide for enterprise users."
 keywords: "LanceDB Enterprise, vector database FAQ, enterprise vector search, database connection, indexing, querying, architecture, monitoring, fault tolerance, consistency, GPU indexing"
 weight: 4
 ---
-
-# LanceDB Enterprise FAQ
 
 ## Connection
 

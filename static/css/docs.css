@@ -535,4 +535,89 @@
 main h1 {
   text-align: left;
   font-size: 2.4rem;
+}
+
+.docs-article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Special style for two-column tables */
+.docs-article-content table:has(tr td:nth-child(2):last-child) {
+    width: auto;
+    min-width: 50%;
+    margin-left: 0;
+}
+
+/* Fallback for browsers that don't support :has() */
+.docs-article-content table.two-column {
+    width: auto;
+    min-width: 50%;
+    margin-left: 0;
+}
+
+.docs-article-content table th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+.docs-article-content table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.docs-article-content table tr:last-child td {
+    border-bottom: none;
+}
+
+.docs-article-content table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.docs-article-content table th:first-child,
+.docs-article-content table td:first-child {
+    padding-left: 1.25rem;
+}
+
+.docs-article-content table th:last-child,
+.docs-article-content table td:last-child {
+    padding-right: 1.25rem;
+}
+
+/* Responsive table handling */
+@media (max-width: 768px) {
+    .docs-article-content table {
+        font-size: 0.85rem;
+        margin: 1rem 0;
+    }
+    
+    .docs-article-content table th,
+    .docs-article-content table td {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .docs-article-content table th:first-child,
+    .docs-article-content table td:first-child {
+        padding-left: 1rem;
+    }
+    
+    .docs-article-content table th:last-child,
+    .docs-article-content table td:last-child {
+        padding-right: 1rem;
+    }
 } 

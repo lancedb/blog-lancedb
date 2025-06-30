@@ -1,10 +1,8 @@
 ---
-title: "LanceDB Enterprise Architecture | System Design Guide"
+title: "Architecture"
 description: "Learn about LanceDB Enterprise architecture and system design. Includes components, scalability, and high-availability features for enterprise deployments."
 weight: 1
 ---
-
-# LanceDB Enterprise Architecture
 
 LanceDB Enterprise consists of the following key components:
 
@@ -12,7 +10,7 @@ LanceDB Enterprise consists of the following key components:
 - Plan Execution Fleet
 - Indexer Fleet
 
-![architecture](../assets/architecture.png)
+![architecture](/assets/docs/architecture.png)
 
 ### Query Execution
 
@@ -42,9 +40,11 @@ An extensive indexing fleet, enhanced with hardware acceleration, operates async
 perform partial or full indexing, data compaction, and cleanup.
 Furthermore, we achieve high-throughput indexing operations without compromising query performance.
 
-!!! tip
-    Customer data does not go through the event queue. The queue sends events such as
-    "create an index" to the indexers to trigger actions.
+{{< admonition tip >}}
+Customer data does not go through the event queue. The queue sends events such as
+"create an index" to the indexers to trigger actions.
+{{< /admonition >}}
 
-!!! note
-    Indexing scales down to zero when there is no activity on the table.
+{{< admonition note >}}
+Indexing scales down to zero when there is no activity on the table.
+{{< /admonition >}}

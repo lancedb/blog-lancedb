@@ -1,10 +1,8 @@
 ---
-title: "LanceDB Enterprise Security | Security Features Guide"
+title: "Security & Compliance"
 description: "Learn about LanceDB Enterprise security features and best practices. Includes authentication, encryption, access control, and compliance features."
 weight: 5
 ---
-
-# LanceDB Enterprise Security & Compliance
 
 ## LanceDB Achieves SOC 2 Type II & HIPAA Compliance: Your Data, Secured
 
