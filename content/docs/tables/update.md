@@ -1,9 +1,8 @@
 ---
-title: "Data Operations in LanceDB | Data Modification Guide"
+title: "Data Operations in LanceDB"
+sidebar_title: "Data Operations"
 description: "Learn how to update and modify data in LanceDB. Includes incremental updates, batch modifications, and best practices for data maintenance."
 ---
-
-# Data Operations in LanceDB 
 
 Once you have created a table, there are several ways to modify its data. You can:
 

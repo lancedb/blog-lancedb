@@ -1,6 +1,7 @@
 ---
-title: "Basic Usage" 
-description: Start using LanceDB with this comprehensive guide. Learn core concepts, installation, basic operations, and best practices for vector database management.
+title: "LanceDB: Comprehensive Guide for Beginners"
+sidebar_title: "Basic Usage"
+description: Learn how to use LanceDB with Python, TypeScript, and Rust SDKs. Includes installation instructions, basic operations, and code examples for each language.
 weight: 2
 ---
 

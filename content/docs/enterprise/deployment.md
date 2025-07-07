@@ -1,5 +1,6 @@
 ---
-title: "Deployment"
+title: "LanceDB Enterprise Deployment Guide"
+sidebar_title: "Deployment"
 description: "Learn how to deploy LanceDB Enterprise in production environments. Includes deployment options, configuration, and best practices for enterprise installations."
 weight: 3
 ---

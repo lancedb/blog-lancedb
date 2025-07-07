@@ -1,9 +1,10 @@
 ---
-title: "Quickstart"
+title: "Getting Started with LanceDB"
+sidebar_title: "Quickstart"
+description: Get started with LanceDB, a modern vector database for AI applications. Learn how to install, connect, and perform basic operations with our Python, TypeScript, and Rust SDKs.
+keywords: LanceDB quickstart, vector database tutorial, AI database setup, semantic search database, vector similarity search
 weight: 5
 ---
-
-# Quickstart
 
 ![LanceDB Hero Image](/assets/docs/quickstart/quickstart.png)
 

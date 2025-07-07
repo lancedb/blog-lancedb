@@ -1,7 +1,8 @@
 ---
 title: Logging in LanceDB Cloud
+sidebar_title: "Logging"
 description: Find answers to common questions about LanceDB Cloud. Includes setup, usage, pricing, and best practices for cloud-based vector database deployment.
-weight: 3
+weight: 2
 ---
 
 To provide more information, especially for LanceDB Cloud related issues, enable

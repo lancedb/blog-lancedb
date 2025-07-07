@@ -1,9 +1,8 @@
 ---
-title: "Versioning & Reproducibility in LanceDB | Data Versioning Guide"
+title: "Versioning & Reproducibility in LanceDB"
+sidebar_title: "Versioning"
 description: "Learn how to implement versioning and ensure reproducibility in LanceDB. Includes version control, data snapshots, and audit trails."
 ---
-
-# Version Control & Reproducibility in LanceDB
 
 LanceDB redefines data management for AI/ML workflows with built-in, 
 automatic versioning powered by the [Lance columnar format](https://github.com/lancedb/lance). 

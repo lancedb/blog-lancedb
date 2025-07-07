@@ -1,5 +1,6 @@
 ---
-title: "LanceDB Cloud"
+title: "LanceDB Cloud: The Serverless Vector Database"
+sidebar_title: "LanceDB Cloud"
 description: Learn about LanceDB Cloud, a serverless vector database service. Includes features, benefits, and best practices for cloud-based vector search applications.
 weight: 3
 ---

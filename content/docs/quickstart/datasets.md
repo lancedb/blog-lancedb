@@ -1,10 +1,9 @@
 ---
-title: "Datasets" 
-description: Start using LanceDB with this comprehensive guide. Learn core concepts, installation, basic operations, and best practices for vector database management.
+title: "How to Ingest a Dataset into LanceDB"
+sidebar_title: "Ingest Data"
+description: Learn how to ingest datasets from Huggingface into LanceDB Cloud. Follow step-by-step instructions for data ingestion, connection setup, and basic search operations.
 weight: 3
 ---
-
-# Ingest a Dataset
 
 In this tutorial, you will ingest a dataset from Huggingface into your **LanceDB Cloud** table. For interactive code, check out the [**Python Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  or the [**TypeScript Example**](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
 

@@ -1,5 +1,6 @@
 ---
-title: "Benchmarks"
+title: "LanceDB Enterprise Performance Benchmarks"
+sidebar_title: "Benchmarks"
 description: "Learn about LanceDB Enterprise performance benchmarks and metrics. Includes query performance, scalability tests, and comparison with other vector databases."
 weight: 2
 ---

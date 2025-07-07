@@ -1,9 +1,8 @@
 ---
 title: Consistency in LanceDB
+sidebar_title: "Consistency"
 description: Learn about consistency settings and versioning in LanceDB tables.
 ---
-
-# Consistency in LanceDB
 
 In LanceDB OSS, users can set the `read_consistency_interval` parameter on connections to achieve different levels of read consistency. This parameter determines how frequently the database synchronizes with the underlying storage system to check for updates made by other processes. If another process updates a table, the database will not see the changes until the next synchronization.
 

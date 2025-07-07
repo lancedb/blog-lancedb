@@ -1,9 +1,8 @@
 ---
 title: Working With Tables in LanceDB
+sidebar_title: "Basic Table Operations"
 description: Learn about different methods to create tables in LanceDB, including from various data sources and empty tables.
 ---
-
-# Working With Tables in LanceDB
 
 In LanceDB, tables store records with a defined schema that specifies column names and types. You can create LanceDB tables from these data formats:
 

@@ -1,9 +1,8 @@
 ---
-title: Schema Management with LanceDB
+title: "Schema Management with LanceDB"
+sidebar_title: "Schema"
 description: Learn how to manage table schemas in LanceDB, including adding, altering, and dropping columns.
 ---
-
-# Schema Management with LanceDB
 
 Schema evolution enables non-breaking modifications to a database table's structure — such as adding columns, altering data types, or dropping fields — to adapt to evolving data requirements without service interruptions. 
 LanceDB supports ACID-compliant schema evolution through granular operations (add/alter/drop columns), allowing you to:

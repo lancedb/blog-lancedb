@@ -1,16 +1,12 @@
 ---
-title: Storage in LanceDB | Data Persistence & Management
+title: "Configuring Cloud Storage in LanceDB"
+sidebar_title: "Configuration"
 description: Master LanceDB's storage capabilities for efficient data management. Covers local storage, cloud storage, data versioning, and best practices for large-scale vector data persistence.
 ---
 
-# **Configuring Cloud Storage for LanceDB**
-
-<!-- TODO: When we add documentation for how to configure other storage types
-           we can change the name to a more general "Configuring storage" -->
-
 When using LanceDB OSS, you can choose where to store your data. The tradeoffs between different storage options are discussed in the [storage concepts guide](../concepts/storage.md). This guide shows how to configure LanceDB to use different storage options.
 
-## **Object Stores**
+## Object Stores
 
 LanceDB OSS supports object stores such as AWS S3 (and compatible stores), Azure Blob Store, and Google Cloud Storage. Which object store to use is determined by the URI scheme of the dataset path. `s3://` is used for AWS S3, `az://` is used for Azure Blob Storage, and `gs://` is used for Google Cloud Storage. These URIs are passed to the `connect` function:
 
@@ -224,7 +220,7 @@ Getting even more specific, you can set the `timeout` for only a particular tabl
 
     The storage option keys are case-insensitive. So `connect_timeout` and `CONNECT_TIMEOUT` are the same setting. Usually lowercase is used in the `storage_options` argument and uppercase is used for environment variables. In the `lancedb` Node package, the keys can also be provided in `camelCase` capitalization. For example, `connectTimeout` is equivalent to `connect_timeout`.
 
-### **General configuration**
+### General configuration
 
 There are several options that can be set for all object stores, mostly related to network client configuration.
 

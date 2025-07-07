@@ -19,7 +19,7 @@
           <details {{ if or (eq .RelPermalink $current.RelPermalink) (in $current.RelPermalink .RelPermalink) }}open{{ end }}>
             <summary>
               <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-                {{ .Title }}
+                {{ .Params.sidebar_title | default .Title }}
               </a>
             </summary>
             {{- $sectionPermalink := .RelPermalink -}}
@@ -32,7 +32,7 @@
                       <div class="sidebar-divider">{{ .Title }}</div>
                     {{- else }}
                       <a href="{{ .RelPermalink }}" class="sidebar-sublink{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">
-                        {{ .Title }}
+                        {{ .Params.sidebar_title | default .Title }}
                       </a>
                     {{- end }}
                   </li>

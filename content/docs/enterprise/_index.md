@@ -1,5 +1,6 @@
 ---
-title: "LanceDB Enterprise"
+title: "LanceDB Enterprise: The Multimodal Lakehouse"
+sidebar_title: "LanceDB Enterprise"
 description: "Learn about LanceDB Enterprise, the enterprise-grade vector database solution. Includes features, benefits, and deployment options for production environments."
 weight: 4
 ---

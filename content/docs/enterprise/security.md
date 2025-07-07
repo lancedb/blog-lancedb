@@ -1,5 +1,6 @@
 ---
-title: "Security & Compliance"
+title: "LanceDB Enterprise Security & Compliance"
+sidebar_title: "Security"
 description: "Learn about LanceDB Enterprise security features and best practices. Includes authentication, encryption, access control, and compliance features."
 weight: 5
 ---
