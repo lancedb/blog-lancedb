@@ -1,5 +1,6 @@
 ---
-title: ColBERT Reranker in LanceDB | Contextual Search Optimization
+title: ColBERT Reranker in LanceDB 
+sidebar_title: "ColBERT"
 description: Enhance search results with ColBERT's contextual reranking in LanceDB. Features efficient model deployment, device optimization, and flexible scoring options for vector, FTS, and hybrid search.
 weight: 3
 ---

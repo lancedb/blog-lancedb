@@ -1,5 +1,5 @@
 ---
-title: "Embedding API"
+title: "Embeddings"
 description: "Welcome to LanceDB documentation"
 weight: 18
 ---

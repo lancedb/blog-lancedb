@@ -1,7 +1,8 @@
 ---
-title: Reciprocal Rank Fusion in LanceDB | Default Hybrid Search Reranker
+title: Reciprocal Rank Fusion in LanceDB 
+sidebar_title: "RRF Algorithm"
 description: Learn about LanceDB's default Reciprocal Rank Fusion (RRF) reranker for hybrid search. Implements the Cormack et al. algorithm for optimal search result ranking.
-weight: 11
+weight: 2
 ---
 
 # Reciprocal Rank Fusion Reranker in LanceDB

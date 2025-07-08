@@ -1,7 +1,8 @@
 ---
-title: Linear Combination Reranker in LanceDB | Score-Based Search Optimization
+title: Linear Combination Reranker in LanceDB 
+sidebar_title: "Linear Combination"
 description: Learn about LanceDB's deprecated Linear Combination Reranker for combining semantic and full-text search scores.
-weight: 20
+weight: 5
 ---
 
 # Linear Combination Reranker in LanceDB

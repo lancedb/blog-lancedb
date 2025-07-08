@@ -1,7 +1,7 @@
 ---
-title: Hybrid Search Evaluation | Performance Metrics Guide
+title: Reranking Evaluation 
 description: Learn about evaluating hybrid search performance in LanceDB. Includes metrics for vector search, keyword search, and reranking methods, with real-world performance comparisons.
-weight: 6
+weight: 99
 ---
 
 # Hybrid Search

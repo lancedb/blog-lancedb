@@ -2,7 +2,6 @@
 title: "How to Use This Documentation Site"
 sidebar_title: "How to Use This Docsite"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
-weight: 2
 ---
 
 {{< admonition "note" "Welcome to LanceDB documentation!" >}}

@@ -1,5 +1,6 @@
 ---
-title: Jina Reranker in LanceDB | Multilingual Search Enhancement
+title: Jina AI Reranker in LanceDB 
+sidebar_title: "Jina AI"
 description: Integrate Jina's multilingual reranking API with LanceDB for improved search results. Features model selection, API key management, and flexible scoring options for all search types.
 weight: 8
 ---

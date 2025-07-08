@@ -1,7 +1,8 @@
 ---
-title: OpenAI Reranker in LanceDB | Experimental GPT-Powered Search
+title: OpenAI Reranker in LanceDB 
+sidebar_title: "OpenAI"
 description: Explore experimental search reranking using OpenAI's GPT models in LanceDB. Features configurable model selection, API key management, and comprehensive scoring options for all search types.
-weight: 10
+weight: 9
 ---
 
 # OpenAI Reranker (Experimental) in LanceDB

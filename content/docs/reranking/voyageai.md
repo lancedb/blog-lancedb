@@ -1,7 +1,8 @@
 ---
-title: VoyageAI Reranker in LanceDB | Advanced Search Optimization
+title: VoyageAI Reranker in LanceDB 
+sidebar_title: "Voyage AI"
 description: Integrate VoyageAI's cutting-edge reranking models with LanceDB. Features model selection, API key management, and comprehensive scoring options for all search types.
-weight: 12
+weight: 10
 ---
 
 # Voyage AI Reranker in LanceDB

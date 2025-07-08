@@ -1,7 +1,8 @@
 ---
-title: Custom Rerankers in LanceDB | Extending Search Capabilities
+title: Custom Rerankers in LanceDB 
+sidebar_title: "Custom Rerankers"
 description: Learn how to create custom rerankers in LanceDB by extending the base Reranker class. Includes implementation examples, score handling, and best practices for hybrid search optimization.
-weight: 5
+weight: 6
 ---
 
 # Building Custom Rerankers in LanceDB

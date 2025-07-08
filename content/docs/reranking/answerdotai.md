@@ -1,7 +1,8 @@
 ---
-title: AnswerDotAI Rerankers in LanceDB | Unified Reranking API
+title: Answer.AI Rerankers in LanceDB 
+sidebar_title: "Answer.AI"
 description: Use AnswerDotAI's lightweight reranking library with LanceDB. Features unified API for common reranking models, configurable model selection, and comprehensive scoring options.
-weight: 1
+weight: 11
 ---
 
 # AnswersDotAI Rerankers in LanceDB

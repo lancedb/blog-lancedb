@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
-weight: 1
+title: "Products"
+weight: 4
 layout: "divider"
 ---

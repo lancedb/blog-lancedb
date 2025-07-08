@@ -1,7 +1,8 @@
 ---
-title: Cohere Reranker in LanceDB | AI-Powered Search Optimization
+title: Cohere Reranker in LanceDB 
+sidebar_title: "Cohere"
 description: Integrate Cohere's powerful reranking API with LanceDB for enhanced search results. Supports English and multilingual models with configurable scoring options for vector, FTS, and hybrid search.
-weight: 2
+weight: 7
 ---
 
 # Cohere Reranker in LanceDB
