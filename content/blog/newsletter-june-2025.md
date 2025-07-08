@@ -25,7 +25,7 @@ This milestone represents a significant validation of our vision to democratize 
 [Announcement from our Cofounder & CEO Chang She](https://lancedb.com/blog/series-a-funding/)
 {{% /admonition %}}
 
-## LanceDB Multimodal Lakehouse
+## Introducing the LanceDB Multimodal Lakehouse
 
 As of June 24th, 2025, along with the celebration of LanceDB’s Series A, we are introducing the [Multimodal Lakehouse Suite of Products](https://lancedb.com/multimodal-lakehouse.html) into LanceDB Enterprise. 
 
@@ -43,7 +43,7 @@ With built-in support for the latest AI frameworks and optimized performance for
 [What is the LanceDB Multimodal Lakehouse?](https://lancedb.com/blog/multimodal-lakehouse/)
 {{% /admonition %}}
 
-## LanceDB Enterprise Product News
+## Product News: New Enterprise Features
 
 | Feature | Description |
 |---------|-------------|
@@ -52,7 +52,7 @@ With built-in support for the latest AI frameworks and optimized performance for
 | **Streamlined Kubernetes deployments** | Native Helm chart support makes BYOC setups faster and easier to manage. A deployment can be up and running in a couple of hours. |
 | **Smarter vector search with tight filters** | Fine-tune recall with new minimum_nprobes and maximum_nprobes controls for better results on queries with highly selective filters. |
 
-## Open Source Releases:
+## Lance & LanceDB OSS Releases:
 
 | Project | Version | Updates |
 |---------|---------|----------|
@@ -60,7 +60,7 @@ With built-in support for the latest AI frameworks and optimized performance for
 | Lance | [v0.30.0](https://github.com/lancedb/lance/releases/tag/v0.30.0) | Breaking changes: [auto-remap indexes before scan](https://github.com/lancedb/lance/pull/3971) & [move file metadata cache to bytes capacity](https://github.com/lancedb/lance/pull/3949). |
 | LanceDB | [v0.21.0](https://github.com/lancedb/lancedb/releases/tag/v0.21.0) | Various improvements to native full text search and native full text search is now the default <br> New documentation site: lancedb.github.io/documentation <br> Lance Trino connector and PostgreSQL extension|
 
-## Events Recap
+## Events and Community Recap
 
 ### From Text to Video: A Unified Multimodal Data Lake for Next-Generation AI
 
@@ -82,9 +82,9 @@ Throughout the talk, Ethan shares pragmatic lessons on system design—covering 
 
 With candid insights and practical trade-offs, this session is essential for engineers and researchers building scalable, researcher-friendly pipelines for the next generation of generative AI.
 
-## Community Contributions:
+## Thank You to Our Valued Contributors:
 
-A heartfelt thank you to our community contributors of lance and lancedb this past month:
+A heartfelt thank you to our community contributors of Lance and LanceDB OSS projects this past month:
 
 @renato2099, @wojiaodoubao, @Jay-ju, @b4l, @yanghua, @HaochengLIU, @ddupg, @bjurkovski  @kilavvy@wojiaodoubao, @leaves12138, @majin1102, @leopardracer, @luohao, @KazuhitoT, @frankliee
 
