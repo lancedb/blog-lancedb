@@ -1,20 +1,20 @@
 ---
 title: "Getting Started with LanceDB"
 sidebar_title: "Quickstart"
-description: Get started with LanceDB, a modern vector database for AI applications. Learn how to install, connect, and perform basic operations with our Python, TypeScript, and Rust SDKs.
+description: Get started with LanceDB, a modern vector database for AI applications. Learn how to install, connect, and perform basic operations with our Python SDK for Cloud.
 keywords: LanceDB quickstart, vector database tutorial, AI database setup, semantic search database, vector similarity search
 weight: 2
 ---
 
 ![LanceDB Hero Image](/assets/docs/quickstart/quickstart.png)
 
-This is a minimal tutorial for Python users. In [**Basic Usage**](../quickstart/basic-usage.md), we'll show you how to work with our Typescript and Rust SDKs. 
+This is a minimal tutorial for Python users on LanceDB Cloud. For more advanced usage, see [**Basic Usage**](../quickstart/basic-usage).
 
 [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb).
 
 ## 1. Install LanceDB
 
-LanceDB requires Python 3.8+ and can be installed via `pip`. The `pandas` package is optional but recommended for data manipulation. **By default, you can manage data using Python lists or dictionaries.** LanceDB also integrates seamlessly with popular data libraries like `pyarrow`, `pydantic`, and `polars` to provide flexible data handling options.
+LanceDB requires Python 3.8+ and can be installed via `pip`. The `pandas` package is optional but recommended for data manipulation.
 
 ```python
 pip install lancedb pandas
@@ -29,75 +29,21 @@ import lancedb
 import pandas as pd
 ```
 
-## 3. Connect to LanceDB
+## 3. Connect to LanceDB Cloud
 
-LanceDB supports both managed and local deployments. The connection `uri` determines where your data is stored. We recommend using [**LanceDB Cloud**](../cloud/index.md) or [**Enterprise**](../enterprise/index.md) for production workloads as they provide a managed infrastructure, security, and automatic backups. 
+LanceDB Cloud provides managed infrastructure, security, and automatic backups. The connection `uri` determines where your data is stored.
 
-=== "Cloud"
-
-    === "Sync API"
-        ```python
-        db = lancedb.connect(
-            uri="db://your-project-slug",
-            api_key="your-api-key",
-            region="us-east-1"
-        )
-        ```
-
-    === "Async API"
-        ```python
-        db = await lancedb.connect_async(
-            uri="db://your-project-slug",
-            api_key="your-api-key",
-            region="us-east-1"
-        )
-        ```
-
-=== "Enterprise"
-
-    For LanceDB Enterprise, set the host override to your private cloud endpoint.
-
-    === "Sync API"
-        ```python
-        host_override = os.environ.get("LANCEDB_HOST_OVERRIDE")
-
-        db = lancedb.connect(
-            uri=uri,
-            api_key=api_key,
-            region=region,
-            host_override=host_override
-        )
-        ```
-
-    === "Async API"
-        ```python
-        host_override = os.environ.get("LANCEDB_HOST_OVERRIDE")
-
-        db = await lancedb.connect_async(
-            uri=uri,
-            api_key=api_key,
-            region=region,
-            host_override=host_override
-        )
-        ```
-
-=== "Open Source"
-
-    === "Sync API"
-        ```python
-        uri = "data/sample-lancedb"
-        db = lancedb.connect(uri)
-        ```
-
-    === "Async API"
-        ```python
-        uri = "data/sample-lancedb"
-        db = await lancedb.connect_async(uri)
-        ```
+```python
+db = lancedb.connect(
+    uri="db://your-project-slug",
+    api_key="your-api-key",
+    region="us-east-1"
+)
+```
 
 ## 4. Add Data
 
-Create a `pandas` DataFrame with your data. Each row must contain a vector field (list of floats) and can include additional metadata. 
+Create a `pandas` DataFrame with your data. Each row must contain a vector field (list of floats) and can include additional metadata.
 
 ```python
 data = pd.DataFrame([
@@ -113,35 +59,21 @@ data = pd.DataFrame([
 
 Create a table in the database. The table takes on the schema of your ingested data.
 
-=== "Sync API"
-    ```python
-    table = db.create_table("adventurers", data)
-    ```
-
-=== "Async API"
-    ```python
-    table = await db.create_table_async("adventurers", data)
-    ```
+```python
+table = db.create_table("adventurers", data)
+```
 
 ## 6. Vector Search
 
 Perform a vector similarity search. The query vector should have the same dimensionality as your data vectors. The search returns the most similar vectors based on **euclidean distance**.
 
-Our query is **"warrior" - [0.8, 0.3, 0.8]**. Let's find the most similar adventurer:  
+Our query is **"warrior" - [0.8, 0.3, 0.8]**. Let's find the most similar adventurer:
 
-=== "Sync API"
-    ```python
-    query_vector = [0.8, 0.3, 0.8]  
-    results = table.search(query_vector).limit(3).to_pandas()
-    print(results)
-    ```
-
-=== "Async API"
-    ```python
-    query_vector = [0.8, 0.3, 0.8]  
-    results = await table.search(query_vector).limit(3).to_pandas()
-    print(results)
-    ```
+```python
+query_vector = [0.8, 0.3, 0.8]  
+results = table.search(query_vector).limit(3).to_pandas()
+print(results)
+```
 
 ## 7. Results
 
