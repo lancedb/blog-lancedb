@@ -82,7 +82,7 @@ Throughout the talk, Ethan shares pragmatic lessons on system design—covering 
 
 With candid insights and practical trade-offs, this session is essential for engineers and researchers building scalable, researcher-friendly pipelines for the next generation of generative AI.
 
-## Thank You to Our Valued Contributors:
+## A Thank You to Our Valued Contributors:
 
 A heartfelt thank you to our community contributors of Lance and LanceDB OSS projects this past month:
 
