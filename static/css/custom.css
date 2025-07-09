@@ -2543,6 +2543,18 @@ nav.pagination .pagination-link.current {
     margin-bottom: 0;
 }
 
+/* Remove underline from links in admonitions */
+.admonition a {
+    text-decoration: none;
+    color: var(--text-accent);
+    transition: color 0.2s ease;
+}
+
+.admonition a:hover {
+    color: #f43f5e;
+    text-decoration: none;
+}
+
 /* All admonition types use enhanced orange styling */
 .admonition.info,
 .admonition.tip,
@@ -2748,3 +2760,13 @@ nav.pagination .pagination-link.current {
         font-size: 0.85rem;
     }
 } 
+
+.admonition a,
+.admonition a:visited,
+.admonition a strong,
+.admonition .admonition-title a,
+.admonition .admonition-title a strong {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
