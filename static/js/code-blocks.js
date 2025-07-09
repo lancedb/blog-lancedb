@@ -262,7 +262,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     monitorPerformance();
+
+    // Add copy buttons to code blocks
+    document.querySelectorAll('pre').forEach(function(block) {
+        addCopyButton(block);
+    });
+
+    // Mark two-column tables
+    document.querySelectorAll('.docs-article-content table').forEach(function(table) {
+        const firstRow = table.querySelector('tr');
+        if (firstRow && firstRow.children.length === 2) {
+            table.classList.add('two-column');
+        }
+    });
 });
+
+function addCopyButton(block) {
+    // ... existing code ...
+}
 
 // Add CSS animation class
 const style = document.createElement('style');

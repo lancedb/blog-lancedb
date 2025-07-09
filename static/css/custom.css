@@ -2748,3 +2748,27 @@ nav.pagination .pagination-link.current {
         font-size: 0.85rem;
     }
 } 
+
+.section.is-footer {
+  width: 100vw;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section.is-footer .container {
+  max-width: 1200px !important;
+  width: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .section.is-footer .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
