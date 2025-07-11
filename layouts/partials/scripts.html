@@ -1,0 +1,14 @@
+{{ $announcementJs := resources.Get "js/announcement.js" | js.Build "announcement.js" | fingerprint }}
+{{ $tocJs := resources.Get "js/toc-progress.js" | js.Build "toc.js" | fingerprint }}
+{{ $headingLinksJs := resources.Get "js/heading-links.js" | js.Build "headingLinks.js" | fingerprint }}
+{{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js"  | fingerprint }}
+{{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
+
+<script src="{{ $announcementJs.RelPermalink }}"></script>
+
+{{ if eq .Type "blog" }}
+    <script src="{{ $tocJs.RelPermalink }}"></script> 
+    <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
+    <script src="{{ $codeTabJS.RelPermalink }}"></script> 
+    <script src="{{ $codeBlocksJS.RelPermalink }}"></script> 
+{{ end }}

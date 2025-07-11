@@ -1,0 +1,137 @@
+/** =====================================================================================
+ *  Toolbox functions
+ ===================================================================================== */
+
+/* Maths helpers: Halve, Double, Quarter, etc. */
+
+/**
+ * Divides a number by 4 and rounds to the nearest integer.
+ */
+ @function quarter($number) {
+  @return round($number / 4);
+}
+
+/**
+ * Divides a number by 2 and rounds to the nearest integer.
+ */
+@function halve($number) {
+  @return round($number / 2);
+}
+
+/**
+ * Multiplies a number by 2 and rounds to the nearest integer.
+ */
+@function double($number) {
+  @return round($number * 2);
+}
+
+/**
+ * Multiplies a number by 3 and rounds to the nearest integer.
+ */
+@function triple($number) {
+  @return round($number * 3);
+}
+
+/**
+ * Multiplies a number by 4 and rounds to the nearest integer.
+ */
+@function quadruple($number) {
+  @return round($number * 4);
+}
+
+/* Calculation helpers */
+
+/**
+ * Performs basic mathematical operations.
+ * Supports unitless and comparable values, otherwise returns a CSS `calc()` string.
+ * 
+ * @param $value1 - The first operand.
+ * @param $operator - The mathematical operator (+, -, *, /).
+ * @param $value2 - The second operand.
+ * 
+ * @return - Result of the operation or a calc() string for incompatible units.
+ */
+@function _calc($value1, $operator, $value2) {
+  @if unitless($value1) or unitless($value2) or comparable($value1, $value2) {
+    @if $operator == '+' {
+      @return $value1 + $value2;
+    } @else if $operator == '-' {
+      @return $value1 - $value2;
+    } @else if $operator == '*' {
+      @return $value1 * $value2;
+    } @else if $operator == '/' {
+      @if $value2 == 0 {
+        @error "Division by zero is not allowed.";
+      }
+      @return $value1 / $value2;
+    } @else {
+      @error "Invalid operator. Use +, -, *, or /.";
+    }
+  } @else {
+    @return unquote("calc(#{$value1} #{$operator} #{$value2})");
+  }
+}
+
+/* Unit manipulation */
+
+/**
+ * Removes the unit from a number, returning a unitless value.
+ */
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/* Number validation */
+
+/**
+ * Checks if a value is a number.
+ */
+@function is-number($value) {
+  @return type-of($value) == 'number';
+}
+
+/* Unit conversion */
+
+/**
+ * Converts a value to REM units based on a root font-size of 16px.
+ */
+@function value-to-rem($value) {
+  $no-units: strip-unit($value);
+  @return #{$no-units / 16}rem;
+}
+
+/**
+ * Converts a value to EM units based on a root font-size of 16px.
+ */
+@function value-to-em($value) {
+  $no-units: strip-unit($value);
+  @return #{$no-units / 16}em;
+}
+
+/* Palette access */
+
+/**
+ * Retrieves a color from the palette map.
+ * 
+ * @param $palette - The palette key.
+ * @param $level - The color level (default: 'base').
+ * 
+ * @return - The requested color or a fallback value if not found.
+ */
+@function palette($palette, $level: 'base') {
+  @if map-has-key($palettes, $palette) {
+    @if map-has-key(map-get($palettes, $palette), $level) {
+      @return map-get(map-get($palettes, $palette), $level);
+    }
+
+    @warn "Unknown level `#{$level}` for color `#{$palette}` in $palettes.";
+    @return deeppink;
+  }
+
+  @warn "Unknown color: `#{$palette}` in $palettes.";
+  @return hotpink;
+}

@@ -1,0 +1,142 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: value-to-rem($container-padding);
+    padding-right: value-to-rem($container-padding);
+
+    @include mq($md) {
+        padding-left: value-to-rem($container-padding-md);
+        padding-right: value-to-rem($container-padding-md);
+    }
+
+    @include mq($xl) {
+        max-width: _calc($container-xl, "+", double($container-padding-md));
+    }
+
+    &.container-fluid {
+        max-width: 100% !important;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-left: value-to-rem(-$grid-gutter);
+    margin-right: value-to-rem(-$grid-gutter);
+    row-gap: value-to-rem(double($grid-gutter));
+
+    @each $aligment in $aligments {
+        &.justify-#{$aligment} {
+            justify-content: $aligment;
+        }
+
+        &.items-#{$aligment} {
+            align-items: $aligment;
+        }
+    }
+}
+
+
+[class^="col-"] {
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding-left: value-to-rem($grid-gutter);
+    padding-right: value-to-rem($grid-gutter);
+}
+@for $col from 0 through 12 {
+    // Base styles for all screen sizes
+    .col-#{$col} {
+      width: calc(100% / 12 * #{$col});
+    }
+  
+    .offset-#{$col} {
+      margin-inline-start: calc(100% / 12 * #{$col});
+    }
+  
+    .order-#{$col} {
+      order: #{$col};
+    }
+  }
+  
+  // Consolidate media query styles
+  @include mq($md) {
+    @for $col from 0 through 12 {
+      .col-md-#{$col} {
+        width: calc(100% / 12 * #{$col});
+      }
+  
+      .offset-md-#{$col} {
+        margin-inline-start: calc(100% / 12 * #{$col});
+      }
+  
+      .order-md-#{$col} {
+        order: #{$col};
+      }
+    }
+  }
+  
+  @include mq($lg) {
+    @for $col from 0 through 12 {
+      .col-lg-#{$col} {
+        width: calc(100% / 12 * #{$col});
+      }
+  
+      .offset-lg-#{$col} {
+        margin-inline-start: calc(100% / 12 * #{$col});
+      }
+  
+      .order-lg-#{$col} {
+        order: #{$col};
+      }
+    }
+  }
+  
+  @include mq($xl) {
+    @for $col from 0 through 12 {
+      .col-xl-#{$col} {
+        width: calc(100% / 12 * #{$col});
+      }
+  
+      .offset-xl-#{$col} {
+        margin-inline-start: calc(100% / 12 * #{$col});
+      }
+  
+      .order-xl-#{$col} {
+        order: #{$col};
+      }
+    }
+  }
+  
+
+$display-value: (
+    none,
+    inline,
+    inline-block,
+    block,
+    flex,
+);
+
+@each $value in $display-value {
+    .d-#{$value} {
+        display: #{$value}!important;
+    }
+    
+    @include mq($md) {
+        .d-md-#{$value} {
+            display: #{$value}!important;
+        }
+    }
+    
+    @include mq($lg) {
+        .d-lg-#{$value} {
+            display: #{$value}!important;
+        }
+    }
+    
+    @include mq($xl) {
+        .d-xl-#{$value} {
+            display: #{$value}!important;
+        }
+    }
+}

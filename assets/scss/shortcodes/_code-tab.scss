@@ -1,0 +1,83 @@
+.code-tab {
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+  border-image-slice: 1;
+  background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  .highlight:has(code) {
+    border: none;
+    background: transparent;
+  }
+}
+
+.code-tab__tabs-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.code-tab__tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+
+  @include mq($md) {
+    justify-content: stretch;
+  }
+}
+
+.code-tab__tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 20px;
+
+  @include font(btn_mob, 21, 400);
+
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+
+  @include mq($md) {
+    padding: 14px 32px;
+    @include font(btn, 24, 400);  
+    flex: 1 1 0px;
+    justify-content: center;
+  }
+
+  background-color: palette(primary-dark, 600);
+  color: palette(primary-offwhite);
+
+  &:hover {
+    background-color: palette(primary-dark, 500);
+  }
+
+  &:active,
+  &:focus,
+  &.active {
+   background-color: palette(primary-grad-dark, start);
+  }
+
+  &.active {
+    pointer-events: none;
+  }
+}
+
+.code-tab__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease-in-out;
+  }
+
+  @include mq($md) {
+    width: 24px;
+    height: 24px;
+  }
+}

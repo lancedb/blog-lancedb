@@ -70,8 +70,6 @@ markup:
     noClasses: false
     codeFences: true
     guessSyntax: true
-    hl_Lines: ""
-    hl_inline: false
     anchorLineNos: false
     lineAnchors: ""
     tabWidth: 2

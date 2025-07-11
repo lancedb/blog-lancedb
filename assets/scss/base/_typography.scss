@@ -1,0 +1,53 @@
+/**
+ * Our base font-size and line-height
+ */
+$base-font-size: 16 !default;
+$base-line-height: 24 !default;
+$line-height-ratio: $base-line-height/$base-font-size !default;
+
+$font-sizes: (
+  H1: 64,
+  H1_tab: 48,
+  H1_mob: 32,
+  H2: 34,
+  H2_tab: 26,
+  H2_mob: 24,
+  H3: 26,
+  H3_tab: 20,
+  H3_mob: 20,
+  H4: 18,
+  base: 16,
+  T1: 10,
+  T2: 12,
+  btn: 17,
+  btn_mob: 15,
+);
+
+$fonts_schema: (
+  "H1": (size: H1, leading: 64, weight: 700),
+  "H1_tab": (size: H1_tab, leading: 58, weight: 700),
+  "H1_mob": (size: H1_mob, leading: 38, weight: 700),
+  "H2": (size: H2, leading: 30, weight: 700),
+  "H2_tab": (size: H2_tab, leading: 32, weight: 700),
+  "H2_mob": (size: H2_mob, leading: 24, weight: 700),
+  "H3": (size: H3, leading: 32, weight: 700),
+  "H3_tab": (size: H3_tab, leading: 24, weight: 700),
+  "H3_mob": (size: H3_mob, leading: 24, weight: 500),
+  "H4": (size: H3_mob, leading: 26, weight: 700),
+  "H4_tab": (size: H3_mob, leading: 26, weight: 700),
+  "H4_mob": (size: H4, leading: 22, weight: 700),
+  "text": (size: base, leading: 28, weight: 400),
+  "T2": (size: T2, leading: 12, weight: 500),
+  "T2_mob": (size: T1, leading: 10, weight: 500),
+);
+
+/**
+   *	Here we assign short names for the font families
+   */
+$font-aeonik: 'Aeonik', sans-serif;
+$_font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$font-families: (
+  base: $font-aeonik,
+  system: $_font-system,
+);

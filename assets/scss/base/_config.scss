@@ -1,0 +1,33 @@
+// Header
+$header-height : 50px;
+$toggle-anim-duration: .3s;
+
+//  Main container width
+$container-xl: 1312px;
+
+// Predefined gutters
+$grid-gutter: 16px;
+$grid-gutter-small: 8px;
+
+// Predefined paddings
+$container-padding: 16px;
+$container-padding-sm: 14px;
+$container-padding-md: 24px;
+
+// Predefined breakpoint
+$md : 768;
+$lg : 992;
+$xl : 1280;
+$laptop : 1440;
+$wide : 1560;
+
+//Aligment 
+$aligments: (
+    flex-start,
+    flex-end,
+    center,
+    space-between,
+    space-around,
+    stretch
+);
+

@@ -1,0 +1,179 @@
+.post-content {
+
+  .highlight:has(code) {
+    position: relative;
+    border: 1px solid;
+    border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+    border-image-slice: 1;
+    background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+
+    border-radius: 4px;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 20px;
+
+    @include mq($md) {
+      padding: 32px;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      border: 1px solid palette(primary-dark, 400);
+      color: palette(primary-offwhite);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 3;
+
+      @include mq($md) {
+        top: 16px;
+        right: 16px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+      }
+
+      &:hover {
+        background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+        border-color: #f97316;
+        color: white;
+      }
+
+      &.copied {
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        color: white;
+      }
+
+      &:focus {
+        outline: 2px solid #f97316;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  code {
+    color: palette(primary-offwhite);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: palette(primary-dark);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #f97316 0%, #f43f5e 100%);
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+    }
+  }
+
+  pre {
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    margin: 0;
+
+    &:focus-within {
+
+      .highlight:has(&) {
+
+        border: 2px solid #f97316;
+      }
+    }
+    
+    @include mq($max: $md) {
+      margin: 1rem -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    code {
+
+      @include mq($max: $md) {
+        padding: 1rem;
+        padding-top: 2.2rem;
+        font-size: 0.85rem;
+      }
+
+      .highlight-line {
+        background: rgba(249, 115, 22, 0.1);
+        border-left: 3px solid #f97316;
+        padding-left: 0.5rem;
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        padding-right: 1.25rem;
+        display: block;
+      }
+    }
+
+    &:hover .copy-button {
+      opacity: 1;
+    }
+
+    &.line-numbers {
+      padding-left: 0;
+
+      code {
+        padding-left: 3.5rem;
+        position: relative;
+
+        &::before {
+          content: counter(line-number);
+          counter-increment: line-number;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 3rem;
+          padding: 1.25rem 0.5rem;
+          background: rgba(0, 0, 0, 0.3);
+          border-right: 1px solid #2d3748;
+          color: #64748b;
+          font-size: 0.8rem;
+          text-align: right;
+          user-select: none;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    &.terminal {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      border: 2px solid #333;
+
+      &::before {
+        content: "terminal";
+        background: linear-gradient(135deg, #333 0%, #555 100%);
+        color: #00ff00;
+
+      }
+
+      code {
+        color: #00ff00;
+        font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+      }
+    }
+  }
+}

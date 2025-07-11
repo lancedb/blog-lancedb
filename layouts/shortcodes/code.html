@@ -2,6 +2,7 @@
 {{ $source := .Get "source" }}
 {{ $options := .Get "options" }}
 {{ $id := .Get "id" }}
+{{ $iconSrc := printf "static/assets/icons/%s.svg" $language}}
 
 {{ with $source | readFile }}
   {{ $snippet := . }}
@@ -41,4 +42,17 @@
 
     {{/* Join the lines into the final snippet. */}}
     {{ $snippet = delimit $includedLines "\n" }}
+
+    {{ with $snippet }}
+      <div class="code-tab__content" data-lang="{{ $language }}">
+        <div class="code-tab__tab d-none" data-lang-switch="{{ $language }}">
+          <div class="code-tab__icon">
+            {{ readFile $iconSrc | safeHTML }}
+          </div>
+          <span class="code-tab__name d-none d-md-block">{{ $language }}</span>
+        </div>
+        {{ highlight (trim . "\n\r") $language $options }}
+      </div>
+    {{ end }}
+  {{ end }}
 {{ end }}

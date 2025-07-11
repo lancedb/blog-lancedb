@@ -1,0 +1,92 @@
+html {
+	box-sizing: border-box;
+	@include font-family(base);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	@include font-size(base);
+	line-height: $line-height-ratio;
+	font-weight: 400;
+	color: palette(primary-dark);
+}
+
+.overflow-hidden {
+	overflow: hidden;
+  }
+
+* {
+	font-family: inherit;
+	line-height: inherit;
+	color: inherit;
+
+	&,
+	&:before,
+	&:after {
+		box-sizing: inherit;
+	}
+}
+
+::selection {
+	background: palette(primary-black);
+	color: palette(primary-white);
+	text-shadow: none;
+	user-select: text;
+}
+
+main {
+	flex-grow: 1;
+}
+
+figure {
+	margin: 0;
+}
+
+img,
+svg {
+	display: block;
+	vertical-align: middle;
+	border: none;
+	max-width: 100%;
+	height: auto;
+}
+
+
+a {
+	color: palette(primary-black);
+	text-decoration-skip-ink: auto;
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hgroup,
+ul,
+ol,
+dd,
+figure,
+table,
+fieldset,
+hr {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+p {
+	margin: 0;
+}
+
+
+ul {
+	margin: 0;
+	padding: 0;
+
+	li {
+		list-style: none;
+	}
+}

@@ -377,7 +377,7 @@
 <div class="navbar_container w-container">
     <a href="{{ .Site.Params.mainLanceDBURL }}" class="navbar_brand w-nav-brand" aria-label="home">
         <div class="navbar_logo-icon w-embed">
-        {{ partial "logo.html" . }}
+        {{ readFile "static/assets/logo.svg" | safeHTML }}
         </div>
     </a>
     

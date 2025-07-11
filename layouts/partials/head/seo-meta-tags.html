@@ -1,0 +1,11 @@
+<title>{{ if .Params.meta.title }}{{ .Params.meta.title }}{{ else }}{{ .Title }}{{ end }}</title>
+
+{{ if .Params.meta.description }}
+  <meta name="description" content="{{ .Params.meta.description | safeHTML }}"/>
+{{ else if .Params.description }}
+  <meta name="description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}"/>
+{{ end }}
+
+{{ if .Params.meta.keywords }}
+  <meta name="keywords" content="{{ .Params.meta.keywords }}">
+{{ end }}

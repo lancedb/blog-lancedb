@@ -1,0 +1,20 @@
+{{ $fonts := resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "fonts.css" . | resources.Fingerprint }}
+{{ $custom := resources.Get "css/custom.css" }}
+{{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
+
+<link href="{{ $fonts.RelPermalink | relURL }}" rel="stylesheet">
+
+{{ with resources.Get "scss/main.scss" }}
+  {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
+  {{ with . | toCSS $opts }}
+    {{ if eq hugo.Environment "development" }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ else }}
+      {{ with . | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+<link href="{{ $custom.RelPermalink | relURL }}" rel="stylesheet">
+<link href="{{ $syntaxHighlighting.RelPermalink | relURL }}" rel="stylesheet">

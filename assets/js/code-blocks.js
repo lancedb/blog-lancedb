@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         codeBlocks.forEach(function(codeBlock) {
             const pre = codeBlock.parentElement;
-            
+            const preWrapper = codeBlock.closest('.highlight');
             // Extract language from class name
             const className = codeBlock.className;
             let language = '';
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             // Add copy button to pre element
-            pre.appendChild(copyButton);
+            preWrapper.appendChild(copyButton);
         });
     }
     
