@@ -56,6 +56,45 @@
     </div>
   </section>
   {{ end }}
+  {{ with .Params.lakehouse }}
+  <section class="lakehouse">
+    <div class="lakehouse__interact">
+      <div class="d-none d-md-block">
+        {{readFile .interact | safeHTML }}
+      </div>
+      <div class="d-md-none">
+        {{readFile .interact_mob | safeHTML }}
+      </div>
+    </div>
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="lakehouse__content text-center">
+            <h2 class="lakehouse__title text-heading-small">{{ .title | safeHTML }}</h2>
+            <p class="lakehouse__description text-body-medium">{{ .description }}</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="lakehouse__media">
+            {{ $alt := .image_alt | default .title }}
+            {{ $image_src := .image }}
+            {{ $image_mobile_src := .image_mob | default $image_src }}
+            {{ $image := resources.GetMatch $image_src }}
+            {{ $image_mobile := resources.GetMatch $image_mobile_src }}
+            <picture>
+              <source srcset="{{ $image_mobile.Permalink | relURL }}" media="(max-width: 767px)">
+              <source srcset="{{ $image.Permalink | relURL }}" media="(min-width: 768px)">
+              <img 
+                  src="{{ $image.Permalink | relURL }}" 
+                  alt="{{ $alt }}" 
+                  width="{{ $image.Width }}" 
+                  height="{{ $image.Height }}">
+            </picture>
+          </div>  
+      </div>
+    </div>  
+  </section>
+  {{ end }}
 {{ end }}
 
 {{ define "page_js" }}

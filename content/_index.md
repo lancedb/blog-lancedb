@@ -26,5 +26,9 @@ logos:
 lakehouse:
   title: The AI-Native <br> Multimodal Lakehouse
   description: AI thrives on more than text. It needs multimodal data. Today’s complex workloads demand more than a database. They need a new foundation built for AI at scale.
-  image: images/lakehouse.jpg
+  image: images/lakehouse.png
+  image_mob: images/lakehouse-mob.png
+  image_alt: Multimodal Lakehouse
+  interact: static/assets/vectors/lakehouse.svg
+  interact_mob: static/assets/vectors/lakehouse-mob.svg
 ---

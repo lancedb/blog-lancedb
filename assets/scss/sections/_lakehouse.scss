@@ -1,0 +1,44 @@
+.lakehouse {
+  padding: 56px 0;
+  overflow: hidden;
+  position: relative;
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .row {
+    row-gap: 40px;
+
+    @include mq($md) {
+      row-gap: 48px;
+    }
+  }
+
+  @include mq($md) {
+    padding: 128px 0 104px;
+  }
+}
+
+.lakehouse__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mq($md) {
+    gap: 20px;
+  }
+}
+
+.lakehouse__description {
+  color: palette(primary-dark, 400);
+}
+
+.lakehouse__interact {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%);
+}
