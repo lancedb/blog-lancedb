@@ -1,451 +1,76 @@
-<style>
-  @media screen and (max-width: 991px) {
-    .navbar_logo-icon {
-        width: 9rem;
-    }
-}
-.navbar_logo-icon {
-    justify-content: flex-start;
-    align-items: center;
-    width: 9.125rem;
-    height: auto;
-    display: flex;
-}
-
-.navbar {
-    z-index: 50;
-    background-color: #0000;
-    margin-bottom: -7.25rem;
-    position: sticky;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-}
-
-@media screen and (max-width: 991px) {
-    .navbar_container {
-        justify-content: space-between;
-        margin: .5rem;
-        padding-left: .75rem;
-        padding-right: .75rem;
-    }
-}
-.navbar_container {
-    background-color: var(--dark-700);
-    border-radius: .5rem;
-    justify-content: space-between;
-    align-items: center;
-    width: auto;
-    max-width: none;
-    margin-top: 1.5rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    padding: .75rem 1.5rem;
-    display: flex;
-}
-
-.navbar_menu-middle {
-    grid-column-gap: 3rem;
-    grid-row-gap: 3rem;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-}
-
-.navbar_navlink.w--current {
-    color: var(--orange-400);
-}
-
-.w-nav-link {
-    vertical-align: top;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    text-decoration: none;
-    display: inline-block;
-    position: relative;
-}
-
-.navbar_navlink {
-    font-family: var(--font--body-family);
-    color: var(--offwhite);
-    padding: 0;
-    font-size: 1rem;
-    line-height: 1.4;
-}
-.navbar_navlink:hover {
-    color: var(--dark-400);
-}
-
-.navbar_menu {
-    flex: 1;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-}
-
-.navbar_menu-content {
-    grid-column-gap: 3rem;
-    grid-row-gap: 3rem;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.navbar_navlink.w--current {
-    color: var(--orange-400);
-}
-
-.navbar_right {
-    grid-column-gap: 1.25rem;
-    grid-row-gap: 1.25rem;
-    justify-content: flex-end;
-    align-items: center;
-    display: flex;
-}
-
-.navbar_right-title {
-    display: none;
-}
-
-.navbar_social-link {
-  color: var(--offwhite);
-  transition: color .2s;
-}
-
-.navbar_social-link:hover {
-  color: var(--dark-400);
-}
-
-.is-bg-orange-400 {
-  background-color: var(--orange-400);
-}
-
-.is-bg-lavende-400 {
-  background-color: var(--lavende-400);
-}
-
-.is-bg-dark-800 {
-  background-color: var(--dark-800);
-}
-
-.is-bg-offwhite {
-  background-color: var(--offwhite);
-}
-
-.is-bg-dark-700 {
-  background-color: var(--dark-700);
-}
-
-.is-bg-dark-600 {
-  background-color: var(--dark-600);
-}
-
-.is-bg-dark-400 {
-  background-color: var(--dark-400);
-}
-
-.is-bg-dark-300 {
-  background-color: var(--dark-300);
-}
-
-.is-bg-dark-200 {
-  background-color: var(--dark-200);
-}
-
-.is-bg-dark-100 {
-  background-color: var(--dark-100);
-}
-
-.is-bg-dark-500 {
-  background-color: var(--dark-500);
-}
-
-.is-text-orange-400 {
-  color: var(--orange-400);
-}
-
-.is-text-lavende-400 {
-  color: var(--lavende-400);
-}
-
-.is-text-dark-800 {
-  color: var(--dark-800);
-}
-
-.is-text-offwhite {
-  color: var(--offwhite);
-}
-
-.is-text-dark-700 {
-  color: var(--dark-700);
-}
-
-.is-text-dark-600 {
-  color: var(--dark-600);
-}
-
-.is-text-dark-400 {
-  color: var(--dark-400);
-}
-
-.is-text-dark-300 {
-  color: var(--dark-300);
-}
-
-.is-text-dark-200 {
-  color: var(--dark-200);
-}
-
-.is-text-dark-100 {
-  color: var(--dark-100);
-}
-
-.primary-button.is-secondary.is-navbar {
-    grid-column-gap: .5rem;
-    grid-row-gap: .5rem;
-    margin-left: 1.25rem;
-    padding: .75rem 1.25rem;
-    font-size: .9375rem;
-    line-height: 1.4;
-}
-.primary-button.is-secondary {
-    border: 1px solid var(--dark-500);
-    background-color: var(--dark-600);
-    color: var(--offwhite);
-}
-.primary-button {
-    grid-column-gap: .625rem;
-    grid-row-gap: .625rem;
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-top-color: var(--orange-400);
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-right-color: var(--orange-400);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: var(--orange-400);
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-left-color: var(--orange-400);
-    background-color: var(--orange-400);
-    font-family: var(--font--heading-family);
-    color: var(--dark-800);
-    letter-spacing: 0;
-    border-radius: .25rem;
-    justify-content: center;
-    align-items: center;
-    padding: .875rem 2rem;
-    font-size: 1.0625rem;
-    font-weight: 500;
-    line-height: 1.4;
-    text-decoration: none;
-    transition-property: all;
-    transition-duration: .2s;
-    transition-timing-function: ease;
-    display: flex;
-}
-
-/* Mobile Navigation Styles */
-.mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 10;
-}
-
-.mobile-menu-toggle span {
-    width: 100%;
-    height: 3px;
-    background-color: var(--offwhite);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: flex;
-    }
-    
-    .navbar_menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--dark-700);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 80px;
-        transition: right 0.3s ease;
-        z-index: 5;
-    }
-    
-    .navbar_menu.active {
-        right: 0;
-    }
-    
-    .navbar_menu-content {
-        flex-direction: column;
-        gap: 2rem;
-        width: 100%;
-        padding: 0 2rem;
-    }
-    
-    .navbar_menu-middle {
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 100%;
-    }
-    
-    .navbar_navlink {
-        font-size: 1.2rem;
-        padding: 1rem 0;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid var(--dark-600);
-    }
-    
-    .navbar_right {
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 100%;
-        margin-top: 2rem;
-    }
-    
-    .navbar_social-link {
-        padding: 1rem;
-        font-size: 1.2rem;
-    }
-    
-    .primary-button.is-secondary.is-navbar {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-    }
-    
-    .navbar_container {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar_menu-content {
-        padding: 0 1rem;
-    }
-    
-    .navbar_navlink {
-        font-size: 1.1rem;
-    }
-    
-    .primary-button.is-secondary.is-navbar {
-        font-size: 1rem;
-        padding: 0.875rem 1.5rem;
-    }
-}
-</style>
-
-<div class="navbar_container w-container">
-    <a href="{{ .Site.Params.mainLanceDBURL }}" class="navbar_brand w-nav-brand" aria-label="home">
-        <div class="navbar_logo-icon w-embed">
-        {{ readFile "static/assets/logo.svg" | safeHTML }}
-        </div>
-    </a>
-    
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    
-    <nav role="navigation" class="navbar_menu w-nav-menu" id="navbar-menu">
-        <div class="navbar_menu-content">
-            <div class="navbar_menu-middle">
-                <a href="{{ .Site.Params.mainLanceDBURL }}/pricing.html" class="navbar_navlink w-nav-link">Pricing</a>
-                <a href="{{ .Site.Params.mainLanceDBURL }}/documentation" class="navbar_navlink w-nav-link">Docs</a>
-                <a href="{{ .Site.Params.mainLanceDBURL }}/blog" aria-current="page" class="navbar_navlink w-nav-link w--current">Blog</a>
+<header class="header">
+    {{ with site.Params.header.top }}
+        <div></div>
+    {{ end }}
+    <div class="container-fluid">
+        <div class="row items-center">
+            <div class="col-12 col-xl-4 d-flex align-items-center justify-content-between">
+                <a href="/" class="header__logo">
+                    {{ readFile site.Params.logo | safeHTML }}
+                </a>
+                <button class="header__toggle d-xl-none button button--secondary">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <div class="navbar_right">
-                <a href="{{ .Site.Params.discordURL }}" class="navbar_social-link w-inline-block">
-                    <div class="original-icon-size w-embed">
-                        {{ partial "discord.html" . }}
+            <div class="col-12 col-xl-8 nav__wrap">
+                <nav class="nav">
+                    <ul class="nav__list">
+                    {{ $current := . }}
+                    {{ range .Site.Menus.main }}
+                        <li class="nav__item">
+                        {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
+                            <span class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}">
+                            {{ .Name }}
+                            </span>
+                        {{ else }}
+                            <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
+                            href="{{ .URL }}">
+                            {{ .Name }}
+                            </a>
+                        {{ end }}
+                        </li>
+                    {{ end }}
+                    </ul>
+                </nav>
+                <div class="nav__additional">
+                    <div class="nav__socials-wrap">
+                        {{ with site.Params.header.socials_title }}
+                        <h3 class="nav__socials-title text-body-large d-xl-none">
+                            {{ . }}
+                        </h3>
+                        {{ end }}
+                        <ul class="nav__socials">
+                            {{ range site.Params.header.socials }}
+                                {{ $social := . }}
+                                {{ range site.Params.socials }}
+                                {{ if eq .name $social }}
+                                        <li>
+                                            <a href="{{ .url }}" target="_blank" class="nav__social-link">
+                                                {{ readFile (printf "static/assets/socials/%s.svg" .icon) | safeHTML }}
+                                            </a>
+                                        </li>
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
+                        </ul>
                     </div>
-                </a>
-                <a href="{{ .Site.Params.githubURL }}" class="navbar_social-link w-inline-block">
-                    <div class="original-icon-size w-embed">
-                        {{ partial "github.html" . }}
-                    </div>
-                </a>
-                <a target="_blank" href="https://accounts.lancedb.com/sign-up" class="primary-button is-secondary is-navbar w-inline-block">Sign up <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2 11L10 3" stroke="CurrentColor" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M2.88889 3H10V10.1111" stroke="CurrentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></a>
+                    <a 
+                        href="{{ site.Params.header.button.url }}" 
+                        class="button button--secondary"
+                        {{- if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{- end }}
+                        >
+                        {{ site.Params.header.button.text }}
+                        {{ if site.Params.header.button.icon }}
+                            <span class="button__icon">
+                            {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                            </span>
+                        {{ end }}
+                    </a>
+
+                </div>
             </div>
         </div>
-    </nav>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const navbarMenu = document.getElementById('navbar-menu');
-    
-    mobileMenuToggle.addEventListener('click', function() {
-        mobileMenuToggle.classList.toggle('active');
-        navbarMenu.classList.toggle('active');
-        
-        // Prevent body scroll when menu is open
-        if (navbarMenu.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close menu when clicking on a link
-    const menuLinks = navbarMenu.querySelectorAll('a');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenuToggle.classList.remove('active');
-            navbarMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!navbarMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-            mobileMenuToggle.classList.remove('active');
-            navbarMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-});
-</script>
+    </div>
+</header>

@@ -15,6 +15,8 @@ $_color-dark-600: #302A25!default;
 $_color-dark-700: #1E1B19!default;
 $_color-dark-800: #171513!default;
 
+$_color-grey-100: #443D39 !default;
+
 $_color-lavende-400: #E7D2F6 !default;
 
 $_color-orange-300: #FF8967 !default;
@@ -44,5 +46,8 @@ $palettes: (
     "primary-grad-dark": (
         start: $_color-grad-dark-start,
         end: $_color-grad-dark-end,
+    ),
+    "primary-grey": (
+        100: $_color-grey-100,
     ),
 );

@@ -1,25 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-/* Custom Font Declarations - Aeonik */
-@font-face {
-    font-family: 'Aeonik';
-    src: url('../fonts/aeonik-regular.woff2') format('woff2'),
-         url('../fonts/aeonik-regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Aeonik';
-    src: url('../fonts/aeonik-medium.woff2') format('woff2'),
-         url('../fonts/aeonik-medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-
-
 :root {
     --bg-primary: #0f1419;
     --bg-secondary: #1a1d23;
@@ -1042,13 +1020,6 @@ article img {
 }
 
 /* Links */
-a {
-    color: var(--text-primary);
-    text-decoration: none;
-}
-a:hover {
-    color: var(--text-accent);
-}
 
 /* Responsive design */
 @media (max-width: 1200px) {

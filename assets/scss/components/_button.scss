@@ -18,20 +18,30 @@
   }
 }
 
+.button__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+
+  svg {
+    transition: all .3s ease-in-out;
+  }
+}
+
 .button--primary {
   background-color: palette(primary-orange);
   border-color: palette(primary-orange);
   color: palette(primary-dark);
 
   &:hover {
-    background-color: palette(primary-orange-500);
-    border-color: palette(primary-orange-500);
+    background-color: palette(primary-orange, 500);
+    border-color: palette(primary-orange, 500);
   }
 
   &:active,
   &:focus {
-    background-color: palette(primary-orange-300);
-    border-color: palette(primary-orange-300);
+    background-color: palette(primary-orange, 300);
+    border-color: palette(primary-orange, 300);
   }
 }
 

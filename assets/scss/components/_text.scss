@@ -1,0 +1,26 @@
+@each $font-key, $font-style in $fonts_schema {
+    @if not map-has-key($fonts_schema, "_") {
+        .text-#{$font-key} {
+            $font-size: map-get($font-style, size);
+            $line-height: map-get($font-style, leading);
+            $font-weight: map-get($font-style, weight);
+            $font-spacing: map-get($font-style, spacing) + "%";
+
+            @include font($font-size, $line-height, $font-weight);
+            letter-spacing: $font-spacing;
+
+            @if map-has-key($fonts_schema, "#{$font-key}_mob") {
+                $mob-style: map-get($fonts_schema, "#{$font-key}_mob");
+                $mob-font-size: map-get($mob-style, size);
+                $mob-line-height: map-get($mob-style, leading);
+                $mob-font-weight: map-get($mob-style, weight);
+                $mob-font-spacing: map-get($font-style, spacing) + "%";
+
+                @include mq($max: $md) {
+                    @include font($mob-font-size, $mob-line-height, $mob-font-weight);
+                    letter-spacing: $mob-font-spacing;
+                }
+            }
+        }
+    }
+}

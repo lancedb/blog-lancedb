@@ -23,6 +23,7 @@ taxonomies:
 
 # Category Configuration
 params:
+  logo: static/assets/logo.svg
   mainLanceDBURL: http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com
   cloudLanceDBURL: https://cloud.lancedb.com
   privacyPdfURL: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
@@ -32,6 +33,28 @@ params:
   githubURL: https://github.com/lancedb
   linkedInURL: https://www.linkedin.com/company/lancedb/
   xURL: https://x.com/lancedb
+  socials:
+    - name: Discord
+      url: https://discord.com/invite/G5DcmnZWKB
+      icon: discord
+    - name: GitHub
+      url: https://github.com/lancedb
+      icon: github
+    - name: LinkedIn
+      url: https://www.linkedin.com/company/lancedb/
+      icon: linkedin
+    - name: X
+      url: https://x.com/lancedb
+      icon: x
+  header:
+    socials_title: Social media
+    socials:
+      - Discord
+      - GitHub
+    button: 
+      text: Sign up
+      icon: true
+      url: https://accounts.lancedb.com/sign-up
   categories:
     - name: Engineering
       slug: engineering
@@ -73,3 +96,14 @@ markup:
     anchorLineNos: false
     lineAnchors: ""
     tabWidth: 2
+menus:
+  main: 
+    - name: Pricing
+      weight: 1
+      pageRef: /pricing
+    - name: Documentation
+      weight: 3
+      pageRef: /docs
+    - name: Blog
+      weight: 3
+      pageRef: /blog

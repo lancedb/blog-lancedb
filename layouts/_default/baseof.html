@@ -2,11 +2,11 @@
 <html lang="en">
     {{- partial "head.html" . -}}
     <body>
-        {{ partial "announcement.html" . }}
-        {{ partial "header.html" . }}
+        {{- partial "announcement.html" . }}
+        {{- partial "header.html" . }}
         {{- block "main" . }}
         {{- end }}
-        {{ partial "footer.html" . }}
+        {{- partial "footer.html" . }}
         {{- partial "scripts.html" . -}}
     </body>
 </html>

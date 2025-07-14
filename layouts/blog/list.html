@@ -1,0 +1,142 @@
+{{ define "main" }}
+<main>  
+{{ $allPosts := where .Site.RegularPages "Section" "blog" }}
+{{ $featuredPosts := where $allPosts ".Params.featured" true }}
+
+<!-- Build non-featured posts collection -->
+{{ $nonFeaturedPosts := slice }}
+{{ range $allPosts }}
+    {{ if not .Params.featured }}
+        {{ $nonFeaturedPosts = $nonFeaturedPosts | append . }}
+    {{ end }}
+{{ end }}
+
+<!-- Create paginator -->
+{{ $paginator := .Paginate $nonFeaturedPosts }}
+
+<!-- Featured Section - Only show on first page -->
+{{ if and $featuredPosts (eq $paginator.PageNumber 1) }}
+    {{ $mainFeatured := index $featuredPosts 0 }}
+    {{ $sideFeatured := after 1 $featuredPosts }}
+    <div class="featured-section">
+        <!-- Main Featured Post -->
+        <article class="main-featured">
+            <a href="{{ $mainFeatured.RelPermalink }}">
+                <img src="{{ $mainFeatured.Params.image | default "/assets/blog/preview.png" }}" alt="{{ $mainFeatured.Title }}" class="preview-image">
+            </a>
+            <h2><a href="{{ $mainFeatured.RelPermalink }}">{{ $mainFeatured.Title }}</a></h2>
+            <div class="post-meta">
+                {{- range $index, $category := $mainFeatured.Params.categories -}}
+                    {{- if $index }} / {{ end -}}
+                    {{- $category -}}
+                {{- end -}}
+                {{- if $mainFeatured.Params.categories }} / {{ end -}}
+                {{- $mainFeatured.Params.author }} / {{ $mainFeatured.Date.Format "January 2, 2006" -}}
+            </div>
+            <p class="post-description">{{ $mainFeatured.Description | default (truncate 160 $mainFeatured.Summary) }}</p>
+        </article>
+        <!-- Side Featured Posts -->
+        <div class="side-featured">
+            {{ range first 2 $sideFeatured }}
+                <article class="side-featured-post">
+                    <a href="{{ .RelPermalink }}">
+                        <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                    </a>
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="post-meta">
+                        {{- range $index, $category := .Params.categories -}}
+                            {{- if $index }} / {{ end -}}
+                            {{- $category -}}
+                        {{- end -}}
+                        {{- if .Params.categories }} / {{ end -}}
+                        {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
+                    </div>
+                </article>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}
+
+<!-- Pagination Navigation -->
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination">
+    <div class="pagination-links">
+        {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                <span class="pagination-arrow">←</span>
+                <span class="pagination-text">Previous</span>
+            </a>
+        {{ end }}
+        
+        <!-- All page numbers -->
+        {{ range $paginator.Pagers }}
+            {{ if eq .PageNumber $paginator.PageNumber }}
+                <span class="pagination-link current">{{ .PageNumber }}</span>
+            {{ else }}
+                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+            {{ end }}
+        {{ end }}
+        
+        {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                <span class="pagination-text">Next</span>
+                <span class="pagination-arrow">→</span>
+            </a>
+        {{ end }}
+    </div>
+</nav>
+{{ end }}
+
+<!-- Posts Grid -->
+<div class="post-grid">
+    {{ range $paginator.Pages }}
+        <article class="post-card">
+            <a href="{{ .RelPermalink }}">
+                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+            </a>
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <div class="post-meta">
+                {{- range $index, $category := .Params.categories -}}
+                    {{- if $index }} / {{ end -}}
+                    {{- $category -}}
+                {{- end -}}
+                {{- if .Params.categories }} / {{ end -}}
+                {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
+            </div>
+            <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
+        </article>
+    {{ end }}
+</div>
+
+<!-- Pagination Navigation (Bottom) -->
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination">
+    <div class="pagination-links">
+        {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                <span class="pagination-arrow">←</span>
+                <span class="pagination-text">Previous</span>
+            </a>
+        {{ end }}
+        
+        <!-- All page numbers -->
+        {{ range $paginator.Pagers }}
+            {{ if eq .PageNumber $paginator.PageNumber }}
+                <span class="pagination-link current">{{ .PageNumber }}</span>
+            {{ else }}
+                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+            {{ end }}
+        {{ end }}
+        
+        {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                <span class="pagination-text">Next</span>
+                <span class="pagination-arrow">→</span>
+            </a>
+        {{ end }}
+    </div>
+</nav>
+{{ end }}
+</main>
+{{ end }}
+    

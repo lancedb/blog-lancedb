@@ -1,0 +1,144 @@
+.nav__wrap {
+  display: flex;
+  justify-content: stratch;
+  align-items: center;
+
+  @include mq($lg) {
+    & > * {
+      flex: 1 1 0px;
+    }
+  }
+
+  @include mq($max: $lg) {
+    $header-height: var(--header-height);
+    overflow: hidden;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 56px;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding-left: value-to-rem($container-padding);
+    padding-right: value-to-rem($container-padding);
+    padding-top: 46px;
+    padding-bottom: 46px;
+    height: 0;
+    transition: all 0.3s ease-out;
+    background-color: palette(primary-dark);
+
+    .open & {
+      height: calc(100dvh - var(--header-height));
+      transition-timing-function: ease-in;
+    }
+  }
+}
+
+.nav__list {
+  padding-bottom: 56px;
+  border-bottom: 1px solid palette(primary-grey, 100);
+
+  @include mq($lg) {
+    padding: 0;
+    border: none;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+.nav__item {
+  @include clear-font();
+}
+
+.nav__link {
+  @include font(nav_mob, 34, 400);
+  color: palette(primary-offwhite);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+  display: block;
+  padding: 26px 16px;
+  border-bottom: 1px dashed palette(primary-grey, 100);
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+
+  &:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  @include mq($lg) {
+    @include font(nav, 22, 400);
+    padding: 0;
+    border: none;
+    color: palette(primary-offwhite);
+
+    &:hover {
+      color: palette(primary-dark, 400);
+    }
+
+  }
+
+  &.active {
+    color: palette(primary-orange);
+  }
+}
+
+.nav__additional {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  justify-content: space-between;
+
+  @include mq($lg) {
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.nav__socials-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include mq($max: $lg) {
+    padding-left: 16px;
+  }
+}
+
+.nav__socials {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+
+  @include mq($lg) {
+    gap: 20px;
+  }
+
+  li {
+    @include clear-font();
+  }
+}
+
+.nav__social-link {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: all 0.3s ease-in-out;
+  color: palette(primary-offwhite);
+  flex-shrink: 0;
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover {
+    color: palette(primary-dark, 400);
+  }
+}
