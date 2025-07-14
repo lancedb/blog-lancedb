@@ -1,5 +1,4 @@
 .header {
-  padding: 20px 0;
   position: sticky;
   left: 0;
   top: 0;
@@ -12,9 +11,91 @@
     background: palette(primary-dark);
     border-color: palette(primary-dark, 600);
   }
+}
+
+.header__main {
+  padding: 20px 0;
 
   @include mq($md) {
     padding: 12px 24px;
+  }
+}
+
+.header__announcement {
+  position: relative;
+  background: linear-gradient(79.99deg, palette(primary-lavende) 10.39%, palette(primary-orange) 80.5%);
+  border: none;
+  transition: all 0.2s ease-in;
+  height: var(--header-anonncement-height);
+
+  .scrolled &:not(.closed),
+  &.closed {
+    height: 0;
+    transition-timing-function: ease-out;
+  }
+
+  .container{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
+.header__announcement-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: palette(primary-dark);
+  @include font(B3_mob, 24, 400);
+  width: fit-content;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include mq($max: $md) {
+    padding-right: 48px;
+  }
+}
+
+.header__announcement-link__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header__announcement-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.header__announcement-close {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: palette(primary-dark);
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+
+  &:hover {
+    border-color: palette(primary-dark);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -51,10 +132,12 @@
       &:nth-child(1) {
         transform: translateY(6px) rotate(45deg);
       }
+
       &:nth-child(2) {
         opacity: 0;
         transform: translateX(10px);
       }
+
       &:nth-child(3) {
         transform: translateY(-6px) rotate(-45deg);
       }

@@ -1,12 +1,10 @@
 {{ $mainJS := resources.Get "js/main.js" | js.Build "main.js" | fingerprint }}
-{{ $announcementJs := resources.Get "js/announcement.js" | js.Build "announcement.js" | fingerprint }}
 {{ $tocJs := resources.Get "js/toc-progress.js" | js.Build "toc.js" | fingerprint }}
 {{ $headingLinksJs := resources.Get "js/heading-links.js" | js.Build "headingLinks.js" | fingerprint }}
 {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js"  | fingerprint }}
 {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
-<script src="{{ $announcementJs.RelPermalink }}"></script>
 
 {{ if eq .Type "blog" }}
     <script src="{{ $tocJs.RelPermalink }}"></script> 

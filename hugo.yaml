@@ -47,6 +47,11 @@ params:
       url: https://x.com/lancedb
       icon: x
   header:
+    top: 
+      link: 
+        text: Why Multimodal Data Needs a Better Lakehouse? — Download the Research Study
+        url: /
+        icon: true
     socials_title: Social media
     socials:
       - Discord

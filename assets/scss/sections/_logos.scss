@@ -1,0 +1,51 @@
+.logos {
+  padding: 48px 0;
+  overflow: hidden;
+
+  @include mq($md) {
+    padding: 64px 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include mq($md) {
+      gap: 24px;
+    }
+  }
+
+  .swiper {
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+
+    @include mq($md) {
+      margin: 0 -36px;
+      width: calc(100% + 72px);
+    }
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+    transition-timing-function: linear;
+  }
+
+  .swiper-slide {
+    width: auto;
+    padding: 0 20px;
+
+    @include mq($md) {
+      padding: 0 36px;
+    }
+  }
+}
+
+.logos__caption {
+  color: palette(primary-dark, 400);
+}
+
+.logos__item {
+  max-height: 32px;
+  width: auto;
+}

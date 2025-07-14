@@ -1,6 +1,7 @@
 .button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 
   padding: 11px 19px;
@@ -13,6 +14,8 @@
   cursor: pointer;
 
   @include mq($md) {
+    justify-content: flex-start;
+    width: fit-content;
     padding: 14px 32px;
     @include font(btn, 24, 400);  
   }

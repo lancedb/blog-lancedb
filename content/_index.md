@@ -13,10 +13,11 @@ hero:
       version: secondary
   vector: static/assets/vectors/hero-bg.svg
 logos:
+  speed: 3000
   caption: Tomorrow's AI is being built on LanceDB today
   items: # all icons for logos should be in static/assets/logos
     - runway.svg 
-    - midjorney.svg
+    - midjourney.svg
     - worldlabs.svg
     - characterai.svg
     - bytedance.svg

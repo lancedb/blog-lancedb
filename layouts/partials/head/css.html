@@ -2,8 +2,12 @@
 {{ $custom := resources.Get "css/custom.css" }}
 {{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
 
-<link href="{{ $fonts.RelPermalink | relURL }}" rel="stylesheet">
+{{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | resources.Fingerprint }}
 
+<link href="{{ $swiper.RelPermalink | relURL }}" rel="stylesheet">
+<link href="{{ $fonts.RelPermalink | relURL }}" rel="stylesheet">
+<link href="{{ $custom.RelPermalink | relURL }}" rel="stylesheet">
+<link href="{{ $syntaxHighlighting.RelPermalink | relURL }}" rel="stylesheet">
 {{ with resources.Get "scss/main.scss" }}
   {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
   {{ with . | toCSS $opts }}
@@ -16,5 +20,3 @@
     {{ end }}
   {{ end }}
 {{ end }}
-<link href="{{ $custom.RelPermalink | relURL }}" rel="stylesheet">
-<link href="{{ $syntaxHighlighting.RelPermalink | relURL }}" rel="stylesheet">

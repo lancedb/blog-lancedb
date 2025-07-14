@@ -9,7 +9,8 @@ body {
 	@include font-size(base);
 	line-height: $line-height-ratio;
 	font-weight: 400;
-	color: palette(primary-dark);
+	color: palette(primary-offwhite);
+	background-color: palette(primary-dark);
 }
 
 .overflow-hidden {

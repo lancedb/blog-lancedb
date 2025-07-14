@@ -1,3 +1,66 @@
 {{ define "main" }}
-  {{ .Title}}
+  <section class="hero-main">
+    {{ with .Params.hero.vector }} 
+      <div class="hero-main__vector">
+        {{ readFile . | safeHTML }}
+      </div>
+    {{ end }}
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-12 col-md-8">
+          <div class="hero-main__content text-center">
+            <h1 class="hero-main__title text-heading-large">
+              {{ .Title }}
+            </h1>
+            <p class="hero-main__description text-body-large">{{ .Description }}</p>
+            {{ with .Params.hero.cta}}
+            <div class="hero-main__cta">
+              {{ range . }}
+                <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{ end }}>
+                  {{ .text }}
+                  {{ if .icon }}
+                    <span class="button__icon">
+                      {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                    </span>
+                  {{ end }}
+                </a>
+              {{ end }}
+            </div>
+            {{end}}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="hero-main__media">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ with .Params.logos }}
+  <section class="logos text-center js-logos" data-slider-speed="{{ .speed | default 5000 }}">
+    <div class="container">
+      <h3 class="logos__caption text-body-medium">{{ .caption }}</h2>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {{ range .items }}
+            <div class="swiper-slide">
+              <div class="logos__item">
+                {{ $logo_src := printf "static/assets/logos/%s" . }}
+                {{ readFile $logo_src | safeHTML }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+{{ end }}
+
+{{ define "page_js" }}
+  {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
+  {{ $js := resources.Get "js/home.js" | minify | fingerprint }}
+  <script src="{{ $swiper.RelPermalink }}"></script>
+  <script src="{{ $js.RelPermalink }}"></script>
 {{ end }}

@@ -4,7 +4,7 @@
             $font-size: map-get($font-style, size);
             $line-height: map-get($font-style, leading);
             $font-weight: map-get($font-style, weight);
-            $font-spacing: map-get($font-style, spacing) + "%";
+            $font-spacing: map-get($font-style, spacing) * 1px;
 
             @include font($font-size, $line-height, $font-weight);
             letter-spacing: $font-spacing;
@@ -14,7 +14,7 @@
                 $mob-font-size: map-get($mob-style, size);
                 $mob-line-height: map-get($mob-style, leading);
                 $mob-font-weight: map-get($mob-style, weight);
-                $mob-font-spacing: map-get($font-style, spacing) + "%";
+                $mob-font-spacing: map-get($font-style, spacing) * 1px;
 
                 @include mq($max: $md) {
                     @include font($mob-font-size, $mob-line-height, $mob-font-weight);
@@ -23,4 +23,20 @@
             }
         }
     }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-medium {
+    font-weight: 500;
 }
