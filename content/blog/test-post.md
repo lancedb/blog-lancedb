@@ -20,15 +20,14 @@ Test snippets
 tis
 ```
 
-{{< code language="python" source="examples/test.py" id="add" >}}
-{{< code language="typescript" source="examples/test.ts" id="add" >}}
-{{< code language="go" source="examples/test.go" id="add" >}}
+{{< code language="python" source="examples/test.py" id="imports" >}}
+{{< code language="typescript" source="examples/test.ts" id="imports" >}}
+{{< code language="rust" source="examples/test.rs" id="connect" >}}
 
 new text
 
 and snippet 
 
-
-{{< code language="go" source="examples/test.go" id="add" >}}
-{{< code language="typescript" source="examples/test.ts" id="add" >}}
-{{< code language="python" source="examples/test.py" id="add" >}}
+{{< code language="python" source="examples/test.py" id="create_table" >}}
+{{< code language="typescript" source="examples/test.ts" id="create_table" >}}
+{{< code language="rust" source="examples/test.rs" id="create_table" >}}

@@ -10,8 +10,8 @@
   {{ if $id }}
     {{ $lines := split $snippet "\n" }}
 
-    {{ $startTag := printf "START %s" $id }}
-    {{ $endTag := printf "END %s" $id }}
+    {{ $startTag := printf "[start:%s]" $id }}
+    {{ $endTag := printf "[end:%s]" $id }}
 
     {{ $startl := -1 }}
     {{ $endl := -1 }}
