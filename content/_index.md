@@ -52,7 +52,10 @@ infrastructure:
 solution:
   title: A Unified Solution
   description: LanceDB provides one place for all your AI data and workloads so your team can move fast from idea to petabyte-scale production.
-  speeed: 3000
+  speed: 7000
+  code:
+    language: python
+    source: static/code-tabs/tabs.py
   items:
     - tab: Storage
       title: The new columnar standard for multimodal data
@@ -73,15 +76,15 @@ solution:
     - tab: Training
       title: Optimized training pipelines
       description: Faster dataloading, global shuffling, and integrated filters for large scale training using pytorch or JAX.
-      code: "#"
+      code: 
   cta: 
-    href:
+    href: "#"
     icon: true
     version: primary
     text: Create your first project
 how_it_works:
   title: How It Works
-  descriptions: Whatever your needs, we know how to make things work better.
+  description: Whatever your needs, we know how to make things work better.
   items:
     - title: For Developers
       list:
@@ -90,19 +93,46 @@ how_it_works:
           icon: union.svg
         - heading: Ingest Data
           text: Streamline your workflow and focus on high-value experimentation
-          icon: 
-        - heading: 
-          text: 
-          icon: 
-    - title: For Developers
+          icon: data.svg
+        - heading: Build and Index
+          text: Easily scale from megabytes to petabytes—without complexity
+          icon: index.svg
+      cta:
+        text: Try LanceDB Cloud
+        href:
+        version: primary
+        icon: true
+    - title: For Enterprises
       list:
-        - heading: 
-          text: 
-          icon: 
-        - heading: 
-          text: 
-          icon: 
-        - heading: 
-          text: 
-          icon: 
+        - heading: Choose your deployment model
+          text: Enterprises hold vast amounts of untapped data—images, transcripts, contracts, and more—with huge AI potential. 
+          icon: question.svg
+        - heading: Integrate with your Data Lake  
+          text: Enterprises hold vast amounts of untapped data—images, transcripts, contracts, and more—with huge AI potential. 
+          icon: integrate.svg
+        - heading: Build and scale
+          text: Unlock top-tier price-performance for multimodal workloads
+          icon: scale.svg
+      cta:
+        text: Contact Sales
+        href:
+        version: primary
+        icon: true
+scale:
+  title: Built for Enterprise Scale
+  speed: 2000
+  cards:
+    - number: 20000
+      prefix: "+"
+      text: Highest search QPS on a single table
+      lottie: /assets/lottie/first.json
+    - number: 100
+      prefix: "%"
+      text: Scale growth at a fraction of the cost
+      lottie: /assets/lottie/second.json
+    - number: 20
+      prefix: PB
+      text: Largest table under management
+      lottie: /assets/lottie/third.json
+    
 ---

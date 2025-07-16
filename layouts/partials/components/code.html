@@ -1,0 +1,39 @@
+{{ $language := .language }}
+{{ $source := .source }}
+{{ $id := .id }}
+
+{{ with $source | readFile }}
+  {{ $snippet := . }}
+
+  {{ if $id }}
+    {{ $lines := split $snippet "\n" }}
+    
+    {{ $startMarker := printf "[start:%s]" $id }}
+    {{ $endMarker := printf "[end:%s]" $id }}
+
+    {{ $startl := -1 }}
+    {{ $endl := -1 }}
+
+    {{/* Find the lines containing start and end comments */}}
+    {{ range $index, $line := $lines }}
+      {{ if in $line $startMarker }}
+        {{ $startl = $index }}
+      {{ else if in $line $endMarker }}
+        {{ $endl = $index }}
+      {{ end }}
+    {{ end }}
+
+    {{ if and (ge $startl 0) (ge $endl 0) }}
+      {{/* Extract lines between markers */}}
+      {{ $snippetLen := sub $endl (add $startl 1) }}
+      {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}
+      {{ $snippet = delimit $includedLines "\n" }}
+
+      <div class="code-tab__content" data-lang="{{ $language }}">
+        {{ highlight (trim $snippet "\n\r") $language }}
+      </div>
+    {{ else }}
+      {{ errorf "Could not find snippet with id: %s" $id }}
+    {{ end }}
+  {{ end }}
+{{ end }}

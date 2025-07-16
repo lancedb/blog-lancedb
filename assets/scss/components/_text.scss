@@ -4,7 +4,7 @@
             $font-size: map-get($font-style, size);
             $line-height: map-get($font-style, leading);
             $font-weight: map-get($font-style, weight);
-            $font-spacing: map-get($font-style, spacing) * 1px;
+            $font-spacing: map-get($font-style, spacing) * 0.01em;
 
             @include font($font-size, $line-height, $font-weight);
             letter-spacing: $font-spacing;
@@ -14,7 +14,7 @@
                 $mob-font-size: map-get($mob-style, size);
                 $mob-line-height: map-get($mob-style, leading);
                 $mob-font-weight: map-get($mob-style, weight);
-                $mob-font-spacing: map-get($font-style, spacing) * 1px;
+                $mob-font-spacing: map-get($font-style, spacing) * 0.01em;
 
                 @include mq($max: $md) {
                     @include font($mob-font-size, $mob-line-height, $mob-font-weight);
@@ -23,6 +23,14 @@
             }
         }
     }
+}
+
+.text-fono {
+   @include font-family(fono);
+}
+
+.text-pro {
+   @include font-family(pro);
 }
 
 .text-center {
@@ -39,4 +47,10 @@
 
 .text-medium {
     font-weight: 500;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, palette(primary-lavende) 0%, palette(primary-orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

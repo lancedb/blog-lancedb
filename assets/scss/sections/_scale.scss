@@ -1,0 +1,87 @@
+.scale {
+  padding: 64px 0;
+
+  @include mq($md) {
+    padding: 128px 0 104px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 40px;
+
+    @include mq($md) {
+      gap: 48px;
+    }
+  }
+}
+
+.scale__card {
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+  border-image-slice: 1;
+  background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+
+  min-height: 380px;
+
+  @include mq($lg) {
+    min-height: 520px;
+  }
+}
+
+.scale__card-body {
+  padding: 16px 24px 24px;
+
+  @include mq($md) {
+    padding: 24px 40px;
+  }
+}
+
+.scale__card-text {
+  max-width: 240px;
+}
+
+.scale__count-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.scale__count {
+  @include font(H3, 68, 500);
+
+  @include mq($md) {
+    @include font(H2, 78, 500);
+  }
+}
+
+.scale__count-pref {
+  @include font(T2_mob, 20, 500);
+  color: palette(primary-orange);
+  margin-top: 10px;
+
+  @include mq($md) {
+    @include font(T1, 34, 500);
+  }
+}
+
+.scale__lottie {
+  flex-grow: 1;
+  padding: 0 16px;
+
+  @include mq($lg) {
+    padding: 0 40px;
+  }
+
+  .col-12:first-child &{
+    width: calc(100% + 16px);
+    margin-left: -16px;
+    @include mq($md) {
+      width: calc(100% + 40px);
+      margin-left: -40px;
+    }
+  }
+}

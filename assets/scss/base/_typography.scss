@@ -42,14 +42,14 @@ $fonts_schema: (
   "heading-large": (size: H1, leading: 64, weight: 400, spacing: -2),
   "heading-large_mob": (size: H1_mob, leading: 39, weight: 400, spacing: -2),
   "heading-medium": (size: H2, leading: 64, weight: 400, spacing: -2),
-  "heading-medium_mob": (size: H2_mob, leading: 36, weight: 400, spacing: -4),
+  "heading-medium_mob": (size: H2_mob, leading: 36, weight: 400, spacing: -2),
   "heading-small": (size: H3, leading: 56, weight: 400, spacing: -2),
   "heading-small_mob": (size: H3_mob, leading: 34, weight: 400, spacing: 0),
   "title-large": (size: T1, leading: 44, weight: 400, spacing: -2),
   "title-large_mob": (size: T1_mob, leading: 34, weight: 400, spacing: -2),
   "title-medium": (size: T2, leading: 32, weight: 400, spacing: 0),
   "title-medium_mob": (size: T2_mob, leading: 27, weight: 400, spacing: 0),
-  "title-small": (size: T3, leading: 26, weight: 400, spacing: -4),
+  "title-small": (size: T3, leading: 26, weight: 400, spacing: -2),
   "title-small_mob": (size: T3_mob, leading: 24, weight: 400, spacing: 0),
   "body-large": (size: B1, leading: 30, weight: 400, spacing: 0),
   "body-large_mob": (size: B1_mob, leading: 24, weight: 400, spacing: 0),
@@ -59,17 +59,20 @@ $fonts_schema: (
   "body-small_mob": (size: B3_mob, leading: 20, weight: 400, spacing: 0),
   "button": (size: btn, leading: 24, weight: 400, spacing: 0),
   "button_mob": (size: btn_mob, leading: 21, weight: 400, spacing: 0),
-  "caption": (size: caption, leading: 12, weight: 400, spacing: -4),
+  "caption": (size: caption, leading: 12, weight: 400, spacing: -2),
   "caption_mob": (size: caption_mob, leading: 10, weight: 400, spacing: 0),
 );
-
 /**
    *	Here we assign short names for the font families
    */
-$font-aeonik: 'Aeonik', sans-serif;
+$font-aeonik: 'Aeonik';
+$font-aeonik-pro: 'Aeonik Pro';
+$font-aeonik-fono: 'Aeonik Fono';
 $_font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
 $font-families: (
   base: $font-aeonik,
+  pro: $font-aeonik-pro,
+  fono: $font-aeonik-fono,
   system: $_font-system,
 );

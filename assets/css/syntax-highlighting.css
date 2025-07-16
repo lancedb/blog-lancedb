@@ -89,88 +89,88 @@
 /* TextWhitespace */ .chroma .w { color: #6e7681; }
 
 /* Enhanced integration with our custom styles */
-.post-content .chroma {
+.highlight .chroma {
     background: none !important;
     color: inherit !important;
 }
 
-.post-content pre .chroma {
+.highlight pre .chroma {
     margin: 0;
     padding: 0;
 }
 
 /* Ensure proper color inheritance in our styled code blocks */
-.post-content pre code .chroma .k { color: #ff7b72; } /* Keywords */
-.post-content pre code .chroma .s, 
-.post-content pre code .chroma .s1, 
-.post-content pre code .chroma .s2 { color: #a5d6ff; } /* Strings */
-.post-content pre code .chroma .c, 
-.post-content pre code .chroma .c1, 
-.post-content pre code .chroma .cm { color: #8b949e; } /* Comments */
-.post-content pre code .chroma .nf { color: #d2a8ff; } /* Functions */
-.post-content pre code .chroma .nc { color: #ffa657; } /* Classes */
-.post-content pre code .chroma .m, 
-.post-content pre code .chroma .mi, 
-.post-content pre code .chroma .mf { color: #79c0ff; } /* Numbers */
+.highlight pre code .chroma .k { color: #ff7b72; } /* Keywords */
+.highlight pre code .chroma .s, 
+.highlight pre code .chroma .s1, 
+.highlight pre code .chroma .s2 { color: #a5d6ff; } /* Strings */
+.highlight pre code .chroma .c, 
+.highlight pre code .chroma .c1, 
+.highlight pre code .chroma .cm { color: #8b949e; } /* Comments */
+.highlight pre code .chroma .nf { color: #d2a8ff; } /* Functions */
+.highlight pre code .chroma .nc { color: #ffa657; } /* Classes */
+.highlight pre code .chroma .m, 
+.highlight pre code .chroma .mi, 
+.highlight pre code .chroma .mf { color: #79c0ff; } /* Numbers */
 
 /* Language-specific enhancements */
-.post-content pre[data-lang="python"] .chroma .k { color: #3776ab; }
-.post-content pre[data-lang="javascript"] .chroma .k,
-.post-content pre[data-lang="js"] .chroma .k { color: #f7df1e; }
-.post-content pre[data-lang="typescript"] .chroma .k,
-.post-content pre[data-lang="ts"] .chroma .k { color: #3178c6; }
-.post-content pre[data-lang="rust"] .chroma .k { color: #ce422b; }
-.post-content pre[data-lang="go"] .chroma .k { color: #00add8; }
+.highlight pre[data-lang="python"] .chroma .k { color: #3776ab; }
+.highlight pre[data-lang="javascript"] .chroma .k,
+.highlight pre[data-lang="js"] .chroma .k { color: #f7df1e; }
+.highlight pre[data-lang="typescript"] .chroma .k,
+.highlight pre[data-lang="ts"] .chroma .k { color: #3178c6; }
+.highlight pre[data-lang="rust"] .chroma .k { color: #ce422b; }
+.highlight pre[data-lang="go"] .chroma .k { color: #00add8; }
 
 /* Highlight matching brackets/parentheses */
-.post-content pre code .chroma .p {
+.highlight pre code .chroma .p {
     transition: background-color 0.2s ease;
 }
 
-.post-content pre code .chroma .p:hover {
+.highlight pre code .chroma .p:hover {
     background-color: rgba(249, 115, 22, 0.2);
     border-radius: 2px;
 }
 
 /* Better visibility for operators */
-.post-content pre code .chroma .o {
+.highlight pre code .chroma .o {
     font-weight: 600;
 }
 
 /* Subtle background for important keywords */
-.post-content pre code .chroma .kd,
-.post-content pre code .chroma .kr {
+.highlight pre code .chroma .kd,
+.highlight pre code .chroma .kr {
     background-color: rgba(255, 123, 114, 0.1);
     padding: 0 2px;
     border-radius: 2px;
 }
 
 /* Enhanced function names */
-.post-content pre code .chroma .nf {
+.highlight pre code .chroma .nf {
     font-weight: 500;
 }
 
 /* Better string highlighting */
-.post-content pre code .chroma .s,
-.post-content pre code .chroma .s1,
-.post-content pre code .chroma .s2 {
+.highlight pre code .chroma .s,
+.highlight pre code .chroma .s1,
+.highlight pre code .chroma .s2 {
     background-color: rgba(165, 214, 255, 0.1);
     padding: 0 1px;
     border-radius: 2px;
 }
 
 /* Improved comment styling */
-.post-content pre code .chroma .c,
-.post-content pre code .chroma .c1,
-.post-content pre code .chroma .cm {
+.highlight pre code .chroma .c,
+.highlight pre code .chroma .c1,
+.highlight pre code .chroma .cm {
     opacity: 0.8;
 }
 
 /* Special highlighting for TODO/FIXME in comments */
-.post-content pre code .chroma .c:contains("TODO"),
-.post-content pre code .chroma .c1:contains("TODO"),
-.post-content pre code .chroma .c:contains("FIXME"),
-.post-content pre code .chroma .c1:contains("FIXME") {
+.highlight pre code .chroma .c:contains("TODO"),
+.highlight pre code .chroma .c1:contains("TODO"),
+.highlight pre code .chroma .c:contains("FIXME"),
+.highlight pre code .chroma .c1:contains("FIXME") {
     background-color: rgba(255, 193, 7, 0.2);
     font-weight: 600;
 } 

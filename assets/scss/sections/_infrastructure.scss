@@ -1,0 +1,94 @@
+.infrastructure {
+  overflow: hidden;
+  padding: 64px 0;
+  border-bottom: 1px solid palette(primary-dark, 600);
+
+  @include mq($md) {
+    padding: 184px 0;
+  }
+
+  .container {
+    position: relative;
+  }
+}
+
+.infrastructure__info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 120px 0;
+
+  @include mq($md) {
+    padding: 140px 0px;
+    gap: 24px;
+  }
+}
+
+.infrastructure__description {
+  color: palette(primary-dark, 400);
+}
+
+.infrastructure__badges {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: calc(100% - 40px);
+
+  @include mq($md) {
+    z-index: 1;
+    width: calc((100%/12) * 10);
+  }
+
+  & > .button {
+    transition: none;
+    position: absolute;
+    pointer-events: none;
+
+    @include mq($max: $md) {
+      &:nth-of-type(1) {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &:nth-of-type(2) {
+        top: 0%;
+        left: 0;
+        transform: translateY(calc(100% + 18px));
+      }
+
+      &:nth-of-type(3) {
+        top: 0%;
+        right: 0;
+        transform: translateY(calc(100% + 15px));
+      }
+
+      &:nth-of-type(4) {
+        bottom: 0%;
+        right: 0;
+        transform: translateY(calc(-100% - 18px));
+      }
+
+      &:nth-of-type(5) {
+        bottom: 0%;
+        left: 0;
+        transform: translateY(calc(-100% - 16px));
+      }
+
+      &:nth-of-type(6) {
+        bottom: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &:last-of-type {
+        display: none;
+      }
+    }
+  }
+}

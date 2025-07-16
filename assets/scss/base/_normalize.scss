@@ -11,6 +11,16 @@ body {
 	font-weight: 400;
 	color: palette(primary-offwhite);
 	background-color: palette(primary-dark);
+	@include font-family(pro);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@include font-family(fono);
 }
 
 .overflow-hidden {
@@ -90,4 +100,12 @@ ul {
 	li {
 		list-style: none;
 	}
+}
+
+.u-bg-dark {
+	background-color: palette(primary-dark);
+}
+
+.u-bg-dark-700 {
+	background-color: palette(primary-dark, 700);
 }

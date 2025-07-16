@@ -16,6 +16,7 @@ $_color-dark-700: #1E1B19!default;
 $_color-dark-800: #171513!default;
 
 $_color-grey-100: #443D39 !default;
+$_color-grey-200: #746F6C !default;
 
 $_color-lavende-400: #E7D2F6 !default;
 
@@ -49,5 +50,6 @@ $palettes: (
     ),
     "primary-grey": (
         100: $_color-grey-100,
+        200: $_color-grey-200,
     ),
 );

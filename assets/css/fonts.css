@@ -1,6 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 /* Custom Font Declarations - Aeonik */
 @font-face {
+    font-family: 'Aeonik Pro';
+    src: url('../fonts/Aeonik-Pro-Medium.woff2') format('woff2'),
+         url('../fonts/Aeonik-Pro-Medium.woff') format('woff'),
+         url('../fonts/Aeonik-Pro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik Pro';
+    src: url('../fonts/Aeonik-Pro-Regular.woff2') format('woff2'),
+         url('../fonts/Aeonik-Pro-Regular.woff') format('woff'),
+         url('../fonts/Aeonik-Pro-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik Fono';
+    src: url('../fonts/AeonikFono-Medium.woff2') format('woff2'),
+         url('../fonts/AeonikFono-Medium.woff') format('woff'),
+         url('../fonts/AeonikFono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik Fono';
+    src: url('../fonts/AeonikFono-Regular.woff2') format('woff2'),
+         url('../fonts/AeonikFono-Regular.woff') format('woff'),
+         url('../fonts/AeonikFono-Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'Aeonik';
     src: url('../fonts/aeonik-regular.woff2') format('woff2'),
          url('../fonts/aeonik-regular.woff') format('woff');

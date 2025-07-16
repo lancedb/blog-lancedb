@@ -57,7 +57,7 @@
   </section>
   {{ end }}
   {{ with .Params.lakehouse }}
-  <section class="lakehouse">
+  <section class="lakehouse u-bg-dark-700">
     <div class="lakehouse__interact">
       <div class="d-none d-md-block">
         {{readFile .interact | safeHTML }}
@@ -95,11 +95,214 @@
     </div>  
   </section>
   {{ end }}
+  {{ with .Params.infrastructure }}
+    <section class="infrastructure">
+      <div class="container">
+        <div class="infrastructure__badges">
+          {{range .badges }}
+            <div class="button badge--badge">
+              <span class="button__icon">
+                {{ readFile (printf "static/assets/icons/%s" .icon) | safeHTML }}
+              </span>
+              <span class="badge__text">{{ .text }}</span>
+            </div>
+          {{ end }}
+        </div>
+        <div class="row justify-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="infrastructure__info text-center">
+              <h2 class="infrastructure__title text-heading-small text-gradient">
+                {{ .title | safeHTML }}
+              </h2>
+              <p class="infrastructure__description text-body-medium">
+                {{ .description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.solution }}
+    <section class="solution u-bg-dark js-solution" data-speed="{{ .speed | default 3000 }}" style="--anim-speed:{{ .speed | default 3000 }}ms;">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-8">
+            <div class="solution__heading text-center">
+              <h2 class="solution__title text-heading-small text-gradient">
+                {{ .title | safeHTML }}
+              </h2>
+              <p class="solution__description text-body-medium">
+                {{ .description }}
+              </p>
+            </div>  
+          </div>
+        </div>
+        <div class="solution__tabs-wrap">
+          <div class="solution__tabs">
+            {{range $index, $item:= .items}}
+            <div class="solution__tab text-body-small{{if eq $index 0}} active{{end}}" data-tab="{{ replace $item.tab " " "_" | lower }}">
+              {{ $item.tab }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        <div class="solution__content">
+          {{ $code := .code }}
+          {{ range $index, $item:= .items }}
+          {{ $tab_id := replace $item.tab " " "_" | lower }}
+            <div class="solution__content-item{{if eq $index 0}} active{{end}}" data-content="{{ $tab_id }}">
+              <div class="row items-stratch justify-space-between">
+                <div class="col-12 col-md-5 solution__content-text order-2 order-md-1">
+                  <h3 class="solution__content-title text-title-large">
+                    {{ $item.title }}
+                  </h3>
+                  <p class="solution__content-description text-body-medium">
+                    {{ $item.description }}
+                  </p>
+                  <div class="solution__range">
+                    <div class="solution__range-thumb"></div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 oreder-1 order-md-2">
+                  <div class="solution__code-wrap">
+                    <div class="solution__code-head">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    
+                    {{ if $code }}
+                      <div class="solution__code">
+                        {{ $language := $code.language | default "python" }}
+                        {{ $source := $code.source | default "static/assets/snippets/solution.js" }}
+                        {{ $id := $tab_id }}
+                        {{ partial "components/code.html" (dict "language" $language "source" $source "id" $id) }}
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+        {{ with .cta }}
+          <a href="{{.href}}" {{if in .href "http" }} target="_blank"{{end}} class="button button--{{.version}} solution__cta">
+            {{ .text }}
+            {{ with .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.how_it_works }}
+    <section class="how-it-works u-bg-dark-700">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="how-it-works__heading text-center">
+              <h2 class="how-it-works__title text-heading-small text-gradient">
+                {{ .title | safeHTML }}
+              </h2>
+              <p class="how-it-works__description text-body-large">
+                {{ .description }}
+              </p>
+            </div>
+          </div>  
+        </div>
+        <div class="row items-stratch">
+          {{ range .items }}
+            <div class="col-12 col-md-6">
+              <div class="how-it-works__item">
+                <h3 class="how-it-works__item-title text-title-large">
+                  {{ .title }}
+                </h3>
+                <ul class="how-it-works__list">
+                  {{ range $index, $li:= .list }}
+                    <li class="how-it-works__list-item">
+                      <div class="how-it-works__list-icon">
+                        {{ readFile (printf "static/assets/icons/%s" $li.icon) | safeHTML }}
+                      </div>
+                      <div class="how-it-works__list-content">
+                        <p class="how-it-works__list-number text-body-medium text-medium">{{ printf "%02d" (add $index 1) }}</p>
+                        <h4 class="how-it-works__list-title text-title-small">
+                          {{ $li.heading }}
+                        </h4>
+                        <p class="how-it-works__list-text text-body-small">
+                          {{ $li.text | markdownify }}
+                        </p>
+                      </div>
+                    </li>
+                  {{ end }}
+                </ul>
+                {{ with .cta }}
+                  <a href="{{.href}}" {{if in .href "http" }} target="_blank"{{end}} class="button button--{{.version}} how-it-works__cta">
+                    {{ .text }}
+                    {{ with .icon }}
+                      <span class="button__icon">
+                        {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                      </span>
+                    {{ end }}
+                  </a>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.scale }}
+    <section class="scale js-scale" data-speed="{{ .speed | default 3000 }}">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-6">
+            <h2 class="scale__title text-heading-small text-center">
+              {{ .title | safeHTML }}
+            </h2>
+          </div>
+        </div>
+        <div class="row items-stratch">
+          {{ $cols := div 12 (len .cards) }}
+          {{ range .cards }}
+            <div class="col-12 col-md-{{ $cols }}">
+              <div class="scale__card">
+                <div class="scale__card-body">
+                  <div class="scale__count-wrap">
+                    <h3 class="scale__count text-gradient text-pro" data-count="{{ .number }}">
+                      0
+                    </h3>
+                    <span class="scale__count-pref">
+                      {{ .prefix }}
+                    </span>
+                  </div>
+                  <p class="scale__card-text text-body-medium text-medium text-fono">
+                    {{ .text | markdownify }}
+                  </p>
+                </div>
+                <div class="scale__lottie" data-lottie="{{ .lottie }}" ></div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
 {{ end }}
 
 {{ define "page_js" }}
   {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
   {{ $js := resources.Get "js/home.js" | minify | fingerprint }}
+  {{ $gsapJs := resources.Get "js/gsap.js" | minify | fingerprint }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="{{ $swiper.RelPermalink }}"></script>
   <script src="{{ $js.RelPermalink }}"></script>
+  <script src="{{ $gsapJs.RelPermalink }}"></script>
 {{ end }}
