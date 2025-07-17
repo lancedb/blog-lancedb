@@ -27,7 +27,7 @@
   border: none;
   transition: all 0.2s ease-in;
   height: var(--header-anonncement-height);
-
+  overflow: hidden;
   .scrolled &:not(.closed),
   &.closed {
     height: 0;
@@ -47,10 +47,11 @@
 .header__announcement-link {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   color: palette(primary-dark);
   @include font(B3_mob, 24, 400);
-  width: fit-content;
+  width: 100%;
 
   &:hover {
     text-decoration: underline;

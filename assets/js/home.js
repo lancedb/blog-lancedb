@@ -158,4 +158,39 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   })();
+
+  // Sliders
+
+  (() => {
+    const sliders = document.querySelectorAll(".js-slider");
+    if (!sliders) return;
+    sliders.forEach((slider) => {
+      const swiperEl = slider.querySelector(".swiper");
+      const sweperPagination = slider.querySelector(
+        ".swiper-pagination"
+      );
+  
+      const options = {
+        slidesPerView: 1.2,
+        breakpoints: {
+          576: {
+            slidesPerView: 2.2,
+          },
+          992: {
+            slidesPerView: 3,
+          },
+        },
+      };
+  
+      if (sweperPagination) {
+        options.pagination = {
+        el: sweperPagination,
+        clickable: true,
+        type: "bullets",
+        };
+      }
+  
+      const swiper = new Swiper(swiperEl, options);
+    });
+  })();
 });

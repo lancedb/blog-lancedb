@@ -11,7 +11,8 @@ hero:
       icon: true
       href: "#"
       version: secondary
-  vector: static/assets/vectors/hero-bg.svg
+  vector: #static/assets/vectors/hero-bg.svg
+  video: assets/video/blob.mp4
 logos:
   speed: 3000
   caption: Tomorrow's AI is being built on LanceDB today
@@ -134,5 +135,63 @@ scale:
       prefix: PB
       text: Largest table under management
       lottie: /assets/lottie/third.json
-    
+compliance: 
+  title: Enterprise-Grade Compliance
+  description: Safety and security guaranteed for your data, every time.
+  cards:
+    - text: SOC2 Type II
+      icon: aicpa.svg
+    - text: GDPR compliant
+      icon: gdpr.svg
+    - text: HIPAA compliant
+      icon: hipaa.svg
+testimonials:
+  title: Trusted By The Best
+  items:
+    - icon: static/assets/logos/worldlabs.svg
+      text: "Lance has been a significant enabler for our multimodal data workflows. Its performance and feature set offer a dramatic step up from legacy formats like WebDataset and Parquet. Using Lance has freed up considerable time and energy for our team, allowing us to iterate faster and focus more on research."
+      rating: 5
+      author:
+        name: Keunhong Park
+        position: Member of Technical Staff
+    - icon: static/assets/logos/harvey.svg
+      text: "Law firms, professional service providers, and enterprises rely on Harvey to process a large number of complex documents in a scalable and secure manner. LanceDB’s search/retrieval infrastructure has been instrumental in helping us meet those demands."
+      rating: 5
+      author: 
+        name: Gabriel Pereyra
+        position: Co-Founder
+    - icon: static/assets/logos/runway.svg
+      text: "Lance transformed our model training pipeline at Runway. The ability to append columns without rewriting entire datasets, combined with fast random access and multimodal support, lets us iterate on AI models faster than ever. For a company building cutting-edge generative AI, that speed of iteration is everything."
+      rating: 5
+      author:
+        name: Kamil Sindil
+        position: Head of Engineering
+blog:
+  title: Official LanceDB Blog
+  highlighted: true # use highlighted for this section
+  posts: # if highlighted false use this posts, filterd by title
+    - A Practical Guide to Training Custom Rerankers
+    - November Feature Roundup
+    - Test Post for code snippet
+  cta: 
+    text: Go to blog
+    icon: true
+    version: primary
+    href: /blog
+cta:
+  title: Start Your Multimodal <br> Transformation Today
+  description: Designed for Multimodal Data. Built for Production Scale.
+  cta:
+    - text: Get started
+      icon: true
+      version: primary
+      href:
+    - text: Discover more
+      icon: true
+      version: secondary
+      href:
+  vectors:
+    left: assets/vectors/cta-left.svg
+    right: assets/vectors/cta-right.svg
+
 ---

@@ -1,6 +1,7 @@
 .hero-main {
   position: relative;
   overflow: hidden;
+  background-color: palette(primary-grey, 500);
 
   &::after {
     position: absolute;
@@ -9,7 +10,7 @@
     left: 0;
     width: 100%;
     height: 73px;
-    background: linear-gradient(360deg, #171513 12.12%, rgba(23, 21, 19, 0) 91.41%);
+    background: linear-gradient(360deg, palette(primary-grey, 500) 12.12%, rgba(23, 21, 19, 0) 91.41%);
     z-index: 2;
 
     @include mq($md) {
@@ -36,6 +37,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
+  z-index: 2;
 
   @include mq($md) {
     gap: 24px;
@@ -57,10 +60,47 @@
 }
 
 .hero-main__media {
-  height: 365px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 
+  margin-top: -60px;
+  
   @include mq($md) {
-    height: 630px;
+    margin-top: -200px;
+  }
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 1;
+    background-color: palette(primary-grey, 500);
+  }
+
+  &::after {
+    left: 0;
+  }
+
+  &::before {
+    right: 0;
+  }
+
+  video {
+    opacity: 0.9;
+    width: 100%;
+    max-width: 90rem;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    object-fit: contain;
+    object-position: center;
   }
 }
 

@@ -31,7 +31,10 @@
         </div>
         <div class="col-12">
           <div class="hero-main__media">
-
+            <video autoplay muted loop playsinline>
+              <source src="{{.Params.hero.video}}" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
@@ -288,6 +291,253 @@
               </div>
             </div>
           {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.compliance }}
+    <section class="compliance u-bg-dark-700">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="compliance__heading text-center">
+              <h2 class="compliance__title text-heading-small">
+                {{ .title | safeHTML }}
+              </h2>
+              <p class="compliance__description text-body-medium">
+                {{ .description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-center">
+          <div class="col-md-11">
+            <div class="compliance__item-wrap">
+              <div class="compliance__item">
+                <div class="compliance__item-dots">
+                  <span class="orange"></span>
+                  <span class="grey"></span>
+                  <span class="grey"></span>
+                  <span class="lavende"></span>
+                </div>
+              </div>
+              {{ range $index, $item:=.cards }}
+                {{ if eq $index 0 }}
+                  <div class="compliance__item">
+                    <div class="compliance__item-icon">
+                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
+                    </div>
+                    <h3 class="compliance__item-title text-title-small text-center">
+                      {{ $item.text }}
+                    </h3>
+                  </div>
+                {{ end }}
+              {{end}}
+              <div class="compliance__item">
+                <div class="compliance__item-dots">
+                  <span class="grey"></span>
+                </div>
+              </div>
+              {{ range $index, $item:=.cards }}
+                {{ if eq $index 1 }}
+                  <div class="compliance__item">
+                    <div class="compliance__item-icon">
+                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
+                    </div>
+                    <h3 class="compliance__item-title text-title-small text-center">
+                      {{ $item.text }}
+                    </h3>
+                  </div>
+                {{ end }}
+              {{end}}
+              <div class="compliance__item">
+                <div class="compliance__item-dots">
+                  <span class="orange"></span>
+                </div>
+              </div>
+              {{ range $index, $item:=.cards }}
+                {{ if eq $index 2 }}
+                  <div class="compliance__item">
+                    <div class="compliance__item-icon">
+                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
+                    </div>
+                    <h3 class="compliance__item-title text-title-small text-center">
+                      {{ $item.text }}
+                    </h3>
+                  </div>
+                {{ end }}
+              {{end}}
+              <div class="compliance__item">
+                <div class="compliance__item-dots">
+                  <span class="orange"></span>
+                  <span class="lavende"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.testimonials }}
+    <section class="testimonials js-slider" >
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-8 col-lg-6 text-center">
+            <h2 class="testimonials__title text-heading-small">
+              {{ .title | safeHTML }}
+            </h2>
+          </div>
+        </div>
+        <div class="testimonials__slider">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              {{ range .items }}
+                <div class="swiper-slide">
+                  <div class="testimonials__item text-center">
+                    <div class="testimonials__item-icon">
+                      {{ readFile .icon | safeHTML }}
+                    </div>
+                    <p class="testimonials__item-text text-body-medium">
+                      "{{ .text }}"
+                    </p>
+                    <div class="testimonials__item-rating">
+                      {{ range seq 1 .rating }}
+                        <span class="testimonials__item-star">
+                          {{ readFile "static/assets/icons/star.svg" | safeHTML }}
+                        </span>
+                      {{ end }}
+                    </div>
+                    {{ with .author }}  
+                      <h3 class="testimonials__item-author text-body-small text-pro">
+                        <span class="author">{{ .name }},</span>
+                        {{ .position }}
+                      </h3>
+                    {{ end }}
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+          <div class="swiper-pagination d-md-none"></div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.blog }}
+    {{ $highlighted := .highlighted }}
+    {{ $all_posts := where site.RegularPages "Section" "blog" }}
+    {{ $posts := slice }}
+    {{ if $highlighted }}
+      {{ $posts = where $all_posts ".Params.featured" true }}
+    {{ else }}
+      {{ range .posts }}
+        {{ $current_psot := where $all_posts "Title" . }}
+        {{ if not (eq $current_psot nil) }}
+          {{ $posts = $posts | append $current_psot }}
+        {{ end }}
+      {{ end }}
+    {{end}}
+    <section class="recent-posts js-slider">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-8 col-lg-6 text-center">
+            <h2 class="recent-posts__title text-heading-small">
+              {{ .title | safeHTML }}
+            </h2>
+          </div>
+        </div>
+        <div class="recent-posts__slider">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              {{ range first 3 $posts }}
+                {{ $reading_time := div .WordCount 200 | math.Round }}
+
+                <div class="swiper-slide">
+                  <a href="{{ .RelPermalink }}" class="recent-posts__card">
+                    
+                    {{ if .Params.image  }}
+                      <div class="recent-posts__card-image">
+                        <img src="{{ .Params.image  | relURL }}" alt="{{ .Title }}">
+                      </div>
+                    {{ end }}
+
+                    <div class="recent-posts__card-content">
+                      <div class="recent-posts__card-meta">
+                        <p class="text-body-small">
+                          {{ if gt $reading_time 0 }}{{ $reading_time }} min read,{{ end }}
+                          {{ .Date.Format "January 2, 2006" }}
+                        </p>
+                        <div class="recent-posts__card-category__wrap">
+                          {{ range .Params.categories }}
+                            <span class="recent-posts__card-category text-caption text-fono">
+                              {{ . }}
+                            </span>
+                          {{ end }}
+                        </div>
+                      </div>
+                      <h3 class="recent-posts__card-title text-title-medium">
+                        {{ .Title }}
+                      </h3>
+                    </div>
+                  </a>
+                </div>
+              {{ end }}
+
+            </div>  
+          </div>
+        </div>
+        {{ with .cta }}
+          <a href="{{.href}}" class="button button--{{.version}}">
+            {{ .text }}
+            {{ with .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>  
+    </section>
+  {{ end }}
+  {{ with .Params.cta }}
+    <section class="cta">
+      <div class="cta__overlay d-none d-md-block">
+         <img src="assets/vectors/noise.png" alt="noize">
+      </div>
+      <div class="cta__bg d-none d-lg-flex">
+        <div class="cta__bg-item left">
+          <img src="{{.vectors.left}}" alt="vectors">
+        </div>
+        <div class="cta__bg-item right">
+          <img src="{{.vectors.right}}" alt="vectors">
+        </div>
+      </div>
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-12 col-md-10 col-lg-6">
+            <div class="cta__content text-center">
+              <h2 class="cta__title text-heading-small">
+                {{ .title | safeHTML }}
+              </h2>
+              <p class="cta__description text-body-medium">
+                {{ .description }}
+              </p>
+              <div class="cta__buttons">
+                {{ range .cta }}
+                  <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{ end }}>
+                    {{ .text }}
+                    {{ if .icon }}
+                      <span class="button__icon">
+                        {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                      </span>
+                    {{ end }}
+                  </a>
+                {{ end }} 
+              </div>  
+            </div>
+          </div>
         </div>
       </div>
     </section>

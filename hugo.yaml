@@ -37,6 +37,9 @@ params:
     - name: Discord
       url: https://discord.com/invite/G5DcmnZWKB
       icon: discord
+    - name: Discord-alt
+      url: https://discord.com/invite/G5DcmnZWKB
+      icon: discord-alt
     - name: GitHub
       url: https://github.com/lancedb
       icon: github
@@ -60,6 +63,24 @@ params:
       text: Sign up
       icon: true
       url: https://accounts.lancedb.com/sign-up
+  footer:
+    text: LanceDB is the first open-source AI-Native Multimodal Lakehouse.
+    logo: static/assets/logo-footer.svg
+    big_logo: static/assets/logo-footer-big.svg
+    menus:
+      - lancedb
+      - resources
+      - legal
+    socials:
+      - X
+      - LinkedIn
+      - Discord-alt
+    copyright: LanceDB Inc
+    certifications:
+      - aicpa.svg
+      - gdpr.svg
+      - hipaa.svg
+    
   categories:
     - name: Engineering
       slug: engineering
@@ -112,3 +133,27 @@ menus:
     - name: Blog
       weight: 3
       pageRef: /blog
+  lancedb:
+    - name: LanceDB Cloud
+      weight: 1
+      url: https://cloud.lancedb.com
+    - name: Pricing
+      weight: 2
+      url: /pricing
+  resources:
+    - name: Blog
+      weight: 1
+      url: /blog
+    - name: Documentation
+      weight: 2
+      url: /docs
+    - name: Support
+      weight: 3
+      url: mailto:support@lancedb.com
+  legal:
+    - name: Terms
+      weight: 1
+      url: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
+    - name: Policy
+      weight: 2
+      url: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
