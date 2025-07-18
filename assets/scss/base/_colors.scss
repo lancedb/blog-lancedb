@@ -20,12 +20,17 @@ $_color-grey-200: #746F6C !default;
 $_color-grey-300: #45403C !default;
 $_color-grey-400: #3F3F3F !default;
 $_color-grey-500: #0e0e0e !default;
+$_color-grey-600: #4E4B48 !default;
+$_color-grey-700: #3C3937 !default;
 
 $_color-lavende-400: #E7D2F6 !default;
 
 $_color-orange-300: #FF8967 !default;
 $_color-orange-400: #FF734A !default;
 $_color-orange-500: #F56136 !default;
+
+$_color-red: #C12624 !default;
+
 
 $palettes: (
     "primary-white": (base: $_color-white),
@@ -47,6 +52,7 @@ $palettes: (
         500: $_color-orange-500,
     ),
     "primary-lavende": (base: $_color-lavende-400),
+    "primary-red": (base: $_color-red),
     "primary-grad-dark": (
         start: $_color-grad-dark-start,
         end: $_color-grad-dark-end,
@@ -57,5 +63,7 @@ $palettes: (
         300: $_color-grey-300,
         400: $_color-grey-400,
         500: $_color-grey-500,
+        600: $_color-grey-600,
+        700: $_color-grey-700,
     ),
 );

@@ -1,0 +1,193 @@
+{{ define "main" }}
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-12 col-md-9">
+          <div class="pricing-hero__heading text-center">
+            <h1 class="pricing-hero__title text-heading-medium">
+              {{ $title := .Title }}
+              {{ with .Params.highlighted }}
+                {{ $highlighted := . }}
+                {{ $highlightedSpan := printf `<span class="text-gradient">%s</span>` $highlighted }}
+                {{ $title = replace $title $highlighted $highlightedSpan }}
+              {{ end }}
+              {{ $title | safeHTML }}
+            </h1>
+            <p class="pricing-hero__description text-body-large">
+              {{ .Description }}
+            </p>
+          </div>
+        </div>
+        {{ range $index, $plan:= .Params.plans }}
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="pricing-plan {{ if eq $index 0 }}active{{ end }}">
+              <div class="pricing-plan__header">
+                <h2 class="pricing-plan__title text-title-medium">
+                  {{ $plan.title }}
+                </h2>
+                <p class="pricing-plan__text text-body-small">
+                  {{ $plan.description }}
+                </p>
+              </div>
+              <div class="pricing-plan__info">
+                <h3 class="pricing-plan__name text-title-small">
+                  {{ $plan.name }}
+                </h3>
+                <p class="pricing-plan__text text-body-medium">
+                  {{ $plan.details }}
+                </p>
+              </div>
+              <div class="pricing-plan__features text-body-small">
+                <p class="pricing-plan__features-title">
+                  {{ $plan.features.title }}
+                </p>
+                <ul class="pricing-plan__features-list">
+                  {{ range $plan.features.items }}
+                    <li class="pricing-plan__feature-item">
+                      <span class="pricing-plan__feature-icon">
+                        {{ readFile "static/assets/icons/list.svg" | safeHTML }}
+                      </span>
+                      {{ . }}
+                    </li>
+                  {{ end }}
+                </ul>
+              </div>
+              {{ with $plan.link }}  
+                <div class="pricing-plan__actions">
+                  <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+                    {{ .text }}
+                    {{ if .icon }}
+                      <span class="button__icon">
+                        {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                      </span>
+                    {{ end }}
+                  </a>
+                  {{ if eq $index 0 }}
+                    <button class="pricing-plan__scroll js-scroll-to-calc">
+                      or check pricing
+                    </button>
+                  {{ end }}
+                </div>  
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ with .Params.calculator }}
+    <section class="pricing-calculator u-bg-dark-700 js-calculator">
+      <div class="container">
+        <div class="pricing-calculator__wrap">
+          <div class="pricing-calculator__body">
+            <h2 class="text-title-medium pricing-calculator__title">
+              {{ .calc_title }}
+            </h2>
+            <div class="pricing-calculator__selects">
+              {{ range .selects }}
+                <div class="pricing-calculator__selects-item">
+                  <h3 class="text-body-small">
+                    {{ .name | title}}
+                  </h3>
+                  <div class="select__wrap">
+                    <select class="select" name="{{.name}}" data-for="{{.name}}">
+                      {{ range .options }}
+                        <option value="{{ .value }}" {{if .selected}} selected{{end}}>{{ .label }}</option>
+                      {{ end }}
+                    </select>
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+            {{ $markers := .markers }}
+            {{ range .sliders }}
+              <div class="pricing-calculator__slider">
+                <div class="pricing-calculator__slider-header">
+                  <h3 class="text-body-small">
+                    {{ .title }}
+                  </h3>
+                  <p class="text-body-small pricing-calculator__slider-value">
+                    1,000,000
+                  </p>
+                </div>
+                <div class="slider">
+                  <input type="range" min="{{.min}}" max="{{.max}}" step="{{.step}}" value="{{.default}}" data-price="{{.price}}" data-for="{{.name}}"/>
+                </div>
+                <div class="slider__marks">
+                  {{ range $markers  }}
+                    <span class="slider__mark text-body-small">{{ . }}</span>
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+          </div>
+          <div class="pricing-calculator__result">
+            <h2 class="text-title-medium pricing-calculator__title">
+              {{ .result_title }}
+            </h2>
+            <div class="pricing-calculator__result-calcs">
+              <div class="pricing-calculator__result-items">
+                {{ range .sliders }}
+                  <div class="pricing-calculator__result-item">
+                    <p class="text-body-small">
+                      {{ .name | title}}
+                    </p>
+                    <p class="text-body-small pricing-calculator__result-value text-medium">
+                      <span class="js-result-value" data-result="{{.name}}"></span>
+                    </p>
+                  </div>
+                {{ end }}
+              </div>
+              <div class="pricing-calculator__totals">
+                <div class="pricing-calculator__total">
+                  <p class="text-body-medium text-medium">
+                    Total
+                  </p>
+                  <p class="text-body-medium text-medium">
+                    <span class="js-total-value"></span>
+                  </p>
+                </div>
+                {{ with .discount }}    
+                  <div class="pricing-calculator__discount" data-discount="{{.value}}" data-price="{{.price}}">
+                    <p class="text-body-small">
+                      {{ .title }}
+                    </p>
+                    <p class="text-body-medium pricing-calculator__total-value">
+                      $<span class="js-discount-value">{{.value}}</span>
+                    </p>
+                  </div>
+                {{ end }}
+                <div class="pricing-calculator__total">
+                  <p class="text-body-medium text-medium">
+                    First Month
+                  </p>
+                  <p class="text-body-medium text-medium">
+                    <span class="js-total-first-month"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="pricing-calculator__actions">
+              {{ range .actions }}
+                <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+                  {{ .text }}
+                  {{ if .icon }}
+                    <span class="button__icon">
+                      {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                    </span>
+                  {{ end }}
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
+
+{{ define "page_js" }}
+  {{ $calcJs := resources.Get "js/calculations.js" | minify | fingerprint }}
+  
+  <script src="{{ $calcJs.RelPermalink | relURL }}"></script>
+{{ end }}

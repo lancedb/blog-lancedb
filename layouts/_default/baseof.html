@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     {{- partial "head.html" . -}}
-    <body>
+    <body class="{{- block "body_class" . }}{{- end }}">
         {{- partial "header.html" . }}
         {{- block "main" . }}
         {{- end }}
-        {{- partial "footer.html" . }}
+        {{ if not (in .RelPermalink "/contact") }}
+            {{ partial "footer.html" . }}
+        {{ end }}
         {{- partial "scripts.html" . -}}
         {{ block "page_js" .}}{{ end }}
     </body>

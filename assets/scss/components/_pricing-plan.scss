@@ -1,0 +1,125 @@
+.pricing-plan {
+  position: relative;
+  height: 100%;
+  padding: 24px 20px 72px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include mq($md) {
+    padding: 40px 32 66px;
+    gap: 32px;
+  }
+
+  border: 1px solid palette(primary-dark, 500);
+
+  border-radius: 4px;
+
+  &.active {
+    border-color: transparent;
+    background-image:
+    linear-gradient(176.55deg, palette(primary-dark) 40.35%, palette(primary-dark) 97.16%),
+    linear-gradient(176.55deg, #3C3937 40.35%, #FF734A 97.16%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    &::after {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      z-index: 1;
+      background-image: radial-gradient(circle at 50% 150%, rgba(255, 115, 74, 0.25) 0%, rgba(26, 23, 21, 0.25) 100%);
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+.pricing-plan__header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding-bottom: 24px;
+  border-bottom: 1px dashed palette(primary-grey, 600);
+}
+
+.pricing-plan__text {
+  color: palette(primary-dark, 200);
+}
+
+.pricing-plan__info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pricing-plan__features {
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+}
+
+.pricing-plan__features,
+.pricing-plan__features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing-plan__feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pricing-plan__feature-icon {
+  display: inline-block;
+  margin-top: 2px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.pricing-plan__actions {
+  position: relative;
+  z-index: 2;
+
+  @include mq($max: $md) {
+   margin-top: 32px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+.pricing-plan__scroll {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: fit-content;
+  transform: translate(-50%, 16px);
+  z-index: 2;
+  text-decoration: underline;
+
+  @include font-family(fono);
+  @include font(btn_mob, 21, 500);
+
+  @include mq($md) {
+    @include font(btn, 24, 500);  
+  }
+}

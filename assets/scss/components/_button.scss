@@ -16,7 +16,6 @@
   cursor: pointer;
 
   @include mq($md) {
-    justify-content: flex-start;
     padding: 14px 32px;
     @include font(btn, 24, 500);  
   }

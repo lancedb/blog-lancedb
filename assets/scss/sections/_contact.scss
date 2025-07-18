@@ -1,0 +1,121 @@
+.contact {
+  position: relative;
+  padding: 64px 0 79px;
+
+  @include mq($lg) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    padding: 116px 0 75px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      background-color: palette(primary-dark, 600);
+      z-index: 1;
+    }
+  }
+
+   &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translate(-50%, 50%);
+      width: 250px;
+      height: 225px;
+      opacity: .3;
+      filter: blur(100px);
+      background-color: #503e32;
+      border-radius: 100%;
+
+      @include mq($lg) {
+        transform: translate(0, 0);
+        width: 598px;
+        height: 529px;
+        bottom: -298px;
+        right: -171px;
+      }
+    }
+
+  .container {
+    position: relative;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .row {
+    height: 100%;
+  }
+}
+
+.contact-page {
+  @include mq($md) {
+    height: 100dvh;
+  } 
+
+  .header {
+    background-color: palette(primary-dark);
+  }
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+
+  @include mq($lg) {
+    gap: 30px;
+    text-align: left;
+  }
+}
+
+.contact__description {
+  color: palette(primary-dark, 300);
+}
+
+.contact__bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(50% + 1px);
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.contact__form {
+  border: 12px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  height: 100%;
+  background-image:
+    linear-gradient(palette(primary-dark, 700), palette(primary-dark, 700)),
+    linear-gradient(90deg, palette(primary-lavende), palette(primary-orange));
+
+  @include mq($md) {
+    border-width: 40px;
+  }
+
+  @include mq($lg) {
+     margin-left: 40px;
+  }
+
+  .button {
+    width: 100%;
+
+    @include mq($md) {
+      width: fit-content;
+      margin-left: auto;
+    }
+  }
+}

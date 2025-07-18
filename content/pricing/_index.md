@@ -1,0 +1,106 @@
+---
+type: pricing
+title: Simple Transparent Pricing
+highlighted: Transparent
+description: From the first POC to billion-scale production, a perfect option for every part of your AI journey
+plans:
+  - title: LanceDB Cloud
+    description: Blazing fast performance. Best for embedded applications.
+    name: Usage-based
+    details: Pay as you go
+    features:
+      title: "Everything in OSS, plus:"
+      items:
+        - Serverless retrieval with nothing to manage
+        - Intuitive UI to manage and explore your data
+        - Automatic indexing, and compaction
+        - Local to Cloud without changing the code
+    link:
+      text: Start free
+      icon: true
+      version: primary
+      href: 
+  - title: LanceDB Enterprise
+    description: Blazing fast performance. Best for embedded applications.
+    name: Custom
+    details: Contact us for pricing
+    features:
+      title: "Everything in LanceDB Cloud, plus:"
+      items:
+        - Multimodal SQL engine
+        - Distributed data pre-processing engine
+        - Optimized training cache
+        - Dedicated infrastructure
+        - Deploy on any cloud
+        - Enterprise security
+    link:
+      text: Contact Sales
+      icon: true
+      version: secondary
+      href: 
+calculator:
+  calc_title: LanceDB Cloud Pricing Calculator
+  result_title: Estimated Monthly Costs
+  selects:
+    - name: dimensions
+      options:
+        - value: 768
+          label: 768
+        - value: 1024
+          label: 1024
+        - value: 1536
+          label: 1536
+          selected: true
+        - value: 2048
+          label: 2048
+    - name: attributes
+      options:
+        - value: 256
+          label: 256B
+        - value: 512
+          label: 512B
+          selected: true
+        - value: 1024
+          label: 1KB
+  markers:
+    - 10k
+    - 100k
+    - 1M
+    - 10M
+    - 100M
+  sliders:
+    - name: writes
+      title: Vectors Written Per Month
+      min: 0
+      max: 4
+      default: 2
+      step: 1
+      price: 100
+    - name: queries
+      title: Vectors Written Per Month
+      min: 0
+      max: 4
+      default: 2
+      step: 1
+      price: 25
+    - name: storage
+      title: Vectors Written Per Month
+      min: 0
+      max: 4
+      default: 2
+      step: 1
+      price: 33
+  discount:
+    value: 100.00
+    title: Free Credits (one-time)
+    price: 100
+  actions:
+    - version: secondary
+      href: 
+      text: Pricing Details
+      icon: true 
+    - version: primary
+      href: 
+      text: Sign up
+      icon: true 
+---
