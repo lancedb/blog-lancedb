@@ -1,0 +1,59 @@
+{{ $content:= .content }}
+{{ $type:= .type }}
+
+<section class="cta cta--{{$type}}">
+  <div class="cta__overlay d-none d-md-block">
+    <img src="/assets/vectors/noise.png" alt="noize">
+  </div>
+  <div class="cta__bg d-none d-lg-flex">
+    <div class="cta__bg-item left">
+      <img src="{{$content.vectors.left}}" alt="vectors">
+    </div>
+    <div class="cta__bg-item right">
+      <img src="{{$content.vectors.right}}" alt="vectors">
+    </div>
+  </div>
+  {{ if eq $type "logo" }}   
+    <div class="cta__gradient">
+      {{ readFile "static/assets/vectors/download.svg" | safeHTML }}
+    </div>
+  {{ end }}
+  <div class="container">
+    <div class="row justify-center">
+      <div class="col-12 col-md-10 col-lg-6">
+        <div class="cta__content text-center">
+          {{ with $content.logo }}
+            <div class="cta__logo">
+              {{ readFile . | safeHTML }}
+            </div>
+          {{ end }}
+          {{ with  $content.title }}
+            <h2 class="cta__title text-heading-small">
+              {{ . | safeHTML }}
+            </h2>
+          {{ end }}
+          {{ with $content.description }}  
+            <p class="cta__description text-body-medium">
+              {{ . }}
+            </p>
+          {{ end }}
+          {{ with $content.cta }}  
+            <div class="cta__buttons">
+              {{ range . }}
+              <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in
+                site.Params.header.button.url "http" }} target="_blank" rel="noopener" {{ end }}>
+                {{ .text }}
+                {{ if .icon }}
+                <span class="button__icon">
+                  {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                </span>
+                {{ end }}
+              </a>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

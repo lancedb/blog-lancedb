@@ -136,6 +136,7 @@ scale:
       text: Largest table under management
       lottie: /assets/lottie/third.json
 compliance: 
+  bg: grey
   title: Enterprise-Grade Compliance
   description: Safety and security guaranteed for your data, every time.
   cards:
@@ -179,6 +180,7 @@ blog:
     version: primary
     href: /blog
 cta:
+  type: buttons
   title: Start Your Multimodal <br> Transformation Today
   description: Designed for Multimodal Data. Built for Production Scale.
   cta:

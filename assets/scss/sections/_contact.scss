@@ -1,13 +1,9 @@
 .contact {
   position: relative;
   padding: 64px 0 79px;
+  overflow: hidden;
 
   @include mq($lg) {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    top: 0;
-    right: 0;
     padding: 116px 0 75px;
 
     &::after {
@@ -91,31 +87,4 @@
   align-items: flex-end;
   justify-content: space-between;
   z-index: 1;
-}
-
-.contact__form {
-  border: 12px solid transparent;
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  height: 100%;
-  background-image:
-    linear-gradient(palette(primary-dark, 700), palette(primary-dark, 700)),
-    linear-gradient(90deg, palette(primary-lavende), palette(primary-orange));
-
-  @include mq($md) {
-    border-width: 40px;
-  }
-
-  @include mq($lg) {
-     margin-left: 40px;
-  }
-
-  .button {
-    width: 100%;
-
-    @include mq($md) {
-      width: fit-content;
-      margin-left: auto;
-    }
-  }
 }

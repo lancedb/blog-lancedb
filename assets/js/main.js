@@ -2,19 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
   (() => {
     const header = document.querySelector(".js-header");
     const anonncement = document.querySelector(".header__announcement");
-    const anonncementClose = anonncement.querySelector(
-      ".header__announcement-close"
-    );
-    const anonncementHeight = anonncement.offsetHeight;
-    header.style.setProperty(
-      "--header-anonncement-height",
-      `${anonncementHeight}px`
-    );
     const headerToggle = header.querySelector(".header__toggle");
-
-    anonncementClose.addEventListener("click", () => {
-      anonncement.classList.add("closed");
-    });
+    
+    if (anonncement) {
+      const anonncementClose = anonncement.querySelector(
+        ".header__announcement-close"
+      );
+      const anonncementHeight = anonncement.offsetHeight;
+      header.style.setProperty(
+        "--header-anonncement-height",
+        `${anonncementHeight}px`
+      );
+  
+      anonncementClose.addEventListener("click", () => {
+        anonncement.classList.add("closed");
+      });
+    }
 
     headerToggle.addEventListener("click", () => {
       const headerHeight = header.offsetHeight;

@@ -64,7 +64,7 @@
   }
 }
 
-.badge--badge {
+.button--badge {
   padding: 7px 12px;
   background-color: transparent;
   border-color: palette(primary-dark, 500);
@@ -79,6 +79,28 @@
       width: 20px;
       height: 20px;
     }
+  }
+
+  &:hover {
+    border-color: palette(primary-dark, 400);
+  }
+
+  &:active,
+  &:focus {
+    background-color: palette(primary-dark);
+    border-color: palette(primary-dark, 400);
+  }
+}
+
+.button--badge-small {
+  @include font(caption_mob, 10, 400);
+  padding: 10px 16px;
+  border-radius: 4px;
+  color: palette(primary-offwhite);
+  text-transform: uppercase;
+
+  @include mq($md) {
+    @include font(caption, 12, 400);
   }
 
   &:hover {

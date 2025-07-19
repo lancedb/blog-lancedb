@@ -103,7 +103,7 @@
       <div class="container">
         <div class="infrastructure__badges">
           {{range .badges }}
-            <div class="button badge--badge">
+            <div class="button button--badge">
               <span class="button__icon">
                 {{ readFile (printf "static/assets/icons/%s" .icon) | safeHTML }}
               </span>
@@ -296,89 +296,7 @@
     </section>
   {{ end }}
   {{ with .Params.compliance }}
-    <section class="compliance u-bg-dark-700">
-      <div class="container">
-        <div class="row justify-center">
-          <div class="col-12 col-md-8 col-lg-6">
-            <div class="compliance__heading text-center">
-              <h2 class="compliance__title text-heading-small">
-                {{ .title | safeHTML }}
-              </h2>
-              <p class="compliance__description text-body-medium">
-                {{ .description }}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-center">
-          <div class="col-md-11">
-            <div class="compliance__item-wrap">
-              <div class="compliance__item">
-                <div class="compliance__item-dots">
-                  <span class="orange"></span>
-                  <span class="grey"></span>
-                  <span class="grey"></span>
-                  <span class="lavende"></span>
-                </div>
-              </div>
-              {{ range $index, $item:=.cards }}
-                {{ if eq $index 0 }}
-                  <div class="compliance__item">
-                    <div class="compliance__item-icon">
-                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
-                    </div>
-                    <h3 class="compliance__item-title text-title-small text-center">
-                      {{ $item.text }}
-                    </h3>
-                  </div>
-                {{ end }}
-              {{end}}
-              <div class="compliance__item">
-                <div class="compliance__item-dots">
-                  <span class="grey"></span>
-                </div>
-              </div>
-              {{ range $index, $item:=.cards }}
-                {{ if eq $index 1 }}
-                  <div class="compliance__item">
-                    <div class="compliance__item-icon">
-                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
-                    </div>
-                    <h3 class="compliance__item-title text-title-small text-center">
-                      {{ $item.text }}
-                    </h3>
-                  </div>
-                {{ end }}
-              {{end}}
-              <div class="compliance__item">
-                <div class="compliance__item-dots">
-                  <span class="orange"></span>
-                </div>
-              </div>
-              {{ range $index, $item:=.cards }}
-                {{ if eq $index 2 }}
-                  <div class="compliance__item">
-                    <div class="compliance__item-icon">
-                      {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
-                    </div>
-                    <h3 class="compliance__item-title text-title-small text-center">
-                      {{ $item.text }}
-                    </h3>
-                  </div>
-                {{ end }}
-              {{end}}
-              <div class="compliance__item">
-                <div class="compliance__item-dots">
-                  <span class="orange"></span>
-                  <span class="lavende"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </section>
+    {{ partial "components/compliance.html" . }}
   {{ end }}
   {{ with .Params.testimonials }}
     <section class="testimonials js-slider" >

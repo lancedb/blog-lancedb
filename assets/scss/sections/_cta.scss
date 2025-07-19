@@ -64,10 +64,20 @@
   @include mq($md) {
     gap: 20px;
   }
+
+  .cta--logo & {
+    @include mq($md) {
+      gap: 55px;
+    }
+  }
 }
 
 .cta__description {
   color: palette(primary-dark, 200);
+
+  .cta--logo & {
+    color: palette(primary-offwhite);
+  }
 }
 
 .cta__buttons {
@@ -88,5 +98,18 @@
     .button {
       width: 100%;
     }
+  }
+}
+
+.cta__gradient {
+  width: 110%;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  @include mq($md) {
+    width: 75%;
   }
 }

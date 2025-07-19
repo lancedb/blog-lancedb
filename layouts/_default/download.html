@@ -1,0 +1,85 @@
+{{ define "main" }}
+  <section class="download-hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 order-2 order-md-1">
+          <div class="download-hero__image">
+            {{ $alt := .Params.image_alt | default .Title }}
+            {{ $image_src := .Params.image }}
+            {{ $image_mobile_src := .Params.image_mob | default $image_src }}
+            {{ $image := resources.GetMatch $image_src }}
+            {{ $image_mobile := resources.GetMatch $image_mobile_src }}
+            <picture>
+              <source srcset="{{ $image_mobile.Permalink | relURL }}" media="(max-width: 767px)">
+              <source srcset="{{ $image.Permalink | relURL }}" media="(min-width: 768px)">
+              <img 
+                  src="{{ $image.Permalink | relURL }}" 
+                  alt="{{ $alt }}" 
+                  width="{{ $image.Width }}" 
+                  height="{{ $image.Height }}">
+            </picture>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 order-1 order-md-2">
+          <div class="download-hero__heading">
+            <div class="button button--badge-small">
+              {{.Params.badge }}
+            </div>
+            <h1 class="download-hero__title text-heading-medium">
+              {{ $title := .Title }}
+              {{ with .Params.highlighted }}
+                {{ $highlighted := . }}
+                {{ $highlightedSpan := printf `<span class="text-gradient">%s</span>` $highlighted }}
+                {{ $title = replace $title $highlighted $highlightedSpan }}
+              {{ end }}
+              {{ $title | safeHTML }}
+            </h1>
+            <p class="download-hero__description text-body-large">
+              {{ .Description }}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {{ with .Params.vector }}
+      <div class="download-hero__vector">
+        {{ readFile . | safeHTML}}
+      </div>
+    {{ end }}
+  </section>
+  {{ with .Params.download }}
+    <section class="download-form u-bg-dark-700">
+      <div class="container">
+        <div class="row items-center">
+          <div class="col-12 col-lg-5">
+            <div class="download-form__content">
+              <h2 class="text-title-medium text-pro">
+                {{ .title }}
+              </h2>
+              <ul class="download-form__list">
+                {{range .list}}
+                  <li class="text-body-medium">
+                    {{.}}
+                  </li>
+                {{end}}
+              </ul>
+              <p class="download-form__info text-body-small">
+                {{.info}}
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-7">
+            {{ partial "components/form.html" (dict "content" .form) }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{ with .Params.compliance }}
+    {{ partial "components/compliance.html" . }}
+  {{ end }}
+  {{ with .Params.cta}}
+     {{ partial "components/cta.html" (dict "content" . "type" .type)}}
+  {{end}}
+{{ end }}

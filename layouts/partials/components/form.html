@@ -1,0 +1,54 @@
+{{$title:= .content.title }}
+{{$fields:= .content.fields }}
+{{$form_action:= .content.submit_action}}
+{{$form_info:= .content.form_info}}
+{{$submit_button:= .content.submit_button}}
+
+<div class="form__wrap">
+  <form action="{{$form_action}}" class="form">
+    {{with $title}}
+      <h2 class="text-title-large form__title">{{.}}</h2>
+    {{end}}
+    <div class="row">
+      {{ range $fields }}
+        {{ $col:= "col-12" }}
+        {{ if .half }}
+          {{$col = "col-12 col-md-6"}}
+        {{ end }}
+        <div class="{{ $col }}">
+          <div class="form__field">
+            <label for="{{ .name }}" class="form__label text-body-small {{if .requared}} required{{end}}">{{ .label }}</label>
+            {{ if eq .type "textarea" }}
+              <textarea id="{{ .name }}" name="{{ .name }}" class="form__input form__textarea text-body-small" placeholder="{{ .placeholder }}"{{if .requared}} required{{end}}></textarea>
+            {{ else if or (eq .type "radio") (eq .type "checkbox") }}
+              <input type="{{ .type }}" id="{{ .name }}" name="{{ .name }}" class="form__input text-body-small form__input--check" placeholder="{{ .placeholder }}"{{if .requared}} required{{end}}>
+            {{ else}}
+              <input type="{{ .type }}" id="{{ .name }}" name="{{ .name }}" class="form__input text-body-small" placeholder="{{ .placeholder }}"{{if .requared}} required{{end}}>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{ with $form_info }}
+        <div class="col-12">
+          <div class="form__info">
+            <p class="form__info-text">
+              {{ . | markdownify}}
+            </p>
+          </div>
+        </div>
+      {{ end }}
+      {{ with $submit_button }}
+        <div class="col-12">
+          <button type="submit" class="button button--{{.version | default "primary"}}">
+            {{ .text }}
+            {{ if .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+            {{ end }}
+          </button>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
