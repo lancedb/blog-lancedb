@@ -6,11 +6,11 @@ featured: false
 categories: ["Case Studies"]
 image: /assets/blog/case-study-dosu/preview-image.png
 description: "How Dosu uses LanceDB to transform codebases into living knowledge bases with real-time search and versioning."
-author: David Myriel
-author_avatar: "/assets/authors/david-myriel.jpg"
-author_bio: "Writer."
-author_github: "davidmyriel"
-author_linkedin: "davidmyriel"
+author: Qian Zhu
+author_avatar: "/assets/authors/qian-zhu.jpg"
+author_bio: "Software Engineer at LanceDB specializing in cloud infrastructure, AI-powered development tools, and knowledge management systems."
+author_github: "QianZhu"
+author_linkedin: "qianzhu56"
 ---
 
 ## About Dosu
