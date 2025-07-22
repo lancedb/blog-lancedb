@@ -95,6 +95,9 @@
 .how-it-works__list-text {
   margin-top: 8px;
   color: palette(primary-dark, 200);
+  @include mq($md) {
+    min-height: 48px;
+  }
 }
 
 .how-it-works__cta {
@@ -103,4 +106,25 @@
     margin-top: 8px;
     width: fit-content;
   }
+}
+
+.how-it-works__list-wrap {
+  position: relative;
+}
+
+.how-it-works__list-item {
+  opacity: 1;
+  transform: translateX(0);
+  will-change: transform, opacity;
+}
+
+.how-it-works__list-line {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+  left: 16px;
+  top: 16px;
+  will-change: height;
+  z-index: 0;
+  inset: 1.5rem auto 3.5rem 2rem;
 }

@@ -49,8 +49,18 @@
     font-weight: 500;
 }
 
-.text-gradient {
+.text-gradient,
+.text-gradient .line {
     background: linear-gradient(90deg, palette(primary-lavende) 0%, palette(primary-orange) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.js-text-animation {
+  overflow: hidden;
+}
+
+.js-text-animation .line {
+  display: inline-block;
+  overflow: hidden;
 }

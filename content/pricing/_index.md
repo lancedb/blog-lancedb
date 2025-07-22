@@ -19,7 +19,7 @@ plans:
       text: Start free
       icon: true
       version: primary
-      href: 
+      href: https://accounts.lancedb.com/sign-up
   - title: LanceDB Enterprise
     description: Blazing fast performance. Best for embedded applications.
     name: Custom
@@ -37,7 +37,7 @@ plans:
       text: Contact Sales
       icon: true
       version: secondary
-      href: 
+      href: /contact
 calculator:
   calc_title: LanceDB Cloud Pricing Calculator
   result_title: Estimated Monthly Costs
@@ -96,11 +96,11 @@ calculator:
     price: 100
   actions:
     - version: secondary
-      href: 
+      href: /contact
       text: Pricing Details
       icon: true 
     - version: primary
-      href: 
+      href: https://accounts.lancedb.com/sign-up
       text: Sign up
       icon: true 
 ---

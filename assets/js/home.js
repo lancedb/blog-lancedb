@@ -106,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     switchTab(currentTab);
-
+    startAutoRotation();
+    
     const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
 
     function setupObserver() {

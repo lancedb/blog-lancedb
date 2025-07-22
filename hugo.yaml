@@ -24,6 +24,7 @@ taxonomies:
 # Category Configuration
 params:
   logo: static/assets/logo.svg
+  sign_upURL: https://accounts.lancedb.com/sign-up
   mainLanceDBURL: http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com
   cloudLanceDBURL: https://cloud.lancedb.com
   privacyPdfURL: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
@@ -53,7 +54,7 @@ params:
     top: 
       link: 
         text: Why Multimodal Data Needs a Better Lakehouse? — Download the Research Study
-        url: /
+        url: /download
         icon: true
     socials_title: Social media
     socials:
@@ -128,7 +129,7 @@ menus:
       weight: 1
       pageRef: /pricing
     - name: Documentation
-      weight: 3
+      weight: 2
       pageRef: /docs
     - name: Blog
       weight: 3

@@ -11,4 +11,11 @@
     <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
     <script src="{{ $codeTabJS.RelPermalink }}"></script> 
     <script src="{{ $codeBlocksJS.RelPermalink }}"></script> 
+{{ else }}
+    {{ $textAniamtionJs := resources.Get "js/text-animation.js" | minify | fingerprint }}
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="{{ $textAniamtionJs.RelPermalink }}"></script> 
 {{ end }}

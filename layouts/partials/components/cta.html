@@ -28,12 +28,12 @@
             </div>
           {{ end }}
           {{ with  $content.title }}
-            <h2 class="cta__title text-heading-small">
+            <h2 class="cta__title text-heading-small js-text-animation">
               {{ . | safeHTML }}
             </h2>
           {{ end }}
           {{ with $content.description }}  
-            <p class="cta__description text-body-medium">
+            <p class="cta__description {{if eq $type "logo"}}text-title-medium text-fono{{else}}text-body-medium{{end}} js-text-animation">
               {{ . }}
             </p>
           {{ end }}

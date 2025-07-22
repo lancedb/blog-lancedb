@@ -9,7 +9,7 @@ hero:
       version: primary
     - text: Discover more
       icon: true
-      href: "#"
+      href: https://accounts.lancedb.com/sign-up
       version: secondary
   vector: #static/assets/vectors/hero-bg.svg
   video: assets/video/blob.mp4
@@ -79,7 +79,7 @@ solution:
       description: Faster dataloading, global shuffling, and integrated filters for large scale training using pytorch or JAX.
       code: 
   cta: 
-    href: "#"
+    href: https://accounts.lancedb.com/sign-up
     icon: true
     version: primary
     text: Create your first project
@@ -100,7 +100,7 @@ how_it_works:
           icon: index.svg
       cta:
         text: Try LanceDB Cloud
-        href:
+        href: https://accounts.lancedb.com/sign-up
         version: primary
         icon: true
     - title: For Enterprises
@@ -116,7 +116,7 @@ how_it_works:
           icon: scale.svg
       cta:
         text: Contact Sales
-        href:
+        href: /contact
         version: primary
         icon: true
 scale:
@@ -187,11 +187,11 @@ cta:
     - text: Get started
       icon: true
       version: primary
-      href:
+      href: https://accounts.lancedb.com/sign-up
     - text: Discover more
       icon: true
       version: secondary
-      href:
+      href: /contact
   vectors:
     left: assets/vectors/cta-left.svg
     right: assets/vectors/cta-right.svg

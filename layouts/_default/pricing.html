@@ -4,7 +4,7 @@
       <div class="row justify-center">
         <div class="col-12 col-md-9">
           <div class="pricing-hero__heading text-center">
-            <h1 class="pricing-hero__title text-heading-medium">
+            <h1 class="pricing-hero__title text-heading-medium js-text-animation">
               {{ $title := .Title }}
               {{ with .Params.highlighted }}
                 {{ $highlighted := . }}
@@ -13,7 +13,7 @@
               {{ end }}
               {{ $title | safeHTML }}
             </h1>
-            <p class="pricing-hero__description text-body-large">
+            <p class="pricing-hero__description text-body-large js-text-animation">
               {{ .Description }}
             </p>
           </div>
@@ -22,10 +22,10 @@
           <div class="col-12 col-md-6 col-lg-4">
             <div class="pricing-plan {{ if eq $index 0 }}active{{ end }}">
               <div class="pricing-plan__header">
-                <h2 class="pricing-plan__title text-title-medium">
+                <h2 class="pricing-plan__title text-title-medium js-text-animation">
                   {{ $plan.title }}
                 </h2>
-                <p class="pricing-plan__text text-body-small">
+                <p class="pricing-plan__text text-body-small js-text-animation">
                   {{ $plan.description }}
                 </p>
               </div>
@@ -80,7 +80,7 @@
       <div class="container">
         <div class="pricing-calculator__wrap">
           <div class="pricing-calculator__body">
-            <h2 class="text-title-medium pricing-calculator__title">
+            <h2 class="text-title-medium pricing-calculator__title js-text-animation">
               {{ .calc_title }}
             </h2>
             <div class="pricing-calculator__selects">
@@ -122,7 +122,7 @@
             {{ end }}
           </div>
           <div class="pricing-calculator__result">
-            <h2 class="text-title-medium pricing-calculator__title">
+            <h2 class="text-title-medium pricing-calculator__title js-text-animation">
               {{ .result_title }}
             </h2>
             <div class="pricing-calculator__result-calcs">

@@ -7,7 +7,7 @@
       <div class="row items-center">
         <div class="col-12 col-lg-6">
           <div class="contact__info">
-            <h1 class="contact__title text-heading-medium">
+            <h1 class="contact__title text-heading-medium js-text-animation">
               {{ $title := .Title }}
               {{ with .Params.highlighted }}
                 {{ $highlighted := . }}
@@ -16,7 +16,7 @@
               {{ end }}
               {{ $title | safeHTML }}
             </h1>
-            <p class="contact__description text-body-large">
+            <p class="contact__description text-body-large js-text-animation">
               {{ .Description }}
             </p>
           </div>
