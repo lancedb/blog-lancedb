@@ -1,5 +1,5 @@
 ---
-title: "LanceDB"
+title: "Platforms"
 description: "Welcome to LanceDB documentation"
-weight: 1
+weight: 16
 ---
