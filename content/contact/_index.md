@@ -4,22 +4,22 @@ highlighted: hear from you
 description: Please fill out the form and we'll get back to you within 48 hours.
 form:
   fields: 
-    - label: Last label
-      name: last_name
+    - label: First name
+      name: first_name
       type: text
-      placeholder: Your last label
-      requared: true
-      half: true
-    - label: First label
-      name: firs_name
-      type: text
-      placeholder: Your First label
+      placeholder: Your First name
       requared: false
       half: true
-    - label: Company label
+    - label: Last name
+      name: last_name
+      type: text
+      placeholder: Your Last name
+      requared: true
+      half: true
+    - label: Company name
       name: company_name
       type: text
-      placeholder: Your Company label
+      placeholder: Your Company name
       requared: true
       half: false
     - label: Your e-mail
@@ -36,10 +36,10 @@ form:
       half: false
   submit_action: //
   submit_button:
-    text: Submit
+    text: Send Message
     icon: true
     variant: primary
-  form_info: By submitting, you agree to our [Privacy Policy](#) and allow LanceDB to store and process the information above to provide you with the content requested.
+  form_info: By submitting, you agree to our [Privacy Policy](https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf) and allow LanceDB to store and process the information above to provide you with the content requested.
 page_bg: 
   left: static/assets/vectors/contact-bg-left.svg
   right: static/assets/vectors/contact-bg-right.svg

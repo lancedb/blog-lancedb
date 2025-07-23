@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".js-header");
     const anonncement = document.querySelector(".header__announcement");
     const headerToggle = header.querySelector(".header__toggle");
-    
+
     if (anonncement) {
       const anonncementClose = anonncement.querySelector(
         ".header__announcement-close"
@@ -45,6 +45,30 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         header.classList.remove("scrolled");
       }
+    });
+  })();
+
+  // Scroll to section
+  (() => {
+    const scrollButtons = document.querySelectorAll(".js-scroll-to-section");
+    if (!scrollButtons.length) return;
+
+    const scrollToSection = (target) => {
+      const section = document.querySelector(`[data-scroll="${target}"]`);
+      if (!section) return;
+
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: "smooth"
+      });
+    };
+    
+    scrollButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = button.dataset.scrollTo;
+        scrollToSection(target);
+      });
     });
   })();
 });

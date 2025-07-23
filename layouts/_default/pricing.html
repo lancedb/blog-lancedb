@@ -63,7 +63,7 @@
                     {{ end }}
                   </a>
                   {{ if eq $index 0 }}
-                    <button class="pricing-plan__scroll js-scroll-to-calc">
+                    <button class="pricing-plan__scroll js-scroll-to-section" data-scroll-to="calculator">
                       or check pricing
                     </button>
                   {{ end }}
@@ -76,7 +76,7 @@
     </div>
   </section>
   {{ with .Params.calculator }}
-    <section class="pricing-calculator u-bg-dark-700 js-calculator">
+    <section class="pricing-calculator u-bg-dark-700 js-calculator" data-scroll="calculator">
       <div class="container">
         <div class="pricing-calculator__wrap">
           <div class="pricing-calculator__body">

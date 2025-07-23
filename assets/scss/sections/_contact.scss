@@ -4,8 +4,12 @@
   overflow: hidden;
 
   @include mq($lg) {
-    padding: 116px 0 75px;
-
+    padding: 140px 0 75px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100dvh;
     &::after {
       content: "";
       position: absolute;
@@ -70,6 +74,7 @@
   @include mq($lg) {
     gap: 30px;
     text-align: left;
+    margin-top: 60px;
   }
 }
 
