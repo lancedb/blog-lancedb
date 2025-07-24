@@ -445,3 +445,56 @@
 // Orange divider below docs body
 .docs-content {
 } 
+
+// Breadcrumbs for docs
+.docs-breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.89em;
+  color: #bfc2c7;
+  opacity: 0.7;
+  margin-bottom: 1.1em;
+  margin-top: 1.1em;
+  gap: 0.2em;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+
+  a {
+    color: #ff734a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.18s;
+    opacity: 1;
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-home {
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    margin-right: 0.1em;
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 1px;
+    }
+  }
+
+  .breadcrumb-sep {
+    color: #ff734a;
+    margin: 0 0.3em;
+    font-weight: 600;
+    opacity: 0.7;
+    font-size: 1em;
+    user-select: none;
+  }
+
+  .breadcrumb-current {
+    color: #bfc2c7;
+    font-weight: 400;
+    opacity: 0.95;
+  }
+} 
