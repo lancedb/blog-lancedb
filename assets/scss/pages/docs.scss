@@ -122,8 +122,105 @@
   margin-bottom: 0.1em;
 }
 
-.docs-content {
-  min-width: 0;
+.docs-content, .docs-article-content {
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1em;
+  color: #fff;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.docs-article-header h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.7em;
+  letter-spacing: -0.01em;
+}
+
+.docs-article-content h2 {
+  font-size: 1.45em;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+  letter-spacing: -0.01em;
+}
+
+.docs-article-content h3 {
+  font-size: 1.18em;
+  font-weight: 500;
+  color: #ff734a;
+  margin-top: 1.7em;
+  margin-bottom: 0.5em;
+}
+
+.docs-article-content h4,
+.docs-article-content h5,
+.docs-article-content h6 {
+  font-size: 1em;
+  font-weight: 500;
+  color: #ff734a;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+.docs-article-content p {
+  margin-bottom: 1.1em;
+  color: #e6e6e6;
+}
+
+.docs-article-content ul,
+.docs-article-content ol {
+  margin-bottom: 1.1em;
+  padding-left: 1.5em;
+}
+
+.docs-article-content li {
+  margin-bottom: 0.4em;
+}
+
+.docs-article-content a {
+  color: #ff734a;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.docs-article-content a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.docs-article-content code {
+  background: #23262b;
+  color: #ffb38a;
+  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 0.97em;
+  padding: 0.18em 0.4em;
+  border-radius: 4px;
+}
+
+.docs-article-content pre {
+  background: #23262b;
+  color: #ffb38a;
+  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 0.97em;
+  padding: 1em;
+  border-radius: 6px;
+  margin: 1.5em 0;
+  overflow-x: auto;
+}
+
+.docs-article-content blockquote {
+  border-left: 3px solid #ff734a;
+  background: #23262b;
+  color: #bfc2c7;
+  padding: 0.7em 1.2em;
+  margin: 1.5em 0;
+  border-radius: 4px;
+  font-style: italic;
 }
 
 .docs-toc {
@@ -196,4 +293,27 @@
   color: #ff734a;
   font-weight: 500;
   opacity: 1;
+} 
+
+.docs-article-header h1,
+.docs-article-content h1,
+.docs-article-content h2,
+.docs-article-content h3,
+.docs-article-content h4,
+.docs-article-content h5,
+.docs-article-content h6,
+.sidebar-divider,
+.toc-container h3 {
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
+} 
+
+.docs-article-content a,
+.sidebar-link,
+.docs-toc .toc-container a {
+  text-decoration: none;
+}
+
+.docs-article-content a:hover,
+.docs-toc .toc-container a:hover {
+  text-decoration: underline;
 } 

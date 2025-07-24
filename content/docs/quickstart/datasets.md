@@ -7,11 +7,11 @@ weight: 3
 
 In this tutorial, you will ingest a dataset from Huggingface into your **LanceDB Cloud** table. For interactive code, check out the [**Python Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  or the [**TypeScript Example**](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
 
-## **Prerequisites**
+## Prerequisites
 
 You will connect to a remote LanceDB cluster, ingest data and run some searches. Before you start, make sure you [**sign up for LanceDB Cloud**](https://accounts.lancedb.com/sign-up) and get your API key and cluster URI.
 
-## **1. Installation**
+## 1. Installation
 
 Install the [**LanceDB SDK**](../api/index.md) with your preferred language.
 
@@ -25,7 +25,7 @@ Install the [**LanceDB SDK**](../api/index.md) with your preferred language.
     npm install @lancedb/lancedb
     ```
 
-## **2. Connect to LanceDB**
+## 2. Connect to LanceDB
 
 For **LanceDB Cloud** users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions, refer to our [**onboarding tutorial**](https://app.storylane.io/share/pudefwx54tun).
 
@@ -74,7 +74,7 @@ For **LanceDB Enterprise** users, please contact [**our team**](mailto:contact@l
     });
     ```
 
-## **3. Load Dataset**
+## 3. Load Dataset
 
 For large datasets, the operation should be performed in batches to optimize memory usage.
 Let's see how it looks when we try to load a larger dataset.
@@ -224,7 +224,7 @@ Let's see how it looks when we try to load a larger dataset.
     const sampleData = await loadDataset(datasetName, split, targetSize);
     console.log(`Loaded ${sampleData.length} examples from AG News dataset`);
     ```
-## **4. Ingest Data**
+## 4. Ingest Data
 
 === "Python"
 
@@ -271,7 +271,7 @@ Let's see how it looks when we try to load a larger dataset.
     console.log('Successfully created table');
     ```
 
-## **5. Build an Index**
+## 5. Build an Index
 
 After creating a table with vector data, you'll want to create an index to enable fast similarity searches. The index creation process optimizes the data structure for efficient vector similarity lookups, significantly improving query performance for large datasets.
 
@@ -305,7 +305,7 @@ As opposed to LanceDB OSS, the `create_index`/`createIndex` operation executes a
     console.log(await table.indexStats(indexName));
     ```
 
-## **6. Vector Search**
+## 6. Vector Search
 
 Once you have created and indexed your table, you can perform vector similarity searches. LanceDB provides a flexible search API that allows you to find similar vectors, apply filters, and select specific columns to return. The examples below demonstrate basic vector searches as well as filtered searches that combine vector similarity with traditional SQL-style filtering.
 
@@ -348,7 +348,7 @@ Once you have created and indexed your table, you can perform vector similarity 
     console.log(results);
     ```
 
-## **7. Filtered Search**
+## 7. Filtered Search
 
 Add filter to your vector search query. Your can use SQL statements, like `where` for filtering.
 
@@ -379,7 +379,7 @@ Add filter to your vector search query. Your can use SQL statements, like `where
     console.log(filteredResultsesults);
     ```
 
-## **What's Next?**
+## What's Next?
 
 That's pretty much it for the **Getting Started** section.
 
