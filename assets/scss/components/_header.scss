@@ -3,14 +3,22 @@
   left: 0;
   top: 0;
   z-index: 1000;
-  background: transparent;
+  background: #181b1f !important;
   border: 1px solid transparent;
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
 
   &.scrolled {
     background: palette(primary-dark);
     border-color: palette(primary-dark, 600);
   }
+}
+
+.header__announcement,
+.header__announcement-link,
+.header__announcement-link__text {
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
+  font-weight: 300;
 }
 
 .header__main {
