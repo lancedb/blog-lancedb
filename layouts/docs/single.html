@@ -24,7 +24,7 @@
                     </div>
                 </article>
             </div>
-            {{ if .TableOfContents }}
+            {{ if and .TableOfContents (not .Params.hide_toc) }}
             <aside class="docs-toc">
                 <div class="toc-container">
                     <h3>On this page:</h3>

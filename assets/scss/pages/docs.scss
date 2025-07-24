@@ -153,6 +153,8 @@
   margin-top: 2.2em;
   margin-bottom: 0.6em;
   letter-spacing: -0.01em;
+  border-bottom: 2px solid #23262b;
+  padding-bottom: 0.2em;
 }
 
 .docs-article-content h3 {
@@ -337,4 +339,97 @@
 
 .docs-sidebar, .docs-toc {
   background: #171513;
+} 
+
+.docs-article-content img {
+  border-radius: 24px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid #ff734a;
+  box-shadow: 
+    0 0 0 6px rgba(255, 115, 74, 0.1),
+    0 8px 32px rgba(255, 115, 74, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 0 0 6px rgba(255, 115, 74, 0.2),
+      0 12px 40px rgba(255, 115, 74, 0.25),
+      0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Minimal table styles
+.docs-article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95em;
+}
+
+.docs-article-content thead {
+  border-bottom: 2px solid #23262b;
+  background: rgba(255, 115, 74, 0.05);
+}
+
+.docs-article-content th {
+  color: #fff;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-right: 2px solid #23262b;
+  
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.docs-article-content tbody tr {
+  border-bottom: 2px solid #23262b;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background: rgba(255, 115, 74, 0.03);
+  }
+}
+
+.docs-article-content td {
+  color: #bfc2c7;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-right: 2px solid #23262b;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.5;
+  
+  &:last-child {
+    border-right: none;
+  }
+  
+  code {
+    background: #23262b;
+    color: #ffb38a;
+    padding: 0.15em 0.3em;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  a {
+    color: #ff734a;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 } 
