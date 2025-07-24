@@ -19,7 +19,7 @@
   color: #fff;
   padding: 0 0 1.2rem 0;
   min-height: 100vh;
-  border-right: 1px solid #23262b;
+  border-right: 1px solid #ff734a;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   position: sticky;
   top: 80px;
@@ -432,4 +432,16 @@
       text-decoration: underline;
     }
   }
+  .header.js-header {
+    border-bottom: 1px solid #ff734a;
+  } 
+} 
+
+// Orange divider below header
+.header {
+  border-bottom: 1px solid #ff734a !important;
+}
+
+// Orange divider below docs body
+.docs-content {
 } 
