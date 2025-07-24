@@ -2,7 +2,7 @@
 .docs-main {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem 0.75rem;
+  padding: 0;
 }
 
 .docs-container {
@@ -10,12 +10,14 @@
   grid-template-columns: 220px 1fr 240px;
   gap: 1.5rem;
   min-height: calc(100vh - 160px);
+  padding: 0;
+  margin: 0;
 }
 
 .docs-sidebar {
   background: #181b1f;
   color: #fff;
-  padding: 1.2rem 0 1.2rem 0;
+  padding: 0 0 1.2rem 0;
   min-height: 100vh;
   border-right: 1px solid #23262b;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
@@ -23,6 +25,8 @@
   top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  margin-top: 0;
+  padding-top: 0;
 
   // Solid, visible scrollbar for Webkit browsers
   &::-webkit-scrollbar {
@@ -130,6 +134,8 @@
   max-width: 800px;
   margin: 0 auto;
   padding-bottom: 4rem;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .docs-article-header h1 {
@@ -207,10 +213,14 @@
   color: #ffb38a;
   font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
   font-size: 0.97em;
-  padding: 1em;
+  padding: 0.3em 0.5em;
   border-radius: 6px;
-  margin: 1.5em 0;
+  margin: 0.2em 0;
   overflow-x: auto;
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .docs-article-content blockquote {
@@ -224,16 +234,18 @@
 }
 
 .docs-toc {
-  background: #181b1f;
+  background: #000000;
   color: #bfc2c7;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 0 0 1.5rem 0;
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
-  top: 80px;
+  top: 110px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .toc-container h3 {
@@ -316,4 +328,14 @@
 .docs-article-content a:hover,
 .docs-toc .toc-container a:hover {
   text-decoration: underline;
+} 
+
+.code-tab__content pre {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+} 
+
+.docs-sidebar, .docs-toc {
+  background: #171513;
 } 
