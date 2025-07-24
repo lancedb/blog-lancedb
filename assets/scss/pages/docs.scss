@@ -1,0 +1,43 @@
+// Docs-specific styles
+.docs-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 0.75rem;
+}
+
+.docs-container {
+  display: grid;
+  grid-template-columns: 220px 1fr 240px;
+  gap: 1.5rem;
+  min-height: calc(100vh - 160px);
+}
+
+.docs-sidebar {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+}
+
+.docs-content {
+  min-width: 0;
+}
+
+.docs-toc {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: transparent;
+  padding-left: 1rem;
+}
+
+.sidebar-link.active {
+  color: var(--text-accent);
+  font-weight: bold;
+} 

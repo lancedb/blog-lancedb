@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} - Documentation - {{ .Site.Title }}</title>
+    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+<body>
+    {{ partial "header.html" . }}
+    <main class="docs-main">
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                {{ partial "docs-sidebar.html" . }}
+            </aside>
+            <div class="docs-content">
+                <article class="docs-article">
+                    <header class="docs-article-header">
+                        <h1>{{ .Title }}</h1>
+                    </header>
+                    <div class="docs-article-content">
+                        {{ .Content }}
+                    </div>
+                </article>
+            </div>
+            {{ if .TableOfContents }}
+            <aside class="docs-toc">
+                <div class="toc-container">
+                    <h3>On this page</h3>
+                    {{ .TableOfContents }}
+                </div>
+            </aside>
+            {{ end }}
+        </div>
+    </main>
+    {{ partial "footer.html" . }}
+    {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js" | fingerprint }}
+    <script src="{{ $codeTabJS.RelPermalink }}"></script>
+</body>
+</html> 

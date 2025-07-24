@@ -1,0 +1,12 @@
+<nav class="sidebar-nav">
+  <ul class="sidebar-list">
+    {{ $section := .Site.GetPage "section" "docs" }}
+    {{ range $section.Pages.ByWeight }}
+      <li>
+        <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.RelPermalink }} active{{ end }}">
+          {{ .Title }}
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</nav> 
