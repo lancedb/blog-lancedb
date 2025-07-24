@@ -17,3 +17,7 @@
 @import 'pages/single-post';
 @import 'pages/not-found';
 @import 'pages/docs';
+
+body, .docs-main, .docs-container, .docs-sidebar, .docs-content, .sidebar-link, .sidebar-list, .sidebar-nav, .sidebar-section, .sidebar-sublink, .sidebar-divider {
+  color: #fff !important;
+}
