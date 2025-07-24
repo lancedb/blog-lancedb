@@ -19,6 +19,27 @@
   min-height: 100vh;
   border-right: 1px solid #23262b;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+
+  // Solid, visible scrollbar for Webkit browsers
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: #23262b;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ff734a;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ff5a1f;
+  }
+
+  // Fallback for Firefox
+  scrollbar-color: #ff734a #23262b;
+  scrollbar-width: thin;
 }
 
 .sidebar-list {
@@ -106,10 +127,73 @@
 }
 
 .docs-toc {
+  background: #181b1f;
+  color: #bfc2c7;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  padding: 1.5rem 0 1.5rem 0;
+  border-radius: 8px;
+  font-size: 1em;
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-  background: transparent;
-  padding-left: 1rem;
+}
+
+.toc-container h3 {
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.05em;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+#TableOfContents,
+.docs-toc .toc-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-toc .toc-container ul ul {
+  padding-left: 1.2em;
+  margin-top: 0.2em;
+}
+
+.docs-toc .toc-container li {
+  margin-bottom: 0.2em;
+}
+
+.docs-toc .toc-container a {
+  color: #bfc2c7;
+  text-decoration: none;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  transition: color 0.2s;
+  line-height: 1.6;
+  display: block;
+}
+
+.docs-toc .toc-container a:hover,
+.docs-toc .toc-container a.active {
+  color: #ff734a;
+  font-weight: 500;
+}
+
+.docs-toc .toc-container ul ul a {
+  font-size: 0.97em;
+  color: #bfc2c7;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.docs-toc .toc-container ul ul a.active {
+  color: #ff734a;
+  font-weight: 500;
+  opacity: 1;
 } 

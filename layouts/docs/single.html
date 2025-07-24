@@ -27,7 +27,7 @@
             {{ if .TableOfContents }}
             <aside class="docs-toc">
                 <div class="toc-container">
-                    <h3>On this page</h3>
+                    <h3>On this page:</h3>
                     {{ .TableOfContents }}
                 </div>
             </aside>
@@ -37,5 +37,7 @@
     {{ partial "footer.html" . }}
     {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js" | fingerprint }}
     <script src="{{ $codeTabJS.RelPermalink }}"></script>
+    {{ $tocActiveJS := resources.Get "js/toc-active.js" | js.Build "toc-active.js" | fingerprint }}
+    <script src="{{ $tocActiveJS.RelPermalink }}"></script>
 </body>
 </html> 
