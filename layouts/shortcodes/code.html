@@ -35,7 +35,7 @@
     {{ end }}
 
     {{/* Size of the snippet in number of lines. */}}
-    {{ $snippetLen := sub (sub $endl $startl) 2 }}
+    {{ $snippetLen := sub $endl (add $startl 1) }}
 
     {{/* Create slice with only the lines between the tags. */}}
     {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}

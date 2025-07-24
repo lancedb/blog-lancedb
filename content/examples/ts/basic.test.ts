@@ -4,6 +4,8 @@ import { expect, test } from "@jest/globals";
 // --8<--  [start:imports]
 import * as lancedb from "@lancedb/lancedb";
 import * as arrow from "apache-arrow";
+// --8<-- [end:imports]
+// --8<-- [start:imports_arrow]
 import {
   Field,
   FixedSizeList,
@@ -12,7 +14,7 @@ import {
   Schema,
   Utf8,
 } from "apache-arrow";
-// --8<-- [end:imports]
+// --8<-- [end:imports_arrow]
 import { withTempDirectory } from "./util.ts";
 
 test("basic table examples", async () => {

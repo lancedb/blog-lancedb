@@ -31,3 +31,11 @@ and snippet
 {{< code language="python" source="examples/test.py" id="create_table" >}}
 {{< code language="typescript" source="examples/test.ts" id="create_table" >}}
 {{< code language="rust" source="examples/test.rs" id="create_table" >}}
+
+text
+
+{{< code language="python" source="examples/test.py" id="create_table" >}}
+
+text
+
+{{< code language="python" source="examples/test.py" id="set_uri" >}}

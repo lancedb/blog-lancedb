@@ -18,15 +18,17 @@ use lancedb::index::Index;
 use lancedb::query::{ExecutableQuery, QueryBase};
 use lancedb::{connect, Result, Table as LanceDbTable};
 
+// --8<-- [start:connect]
 #[tokio::main]
 async fn main() -> Result<()> {
+// --8<-- [start:connect]
     if std::path::Path::new("data").exists() {
         std::fs::remove_dir_all("data").unwrap();
     }
-    // --8<-- [start:connect]
+    // --8<-- [start:connect_uri]
     let uri = "data/sample-lancedb";
     let db = connect(uri).execute().await?;
-    // --8<-- [end:connect]
+    // --8<-- [end:connect_uri]
 
     // --8<-- [start:list_names]
     println!("{:?}", db.table_names().execute().await?);
