@@ -10,7 +10,7 @@ hide_toc: true
 ## Product Release: Announcing LanceDB Cloud!
 ***<p style="text-align: center;">Now you can deploy LanceDB in the cloud or on your own infrastructure!</p>***
 
-[![LanceDB Cloud](/assets/docs/cloud-cta.png)](https://lancedb.com/cloud)
+[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://lancedb.com/cloud)
 
 With [**LanceDB Cloud**](/cloud/), you can build secure, scalable, and high-performance vector search solutions. Manage your clusters through the [LanceDB Cloud UI](/docs/cloud/), or run LanceDB on your own infrastructure for complete control and data sovereignty.
 
