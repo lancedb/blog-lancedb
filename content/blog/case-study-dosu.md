@@ -1,6 +1,6 @@
 ---
 title: "Case Study: Meet Dosu - the Intelligent Knowledge Base for Software Teams and Agents"
-date: 2025-07-14
+date: 2025-07-24
 draft: false
 featured: false
 categories: ["Case Studies"]
