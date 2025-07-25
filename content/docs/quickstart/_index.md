@@ -6,11 +6,7 @@ keywords: LanceDB quickstart, vector database tutorial, AI database setup, seman
 weight: 2
 ---
 
-![LanceDB Hero Image](/assets/docs/quickstart/quickstart.png)
-
-This is a minimal tutorial for Python users on LanceDB Cloud. For more advanced usage, see [**Basic Usage**](../quickstart/basic-usage).
-
-[Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb).
+This is a minimal tutorial for Python users on LanceDB Cloud. To run the notebook, [open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb).
 
 ## 1. Install LanceDB
 
@@ -89,4 +85,4 @@ The results show the most similar vectors to your query, sorted by similarity sc
 
 ## What's Next?
 
-Check out some [**Basic Usage tips**](../quickstart/basic-usage). After that, we'll teach you how to build a small app.
+Check out some [Basic Usage tips](../quickstart/basic-usage). After that, we'll teach you how to build a small app.

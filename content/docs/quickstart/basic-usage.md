@@ -1,11 +1,9 @@
 ---
-title: "LanceDB: Comprehensive Guide for Beginners"
+title: "Getting Started with LanceDB"
 sidebar_title: "Basic Usage"
 description: Learn how to use LanceDB with Python, TypeScript, and Rust SDKs. Includes installation instructions, basic operations, and code examples for each language.
 weight: 2
 ---
-
-# Basic Usage
 
 In this section, you'll learn basic operations [**in Python, TypeScript, and Rust SDKs**](../api/index.md). 
 
