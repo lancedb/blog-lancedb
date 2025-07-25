@@ -94,10 +94,12 @@
   }
 
 .code-tab__content pre {
-  width: 100%;
-  margin: 0;
-  border-radius: 6px;
-  box-sizing: border-box;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0.5em 0.7em !important;
 }
 
 .code-tab__content .highlight {
@@ -106,4 +108,13 @@
   border-radius: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+.code-tab__tab[data-lang-switch="rust"] {
+  gap: 0.2em;
+}
+.code-tab__tab[data-lang-switch="rust"] .code-tab__icon {
+  width: 1.4em;
+  height: 1.4em;
+  margin-right: 0.15em;
 }
