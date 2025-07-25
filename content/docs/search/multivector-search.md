@@ -47,29 +47,17 @@ where `sim` is the similarity function (e.g. cosine).
 
 Connect to LanceDB and import required libraries for data management.
 
-=== "Cloud"
+{{< code language="python" >}}
+import lancedb
+import numpy as np
+import pyarrow as pa
 
-    ```python
-    import lancedb
-    import numpy as np
-    import pyarrow as pa
-
-    db = lancedb.connect(
+db = lancedb.connect(
     uri="db://your-project-slug",
     api_key="your-api-key",
     region="your-cloud-region"
-    )
-    ```
-
-=== "Open Source"
-
-    ```python
-    import lancedb
-    import numpy as np
-    import pyarrow as pa
-
-    db = lancedb.connect("data/multivector_demo")
-    ```
+)
+{{< /code >}}
 
 ### **2. Define Schema**
 
@@ -81,193 +69,67 @@ Define a schema that specifies a multivector field. A multivector field is a nes
    - Each inner list is a 256-dimensional vector
    - Using float32 for memory efficiency while maintaining precision
 
-=== "Cloud"
+{{< code language="python" >}}
+db = lancedb.connect("data/multivector_demo")
+schema = pa.schema(
+    [
+        pa.field("id", pa.int64()),
+        # float16, float32, and float64 are supported
+        pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
+    ]
+)
+{{< /code >}}
 
-    ```python
-    db = lancedb.connect("data/multivector_demo")
-    schema = pa.schema(
-        [
-            pa.field("id", pa.int64()),
-            # float16, float32, and float64 are supported
-            pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
-        ]
-    )
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        db = lancedb.connect("data/multivector_demo")
-        schema = pa.schema(
-            [
-                pa.field("id", pa.int64()),
-                # float16, float32, and float64 are supported
-                pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
-            ]
-        )
-        ```
-
-    === "Aync API"
-
-        ```python
-        db = await lancedb.connect_async("data/multivector_demo")
-        schema = pa.schema(
-            [
-                pa.field("id", pa.int64()),
-                # float16, float32, and float64 are supported
-                pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
-            ]
-        )
-        ```
-        
 ### **3. Generate Multivectors**
 
 Generate sample data where each document contains multiple vector embeddings, which could represent different aspects or views of the same document. 
 
 In this example, we create **1024 documents** where each document has **2 random vectors** of **dimension 256**, simulating a real-world scenario where you might have multiple embeddings per item.
 
-=== "Cloud"
-
-    ```python
-    data = [
-        {
-            "id": i,
-            "vector": np.random.random(size=(2, 256)).tolist(),  # Each document has 2 vectors
-        }
-        for i in range(1024)
-    ]
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        data = [
-            {
-                "id": i,
-                "vector": np.random.random(size=(2, 256)).tolist(),  # Each document has 2 vectors
-            }
-            for i in range(1024)
-        ]
-        ```
-        
-    === "Aync API"
-
-        ```python
-        data = [
-            {
-                "id": i,
-                "vector": np.random.random(size=(2, 256)).tolist(),
-            }
-            for i in range(1024)
-        ]
-        ```
+{{< code language="python" >}}
+data = [
+    {
+        "id": i,
+        "vector": np.random.random(size=(2, 256)).tolist(),  # Each document has 2 vectors
+    }
+    for i in range(1024)
+]
+{{< /code >}}
 
 ### **4. Create a Table**
 
 Create a table with the defined schema and sample data, which will store multiple vectors per document for similarity search.
 
-=== "Cloud"
-
-    ```python
-    tbl = db.create_table("multivector_example", data=data, schema=schema)
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        tbl = db.create_table("multivector_example", data=data, schema=schema)
-        ```
-        
-    === "Aync API"
-
-        ```python
-        tbl = await db.create_table("my_table", data=data, schema=schema)
-        ```
+{{< code language="python" >}}
+tbl = db.create_table("multivector_example", data=data, schema=schema)
+{{< /code >}}
 
 ### **5. Build an Index**
 
 Only cosine similarity is supported as the distance metric for multivector search operations. 
 For faster search, build the standard `IVF_PQ` index over your vectors:
 
-=== "Cloud"
-
-    ```python
-    tbl.create_index(metric="cosine", vector_column_name="vector")
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        tbl.create_index(metric="cosine", vector_column_name="vector")
-        ```
-        
-    === "Aync API"
-
-        ```python
-        await tbl.create_index(column="vector", config=IvfPq(distance_type="cosine"))
-        ```
+{{< code language="python" >}}
+tbl.create_index(metric="cosine", vector_column_name="vector")
+{{< /code >}}
 
 ### **6. Query a Single Vector**
 
 When searching with a single query vector, it will be compared against all vectors in each document, and the similarity scores will be aggregated to find the most relevant documents.
 
-=== "Cloud"
-
-    ```python
-    query = np.random.random(256)
-    results_single = tbl.search(query).limit(5).to_pandas()
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        query = np.random.random(256)
-        results_single = tbl.search(query).limit(5).to_pandas()
-        ```
-        
-    === "Aync API"
-
-        ```python
-        query = np.random.random(256)
-        await tbl.query().nearest_to(query).to_arrow()
-        ```
+{{< code language="python" >}}
+query = np.random.random(256)
+results_single = tbl.search(query).limit(5).to_pandas()
+{{< /code >}}
 
 ### **7. Query Multiple Vectors**
 
 With multiple vector queries, LanceDB calculates similarity using late interaction - a technique that computes relevance by finding the best matching pairs between query and document vectors. This approach provides more nuanced matching while maintaining fast retrieval speeds.
 
-=== "Cloud"
-
-    ```python
-    query_multi = np.random.random(size=(2, 256))
-    results_multi = tbl.search(query_multi).limit(5).to_pandas()
-    ```
-
-=== "Open Source"
-
-    === "Sync API"
-
-        ```python
-        query_multi = np.random.random(size=(2, 256))
-        results_multi = tbl.search(query_multi).limit(5).to_pandas()
-        ```
-        
-    === "Aync API"
-
-        ```python
-        query = np.random.random(size=(2, 256))
-        await tbl.query().nearest_to(query).to_arrow()
-        ```
+{{< code language="python" >}}
+query_multi = np.random.random(size=(2, 256))
+results_multi = tbl.search(query_multi).limit(5).to_pandas()
+{{< /code >}}
 
 ## **What's Next?**
 

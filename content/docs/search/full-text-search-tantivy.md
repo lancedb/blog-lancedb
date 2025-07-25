@@ -8,11 +8,11 @@ LanceDB supports Full-Text Search (FTS) via [**Tantivy**](https://github.com/qui
 
 This feature is only available in Python Async SDK. You won't be able to build indexes on object storage or use incremental indexing. If you need these features, then switch over to native FTS.
 
-## **Basic Usage**
+## Basic Usage
 
 In this example, you will create a table named `my_table`. Then, you will index the `content` column and query it via keyword search. 
 
-### **1. Installation**
+### 1. Installation
 
 You will need version 0.20.1 of [`tantivy-py`](https://github.com/quickwit-oss/tantivy-py):
 
@@ -20,7 +20,7 @@ You will need version 0.20.1 of [`tantivy-py`](https://github.com/quickwit-oss/t
 pip install tantivy==0.20.1
 ```
 
-### **2. Setup**
+### 2. Setup
 
 ```python
 import lancedb
@@ -37,7 +37,7 @@ table = db.create_table(
 )
 ```
 
-### **3. Construct FTS Index**
+### 3. Construct FTS Index
 
 By default, FTS Index is configured to `use_tantivy=True`. Switch to `use_tantivy=False` for the native LanceDB FTS Index.
 
@@ -45,7 +45,7 @@ By default, FTS Index is configured to `use_tantivy=True`. Switch to `use_tantiv
 table.create_fts_index("content", use_tantivy=True)
 ```
 
-## **4. Full-Text Search**
+## 4. Full-Text Search
 
 Search for the word `puppy` in the `content` column:
 
@@ -65,9 +65,9 @@ It would search on all indexed columns by default, so it's useful when there are
 LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
 {{< /admonition >}}
 
-## **Advanced Usage**
+## Advanced Usage
 
-### **Tokenize Table Data**
+### Tokenize Table Data
 
 By default, the text is tokenized by splitting on punctuation and whitespaces, and would filter out words that are longer than 40 characters. All words are converted to lowercase.
 
@@ -81,7 +81,7 @@ table.create_fts_index("content", use_tantivy=True, tokenizer_name="en_stem", re
 
 The following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported for stemming.
 
-### **Index Multiple Columns**
+### Index Multiple Columns
 
 If want to index multiple columns of string data, just list them in `create_fts_index`:
 
@@ -91,7 +91,7 @@ table.create_fts_index(["title", "content"], use_tantivy=True, replace=True)
 
 The search API call does not change - you can search over all indexed columns at once.
 
-### **Filtering Options**
+### Filtering Options
 
 Currently the LanceDB full text search feature supports **post-filtering**, meaning that filters are
 applied on top of the full text search results (see [native FTS](/guides/search.full-text-searhc.md) if you need pre-filtering). This can be invoked via the familiar `where` syntax:
@@ -100,7 +100,7 @@ applied on top of the full text search results (see [native FTS](/guides/search.
 table.search("puppy").limit(10).where("meta='foo'").to_list()
 ```
 
-### **Pre-Order Documents**
+### Pre-Order Documents
 
 You can pre-order the documents by specifying `ordering_field_names` when
 creating the full-text search index. Once pre-sorted, you can then specify
@@ -127,14 +127,13 @@ The fields to sort on must be of typed unsigned integer, or else you will see an
 You can specify multiple fields for ordering at indexing time. But at query time only one ordering field is supported.
 {{< /admonition >}}
 
-
-### **Phrase vs. Terms Queries**
+### Phrase vs. Terms Queries
 
 For full-text search you can specify either a **phrase** query like `"the old man and the sea"`,
 or a **terms** search query like `"(Old AND Man) AND Sea"`. For more details on the terms
 query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/tantivy/query/struct.QueryParser.html).
 
-{{< admonition "tip" "Note" >}}
+{{< admonition "tip" >}}
 The query parser will raise an exception on queries that are ambiguous. For example, in the query `they could have been dogs OR cats`, `OR` is capitalized so it's considered a keyword query operator. But it's ambiguous how the left part should be treated. So if you submit this search query as is, you'll get `Syntax Error: they could have been dogs OR cats`.
 
 ```py
@@ -162,8 +161,7 @@ is treated as a phrase query.
 In general, a query that's declared as a phrase query will be wrapped in double quotes during parsing, with nested
 double quotes replaced by single quotes.
 
-
-## **Index Configuration**
+## Index Configuration
 
 By default, LanceDB configures a 1GB heap size limit for creating the index. You can
 reduce this if running on a smaller node, or increase this for faster performance while
@@ -175,7 +173,7 @@ heap = 1024 * 1024 * 512
 table.create_fts_index(["title", "content"], use_tantivy=True, writer_heap_size=heap, replace=True)
 ```
 
-## **Limitations**
+## Limitations
 
 1. New data added after creating the FTS index will appear in search results, but with increased latency due to a flat search on the unindexed portion. Reindexing with `create_fts_index` will reduce latency. **LanceDB Cloud** automates this merging process, minimizing the impact on search speed. 
 

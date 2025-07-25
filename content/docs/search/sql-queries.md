@@ -18,22 +18,22 @@ preferred language or tool is not listed here, please [reach out](mailto:contact
 clients.
 
 === "Python"
-    ```bash
+    {{< code language="bash" >}}
     # The `flightsql-dbapi` package provides a Python DB API 2 interface to the
     # LanceDB SQL endpoint. You can use it to connect to the SQL endpoint and
     # execute queries directly and get back results in pyarrow format.
 
     pip install flightsql-dbapi
-    ```
+    {{< /code >}}
 
 === "TypeScript"
-    ```bash
+    {{< code language="bash" >}}
     # LanceDB maintains a TypeScript client for the Arrow FlightSQL protocol.
     # You can use it to connect to the SQL endpoint and execute queries directly.
     # Results are returned in Arrow format or as plain JS/TS objects.
 
     npm install --save @lancedb/flightsql-client
-    ```
+    {{< /code >}}
 
 ## Usage
 
@@ -43,7 +43,7 @@ information on the SQL syntax and functions supported by DataFusion, please refe
 [DataFusion documentation](https://datafusion.apache.org/user-guide/sql/index.html).
 
 === "Python"
-    ```python
+    {{< code language="python" >}}
     from flightsql import FlightSQLClient
 
     client = FlightSQLClient(
@@ -65,10 +65,10 @@ information on the SQL syntax and functions supported by DataFusion, please refe
         return reader.read_all()
 
     print(run_query("SELECT * FROM flights WHERE origin = 'SFO'"))
-    ```
+    {{< /code >}}
 
 === "TypeScript"
-    ```typescript
+    {{< code language="typescript" >}}
     import { Client } from "@lancedb/flightsql-client";
 
     const client = await Client.connect({
@@ -89,4 +89,4 @@ information on the SQL syntax and functions supported by DataFusion, please refe
 
     const flights = (await result.collectToObjects()) as FlightRecord[];
     console.log(flights);
-    
+    {{< /code >}} 

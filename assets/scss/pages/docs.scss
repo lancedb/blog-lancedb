@@ -146,6 +146,15 @@
   letter-spacing: -0.01em;
 }
 
+.docs-article-content h1,
+.docs-article-content h2,
+.docs-article-content h3,
+.docs-article-content h4,
+.docs-article-content h5,
+.docs-article-content h6 {
+  font-weight: 400;
+}
+
 .docs-article-content h2 {
   font-size: 1.45em;
   font-weight: 600;

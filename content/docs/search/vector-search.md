@@ -24,9 +24,9 @@ The right metric improves both search accuracy and query performance. Currently,
 
 Choose exhaustive search when you need guaranteed 100% recall, typically with smaller datasets where query speed isn't the primary concern. The system scans every vector in the table and calculates precise distances to find the exact nearest neighbors.
 
-```python
+{{< code language="python" >}}
 tbl.search(np.random.random((1536))).limit(10).to_list()
-```
+{{< /code >}}
 
 This carries out a brute force search through every vector in the table to find the 10 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
 
@@ -35,9 +35,9 @@ This carries out a brute force search through every vector in the table to find 
 By default, `l2` will be used as metric type. You can specify the metric type as
 `cosine` or `dot` if required.
 
-```python
+{{< code language="python" >}}
 tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
-```
+{{< /code >}}
 
 Here you can see the same search but using `cosine` similarity instead of `l2` distance. The result focuses on vector direction rather than absolute distance, which works better for normalized embeddings.
 
@@ -45,9 +45,9 @@ Here you can see the same search but using `cosine` similarity instead of `l2` d
 
 Use ANN search for large-scale applications where speed matters more than perfect recall. LanceDB uses approximate nearest neighbor algorithms to deliver fast results without examining every vector in your dataset.
 
-```python
+{{< code language="python" >}}
 tbl.search([100, 100]).limit(2).to_pandas()
-```
+{{< /code >}}
 
 This finds the 2 most similar vectors to [100, 100] using an approximate nearest neighbor index for speed. The output is a pandas DataFrame with the top matches and their similarity scores.
 
@@ -59,10 +59,10 @@ Use multivector search when your documents contain multiple embeddings and you n
 
 Only `cosine` similarity is supported as the distance metric for multivector search operations.
 
-```python
+{{< code language="python" >}}
 query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
-```
+{{< /code >}}
 
 Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
 
@@ -72,7 +72,7 @@ Here you can see how to take 2 query vectors and find the best matching pairs be
 
 Use `distance_range` search when you need vectors within particular similarity bounds rather than just the closest neighbors. The system filters results to only include vectors that fall within your specified distance thresholds from the query.
 
-```python
+{{< code language="python" >}}
 query = np.random.random(256)
 
 # Search for the vectors within the range of [0.1, 0.5)
@@ -83,7 +83,7 @@ tbl.search(query).distance_range(upper_bound=0.5).to_arrow()
 
 # Search for the vectors with the distance greater or equal to 0.1
 tbl.search(query).distance_range(lower_bound=0.1).to_arrow()
-```
+{{< /code >}}
 
 This shows three ways to search within distance ranges: bounded, upper bound only, and lower bound only. 
 
@@ -99,7 +99,7 @@ Use binary vector search for scenarios involving binary embeddings, such as thos
 The dim of the binary vector must be a multiple of 8. A vector of dim 128 will be stored as a uint8 array of size 16.
 {{< /admonition >}}
 
-```python
+{{< code language="python" >}}
 import lancedb
 import numpy as np
 import pyarrow as pa
@@ -132,7 +132,7 @@ tbl.add(data)
 query = np.random.randint(0, 2, size=256)
 packed_query = np.packbits(query)
 tbl.search(packed_query).distance_type("hamming").to_arrow()
-```
+{{< /code >}}
 
 Here you can see how to set up a table for binary vectors, pack them efficiently into bytes, and search using Hamming distance. 
 
@@ -144,7 +144,7 @@ The search produces an Arrow table with binary vectors ranked by how many bits d
 
 Use prefiltering to boost query performance by reducing the search space before vector calculations begin. The system first applies your filter criteria to the dataset, then conducts vector search operations only on the remaining relevant subset.
 
-```python
+{{< code language="python" >}}
 search_results = (
     table.search(query_embed)
     .where("label > 2")
@@ -152,7 +152,7 @@ search_results = (
     .limit(5)
     .to_pandas()
 )
-```
+{{< /code >}}
 
 This filters out rows where label ≤ 2 before doing vector search, then picks specific columns from the top 5 matches. 
 
@@ -164,7 +164,7 @@ As a result, you'll see a pandas DataFrame with just the data you want from the 
 
 Use postfiltering to prioritize vector similarity by searching the full dataset first, then applying metadata filters to the top results. This approach ensures you get the most similar vectors before filtering, which can be crucial when similarity is more important than metadata constraints.
 
-```python
+{{< code language="python" >}}
 results_post_filtered = (
     table.search(query_embed)
     .where("label > 1", prefilter=False)
@@ -172,7 +172,7 @@ results_post_filtered = (
     .limit(5)
     .to_pandas()
 )
-```
+{{< /code >}}
 
 Here you can see how to do vector search first to get the most similar vectors, then filter by label > 1 on those results. 
 
@@ -186,14 +186,14 @@ In the end, you receive a pandas DataFrame with the best matches that also meet 
 
 Use batch search to handle multiple query vectors simultaneously. This gives you significant efficiency gains over individual queries. LanceDB processes all vectors in parallel and organizes results with a `query_index` field that maps each result set back to its originating query.
 
-```python
+{{< code language="python" >}}
 query_dataset = load_dataset(
     "sunhaozhepy/ag_news_sbert_keywords_embeddings", split="test[5000:5005]"
 )
 query_embeds = query_dataset["keywords_embeddings"]
 batch_results = table.search(query_embeds).limit(5).to_pandas()
 print(batch_results)
-```
+{{< /code >}}
 
 This takes 5 query embeddings and finds the top 5 matches for each one in a single batch operation. 
 
@@ -216,9 +216,9 @@ searchable through a fallback brute-force search mechanism. This ensures zero
 latency between data insertion and searchability, though it may temporarily 
 increase query response times. 
 
-```python
+{{< code language="python" >}}
 table.search(embedding, fast_search=True).limit(5).to_pandas()
-```
+{{< /code >}}
 
 Here you can see how to turn on fast search mode to skip unindexed vectors and only look through indexed data for speed. 
 
@@ -234,9 +234,9 @@ This feature is available for LanceDB Enterprise users.
 
 Use `bypass_vector_index` to get exact, ground-truth results by performing exhaustive searches across all vectors. Instead of relying on approximate methods, the system directly compares your query against every vector in the table, ensuring 100% recall at the cost of increased query time.
 
-```python
+{{< code language="python" >}}
 table.search(embedding).bypass_vector_index().limit(5).to_pandas()
-```
+{{< /code >}}
 
 This skips the approximate index and checks every single vector for exact, ground-truth results. 
 
@@ -246,23 +246,4 @@ The outcome is a pandas DataFrame with the top 5 exact matches, guaranteeing 100
 
 This approach is particularly useful when:
 - Evaluating ANN index quality
-- Calculating recall metrics to tune `nprobes` parameter
-- Verifying search accuracy for critical applications
-- Benchmarking approximate vs exact search results
-
-## SDK Reference
-
-LanceDB provides official SDKs for multiple programming languages:
-
-- **[Python SDK](../python/)** - Primary SDK with full feature support, pandas integration, and comprehensive documentation
-- **[TypeScript SDK](../typescript/)** - Type-safe client with IntelliSense support for modern TypeScript projects
-- **[Rust SDK](../rust/)** - High-performance Rust client for systems programming and embedded applications
-
-Each SDK includes examples, API reference, and integration guides for common frameworks.
-
-## Next Steps
-
-Build an app in 5 minutes! Clone our demo repository and build a small vector search app using LanceDB Cloud.
-
-
-
+- Calculating recall metrics to tune `

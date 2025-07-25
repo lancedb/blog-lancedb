@@ -1,0 +1,136 @@
+// Admonition styles for docs and blog
+.admonition {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background: rgba(255, 115, 74, 0.05);
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  
+  &.note {
+    border-left-color: #ff734a;
+    background: rgba(255, 115, 74, 0.08);
+    
+    .admonition-title {
+      color: #ff734a;
+    }
+  }
+  
+  &.warning {
+    border-left-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.08);
+    
+    .admonition-title {
+      color: #f59e0b;
+    }
+  }
+  
+  &.tip {
+    border-left-color: #10b981;
+    background: rgba(16, 185, 129, 0.08);
+    
+    .admonition-title {
+      color: #10b981;
+    }
+  }
+  
+  &.info {
+    border-left-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+    
+    .admonition-title {
+      color: #3b82f6;
+    }
+  }
+  
+  &.error {
+    border-left-color: #ef4444;
+    background: rgba(239, 68, 68, 0.08);
+    
+    .admonition-title {
+      color: #ef4444;
+    }
+  }
+  
+  .admonition-content {
+    color: #e6e6e6;
+    line-height: 1.6;
+    
+    p {
+      margin: 0.5rem 0 0 0;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    ul, ol {
+      margin: 0.5rem 0 0 0;
+      padding-left: 1.5rem;
+      
+      li {
+        margin-bottom: 0.2rem;
+      }
+    }
+    
+    code {
+      background: rgba(255, 115, 74, 0.1);
+      color: #ffb38a;
+      padding: 0.15em 0.3em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    
+    pre {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 115, 74, 0.2);
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 0.5rem 0 0 0;
+      overflow-x: auto;
+      
+      code {
+        background: none;
+        color: #ffe2c6;
+        padding: 0;
+      }
+    }
+  }
+  
+  .admonition-title {
+    font-weight: 600;
+    font-size: 0.95em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  &.no-title {
+    .admonition-content {
+      p:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+  
+  &.inline {
+    .admonition-title {
+      display: inline;
+      margin-right: 0.5rem;
+      margin-bottom: 0;
+    }
+    
+    .admonition-content {
+      display: inline;
+      
+      p {
+        display: inline;
+        margin: 0;
+      }
+    }
+  }
+} 

@@ -1,5 +1,5 @@
 ---
-title: "Vector Search in LanceDBh"
+title: "Vector Search in LanceDB"
 sidebar_title: "Search"
 description: "Master vector search in LanceDB with our comprehensive guide. Learn about embeddings, ANN search, brute force search, and how to perform efficient similarity searches at scale."
 weight: 10

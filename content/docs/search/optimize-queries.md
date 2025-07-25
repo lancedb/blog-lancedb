@@ -39,28 +39,26 @@ Let's examine a vector search query that:
 - Returns the top 100 matches
 - Projects specific columns: `chunk_index`, `title`, and `identifier`
 
-=== "Python"
-    ```python
-    # explain_plan
-    query_explain_plan = (
-        table.search(query_embed)
-        .where("identifier > 0 AND identifier < 1000000")
-        .select(["chunk_index", "title", "identifier"])
-        .limit(100)
-        .explain_plan(True)
-    )
-    ```
+{{< code language="python" >}}
+# explain_plan
+query_explain_plan = (
+    table.search(query_embed)
+    .where("identifier > 0 AND identifier < 1000000")
+    .select(["chunk_index", "title", "identifier"])
+    .limit(100)
+    .explain_plan(True)
+)
+{{< /code >}}
 
-=== "TypeScript"
-    ```typescript
-    // explain_plan
-    const explainPlan = await table
-        .search(queryEmbed)
-        .where("identifier > 0 AND identifier < 1000000")
-        .select(["chunk_index", "title", "identifier"])
-        .limit(100)
-        .explainPlan(true);
-    ```
+{{< code language="typescript" >}}
+// explain_plan
+const explainPlan = await table
+    .search(queryEmbed)
+    .where("identifier > 0 AND identifier < 1000000")
+    .select(["chunk_index", "title", "identifier"])
+    .limit(100)
+    .explainPlan(true);
+{{< /code >}}
 
 ### Execution Plan Components
 
@@ -146,28 +144,26 @@ This plan demonstrates a basic search without index optimizations: it performs a
 
 Let's use `analyze_plan` to run the query and analyze the query performance, which will help us identify potential bottlenecks:
 
-=== "Python"
-    ```python
-    # analyze_plan
-    query_analyze_plan = (
-        table.search(query_embed)
-        .where("identifier > 0 AND identifier < 1000000")
-        .select(["chunk_index", "title", "identifier"])
-        .limit(100)
-        .analyze_plan()
-    )
-    ```
+{{< code language="python" >}}
+# analyze_plan
+query_analyze_plan = (
+    table.search(query_embed)
+    .where("identifier > 0 AND identifier < 1000000")
+    .select(["chunk_index", "title", "identifier"])
+    .limit(100)
+    .analyze_plan()
+)
+{{< /code >}}
 
-=== "TypeScript"
-    ```typescript
-    // analyze_plan
-    const analyzePlan = await table
-        .search(queryEmbed)
-        .where("identifier > 0 AND identifier < 1000000")
-        .select(["chunk_index", "title", "identifier"])
-        .limit(100)
-        .analyzePlan();
-    ```
+{{< code language="typescript" >}}
+// analyze_plan
+const analyzePlan = await table
+    .search(queryEmbed)
+    .where("identifier > 0 AND identifier < 1000000")
+    .select(["chunk_index", "title", "identifier"])
+    .limit(100)
+    .analyzePlan();
+{{< /code >}}
 
 ### Performance Metrics Analysis
 

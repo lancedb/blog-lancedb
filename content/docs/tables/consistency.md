@@ -18,66 +18,47 @@ This is only tune-able in LanceDB OSS. In LanceDB Cloud, readers are always even
 
 ## Configuring Consistency Parameters
 
-=== "Python"
+To set strong consistency in Python, use `timedelta(0)`:
 
-    To set strong consistency, use `timedelta(0)`:
+{{< code language="python" >}}
+from datetime import timedelta
 
-    === "Sync API"
+uri = "data/sample-lancedb"
+db = lancedb.connect(uri, read_consistency_interval=timedelta(0))
+tbl = db.open_table("test_table")
+{{< /code >}}
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:import-datetime"
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_strong_consistency"
-        ```
-    === "Async API"
+{{< code language="typescript" >}}
+const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 0 });
+const tbl = await db.openTable("my_table");
+{{< /code >}}
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:import-datetime"
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_async_strong_consistency"
-        ```
+For eventual consistency, use a custom `timedelta`:
 
-    For eventual consistency, use a custom `timedelta`:
+{{< code language="python" >}}
+from datetime import timedelta
 
-    === "Sync API"
+uri = "data/sample-lancedb"
+db = lancedb.connect(uri, read_consistency_interval=timedelta(seconds=5))
+tbl = db.open_table("test_table")
+{{< /code >}}
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:import-datetime"
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_eventual_consistency"
-        ```
-    === "Async API"
+{{< code language="typescript" >}}
+const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 5 });
+const tbl = await db.openTable("my_table");
+{{< /code >}}
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:import-datetime"
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_async_eventual_consistency"
-        ```
 
-    By default, a `Table` will never check for updates from other writers. To manually check for updates you can use `checkout_latest`:
+By default, a `Table` will never check for updates from other writers. To manually check for updates you can use `checkout_latest`:
 
-    === "Sync API"
+{{< code language="python" >}}
+tbl = db.open_table("test_table")
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_checkout_latest"
-        ```
-    === "Async API"
+# (Other writes happen to my_table from another process)
 
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_tables.py:table_async_checkout_latest"
-        ```
-
-=== "Typescript[^1]"
-
-    To set strong consistency, use `0`:
-
-    ```ts
-    const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 0 });
-    const tbl = await db.openTable("my_table");
-    ```
-
-    For eventual consistency, specify the update interval as seconds:
-
-    ```ts
-    const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 5 });
-    const tbl = await db.openTable("my_table");
-    ```
+# Check for updates
+tbl.checkout_latest()
+{{< /code >}}
 
 ## Handling bad vectors
 
