@@ -4,55 +4,69 @@
 {{ $id := .Get "id" }}
 {{ $iconSrc := printf "static/assets/icons/%s.svg" $language}}
 
-{{ with $source | readFile }}
-  {{ $snippet := . }}
+{{ if $source }}
+  {{ with $source | readFile }}
+    {{ $snippet := . }}
 
-  {{ if $id }}
-    {{ $lines := split $snippet "\n" }}
+    {{ if $id }}
+      {{ $lines := split $snippet "\n" }}
 
-    {{ $startTag := printf "[start:%s]" $id }}
-    {{ $endTag := printf "[end:%s]" $id }}
+      {{ $startTag := printf "[start:%s]" $id }}
+      {{ $endTag := printf "[end:%s]" $id }}
 
-    {{ $startl := -1 }}
-    {{ $endl := -1 }}
+      {{ $startl := -1 }}
+      {{ $endl := -1 }}
 
-    {{/* Find the lines that ends with the start and end tags. */}}
-    {{ range $index, $line := $lines }}
-      {{ if hasSuffix $line $startTag }}
-        {{ $startl = $index }}
-      {{ else if hasSuffix $line $endTag }}
-        {{ $endl = $index }}
+      {{/* Find the lines that ends with the start and end tags. */}}
+      {{ range $index, $line := $lines }}
+        {{ if hasSuffix $line $startTag }}
+          {{ $startl = $index }}
+        {{ else if hasSuffix $line $endTag }}
+          {{ $endl = $index }}
+        {{ end }}
+      {{ end }}
+
+      {{/* Let's add some basic assertions. */}}
+      {{ if lt $startl 0 }}
+        {{ errorf "Named snippet is missing START tag" }}
+      {{ end }}
+
+      {{ if lt $endl 0 }}
+        {{ errorf "Named snippet is missing END tag" }}
+      {{ end }}
+
+      {{/* Size of the snippet in number of lines. */}}
+      {{ $snippetLen := sub $endl (add $startl 1) }}
+
+      {{/* Create slice with only the lines between the tags. */}}
+      {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}
+
+      {{/* Join the lines into the final snippet. */}}
+      {{ $snippet = delimit $includedLines "\n" }}
+
+      {{ with $snippet }}
+        <div class="code-tab__content" data-lang="{{ $language }}">
+          <div class="code-tab__tab d-none" data-lang-switch="{{ $language }}">
+            <div class="code-tab__icon">
+              {{ readFile $iconSrc | safeHTML }}
+            </div>
+            <span class="code-tab__name d-none d-md-block">{{ $language }}</span>
+          </div>
+          {{ highlight (trim . "\n\r") $language $options }}
+        </div>
       {{ end }}
     {{ end }}
-
-    {{/* Let's add some basic assertions. */}}
-    {{ if lt $startl 0 }}
-      {{ errorf "Named snippet is missing START tag" }}
-    {{ end }}
-
-    {{ if lt $endl 0 }}
-      {{ errorf "Named snippet is missing END tag" }}
-    {{ end }}
-
-    {{/* Size of the snippet in number of lines. */}}
-    {{ $snippetLen := sub $endl (add $startl 1) }}
-
-    {{/* Create slice with only the lines between the tags. */}}
-    {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}
-
-    {{/* Join the lines into the final snippet. */}}
-    {{ $snippet = delimit $includedLines "\n" }}
-
-    {{ with $snippet }}
-      <div class="code-tab__content" data-lang="{{ $language }}">
-        <div class="code-tab__tab d-none" data-lang-switch="{{ $language }}">
-          <div class="code-tab__icon">
-            {{ readFile $iconSrc | safeHTML }}
-          </div>
-          <span class="code-tab__name d-none d-md-block">{{ $language }}</span>
+  {{ end }}
+{{ else }}
+  {{ with .Inner }}
+    <div class="code-tab__content" data-lang="{{ $language }}">
+      <div class="code-tab__tab d-none" data-lang-switch="{{ $language }}">
+        <div class="code-tab__icon">
+          {{ readFile $iconSrc | safeHTML }}
         </div>
-        {{ highlight (trim . "\n\r") $language $options }}
+        <span class="code-tab__name d-none d-md-block">{{ $language }}</span>
       </div>
-    {{ end }}
+      {{ highlight (trim . "\n\r") $language $options }}
+    </div>
   {{ end }}
 {{ end }}

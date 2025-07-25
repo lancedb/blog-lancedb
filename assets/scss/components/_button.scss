@@ -7,9 +7,9 @@
 
   padding: 11px 19px;
   border: 1px solid;
-  border-radius: 4px;
+  border-radius: 8px;
 
-  @include font-family(fono);
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
   @include font(btn_mob, 21, 500);
 
   transition: all .3s ease-in-out;
@@ -49,18 +49,19 @@
 }
 
 .button--secondary {
-  background-color: palette(primary-dark, 600);
-  border-color: palette(primary-dark, 500);
-  color: palette(primary-offwhite);
+  background-color: #181b1f;
+  border-color: #23262b;
+  color: #fff;
 
   &:hover {
-    border-color: palette(primary-dark, 400);
+    border-color: #ff734a;
+    color: #ff734a;
   }
 
   &:active,
   &:focus {
-    background-color: palette(primary-dark);
-    border-color: palette(primary-dark, 400);
+    background-color: #23262b;
+    border-color: #ff734a;
   }
 }
 

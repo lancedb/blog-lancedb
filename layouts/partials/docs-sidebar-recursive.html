@@ -1,0 +1,22 @@
+<ul class="sidebar-list">
+  {{- range .Pages.ByWeight }}
+    <li>
+      {{- if eq .Params.layout "divider" }}
+        <div class="sidebar-divider">{{ .Params.sidebar_title | default .Title }}</div>
+      {{- else if .Pages }}
+        <details {{ if or (eq .RelPermalink $.current.RelPermalink) (in $.current.RelPermalink .RelPermalink) }}open{{ end }}>
+          <summary>
+            <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+              {{ .Params.sidebar_title | default .Title }}
+            </a>
+          </summary>
+          {{ partial "docs-sidebar-recursive.html" (dict "Pages" .Pages "current" $.current) }}
+        </details>
+      {{- else }}
+        <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+          {{ .Params.sidebar_title | default .Title }}
+        </a>
+      {{- end }}
+    </li>
+  {{- end }}
+</ul> 
