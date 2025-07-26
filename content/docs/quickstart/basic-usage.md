@@ -154,19 +154,6 @@ By default, LanceDB runs a brute-force scan over the dataset to find the K neare
 
 **Why is index creation manual:** LanceDB does not automatically create the ANN index for two reasons. **First**, it's optimized for really fast retrievals via a disk-based index, and **second**, data and query workloads can be very diverse, so there's no one-size-fits-all index configuration. LanceDB provides many parameters to fine-tune index size, query latency, and accuracy.
 
-## Embedding Data
-
-You can use the Embedding API when working with embedding models. It automatically vectorizes the data at ingestion and query time and comes with built-in integrations with popular embedding models like OpenAI, Hugging Face, Sentence Transformers, CLIP, and more.
-
-{{< code language="python" source="examples/py/test_embeddings_optional.py" id="imports" />}}
-{{< code language="python" source="examples/py/test_embeddings_optional.py" id="openai_embeddings" />}}
-{{< code language="typescript" source="examples/ts/embedding.test.ts" id="imports" />}}
-{{< code language="typescript" source="examples/ts/embedding.test.ts" id="openai_embeddings" />}}
-{{< code language="rust" source="examples/rs/openai.rs" id="imports" />}}
-{{< code language="rust" source="examples/rs/openai.rs" id="openai_embeddings" />}}
-
-Learn about using the existing integrations and creating custom embedding functions in the [**Embedding Guide**](../embeddings/index.md).
-
 ## **What's Next?**
 
 This section covered the very basics of using LanceDB. 

@@ -59,14 +59,19 @@ Create a table in the database. The table takes on the schema of your ingested d
 table = db.create_table("adventurers", data)
 ```
 
+Now, go to LanceDB Cloud and verify that your remote table has been created:
+
+![Quickstart Table](/assets/docs/quickstart/quickstart-table.png)
+
+
 ## 6. Vector Search
 
 Perform a vector similarity search. The query vector should have the same dimensionality as your data vectors. The search returns the most similar vectors based on **euclidean distance**.
 
-Our query is **"warrior" - [0.8, 0.3, 0.8]**. Let's find the most similar adventurer:
+Our query is "warrior", represented by a vector `[0.8, 0.3, 0.8]`. Let's find the most similar adventurer:
 
 ```python
-query_vector = [0.8, 0.3, 0.8]  
+query_vector = [0.8, 0.3, 0.8] # warrior 
 results = table.search(query_vector).limit(3).to_pandas()
 print(results)
 ```
@@ -83,6 +88,8 @@ The results show the most similar vectors to your query, sorted by similarity sc
 | 3  | [0.5, 0.9, 0.6] | cleric  | 0.49      |
 ```
 
-## What's Next?
+Looks like the knight is the most similar to the warrior. Not exactly a real-life scenario - but you can see how vector search works in five steps.
 
-Check out some [Basic Usage tips](../quickstart/basic-usage). After that, we'll teach you how to build a small app.
+Let's actually vectorize the word "warrior" with an embedding model and run a search over the same table, but embedded using a simple model `like sentence-transformers`.
+
+Check out the next [tutorial on using the Embedding API](../quickstart/embedding). 

@@ -653,10 +653,27 @@ main .post-meta {
     line-height: 1.8;
 }
 
+.post-content ul {
+    list-style-type: disc;
+}
+
+.post-content ol {
+    list-style-type: decimal;
+}
+
 .post-content li {
     margin-bottom: 0.5rem;
     color: var(--text-primary);
     line-height: 1.8;
+    list-style-position: outside;
+}
+
+.post-content ul li {
+    list-style-type: disc;
+}
+
+.post-content ol li {
+    list-style-type: decimal;
 }
 
 .post-content strong {
@@ -960,7 +977,7 @@ article img {
     max-width: 75%;
     height: auto;
     display: block;
-    margin: 1.5rem auto;
+    margin: 1.8em auto;  /* Equal to one line of text height (1.8em based on line-height) */
 }
 
 /* Handle transparent images on dark backgrounds - specifically for column shredding diagrams */

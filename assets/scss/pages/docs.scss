@@ -195,8 +195,25 @@
   padding-left: 1.5em;
 }
 
+.docs-article-content ul {
+  list-style-type: disc;
+}
+
+.docs-article-content ol {
+  list-style-type: decimal;
+}
+
 .docs-article-content li {
   margin-bottom: 0.4em;
+  list-style-position: outside;
+}
+
+.docs-article-content ul li {
+  list-style-type: disc;
+}
+
+.docs-article-content ol li {
+  list-style-type: decimal;
 }
 
 .docs-article-content a {
@@ -359,8 +376,7 @@
 .docs-article-content img {
   border-radius: 24px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.7em auto;  // Equal to one line of text height (1.7em based on line-height)
   border: 3px solid #ff734a;
   box-shadow: 
     0 0 0 6px rgba(255, 115, 74, 0.1),
