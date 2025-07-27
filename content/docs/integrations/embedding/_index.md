@@ -4,6 +4,7 @@ sidebar_title: Embeddings
 description: "Supported embedding providers for LanceDB"
 hide_toc: true
 weight: 20
+sidebar_collapsed: true
 ---
 
 | Provider | Description |

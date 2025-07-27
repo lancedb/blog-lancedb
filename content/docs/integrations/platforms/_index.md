@@ -4,6 +4,7 @@ sidebar_title: Platforms
 description: "Integrations with data processing platforms and tools"
 weight: 16
 hide_toc: true
+sidebar_collapsed: true
 ---
 
 | Platform | Description |

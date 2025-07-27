@@ -3,6 +3,7 @@ title: "Vector Search Tutorials"
 sidebar_title: "Vector Search"
 description: "Master vector search with LanceDB through Python and TypeScript tutorials"
 weight: 2
+sidebar_collapsed: true
 ---
 
 | Tutorial | Language | Difficulty | Description |

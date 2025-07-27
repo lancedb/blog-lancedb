@@ -4,6 +4,7 @@ sidebar_title: "RAG & Agents"
 description: "Build intelligent applications with RAG and AI agents using LanceDB"
 weight: 3
 hide_toc: true
+sidebar_collapsed: true
 ---
 
 | Tutorial | Language | Difficulty | Description |

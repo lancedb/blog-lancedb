@@ -4,6 +4,7 @@ sidebar_title: Frameworks
 description: "Integrations with popular AI frameworks and development tools"
 weight: 17
 hide_toc: true
+sidebar_collapsed: true
 ---
 
 | Framework | Description |
