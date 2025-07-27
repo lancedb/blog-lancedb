@@ -1,3 +1,7 @@
+---
+title: Cloud-Only API
+weight: 5
+---
 # Python API Reference (SaaS)
 
 This section contains the API reference for the LanceDB Cloud Python API.

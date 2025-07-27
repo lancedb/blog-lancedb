@@ -1,5 +1,5 @@
 ---
-title: "Concepts"
+title: "Core Concepts"
 description: "Core concepts and fundamental understanding of LanceDB"
 weight: 5
 ---
