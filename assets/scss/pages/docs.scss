@@ -400,74 +400,182 @@
   }
 }
 
-// Minimal table styles
+// Enhanced stylish table styles (no rounded corners)
 .docs-article-content table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
   font-size: 0.95em;
+  background: linear-gradient(135deg, #1a1d21 0%, #23262b 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(255, 115, 74, 0.1);
+  border: 1px solid rgba(255, 115, 74, 0.2);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+    z-index: 1;
+  }
 }
 
 .docs-article-content thead {
-  border-bottom: 2px solid #23262b;
-  background: rgba(255, 115, 74, 0.05);
+  background: linear-gradient(135deg, rgba(255, 115, 74, 0.15) 0%, rgba(255, 115, 74, 0.08) 100%);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+  }
+}
+
+.docs-article-content thead tr {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+  }
 }
 
 .docs-article-content th {
   color: #fff;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9em;
   text-align: center;
-  padding: 0.8rem 1rem;
+  padding: 1.2rem 1rem;
   border: none;
-  border-right: 2px solid #23262b;
+  border-right: 1px solid rgba(255, 115, 74, 0.2);
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
   
   &:last-child {
     border-right: none;
   }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
 }
 
 .docs-article-content tbody tr {
-  border-bottom: 2px solid #23262b;
+  border-bottom: 1px solid rgba(255, 115, 74, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
   
   &:last-child {
     border-bottom: none;
   }
   
   &:hover {
-    background: rgba(255, 115, 74, 0.03);
+    background: linear-gradient(135deg, rgba(255, 115, 74, 0.08) 0%, rgba(231, 210, 246, 0.05) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 115, 74, 0.15);
+  }
+  
+  &:nth-child(even) {
+    background: rgba(255, 115, 74, 0.02);
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(231, 210, 246, 0.07) 100%);
+    }
   }
 }
 
 .docs-article-content td {
-  color: #bfc2c7;
+  color: #e6e6e6;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  padding: 0.8rem 1rem;
+  padding: 1rem 1.2rem;
   border: none;
-  border-right: 2px solid #23262b;
+  border-right: 1px solid rgba(255, 115, 74, 0.1);
   vertical-align: middle;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.6;
+  transition: all 0.3s ease;
   
   &:last-child {
     border-right: none;
   }
   
+  &:hover {
+    color: #fff;
+    background: rgba(255, 115, 74, 0.05);
+  }
+  
   code {
-    background: #23262b;
+    background: linear-gradient(135deg, #23262b 0%, #2a2d32 100%);
     color: #ffb38a;
-    padding: 0.15em 0.3em;
-    border-radius: 3px;
+    padding: 0.2em 0.4em;
     font-size: 0.9em;
+    border: 1px solid rgba(255, 115, 74, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
   
   a {
     color: #ff734a;
     text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 100%);
+      transition: width 0.3s ease;
+    }
     
     &:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-decoration: none;
+      
+      &::after {
+        width: 100%;
+      }
     }
   }
 } 
