@@ -1,9 +1,9 @@
 ---
 title: "Full-Text Search (FTS) Index"
-sidebar_title: "Full-Text Search Index"
+sidebar_title: "Full-Text Index"
 description: "Learn how to implement performant full-text search in LanceDB using BM25. Includes configuration options, API examples in Python and TypeScript, and best practices for text search optimization."
 keywords: "LanceDB full-text search, BM25 search, text search index, FTS configuration, text tokenization, search optimization, Python TypeScript search API"
-weight: 1
+weight: 2
 ---
 
 LanceDB Cloud and Enterprise provide performant full-text search based on BM25, allowing you to incorporate keyword-based search in your retrieval solutions.

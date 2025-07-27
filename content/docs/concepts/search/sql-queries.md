@@ -1,7 +1,7 @@
 ---
 title: "SQL Queries in LanceDB Enterprise"
 sidebar_title: SQL Queries
-description: "Learn how to use SQL queries in LanceDB. Includes SQL syntax, query optimization, and best practices for SQL-based data access."
+weight: 7
 ---
 # SQL Queries in LanceDB Enterprise
 

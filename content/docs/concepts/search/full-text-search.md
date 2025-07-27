@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search in LanceDB
 sidebar_title: Full-Text Search (Native)
-description: "Learn how to implement full-text search in LanceDB. Includes text indexing, query syntax, and performance optimization for text search."
+weight: 3
 ---
 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.

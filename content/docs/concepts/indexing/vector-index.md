@@ -2,7 +2,7 @@
 title: "Vector Indexes in LanceDB"
 sidebar_title: Vector Index
 description: "Learn how to build and optimize indexes in LanceDB. Includes vector indexes, scalar indexes, and best practices for index management."
-weight: 6
+weight: 1
 ---
 
 LanceDB offers two main vector indexing algorithms: **Inverted File (IVF) Index** and **Hierarchically Navigable Small Worlds (HNSW) Index**. You can create multiple vector indexes within a Lance table. This guide will walk you through some common configurations and build patterns.

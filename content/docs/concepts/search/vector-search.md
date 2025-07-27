@@ -2,12 +2,18 @@
 title: "Vector Search in LanceDB"
 sidebar_title: Vector Search
 description: "Learn how to implement vector search in LanceDB. Includes similarity search, nearest neighbor queries, and performance optimization."
-weight: 3
+weight: 1
 ---
+
+Vector search is a technique used to search for similar items based on their vector representations, called embeddings. It is also known as similarity search, nearest neighbor search, or approximate nearest neighbor search.
+
+![](/assets/docs/vector-db-basics.png)
+
+Raw data (e.g. text, images, audio, etc.) is converted into embeddings via an embedding model, which are then stored in a vector database like LanceDB. To perform similarity search at scale, an index is created on the stored embeddings, which can then used to perform fast lookups.
 
 ## Supported Distance Metrics
 
-Distance metrics determine how LanceDB compares vectors to find similar matches. Choose `l2` for general-purpose similarity, `cosine` for normalized embeddings, `dot` for raw similarity scores, or `hamming` for binary vectors. 
+Distance metrics determine how LanceDB compares vectors to find similar matches. Euclidean or `l2` is the default, and used for general-purpose similarity, `cosine` for normalized embeddings, `dot` for raw similarity scores, or `hamming` for binary vectors. 
 
 **Important:** Use the same distance metric that your embedding model was trained with. Most modern embedding models use cosine similarity, so `cosine` is often the best choice.
 
@@ -22,13 +28,21 @@ The right metric improves both search accuracy and query performance. Currently,
 
 ## Vector Search With No Index
 
-Choose exhaustive search when you need guaranteed 100% recall, typically with smaller datasets where query speed isn't the primary concern. The system scans every vector in the table and calculates precise distances to find the exact nearest neighbors.
+The simplest way to perform vector search is to perform a brute force search, without an index, where the distance between the query vector and all the vectors in the database are computed, with the top-k closest vectors returned. 
+
+This is equivalent to a k-nearest neighbours (kNN) search in vector space.
+
+Choose brute force search when you need guaranteed 100% recall, typically with smaller datasets where query speed isn't the primary concern. The system scans every vector in the table and calculates precise distances to find the exact nearest neighbors.
 
 {{< code language="python" >}}
-tbl.search(np.random.random((1536))).limit(10).to_list()
+tbl.search(np.random.random((1536))).limit(3).to_list()
 {{< /code >}}
 
-This carries out a brute force search through every vector in the table to find the 10 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
+This carries out a brute force search through every vector in the table to find the 3 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
+
+![](/assets/docs/knn_search.png)
+
+As you can imagine, the brute force approach is not scalable for datasets larger than a few hundred thousand vectors, as the latency of the search grows linearly with the size of the dataset. This is where approximate nearest neighbour (ANN) algorithms come in.
 
 ## Configure Distance Metric
 
@@ -42,6 +56,10 @@ tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
 Here you can see the same search but using `cosine` similarity instead of `l2` distance. The result focuses on vector direction rather than absolute distance, which works better for normalized embeddings.
 
 ## Vector Search With ANN Index
+
+Instead of performing an exhaustive search on the entire database for each and every query, approximate nearest neighbour (ANN) algorithms use an index to narrow down the search space, which significantly reduces query latency. 
+
+The trade-off is that the results are not guaranteed to be the true nearest neighbors of the query, but are usually "good enough" for most use cases.
 
 Use ANN search for large-scale applications where speed matters more than perfect recall. LanceDB uses approximate nearest neighbor algorithms to deliver fast results without examining every vector in your dataset.
 

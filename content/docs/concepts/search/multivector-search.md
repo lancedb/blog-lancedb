@@ -1,19 +1,25 @@
 ---
 title: "Multivector Search in LanceDB"
 sidebar_title: Multivector Search
-description: "Learn how to implement multivector search in LanceDB. Includes multiple vector fields, cross-modal search, and complex query patterns."
+weight: 2
 ---
 
-# **Multivector Search with LanceDB**
+LanceDB natively supports multivector data types, enabling advanced search scenarios where a single data item is represented by multiple embeddings (e.g., using models like ColBERT or CoLPali). 
+
+In this framework, documents and queries are encoded as collections of contextualized vectors—precomputed for documents and indexed for queries.
+
+You can store and index multiple vectors per row.
+Your can query with a single vector or multiple vectors
+Multivector search performance (recall) is optimized with [XTR](https://arxiv.org/abs/2501.17788).
+
+Currently, only the `cosine` metric is supported for multivector search. 
+The vector value type can be `float16`, `float32`, or `float64`.
+
+Multivector search is currently supported in our Python SDK. 
 
 LanceDB's multivector support enables you to store and search multiple vector embeddings for a single item. This capability is particularly valuable when working with late interaction models like ColBERT and ColPaLi that generate multiple embeddings per document.
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb).
-
-## **Multivector Support**
-
-!!! note "Only in Python SDK"
-    Multivector search is currently supported in our Python SDK. 
 
 Each item in your dataset can have a column containing multiple vectors, which LanceDB can efficiently index and search. When performing a search, you can query using either a single vector embedding or multiple vector embeddings. 
 

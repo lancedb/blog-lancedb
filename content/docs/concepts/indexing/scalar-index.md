@@ -2,7 +2,7 @@
 title: Scalar Indexes in LanceDB 
 sidebar_title: Scalar Index
 description: Learn how to use scalar indexes in LanceDB for efficient metadata filtering and query optimization.
-weight: 5
+weight: 3
 ---
 
 Scalar indexes organize data by scalar attributes (e.g., numbers, categories) and enable fast filtering of vector data. They accelerate retrieval of scalar data associated with vectors, thus enhancing query performance.

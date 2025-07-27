@@ -5,6 +5,12 @@ description: "Complete reference for LanceDB's embedding API - registry, functio
 weight: 9
 ---
 
+Modern machine learning models can be trained to convert raw data into embeddings, represented as arrays (or vectors) of floating point numbers of fixed dimensionality. What makes embeddings useful in practice is that the position of an embedding in vector space captures some of the semantics of the data, depending on the type of model and how it was trained. Points that are close to each other in vector space are considered similar (or appear in similar contexts), and points that are far away are considered dissimilar.
+
+Large datasets of multi-modal data (text, audio, images, etc.) can be converted into embeddings with the appropriate model. Projecting the vectors' principal components in 2D space results in groups of vectors that represent similar concepts clustering together, as shown below.
+
+![](/assets/docs/embedding_intro.png)
+
 LanceDB provides an embedding function registry that automatically generates vector embeddings during data ingestion and querying. The API abstracts embedding generation, allowing you to focus on your application logic.
 
 ## Core Concepts

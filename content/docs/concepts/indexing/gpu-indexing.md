@@ -3,7 +3,7 @@ title: "GPU-Powered Vector Indexing in LanceDB"
 sidebar_title: GPU Indexing
 description: "Learn about LanceDB's high-performance GPU-based vector indexing capabilities. Scale your vector search to billions of rows with accelerated indexing performance."
 keywords: "LanceDB GPU indexing, vector database acceleration, enterprise vector search, GPU-powered indexing, large-scale vector search, enterprise features"
-weight: 2
+weight: 4
 ---
 
 With LanceDB's GPU-powered indexing you can create vector indexes for billions of rows in just a few hours. This can significantly accelerate your vector search operations. 

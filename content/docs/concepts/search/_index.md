@@ -1,29 +1,23 @@
 ---
-title: "Vector Search in LanceDB"
+title: Search Features in LanceDB
 sidebar_title: "Search"
-description: "Master vector search in LanceDB with our comprehensive guide. Learn about embeddings, ANN search, brute force search, and how to perform efficient similarity searches at scale."
-weight: 10
+description: "Comprehensive guide to all search capabilities in LanceDB including vector search, full-text search, hybrid search, and more."
+weight: 1
 ---
 
-## Understanding Vector Search Fundamentals
+| Search Feature | Description |
+|----------------|-------------|
+| [Vector Search](/docs/concepts/search/vector-search/) | Semantic similarity search using vector embeddings with support for multiple distance metrics (L2, cosine, dot product, hamming) |
+| [Multivector Search](/docs/concepts/search/multivector-search/) | Search using multiple vector embeddings per document with late interaction models like ColBERT |
+| [Full-Text Search (Native)](/docs/concepts/search/full-text-search/) | Keyword-based search using LanceDB's native BM25 implementation with pre-filtering capabilities |
+| [Full-Text Search (Tantivy)](/docs/concepts/search/full-text-search-tantivy/) | Advanced full-text search using Tantivy engine with language-specific stemming and multi-column indexing |
+| [Hybrid Search](/docs/concepts/search/hybrid-search/) | Combines vector and full-text search results using reranking algorithms like RRF |
+| [Metadata Filtering](/docs/concepts/search/filtering/) | Filter search results based on metadata fields with pre-filtering and post-filtering options |
+| [SQL Queries](/docs/concepts/search/sql-queries/) | Traditional SQL queries for analytical queries and data exploration (Enterprise only) |
 
-Vector search is a technique used to search for similar items based on their vector representations, called embeddings. It is also known as similarity search, nearest neighbor search, or approximate nearest neighbor search.
+## Where to Begin?
 
-Raw data (e.g. text, images, audio, etc.) is converted into embeddings via an embedding model, which are then stored in a vector database like LanceDB. To perform similarity search at scale, an index is created on the stored embeddings, which can then used to perform fast lookups.
-
-![](/assets/docs/vector-db-basics.png)
-
-## Brute Force Search Implementation
-
-The simplest way to perform vector search is to perform a brute force search, without an index, where the distance between the query vector and all the vectors in the database are computed, with the top-k closest vectors returned. This is equivalent to a k-nearest neighbours (kNN) search in vector space.
-
-![](/assets/docs/knn_search.png)
-
-As you can imagine, the brute force approach is not scalable for datasets larger than a few hundred thousand vectors, as the latency of the search grows linearly with the size of the dataset. This is where approximate nearest neighbour (ANN) algorithms come in.
-
-## Approximate Nearest Neighbor (ANN) Search
-
-Instead of performing an exhaustive search on the entire database for each and every query, approximate nearest neighbour (ANN) algorithms use an index to narrow down the search space, which significantly reduces query latency. The trade-off is that the results are not guaranteed to be the true nearest neighbors of the query, but are usually "good enough" for most use cases.
-
-
-
+- Explore [Vector Search](/docs/concepts/search/vector-search/) for semantic similarity
+- Learn [Full-Text Search](/docs/concepts/search/full-text-search/) for keyword matching
+- Master [Hybrid Search](/docs/concepts/search/hybrid-search/) for combined capabilities
+- Understand [Metadata Filtering](/docs/concepts/search/filtering/) for result refinement

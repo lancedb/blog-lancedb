@@ -1,17 +1,28 @@
 ---
 title: "Optimize Query Performance in LanceDB"
 sidebar_title: Query Optimization
-description: "Learn how to optimize query performance in LanceDB. Includes performance analysis, tuning techniques, and best practices for workloads."
-keywords: "LanceDB query optimization, performance tuning, query analysis, execution plans, index optimization, vector search performance"
+weight: 1
 ---
 
-# Query Optimization with LanceDB
-
 LanceDB provides two powerful tools for query analysis and optimization: `explain_plan` and `analyze_plan`.
+
+If you have slow queries or unexpected query results, it can be helpful to
+print the resolved query plan. You can use the `explain_plan` method to do this:
+
+* Python Sync: [LanceQueryBuilder.explain_plan][lancedb.query.LanceQueryBuilder.explain_plan]
+* Python Async: [AsyncQueryBase.explain_plan][lancedb.query.AsyncQueryBase.explain_plan]
+* Node @lancedb/lancedb: [LanceQueryBuilder.explainPlan](/lancedb/js/classes/QueryBase/#explainplan)
+
+To understand how a query was actually executed—including metrics like execution time, number of rows processed, I/O stats, and more—use the analyze_plan method. This executes the query and returns a physical execution plan annotated with runtime metrics, making it especially helpful for performance tuning and debugging.
+
+* Python Sync: [LanceQueryBuilder.analyze_plan][lancedb.query.LanceQueryBuilder.analyze_plan]
+* Python Async: [AsyncQueryBase.analyze_plan][lancedb.query.AsyncQueryBase.analyze_plan]
+* Node @lancedb/lancedb: [LanceQueryBuilder.analyzePlan](/lancedb/js/classes/QueryBase/#analyzePlan)
 
 ## Query Analysis Tools
 
 ### explain_plan
+
 Reveals the logical query plan before execution, helping you identify potential issues with query structure and index usage. This tool is useful for:
 
 - Verifying query optimization strategies

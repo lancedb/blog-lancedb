@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search with Tantivy 
 sidebar_title: Full-Text Search (Tantivy)
-description: Learn how to implement full-text search in LanceDB using Tantivy. Includes text indexing, search capabilities, and best practices for efficient text search operations.
+weight: 4
 ---
 
 LanceDB supports Full-Text Search (FTS) via [**Tantivy**](https://github.com/quickwit-oss/tantivy). With Tantivy, you can incorporate keyword search (based on BM25) in your retrieval solutions.

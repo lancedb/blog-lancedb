@@ -1,7 +1,7 @@
 ---
 title: "Metadata Filtering in LanceDB"
 sidebar_title: Filtering
-description: "Learn how to implement metadata filtering in LanceDB. Includes scalar filtering, complex conditions, and optimizing filtered queries."
+weight: 6
 ---
 
 LanceDB supports filtering features of query results based on metadata fields. 

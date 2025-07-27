@@ -1,7 +1,7 @@
 ---
 title: Hybrid Search in LanceDB
 sidebar_title: Hybrid Search
-description: "Learn how to implement hybrid search in LanceDB. Includes combining vector and keyword search, reranking, and optimizing search results."
+weight: 5
 ---
 
 You may want to search for a document that is semantically similar to a query document, but also contains a specific keyword. This is an example of **hybrid search**, a query method that combines multiple search techniques.

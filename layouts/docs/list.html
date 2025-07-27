@@ -26,11 +26,11 @@
                           {{ range $i, $a := $ancestors }}
                             {{ if and (in $a.RelPermalink "/docs/") (ne $a.Title "Docs") }}
                               <span class="breadcrumb-sep">/</span>
-                              <a href="{{ $a.RelPermalink }}">{{ $a.Title }}</a>
+                              <a href="{{ $a.RelPermalink }}">{{ $a.Params.sidebar_title | default $a.Title }}</a>
                             {{ end }}
                           {{ end }}
                           <span class="breadcrumb-sep">/</span>
-                          <span class="breadcrumb-current">{{ .Title }}</span>
+                          <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
                         </nav>
                         <h1>{{ .Title }}</h1>
                     </header>
