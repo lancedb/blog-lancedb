@@ -14,6 +14,6 @@ Check out our [GitHub Discussions](https://github.com/lancedb/lancedb/discussion
 
 | Category | Description |
 |:---------|:------------|
-| [Open Source (OSS)](/docs/faq/faq-oss) | Questions about LanceDB open source deployment, installation, and community support |
+| [LanceDB OSS](/docs/faq/faq-oss) | Questions about LanceDB open source deployment, installation, and community support |
 | [LanceDB Cloud](/docs/faq/faq-cloud) | Questions about LanceDB Cloud service, pricing, and managed deployment |
-| [Enterprise](/docs/faq/faq-enterprise) | Questions about enterprise features, security, compliance, and support |
+| [LanceDB Enterprise](/docs/faq/faq-enterprise) | Questions about enterprise features, security, compliance, and support |
