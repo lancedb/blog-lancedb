@@ -1,7 +1,7 @@
 ---
-title: "APIs & SDKs"
+title: "LanceDB Cloud REST API"
 description: "Welcome to LanceDB documentation"
-weight: 4
+weight: 99
 ---
 
 ## Hello
