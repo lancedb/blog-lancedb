@@ -82,6 +82,18 @@
   line-height: 1.2;
 }
 
+// When sidebar-divider is a link, ensure it looks identical
+a.sidebar-divider {
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .sidebar-link {
   display: block;
   color: #fff;

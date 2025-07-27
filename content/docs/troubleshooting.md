@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting 
-weight: 101
+weight: 100
 ---
 
 ## Enable Logging in LanceDB Cloud

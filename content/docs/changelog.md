@@ -2,7 +2,7 @@
 title: LanceDB Changelog
 sidebar_title: Changelog
 description: Track LanceDB's latest features, improvements, and bug fixes. Stay updated with our vector database's development progress and new capabilities.
-weight: 100
+weight: 101
 ---
 ## June 2025
 

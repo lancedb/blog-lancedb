@@ -2,7 +2,11 @@
   {{- range .Pages.ByWeight }}
     <li>
       {{- if eq .Params.layout "divider" }}
-        <div class="sidebar-divider">{{ .Params.sidebar_title | default .Title }}</div>
+        {{- if .Params.link }}
+          <a href="{{ .Params.link }}" class="sidebar-divider">{{ .Params.sidebar_title | default .Title }}</a>
+        {{- else }}
+          <div class="sidebar-divider">{{ .Params.sidebar_title | default .Title }}</div>
+        {{- end }}
       {{- else if .Pages }}
         <details {{ if or (eq .RelPermalink $.current.RelPermalink) (in $.current.RelPermalink .RelPermalink) }}open{{ end }}>
           <summary>
