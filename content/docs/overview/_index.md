@@ -1,11 +1,15 @@
 ---
-title: "LanceDB: The OSS Multimodal Lakehouse"
+title: "What is LanceDB?"
 sidebar_title: "What is LanceDB?"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
 weight: 3
 ---
 
 **LanceDB OSS** is an open-source, batteries-included embedded multimodal database that you can run on your own infrastructure. "Embedded" means that it runs *in-process*, making it incredibly simple to self-host your own AI retrieval workflows for RAG and more. No servers, no hassle.
+
+[![LanceDB Products](/assets/docs/lancedb-products.png)](https://lancedb.com/cloud)
+
+
 
 ![What is LanceDB?](/assets/docs/lancedb_embedded_explanation.png)
 

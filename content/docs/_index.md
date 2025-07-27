@@ -5,7 +5,11 @@ weight: 1
 hide_toc: true
 ---
 
-**LanceDB** is a high-performance, open-source vector database designed for AI, search, and analytics at scale. Use this documentation to build production-ready applications with a simple API to store, search, and manage vector data alongside rich metadata. LanceDB’s flexible features enable neural search, semantic retrieval, hybrid queries, and more.
+**LanceDB** is an open-source vector database that fully supports multimodal data. Use LanceDB to build large-scale search, RAG and Agentic applications. 
+
+{{< admonition >}}
+Looking for Lance columnar format docs? [Click here.](https://lancedb.github.io/lance/)
+{{< /admonition >}}
 
 ## Product Release: Announcing LanceDB Cloud!
 ***<p style="text-align: center;">Now you can deploy LanceDB in the cloud or on your own infrastructure!</p>***

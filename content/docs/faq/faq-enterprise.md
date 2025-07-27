@@ -1,9 +1,9 @@
 ---
 title: "LanceDB Enterprise: Frequently Asked Questions"
-sidebar_title: "FAQ"
+sidebar_title: "LanceDB Enterprise "
 description: "Find answers to frequently asked questions about LanceDB Enterprise. Covers features, performance, deployment, security, and more."
 keywords: "LanceDB Enterprise, vector database FAQ, enterprise vector search, database connection, indexing, querying, architecture, monitoring, fault tolerance, consistency, GPU indexing"
-weight: 6
+weight: 3
 ---
 
 ## Connection

@@ -1,8 +1,8 @@
 ---
 title: "LanceDB: Frequently Asked Questions"
-sidebar_title: "FAQ"
+sidebar_title: "LanceDB OSS FAQ"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
-weight: 99
+weight: 1
 ---
 
 This section covers some common questions and issues that you may encounter when using LanceDB.
