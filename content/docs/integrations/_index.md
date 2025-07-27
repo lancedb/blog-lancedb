@@ -3,6 +3,7 @@ title: "LanceDB Third-Party Integrations"
 sidebar_title: Integrations
 description: "Connect LanceDB with popular AI frameworks, embedding models, and development tools"
 weight: 11
+hide_toc: true
 ---
 
 LanceDB integrates seamlessly with the modern AI ecosystem, providing connectors for popular frameworks, embedding models, and development tools. Whether you're building RAG applications, working with data management platforms, or working with specific AI models, LanceDB has you covered.

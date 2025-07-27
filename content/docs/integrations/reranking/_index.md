@@ -10,15 +10,14 @@ Reranking is the process of reordering a list of items based on some criteria. I
 
 LanceDB comes with some built-in rerankers. Some of the rerankers that are available in LanceDB are:
 
-| Reranker | Description | Supported Query Types |
-| --- | --- | --- |
-| `LinearCombinationReranker` | Reranks search results based on a linear combination of FTS and vector search scores | Hybrid |
-| `CohereReranker` | Uses cohere Reranker API to rerank results | Vector, FTS, Hybrid |
-| `CrossEncoderReranker` | Uses a cross-encoder model to rerank search results | Vector, FTS, Hybrid |
-| `ColbertReranker` | Uses a colbert model to rerank search results | Vector, FTS, Hybrid |
-| `OpenaiReranker`(Experimental) | Uses OpenAI's chat model to rerank search results | Vector, FTS, Hybrid |
-| `VoyageAIReranker` | Uses voyageai Reranker API to rerank results | Vector, FTS, Hybrid |
-
+| Reranker | Description |
+|:---------|:------------|
+| `LinearCombinationReranker` | Reranks search results based on a linear combination of FTS and vector search scores |
+| `CohereReranker` | Uses cohere Reranker API to rerank results |
+| `CrossEncoderReranker` | Uses a cross-encoder model to rerank search results |
+| `ColbertReranker` | Uses a colbert model to rerank search results |
+| `OpenaiReranker`(Experimental) | Uses OpenAI's chat model to rerank search results |
+| `VoyageAIReranker` | Uses voyageai Reranker API to rerank results |
 
 ## Using a Reranker
 Using rerankers is optional for vector and FTS. However, for hybrid search, rerankers are required. To use a reranker, you need to create an instance of the reranker and pass it to the `rerank` method of the query builder:
