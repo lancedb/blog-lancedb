@@ -1,6 +1,6 @@
 ---
-title: Python SDK Reference
-weight: 99
+title: Python SDK 
+weight: 10
 ---
 
 This section contains the API reference for the Python API. LanceDB provides both synchronous and asynchronous API clients.

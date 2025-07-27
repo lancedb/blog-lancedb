@@ -1,5 +1,5 @@
 ---
-title: "Tutorials"
+title: "APIs & SDKs"
 description: "Welcome to LanceDB documentation"
-weight: 10
+weight: 6
 ---

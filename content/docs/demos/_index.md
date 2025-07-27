@@ -1,5 +1,5 @@
 ---
-title: "Feature Engineering"
+title: "Demos"
 description: "Welcome to LanceDB documentation"
-weight: 12
+weight: 9
 ---
