@@ -1,19 +1,14 @@
 ---
-title: "RAG (Retrieval-Augmented Generation)"
+title: "Retrieval-Augmented Generation"
 sidebar_title: "RAG"
 description: "Build RAG with LanceDB for efficient vector-based information retrieval and more accurate responses from AI"
 weight: 3
 ---
-
 RAG (Retrieval-Augmented Generation) with LanceDB 
 ====================================================================
-
 Build RAG (Retrieval-Augmented Generation) with  LanceDB, a powerful solution for efficient vector-based information retrieval . 
-
 Experience the Future of Search 
-
  RAG enables AI to retrieve relevant information from external sources and use it to generate more accurate and context-specific responses.  LanceDB provides a robust framework for integrating LLMs with external knowledge sources .
-
 | RAG | Description |
 |:----|:------------|
 | [RAG with Matryoshka Embeddings and LlamaIndex](https://github.com/lancedb/vectordb-recipes/blob/main/tutorials/RAG-with_MatryoshkaEmbed-Llamaindex) | Utilize Matryoshka embeddings and LlamaIndex to improve the efficiency and accuracy of your RAG models. |
@@ -28,15 +23,3 @@ Experience the Future of Search
 | [Query Expansion and Reranker](https://github.com/lancedb/vectordb-recipes/tree/main/examples/archived_examples/QueryExpansion%26Reranker) | Enhance RAG with query expansion using Large Language Models and advanced reranking methods like Cross Encoders, ColBERT v2, and FlashRank for improved document retrieval precision and recall |
 | [RAG Fusion](https://github.com/lancedb/vectordb-recipes/tree/main/examples/archived_examples/RAG_Fusion) | Build RAG Fusion, utilize the RRF algorithm to rerank documents based on user queries ! Use LanceDB as vector database to store and retrieve documents related to queries via OPENAI Embeddings |
 | [Agentic RAG](https://github.com/lancedb/vectordb-recipes/blob/main/tutorials/Agentic_RAG) | Build autonomous information retrieval with Agentic RAG, a framework of intelligent agents that collaborate to synthesize, summarize, and compare data across sources, that enables proactive and informed decision-making |
-
-
-
-
-
-
-
-
-
-
-
-

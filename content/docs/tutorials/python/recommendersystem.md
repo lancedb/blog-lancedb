@@ -1,19 +1,13 @@
 ---
-title: "Recommender Systems"
+title: "Recommender Systems with LanceDB"
 sidebar_title: "Recommender Systems"
 description: "Deliver personalized experiences by efficiently storing and querying item embeddings"
 weight: 7
 ---
 
-Recommender Systems: Personalized Discovery
-==============================================================
-Deliver personalized experiences with Recommender Systems. 
+LanceDB's powerful vector database capabilities can efficiently store and query item embeddings. Recommender Systems can utilize it and provide personalized recommendations based on user preferences  and item features  and therefore enhance the user experience. 
 
-Technical Overview
-
- LanceDB's powerful vector database capabilities can efficiently store and query item embeddings. Recommender Systems can utilize it and provide personalized recommendations based on user preferences  and item features  and therefore enhance the user experience. 
-
-| Recommender System | Description |
+| Tutorial | Description |
 |:------------------|:------------|
 | [Movie Recommender System](https://github.com/lancedb/vectordb-recipes/blob/main/examples/movie-recommender) | Use collaborative filtering to predict user preferences, assuming similar users will like similar movies, and leverage Singular Value Decomposition (SVD) from Numpy for precise matrix factorization and accurate recommendations |
 | [Movie Recommendation with Genres](https://github.com/lancedb/vectordb-recipes/tree/main/examples/archived_examples/movie-recommendation-with-genres) | Creates movie embeddings using Doc2Vec, capturing genre and characteristic nuances, and leverages VectorDB for efficient storage and querying, enabling accurate genre classification and personalized movie recommendations through similarity searches |

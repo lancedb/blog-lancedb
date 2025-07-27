@@ -6,12 +6,6 @@ weight: 2
 hide_toc: true
 ---
 
-# TypeScript Tutorials
-
-Learn how to build applications with LanceDB using TypeScript and Node.js. These tutorials cover web applications, chatbots, and serverless deployments.
-
-## Overview
-
 | Tutorial | Description |
 |:---------|:------------|
 | [YouTube Transcript Bot with Node.js](/docs/tutorials/typescript/youtube_transcript_bot_with_nodejs/) | Build a bot that processes and searches YouTube transcripts |

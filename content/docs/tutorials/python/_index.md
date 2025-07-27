@@ -6,14 +6,6 @@ weight: 1
 hide_toc: true
 ---
 
-# Python Tutorials
-
-To help you get started, we provide some examples, projects, and applications that use the LanceDB Python API. These examples are designed to get you right into the code with minimal introduction, enabling you to move from an idea to a proof of concept in minutes. 
-
-You can find the latest examples in our [VectorDB Recipes](https://github.com/lancedb/vectordb-recipes) repository. 
-
-## Overview
-
 | Tutorial | Description |
 |:---------|:------------|
 | [Build from Scratch](/docs/tutorials/python/build_from_scratch/) | Start building your GenAI applications from the ground up using LanceDB's efficient vector-based document retrieval capabilities |

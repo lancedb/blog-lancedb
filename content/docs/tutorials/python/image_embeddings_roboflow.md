@@ -1,11 +1,9 @@
 ---
-title: "Image Embeddings with Roboflow"
-sidebar_title: "Image Embeddings with Roboflow"
+title: "Load Image Embeddings with Roboflow"
+sidebar_title: "Ingestion with Roboflow"
 description: "Work with image embeddings using Roboflow integration"
 weight: 9
 ---
-
-# How to Load Image Embeddings into LanceDB
 
 With the rise of Large Multimodal Models (LMMs) such as [GPT-4 Vision](https://blog.roboflow.com/gpt-4-vision/), the need for storing image embeddings is growing. The most effective way to store text and image embeddings is in a vector database such as LanceDB. Vector databases are a special kind of data store that enables efficient search over stored embeddings. 
 

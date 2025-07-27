@@ -1,16 +1,10 @@
 ---
-title: "RAG Tutorials"
+title: "Retrieval Augmented Generation with LanceDB"
 sidebar_title: "RAG"
 description: "Retrieval-Augmented Generation tutorials and patterns for building AI applications with LanceDB"
 weight: 3
 hide_toc: true
 ---
-
-# RAG Tutorials
-
-Learn how to build Retrieval-Augmented Generation (RAG) applications with LanceDB. These tutorials cover various RAG patterns and techniques for improving AI responses.
-
-## Overview
 
 | Tutorial | Description |
 |:---------|:------------|

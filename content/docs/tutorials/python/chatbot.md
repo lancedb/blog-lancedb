@@ -1,20 +1,15 @@
 ---
-title: "Chatbot Applications"
+title: "Build Chatbots with LanceDB"
 sidebar_title: "Chatbot"
 description: "Create chatbots that retrieve relevant context for coherent and context-aware replies"
 weight: 5
 ---
 
-Chatbot applications with LanceDB 
-====================================================================
-
- Create innovative chatbot applications that utilizes LanceDB for efficient vector-based response generation!  
+Create innovative chatbot applications that utilizes LanceDB for efficient vector-based response generation!  
  
-Introduction 
+Users can input their queries, allowing the chatbot to retrieve relevant context seamlessly.  This enables the generation of coherent and context-aware replies that enhance user experience.  Dive into the world of advanced conversational AI and streamline interactions with powerful data management! 
 
- Users can input their queries, allowing the chatbot to retrieve relevant context seamlessly.  This enables the generation of coherent and context-aware replies that enhance user experience.  Dive into the world of advanced conversational AI and streamline interactions with powerful data management! 
-
-| Chatbot | Description |
+| Tutorial | Description |
 |:--------|:------------|
 | [Databricks DBRX Website Bot](https://github.com/lancedb/vectordb-recipes/blob/main/examples/databricks_DBRX_website_bot) | Engage with the Hogwarts chatbot, that uses Open-source RAG with DBRX, LanceDB and LLama-index with Hugging Face Embeddings, to provide interactive and engaging user experiences. |
 | [CLI SDK Manual Chatbot Locally](https://github.com/lancedb/vectordb-recipes/blob/main/examples/CLI-SDK-Manual-Chatbot-Locally) | CLI chatbot for SDK/hardware documents using Local RAG with LLama3, Ollama, LanceDB, and Openhermes Embeddings, built with Phidata Assistant and Knowledge Base |

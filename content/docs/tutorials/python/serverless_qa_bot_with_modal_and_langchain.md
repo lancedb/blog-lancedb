@@ -5,9 +5,7 @@ description: "Build serverless QA bots using Modal and LangChain"
 weight: 10
 ---
 
-# Serverless QA Bot with Modal and LangChain
-
-## use LanceDB's LangChain integration with Modal to run a serverless app
+In this tutorial, you will use LanceDB's LangChain integration with Modal to run a serverless app.
 
 <img id="splash" width="400" alt="modal" src="https://github.com/lancedb/lancedb/assets/917119/7d80a40f-60d7-48a6-972f-dab05000eccf">
 

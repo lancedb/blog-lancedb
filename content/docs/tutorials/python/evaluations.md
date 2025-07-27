@@ -1,16 +1,11 @@
 ---
-title: "Evaluation"
+title: "Evaluating Text Performance with Precision"
 sidebar_title: "Evaluation"
 description: "Develop evaluation applications to measure performance across various metrics"
 weight: 8
 ---
 
-Evaluation: Assessing Text Performance with Precision 
-====================================================================
-
 Evaluation is a comprehensive tool designed to measure the performance of text-based inputs, enabling data-driven optimization and improvement . 
-
-Text Evaluation 101 
 
 Using robust framework for assessing reference and candidate texts across various metrics, ensure that the text outputs are high-quality and meet specific requirements and standards.
 

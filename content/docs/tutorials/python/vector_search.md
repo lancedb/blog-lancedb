@@ -5,16 +5,9 @@ description: "Use LanceDB's vector search capabilities to perform efficient and 
 weight: 2
 ---
 
-Vector Search: Efficient Retrieval 
-====================================================================
-
-Vector search with LanceDB, is a solution for  efficient and accurate similarity searches in large datasets . 
-
-Vector Search Capabilities in LanceDB
-
 LanceDB implements vector search algorithms for efficient document retrieval and analysis . This enables fast and accurate discovery of relevant documents, leveraging dense vector representations . The platform supports scalable indexing and querying of high-dimensional vector spaces, facilitating precise document matching and retrieval .
 
-| Vector Search | Description |
+| Tutorial | Description |
 |:-----------------|:---------------|
 | [Inbuilt Hybrid Search](https://github.com/lancedb/vectordb-recipes/blob/main/examples/Inbuilt-Hybrid-Search) | Perform hybrid search in LanceDB by combining the results of semantic and full-text search via a reranking algorithm of your choice |
 | [Hybrid Search with BM25 and LanceDB](https://github.com/lancedb/vectordb-recipes/blob/main/examples/Hybrid_search_bm25_lancedb) | Use Synergizes BM25's keyword-focused precision (term frequency, document length normalization, bias-free retrieval) with LanceDB's semantic understanding (contextual analysis, query intent alignment) for nuanced search results in complex datasets |

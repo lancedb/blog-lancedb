@@ -5,9 +5,7 @@ description: "Deploy LanceDB in a serverless environment with S3 and Lambda"
 weight: 11
 ---
 
-# Serverless LanceDB
-
-## Store your data on S3 and use Lambda to compute embeddings and retrieve queries in production easily.
+Store your data on S3 and use Lambda to compute embeddings and retrieve queries in production easily.
 
 <img id="splash" width="400" alt="s3-lambda" src="https://user-images.githubusercontent.com/917119/234653050-305a1e90-9305-40ab-b014-c823172a948c.png">
 

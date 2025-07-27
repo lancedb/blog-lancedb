@@ -1,11 +1,9 @@
 ---
-title: "Multimodal Search"
+title: "Image Multimodal Search"
 sidebar_title: "Multimodal Search"
 description: "Advanced multimodal search capabilities"
 weight: 14
 ---
-
-# Image multimodal search
 
 ## Search through an image dataset using natural language, full text and SQL
 
