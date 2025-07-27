@@ -1,6 +1,6 @@
 ---
 title: "LanceDB: Frequently Asked Questions"
-sidebar_title: "LanceDB OSS FAQ"
+sidebar_title: "LanceDB OSS"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
 weight: 1
 ---
@@ -13,15 +13,15 @@ Yes, LanceDB is an open source vector database available under an Apache 2.0 lic
 
 ### What is the difference between Lance and LanceDB?
 
-[Lance](https://github.com/lancedb/lance) is a modern columnar data format for AI, written in Rust 🦀. It's perfect for building search engines, feature stores and being the foundation of large-scale ML training jobs requiring high performance IO and shuffles. It also has native support for storing, querying, and inspecting deeply nested data for robotics or large blobs like images, point clouds, and more.
+[Lance](https://github.com/lancedb/lance) is a modern columnar data format for AI, written in Rust. It's perfect for building search engines, feature stores and being the foundation of large-scale ML training jobs requiring high performance IO and shuffles. It also has native support for storing, querying, and inspecting deeply nested data for robotics or large blobs like images, point clouds, and more.
 
-LanceDB is the vector database that's built on top of Lance, and utilizes the underlying optimized storage format to build efficient disk-based indexes that power semantic search & retrieval applications, from RAGs to QA Bots to recommender systems.
+LanceDB is the vector database that's built on top of Lance, and utilizes the underlying optimized storage format to build efficient disk-based indexes that power semantic search & retrieval applications, from RAGs to QA bots to recommender systems.
 
 ### Why invent another data format instead of using Parquet?
 
 As we mention in our talk titled "[Lance, a modern columnar data format](https://www.youtube.com/watch?v=ixpbVyrsuL8)", Parquet and other tabular formats that derive from it are rather dated (Parquet is over 10 years old), especially when it comes to random access on vectors. We needed a format that's able to handle the complex trade-offs involved in shuffling, scanning, OLAP and filtering large datasets involving vectors, and our extensive experiments with Parquet didn't yield sufficient levels of performance for modern ML. [Our benchmarks](https://blog.lancedb.com/benchmarking-random-access-in-lance-ed690757a826) show that Lance is up to 1000x faster than Parquet for random access, which we believe justifies our decision to create a new data format for AI.
 
-### Why build in Rust? 🦀
+### Why build in Rust?
 
 We believe that the Rust ecosystem has attained mainstream maturity and that Rust will form the underpinnings of large parts of the data and ML landscape in a few years. Performance, latency and reliability are paramount to a vector DB, and building in Rust allows us to iterate and release updates more rapidly due to Rust's safety guarantees. Both Lance (the data format) and LanceDB (the database) are written entirely in Rust. We also provide Python, JavaScript, and Rust client libraries to interact with the database.
 
@@ -49,7 +49,7 @@ Yes, LanceDB supports full-text search (FTS) via [Tantivy](https://github.com/qu
 
 ### How can I speed up data inserts?
 
-It's highly recommend to perform bulk inserts via batches (for e.g., Pandas DataFrames or lists of dicts in Python) to speed up inserts for large datasets. Inserting records one at a time is slow and can result in suboptimal performance because each insert creates a new data fragment on disk. Batching inserts allows LanceDB to create larger fragments (and their associated manifests), which are more efficient to read and write.
+It's highly recommended to perform bulk inserts via batches (for e.g., Pandas DataFrames or lists of dicts in Python) to speed up inserts for large datasets. Inserting records one at a time is slow and can result in suboptimal performance because each insert creates a new data fragment on disk. Batching inserts allows LanceDB to create larger fragments (and their associated manifests), which are more efficient to read and write.
 
 ### Do I need to set a refine factor when using an index?
 
@@ -75,14 +75,14 @@ MinIO supports an S3 compatible API. In order to connect to a MinIO instance, yo
 
 Refer to this [post](https://blog.lancedb.com/benchmarking-lancedb-92b01032874a) for recent benchmarks.
 
-### How much data can LanceDB practically manage without effecting performance?
+### How much data can LanceDB practically manage without affecting performance?
 
 We target good performance on ~10-50 billion rows and ~10-30 TB of data.
 
 ### Does LanceDB support concurrent operations?
 
-LanceDB can handle concurrent reads very well, and can scale horizontally. The main constraint is how well the [storage layer](https://lancedb.github.io/lancedb/concepts/storage/) you've chosen scales. For writes, we support concurrent writing, though too many concurrent writers can lead to failing writes as there is a limited number of times a writer retries a commit
+LanceDB can handle concurrent reads very well, and can scale horizontally. The main constraint is how well the [storage layer](https://lancedb.github.io/lancedb/concepts/storage/) you've chosen scales. For writes, we support concurrent writing, though too many concurrent writers can lead to failing writes as there is a limited number of times a writer retries a commit.
 
 {{< admonition "info" "Multiprocessing with LanceDB" >}}
-For multiprocessing you should probably not use ```fork``` as lance is multi-threaded internally and ```fork``` and multi-thread do not work well.[Refer to this discussion](https://discuss.python.org/t/concerns-regarding-deprecation-of-fork-with-alive-threads/33555)
+For multiprocessing you should probably not use ```fork``` as lance is multi-threaded internally and ```fork``` and multi-thread do not work well. [Refer to this discussion](https://discuss.python.org/t/concerns-regarding-deprecation-of-fork-with-alive-threads/33555)
 {{< /admonition >}}

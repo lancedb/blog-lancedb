@@ -27,6 +27,14 @@ It's designed to be cost-effective and highly scalable without breaking the bank
 
 - **Full Observability**: Native integration with OpenTelemetry for comprehensive logging, monitoring and distributed tracing.
 
+## What is the difference between LanceDB OSS and LanceDB Cloud?
+
+LanceDB OSS is an **embedded** (in-process) solution that can be used as the vector store of choice for your LLM and RAG applications. It can be embedded inside an existing application backend, or used in-process alongside existing ML and data engineering pipelines.
+
+LanceDB Cloud is a **serverless** solution — the database and data sit on the cloud and we manage the scalability of the application side via a remote client, without the need to manage any infrastructure.
+
+Both flavors of LanceDB benefit from the blazing fast Lance data format and are built on the same open source foundations.
+
 ## Upgrading from OSS to Cloud
 
 The OSS version of LanceDB is designed to be embedded in your application, and it runs in-process. This makes it incredibly simple to self-host your own AI retrieval workflows for RAG and more and build and test out your concepts on your own infrastructure. The OSS version is forever free, and you can continue to build and integrate LanceDB into your existing backend applications without any added costs.

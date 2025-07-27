@@ -1,54 +1,38 @@
 // Admonition styles for docs and blog
 .admonition {
-  margin: 1.5rem 0;
-  padding: 1rem 1.2rem;
-  border-radius: 8px;
-  border-left: 4px solid;
-  background: rgba(255, 115, 74, 0.05);
+  margin: 2rem 0;
+  padding: 1.5rem 1.5rem;
+  border-radius: 0;
+  border: 1px solid rgba(255, 115, 74, 0.2);
+  background: linear-gradient(135deg, #1a1d21 0%, #23262b 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(255, 115, 74, 0.1);
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  position: relative;
   
-  &.note {
-    border-left-color: #ff734a;
-    background: rgba(255, 115, 74, 0.08);
-    
-    .admonition-title {
-      color: #ff734a;
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+    z-index: 1;
   }
   
-  &.warning {
-    border-left-color: #f59e0b;
-    background: rgba(245, 158, 11, 0.08);
-    
-    .admonition-title {
-      color: #f59e0b;
-    }
-  }
-  
-  &.tip {
-    border-left-color: #10b981;
-    background: rgba(16, 185, 129, 0.08);
-    
-    .admonition-title {
-      color: #10b981;
-    }
-  }
-  
-  &.info {
-    border-left-color: #3b82f6;
-    background: rgba(59, 130, 246, 0.08);
-    
-    .admonition-title {
-      color: #3b82f6;
-    }
-  }
-  
+  &.note,
+  &.warning,
+  &.tip,
+  &.info,
   &.error {
-    border-left-color: #ef4444;
-    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(255, 115, 74, 0.3);
     
-    .admonition-title {
-      color: #ef4444;
+    &::before {
+      background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
+    }
+    
+    .admonition-title::after {
+      background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 100%);
     }
   }
   
@@ -103,10 +87,17 @@
   
   .admonition-title {
     font-weight: 600;
-    font-size: 0.95em;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: #fff;
+    font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .admonition-icon {
+    margin-right: 0.5rem;
+    font-size: 1.1em;
   }
   
   &.no-title {

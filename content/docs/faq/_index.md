@@ -8,7 +8,7 @@ hide_toc: true
 
 Find answers to common questions about LanceDB across different deployment options and use cases.
 
-{{< admonition "info" "Can't find what you're looking for?" >}}
+{{< admonition "warning" "Can't find what you're looking for?" >}}
 Check out our [GitHub Discussions](https://github.com/lancedb/lancedb/discussions) for community support or [contact us](/contact) for enterprise assistance.
 {{< /admonition >}}
 

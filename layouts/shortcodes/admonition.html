@@ -4,7 +4,7 @@
 
 <div class="admonition {{ $type }}{{ if not $showTitle }} no-title{{ end }}">
     <div class="admonition-content">
-        {{ if $showTitle }}<div class="admonition-title">{{ $title }}</div>{{ end }}
+        {{ if $showTitle }}<div class="admonition-title">💡 {{ $title }}</div>{{ else }}<span class="admonition-icon">💡</span>{{ end }}
         {{ .Inner | markdownify }}
     </div>
 </div> 
