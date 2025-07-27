@@ -1,11 +1,20 @@
 ---
-title: "Vector Search"
+title: "Vector Search Tutorials"
 sidebar_title: "Vector Search"
-description: "Use LanceDB's vector search capabilities to perform efficient and accurate similarity searches"
+description: "Master vector search with LanceDB through Python and TypeScript tutorials"
 weight: 2
 ---
 
-LanceDB implements vector search algorithms for efficient document retrieval and analysis . This enables fast and accurate discovery of relevant documents, leveraging dense vector representations . The platform supports scalable indexing and querying of high-dimensional vector spaces, facilitating precise document matching and retrieval .
+| Tutorial | Language | Difficulty | Description |
+|:---------|:---------|:-----------|:------------|
+| [Multimodal Search](/docs/tutorials/vector-search/multimodal/) | Python | Beginner | Combine text and image queries to find the most relevant results using LanceDB's multimodal capabilities |
+| [Image Embeddings with Roboflow](/docs/tutorials/vector-search/image_embeddings_roboflow/) | Python | Beginner | Work with image embeddings using Roboflow integration |
+| [Recommender Systems](/docs/tutorials/vector-search/recommendersystem/) | Python | Intermediate | Deliver personalized experiences by efficiently storing and querying item embeddings |
+| [TransformerJS Embedding Search](/docs/tutorials/vector-search/transformerjs_embedding_search_nodejs/) | TypeScript | Intermediate | Use TransformerJS for embedding search in Node.js applications |
+| [Serverless LanceDB with S3 and Lambda](/docs/tutorials/vector-search/serverless_lancedb_with_s3_and_lambda/) | Python | Advanced | Deploy LanceDB in a serverless environment with S3 and Lambda |
+| [Advanced Multimodal Search](/docs/tutorials/vector-search/multimodal_search/) | Python | Advanced | Advanced multimodal search capabilities |
+
+## Additional Examples
 
 | Tutorial | Description |
 |:-----------------|:---------------|

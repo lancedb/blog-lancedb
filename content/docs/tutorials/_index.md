@@ -1,20 +1,20 @@
 ---
-title: "Building Apps with LanceDB"
+title: "LanceDB Tutorials and Examples"
 sidebar_title: "Tutorials"
 description: "Step-by-step tutorials and practical examples for building applications with LanceDB"
 weight: 10
 hide_toc: true
 ---
 
-To help you get started, we provide some examples, projects, and applications that use the LanceDB SDKs. These examples are designed to get you right into the code with minimal introduction, enabling you to move from an idea to a proof of concept in minutes. 
-
-{{< admonition >}}
-You can find the latest examples in our [VectorDB Recipes](https://github.com/lancedb/vectordb-recipes) repository. 
-{{< /admonition >}}
+Explore tutorials organized by use case and difficulty level:
 
 | Tutorial | Description |
 |:---------|:------------|
-| [Python Tutorials](/docs/tutorials/python/) | Python examples and tutorials for building AI applications |
-| [TypeScript Tutorials](/docs/tutorials/typescript/) | TypeScript and Node.js tutorials for web applications |
-| [RAG Tutorials](/docs/tutorials/rag/) | Retrieval-Augmented Generation tutorials and patterns |
+| [Vector Search Tutorials](/docs/tutorials/vector-search/) | Complete guide to vector search with LanceDB, including multimodal search, embeddings, and recommender systems |
+| [RAG and Agents Tutorials](/docs/tutorials/rag-agents/) | Complete guide to building RAG applications and AI agents with LanceDB |
+| [Advanced RAG Patterns](/docs/tutorials/rag-agents/#advanced-rag-patterns) | Advanced RAG techniques including Graph RAG, HYDE, Multi-head RAG, Self RAG, FLARE, Adaptive RAG, Agentic RAG, and Corrective RAG |
+| [Deployment & Evaluation](/docs/tutorials/vector-search/#deployment--evaluation) | Serverless deployments, evaluation frameworks, and production-ready patterns |
 
+{{< admonition >}}
+Explore all the code samples in our [VectorDB Recipes](https://github.com/lancedb/vectordb-recipes) repository. 
+{{< /admonition >}}

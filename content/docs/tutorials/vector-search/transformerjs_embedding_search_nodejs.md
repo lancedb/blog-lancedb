@@ -5,16 +5,9 @@ description: "Use Transformer.js for embedding generation and search"
 weight: 2
 ---
 
-# Vector embedding search using TransformersJS
-
-## Embed and query data from LanceDB using TransformersJS
-
-<img id="splash" width="400" alt="transformersjs" src="https://github.com/lancedb/lancedb/assets/43097991/88a31e30-3d6f-4eef-9216-4b7c688f1b4f">
-
 This example shows how to use the [transformers.js](https://github.com/xenova/transformers.js) library to perform vector embedding search using LanceDB's Javascript API.
 
-
-### Setting up
+## Setting up
 First, install the dependencies:
 ```bash
 npm install vectordb
@@ -31,7 +24,7 @@ const { pipeline } = await import('@xenova/transformers')
 const pipe = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 ```
 
-### Creating the embedding function
+## Creating the embedding function
 
 Next, we will create a function that will take in a string and return the vector embedding of that string. We will use the `pipe` function we defined earlier to get the vector embedding of the string.
 
@@ -54,7 +47,7 @@ embed_fun.embed = async function (batch) {
 }
 ```
 
-### Creating the database
+## Creating the database
 
 Now, we will create the LanceDB database and add the embedding function we defined earlier.
 
@@ -76,7 +69,7 @@ const data = [
 const table = await db.createTable('food_table', data, "create", embed_fun)
 ```
 
-### Performing the search
+## Performing the search
 
 Now, we can perform the search using the `search` function. LanceDB automatically uses the embedding function we defined earlier to get the vector embedding of the query string.
 
@@ -123,6 +116,6 @@ Output of `results`:
 ]
 ```
 
-### Wrapping it up
+## Wrapping it up
 
 In this example, we showed how to use the `transformers.js` library to perform vector embedding search using LanceDB's Javascript API. You can find the full code for this example on [Github](https://github.com/lancedb/lancedb/blob/main/node/examples/js-transformers/index.js)!
