@@ -61,7 +61,7 @@ Revamped LanceDB Cloud onboarding, added Umap visualization and improved perform
 
 ### Features
 * **Reduced Commit Conflict Upsert**: Upsert operations to the same table are now designed to be conflict-free under typical concurrent workloads, enabling more reliable and higher-throughput parallel data ingestion and updates.
-    *  Added timeout parameter for `merge_insert` for better control over long-running upserts [\[lancedb#2378\]](https://github.com/lancedb/lancedb/pull/2378)
+    * Added timeout parameter for `merge_insert` for better control over long-running upserts [\[lancedb#2378\]](https://github.com/lancedb/lancedb/pull/2378)
 * **Reduced IOPS to object store**:
     * Optimized I/O Patterns for small tables: Significant improvements reduce total IOPS to the object store by up to 95%, especially benefiting small-table workloads. [\[lance#3764\]](https://github.com/lancedb/lance/pull/3764)
     * Scan cache: Introduced a scan cache to further minimize object store IOPS and accelerate query performance. #enterprise 
@@ -70,7 +70,6 @@ Revamped LanceDB Cloud onboarding, added Umap visualization and improved perform
     * IVF_PQ indexing performance: Eliminated unnecessary data copying during index creation, resulting in faster PQ training and reduced memory usage. [\[lance#3894\]](https://github.com/lancedb/lance/pull/3894)
 * **Configurable Scan Concurrency**: Query nodes now support configurable concurrency limits for scan requests to plan executors, allowing for better resource management in enterprise deployments. #enterprise
     * New `grpc.concurrency_limit_per_connection` setting in the plan executor for fine-grained control.
-performance. #enterprise
 * **Improved Enterprise Deployment**:
     * Automate deployment for AWS environments, making setup and scaling easier for enterprise users. 
     * GCP deployments now support configuration of weak consistency and concurrency limits for greater flexibility and cost control.
@@ -87,7 +86,7 @@ performance. #enterprise
     * Addressed a bug in bitmap scalar index remapping, so partial remapping during compaction no longer drops rows unexpectedly.
 * **Partition Count for Small Tables**: Improved partitioning logic ensures the correct number of partitions for small tables, leading to more efficient queries.
 * **Accurate Error for Non-Existent Index**: Dropping a non-existent index now returns an IndexNotFound error (instead of a TableNotFound error). [\[lancedb#2380\]](https://github.com/lancedb/lancedb/pull/2380)
-* **Index Consistency After Horizontal `merge_insert`**:Any index fragments associated with modified data are now properly removed during a horizontal merge_insert, preventing index corruption and ensuring indices always reflect the current state of the data. [\[lancedb#3863\]](https://github.com/lancedb/lancedb/pull/3863)
+* **Index Consistency After Horizontal `merge_insert`**: Any index fragments associated with modified data are now properly removed during a horizontal merge_insert, preventing index corruption and ensuring indices always reflect the current state of the data. [\[lancedb#3863\]](https://github.com/lancedb/lancedb/pull/3863)
 * **Fixed issues in create_index with empty tables**: 
     * Resolved an error that could occur when performing operations such as deleting the last row or creating an index on an empty table. The function now safely handles empty tables, preventing division-by-zero errors during these events.
     * Corrected a bug where events could be dropped if processed in the same batch as other events for empty tables. This was caused by Lance datasets evaluating to False when empty; the check now properly distinguishes between None and empty datasets, ensuring all events are processed as intended.
@@ -103,7 +102,7 @@ Enhanced Performance and Improved Version Control
     * `wait_for_index`: Ensures complete data indexing with configurable `wait_timeout`.
 * **Performance Improvements**:
     * **Query Latency**: Eliminated full cache ring scans when nodes < replication factor.
-    * **Full-Text Search**: Introduced configurable FTS index prewarming to accelerate search operations. `enterprise`
+    * **Full-Text Search**: Introduced configurable FTS index prewarming to accelerate search operations. #enterprise
     * **Table Creation**: Leveraged cached database connections to reduce overhead—ideal for bulk table creation scenarios.
 * **Session-Level Object Store Caching**: Shared connection pools via weak references to object stores. Example: 100 tables → 1 S3 connection pool.
 * **IVF_PQ float64 support**: Expanded vector indexing to float64 datasets (previously limited to float16/32).
@@ -124,7 +123,7 @@ Enhanced Performance and Improved Version Control
     * Added scalar index support for small FixedSizeBinary columns (e.g., UUID). [\[lancedb#2297\]](https://github.com/lancedb/lancedb/pull/2297)
 * **Index**:
     * Fixed IVF_PQ index on vector columns with NaN/INFs. [\[lance#3648\]](https://github.com/lancedb/lance/pull/3648)
-    * Resolved GPU-based indexing crashes on non-contiguous arrays. [\[lance#3675\]](https://github.com/lancedb/lance/pull/3675) `enterprise`
+    * Resolved GPU-based indexing crashes on non-contiguous arrays. [\[lance#3675\]](https://github.com/lancedb/lance/pull/3675) #enterprise
     * Fixed B-tree index corruption during null remapping. [\[lance#3704\]](https://github.com/lancedb/lance/pull/3704)
 * **Cloud Dashboard**: Optimized chart rendering for better visibility in the Cloud usage dashboard.
 
@@ -140,7 +139,7 @@ Enhanced Full-Text Search and Advanced Query Debugging Features
     * `restore`: Revert to a specific prior version of your dataset and modify it from a verified, stable state.
 * **Scalar Indexing for Extended Data Types**: LanceDB now supports scalar indexing on UUID columns of FixedSizeBinary type.
 * **Binary vector support in TypeScript SDK**: LanceDB's TypeScript SDK now natively supports binary vector indexing and querying with production-grade efficiency.
-* **Support S3-compatible object store**: Extended LanceDB Enterprise deployment to work with S3-compatible object stores, such as Tigris, Minio and etc. `enterprise`
+* **Support S3-compatible object store**: Extended LanceDB Enterprise deployment to work with S3-compatible object stores, such as Tigris, Minio and etc. #enterprise
 
 ### Bug Fixes
 * **Improved Merge insert performance**: Enhanced the merge-insert operation to reduce error rates during upsert operations, improving data reliability.[\[lance#3603\]](https://github.com/lancedb/lance/pull/3603).
@@ -156,8 +155,8 @@ Multivector Search ready and Table data preview available in Cloud UI
 ### Features
 * **Multivector Search is now live**: documents can be stored as contextualized vector lists. Fast multi-vector queries are supported at scale, powered by our XTR optimization.
 * **`Drop_index` added to SDK**: users can remove unused or outdated indexes from your tables.
-* **Explore Your Data at a Glance**: preview sample data from any table with a single click. `lancedb-cloud`
-* **Search by Project/Table in Cloud UI**: allow users to quickly locate the desired project/table. `lancedb-cloud`
+* **Explore Your Data at a Glance**: preview sample data from any table with a single click. #lancedb-cloud
+* **Search by Project/Table in Cloud UI**: allow users to quickly locate the desired project/table. #lancedb-cloud
 
 ### Bug Fixes
 * **FTS stability fix**: Resolved a crash in Full Text Search (FTS) during flat-mode searches.
@@ -172,10 +171,10 @@ Support Hamming Distance and GPU based indexing ready
 
 ### Features
 * **Support Hamming distance and binary vector**: Added `hamming` as a distance metric (joining `l2`, `cosine`, `dot`) for binary vector similarity search.
-* **GPU-Accelerated IVF-PQ indexing**: Build IVF-PQ indexes 10x faster. `enterprise`
-* **AWS Graviton 4 & Google Axion build optimizations**: ARM64 SIMD acceleration cuts query costs. `enterprise`
+* **GPU-Accelerated IVF-PQ indexing**: Build IVF-PQ indexes 10x faster. #enterprise
+* **AWS Graviton 4 & Google Axion build optimizations**: ARM64 SIMD acceleration cuts query costs. #enterprise
 * **float16 Vector Index Supports**: reduce storage size while maintaining search quality.
-* **Self-Serve Cloud Onboarding**: new workflow-based UI guides users for smooth experience. `lancedb-cloud`
+* **Self-Serve Cloud Onboarding**: new workflow-based UI guides users for smooth experience. #lancedb-cloud
 
 ### Bug Fixes
 * `list_indices` and `index_stats` now always fetch the latest version of the table by default unless a specific version is explicitly provided.
@@ -189,9 +188,9 @@ Support Hamming Distance and GPU based indexing ready
 Performant SQL queries at scale and more cost-effective vector search
 
 ### Features
-* **Run SQL with massive datasets**: added Apache Arrow flight-SQL protocol to run SQL queries with billions of data and return in seconds. `enterprise`.
-* **Accelerate vector search**: added our Quantinized-IVF algorithm and other optimization techniques to improve QPS/core. `enterprise`
-* **Azure Stack Router Deployment**: route traffic efficiently to serve low query latency. `enterprise`
+* **Run SQL with massive datasets**: added Apache Arrow flight-SQL protocol to run SQL queries with billions of data and return in seconds. #enterprise
+* **Accelerate vector search**: added our Quantinized-IVF algorithm and other optimization techniques to improve QPS/core. #enterprise
+* **Azure Stack Router Deployment**: route traffic efficiently to serve low query latency. #enterprise
 * **Distance range filtering**: filter query results using `distance_range()` to return search results with a lowerbound, upperbound or a range [\[lance#3326\]](https://github.com/lancedb/lance/pull/3326).
 * **Full-Text Search(FTS) indexing options**: configure tokenizers, stopword lists and more at FTS index creation.
 

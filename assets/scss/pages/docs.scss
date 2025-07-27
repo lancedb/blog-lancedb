@@ -262,13 +262,18 @@ a.sidebar-divider {
   border-color: #ff734a;
 }
 
-.docs-article-content code {
-  background: none;
-  color: #ffe2c6;
-  font-family: inherit;
-  font-size: 1em;
-  padding: 0;
-  border-radius: 0;
+.docs-article-content code:not(pre code) {
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.25em 0.6em;
+  font-size: 0.9em;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  box-shadow: none;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  display: inline-block;
+  line-height: 1.4;
 }
 
 .docs-article-content blockquote {
@@ -555,12 +560,17 @@ a.sidebar-divider {
   }
   
   code {
-    background: linear-gradient(135deg, #23262b 0%, #2a2d32 100%);
-    color: #ffb38a;
-    padding: 0.2em 0.4em;
+    background: #2d3748;
+    color: #ffffff;
+    padding: 0.25em 0.6em;
     font-size: 0.9em;
-    border: 1px solid rgba(255, 115, 74, 0.2);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    box-shadow: none;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+    display: inline-block;
+    line-height: 1.4;
   }
   
   a {
