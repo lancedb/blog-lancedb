@@ -1,5 +1,6 @@
 ---
 title: AWS Bedrock Text Embedding Models
+sidebar_title: AWS
 ---
 
 AWS Bedrock supports multiple base models for generating text embeddings. You need to setup the AWS credentials to use this embedding function.

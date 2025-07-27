@@ -1,5 +1,6 @@
 ---
 title: VoyageAI Embedding Models
+sidebar_title: VoyageAI
 ---
 
 Voyage AI provides cutting-edge embedding and rerankers.

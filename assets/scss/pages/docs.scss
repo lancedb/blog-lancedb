@@ -136,6 +136,8 @@
   padding-bottom: 4rem;
   margin-top: 0;
   padding-top: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .docs-article-header h1 {
@@ -279,6 +281,11 @@
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   margin-top: 1.5rem;
+  
+  &--hidden {
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 .toc-container h3 {

@@ -1,4 +1,8 @@
-# DuckDB
+---
+title: "DuckDB"
+sidebar_title: "DuckDB"
+weight: 3
+---
 
 In Python, LanceDB tables can also be queried with [DuckDB](https://duckdb.org/), an in-process SQL OLAP database. This means you can write complex SQL queries to analyze your data in LanceDB.
 

@@ -1,5 +1,6 @@
 ---
 title: Instructor Embedding Models
+sidebar_title: Instructor
 ---
 
 [Instructor](https://instructor-embedding.github.io/) is an instruction-finetuned text embedding model that can generate text embeddings tailored to any task (e.g. classification, retrieval, clustering, text evaluation, etc.) and domains (e.g. science, finance, etc.) by simply providing the task instruction, without any finetuning.

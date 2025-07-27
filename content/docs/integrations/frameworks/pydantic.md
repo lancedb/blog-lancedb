@@ -1,4 +1,8 @@
-# Pydantic
+---
+title: "Pydantic"
+sidebar_title: "Pydantic"
+weight: 3
+---
 
 [Pydantic](https://docs.pydantic.dev/latest/) is a data validation library in Python.
 LanceDB integrates with Pydantic for schema inference, data ingestion, and query result casting.

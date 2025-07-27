@@ -1,5 +1,6 @@
 ---
 title: Ollama Embedding Models
+sidebar_title: Ollama
 ---
 
 Generate embeddings via the [ollama](https://github.com/ollama/ollama-python) python library. More details:

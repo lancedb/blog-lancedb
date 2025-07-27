@@ -1,5 +1,6 @@
 ---
 title: ImageBind Embedding Models
+sidebar_title: ImageBind
 ---
 
 We have support for [imagebind](https://github.com/facebookresearch/ImageBind) model embeddings. You can download our version of the packaged model via - `pip install imagebind-packaged==0.1.2`.

@@ -1,5 +1,6 @@
 ---
 title: OpenCLIP Embedding Models
+sidebar_title: OpenCLIP
 ---
 
 We support CLIP model embeddings using the open source alternative, [open-clip](https://github.com/mlfoundations/open_clip) which supports various customizations. It is registered as `open-clip` and supports the following customizations:

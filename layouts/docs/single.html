@@ -43,14 +43,14 @@
                     </div>
                 </article>
             </div>
-            {{ if and .TableOfContents (not .Params.hide_toc) }}
-            <aside class="docs-toc">
+            <aside class="docs-toc{{ if .Params.hide_toc }} docs-toc--hidden{{ end }}">
                 <div class="toc-container">
+                    {{ if not .Params.hide_toc }}
                     <h3>On this page:</h3>
                     {{ .TableOfContents }}
+                    {{ end }}
                 </div>
             </aside>
-            {{ end }}
         </div>
     </main>
     {{ partial "footer.html" . }}

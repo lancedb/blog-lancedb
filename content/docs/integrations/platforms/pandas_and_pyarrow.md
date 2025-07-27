@@ -1,4 +1,8 @@
-# Pandas and PyArrow
+---
+title: "Pandas and PyArrow"
+sidebar_title: "Pandas & PyArrow"
+weight: 1
+---
 
 Because Lance is built on top of [Apache Arrow](https://arrow.apache.org/),
 LanceDB is tightly integrated with the Python data ecosystem, including [Pandas](https://pandas.pydata.org/)

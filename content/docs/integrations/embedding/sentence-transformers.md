@@ -1,5 +1,6 @@
 ---
 title: Sentence Transformers Embedding Models
+sidebar_title: Sentence Transformers
 ---
 
 Allows you to set parameters when registering a `sentence-transformers` object.

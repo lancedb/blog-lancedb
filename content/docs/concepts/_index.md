@@ -1,23 +1,15 @@
 ---
 title: "Core Concepts"
+sidebar_title: "Core Concepts"
 description: "Core concepts and fundamental understanding of LanceDB"
 weight: 5
+hide_toc: true
 ---
 
-# Core Concepts
-
-This section covers the fundamental concepts and principles that underpin LanceDB's architecture and functionality.
-
-## Overview
-
-| Concept | Description | Link |
-|---------|-------------|------|
-| **Tables** | Understanding LanceDB tables, their structure, and how they store and organize data | [Tables](/docs/concepts/tables/) |
-| **Search** | Vector search capabilities, similarity search, and retrieval mechanisms | [Search](/docs/concepts/search/) |
-| **Indexing** | Index types, creation, and optimization for efficient data retrieval | [Indexing](/docs/concepts/indexing/) |
-| **Storage** | Storage formats, file organization, and data persistence strategies | [Storage](/docs/concepts/storage/) |
-| **Embedding** | Vector embeddings, model integration, and embedding workflows | [Embedding](/docs/concepts/embedding/) |
-
-## Getting Started
-
-Start with the [Tables](/docs/concepts/tables/) concept to understand the fundamental data structure, then explore [Search](/docs/concepts/search/) and [Indexing](/docs/concepts/indexing/) to learn about retrieval mechanisms. The [Storage](/docs/concepts/storage/) section covers how data is persisted, while [Embedding](/docs/concepts/embedding/) explains vector representation and model integration.
+| Concept | Description |
+|:--------|:------------|
+| [Tables](/docs/concepts/tables/) | Understanding LanceDB tables, their structure, and data organization |
+| [Search](/docs/concepts/search/) | Vector search capabilities, similarity search, and retrieval mechanisms |
+| [Indexing](/docs/concepts/indexing/) | Index types, creation, and optimization for efficient data retrieval |
+| [Storage](/docs/concepts/storage/) | Storage formats, file organization, and data persistence strategies |
+| [Embedding](/docs/concepts/embedding/) | Vector embeddings, model integration, and embedding workflows |

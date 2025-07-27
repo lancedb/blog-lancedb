@@ -1,5 +1,6 @@
 ---
 title: Jina Embedding Models
+sidebar_title: Jina
 ---
 
 ## Text Embedding Models

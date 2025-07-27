@@ -1,5 +1,6 @@
 ---
 title: OpenAI Embedding Models
+sidebar_title: OpenAI
 ---
 
 LanceDB registers the OpenAI embeddings function in the registry by default, as `openai`. Below are the parameters that you can customize when creating the instances:

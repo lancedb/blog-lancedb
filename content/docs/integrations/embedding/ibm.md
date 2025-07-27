@@ -1,5 +1,6 @@
 ---
 title: IBM WatsonX AI Embedding Models
+sidebar_title: IBM WatsonX
 ---
 
 Generate text embeddings using IBM's watsonx.ai platform.
