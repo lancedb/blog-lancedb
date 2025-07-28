@@ -11,11 +11,11 @@ The Python SDK uses our native FTS implementation by default, you need to pass `
 {{< /admonition >}}
 
 
-## **Basic Usage**
+## Basic Usage
 
 Consider that we have a LanceDB table named `my_table`, whose string column `text` we want to index and query via keyword search, the FTS index must be created before you can search via keywords.
 
-### **1. Open Table**
+### 1. Open Table
 
 First, open or create the table you want to search:
 
@@ -57,7 +57,7 @@ let tbl = db
     .await?;
 {{< /code >}}
 
-### **2. Construct FTS Index**
+### 2. Construct FTS Index
 
 Create a full-text search index on your text column:
 
@@ -80,7 +80,7 @@ tbl
     .await?;
 {{< /code >}}
 
-### **3. Full Text Search**
+### 3. Full Text Search
 
 Perform the search and retrieve results:
 
@@ -118,9 +118,9 @@ If you want to specify which columns to search us `fts_columns="text"`
 LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
 {{< /admonition >}}
 
-## **Advanced Usage**
+## Advanced Usage
 
-### **Tokenize Table Data**
+### Tokenize Table Data
 
 By default, the text is tokenized by splitting on punctuation and whitespaces, and would filter out words that are longer than 40 characters. All words are converted to lowercase.
 
@@ -138,7 +138,7 @@ For example, for language with accents, you can specify the tokenizer to use `as
 
 {{< code language="python" source="examples/py/test_search.py" id="fts_config_folding" />}}
 
-### **Filtering Options**
+### Filtering Options
 
 LanceDB full text search supports to filter the search results by a condition, both pre-filtering and post-filtering are supported.
 
@@ -195,7 +195,7 @@ table
     .await?;
 {{< /code >}}
 
-### **Phrase vs. Terms Queries**
+### Phrase vs. Terms Queries
 
 {{< admonition "warning" "Warn" >}}
 Lance-based FTS doesn't support queries using boolean operators `OR`, `AND`.
@@ -211,7 +211,7 @@ To search for a phrase, the index must be created with `with_position=True` and 
 
 This will allow you to search for phrases, but it will also significantly increase the index size and indexing time.
 
-### **Fuzzy Search**
+### Fuzzy Search
 
 Fuzzy search allows you to find matches even when the search terms contain typos or slight variations. 
 LanceDB uses the classic [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) 
@@ -225,9 +225,9 @@ to find similar terms within a specified edit distance.
 Let's create a sample table and build full-text search indices to demonstrate 
 fuzzy search capabilities and relevance boosting features.
 
-## **Example: Fuzzy Search**
+## Example: Fuzzy Search
 
-### **1. Generate Data**
+### 1. Generate Data
 
 First, let's create a table with sample text data for testing fuzzy search:
 
@@ -311,7 +311,7 @@ const text2 = Array.from({ length: n }, () => generateText(text2Nouns));
 const count = Array.from({ length: n }, () => Math.floor(Math.random() * 10000) + 1);
 {{< /code >}}
 
-### **2. Create Table**
+### 2. Create Table
 
 {{< code language="python" >}}
 # Create table with sample data
@@ -343,7 +343,7 @@ const data = makeArrowTable(
 const table = await db.createTable(tableName, data, { mode: "overwrite" });
 {{< /code >}}
 
-### **3. Construct FTS Index**
+### 3. Construct FTS Index
 
 Create a full-text search index on the first text column:
 
@@ -373,11 +373,11 @@ await table.createIndex("text2", { config: Index.fts() });
 await waitForIndex(table, "text2_idx");
 {{< /code >}}
 
-### **4. Basic and Fuzzy Search**
+### 4. Basic and Fuzzy Search
 
 Now we can perform basic, fuzzy, and prefix match searches:
 
-#### **Basic Exact Search**
+#### Basic Exact Search
 
 {{< code language="python" >}}
 from lancedb.query import MatchQuery
@@ -402,7 +402,7 @@ const basicMatchResults = await table.query()
     .toArray();
 {{< /code >}}
 
-#### **Fuzzy Search with Typos**
+#### Fuzzy Search with Typos
 
 {{< code language="python" >}}
 # Fuzzy match (allows typos)
@@ -425,7 +425,7 @@ const fuzzyResults = await table.query()
     .toArray();
 {{< /code >}}
 
-#### **Prefix based Match**
+#### Prefix based Match
 
 Prefix-based match allows you to search for documents containing words that start with a specific prefix. 
 
@@ -450,7 +450,7 @@ const fuzzyResults = await table.query()
     .toArray();
 {{< /code >}}
 
-### **Phrase Match**
+### Phrase Match
 
 Phrase matching enables you to search for exact sequences of words. Unlike regular text search 
 which matches individual terms independently, phrase matching requires words to appear in the 
@@ -487,7 +487,7 @@ const phraseResults = await table.query()
   .toArray();
 {{< /code >}}
 
-#### **Flexible Phrase Match**
+#### Flexible Phrase Match
 To provide more flexible phrase matching, LanceDB supports the `slop` parameter. This allows you to match phrases where the terms appear close to each other, even if they are not directly adjacent or in the exact order, as long as they are within the specified `slop` value.
 
 For example, the phrase query "puppy merrily" would not return any results by default. However, if you set `slop=1`, it will match phrases like "puppy jumps merrily", "puppy runs merrily", and similar variations where one word appears between "puppy" and "merrily".
@@ -518,7 +518,7 @@ const phraseResults = await table.query()
 {{< /code >}}
 
 
-### **Search with Boosting**
+### Search with Boosting
 
 Boosting allows you to control the relative importance of different search terms or fields 
 in your queries. This feature is particularly useful when you need to:
@@ -622,10 +622,10 @@ const multiMatchBoostingResults = await table.query()
 - For complex queries, use SQL to combine FTS with other filter conditions
 {{< /admonition >}}
 
-### **Boolean Queries**
+### Boolean Queries
 LanceDB supports boolean logic in full-text search, allowing you to combine multiple queries using `and` and `or` operators. This is useful when you want to match documents that satisfy multiple conditions (intersection) or at least one of several conditions (union).
 
-#### **Combining Two Match Queries**
+#### Combining Two Match Queries
 
 In Python, you can combine two MatchQuery objects using either the `and` function or the `&` operator (e.g., `MatchQuery("puppy", "text") and MatchQuery("merrily", "text")`); both methods are supported and yield the same result. Similarly, you can use either the `or` function or the `|` operator to perform an or query. 
 
@@ -706,7 +706,7 @@ console.log(shouldResults);
 {{< /admonition >}}
 
 
-## **Full-Text Search on Array Fields**
+## Full-Text Search on Array Fields
 
 LanceDB supports full-text search on string array columns, enabling efficient keyword-based search across multiple values within a single field (e.g., tags, keywords).
 
