@@ -8,7 +8,7 @@ form:
       name: first_name
       type: text
       placeholder: Your First name
-      requared: false
+      requared: true
       half: true
     - label: Last name
       name: last_name
@@ -22,7 +22,7 @@ form:
       placeholder: Your Company name
       requared: true
       half: false
-    - label: Your e-mail
+    - label: Email
       name: email
       type: email
       placeholder: Your Email
@@ -32,7 +32,7 @@ form:
       name: message
       type: textarea
       placeholder: Your text
-      requared: false
+      requared: true
       half: false
   submit_action: //
   submit_button:

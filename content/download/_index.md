@@ -54,7 +54,7 @@ download:
     form_info: By submitting, you agree to our [Privacy Policy](#) and allow LanceDB to store and process the information above to provide you with the content requested.
 compliance: 
   title: Enterprise-Grade Compliance
-  description: Safety and security guaranteed for your data, every time.
+  description: Safety and security guaranteed for your data.
   cards:
     - text: SOC2 Type II
       icon: aicpa.svg

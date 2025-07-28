@@ -1,83 +1,120 @@
+// This file is now the single source of truth for code tab shortcode styles.
+// It is imported by both the blog and docs main.scss for consistent appearance.
+// No changes needed if already imported in both places.
+// (If you want to force a re-import, ensure @import 'shortcodes/code-tab'; is present in both main.scss files.)
+
 .code-tab {
-  border: 1px solid;
-  border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
-  border-image-slice: 1;
-  background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
-
-  border-radius: 4px;
+  background: #202124;
+  border-radius: 14px;
   overflow: hidden;
-
-  .highlight:has(code) {
+  padding: 0.1em 0.1em 0.2em 0.1em;
+  margin: 0.5em 0;
+  box-shadow: none;
     border: none;
-    background: transparent;
-  }
 }
 
 .code-tab__tabs-wrap {
   overflow-x: auto;
-  margin-bottom: 20px;
+  margin-bottom: 0.5em;
+  background: transparent;
 }
 
 .code-tab__tabs {
-  position: relative;
   display: flex;
   flex-wrap: nowrap;
-
-  @include mq($md) {
-    justify-content: stretch;
-  }
+  border-bottom: 1px solid #292a2d;
+  background: transparent;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
 }
 
 .code-tab__tab {
   display: flex;
   align-items: center;
-  gap: 8px;
-
-  padding: 12px 20px;
-
-  @include font(btn_mob, 21, 400);
-
-  transition: all .3s ease-in-out;
+  background: transparent;
+  color: #bfc2c7;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.97em;
+  font-weight: 400;
+  padding: 0.5em 1.1em 0.4em 1.1em;
+  margin: 0 0.1em 0 0;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
   cursor: pointer;
-
-  @include mq($md) {
-    padding: 14px 32px;
-    @include font(btn, 24, 400);  
-    flex: 1 1 0px;
-    justify-content: center;
-  }
-
-  background-color: palette(primary-dark, 600);
-  color: palette(primary-offwhite);
+  position: relative;
+  outline: none;
+  gap: 0.4em;
 
   &:hover {
-    background-color: palette(primary-dark, 500);
-  }
-
-  &:active,
-  &:focus,
-  &.active {
-   background-color: palette(primary-grad-dark, start);
+    color: #ff734a;
+    background: #23262b;
   }
 
   &.active {
-    pointer-events: none;
+    color: #ff734a;
+    font-weight: 500;
+    background: #23262b;
+    z-index: 1;
+  }
+
+  &.active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: -1px;
+    height: 2px;
+    background: #ff734a;
+    border-radius: 1px 1px 0 0;
   }
 }
 
 .code-tab__icon {
-  width: 20px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
   flex-shrink: 0;
-
+  margin-right: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   svg {
     width: 100%;
     height: 100%;
-    transition: all .3s ease-in-out;
+    transition: all .2s;
+    display: block;
+  }
+}
+
+.code-tab__content {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: block;
   }
 
-  @include mq($md) {
-    width: 24px;
-    height: 24px;
-  }
+.code-tab__content pre {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0.5em 0.7em !important;
+}
+
+.code-tab__content .highlight {
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.code-tab__tab[data-lang-switch="rust"] {
+  gap: 0.2em;
+}
+.code-tab__tab[data-lang-switch="rust"] .code-tab__icon {
+  width: 1.4em;
+  height: 1.4em;
+  margin-right: 0.15em;
 }

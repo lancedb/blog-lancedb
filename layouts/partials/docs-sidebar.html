@@ -1,0 +1,4 @@
+{{ $section := .Site.GetPage "section" "docs" }}
+<nav class="sidebar-nav">
+  {{ partial "docs-sidebar-recursive.html" (dict "Pages" $section.Pages "current" .) }}
+</nav> 

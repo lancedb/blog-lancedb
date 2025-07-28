@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} - Documentation - {{ .Site.Title }}</title>
+    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+<body>
+    {{ partial "header.html" . }}
+    <div class="docs-orange-divider"></div>
+    <main class="docs-main">
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                {{ partial "docs-sidebar.html" . }}
+            </aside>
+            <div class="docs-content">
+                <article class="docs-article">
+                    <header class="docs-article-header">
+                        <nav class="docs-breadcrumbs">
+                          <a href="/" aria-label="Home" class="breadcrumb-home">
+                            <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M2 10L10 3L18 10" stroke="#ff734a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10V17H8V13H12V17H16V10" stroke="#ff734a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </a>
+                          {{ $ancestors := .CurrentSection.Ancestors.Reverse }}
+                          {{ range $i, $a := $ancestors }}
+                            {{ if and (in $a.RelPermalink "/docs/") (ne $a.Title "Docs") }}
+                              <span class="breadcrumb-sep">/</span>
+                              <a href="{{ $a.RelPermalink }}">{{ $a.Params.sidebar_title | default $a.Title }}</a>
+                            {{ end }}
+                          {{ end }}
+                          <span class="breadcrumb-sep">/</span>
+                          <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
+                        </nav>
+                        <h1>{{ .Title }}</h1>
+                    </header>
+                    <div class="docs-article-content">
+                        {{ .Content }}
+                    </div>
+                </article>
+            </div>
+            <aside class="docs-toc{{ if .Params.hide_toc }} docs-toc--hidden{{ end }}">
+                <div class="toc-container">
+                    {{ if not .Params.hide_toc }}
+                    <h3>On this page</h3>
+                    {{ .TableOfContents }}
+                    {{ end }}
+                </div>
+            </aside>
+        </div>
+    </main>
+    {{ partial "footer.html" . }}
+    {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js" | fingerprint }}
+    <script src="{{ $codeTabJS.RelPermalink }}"></script>
+</body>
+</html> 

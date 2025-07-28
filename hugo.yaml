@@ -54,7 +54,7 @@ params:
     top: 
       link: 
         text: Why Multimodal Data Needs a Better Lakehouse? — Download the Research Study
-        url: /download
+        url: /download/
         icon: true
     socials_title: Social media
     socials:
