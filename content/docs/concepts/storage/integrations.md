@@ -10,104 +10,45 @@ When using LanceDB OSS, you can choose where to store your data. The tradeoffs b
 
 LanceDB OSS supports object stores such as AWS S3 (and compatible stores), Azure Blob Store, and Google Cloud Storage. Which object store to use is determined by the URI scheme of the dataset path. `s3://` is used for AWS S3, `az://` is used for Azure Blob Storage, and `gs://` is used for Google Cloud Storage. These URIs are passed to the `connect` function:
 
-=== "Python"
 
-    AWS S3:
-    === "Sync API"
+### Basic Connection Examples
 
-        ```python
-        import lancedb
-        db = lancedb.connect("s3://bucket/path")
-        ```
-    === "Async API"
+#### AWS S3
 
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async("s3://bucket/path")
-        ```
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect("s3://bucket/path")
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("s3://bucket/path");
+{{< /code >}}
 
-    Google Cloud Storage:
+#### Google Cloud Storage
 
-    === "Sync API"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect("gs://bucket/path")
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("gs://bucket/path");
+{{< /code >}}
 
-        ```python
-        import lancedb
-        db = lancedb.connect("gs://bucket/path")
-        ```
-    === "Async API"
+#### Azure Blob Storage
 
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async("gs://bucket/path")
-        ```
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect("az://bucket/path")
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("az://bucket/path");
+{{< /code >}}
 
-    Azure Blob Storage:
+Note that for Azure, storage credentials must be configured. See [Azure Blob Storage](#azure-blob-storage) for more details.
 
-    <!-- skip-test -->
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect("az://bucket/path")
-        ```
-    <!-- skip-test -->
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async("az://bucket/path")
-        ```
-    Note that for Azure, storage credentials must be configured. See [below](#azure-blob-storage) for more details.
-
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        AWS S3:
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect("s3://bucket/path");
-        ```
-
-        Google Cloud Storage:
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect("gs://bucket/path");
-        ```
-
-        Azure Blob Storage:
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect("az://bucket/path");
-        ```
-
-
-    === "vectordb (deprecated)"
-
-        AWS S3:
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect("s3://bucket/path");
-        ```
-
-        Google Cloud Storage:
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect("gs://bucket/path");
-        ```
-
-        Azure Blob Storage:
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect("az://bucket/path");
-        ```
+### Configuration Options
 
 In most cases, when running in the respective cloud and permissions are set up correctly, no additional configuration is required. When running outside of the respective cloud, authentication credentials must be provided. Credentials and other configuration options can be set in two ways: first, by setting environment variables. And second, by passing a `storage_options` object to the `connect` function. For example, to increase the request timeout to 60 seconds, you can set the `TIMEOUT` environment variable to `60s`:
 
@@ -117,117 +58,55 @@ export TIMEOUT=60s
 
 If you only want this to apply to one particular connection, you can pass the `storage_options` argument when opening the connection:
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3://bucket/path",
+    storage_options={"timeout": "60s"}
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
 
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3://bucket/path",
-            storage_options={"timeout": "60s"}
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3://bucket/path",
-            storage_options={"timeout": "60s"}
-        )
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-
-        const db = await lancedb.connect("s3://bucket/path", {
-            storageOptions: {timeout: "60s"}
-        });
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect("s3://bucket/path", {
-            storageOptions: {timeout: "60s"}
-        });
-        ```
+const db = await lancedb.connect("s3://bucket/path", {
+    storageOptions: {timeout: "60s"}
+});
+{{< /code >}}
 
 Getting even more specific, you can set the `timeout` for only a particular table:
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect("s3://bucket/path")
+table = db.create_table(
+    "table",
+    [{"a": 1, "b": 2}],
+    storage_options={"timeout": "60s"}
+)
+{{< /code >}}
 
-    <!-- skip-test -->
-    === "Sync API"
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("s3://bucket/path");
+const table = db.createTable(
+    "table",
+    [{ a: 1, b: 2}],
+    {storageOptions: {timeout: "60s"}}
+);
+{{< /code >}}
 
-        ```python
-        import lancedb
-        db = lancedb.connect("s3://bucket/path")
-        table = db.create_table(
-            "table",
-            [{"a": 1, "b": 2}],
-            storage_options={"timeout": "60s"}
-        )
-        ```
-    <!-- skip-test -->
-    === "Async API"
+{{< admonition info "Storage option casing" >}}
+The storage option keys are case-insensitive. So `connect_timeout` and `CONNECT_TIMEOUT` are the same setting. Usually lowercase is used in the `storage_options` argument and uppercase is used for environment variables. In the `lancedb` Node package, the keys can also be provided in `camelCase` capitalization. For example, `connectTimeout` is equivalent to `connect_timeout`.
+{{< /admonition >}}
 
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async("s3://bucket/path")
-        async_table = await async_db.create_table(
-            "table",
-            [{"a": 1, "b": 2}],
-            storage_options={"timeout": "60s"}
-        )
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        <!-- skip-test -->
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect("s3://bucket/path");
-        const table = db.createTable(
-            "table",
-            [{ a: 1, b: 2}],
-            {storageOptions: {timeout: "60s"}}
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        <!-- skip-test -->
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect("s3://bucket/path");
-        const table = db.createTable(
-            "table",
-            [{ a: 1, b: 2}],
-            {storageOptions: {timeout: "60s"}}
-        );
-        ```
-
-!!! info "Storage option casing"
-
-    The storage option keys are case-insensitive. So `connect_timeout` and `CONNECT_TIMEOUT` are the same setting. Usually lowercase is used in the `storage_options` argument and uppercase is used for environment variables. In the `lancedb` Node package, the keys can also be provided in `camelCase` capitalization. For example, `connectTimeout` is equivalent to `connect_timeout`.
-
-### General configuration
+#### General Configuration Options
 
 There are several options that can be set for all object stores, mostly related to network client configuration.
 
 <!-- from here: https://docs.rs/object_store/latest/object_store/enum.ClientConfigKey.html -->
 
 | Key                        | Description                                                                                      |
-|----------------------------|--------------------------------------------------------------------------------------------------|
+|:---------------------------|:-------------------------------------------------------------------------------------------------|
 | `allow_http`               | Allow non-TLS, i.e. non-HTTPS connections. Default: `False`.                                      |
 | `allow_invalid_certificates`| Skip certificate validation on HTTPS connections. Default: `False`.                               |
 | `connect_timeout`          | Timeout for only the connect phase of a Client. Default: `5s`.                                    |
@@ -237,80 +116,47 @@ There are several options that can be set for all object stores, mostly related 
 | `proxy_ca_certificate`     | PEM-formatted CA certificate for proxy connections.                                                |
 | `proxy_excludes`           | List of hosts that bypass the proxy. This is a comma-separated list of domains and IP masks. Any subdomain of the provided domain will be bypassed. For example, `example.com, 192.168.1.0/24` would bypass `https://api.example.com`, `https://www.example.com`, and any IP in the range `192.168.1.0/24`. |
 
-### **AWS S3**
+## Cloud Storage Providers
+
+### AWS S3
+
+![AWS S3 Configuration](/assets/docs/concepts/storage/aws.jpg)
 
 To configure credentials for AWS S3, you can use the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` keys. Region can also be set, but it is not mandatory when using AWS.
 These can be set as environment variables or passed in the `storage_options` parameter:
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3://bucket/path",
+    storage_options={
+        "aws_access_key_id": "my-access-key",
+        "aws_secret_access_key": "my-secret-key",
+        "aws_session_token": "my-session-token",
+    }
+)
+{{< /code >}}
 
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3://bucket/path",
-            storage_options={
-                "aws_access_key_id": "my-access-key",
-                "aws_secret_access_key": "my-secret-key",
-                "aws_session_token": "my-session-token",
-            }
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3://bucket/path",
-            storage_options={
-                "aws_access_key_id": "my-access-key",
-                "aws_secret_access_key": "my-secret-key",
-                "aws_session_token": "my-session-token",
-            }
-        )
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect(
-            "s3://bucket/path",
-            {
-                storageOptions: {
-                    awsAccessKeyId: "my-access-key",
-                    awsSecretAccessKey: "my-secret-key",
-                    awsSessionToken: "my-session-token",
-                }
-            }
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect(
-            "s3://bucket/path",
-            {
-                storageOptions: {
-                    awsAccessKeyId: "my-access-key",
-                    awsSecretAccessKey: "my-secret-key",
-                    awsSessionToken: "my-session-token",
-                }
-            }
-        );
-        ```
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "s3://bucket/path",
+    {
+        storageOptions: {
+            awsAccessKeyId: "my-access-key",
+            awsSecretAccessKey: "my-secret-key",
+            awsSessionToken: "my-session-token",
+        }
+    }
+);
+{{< /code >}}
 
 Alternatively, if you are using AWS SSO, you can use the `AWS_PROFILE` and `AWS_DEFAULT_REGION` environment variables.
 
 The following keys can be used as both environment variables or keys in the `storage_options` parameter:
 
 | Key                                | Description                                                                                          |
-|------------------------------------|------------------------------------------------------------------------------------------------------|
+|:-----------------------------------|:----------------------------------------------------------------------------------------------------|
 | `aws_region` / `region`             | The AWS region the bucket is in. This can be automatically detected when using AWS S3, but must be specified for S3-compatible stores. |
 | `aws_access_key_id` / `access_key_id` | The AWS access key ID to use.                                                                       |
 | `aws_secret_access_key` / `secret_access_key` | The AWS secret access key to use.                                                               |
@@ -322,13 +168,13 @@ The following keys can be used as both environment variables or keys in the `sto
 | `aws_sse_kms_key_id`                | The KMS key ID to use for server-side encryption. If set, `aws_server_side_encryption` must be `"aws:kms"` or `"aws:kms:dsse"`. |
 | `aws_sse_bucket_key_enabled`        | Whether to use bucket keys for server-side encryption.                                               |
 
-!!! tip "Automatic cleanup for failed writes"
+{{< admonition tip "Automatic cleanup for failed writes" >}}
+LanceDB uses [multi-part uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) when writing data to S3 in order to maximize write speed. LanceDB will abort these uploads when it shuts down gracefully, such as when cancelled by keyboard interrupt. However, in the rare case that LanceDB crashes, it is possible that some data will be left lingering in your account. To cleanup this data, we recommend (as AWS themselves do) that you setup a lifecycle rule to delete in-progress uploads after 7 days. See the AWS guide:
 
-    LanceDB uses [multi-part uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) when writing data to S3 in order to maximize write speed. LanceDB will abort these uploads when it shuts down gracefully, such as when cancelled by keyboard interrupt. However, in the rare case that LanceDB crashes, it is possible that some data will be left lingering in your account. To cleanup this data, we recommend (as AWS themselves do) that you setup a lifecycle rule to delete in-progress uploads after 7 days. See the AWS guide:
+**[Configuring a bucket lifecycle configuration to delete incomplete multipart uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpu-abort-incomplete-mpu-lifecycle-config.html)**
+{{< /admonition >}}
 
-    **[Configuring a bucket lifecycle configuration to delete incomplete multipart uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpu-abort-incomplete-mpu-lifecycle-config.html)**
-
-#### **AWS IAM Permissions**
+#### AWS IAM Permissions
 
 If a bucket is private, then an IAM policy must be specified to allow access to it. For many development scenarios, using broad permissions such as a PowerUser account is more than sufficient for working with LanceDB. However, in many production scenarios, you may wish to have as narrow as possible permissions.
 
@@ -411,34 +257,19 @@ different processes. To enable this feature, you must modify your connection
 URI to use the `s3+ddb` scheme and add a query parameter `ddbTableName` with the
 name of the table to use.
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3+ddb://bucket/path?ddbTableName=my-dynamodb-table",
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+const lancedb = require("lancedb");
 
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3+ddb://bucket/path?ddbTableName=my-dynamodb-table",
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3+ddb://bucket/path?ddbTableName=my-dynamodb-table",
-        )    
-        ```
-
-=== "JavaScript"
-
-    ```javascript
-    const lancedb = require("lancedb");
-
-    const db = await lancedb.connect(
-        "s3+ddb://bucket/path?ddbTableName=my-dynamodb-table",
-    );
-    ```
+const db = await lancedb.connect(
+    "s3+ddb://bucket/path?ddbTableName=my-dynamodb-table",
+);
+{{< /code >}}
 
 The DynamoDB table must be created with the following schema:
 
@@ -447,141 +278,98 @@ The DynamoDB table must be created with the following schema:
 
 You can create this programmatically with:
 
-=== "Python"
+{{< code language="python" >}}
+import boto3
 
-    <!-- skip-test -->
-    ```python
-    import boto3
+dynamodb = boto3.client("dynamodb")
+table = dynamodb.create_table(
+    TableName=table_name,
+    KeySchema=[
+        {"AttributeName": "base_uri", "KeyType": "HASH"},
+        {"AttributeName": "version", "KeyType": "RANGE"},
+    ],
+    AttributeDefinitions=[
+        {"AttributeName": "base_uri", "AttributeType": "S"},
+        {"AttributeName": "version", "AttributeType": "N"},
+    ],
+    ProvisionedThroughput={"ReadCapacityUnits": 1, "WriteCapacityUnits": 1},
+)
+{{< /code >}}
 
-    dynamodb = boto3.client("dynamodb")
-    table = dynamodb.create_table(
-        TableName=table_name,
-        KeySchema=[
-            {"AttributeName": "base_uri", "KeyType": "HASH"},
-            {"AttributeName": "version", "KeyType": "RANGE"},
-        ],
-        AttributeDefinitions=[
-            {"AttributeName": "base_uri", "AttributeType": "S"},
-            {"AttributeName": "version", "AttributeType": "N"},
-        ],
-        ProvisionedThroughput={"ReadCapacityUnits": 1, "WriteCapacityUnits": 1},
-    )
-    ```
+{{< code language="typescript" >}}
+import {
+    CreateTableCommand,
+    DynamoDBClient,
+} from "@aws-sdk/client-dynamodb";
 
-=== "JavaScript"
-
-    <!-- skip-test -->
-    ```javascript
-    import {
-      CreateTableCommand,
-      DynamoDBClient,
-    } from "@aws-sdk/client-dynamodb";
-
-    const dynamodb = new DynamoDBClient({
-      region: CONFIG.awsRegion,
-      credentials: {
-        accessKeyId: CONFIG.awsAccessKeyId,
-        secretAccessKey: CONFIG.awsSecretAccessKey,
-      },
-      endpoint: CONFIG.awsEndpoint,
-    });
-    const command = new CreateTableCommand({
-      TableName: table_name,
-      AttributeDefinitions: [
-        {
-          AttributeName: "base_uri",
-          AttributeType: "S",
-        },
-        {
-          AttributeName: "version",
-          AttributeType: "N",
-        },
-      ],
-      KeySchema: [
-        { AttributeName: "base_uri", KeyType: "HASH" },
-        { AttributeName: "version", KeyType: "RANGE" },
-      ],
-      ProvisionedThroughput: {
-        ReadCapacityUnits: 1,
-        WriteCapacityUnits: 1,
-      },
-    });
-    await client.send(command);
-    ```
-
+const dynamodb = new DynamoDBClient({
+    region: CONFIG.awsRegion,
+    credentials: {
+    accessKeyId: CONFIG.awsAccessKeyId,
+    secretAccessKey: CONFIG.awsSecretAccessKey,
+    },
+    endpoint: CONFIG.awsEndpoint,
+});
+const command = new CreateTableCommand({
+    TableName: table_name,
+    AttributeDefinitions: [
+    {
+        AttributeName: "base_uri",
+        AttributeType: "S",
+    },
+    {
+        AttributeName: "version",
+        AttributeType: "N",
+    },
+    ],
+    KeySchema: [
+    { AttributeName: "base_uri", KeyType: "HASH" },
+    { AttributeName: "version", KeyType: "RANGE" },
+    ],
+    ProvisionedThroughput: {
+    ReadCapacityUnits: 1,
+    WriteCapacityUnits: 1,
+    },
+});
+await client.send(command);
+{{< /code >}}
 
 #### S3-compatible stores
 
 LanceDB can also connect to S3-compatible stores, such as MinIO. To do so, you must specify both region and endpoint:
 
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3://bucket/path",
-            storage_options={
-                "region": "us-east-1",
-                "endpoint": "http://minio:9000",
-            }
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3://bucket/path",
-            storage_options={
-                "region": "us-east-1",
-                "endpoint": "http://minio:9000",
-            }
-        )    
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect(
-            "s3://bucket/path",
-            {
-                storageOptions: {
-                    region: "us-east-1",
-                    endpoint: "http://minio:9000",
-                }
-            }
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect(
-            "s3://bucket/path",
-            {
-                storageOptions: {
-                    region: "us-east-1",
-                    endpoint: "http://minio:9000",
-                }
-            }
-        );
-        ```
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3://bucket/path",
+    storage_options={
+        "region": "us-east-1",
+        "endpoint": "http://minio:9000",
+    }
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "s3://bucket/path",
+    {
+        storageOptions: {
+            region: "us-east-1",
+            endpoint: "http://minio:9000",
+        }
+    }
+);
+{{< /code >}}
 
 This can also be done with the ``AWS_ENDPOINT`` and ``AWS_DEFAULT_REGION`` environment variables.
 
-!!! tip "Local servers"
-
-    For local development, the server often has a `http` endpoint rather than a
-    secure `https` endpoint. In this case, you must also set the `ALLOW_HTTP`
-    environment variable to `true` to allow non-TLS connections, or pass the
-    storage option `allow_http` as `true`. If you do not do this, you will get
-    an error like `URL scheme is not allowed`.
+{{< admonition tip "Local servers" >}}
+For local development, the server often has a `http` endpoint rather than a
+secure `https` endpoint. In this case, you must also set the `ALLOW_HTTP`
+environment variable to `true` to allow non-TLS connections, or pass the
+storage option `allow_http` as `true`. If you do not do this, you will get
+an error like `URL scheme is not allowed`.
+{{< /admonition >}}
 
 #### S3 Express
 
@@ -589,210 +377,105 @@ LanceDB supports [S3 Express One Zone](https://aws.amazon.com/s3/storage-classes
 
 To configure LanceDB to use an S3 Express endpoint, you must set the storage option `s3_express`. The bucket name in your table URI should **include the suffix**.
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3://my-bucket--use1-az4--x-s3/path",
+    storage_options={
+        "region": "us-east-1",
+        "s3_express": "true",
+    }
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "s3://my-bucket--use1-az4--x-s3/path",
+    {
+        storageOptions: {
+            region: "us-east-1",
+            s3Express: "true",
+        }
+    }
+);
+{{< /code >}}
 
-    === "Sync API"
+### Google Cloud Storage
 
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3://my-bucket--use1-az4--x-s3/path",
-            storage_options={
-                "region": "us-east-1",
-                "s3_express": "true",
-            }
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3://my-bucket--use1-az4--x-s3/path",
-            storage_options={
-                "region": "us-east-1",
-                "s3_express": "true",
-            }
-        )    
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect(
-            "s3://my-bucket--use1-az4--x-s3/path",
-            {
-                storageOptions: {
-                    region: "us-east-1",
-                    s3Express: "true",
-                }
-            }
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect(
-            "s3://my-bucket--use1-az4--x-s3/path",
-            {
-                storageOptions: {
-                    region: "us-east-1",
-                    s3Express: "true",
-                }
-            }
-        );
-        ```
-
-### **Google Cloud Storage**
+![Google Cloud Storage Configuration](/assets/docs/concepts/storage/gcp.jpg)
 
 GCS credentials are configured by setting the `GOOGLE_SERVICE_ACCOUNT` environment variable to the path of a JSON file containing the service account credentials. Alternatively, you can pass the path to the JSON file in the `storage_options`:
 
-=== "Python"
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "gs://my-bucket/my-database",
+    storage_options={
+        "service_account": "path/to/service-account.json",
+    }
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "gs://my-bucket/my-database",
+    {
+        storageOptions: {
+            serviceAccount: "path/to/service-account.json",
+        }
+    }
+);
+{{< /code >}}
 
-    <!-- skip-test -->
-    === "Sync API"
 
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "gs://my-bucket/my-database",
-            storage_options={
-                "service_account": "path/to/service-account.json",
-            }
-        )
-        ```
-    <!-- skip-test -->
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "gs://my-bucket/my-database",
-            storage_options={
-                "service_account": "path/to/service-account.json",
-            }
-        )    
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect(
-            "gs://my-bucket/my-database",
-            {
-                storageOptions: {
-                    serviceAccount: "path/to/service-account.json",
-                }
-            }
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect(
-            "gs://my-bucket/my-database",
-            {
-                storageOptions: {
-                    serviceAccount: "path/to/service-account.json",
-                }
-            }
-        );
-        ```
-
-!!! info "HTTP/2 support"
-
-    By default, GCS uses HTTP/1 for communication, as opposed to HTTP/2. This improves maximum throughput significantly. However, if you wish to use HTTP/2 for some reason, you can set the environment variable `HTTP1_ONLY` to `false`.
+{{< admonition info "HTTP/2 support" >}}
+By default, GCS uses HTTP/1 for communication, as opposed to HTTP/2. This improves maximum throughput significantly. However, if you wish to use HTTP/2 for some reason, you can set the environment variable `HTTP1_ONLY` to `false`.
+{{< /admonition >}}
 
 The following keys can be used as both environment variables or keys in the `storage_options` parameter:
 <!-- source: https://docs.rs/object_store/latest/object_store/gcp/enum.GoogleConfigKey.html -->
 
 | Key                                   | Description                                  |
-|---------------------------------------|----------------------------------------------|
+|:--------------------------------------|:---------------------------------------------|
 | ``google_service_account`` / `service_account` | Path to the service account JSON file.       |
 | ``google_service_account_key``        | The serialized service account key.          |
 | ``google_application_credentials``    | Path to the application credentials.         |
 
 ### Azure Blob Storage
 
+![Azure Blob Storage Configuration](/assets/docs/concepts/storage/azure.jpg)
+
 Azure Blob Storage credentials can be configured by setting the `AZURE_STORAGE_ACCOUNT_NAME`and `AZURE_STORAGE_ACCOUNT_KEY` environment variables. Alternatively, you can pass the account name and key in the `storage_options` parameter:
 
-=== "Python"
-
-    <!-- skip-test -->
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "az://my-container/my-database",
-            storage_options={
-                account_name: "some-account",
-                account_key: "some-key",
-            }
-        )
-        ```
-    <!-- skip-test -->
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "az://my-container/my-database",
-            storage_options={
-                account_name: "some-account",
-                account_key: "some-key",
-            }
-        )   
-        ```
-
-=== "TypeScript"
-
-    === "@lancedb/lancedb"
-
-        ```ts
-        import * as lancedb from "@lancedb/lancedb";
-        const db = await lancedb.connect(
-            "az://my-container/my-database",
-            {
-                storageOptions: {
-                    accountName: "some-account",
-                    accountKey: "some-key",
-                }
-            }
-        );
-        ```
-
-    === "vectordb (deprecated)"
-
-        ```ts
-        const lancedb = require("lancedb");
-        const db = await lancedb.connect(
-            "az://my-container/my-database",
-            {
-                storageOptions: {
-                    accountName: "some-account",
-                    accountKey: "some-key",
-                }
-            }
-        );
-        ```
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "az://my-container/my-database",
+    storage_options={
+        account_name: "some-account",
+        account_key: "some-key",
+    }
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "az://my-container/my-database",
+    {
+        storageOptions: {
+            accountName: "some-account",
+            accountKey: "some-key",
+        }
+    }
+);
+{{< /code >}}
 
 These keys can be used as both environment variables or keys in the `storage_options` parameter:
 
 <!-- source: https://docs.rs/object_store/latest/object_store/azure/enum.AzureConfigKey.html -->
 
 | Key                                   | Description                                                                                      |
-|---------------------------------------|--------------------------------------------------------------------------------------------------|
+|:--------------------------------------|:-------------------------------------------------------------------------------------------------|
 | ``azure_storage_account_name``        | The name of the azure storage account.                                                           |
 | ``azure_storage_account_key``         | The serialized service account key.                                                              |
 | ``azure_client_id``                   | Service principal client id for authorizing requests.                                            |
@@ -812,59 +495,42 @@ These keys can be used as both environment variables or keys in the `storage_opt
 
 <!-- TODO: demonstrate how to configure networked file systems for optimal performance -->
 
-### **Tigris Object Storage**
+### Tigris Object Storage
+
+![Tigris Object Storage Configuration](/assets/docs/concepts/storage/tigris.jpg)
 
 Tigris Object Storage provides an S3-compatible API for its global storage. To connect to Tigris Object Storage, you need to configure the endpoint and set the region to auto:
 
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        import lancedb
-        db = lancedb.connect(
-            "s3://your-bucket/path",
-            storage_options={
-                "endpoint": "https://t3.storage.dev",
-                "region": "auto"
-            }
-        )
-        ```
-    === "Async API"
-
-        ```python
-        import lancedb
-        async_db = await lancedb.connect_async(
-            "s3://your-bucket/path",
-            storage_options={
-                "endpoint": "https://t3.storage.dev",
-                "region": "auto"
-            }
-        )
-        ```
-
-=== "TypeScript"
-
-    ```ts
-    import * as lancedb from "@lancedb/lancedb";
-    const db = await lancedb.connect(
-        "s3://your-bucket/path",
-        {
-            storageOptions: {
-                endpoint: "https://t3.storage.dev",
-                region: "auto"
-            }
+{{< code language="python" >}}
+import lancedb
+db = lancedb.connect(
+    "s3://your-bucket/path",
+    storage_options={
+        "endpoint": "https://t3.storage.dev",
+        "region": "auto"
+    }
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect(
+    "s3://your-bucket/path",
+    {
+        storageOptions: {
+            endpoint: "https://t3.storage.dev",
+            region: "auto"
         }
-    );
-    ```
+    }
+);
+{{< /code >}}
 
 You can also set these values using environment variables:
 
-```bash
+{{< code language="bash" >}}
 export AWS_ENDPOINT="https://t3.storage.dev"
 export AWS_DEFAULT_REGION="auto"
-```
+{{< /code >}}
 
-!!! note "Example Project"
-
-    [**Tigris has prepared a tutorial**](https://www.tigrisdata.com/docs/libraries/lancedb/) on how to build a RAG application with LanceDB, hosted on Tigris Object Storage.
+{{< admonition note "Example Project" >}}
+[**Tigris has prepared a tutorial**](https://www.tigrisdata.com/docs/libraries/lancedb/) on how to build a RAG application with LanceDB, hosted on Tigris Object Storage.
+{{< /admonition >}}
