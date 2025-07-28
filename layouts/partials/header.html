@@ -24,17 +24,70 @@
     <div class="header__main">
         <div class="container container-fluid">
             <div class="row items-center">
-                <div class="col-12 col-lg-4 d-flex items-center justify-space-between">
-                    <a href="/" class="header__logo">
-                        {{ readFile site.Params.logo | safeHTML }}
-                    </a>
-                    <button class="header__toggle d-lg-none button button--secondary">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                <div class="col-12 d-flex items-center justify-space-between">
+                    <div class="header__left d-flex items-center">
+                        <a href="/" class="header__logo">
+                            {{ readFile site.Params.logo | safeHTML }}
+                        </a>
+                        <nav class="nav d-none d-lg-block">
+                            <ul class="nav__list">
+                            {{ $current := . }}
+                            {{ range .Site.Menus.main }}
+                                <li class="nav__item">
+                                {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
+                                    <span class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}">
+                                    {{ .Name }}
+                                    </span>
+                                {{ else }}
+                                    <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
+                                    href="{{ .URL }}">
+                                    {{ .Name }}
+                                    </a>
+                                {{ end }}
+                                </li>
+                            {{ end }}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="header__right d-flex items-center">
+                        <div class="nav__additional d-none d-lg-flex">
+                            <div class="nav__socials-wrap">
+                                <ul class="nav__socials">
+                                    {{ range site.Params.header.socials }}
+                                        {{ $social := . }}
+                                        {{ range site.Params.socials }}
+                                        {{ if eq .name $social }}
+                                                <li>
+                                                    <a href="{{ .url }}" target="_blank" class="nav__social-link">
+                                                        {{ readFile (printf "static/assets/socials/%s.svg" .icon) | safeHTML }}
+                                                    </a>
+                                                </li>
+                                            {{ end }}
+                                        {{ end }}
+                                    {{ end }}
+                                </ul>
+                            </div>
+                            <a 
+                                href="{{ site.Params.header.button.url }}" 
+                                class="button button--secondary"
+                                {{ if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{ end }}
+                                >
+                                {{ site.Params.header.button.text }}
+                                {{ if site.Params.header.button.icon }}
+                                    <span class="button__icon">
+                                    {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                                    </span>
+                                {{ end }}
+                            </a>
+                        </div>
+                        <button class="header__toggle d-lg-none button button--secondary">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-8 nav__container">
+                <div class="col-12 nav__container d-lg-none">
                     <div class="nav__wrap">
                         <nav class="nav">
                             <ul class="nav__list">
@@ -89,7 +142,6 @@
                                     </span>
                                 {{ end }}
                             </a>
-        
                         </div>
                     </div>
                 </div>
