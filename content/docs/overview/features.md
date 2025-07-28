@@ -2,7 +2,7 @@
 title: LanceDB Feature Catalog
 sidebar_title: "Feature Catalog"
 description: "Complete catalog of LanceDB features including storage, tables, ingestion, indexing, search, and filtering capabilities"
-weight: 2
+weight: 5
 ---
 
 This list outlines all the features offered by LanceDB - across OSS, Cloud and Enterprise product lines. Click on each feature to be taken to its individual documentation page.

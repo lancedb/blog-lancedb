@@ -2,7 +2,7 @@
 title: "LanceDB Enterprise: The Multimodal Lakehouse"
 sidebar_title: "LanceDB Enterprise"
 description: "Learn about LanceDB Enterprise, the enterprise-grade vector database solution. Includes features, benefits, and deployment options for production environments."
-weight: 6
+weight: 4
 ---
 
 **LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance vector database that can operate at extreme scale.

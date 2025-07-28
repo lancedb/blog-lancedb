@@ -1,5 +1,5 @@
 ---
-title: The Single Source of Truth for All Your AI Data
+title: Designed for Multimodal. Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
 hero:
   cta:
@@ -34,7 +34,7 @@ lakehouse:
   interact_mob: static/assets/vectors/lakehouse-mob.svg
 infrastructure:
   title: AI Needs Better <br> Data Infrastructure
-  description: Data lakes only handle tabular data, search engines just work with vectors, andneither work well with multimodal data. Researchers using today'sinfrastructure face more complexity, higher cost, and slower progress.
+  description: Data lakes only handle tabular data, search engines just work with vectors, andneither work well with multimodal data. Researchers using today's infrastructure face more complexity, higher cost, and slower progress.
   badges:
     - icon: binary.svg
       text: Chunking
@@ -60,7 +60,7 @@ solution:
   items:
     - tab: Storage
       title: The new columnar standard for multimodal data
-      description: Fast scans and random access. Large blob storage. Zero-copy fine-grained data-evolution at petabyte scale
+      description: Fast scans and random access. Large blob storage. Zero-copy fine-grained data-evolution at petabyte scale.
       code: 
     - tab: Search
       title: Advanced retrieval for AI
@@ -84,19 +84,19 @@ solution:
     version: primary
     text: Create your first project
 how_it_works:
-  title: How It Works
-  description: Whatever your needs, we know how to make things work better.
+  title: How LanceDB Works
+  description: From prototype to production.
   items:
     - title: For Developers
       list:
         - heading: Connect to LanceDB
-          text: Get started fast with a simple install and intuitive interface
+          text: Get started fast with a simple install and intuitive interface.
           icon: union.svg
         - heading: Ingest Data
-          text: Streamline your workflow and focus on high-value experimentation
+          text: Grow your project to petabyte scale without worrying about infrastructure.
           icon: data.svg
         - heading: Build and Index
-          text: Easily scale from megabytes to petabytes—without complexity
+          text: Streamline your workflow and focus on high-value experimentation.
           icon: index.svg
       cta:
         text: Try LanceDB Cloud
@@ -105,14 +105,14 @@ how_it_works:
         icon: true
     - title: For Enterprises
       list:
-        - heading: Choose your deployment model
-          text: Enterprises hold vast amounts of untapped data—images, transcripts, contracts, and more—with huge AI potential. 
+        - heading: Choose Deployment Model
+          text: Unlock the value in your sales calls, decks, contracts, and more.
           icon: question.svg
-        - heading: Integrate with your Data Lake  
-          text: Enterprises hold vast amounts of untapped data—images, transcripts, contracts, and more—with huge AI potential. 
+        - heading: Data Lake Compatible
+          text: Keep you data private and secure. Works with your existing data lake.
           icon: integrate.svg
-        - heading: Build and scale
-          text: Unlock top-tier price-performance for multimodal workloads
+        - heading: Build and Scale
+          text: Unlock massive scalability and unmatched price-performance.
           icon: scale.svg
       cta:
         text: Contact Sales
@@ -129,7 +129,7 @@ scale:
       lottie: /assets/lottie/first.json
     - number: 100
       prefix: "%"
-      text: Scale growth at a fraction of the cost
+      text: Massive scalability at a fraction of the cost
       lottie: /assets/lottie/second.json
     - number: 20
       prefix: PB
@@ -138,7 +138,7 @@ scale:
 compliance: 
   bg: grey
   title: Enterprise-Grade Compliance
-  description: Safety and security guaranteed for your data, every time.
+  description: Safety and security guaranteed for your data.
   cards:
     - text: SOC2 Type II
       icon: aicpa.svg

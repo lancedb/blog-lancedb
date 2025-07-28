@@ -5,34 +5,33 @@ highlighted: Transparent
 description: From the first POC to billion-scale production, a perfect option for every part of your AI journey
 plans:
   - title: LanceDB Cloud
-    description: Blazing fast performance. Best for embedded applications.
+    description: Serverless search engine. Best for growing teams who want to search more and manage less.
     name: Usage-based
     details: Pay as you go
     features:
       title: "Everything in OSS, plus:"
       items:
         - Serverless retrieval with nothing to manage
-        - Intuitive UI to manage and explore your data
-        - Automatic indexing, and compaction
-        - Local to Cloud without changing the code
+        - Intuitive UI to explore your data
+        - Automatic indexing and compaction
+        - Python, TypeScript, and Rust SDKs
     link:
       text: Start free
       icon: true
       version: primary
       href: https://accounts.lancedb.com/sign-up
   - title: LanceDB Enterprise
-    description: Blazing fast performance. Best for embedded applications.
+    description: The AI-Native Multimodal Lakehouse for enterprises with billions of vectors and multimodal workloads.
     name: Custom
     details: Contact us for pricing
     features:
       title: "Everything in LanceDB Cloud, plus:"
       items:
+        - Complete control of your data
         - Multimodal SQL engine
         - Distributed data pre-processing engine
-        - Optimized training cache
-        - Dedicated infrastructure
+        - Optimized training infrastructure
         - Deploy on any cloud
-        - Enterprise security
     link:
       text: Contact Sales
       icon: true
@@ -77,14 +76,14 @@ calculator:
       step: 1
       price: 100
     - name: queries
-      title: Vectors Written Per Month
+      title: Queries Per Month
       min: 0
       max: 4
       default: 2
       step: 1
       price: 25
     - name: storage
-      title: Vectors Written Per Month
+      title: Total Vectors Stored
       min: 0
       max: 4
       default: 2
