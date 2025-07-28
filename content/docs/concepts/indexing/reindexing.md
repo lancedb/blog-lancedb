@@ -10,7 +10,7 @@ weight: 5
 
 Reindexing is the process of updating the index to account for new data, keeping good performance for queries. This applies to either a full-text search (FTS) index or a vector index. For ANN search, new data will always be included in query results, but queries on tables with unindexed data will fallback to slower search methods for the new parts of the table. This is another important operation to run periodically as your data grows, as it also improves performance. This is especially important if you're appending large amounts of data to an existing dataset.
 
-{{< admonition "tip" >}}
+{{< admonition tip >}}
 When adding new data to a dataset that has an existing index (either FTS or vector), LanceDB doesn't immediately update the index until a reindex operation is complete.
 {{< /admonition >}}
 
@@ -24,7 +24,7 @@ When a reindex job is triggered in the background, the entire data is reindexed,
 
 > While indexes are being rebuilt, queries use brute force methods on unindexed rows, which may temporarily increase latency. To avoid this, set `fast_search=True` to search only indexed data.
 
-{{< admonition "note" "Checking Index Status" >}}
+{{< admonition note "Checking Index Status" >}}
 Use `index_stats()` to view the number of unindexed rows. This will be zero when indexes are fully up-to-date.
 {{< /admonition >}}
 
@@ -34,30 +34,26 @@ Use `index_stats()` to view the number of unindexed rows. This will be zero when
 
 This can make the query more efficient, especially when the table is large and the new records are relatively small.
 
-=== "Python"
-    === "Sync API"
-        ```python
-        --8<-- "python/python/tests/docs/test_search.py:fts_incremental_index"
-        ```
-    === "Async API"
-        ```python
-        --8<-- "python/python/tests/docs/test_search.py:fts_incremental_index_async"
-        ```
+{{< code language="python" >}}
+import lancedb
 
-=== "TypeScript"
-    ```typescript
-    await tbl.add([{ vector: [3.1, 4.1], text: "Frodo was a happy puppy" }]);
-    await tbl.optimize();
-    ```
+# Connect to LanceDB
+db = lancedb.connect("data")
+table = db.open_table("my_table")
 
-=== "Rust"
-    ```rust
-    let more_data: Box<dyn RecordBatchReader + Send> = create_some_records()?;
-    tbl.add(more_data).execute().await?;
-    tbl.optimize(OptimizeAction::All).execute().await?;
-    ```
+# Add new data
+table.add([{"vector": [3.1, 4.1], "text": "Frodo was a happy puppy"}])
 
-{{< admonition "note" "Performance Considerations" >}}
+# Optimize to update indexes
+table.optimize()
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await tbl.add([{ vector: [3.1, 4.1], text: "Frodo was a happy puppy" }]);
+await tbl.optimize();
+{{< /code >}}
+
+{{< admonition note "Performance Considerations" >}}
 New data added after creating the FTS index will appear in search results while the incremental index is still in progress, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud & Enterprise automate this merging process, minimizing the impact on search speed.
 {{< /admonition >}}
 

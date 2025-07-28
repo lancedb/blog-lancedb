@@ -12,7 +12,7 @@ With LanceDB's GPU-powered indexing you can create vector indexes for billions o
 
 ## Automatic GPU Indexing in LanceDB Enterprise
 
-{{< admonition "info" "LanceDB Enterprise Only" >}}
+{{< admonition info "LanceDB Enterprise Only" >}}
 Automatic GPU Indexing is currently only available in LanceDB Enterprise. Please [contact us](mailto:contact@lancedb.com) to enable this feature for your deployment.
 {{< /admonition >}}
 
@@ -28,29 +28,27 @@ You can use the Python SDK to manually create the IVF_PQ index. You will need [P
 
 You can specify the GPU device to train IVF partitions via `accelerator`. Specify parameters `cuda` or `mps` (on Apple Silicon) to enable GPU training.
 
-=== "Linux"
+### GPU Indexing on Linux
 
-    <!-- skip-test -->
-    ``` { .python .copy }
-    # Create index using CUDA on Nvidia GPUs.
-    tbl.create_index(
-        num_partitions=256,
-        num_sub_vectors=96,
-        accelerator="cuda"
-    )
-    ```
+```python
+# Create index using CUDA on Nvidia GPUs.
+tbl.create_index(
+    num_partitions=256,
+    num_sub_vectors=96,
+    accelerator="cuda"
+)
+```
 
-=== "MacOS"
+### GPU Indexing on MacOS (Apple Silicon)
 
-    <!-- skip-test -->
-    ```python
-    # Create index using MPS on Apple Silicon.
-    tbl.create_index(
-        num_partitions=256,
-        num_sub_vectors=96,
-        accelerator="mps"
-    )
-    ```
+```python
+# Create index using MPS on Apple Silicon.
+tbl.create_index(
+    num_partitions=256,
+    num_sub_vectors=96,
+    accelerator="mps"
+)
+```
 
 ## Performance Considerations
 
