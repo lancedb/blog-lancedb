@@ -9,8 +9,6 @@ weight: 3
 
 [![LanceDB Products](/assets/docs/lancedb-products.png)](https://lancedb.com/cloud)
 
-
-
 ![What is LanceDB?](/assets/docs/lancedb_embedded_explanation.png)
 
 It is a multimodal vector database for AI that's designed to store, manage, query and retrieve embeddings on large-scale data of different modalities. Most existing vector databases that store and query just the embeddings and their metadata. The actual data is stored elsewhere, requiring you to manage their storage and versioning separately.
