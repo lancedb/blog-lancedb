@@ -3,21 +3,34 @@ title: "What is LanceDB?"
 sidebar_title: "What is LanceDB?"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
 weight: 3
+hide_toc: true
 ---
 
-**LanceDB OSS** is an open-source, batteries-included embedded multimodal database that you can run on your own infrastructure. "Embedded" means that it runs *in-process*, making it incredibly simple to self-host your own AI retrieval workflows for RAG and more. No servers, no hassle.
+### The Multimodal Vector Database
 
-[![LanceDB Products](/assets/docs/lancedb-products.png)](https://lancedb.com/cloud)
+**LanceDB** is a multimodal vector database that's designed to store and search data of different modalities. You can use LanceDB to build fast, scalable, and intelligent applications that rely on vector search and analytics. 
+
+By combining columnar storage with cutting-edge indexing techniques, LanceDB enables efficient querying of both structured and unstructured data. It is ideal for powering [semantic search engines](/docs/tutorials/vector-search/), [recommendation systems](/docs/tutorials/vector-search/), and [AI-driven applications (RAG, Agents)](/docs/tutorials/rag-agents/) that require real-time insights.
+
+### LanceDB Holds All the Data
+
+- **The Source of Truth:** Most existing vector databases only store and search embeddings and their metadata. The original data is usually stored elsewhere, so you need another database as a source of truth. LanceDB can effortlessly store both the source data and its embeddings.
+
+- **Technology:** It is built on top of [Lance](https://github.com/lancedb/lance), an open-source columnar data format designed for extreme storage, performant ML workloads and fast random access.
+
+### LanceDB is Multimodal and Embedded
+
+- **Multimodal:** You can store vectors, metadata, raw images, videos, text, audio files and more. All modalities are stored in the Lance format, which provides automatic data versioning and blazing fast retrievals and filtering.
+
+![What is LanceDB?](/assets/docs/overview/multimodal.png)
+
+- **Embedded:** This database doesn't run as a server. Instead it runs *in-process* in your app, making it simple and cheap to implement. 
 
 ![What is LanceDB?](/assets/docs/lancedb_embedded_explanation.png)
 
-It is a multimodal vector database for AI that's designed to store, manage, query and retrieve embeddings on large-scale data of different modalities. Most existing vector databases that store and query just the embeddings and their metadata. The actual data is stored elsewhere, requiring you to manage their storage and versioning separately.
+### Integrations & Ecosystem
 
-![](/assets/docs/lancedb_and_lance.png)
-
-## **LanceDB Ecosystem**
-
-LanceDB integrates with a wide range of tools and frameworks in the AI and data ecosystem:
+LanceDB integrates seamlessly with the modern AI ecosystem, providing connectors for popular frameworks, embedding models, and development tools. Whether you’re building RAG applications, working with data management platforms, or working with specific AI models, LanceDB has you covered. [Learn more about our integrations.](/docs/integrations/)
 
 ![](/assets/docs/ecosystem-illustration.png)
 
@@ -26,16 +39,6 @@ LanceDB integrates with a wide range of tools and frameworks in the AI and data 
 * Directly from a client application like a Jupyter notebook for analytical workloads
 * Deployed as a remote serverless database
 {{< /admonition >}}
-
-LanceDB supports storage of the *actual data itself*, alongside the embeddings and metadata. You can persist your images, videos, text documents, audio files and more in the Lance format, which provides automatic data versioning and blazing fast retrievals and filtering via LanceDB.
-
-![](/assets/docs/lancedb_local_data_explanation.png)
-
-The core of LanceDB is written in Rust 🦀 and is built on top of [Lance](https://github.com/lancedb/lance), an open-source columnar data format designed for performant ML workloads and fast random access.
-
-Both the database and the underlying data format are designed from the ground up to be **easy-to-use**, **scalable** and **cost-effective**.
-
-
 
 
 

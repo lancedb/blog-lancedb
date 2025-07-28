@@ -3,6 +3,7 @@ title: "LanceDB Cloud: The Multimodal Vector Database"
 sidebar_title: "LanceDB Cloud"
 description: Learn about LanceDB Cloud, a serverless vector database service. Includes features, benefits, and best practices for cloud-based vector search applications.
 weight: 3
+hide_toc: true
 ---
 
 LanceDB Cloud is a serverless vector database service that makes it easy to build, deploy, and scale AI-powered applications.
@@ -13,7 +14,7 @@ LanceDB Cloud provides the same underlying fast vector store that powers the OSS
 
 It's designed to be cost-effective and highly scalable without breaking the bank. LanceDB Cloud is currently in private beta with general availability coming soon, but you can apply for early access with the private beta release by signing up below.
 
-[Try out LanceDB Cloud (Public Beta) Now](https://cloud.lancedb.com){ .md-button .md-button--primary }
+[Try out LanceDB Cloud (Public Beta) Now](https://cloud.lancedb.com)
 
 ## Key Features
 
