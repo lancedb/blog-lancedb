@@ -15,7 +15,7 @@ The Python SDK uses our native FTS implementation by default, you need to pass `
 
 Consider that we have a LanceDB table named `my_table`, whose string column `text` we want to index and query via keyword search, the FTS index must be created before you can search via keywords.
 
-### 1. Open Table
+### Table setup
 
 First, open or create the table you want to search:
 
@@ -57,7 +57,7 @@ let tbl = db
     .await?;
 {{< /code >}}
 
-### 2. Construct FTS Index
+### Construct FTS Index
 
 Create a full-text search index on your text column:
 
@@ -80,7 +80,7 @@ tbl
     .await?;
 {{< /code >}}
 
-### 3. Full Text Search
+### Full Text Search
 
 Perform the search and retrieve results:
 
@@ -128,7 +128,10 @@ Stemming is useful for improving search results by reducing words to their root 
 
 For example, to enable stemming for English:
 
-{{< code language="python" source="examples/py/test_search.py" id="fts_config_stem" />}}
+
+```python
+table.create_fts_index("text", tokenizer_name="en_stem", replace=True)
+```
 
 the following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
 
@@ -136,7 +139,16 @@ The tokenizer is customizable, you can specify how the tokenizer splits the text
 
 For example, for language with accents, you can specify the tokenizer to use `ascii_folding` to remove accents, e.g. 'é' to 'e':
 
-{{< code language="python" source="examples/py/test_search.py" id="fts_config_folding" />}}
+```
+table.create_fts_index(
+        "text",
+        use_tantivy=False,
+        language="French",
+        stem=True,
+        ascii_folding=True,
+        replace=True,
+    )
+```
 
 ### Filtering Options
 
@@ -207,7 +219,10 @@ query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/
 
 To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 
-{{< code language="python" source="examples/py/test_search.py" id="fts_with_position" />}}
+```python
+table.create_fts_index("text", use_tantivy=False, with_position=True, replace=True)
+```
+
 
 This will allow you to search for phrases, but it will also significantly increase the index size and indexing time.
 
@@ -227,7 +242,7 @@ fuzzy search capabilities and relevance boosting features.
 
 ## Example: Fuzzy Search
 
-### 1. Generate Data
+### Generate Data
 
 First, let's create a table with sample text data for testing fuzzy search:
 
@@ -311,7 +326,7 @@ const text2 = Array.from({ length: n }, () => generateText(text2Nouns));
 const count = Array.from({ length: n }, () => Math.floor(Math.random() * 10000) + 1);
 {{< /code >}}
 
-### 2. Create Table
+### Create Table
 
 {{< code language="python" >}}
 # Create table with sample data
@@ -343,7 +358,7 @@ const data = makeArrowTable(
 const table = await db.createTable(tableName, data, { mode: "overwrite" });
 {{< /code >}}
 
-### 3. Construct FTS Index
+### Construct FTS Index
 
 Create a full-text search index on the first text column:
 
@@ -373,7 +388,7 @@ await table.createIndex("text2", { config: Index.fts() });
 await waitForIndex(table, "text2_idx");
 {{< /code >}}
 
-### 4. Basic and Fuzzy Search
+### Basic and Fuzzy Search
 
 Now we can perform basic, fuzzy, and prefix match searches:
 
@@ -629,14 +644,18 @@ LanceDB supports boolean logic in full-text search, allowing you to combine mult
 
 In Python, you can combine two MatchQuery objects using either the `and` function or the `&` operator (e.g., `MatchQuery("puppy", "text") and MatchQuery("merrily", "text")`); both methods are supported and yield the same result. Similarly, you can use either the `or` function or the `|` operator to perform an or query. 
 
-In TypeScript, boolean queries are constructed using the `BooleanQuery` class with a list of [Occur, subquery] pairs. For example, to perform an AND query:(e.g. 
-    `new BooleanQuery([
+In TypeScript, boolean queries are constructed using the `BooleanQuery` class with a list of [Occur, subquery] pairs. For example, to perform an AND query:
+
+```sql
+          BooleanQuery([
             [Occur.Must, new MatchQuery("puppy", "text")],
             [Occur.Must, new MatchQuery("merrily", "text")],
-          ])`)
-This approach allows you to specify complex boolean logic by combining multiple subqueries with different Occur values (such as Must, Should, or MustNot).
+          ])
+```
 
-{{< admonition "note" >}}
+This approach allows you to specify complex boolean logic by combining multiple subqueries with different Occur values (such as `Must`, `Should`, or `MustNot`).
+
+{{< admonition "note" "Which queries are allowed?" >}}
 A boolean query must include at least one `SHOULD` or `MUST` clause. Queries that contain only a `MUST_NOT` clause are not allowed.
 {{< /admonition >}}
 
@@ -700,7 +719,7 @@ console.log("\nDocuments containing either 'puppy' or 'merrily':");
 console.log(shouldResults);
 {{< /code >}}
 
-{{< admonition "tip" >}}
+{{< admonition "tip" "How to use booleans?" >}}
 - Use `and`/`&`(Python), `Occur.Must`(Typescript) for intersection (documents must match all queries).
 - Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
 {{< /admonition >}}
@@ -709,6 +728,10 @@ console.log(shouldResults);
 ## Full-Text Search on Array Fields
 
 LanceDB supports full-text search on string array columns, enabling efficient keyword-based search across multiple values within a single field (e.g., tags, keywords).
+
+### Setting Up the Connection
+
+Connect to your LanceDB instance:
 
 {{< code language="python" >}}
 import lancedb
@@ -719,14 +742,47 @@ db = lancedb.connect(
   api_key="your-api-key",
   region="us-east-1"
 )
+{{< /code >}}
 
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb"
+
+const db = await lancedb.connect({
+  uri: "db://your-project-slug",
+  apiKey: "your-api-key",
+  region: "us-east-1"
+});
+{{< /code >}}
+
+### Defining the Schema
+
+Create a schema that includes an array field for tags:
+
+{{< code language="python" >}}
 table_name = "fts-array-field-test"
 schema = pa.schema([
     pa.field("id", pa.string()),
     pa.field("tags", pa.list_(pa.string())),
     pa.field("description", pa.string())
 ])
+{{< /code >}}
 
+{{< code language="typescript" >}}
+const tableName = "fts-array-field-test-ts";
+
+// Create schema
+const schema = new Schema([
+  new Field("id", new Utf8(), false),
+  new Field("tags", new List(new Field("item", new Utf8()))),
+  new Field("description", new Utf8(), false)
+]);
+{{< /code >}}
+
+### Creating Sample Data
+
+Generate sample data with array fields containing tags:
+
+{{< code language="python" >}}
 # Generate sample data
 data = {
     "id": [f"doc_{i}" for i in range(10)],
@@ -755,50 +811,9 @@ data = {
         "AI and NLP applications"
     ]
 }
-
-# Create table and add data
-table = db.create_table(table_name, schema=schema, mode="overwrite")
-table_data = pa.Table.from_pydict(data, schema=schema)
-table.add(table_data)
-
-# Create FTS index
-table.create_fts_index("tags")
-wait_for_index(table, "tags_idx")
-
-# Search examples
-print("\nSearching for 'learning' in tags with a typo:")
-result = (
-    table.search(MatchQuery("learnin", column="tags", fuzziness=1))
-    .select(['id', 'tags', 'description'])
-    .to_arrow()
-)
-
-print("\nSearching for 'machine learning' in tags:")
-result = (
-    table.search(PhraseQuery("machine learning", column="tags"))
-    .select(['id', 'tags', 'description'])
-    .to_arrow()
-)
 {{< /code >}}
 
 {{< code language="typescript" >}}
-import * as lancedb from "@lancedb/lancedb"
-
-const db = await lancedb.connect({
-  uri: "db://your-project-slug",
-  apiKey: "your-api-key",
-  region: "us-east-1"
-});
-
-const tableName = "fts-array-field-test-ts";
-
-// Create schema
-const schema = new Schema([
-  new Field("id", new Utf8(), false),
-  new Field("tags", new List(new Field("item", new Utf8()))),
-  new Field("description", new Utf8(), false)
-]);
-
 // Generate sample data
 const data = makeArrowTable(
   Array(10).fill(0).map((_, i) => ({
@@ -830,11 +845,36 @@ const data = makeArrowTable(
   })),
   { schema }
 );
+{{< /code >}}
 
+### Creating the Table and Adding Data
+
+Create the table and populate it with the sample data:
+
+{{< code language="python" >}}
+# Create table and add data
+table = db.create_table(table_name, schema=schema, mode="overwrite")
+table_data = pa.Table.from_pydict(data, schema=schema)
+table.add(table_data)
+{{< /code >}}
+
+{{< code language="typescript" >}}
 // Create table
 const table = await db.createTable(tableName, data, { mode: "overwrite" });
 console.log(`Created table: ${tableName}`);
+{{< /code >}}
 
+### Building the Full-Text Search Index
+
+Create an FTS index on the tags column to enable efficient text search:
+
+{{< code language="python" >}}
+# Create FTS index
+table.create_fts_index("tags")
+wait_for_index(table, "tags_idx")
+{{< /code >}}
+
+{{< code language="typescript" >}}
 // Create FTS index
 console.log("Creating FTS index on 'tags' column...");
 await table.createIndex("tags", {
@@ -844,7 +884,23 @@ await table.createIndex("tags", {
 // Wait for index
 const ftsIndexName = "tags_idx";
 await waitForIndex(table, ftsIndexName);
+{{< /code >}}
 
+### Performing Fuzzy Search
+
+Search for terms with typos using fuzzy matching:
+
+{{< code language="python" >}}
+# Search examples
+print("\nSearching for 'learning' in tags with a typo:")
+result = (
+    table.search(MatchQuery("learnin", column="tags", fuzziness=1))
+    .select(['id', 'tags', 'description'])
+    .to_arrow()
+)
+{{< /code >}}
+
+{{< code language="typescript" >}}
 // Search examples
 console.log("\nSearching for 'learning' in tags with a typo:");
 const fuzzyResults = await table.query()
@@ -854,7 +910,22 @@ const fuzzyResults = await table.query()
   .select(["id", "tags", "description"])
   .toArray();
 console.log(fuzzyResults);
+{{< /code >}}
 
+### Performing Phrase Search
+
+Search for exact phrases within the array fields:
+
+{{< code language="python" >}}
+print("\nSearching for 'machine learning' in tags:")
+result = (
+    table.search(PhraseQuery("machine learning", column="tags"))
+    .select(['id', 'tags', 'description'])
+    .to_arrow()
+)
+{{< /code >}}
+
+{{< code language="typescript" >}}
 console.log("\nSearching for 'machine learning' in tags:");
 const phraseResults = await table.query()
   .fullTextSearch(new PhraseQuery("machine learning", "tags"))

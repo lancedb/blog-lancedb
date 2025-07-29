@@ -113,7 +113,7 @@ Because it's built on top of DataFusion, LanceDB embraces the utilization of sta
 LanceDB supports a growing list of SQL expressions:
 
 | SQL Expression | Description |
-|---------------|-------------|
+|:---------------|:-------------|
 | `>, >=, <, <=, =` | Comparison operators |
 | `AND`, `OR`, `NOT` | Logical operators |
 | `IS NULL`, `IS NOT NULL` | Null checks |
@@ -171,7 +171,7 @@ For timestamp columns, the precision can be specified as a number in the type
 parameter. Microsecond precision (6) is the default.
 
 | SQL            | Time unit    |
-| -------------- | ------------ |
+|:-------------- |:------------ |
 | `timestamp(0)` | Seconds      |
 | `timestamp(3)` | Milliseconds |
 | `timestamp(6)` | Microseconds |
@@ -183,7 +183,7 @@ LanceDB internally stores data in [Apache Arrow](https://arrow.apache.org/) form
 The mapping from SQL types to Arrow types is:
 
 | SQL type                                                  | Arrow type         |
-| --------------------------------------------------------- | ------------------ |
+|:--------------------------------------------------------- |:------------------ |
 | `boolean`                                                 | `Boolean`          |
 | `tinyint` / `tinyint unsigned`                            | `Int8` / `UInt8`   |
 | `smallint` / `smallint unsigned`                          | `Int16` / `UInt16` |

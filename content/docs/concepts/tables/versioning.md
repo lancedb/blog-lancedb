@@ -2,6 +2,7 @@
 title: "Versioning & Reproducibility in LanceDB"
 sidebar_title: "Versioning"
 description: "Learn how to implement versioning and ensure reproducibility in LanceDB. Includes version control, data snapshots, and audit trails."
+weight: 3
 ---
 
 LanceDB redefines data management for AI/ML workflows with built-in, 

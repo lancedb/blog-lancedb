@@ -1,39 +1,36 @@
 ---
-title: "SQL Queries in LanceDB Enterprise"
+title: "Working with SQL Queries"
 sidebar_title: SQL Queries
 weight: 7
 ---
-# SQL Queries in LanceDB Enterprise
 
-!!! note
-        This is a preview feature that is only available in LanceDB Enterprise.
+{{< admonition tip "Only in LanceDB Enterprise" >}}
+This is a preview feature that is only available in LanceDB Enterprise.
+{{< /admonition >}}
 
 Our solution includes an SQL endpoint that can be used for analytical queries and data exploration. The SQL endpoint is designed to be compatible with the
 [Arrow FlightSQL protocol](https://arrow.apache.org/docs/format/FlightSql.html), which allows you to use any Arrow FlightSQL-compatible client to query your data.
 
-## Installing a client
+## Installing the client
 
 There are Flight SQL clients available for most languages and tools.  If you find that your
 preferred language or tool is not listed here, please [reach out](mailto:contact@lancedb.com) to us and we can help you find a solution.  The following examples demonstrate how to install the Python and TypeScript
 clients.
 
-=== "Python"
-    {{< code language="bash" >}}
-    # The `flightsql-dbapi` package provides a Python DB API 2 interface to the
-    # LanceDB SQL endpoint. You can use it to connect to the SQL endpoint and
-    # execute queries directly and get back results in pyarrow format.
+{{< code language="python" >}}
+# The `flightsql-dbapi` package provides a Python DB API 2 interface to the
+# LanceDB SQL endpoint. You can use it to connect to the SQL endpoint and
+# execute queries directly and get back results in pyarrow format.
 
-    pip install flightsql-dbapi
-    {{< /code >}}
+pip install flightsql-dbapi
+{{< /code >}}
+{{< code language="typescript" >}}
+# LanceDB maintains a TypeScript client for the Arrow FlightSQL protocol.
+# You can use it to connect to the SQL endpoint and execute queries directly.
+# Results are returned in Arrow format or as plain JS/TS objects.
 
-=== "TypeScript"
-    {{< code language="bash" >}}
-    # LanceDB maintains a TypeScript client for the Arrow FlightSQL protocol.
-    # You can use it to connect to the SQL endpoint and execute queries directly.
-    # Results are returned in Arrow format or as plain JS/TS objects.
-
-    npm install --save @lancedb/flightsql-client
-    {{< /code >}}
+npm install --save @lancedb/flightsql-client
+{{< /code >}}
 
 ## Usage
 
@@ -42,51 +39,68 @@ you can use a wide variety of SQL syntax and functions to query your data.  For 
 information on the SQL syntax and functions supported by DataFusion, please refer to the
 [DataFusion documentation](https://datafusion.apache.org/user-guide/sql/index.html).
 
-=== "Python"
-    {{< code language="python" >}}
-    from flightsql import FlightSQLClient
+### Setting Up the Client
 
-    client = FlightSQLClient(
-        host="your-enterprise-endpoint",
-        port=10025,
-        insecure=True,
-        token="DATABASE_TOKEN",
-        metadata={"database": "your-project-slug"},
-        features={"metadata-reflection": "true"},
-    )
+Establish a connection to your LanceDB Enterprise SQL endpoint using your preferred FlightSQL client:
 
-    def run_query(query: str):
-        """Simple method to fully materialize query results"""
-        info = client.execute(query)
-        if len(info.endpoints) != 1:
-            raise Error("Expected exactly one endpoint")
-        ticket = info.endpoints[0].ticket
-        reader = client.do_get(ticket)
-        return reader.read_all()
+{{< code language="python" >}}
+from flightsql import FlightSQLClient
 
-    print(run_query("SELECT * FROM flights WHERE origin = 'SFO'"))
-    {{< /code >}}
+client = FlightSQLClient(
+    host="your-enterprise-endpoint",
+    port=10025,
+    insecure=True,
+    token="DATABASE_TOKEN",
+    metadata={"database": "your-project-slug"},
+    features={"metadata-reflection": "true"},
+)
+{{< /code >}}
+{{< code language="typescript" >}}
+import { Client } from "@lancedb/flightsql-client";
 
-=== "TypeScript"
-    {{< code language="typescript" >}}
-    import { Client } from "@lancedb/flightsql-client";
+const client = await Client.connect({
+    host: "your-enterprise-endpoint:10025",
+    username: "lancedb",
+    password: "password",
+});
+{{< /code >}}
 
-    const client = await Client.connect({
-      host: "your-enterprise-endpoint:10025",
-      username: "lancedb",
-      password: "password",
-    });
+### Executing a Query
 
-    const result = await client.query("SELECT * FROM flights WHERE origin = 'SFO'");
+Run SQL queries against your LanceDB tables. Different clients may handle the FlightSQL protocol differently:
 
-    // Results are returned as plain JS/TS objects and we create an interface
-    // here for our expected structure so we can have strong typing.  This is
-    // optional but recommended.
-    interface FlightRecord {
-        origin: string;
-        destination: string;
-    }
+{{< code language="python" >}}
+def run_query(query: str):
+    """Simple method to fully materialize query results"""
+    info = client.execute(query)
+    if len(info.endpoints) != 1:
+        raise Error("Expected exactly one endpoint")
+    ticket = info.endpoints[0].ticket
+    reader = client.do_get(ticket)
+    return reader.read_all()
 
-    const flights = (await result.collectToObjects()) as FlightRecord[];
-    console.log(flights);
-    {{< /code >}} 
+result = run_query("SELECT * FROM flights WHERE origin = 'SFO'")
+{{< /code >}}
+{{< code language="typescript" >}}
+const result = await client.query("SELECT * FROM flights WHERE origin = 'SFO'");
+{{< /code >}}
+
+### Processing Results
+
+Handle the query results returned by your FlightSQL client:
+
+{{< code language="python" >}}
+print(result)
+{{< /code >}}
+{{< code language="typescript" >}}
+// Results are returned as plain JS/TS objects and we create an interface
+// here for our expected structure so we can have strong typing.  This is
+// optional but recommended.
+interface FlightRecord {
+    origin: string;
+    destination: string;
+}
+
+const flights = (await result.collectToObjects()) as FlightRecord[];
+console.log(flights);
+{{< /code >}} 

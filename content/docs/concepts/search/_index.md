@@ -6,7 +6,7 @@ weight: 1
 hide_toc: true
 ---
 
-| Search Feature | Description |
+| Feature | Description |
 |:---------------|:------------|
 | [Vector Search](/docs/concepts/search/vector-search/) | Semantic similarity search with multiple distance metrics |
 | [Multivector Search](/docs/concepts/search/multivector-search/) | Search using multiple vector embeddings per document |
