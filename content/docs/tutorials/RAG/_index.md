@@ -2,16 +2,18 @@
 title: "RAG Tutorials"
 sidebar_title: "RAG"
 description: "Explore a variety of RAG (Retrieval-Augmented Generation) applications with LanceDB."
+weight: 1
+sidebar_collapsed: true
 ---
-
-## Examples
 
 This section provides a curated list of advanced RAG techniques and examples to help you build powerful and intelligent applications with LanceDB.
 
+## Available Tutorials
+
 | RAG Technique | Description |
-| --- | --- |
+|----------|:------------|
 | **Contextual RAG** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Contextual-RAG/Anthropic_Contextual_RAG.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Contextual-RAG) | Improves retrieval by combatting the "lost in the middle" problem. This technique uses an LLM to generate succinct context for each document chunk, then prepends that context to the chunk before embedding, leading to more accurate retrieval. |
-| **Matryoshka Embeddings** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/RAG-with_MatryoshkaEmbed-Llamaindex/RAG_with_MatryoshkaEmbedding_and_Llamaindex.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/RAG-with_MatryoshkaEmbed-Llamaindex) | Demonstrates a RAG pipeline using Matryoshka Embeddings with LanceDB and Llamaindex. This method allows for efficient storage and retrieval of nested, variable-sized embeddings. |
+| **Matryoshka Embeddings** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/RAG-with_MatryoshkaEmbed-Llamaindex/RAG_with_MatryoshkaEmbedding_and_Llamaindex.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/RAG-with_MatryoshkaEmbed-Llamaindex) | Demonstrates a RAG pipeline using Matryoshka Embeddings with LanceDB and LlamaIndex. This method allows for efficient storage and retrieval of nested, variable-sized embeddings. |
 | **HyDE (Hypothetical Document Embeddings)** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Advance-RAG-with-HyDE) | An advanced RAG technique that uses an LLM to generate a "hypothetical" document in response to a query. This hypothetical document is then used to retrieve actual, similar documents, improving relevance. |
 | **Late Chunking** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advanced_RAG_Late_Chunking/Late_Chunking_(Chunked_Pooling).ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Advanced_RAG_Late_Chunking) | An advanced RAG method where documents are retrieved first, and then chunking is performed on the retrieved documents just before synthesis. This helps maintain context that might be lost with pre-chunking. |
 | **Parent Document Retriever** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/parent_document_retriever/main.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/parent_document_retriever) | A RAG strategy that involves splitting documents into smaller child chunks for searching, but retrieving the larger parent chunk for context. This provides the LLM with more complete information to generate a better response. |

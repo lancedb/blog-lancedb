@@ -6,21 +6,22 @@ weight: 19
 sidebar_collapsed: true
 ---
 
-Reranking is the process of reordering a list of items based on some criteria. In the context of search, reranking is used to reorder the search results returned by a search engine based on some criteria. This can be useful when the initial ranking of the search results is not satisfactory or when the user has provided additional information that can be used to improve the ranking of the search results.
+Reranking is the process of reordering a list of items based on some criteria. In the context of search, reranking is used to reorder the search results returned by a search engine based on specific criteria. This can be useful when the initial ranking of the search results is not satisfactory or when the user has provided additional information that can be used to improve the ranking of the search results.
 
-LanceDB comes with some built-in rerankers. Some of the rerankers that are available in LanceDB are:
+LanceDB comes with several built-in rerankers. Some of the rerankers available in LanceDB are:
 
 | Reranker | Description |
 |:---------|:------------|
 | `LinearCombinationReranker` | Reranks search results based on a linear combination of FTS and vector search scores |
-| `CohereReranker` | Uses cohere Reranker API to rerank results |
+| `CohereReranker` | Uses Cohere's Reranker API to rerank results |
 | `CrossEncoderReranker` | Uses a cross-encoder model to rerank search results |
-| `ColbertReranker` | Uses a colbert model to rerank search results |
-| `OpenaiReranker`(Experimental) | Uses OpenAI's chat model to rerank search results |
-| `VoyageAIReranker` | Uses voyageai Reranker API to rerank results |
+| `ColbertReranker` | Uses a ColBERT model to rerank search results |
+| `OpenaiReranker` (Experimental) | Uses OpenAI's chat model to rerank search results |
+| `VoyageAIReranker` | Uses VoyageAI's Reranker API to rerank results |
 
 ## Using a Reranker
-Using rerankers is optional for vector and FTS. However, for hybrid search, rerankers are required. To use a reranker, you need to create an instance of the reranker and pass it to the `rerank` method of the query builder:
+
+Using rerankers is optional for vector and FTS searches. However, for hybrid search, rerankers are required. To use a reranker, you need to create an instance of the reranker and pass it to the `rerank` method of the query builder:
 
 ```python
 import lancedb
@@ -39,6 +40,7 @@ data = [
     {"text": "hello world"},
     {"text": "goodbye world"}
     ]
+    
 tbl = db.create_table("test", data)
 reranker = CohereReranker(api_key="your_api_key")
 
@@ -54,6 +56,7 @@ result = tbl.search("hello", query_type="hybrid").rerank(reranker).to_list()
 ```
 
 ### Multi-vector reranking
+
 Most rerankers support reranking based on multiple vectors. To rerank based on multiple vectors, you can pass a list of vectors to the `rerank` method. Here's an example of how to rerank based on multiple vector columns using the `CrossEncoderReranker`:
 
 ```python
@@ -67,10 +70,11 @@ res1 = table.search(query, vector_column_name="vector").limit(3)
 res2 = table.search(query, vector_column_name="text_vector").limit(3)
 res3 = table.search(query, vector_column_name="meta_vector").limit(3)
 
-reranked = reranker.rerank_multivector([res1, res2, res3],  deduplicate=True)
+reranked = reranker.rerank_multivector([res1, res2, res3], deduplicate=True)
 ```
     
 ## Available Rerankers
+
 LanceDB comes with the following built-in rerankers:
 
 - [Cohere Reranker](./cohere.md)
@@ -85,4 +89,4 @@ LanceDB comes with the following built-in rerankers:
 
 ## Creating Custom Rerankers
 
-LanceDB also you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](./custom_reranker.md) section.
+LanceDB also allows you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](./custom_reranker.md) section.
