@@ -209,7 +209,7 @@ The final result is a pandas DataFrame with all results, including a `query_inde
 When processing batch queries, the results include a `query_index` field 
 to explicitly associate each result set with its corresponding query in 
 the input batch. 
-{{< / admonition >}}
+{{< /admonition >}}
 
 ### Search With Asynchronous Indexing
 
