@@ -4,20 +4,12 @@ sidebar_title: Query Optimization
 weight: 1
 ---
 
-LanceDB provides two powerful tools for query analysis and optimization: `explain_plan` and `analyze_plan`.
+LanceDB provides two powerful tools for query analysis and optimization: `explain_plan` and `analyze_plan`. Let's take a better look at how they work:
 
-If you have slow queries or unexpected query results, it can be helpful to
-print the resolved query plan. You can use the `explain_plan` method to do this:
-
-* Python Sync: [LanceQueryBuilder.explain_plan][lancedb.query.LanceQueryBuilder.explain_plan]
-* Python Async: [AsyncQueryBase.explain_plan][lancedb.query.AsyncQueryBase.explain_plan]
-* Node @lancedb/lancedb: [LanceQueryBuilder.explainPlan](/lancedb/js/classes/QueryBase/#explainplan)
-
-To understand how a query was actually executed—including metrics like execution time, number of rows processed, I/O stats, and more—use the analyze_plan method. This executes the query and returns a physical execution plan annotated with runtime metrics, making it especially helpful for performance tuning and debugging.
-
-* Python Sync: [LanceQueryBuilder.analyze_plan][lancedb.query.LanceQueryBuilder.analyze_plan]
-* Python Async: [AsyncQueryBase.analyze_plan][lancedb.query.AsyncQueryBase.analyze_plan]
-* Node @lancedb/lancedb: [LanceQueryBuilder.analyzePlan](/lancedb/js/classes/QueryBase/#analyzePlan)
+| Method | Purpose | Description |
+|:-------|:--------|:------------|
+| `explain_plan` | Query Analysis | Print the resolved query plan to understand how the query will be executed. Helpful for identifying slow queries or unexpected query results. |
+| `analyze_plan` | Performance Tuning | Execute the query and return a physical execution plan annotated with runtime metrics including execution time, number of rows processed, and I/O stats. Essential for performance tuning and debugging. |
 
 ## Query Analysis Tools
 

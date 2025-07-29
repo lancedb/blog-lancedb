@@ -3,6 +3,7 @@ title: "Working with Tables in LanceDB"
 sidebar_title: "Tables"
 description: "Introduction to tables in LanceDB and basic concepts for managing multimodal and vector data."
 weight: 8
+hide_toc: true
 ---
 
 | Feature | Description |

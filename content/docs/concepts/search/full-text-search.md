@@ -139,7 +139,7 @@ The tokenizer is customizable, you can specify how the tokenizer splits the text
 
 For example, for language with accents, you can specify the tokenizer to use `ascii_folding` to remove accents, e.g. 'é' to 'e':
 
-```
+```python
 table.create_fts_index(
         "text",
         use_tantivy=False,
