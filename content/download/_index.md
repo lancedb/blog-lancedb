@@ -16,6 +16,8 @@ download:
   info: We propose design principles and potential system enhancements for a new generation of multimodal lakehouses, aiming to bridge the gap between traditional data infrastructure and the needs of large-scale, AI-driven applications.
   form:
     title: Download Your Copy
+    embeded: '<script src="https://js-na2.hsforms.net/forms/embed/242023405.js" defer></script>
+<div class="hs-form-frame" data-region="na2" data-form-id="c4dd2bb3-70ea-4553-aaee-35adad82b27a" data-portal-id="242023405"></div>'
     fields: 
       - label: Last Name
         name: last_name
