@@ -774,7 +774,8 @@ main .post-meta {
 /* Code block container */
 .post-content pre {
     background: linear-gradient(135deg, #0f1419 0%, #1a1d23 100%);
-    border: 1px solid #2d3748;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
     border-radius: 12px;
     margin: 1.5rem 0;
     overflow: hidden;
@@ -2703,4 +2704,4 @@ nav.pagination .pagination-link.current {
         margin: 0.4rem 0.8rem 0.8rem;
         font-size: 0.85rem;
     }
-} 
+} /* Docs copy button styles */
