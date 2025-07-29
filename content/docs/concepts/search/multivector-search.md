@@ -4,31 +4,21 @@ sidebar_title: Multivector Search
 weight: 2
 ---
 
-LanceDB natively supports multivector data types, enabling advanced search scenarios where a single data item is represented by multiple embeddings (e.g., using models like ColBERT or CoLPali). 
-
-In this framework, documents and queries are encoded as collections of contextualized vectors—precomputed for documents and indexed for queries.
-
-You can store and index multiple vectors per row.
-Your can query with a single vector or multiple vectors
-Multivector search performance (recall) is optimized with [XTR](https://arxiv.org/abs/2501.17788).
-
-Currently, only the `cosine` metric is supported for multivector search. 
-The vector value type can be `float16`, `float32`, or `float64`.
-
-Multivector search is currently supported in our Python SDK. 
-
 LanceDB's multivector support enables you to store and search multiple vector embeddings for a single item. This capability is particularly valuable when working with late interaction models like ColBERT and ColPaLi that generate multiple embeddings per document.
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb).
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb)
 
 Each item in your dataset can have a column containing multiple vectors, which LanceDB can efficiently index and search. When performing a search, you can query using either a single vector embedding or multiple vector embeddings. 
 
 LanceDB also integrates with [**ConteXtualized Token Retriever (XTR)**](https://arxiv.org/abs/2304.01982), an advanced retrieval model that prioritizes the most semantically important document tokens during search. This integration enhances the quality of search results by focusing on the most relevant token matches.
 
-- Supported similarity metric: **Cosine similarity only**
-- Vector value types: **float16, float32, or float64**
+{{< admonition tip "Multivector Search" >}}
+- Multivector search is currently supported in our Python SDK. 
+- Currently, only the `cosine` metric is supported for multivector search. 
+- The vector value type can be `float16`, `float32`, or `float64`.
+{{< /admonition >}}
 
-### **Computing Similarity**
+### Computing Similarity
 
 MaxSim (Maximum Similarity) is a key concept in late interaction models that:
 
@@ -38,22 +28,22 @@ MaxSim (Maximum Similarity) is a key concept in late interaction models that:
 
 The MaxSim calculation can be expressed as:
 
-![maxsim](../../assets/maxsim.png)
+$$\text{MaxSim}(Q, D) = \sum_{i=1}^{|Q|} \max_{j=1}^{|D|} \text{sim}(q_i, d_j)$$
 
-where `sim` is the similarity function (e.g. cosine).
+where `sim` is the similarity function (e.g. cosine), $Q = \{q_1, q_2, ..., q_{|Q|}\}$ represents the query vectors, and $D = \{d_1, d_2, ..., d_{|D|}\}$ represents the document vectors.
 
-!!! note "Distance Metric"
+{{< admonition note "Distance Metric" >}}
+For now, only `cosine` metric is supported for multivector search.
+The vector value type can be `float16`, `float32` or `float64`.
+{{< /admonition >}}
 
-    For now, only `cosine` metric is supported for multivector search.
-    The vector value type can be `float16`, `float32` or `float64`.
+## Example: Multivector Search
 
-## **Example: Multivector Search**
-
-### **1. Setup**
+### 1. Setup
 
 Connect to LanceDB and import required libraries for data management.
 
-{{< code language="python" >}}
+```python
 import lancedb
 import numpy as np
 import pyarrow as pa
@@ -63,9 +53,9 @@ db = lancedb.connect(
     api_key="your-api-key",
     region="your-cloud-region"
 )
-{{< /code >}}
+```
 
-### **2. Define Schema**
+### 2. Define Schema
 
 Define a schema that specifies a multivector field. A multivector field is a nested list structure where each document contains multiple vectors. In this case, we'll create a schema with:
 
@@ -75,7 +65,7 @@ Define a schema that specifies a multivector field. A multivector field is a nes
    - Each inner list is a 256-dimensional vector
    - Using float32 for memory efficiency while maintaining precision
 
-{{< code language="python" >}}
+```python
 db = lancedb.connect("data/multivector_demo")
 schema = pa.schema(
     [
@@ -84,15 +74,15 @@ schema = pa.schema(
         pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
     ]
 )
-{{< /code >}}
+```
 
-### **3. Generate Multivectors**
+### 3. Generate Multivectors
 
 Generate sample data where each document contains multiple vector embeddings, which could represent different aspects or views of the same document. 
 
 In this example, we create **1024 documents** where each document has **2 random vectors** of **dimension 256**, simulating a real-world scenario where you might have multiple embeddings per item.
 
-{{< code language="python" >}}
+```python
 data = [
     {
         "id": i,
@@ -100,48 +90,46 @@ data = [
     }
     for i in range(1024)
 ]
-{{< /code >}}
+```
 
-### **4. Create a Table**
+### 4. Create a Table
 
 Create a table with the defined schema and sample data, which will store multiple vectors per document for similarity search.
 
-{{< code language="python" >}}
+```python
 tbl = db.create_table("multivector_example", data=data, schema=schema)
-{{< /code >}}
+```
 
-### **5. Build an Index**
+### 5. Build an Index
 
 Only cosine similarity is supported as the distance metric for multivector search operations. 
 For faster search, build the standard `IVF_PQ` index over your vectors:
 
-{{< code language="python" >}}
+```python
 tbl.create_index(metric="cosine", vector_column_name="vector")
-{{< /code >}}
+```
 
-### **6. Query a Single Vector**
+### 6. Query a Single Vector
 
 When searching with a single query vector, it will be compared against all vectors in each document, and the similarity scores will be aggregated to find the most relevant documents.
 
-{{< code language="python" >}}
+```python
 query = np.random.random(256)
 results_single = tbl.search(query).limit(5).to_pandas()
-{{< /code >}}
+```
 
-### **7. Query Multiple Vectors**
+### 7. Query Multiple Vectors
 
 With multiple vector queries, LanceDB calculates similarity using late interaction - a technique that computes relevance by finding the best matching pairs between query and document vectors. This approach provides more nuanced matching while maintaining fast retrieval speeds.
 
-{{< code language="python" >}}
+```python
 query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
-{{< /code >}}
+```
 
-## **What's Next?**
+## What's Next?
 
 If you still need more guidance, you can try the complete [**Multivector Search Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb).
-
-For advanced users, we prepared a [**Tutorial on ColPali and LanceDB**](/docs/notebooks/Multivector_on_LanceDB/).
 
 
 

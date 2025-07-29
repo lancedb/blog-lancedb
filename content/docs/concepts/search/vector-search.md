@@ -20,31 +20,13 @@ Distance metrics determine how LanceDB compares vectors to find similar matches.
 The right metric improves both search accuracy and query performance. Currently, LanceDB supports the following metrics:
 
 | Metric | Description | Default |
-|--------|-------------|---------|
+|:-------|:------------|:--------|
 | `l2` | [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) - measures the straight-line distance between two points in vector space. Calculated as the square root of the sum of squared differences between corresponding vector components. | ✓ |
 | `cosine` | [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) - measures the cosine of the angle between two vectors, ranging from -1 to 1. Computed as the dot product divided by the product of vector magnitudes. | x |
 | `dot` | [Dot product](https://en.wikipedia.org/wiki/Dot_product) - calculates the sum of products of corresponding vector components. Provides raw similarity scores without normalization, sensitive to vector magnitudes. | x |
 | `hamming` | [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) - counts the number of positions where corresponding bits differ between binary vectors. Only applicable to binary vectors stored as packed uint8 arrays. | x |
 
-## Vector Search With No Index
-
-The simplest way to perform vector search is to perform a brute force search, without an index, where the distance between the query vector and all the vectors in the database are computed, with the top-k closest vectors returned. 
-
-This is equivalent to a k-nearest neighbours (kNN) search in vector space.
-
-Choose brute force search when you need guaranteed 100% recall, typically with smaller datasets where query speed isn't the primary concern. The system scans every vector in the table and calculates precise distances to find the exact nearest neighbors.
-
-{{< code language="python" >}}
-tbl.search(np.random.random((1536))).limit(3).to_list()
-{{< /code >}}
-
-This carries out a brute force search through every vector in the table to find the 3 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
-
-![](/assets/docs/knn_search.png)
-
-As you can imagine, the brute force approach is not scalable for datasets larger than a few hundred thousand vectors, as the latency of the search grows linearly with the size of the dataset. This is where approximate nearest neighbour (ANN) algorithms come in.
-
-## Configure Distance Metric
+### Configure Distance Metric
 
 By default, `l2` will be used as metric type. You can specify the metric type as
 `cosine` or `dot` if required.
@@ -71,22 +53,7 @@ This finds the 2 most similar vectors to [100, 100] using an approximate nearest
 
 **Read more:** [Vector Indexing](../reference/ann-index.md)
 
-## Multivector Search 
-
-Use multivector search when your documents contain multiple embeddings and you need sophisticated matching between query and document vector pairs. The late interaction approach finds the most relevant combinations across all available embeddings and provides nuanced similarity scoring.
-
-Only `cosine` similarity is supported as the distance metric for multivector search operations.
-
-{{< code language="python" >}}
-query_multi = np.random.random(size=(2, 256))
-results_multi = tbl.search(query_multi).limit(5).to_pandas()
-{{< /code >}}
-
-Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
-
-**Read more:** [Multivector Search](../reference/multivector-search.md)
-
-## Search With Distance Range
+### Search With Distance Range
 
 Use `distance_range` search when you need vectors within particular similarity bounds rather than just the closest neighbors. The system filters results to only include vectors that fall within your specified distance thresholds from the query.
 
@@ -109,7 +76,7 @@ The `distance_range()` method filters results by similarity thresholds - the fir
 
 Each approach returns Arrow tables with vectors that fall within your specified distance thresholds.
 
-## Search With Binary Vectors
+### Search With Binary Vectors
 
 Use binary vector search for scenarios involving binary embeddings, such as those produced by hashing algorithms. The system stores these efficiently as packed uint8 arrays and uses Hamming distance calculations to determine vector similarity.
 
@@ -158,7 +125,24 @@ The schema defines a 32-byte vector field (256 bits ÷ 8), `np.random.randint(0,
 
 The search produces an Arrow table with binary vectors ranked by how many bits differ from the query.
 
-## Vector Search With Prefiltering
+## Multivector Search 
+
+Use multivector search when your documents contain multiple embeddings and you need sophisticated matching between query and document vector pairs. The late interaction approach finds the most relevant combinations across all available embeddings and provides nuanced similarity scoring.
+
+Only `cosine` similarity is supported as the distance metric for multivector search operations.
+
+{{< code language="python" >}}
+query_multi = np.random.random(size=(2, 256))
+results_multi = tbl.search(query_multi).limit(5).to_pandas()
+{{< /code >}}
+
+Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
+
+**Read more:** [Multivector Search](../reference/multivector-search.md)
+
+## Vector Search With Filtering
+
+### Prefiltering
 
 Use prefiltering to boost query performance by reducing the search space before vector calculations begin. The system first applies your filter criteria to the dataset, then conducts vector search operations only on the remaining relevant subset.
 
@@ -178,7 +162,7 @@ The `.where("label > 2")` applies a filter before vector search, `.select(["text
 
 As a result, you'll see a pandas DataFrame with just the data you want from the most similar vectors.
 
-## Vector Search With Postfiltering
+### Postfiltering
 
 Use postfiltering to prioritize vector similarity by searching the full dataset first, then applying metadata filters to the top results. This approach ensures you get the most similar vectors before filtering, which can be crucial when similarity is more important than metadata constraints.
 
@@ -200,7 +184,9 @@ In the end, you receive a pandas DataFrame with the best matches that also meet 
 
 **Read more:** [Filtering](../reference/postfiltering.md)
 
-## Search in Parallel Batches
+## Scaling Vector Search
+
+### Batch Search
 
 Use batch search to handle multiple query vectors simultaneously. This gives you significant efficiency gains over individual queries. LanceDB processes all vectors in parallel and organizes results with a `query_index` field that maps each result set back to its originating query.
 
@@ -225,7 +211,7 @@ to explicitly associate each result set with its corresponding query in
 the input batch. 
 {{< / admonition >}}
 
-## Search With Asynchronous Indexing
+### Search With Asynchronous Indexing
 
 To optimize for speed over completeness, enable the `fast_search` flag in your query to skip searching unindexed data.
 
@@ -244,11 +230,28 @@ The `fast_search=True` parameter tells LanceDB to only search indexed vectors, s
 
 You'll obtain a pandas DataFrame with the top `5` matches from indexed vectors, but might miss data that was just added.
 
-## Bypassing the Vector Index
 
-{{< admonition note >}}
-This feature is available for LanceDB Enterprise users.
-{{< / admonition >}}
+## Brute Force Search
+
+### Search With No Index
+
+The simplest way to perform vector search is to perform a brute force search, without an index, where the distance between the query vector and all the vectors in the database are computed, with the top-k closest vectors returned. 
+
+This is equivalent to a k-nearest neighbours (kNN) search in vector space.
+
+Choose brute force search when you need guaranteed 100% recall, typically with smaller datasets where query speed isn't the primary concern. The system scans every vector in the table and calculates precise distances to find the exact nearest neighbors.
+
+{{< code language="python" >}}
+tbl.search(np.random.random((1536))).limit(3).to_list()
+{{< /code >}}
+
+This carries out a brute force search through every vector in the table to find the 3 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
+
+![](/assets/docs/knn_search.png)
+
+As you can imagine, the brute force approach is not scalable for datasets larger than a few hundred thousand vectors, as the latency of the search grows linearly with the size of the dataset. This is where approximate nearest neighbour (ANN) algorithms come in.
+
+### Bypass the Vector Index
 
 Use `bypass_vector_index` to get exact, ground-truth results by performing exhaustive searches across all vectors. Instead of relying on approximate methods, the system directly compares your query against every vector in the table, ensuring 100% recall at the cost of increased query time.
 

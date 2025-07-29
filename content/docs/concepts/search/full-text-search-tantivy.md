@@ -12,7 +12,7 @@ This feature is only available in Python Async SDK. You won't be able to build i
 
 In this example, you will create a table named `my_table`. Then, you will index the `content` column and query it via keyword search. 
 
-### 1. Installation
+### Installation
 
 You will need version 0.20.1 of [`tantivy-py`](https://github.com/quickwit-oss/tantivy-py):
 
@@ -20,7 +20,7 @@ You will need version 0.20.1 of [`tantivy-py`](https://github.com/quickwit-oss/t
 pip install tantivy==0.20.1
 ```
 
-### 2. Setup
+### Setup
 
 ```python
 import lancedb
@@ -37,7 +37,7 @@ table = db.create_table(
 )
 ```
 
-### 3. Construct FTS Index
+### Construct FTS Index
 
 By default, FTS Index is configured to `use_tantivy=True`. Switch to `use_tantivy=False` for the native LanceDB FTS Index.
 
@@ -45,7 +45,7 @@ By default, FTS Index is configured to `use_tantivy=True`. Switch to `use_tantiv
 table.create_fts_index("content", use_tantivy=True)
 ```
 
-## 4. Full-Text Search
+## Full-Text Search
 
 Search for the word `puppy` in the `content` column:
 
