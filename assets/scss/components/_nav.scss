@@ -54,18 +54,12 @@
     display: flex;
     gap: 48px;
     align-items: center;
-    justify-content: flex-start;
-    width: auto;
-    margin: 0;
+    justify-content: center;
+    width: 100%;
   }
 }
-
 .nav__item {
   @include clear-font();
-  
-  @include mq($lg) {
-    margin: 0;
-  }
 }
 
 .nav__link {
@@ -92,7 +86,6 @@
     padding: 0;
     border: none;
     color: palette(primary-offwhite);
-    white-space: nowrap;
 
     &:hover {
       color: palette(primary-dark, 400);

@@ -29,24 +29,6 @@
   }
 }
 
-.header__left {
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  flex: 1;
-  
-  @include mq($max: $lg) {
-    gap: 24px;
-  }
-}
-
-.header__right {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  justify-content: flex-end;
-}
-
 .header__announcement {
   position: relative;
   background: linear-gradient(79.99deg, palette(primary-lavende) 10.39%, palette(primary-orange) 80.5%);
@@ -130,7 +112,6 @@
   height: 34px;
   width: auto;
   display: block;
-  flex-shrink: 0;
 
   svg {
     height: 100%;
