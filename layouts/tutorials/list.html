@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{- partial "head.html" . -}}
+<body>
+    {{ partial "header.html" . }}
+    <div class="docs-orange-divider"></div>
+    <main class="docs-main">
+        <div class="docs-container">
+            <aside class="docs-sidebar">
+                {{ partial "docs-sidebar.html" . }}
+            </aside>
+            <div class="docs-content">
+                <article class="docs-article">
+                    <header class="docs-article-header">
+                        <h1>{{ .Title }}</h1>
+                    </header>
+                    <div class="docs-article-content">
+                        {{ .Content }}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+    {{ partial "footer.html" . }}
+</body>
+</html>

@@ -1,0 +1,28 @@
+---
+title: "Vector Search Tutorials"
+sidebar_title: "Vector Search"
+description: "Master vector search with LanceDB through Python and TypeScript tutorials"
+---
+
+LanceDB's vector search capabilities are designed to provide fast, accurate, and scalable similarity search for a wide range of applications. This section provides a curated list of tutorials to help you get started with the different vector search features available in LanceDB.
+
+| Feature | Description |
+| --- | --- |
+| [Vector Search](/docs/concepts/search/vector-search/) | Learn the fundamentals of vector search, including how to perform similarity searches, use different distance metrics, and optimize performance. |
+| [Hybrid Search](/docs/integrations/reranking/eval/) | Combine keyword-based search with vector search to improve retrieval accuracy and relevance. |
+| [Full-Text Search](/docs/concepts/search/full-text-search/) | Perform full-text search on your text data, and combine it with vector search for a powerful hybrid search experience. |
+| [Reranking](/docs/integrations/reranking/) | Refine your search results using reranking models to improve the relevance of the top-k results. |
+| [Multi-vector Search](/docs/concepts/search/multivector-search/) | Use multiple vector embeddings per document to perform more nuanced and accurate searches. |
+
+## Examples
+
+This section provides handpicked examples of applications built with LanceDB, showcasing its versatility and power.
+
+| Example | Description | Links |
+| --- | --- | --- |
+| Hybrid Search & Reranking | This example demonstrates how to use LanceDB's built-in hybrid search feature, which combines the strengths of both semantic and full-text search. By using the BEIR dataset, it shows how to achieve more relevant results by searching for both the meaning of a query and the specific keywords it contains. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Inbuilt-Hybrid-Search/Inbuilt_Hybrid_Search_with_LanceDB.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Inbuilt-Hybrid-Search) |
+| Multimodal Video Retrieval | Learn how to build a video search application using V-JEPA (Video Joint Embedding Predictive Architecture) and LanceDB. This example shows how to generate vector embeddings for videos and then use LanceDB to perform similarity searches, allowing you to find videos that are visually similar to a given query. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/v-jepa-video-search/v-jepa.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/v-jepa-video-search) |
+| Vector Arithmetic | Explore the concept of vector arithmetic with LanceDB. This notebook demonstrates how you can manipulate vector embeddings to capture more complex relationships in your data. For instance, you can modify a search query by adding or subtracting vector representations of different concepts, enabling more nuanced and powerful semantic search. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Vector-Arithmetic-with-LanceDB/main.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Vector-Arithmetic-with-LanceDB) |
+| Reddit Concept Summarizer | This project showcases a complete pipeline for acquiring text data from Reddit, transforming it into meaningful vector representations using embeddings, and then storing and managing those vectors in LanceDB. It demonstrates how to build applications on top of this data, such as summarization and powerful semantic search. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Reddit-summarization-and-search/subreddit_summarization_querying.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Reddit-summarization-and-search) |
+| NER Powered Vector Search | This example demonstrates how to use Named Entity Recognition (NER) to power vector search. By extracting entities (like people, places, and organizations) from text and creating vector embeddings of them, you can significantly improve the accuracy of your search results. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/NER-powered-Semantic-Search/NER_powered_Semantic_Search_with_LanceDB.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/NER-powered-Semantic-Search) |
+| Multivector Search with XTR | This notebook dives into LanceDB's advanced multivector search capabilities, enhanced by the XTR (ConteXtualized Token Retriever) technique. It shows how to represent complex data with multiple vectors for more nuanced meaning and how XTR speeds up retrieval by prioritizing the most important tokens. | [Open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multivector_xtr/main.ipynb)<br>[View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/multivector_xtr) |

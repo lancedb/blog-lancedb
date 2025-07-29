@@ -10,7 +10,7 @@ hide_toc: true
 
 **LanceDB** is a multimodal vector database that's designed to store and search data of different modalities. You can use LanceDB to build fast, scalable, and intelligent applications that rely on vector search and analytics. 
 
-By combining columnar storage with cutting-edge indexing techniques, LanceDB enables efficient querying of both structured and unstructured data. It is ideal for powering [semantic search engines](/docs/tutorials/vector-search/), [recommendation systems](/docs/tutorials/vector-search/), and [AI-driven applications (RAG, Agents)](/docs/tutorials/rag-agents/) that require real-time insights.
+By combining columnar storage with cutting-edge indexing techniques, LanceDB enables efficient querying of both structured and unstructured data. It is ideal for powering [semantic search engines](/tutorials/multimodal-vector-search/), [recommendation systems](/tutorials/multimodal-vector-search/), and [AI-driven applications (RAG, Agents)](/tutorials/RAG/) that require real-time insights.
 
 ### LanceDB Holds All the Data
 
