@@ -35,7 +35,7 @@
     src: url('../fonts/AeonikFono-Regular.woff2') format('woff2'),
          url('../fonts/AeonikFono-Regular.woff') format('woff'),
          url('../fonts/AeonikFono-Regular.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }

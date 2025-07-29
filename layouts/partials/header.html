@@ -3,7 +3,7 @@
         {{ with site.Params.header.top}}
         <div class="header__announcement">
             <div class="container container-fluid">
-                <a class="header__announcement-link" href="{{.link.href}}" {{- if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{- end }}>
+                <a class="header__announcement-link" href="{{.link.url}}" {{- if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{- end }}>
                     <span class="header__announcement-link__text">
                         {{.link.text}}
                     </span>

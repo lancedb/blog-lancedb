@@ -14,12 +14,12 @@
     {{with $title}}
       <h2 class="text-title-large form__title js-text-animation">{{.}}</h2>
     {{end}}
+    <div class="row">
     {{ if $embeded }}
-      <div class="form__embed">
+      <div class="col-12">
         {{ $embeded | safeHTML }}
       </div>
     {{ else }}
-      <div class="row">
         {{ range $fields }}
           {{ $col:= "col-12" }}
           {{ if .half }}
@@ -47,24 +47,65 @@
             </div>
           </div>
         {{ end }}
+        {{ end }}
         {{ with $submit_button }}
-          <div class="col-12">
-            <button type="submit" class="button button--{{.version | default "primary"}}">
-              {{ .text }}
-              {{ if .icon }}
-                <span class="button__icon">
-                  {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
-                </span>
-              {{ end }}
-            </button>
-          </div>
+        <div class="col-12">
+          <button  {{ if not $embeded }}type="submit"{{ end }} class="button button--{{.version | default "primary"}} {{ if $embeded }}js-form-submit{{ end }}">
+            {{ .text }}
+            {{ if .icon }}
+            <span class="button__icon">
+              {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+            </span>
+            {{ end }}
+          </button>
+        </div>
         {{ end }}
       </div>
-    {{ end }}
+  
+    {{ if $embeded }}
+      {{ with .content.success }}
+      <div class="form__success">
+        <div class="form__success-icon text-center">
+          {{readFile "static/assets/icons/thumb-up.svg" | safeHTML}}
+        </div>
+        <div class="form__success-text">
+          <h2 class="text-title-large">
+            {{ .title }}
+            <span class="text-gradient js-submit-name"></span>
+          </h2>
+          {{ with .description }}  
+            <p class="text-body-medium text-medium">
+              {{.}}
+            </p>
+          {{ end }}
+          {{ with .addition }}   
+            <p class="text-body-medium text-grey">
+              {{.}}
+            </p>
+          {{ end }}
+        </div>
+        {{ with .button }}
+        <div class="form__success-button">
+          <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+            {{ .text }}
+            {{ if .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+            {{ end }}
+          </a>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div> 
   </div>
-  {{ if $embeded }}
-  </div> 
   {{ else }}
+    </div>
   </form> 
   {{ end }}
 </div>
+{{ define "form" }}
+    {{ $formJs := resources.Get "js/form.js" | minify | fingerprint }}
+    <script src="{{ $formJs.RelPermalink | relURL }}"></script>
+{{ end }}

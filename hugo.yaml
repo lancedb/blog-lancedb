@@ -29,11 +29,7 @@ params:
   cloudLanceDBURL: https://cloud.lancedb.com
   privacyPdfURL: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
   termsPdfUrl: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
-  discordURL: https://discord.com/invite/G5DcmnZWKB
-  supportURL: mailto:support@lancedb.com
-  githubURL: https://github.com/lancedb
-  linkedInURL: https://www.linkedin.com/company/lancedb/
-  xURL: https://x.com/lancedb
+  downloadURL: https://learn.lancedb.com/hubfs/lancedb-multimodal-lakehouse.pdf
   socials:
     - name: Discord
       url: https://discord.com/invite/G5DcmnZWKB
