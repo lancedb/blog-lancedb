@@ -4,9 +4,13 @@ sidebar_title: Multivector Search
 weight: 2
 ---
 
-LanceDB's multivector support enables you to store and search multiple vector embeddings for a single item. This capability is particularly valuable when working with late interaction models like ColBERT and ColPaLi that generate multiple embeddings per document.
+LanceDB's multivector support enables you to store and search multiple vector embeddings for a single item. 
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb)
+This capability is particularly valuable when working with late interaction models like ColBERT and ColPaLi that generate multiple embeddings per document.
+
+In this tutorial, you'll create a table with multiple vector embeddings per document and learn how to perform multivector search. [For all the code - open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb)
+
+## Multivector Support
 
 Each item in your dataset can have a column containing multiple vectors, which LanceDB can efficiently index and search. When performing a search, you can query using either a single vector embedding or multiple vector embeddings. 
 

@@ -275,10 +275,10 @@ a.sidebar-divider {
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
-  top: 110px;
+  top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-  margin-top: 1.5rem;
+  margin-top: 0;
   
   &--hidden {
     visibility: hidden;
@@ -376,6 +376,87 @@ a.sidebar-divider {
 
 .docs-sidebar, .docs-toc {
   background: #171513;
+}
+
+// Override blog TOC styles for docs pages
+.docs-toc .toc-container {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-toc .toc {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-toc .toc h2 {
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.05em;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.docs-toc .toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-toc .toc ul ul {
+  padding-left: 1.2em;
+  margin-top: 0.2em;
+}
+
+.docs-toc .toc li {
+  margin-bottom: 0.2em;
+}
+
+.docs-toc .toc a {
+  color: #bfc2c7;
+  text-decoration: none;
+  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  transition: color 0.2s;
+  line-height: 1.6;
+  display: block;
+}
+
+.docs-toc .toc a:hover,
+.docs-toc .toc a.active {
+  color: #ff734a;
+  font-weight: 500;
+}
+
+.docs-toc .toc ul ul a {
+  font-size: 0.97em;
+  color: #bfc2c7;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.docs-toc .toc ul ul a.active {
+  color: #ff734a;
+  font-weight: 500;
+  opacity: 1;
+}
+
+// Override h1 alignment for docs pages
+.docs-article-header h1,
+.docs-article-content h1 {
+  text-align: left !important;
 } 
 
 .docs-article-content img {
