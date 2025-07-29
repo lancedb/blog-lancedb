@@ -10,7 +10,8 @@
   padding: 0.1em 0.1em 0.2em 0.1em;
   margin: 0.5em 0;
   box-shadow: none;
-    border: none;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
 }
 
 .code-tab__tabs-wrap {
@@ -23,9 +24,12 @@
   display: flex;
   flex-wrap: nowrap;
   border-bottom: 1px solid #292a2d;
-  background: transparent;
+  background: linear-gradient(135deg, #1a1d21 0%, #23262b 100%);
   border-radius: 10px 10px 0 0;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 115, 74, 0.1);
+  border-left: 1px solid rgba(255, 115, 74, 0.1);
+  border-right: 1px solid rgba(255, 115, 74, 0.1);
 }
 
 .code-tab__tab {

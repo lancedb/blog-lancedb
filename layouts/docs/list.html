@@ -46,5 +46,7 @@
     {{ partial "footer.html" . }}
     {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js" | fingerprint }}
     <script src="{{ $codeTabJS.RelPermalink }}"></script>
+    {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js" | fingerprint }}
+    <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
 </body>
 </html> 

@@ -38,17 +38,29 @@
 // Standard markdown code blocks (```python)
 .highlight:has(code) {
   @extend .code-block-default;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
 }
 
 // Hugo shortcode code blocks ({{< code language="python" >}})
 .post-content .highlight:has(code),
 .code-tab__content .highlight:has(code) {
   @extend .code-block-default;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
+}
+
+// Remove gradient border from code blocks inside tabbed containers
+.code-tab .highlight:has(code) {
+  border: none !important;
+  border-image: none !important;
 }
 
 // Multi-language code tabs (Python/TypeScript side-by-side)
 .code-tab {
   @extend .code-block-default;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
 }
 
 .code-tab__content {
@@ -89,14 +101,10 @@
   margin: 1.2em 0;
   border: 1px solid rgba(255, 115, 74, 0.18);
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
-  transition: box-shadow 0.25s, border-color 0.25s;
+  // Removed transition and hover/focus effects
   position: relative;
 
-  &:hover,
-  &:focus-within {
-    box-shadow: 0 4px 24px 0 rgba(255, 115, 74, 0.18), 0 2px 12px 0 rgba(0,0,0,0.22);
-    border-color: #ff734a;
-  }
+  // Removed &:hover and &:focus-within animations
 }
 
 // Override docs.scss conflicting styles
@@ -106,7 +114,8 @@
   border-radius: 14px !important;
   padding: 0.1em 0.1em 0.2em 0.1em !important;
   margin: 0.5em 0 !important;
-  border: none !important;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
   box-shadow: none !important;
 }
 
@@ -139,25 +148,92 @@
 // Copy button styles (common across all code blocks)
 .copy-button {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: 1px solid palette(primary-dark, 400);
-  color: palette(primary-offwhite);
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  top: 8px;
+  right: 8px;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: #f97316;
+  padding: 6px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   z-index: 3;
+  opacity: 0.7;
+  line-height: 1.2;
+  height: auto;
+  min-height: 1.2em;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
 
   @include mq($md) {
-    top: 16px;
-    right: 16px;
-    padding: 0.4rem 0.8rem;
+    top: 10px;
+    right: 10px;
+    padding: 8px;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+    border-color: #f97316;
+    color: white;
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  }
+
+  &.copied {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    border-color: #059669;
+    color: white;
+    transform: scale(0.95);
+    transition: all 0.1s ease;
+  }
+
+  &:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
+// Specific copy button styles for docs pages
+.docs-article-content pre .copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: #f4ebe8;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  z-index: 3;
+  opacity: 1 !important;
+  line-height: 1.2;
+  height: auto;
+  min-height: 1.2em;
+
+  @include mq($md) {
+    top: 10px;
+    right: 10px;
+    padding: 0.25rem 0.5rem;
     font-size: 0.7rem;
   }
 
@@ -168,8 +244,11 @@
   }
 
   &.copied {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
+    background: #2d3748; // Darker, more opaque background
+    border: 1px solid #4a5568; // Darker border
+    color: #e2e8f0; // Lighter text for contrast
+    transform: scale(0.95); // Quick scale down effect
+    transition: all 0.1s ease; // Faster transition
   }
 
   &:focus {
@@ -202,11 +281,14 @@ code {
 
 // Focus states (common across all code blocks)
 pre {
-  &:focus-within {
-    .highlight:has(&) {
-      border: 2px solid #f97316;
-    }
-  }
+  position: relative;
+  
+  // Removed focus-within animations
+  // &:focus-within {
+  //   .highlight:has(&) {
+  //     border: 2px solid #f97316;
+  //   }
+  // }
 
   &:hover .copy-button {
     opacity: 1;

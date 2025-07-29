@@ -5,12 +5,12 @@
 {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
+<script src="{{ $codeBlocksJS.RelPermalink }}"></script>
 
 {{ if eq .Type "blog" }}
     <script src="{{ $tocJs.RelPermalink }}"></script> 
     <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
     <script src="{{ $codeTabJS.RelPermalink }}"></script> 
-    <script src="{{ $codeBlocksJS.RelPermalink }}"></script> 
 {{ else }}
     {{ $textAniamtionJs := resources.Get "js/text-animation.js" | minify | fingerprint }}
 
