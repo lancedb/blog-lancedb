@@ -1,8 +1,8 @@
 ---
-title: "LanceDB Embedding API"
-sidebar_title: Embedding
+title: "Vectorizing and Embedding Data with LanceDB"
+sidebar_title: Embedding Data
 description: "Complete reference for LanceDB's embedding API - registry, functions, schemas, and multi-language SDK support."
-weight: 9
+weight: 1
 ---
 
 Modern machine learning models can be trained to convert raw data into embeddings, represented as arrays (or vectors) of floating point numbers of fixed dimensionality. What makes embeddings useful in practice is that the position of an embedding in vector space captures some of the semantics of the data, depending on the type of model and how it was trained. Points that are close to each other in vector space are considered similar (or appear in similar contexts), and points that are far away are considered dissimilar.

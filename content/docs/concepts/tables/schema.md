@@ -1,6 +1,6 @@
 ---
 title: "Schema and Data Evolution with LanceDB"
-sidebar_title: "Schema"
+sidebar_title: "Table Schema"
 description: Learn how to manage table schemas in LanceDB, including adding, altering, and dropping columns.
 weight: 4
 ---

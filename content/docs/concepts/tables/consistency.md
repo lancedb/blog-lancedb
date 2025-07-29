@@ -1,6 +1,6 @@
 ---
 title: Consistency in LanceDB
-sidebar_title: "Consistency"
+sidebar_title: "Table Consistency"
 description: Learn about consistency settings and versioning in LanceDB tables.
 weight: 5
 ---
