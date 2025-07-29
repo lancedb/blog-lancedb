@@ -241,26 +241,7 @@ a.sidebar-divider {
   text-decoration: underline;
 }
 
-.docs-article-content pre {
-  background: linear-gradient(135deg, #23262b 60%, #181b1f 100%);
-  color: #ffe2c6;
-  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-  font-size: 1em;
-  padding: 1.1em 1.5em;
-  border-radius: 10px;
-  margin: 1.2em 0;
-  overflow-x: auto;
-  border: 1px solid rgba(255, 115, 74, 0.18);
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
-  transition: box-shadow 0.25s, border-color 0.25s;
-  position: relative;
-}
-
-.docs-article-content pre:hover,
-.docs-article-content pre:focus-within {
-  box-shadow: 0 4px 24px 0 rgba(255, 115, 74, 0.18), 0 2px 12px 0 rgba(0,0,0,0.22);
-  border-color: #ff734a;
-}
+// Documentation page pre styles are now managed in _code-common.scss
 
 .docs-article-content code:not(pre code) {
   background: #2d3748;

@@ -93,22 +93,7 @@
   display: block;
   }
 
-.code-tab__content pre {
-  background: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  border: none !important;
-  margin: 0 !important;
-  padding: 0.5em 0.7em !important;
-}
-
-.code-tab__content .highlight {
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+// Code tab content styles are now managed in _code-common.scss
 
 .code-tab__tab[data-lang-switch="rust"] {
   gap: 0.2em;

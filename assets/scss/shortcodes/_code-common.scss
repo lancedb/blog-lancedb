@@ -1,0 +1,240 @@
+// Common Code Block Styles
+// This file manages all code block styles across the site
+// Default style is based on multi-language code tabs
+
+// Default code block style (based on multi-language code tabs)
+.code-block-default {
+  background: #202124;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0.1em 0.1em 0.2em 0.1em;
+  margin: 0.5em 0;
+  box-shadow: none;
+  border: none;
+  max-width: 100%;
+  overflow-x: auto;
+
+  pre {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0.5em 0.7em !important;
+    overflow: hidden;
+  }
+
+  code {
+    color: palette(primary-offwhite);
+    font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+// Standard markdown code blocks (```python)
+.highlight:has(code) {
+  @extend .code-block-default;
+}
+
+// Hugo shortcode code blocks ({{< code language="python" >}})
+.post-content .highlight:has(code),
+.code-tab__content .highlight:has(code) {
+  @extend .code-block-default;
+}
+
+// Multi-language code tabs (Python/TypeScript side-by-side)
+.code-tab {
+  @extend .code-block-default;
+}
+
+.code-tab__content {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.code-tab__content .highlight {
+  @extend .code-block-default;
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.code-tab__content pre {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0.5em 0.7em !important;
+  overflow: hidden;
+}
+
+// Documentation page code blocks (enhanced with hover effects)
+.docs-article-content pre {
+  @extend .code-block-default;
+  background: linear-gradient(135deg, #23262b 60%, #181b1f 100%) !important;
+  color: #ffe2c6;
+  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 1em;
+  padding: 1.1em 1.5em !important;
+  border-radius: 10px !important;
+  margin: 1.2em 0;
+  border: 1px solid rgba(255, 115, 74, 0.18);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
+  transition: box-shadow 0.25s, border-color 0.25s;
+  position: relative;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 4px 24px 0 rgba(255, 115, 74, 0.18), 0 2px 12px 0 rgba(0,0,0,0.22);
+    border-color: #ff734a;
+  }
+}
+
+// Override docs.scss conflicting styles
+.docs-article-content .highlight:has(code) {
+  @extend .code-block-default;
+  background: #202124 !important;
+  border-radius: 14px !important;
+  padding: 0.1em 0.1em 0.2em 0.1em !important;
+  margin: 0.5em 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+// Admonition code blocks (subtle dark background)
+.admonition-content pre {
+  @extend .code-block-default;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 115, 74, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  margin: 0.5rem 0 0 0;
+  overflow-x: auto;
+
+  code {
+    background: none;
+    color: #ffe2c6;
+    padding: 0;
+  }
+}
+
+// Solution section code blocks (transparent background)
+.solution__code .highlight:has(code) {
+  @extend .code-block-default;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
+}
+
+// Copy button styles (common across all code blocks)
+.copy-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid palette(primary-dark, 400);
+  color: palette(primary-offwhite);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 3;
+
+  @include mq($md) {
+    top: 16px;
+    right: 16px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+    border-color: #f97316;
+    color: white;
+  }
+
+  &.copied {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+  }
+
+  &:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+  }
+}
+
+// Scrollbar styles (common across all code blocks)
+code {
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: palette(primary-dark);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #f97316 0%, #f43f5e 100%);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+  }
+}
+
+// Focus states (common across all code blocks)
+pre {
+  &:focus-within {
+    .highlight:has(&) {
+      border: 2px solid #f97316;
+    }
+  }
+
+  &:hover .copy-button {
+    opacity: 1;
+  }
+}
+
+// Line highlighting (common across all code blocks)
+.highlight-line {
+  background: rgba(249, 115, 22, 0.1);
+  border-left: 3px solid #f97316;
+  padding-left: 0.5rem;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding-right: 1.25rem;
+  display: block;
+}
+
+// Inline code styles (common across all code blocks)
+code:not(pre code) {
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.25em 0.6em;
+  font-size: 0.9em;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  box-shadow: none;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  display: inline-block;
+  line-height: 1.4;
+} 

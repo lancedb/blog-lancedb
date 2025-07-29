@@ -1,63 +1,8 @@
+// Code block styles are now managed in _code-common.scss
+// This file only contains specific overrides if needed
+
 .post-content,
 .code-tab__content {
-
-  .highlight:has(code) {
-    position: relative;
-    border: 1px solid;
-    border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
-    border-image-slice: 1;
-    background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
-
-    border-radius: 4px;
-    overflow-x: auto;
-    max-width: 100%;
-    padding: 20px;
-
-    @include mq($md) {
-      padding: 32px;
-    }
-
-    .copy-button {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: transparent;
-      border: 1px solid palette(primary-dark, 400);
-      color: palette(primary-offwhite);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      z-index: 3;
-
-      @include mq($md) {
-        top: 16px;
-        right: 16px;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.7rem;
-      }
-
-      &:hover {
-        background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
-        border-color: #f97316;
-        color: white;
-      }
-
-      &.copied {
-        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-        color: white;
-      }
-
-      &:focus {
-        outline: 2px solid #f97316;
-        outline-offset: 2px;
-      }
-    }
-  }
 
   code {
     color: palette(primary-offwhite);
