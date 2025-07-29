@@ -18,7 +18,7 @@ This is only tune-able in LanceDB OSS. In LanceDB Cloud, readers are always even
 
 ## Configuring Consistency Parameters
 
-To set strong consistency in Python, use `timedelta(0)`:
+To set strong consistency, set the interval to 0:
 
 {{< code language="python" >}}
 from datetime import timedelta
@@ -27,13 +27,12 @@ uri = "data/sample-lancedb"
 db = lancedb.connect(uri, read_consistency_interval=timedelta(0))
 tbl = db.open_table("test_table")
 {{< /code >}}
-
 {{< code language="typescript" >}}
 const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 0 });
 const tbl = await db.openTable("my_table");
 {{< /code >}}
 
-For eventual consistency, use a custom `timedelta`:
+For eventual consistency, use a custom interval:
 
 {{< code language="python" >}}
 from datetime import timedelta
@@ -42,7 +41,6 @@ uri = "data/sample-lancedb"
 db = lancedb.connect(uri, read_consistency_interval=timedelta(seconds=5))
 tbl = db.open_table("test_table")
 {{< /code >}}
-
 {{< code language="typescript" >}}
 const db = await lancedb.connect({ uri: "./.lancedb", readConsistencyInterval: 5 });
 const tbl = await db.openTable("my_table");
@@ -51,14 +49,14 @@ const tbl = await db.openTable("my_table");
 
 By default, a `Table` will never check for updates from other writers. To manually check for updates you can use `checkout_latest`:
 
-{{< code language="python" >}}
+```python
 tbl = db.open_table("test_table")
 
 # (Other writes happen to my_table from another process)
 
 # Check for updates
 tbl.checkout_latest()
-{{< /code >}}
+```
 
 ## Handling bad vectors
 
