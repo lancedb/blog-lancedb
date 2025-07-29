@@ -3,6 +3,8 @@ title: We’d love <br> to hear from you
 highlighted: hear from you
 description: Please fill out the form and we'll get back to you within 48 hours.
 form:
+  embeded: '<script src="https://js-na2.hsforms.net/forms/embed/developer/242023405.js" defer></script>
+<div class="hs-form-html" data-region="na2" data-form-id="774f9a7f-3b99-4d62-9916-157b8660751f" data-portal-id="242023405"></div>'
   fields: 
     - label: First name
       name: first_name

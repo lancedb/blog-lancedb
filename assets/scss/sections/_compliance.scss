@@ -25,7 +25,7 @@
 .compliance__item-wrap {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: stretch;
+  justify-content: center;
   align-items: flex-start;
 
   margin-top: 38px;
@@ -40,7 +40,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-
 
   @include mq($md) {
     gap: 18px;
@@ -64,7 +63,8 @@
 .compliance__item-dots {
   padding: 10px 24px;
   aspect-ratio: 1;
-  @include mq($md) {
+  min-height: 162px;
+  @include mq($lg) {
     padding: 37px;
   }
 }
@@ -74,10 +74,16 @@
   align-items: center;
   justify-content: center;
   border: 1px solid palette(primary-grey, 300);
-  background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+  background: linear-gradient(180deg, palette(primary-dark, 700) 40%, palette(primary-grad-dark, start) 100%);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   @include mq($md) {
     padding: 24px 37px;
+  }
+
+  &:hover {
+    background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
   }
 
   svg {

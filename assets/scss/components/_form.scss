@@ -1,4 +1,3 @@
-
 .form__wrap {
   border: 12px solid transparent;
   background-origin: border-box;
@@ -13,7 +12,7 @@
   }
 
   @include mq($lg) {
-     margin-left: 40px;
+    margin-left: 40px;
   }
 
   .button {
@@ -73,7 +72,7 @@
       }
     }
 
-    &::after{
+    &::after {
       position: absolute;
       left: 0;
       top: 50%;
@@ -103,7 +102,12 @@
   }
 }
 
-.form__input {
+.form__input,
+.form .hsfc-Form input[type="text"],
+.form .hsfc-Form input[type="email"],
+.form .hsfc-Form input[type="password"],
+.form .hsfc-Form input[type="number"],
+.form .hsfc-Form textarea{
   appearance: none;
   background-color: palette(primary-dark);
   border: 1px solid palette(primary-dark, 500);
@@ -112,6 +116,8 @@
   padding: 14px 16px;
   color: palette(primary-offwhite);
   transition: all .3s ease-in-out;
+  @include text-style(body-small);
+  @include font-family(pro);
 
   &:placeholder {
     color: palette(primary-dark, 400);
@@ -129,6 +135,7 @@
 
   &:hover {
     border-color: palette(primary-dark, 400);
+    box-shadow: none;
   }
 
   &.error {
@@ -231,8 +238,57 @@
 .form__info-text {
   color: palette(primary-dark, 400);
 
-  a{
+  a {
     text-decoration: underline;
     color: palette(primary-dark, 400);
   }
+}
+
+// Hubspot form embed
+
+.form .hsfc-Form {
+  .hsfc-Step__Content {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    row-gap: value-to-rem(double($grid-gutter));
+  }
+
+  .hsfc-Row {
+    row-gap: value-to-rem(double($grid-gutter));
+    column-gap: value-to-rem(double($grid-gutter));
+    margin-bottom: 0;
+    &:has(.hsfc-Heading),
+    &:has(.hsfc-RichText) {
+      display: none;
+    }
+  }
+
+  .hsfc-TextField,
+  .hsfc-EmailField,
+  .hsfc-TextareaField {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .hsfc-FieldLabel {
+      @include text-style(body-small);
+      @include font-family(pro);
+      color: palette(primary-offwhite);
+      margin: 0;
+    }
+
+    .hsfc-ErrorAlert {
+      display: none;
+    }
+
+    &:has(.hsfc-ErrorAlert) {
+      input,
+      textarea {
+        border-color: palette(primary-red);
+        color: palette(primary-red);
+      }
+    }
+  }
+
 }
