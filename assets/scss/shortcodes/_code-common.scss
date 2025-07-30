@@ -169,8 +169,10 @@
   min-height: 1.2em;
   backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
+  display: none;
 
   @include mq($md) {
+    display: inline-block;
     top: 10px;
     right: 10px;
     padding: 8px;
