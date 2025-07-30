@@ -28,7 +28,7 @@
                 </article>
             </div>
         </div>
-        <aside class="col-12 col-md-3 col-lg-2{{ if .Params.hide_toc }}d-none{{ end }} docs-toc">
+        <aside class="col-12 col-md-3 col-lg-2{{ if .Params.hide_toc }} d-none{{ end }} docs-toc">
             <div class="toc-container">
                 {{ if not .Params.hide_toc }}
                 {{ .TableOfContents }}
