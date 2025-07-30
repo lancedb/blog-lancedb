@@ -5,12 +5,13 @@ description: "Interactive demonstrations and examples of LanceDB in action"
 weight: 9
 ---
 
-## Searching Over 40 Million Wikipedia Entries
+{{< admonition "Note" "Searching Over 40 Million Wikipedia Entries" >}}
+This demo showcases LanceDB's ability to efficiently search through 40M+ Wikipedia entries, demonstrating production-grade performance at scale.
+{{< /admonition >}}
 
-➡️ **[Try the Live Wikipedia Search App Here!](https://wiki-search-2.vercel.app/)** ⬅️
+<p style="text-align: center;">➡️ <a href="https://wiki-search-2.vercel.app/">Click to try the Live Wikipedia Search App!</a> ⬅️</p>
 
-![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)
-
+[![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://wiki-search-2.vercel.app/)
 
 ## Overview
 
@@ -32,7 +33,7 @@ uses Modal for massive parallelization, the LanceDB techniques shown are fundame
 within **any infrastructure** you choose for scaling (Ray, Spark, etc.).
 {{< /admonition >}}
 
-## Performance 
+### Performance 
 
 When running this workflow on Modal with 50 GPUs:
 * **Ingestion**: Complete 41M records in ~11 minutes
@@ -48,7 +49,7 @@ By storing Wikipedia chunks and their embeddings in LanceDB, you create a powerf
 * Retrieval-Augmented Generation (RAG) pipelines
 * Knowledge discovery tools
 
-## Setup Instructions
+## Setup 
 
 Before starting, ensure you have:
 
@@ -161,7 +162,7 @@ table.create_fts_index(["content", "title"])
 ```
 Once the index creation is done, you'll see these labels appear on the columns with index.
 
-![Indexed Table](/images/app-gallery/indexed-table.png)
+![Indexed Table](/assets/docs/demos/indexed-table.png)
 
 {{< admonition >}}
 To wait until all data is fully indexed, you can specify the `wait_timeout` parameter on `create_index()` or call `wait_for_index()` on the table.

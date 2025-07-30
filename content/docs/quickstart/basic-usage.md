@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with LanceDB"
+title: "Common Database Operations in LanceDB"
 sidebar_title: "Basic Usage"
 description: Learn how to use LanceDB with Python, TypeScript, and Rust SDKs. Includes installation instructions, basic operations, and code examples for each language.
 weight: 2
@@ -156,8 +156,13 @@ By default, LanceDB runs a brute-force scan over the dataset to find the K neare
 
 ## What's Next?
 
-This section covered the very basics of using LanceDB. We've prepared another example to teach you about [working with whole datasets](datasets).
+This section covered the very basics of using LanceDB. 
 
 - To learn more about vector databases, you may want to read about [Search](/docs/concepts/search/) or [Indexing](/docs/concepts/indexing/) to get familiar with the concepts.
 
 - If you've already worked with other vector databases, dive into the [Table Docs](/docs/concepts/tables/) to learn how to work with LanceDB Tables in more detail.
+
+{{< admonition "Note" "How to Ingest Data?" >}}
+We've prepared another example to teach you about [working with whole datasets](datasets).
+{{< /admonition >}}
+

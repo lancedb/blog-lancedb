@@ -3,13 +3,13 @@ title: Designed for Multimodal. <br> Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
 hero:
   cta:
-    - text: Get started
-      icon: true
-      href: /contact
-      version: primary
-    - text: Discover more
+    - text: Get Started
       icon: true
       href: https://accounts.lancedb.com/sign-up
+      version: primary
+    - text: Learn More
+      icon: true
+      href: /contact
       version: secondary
   vector: #static/assets/vectors/hero-bg.svg
   video: assets/video/blob.mp4
@@ -82,7 +82,7 @@ solution:
     href: https://accounts.lancedb.com/sign-up
     icon: true
     version: primary
-    text: Create your first project
+    text: Create Your First Project
 how_it_works:
   title: How LanceDB Works
   description: From prototype to production.
@@ -175,7 +175,7 @@ blog:
     - November Feature Roundup
     - Test Post for code snippet
   cta: 
-    text: Go to blog
+    text: Read the Blog
     icon: true
     version: primary
     href: /blog

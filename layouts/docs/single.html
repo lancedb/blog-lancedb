@@ -53,5 +53,7 @@
     <script src="{{ $codeTabJS.RelPermalink }}"></script>
     {{ $tocActiveJS := resources.Get "js/toc-active.js" | js.Build "toc-active.js" | fingerprint }}
     <script src="{{ $tocActiveJS.RelPermalink }}"></script>
+    {{ $imageExpandJS := resources.Get "js/image-expand.js" | js.Build "image-expand.js" | fingerprint }}
+    <script src="{{ $imageExpandJS.RelPermalink }}"></script>
 </body>
 </html> 

@@ -88,8 +88,12 @@ The results show the most similar vectors to your query, sorted by similarity sc
 | 3  | [0.5, 0.9, 0.6] | cleric  | 0.49      |
 ```
 
-Looks like the knight is the most similar to the warrior. Not exactly a real-life scenario - but you can see how vector search works in five steps.
+Looks like the knight is the most similar to the warrior. 
 
-Let's actually vectorize the word "warrior" with an embedding model and run a search over the same table, but embedded using a simple model `like sentence-transformers`.
+This is, of course, a simplified scenario - but the engine offered by LanceDB allows you to conduct complex calculations at high volumes and extreme speeds.
 
-Check out the next [tutorial on using the Embedding API](../quickstart/embedding). 
+In real world scenarios, [embeddings](/docs/guides/embedding/) capture meaning and [vector search](/docs/concepts/search/vector-search/) gives you access to powerful ways of finding semantic relevance or contextual relations.
+
+{{< admonition "Note" "What's Next?" >}}
+Check out the next [tutorial on Common Database Operations](/docs/quickstart/basic-usage/). 
+{{< /admonition >}}

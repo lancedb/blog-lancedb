@@ -1,6 +1,6 @@
 ---
-title: "How to Ingest a Dataset into LanceDB"
-sidebar_title: "Ingest Data"
+title: "Ingesting Datasets into LanceDB"
+sidebar_title: "Ingesting Data"
 description: Learn how to ingest datasets from Huggingface into LanceDB Cloud. Follow step-by-step instructions for data ingestion, connection setup, and basic search operations.
 weight: 3
 ---
@@ -357,6 +357,10 @@ console.log(filteredResultsesults);
 
 That's pretty much it for the **Getting Started** section.
 
-To learn more about vector databases, you may want to read about [**Indexing**](../concepts/indexing.md) to get familiar with the concepts.
+- To learn more about vector databases, you may want to read about [Search](/docs/concepts/search/) or [Indexing](/docs/concepts/indexing) to get familiar with the concepts.
 
-If you've already worked with other vector databases, dive into the [**Table Guide**](../guides/tables/index.md) to learn how to work with LanceDB in more detail.
+- If you've already worked with other vector databases, dive into the [Table Docs](/docs/concepts/tables/) to learn how to work with LanceDB in more detail.
+
+{{< admonition "Note" "Try Building an App!" >}}
+It's time to start working on end-to-end exercises. [We prepared a few beginner tutorials for you](/docs/tutorials/).
+{{< /admonition >}}

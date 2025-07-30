@@ -16,7 +16,7 @@ plans:
         - Automatic indexing and compaction
         - Python, TypeScript, and Rust SDKs
     link:
-      text: Start free
+      text: Start Free
       icon: true
       version: primary
       href: https://accounts.lancedb.com/sign-up
@@ -96,10 +96,10 @@ calculator:
   actions:
     - version: secondary
       href: /contact
-      text: Pricing Details
+      text: Contact Sales
       icon: true 
     - version: primary
       href: https://accounts.lancedb.com/sign-up
-      text: Sign up
+      text: Sign Up
       icon: true 
 ---
