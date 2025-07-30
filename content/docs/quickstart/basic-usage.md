@@ -156,9 +156,8 @@ By default, LanceDB runs a brute-force scan over the dataset to find the K neare
 
 ## What's Next?
 
-This section covered the very basics of using LanceDB. We've prepared another example to teach you about [working with whole datasets](datasets.md).
+This section covered the very basics of using LanceDB. We've prepared another example to teach you about [working with whole datasets](datasets).
 
-- To learn more about vector databases, you may want to read about [Indexing](../concepts/indexing.md) to get familiar with the concepts.
+- To learn more about vector databases, you may want to read about [Search](/docs/concepts/search/) or [Indexing](/docs/concepts/indexing/) to get familiar with the concepts.
 
-- If you've already worked with other vector databases, dive into the [Table Guide](../guides/tables/index.md) to learn how to work with LanceDB in more detail.
-
+- If you've already worked with other vector databases, dive into the [Table Docs](/docs/concepts/tables/) to learn how to work with LanceDB Tables in more detail.
