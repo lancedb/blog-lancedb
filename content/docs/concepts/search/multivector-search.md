@@ -39,7 +39,7 @@ The MaxSim calculation can be expressed as:
 where `sim` is the similarity function (e.g. cosine), $Q = \{q_1, q_2, ..., q_{|Q|}\}$ represents the query vectors, and $D = \{d_1, d_2, ..., d_{|D|}\}$ represents the document vectors.
 
 {{< admonition note "Distance Metric" >}}
-For now, only `cosine` metric is supported for multivector search.
+For now, you should use only the `cosine` metric for multivector search.
 The vector value type can be `float16`, `float32` or `float64`.
 {{< /admonition >}}
 

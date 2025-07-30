@@ -118,7 +118,7 @@ LanceDB automatically searches on the existing FTS index if the input to the sea
 
 By default, the text is tokenized by splitting on punctuation and whitespaces, and would filter out words that are longer than 40 characters. All words are converted to lowercase.
 
-Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages. We encourage users to set the `language` parameter rather than `tokenizer_name` because you cannot customize the tokenizer if `tokenizer_name` is specified.
+Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages. You should set the `language` parameter rather than `tokenizer_name` because you cannot customize the tokenizer if `tokenizer_name` is specified.
 
 For example, to enable stemming for English:
 

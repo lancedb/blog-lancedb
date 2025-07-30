@@ -15,7 +15,7 @@ Raw data (e.g. text, images, audio, etc.) is converted into embeddings via an em
 
 Distance metrics determine how LanceDB compares vectors to find similar matches. Euclidean or `l2` is the default, and used for general-purpose similarity, `cosine` for unnormalized embeddings, `dot` for normalized embeddings (best performance), or `hamming` for binary vectors. 
 
-**Important:** Use the same distance metric that your embedding model was trained with. Most modern embedding models use cosine similarity, so `cosine` is often the best choice. However, if your vectors are normalized, we encourage using `dot` for best performance.
+**Important:** Use the same distance metric that your embedding model was trained with. Most modern embedding models use cosine similarity, so `cosine` is often the best choice. However, if your vectors are normalized, you should use `dot` for best performance.
 
 The right metric improves both search accuracy and query performance. Currently, LanceDB supports the following metrics:
 
@@ -31,7 +31,7 @@ The right metric improves both search accuracy and query performance. Currently,
 By default, `l2` will be used as metric type. You can specify the metric type as
 `cosine` or `dot` if required.
 
-**Note:** Distance metric configuration during search is only available when there's no vector index. If a vector index exists, the distance metric is always the one specified when creating the index.
+**Note:** You can configure the distance metric during search only if there’s no vector index. If a vector index exists, the distance metric will always be the one you specified when creating the index.
 
 {{< code language="python" >}}
 tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
