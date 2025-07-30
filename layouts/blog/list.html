@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main>  
+<div class="container">
 {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
 {{ $featuredPosts := where $allPosts ".Params.featured" true }}
 
@@ -137,6 +137,6 @@
     </div>
 </nav>
 {{ end }}
-</main>
+</div>
 {{ end }}
     
