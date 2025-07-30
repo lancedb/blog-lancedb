@@ -333,7 +333,7 @@ a.sidebar-divider {
 .docs-toc .toc-container a:hover,
 .docs-toc .toc-container a.active {
   color: #ff734a;
-  font-weight: 500;
+  text-decoration: underline;
 }
 
 .docs-toc .toc-container ul ul a {
@@ -345,9 +345,9 @@ a.sidebar-divider {
 
 .docs-toc .toc-container ul ul a.active {
   color: #ff734a;
-  font-weight: 500;
+  text-decoration: underline;
   opacity: 1;
-} 
+}
 
 .docs-article-header h1,
 .docs-article-content h1,
@@ -475,6 +475,9 @@ a.sidebar-divider {
     0 8px 32px rgba(255, 115, 74, 0.15),
     0 4px 16px rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  width: auto;
+  height: auto;
   
   &:hover {
     transform: translateY(-2px);

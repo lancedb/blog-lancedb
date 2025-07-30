@@ -35,6 +35,15 @@ By default, `l2` will be used as metric type. You can specify the metric type as
 tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
 {{< /code >}}
 
+{{< code language="typescript" >}}
+const results2 = await (
+  tbl.search(Array(128).fill(1.2)) as lancedb.VectorQuery
+)
+  .distanceType("cosine")
+  .limit(10)
+  .toArray();
+{{< /code >}}
+
 Here you can see the same search but using `cosine` similarity instead of `l2` distance. The result focuses on vector direction rather than absolute distance, which works better for normalized embeddings.
 
 ## Vector Search With ANN Index
@@ -45,13 +54,130 @@ The trade-off is that the results are not guaranteed to be the true nearest neig
 
 Use ANN search for large-scale applications where speed matters more than perfect recall. LanceDB uses approximate nearest neighbor algorithms to deliver fast results without examining every vector in your dataset.
 
+### Vector Search with Prefiltering
+
+This is the default vector search setting. You can use prefiltering to boost query performance by reducing the search space before vector calculations begin. The system first applies your filter criteria to the dataset, then conducts vector search operations only on the remaining relevant subset.
+
 {{< code language="python" >}}
-tbl.search([100, 100]).limit(2).to_pandas()
+import lancedb
+from datasets import load_dataset
+
+# Connect to LanceDB
+db = lancedb.connect(
+  uri="db://your-project-slug",
+  api_key="your-api-key",
+  region="us-east-1"
+)
+
+# Load query vector from dataset
+query_dataset = load_dataset("sunhaozhepy/ag_news_sbert_keywords_embeddings", split="test[5000:5001]")
+print(f"Query keywords: {query_dataset[0]['keywords']}")
+query_embed = query_dataset["keywords_embeddings"][0]
+
+# Open table and perform search
+table_name = "lancedb-cloud-quickstart"
+table = db.open_table(table_name)
+
+# Vector search with filters (pre-filtering is the default)
+search_results = (
+    table.search(query_embed)
+    .where("label > 2")
+    .select(["text", "keywords", "label"])
+    .limit(5)
+    .to_pandas()
+)
+
+print("Search results (with pre-filtering):")
+print(search_results)
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+
+// Connect to LanceDB
+const db = await lancedb.connect({
+  uri: "db://your-project-slug",
+  apiKey: "your-api-key",
+  region: "us-east-1"
+});
+
+// Generate a sample 768-dimension embedding vector (typical for BERT-based models)
+// In real applications, you would get this from an embedding model
+const dimensions = 768;
+const queryEmbed = Array.from({ length: dimensions }, () => Math.random() * 2 - 1);
+
+// Open table and perform search
+const tableName = "lancedb-cloud-quickstart";
+const table = await db.openTable(tableName);
+
+// Vector search with filters (pre-filtering is the default)
+const vectorResults = await table.search(queryEmbed)
+  .where("label > 2")
+  .select(["text", "keywords", "label"])
+  .limit(5)
+  .toArray();
+
+console.log("Search results (with pre-filtering):");
+console.log(vectorResults);
 {{< /code >}}
 
-This finds the 2 most similar vectors to [100, 100] using an approximate nearest neighbor index for speed. The output is a pandas DataFrame with the top matches and their similarity scores.
+This filters out rows where label ≤ 2 before doing vector search, then picks specific columns from the top 5 matches. 
 
-**Read more:** [Vector Indexing](../reference/ann-index.md)
+The `.where("label > 2")` applies a filter before vector search, `.select(["text", "keywords", "label"])` chooses specific columns to return, and `.limit(5)` restricts results to the top `5` most similar vectors. 
+
+As a result, you'll see a pandas DataFrame with just the data you want from the most similar vectors.
+
+### Vector Search with Postfiltering
+
+Use postfiltering to prioritize vector similarity by searching the full dataset first, then applying metadata filters to the top results. This approach ensures you get the most similar vectors before filtering, which can be crucial when similarity is more important than metadata constraints.
+
+{{< code language="python" >}}
+results_post_filtered = (
+    table.search(query_embed)
+    .where("label > 1", prefilter=False)
+    .select(["text", "keywords", "label"])
+    .limit(5)
+    .to_pandas()
+)
+
+print("Vector search results with post-filter:")
+print(results_post_filtered)
+{{< /code >}}
+{{< code language="typescript" >}}
+const vectorResultsWithPostFilter = await (table.search(queryEmbed) as VectorQuery)
+  .where("label > 2")
+  .postfilter()
+  .select(["text", "keywords", "label"])
+  .limit(5)
+  .toArray();
+
+console.log("Vector search results with post-filter:");
+console.log(vectorResultsWithPostFilter);
+{{< /code >}}
+
+Here you can see how to do vector search first to get the most similar vectors, then filter by label > 1 on those results. 
+
+The `prefilter=False` parameter tells LanceDB to apply the filter after vector search instead of before, `.where("label > 1")` filters the top results by metadata, and `.select()` chooses which columns to include. 
+
+In the end, you receive a pandas DataFrame with the best matches that also meet your metadata requirements.
+
+**Read more:** [Filtering](../reference/postfiltering.md)
+
+## Multivector Search 
+
+Use multivector search when your documents contain multiple embeddings and you need sophisticated matching between query and document vector pairs. The late interaction approach finds the most relevant combinations across all available embeddings and provides nuanced similarity scoring.
+
+Only `cosine` similarity is supported as the distance metric for multivector search operations.
+
+{{< code language="python" >}}
+query_multi = np.random.random(size=(2, 256))
+results_multi = tbl.search(query_multi).limit(5).to_pandas()
+{{< /code >}}
+
+Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
+
+**Read more:** [Multivector Search](../reference/multivector-search.md)
+
+## Advanced Search Scenarios
 
 ### Search With Distance Range
 
@@ -68,6 +194,17 @@ tbl.search(query).distance_range(upper_bound=0.5).to_arrow()
 
 # Search for the vectors with the distance greater or equal to 0.1
 tbl.search(query).distance_range(lower_bound=0.1).to_arrow()
+{{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+
+const results3 = await (
+  tbl.search(Array(128).fill(1.2)) as lancedb.VectorQuery
+)
+  .distanceType("cosine")
+  .distanceRange(0.1, 0.2)
+  .limit(10)
+  .toArray();
 {{< /code >}}
 
 This shows three ways to search within distance ranges: bounded, upper bound only, and lower bound only. 
@@ -119,70 +256,51 @@ packed_query = np.packbits(query)
 tbl.search(packed_query).distance_type("hamming").to_arrow()
 {{< /code >}}
 
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+
+import { Field, FixedSizeList, Int32, Schema, Uint8 } from "apache-arrow";
+
+const schema = new Schema([
+  new Field("id", new Int32(), true),
+  new Field("vec", new FixedSizeList(32, new Field("item", new Uint8()))),
+]);
+const data = lancedb.makeArrowTable(
+  Array(1_000)
+    .fill(0)
+    .map((_, i) => ({
+      // the 256 bits would be store in 32 bytes,
+      // if your data is already in this format, you can skip the packBits step
+      id: i,
+      vec: lancedb.packBits(Array(256).fill(i % 2)),
+    })),
+  { schema: schema },
+);
+
+const tbl = await db.createTable("binary_table", data);
+await tbl.createIndex("vec", {
+  config: lancedb.Index.ivfFlat({
+    numPartitions: 10,
+    distanceType: "hamming",
+  }),
+});
+
+      const query = Array(32)
+        .fill(1)
+        .map(() => Math.floor(Math.random() * 255));
+      const results = await tbl.query().nearestTo(query).limit(10).toArrow();
+      // --8<-- [end:search_binary_data
+      expect(results.numRows).toBe(10);
+    }
+  });
+});
+{{< /code >}}
+
 Here you can see how to set up a table for binary vectors, pack them efficiently into bytes, and search using Hamming distance. 
 
 The schema defines a 32-byte vector field (256 bits ÷ 8), `np.random.randint(0, 2, size=256)` creates binary vectors, `np.packbits()` compresses them to bytes, and `.distance_type("hamming")` specifies `hamming` distance for similarity calculation. 
 
 The search produces an Arrow table with binary vectors ranked by how many bits differ from the query.
-
-## Multivector Search 
-
-Use multivector search when your documents contain multiple embeddings and you need sophisticated matching between query and document vector pairs. The late interaction approach finds the most relevant combinations across all available embeddings and provides nuanced similarity scoring.
-
-Only `cosine` similarity is supported as the distance metric for multivector search operations.
-
-{{< code language="python" >}}
-query_multi = np.random.random(size=(2, 256))
-results_multi = tbl.search(query_multi).limit(5).to_pandas()
-{{< /code >}}
-
-Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
-
-**Read more:** [Multivector Search](../reference/multivector-search.md)
-
-## Vector Search With Filtering
-
-### Prefiltering
-
-Use prefiltering to boost query performance by reducing the search space before vector calculations begin. The system first applies your filter criteria to the dataset, then conducts vector search operations only on the remaining relevant subset.
-
-{{< code language="python" >}}
-search_results = (
-    table.search(query_embed)
-    .where("label > 2")
-    .select(["text", "keywords", "label"])
-    .limit(5)
-    .to_pandas()
-)
-{{< /code >}}
-
-This filters out rows where label ≤ 2 before doing vector search, then picks specific columns from the top 5 matches. 
-
-The `.where("label > 2")` applies a filter before vector search, `.select(["text", "keywords", "label"])` chooses specific columns to return, and `.limit(5)` restricts results to the top `5` most similar vectors. 
-
-As a result, you'll see a pandas DataFrame with just the data you want from the most similar vectors.
-
-### Postfiltering
-
-Use postfiltering to prioritize vector similarity by searching the full dataset first, then applying metadata filters to the top results. This approach ensures you get the most similar vectors before filtering, which can be crucial when similarity is more important than metadata constraints.
-
-{{< code language="python" >}}
-results_post_filtered = (
-    table.search(query_embed)
-    .where("label > 1", prefilter=False)
-    .select(["text", "keywords", "label"])
-    .limit(5)
-    .to_pandas()
-)
-{{< /code >}}
-
-Here you can see how to do vector search first to get the most similar vectors, then filter by label > 1 on those results. 
-
-The `prefilter=False` parameter tells LanceDB to apply the filter after vector search instead of before, `.where("label > 1")` filters the top results by metadata, and `.select()` chooses which columns to include. 
-
-In the end, you receive a pandas DataFrame with the best matches that also meet your metadata requirements.
-
-**Read more:** [Filtering](../reference/postfiltering.md)
 
 ## Scaling Vector Search
 
@@ -191,12 +309,35 @@ In the end, you receive a pandas DataFrame with the best matches that also meet 
 Use batch search to handle multiple query vectors simultaneously. This gives you significant efficiency gains over individual queries. LanceDB processes all vectors in parallel and organizes results with a `query_index` field that maps each result set back to its originating query.
 
 {{< code language="python" >}}
+# Load a batch of query embeddings
 query_dataset = load_dataset(
     "sunhaozhepy/ag_news_sbert_keywords_embeddings", split="test[5000:5005]"
 )
 query_embeds = query_dataset["keywords_embeddings"]
 batch_results = table.search(query_embeds).limit(5).to_pandas()
 print(batch_results)
+{{< /code >}}
+{{< code language="typescript" >}}
+ // Batch query
+console.log("Performing batch vector search...");
+const batchSize = 5;
+const queryVectors = Array.from(
+  { length: batchSize },
+  () => Array.from(
+    { length: dimensions },
+    () => Math.random() * 2 - 1,
+  ),
+);
+let batchQuery = table.search(queryVectors[0]) as VectorQuery;
+for (let i = 1; i < batchSize; i++) {
+  batchQuery = batchQuery.addQueryVector(queryVectors[i]);
+}
+const batchResults = await batchQuery
+  .select(["text", "keywords", "label"])
+  .limit(5)
+  .toArray();
+console.log("Batch vector search results:");
+console.log(batchResults);
 {{< /code >}}
 
 This takes 5 query embeddings and finds the top 5 matches for each one in a single batch operation. 
@@ -223,6 +364,14 @@ increase query response times.
 {{< code language="python" >}}
 table.search(embedding, fast_search=True).limit(5).to_pandas()
 {{< /code >}}
+{{< code language="typescript" >}}
+await table
+  .query()
+  .nearestTo(embedding)
+  .fastSearch()
+  .limit(5)
+  .toArray();
+{{< /code >}}
 
 Here you can see how to turn on fast search mode to skip unindexed vectors and only look through indexed data for speed. 
 
@@ -244,6 +393,14 @@ Choose brute force search when you need guaranteed 100% recall, typically with s
 {{< code language="python" >}}
 tbl.search(np.random.random((1536))).limit(3).to_list()
 {{< /code >}}
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+
+const db = await lancedb.connect(databaseDir);
+const tbl = await db.openTable("my_vectors");
+
+const results1 = await tbl.search(Array(128).fill(1.2)).limit(3).toArray();
+{{< /code >}}
 
 This carries out a brute force search through every vector in the table to find the 3 closest matches to a random 1536-dimensional query. You'll get back a list of the most similar vectors with exact distances.
 
@@ -257,6 +414,14 @@ Use `bypass_vector_index` to get exact, ground-truth results by performing exhau
 
 {{< code language="python" >}}
 table.search(embedding).bypass_vector_index().limit(5).to_pandas()
+{{< /code >}}
+{{< code language="typescript" >}}
+await table
+  .query()
+  .nearestTo(embedding)
+  .bypassVectorIndex()
+  .limit(5)
+  .toArray();
 {{< /code >}}
 
 This skips the approximate index and checks every single vector for exact, ground-truth results. 
