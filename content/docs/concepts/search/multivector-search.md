@@ -32,7 +32,9 @@ MaxSim (Maximum Similarity) is a key concept in late interaction models that:
 
 The MaxSim calculation can be expressed as:
 
-$$\text{MaxSim}(Q, D) = \sum_{i=1}^{|Q|} \max_{j=1}^{|D|} \text{sim}(q_i, d_j)$$
+```math
+\text{MaxSim}(Q, D) = \sum_{i=1}^{|Q|} \max_{j=1}^{|D|} \text{sim}(q_i, d_j)
+```
 
 where `sim` is the similarity function (e.g. cosine), $Q = \{q_1, q_2, ..., q_{|Q|}\}$ represents the query vectors, and $D = \{d_1, d_2, ..., d_{|D|}\}$ represents the document vectors.
 
