@@ -33,14 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (window.scrollY > 0) {
+    if (window.scrollY > 10) {
       header.classList.add("scrolled");
     } else {
       header.classList.remove("scrolled");
     }
 
     document.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 10) {
         header.classList.add("scrolled");
       } else {
         header.classList.remove("scrolled");
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth"
       });
     };
-    
+
     scrollButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         e.preventDefault();
