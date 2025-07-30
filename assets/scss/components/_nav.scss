@@ -52,11 +52,15 @@
     padding: 0;
     border: none;
     display: flex;
-    gap: 48px;
+    gap: 24px;
     align-items: center;
     justify-content: flex-start;
     width: auto;
     margin: 0;
+  }
+
+  @include mq($xl) {
+    gap: 48px;
   }
 }
 

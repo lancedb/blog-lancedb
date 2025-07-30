@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switchTab(currentTab);
     startAutoRotation();
-    
+
     const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
 
     function setupObserver() {
@@ -170,9 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const sweperPagination = slider.querySelector(
         ".swiper-pagination"
       );
+      const slidesShow = slider.dataset.slidesShow || 1;
   
       const options = {
-        slidesPerView: 1.2,
+        slidesPerView: slidesShow,
         breakpoints: {
           576: {
             slidesPerView: 2.2,
