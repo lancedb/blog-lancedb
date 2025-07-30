@@ -5,9 +5,9 @@ description: Learn how to use LanceDB with Python, TypeScript, and Rust SDKs. In
 weight: 2
 ---
 
-In this section, you'll learn basic operations [**in Python, TypeScript, and Rust SDKs**](../api/index.md). 
+In this section, you'll learn basic operations [in Python, TypeScript, and Rust SDKs](../api/index.md). 
 
-For the **LanceDB Cloud/Enterprise** API Reference, check the [**HTTP REST API Specification**](../api/cloud.md).
+For the **LanceDB Cloud/Enterprise** API Reference, check the [HTTP REST API Specification](../api/cloud.md).
 
 ## Installation Options
 
@@ -134,7 +134,7 @@ as the `where()` clause (`only_if()` in Rust) on a search. They can be as
 simple or complex as needed. To see what expressions are supported, see the
 [SQL filters](sql.md) section.
 
-## **Vector Search**
+## Vector Search
 
 Once you've embedded the query, you can find its nearest neighbors as follows. LanceDB uses L2 (Euclidean) distance by default, but supports other distance metrics like cosine similarity and dot product.
 
@@ -154,11 +154,10 @@ By default, LanceDB runs a brute-force scan over the dataset to find the K neare
 
 **Why is index creation manual:** LanceDB does not automatically create the ANN index for two reasons. **First**, it's optimized for really fast retrievals via a disk-based index, and **second**, data and query workloads can be very diverse, so there's no one-size-fits-all index configuration. LanceDB provides many parameters to fine-tune index size, query latency, and accuracy.
 
-## **What's Next?**
+## What's Next?
 
-This section covered the very basics of using LanceDB. We've prepared another example to teach you about [**working with whole datasets**](datasets).
+This section covered the very basics of using LanceDB. We've prepared another example to teach you about [working with whole datasets](datasets).
 
-- To learn more about vector databases, you may want to read about [**Search**](/docs/concepts/search/) or [**Indexing**](/docs/concepts/indexing/) to get familiar with the concepts.
+- To learn more about vector databases, you may want to read about [Search](/docs/concepts/search/) or [Indexing](/docs/concepts/indexing/) to get familiar with the concepts.
 
-- If you've already worked with other vector databases, dive into the [**Table Docs**](/docs/concepts/tables/) to learn how to work with LanceDB Tables in more detail.
-
+- If you've already worked with other vector databases, dive into the [Table Docs](/docs/concepts/tables/) to learn how to work with LanceDB Tables in more detail.

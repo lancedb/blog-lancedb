@@ -1,7 +1,7 @@
 ---
-title: "Embedding Data and Queries in LanceDB"
-sidebar_title: "Embedding API"
-weight: 4
+title: "Quickstart: Embedding Data and Queries"
+sidebar_title: "Quickstart"
+weight: 1
 ---
 
 LanceDB will automatically vectorize the data both at ingestion and query time. All you need to do is specify which model to use.

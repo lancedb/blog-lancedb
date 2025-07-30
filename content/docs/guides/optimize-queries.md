@@ -1,7 +1,7 @@
 ---
 title: "Optimize Query Performance in LanceDB"
 sidebar_title: Query Optimization
-weight: 1
+weight: 3
 ---
 
 LanceDB provides two powerful tools for query analysis and optimization: `explain_plan` and `analyze_plan`. Let's take a better look at how they work:

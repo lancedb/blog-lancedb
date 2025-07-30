@@ -6,87 +6,19 @@ weight: 19
 sidebar_collapsed: true
 ---
 
-Reranking is the process of reordering a list of items based on some criteria. In the context of search, reranking is used to reorder the search results returned by a search engine based on specific criteria. This can be useful when the initial ranking of the search results is not satisfactory or when the user has provided additional information that can be used to improve the ranking of the search results.
+LanceDB supports a variety of reranking models to improve search result quality. Choose the model that best fits your use case and performance requirements.
 
-LanceDB comes with several built-in rerankers. Some of the rerankers available in LanceDB are:
+## Available Reranking Models
 
-| Reranker | Description |
-|:---------|:------------|
-| `LinearCombinationReranker` | Reranks search results based on a linear combination of FTS and vector search scores |
-| `CohereReranker` | Uses Cohere's Reranker API to rerank results |
-| `CrossEncoderReranker` | Uses a cross-encoder model to rerank search results |
-| `ColbertReranker` | Uses a ColBERT model to rerank search results |
-| `OpenaiReranker` (Experimental) | Uses OpenAI's chat model to rerank search results |
-| `VoyageAIReranker` | Uses VoyageAI's Reranker API to rerank results |
-
-## Using a Reranker
-
-Using rerankers is optional for vector and FTS searches. However, for hybrid search, rerankers are required. To use a reranker, you need to create an instance of the reranker and pass it to the `rerank` method of the query builder:
-
-```python
-import lancedb
-from lancedb.embeddings import get_registry
-from lancedb.pydantic import LanceModel, Vector
-from lancedb.rerankers import CohereReranker
-
-embedder = get_registry().get("sentence-transformers").create()
-db = lancedb.connect("~/.lancedb")
-
-class Schema(LanceModel):
-    text: str = embedder.SourceField()
-    vector: Vector(embedder.ndims()) = embedder.VectorField()
-
-data = [
-    {"text": "hello world"},
-    {"text": "goodbye world"}
-    ]
-    
-tbl = db.create_table("test", data)
-reranker = CohereReranker(api_key="your_api_key")
-
-# Run vector search with a reranker
-result = tbl.search("hello").rerank(reranker).to_list() 
-
-# Run FTS search with a reranker
-result = tbl.search("hello", query_type="fts").rerank(reranker).to_list()
-
-# Run hybrid search with a reranker
-tbl.create_fts_index("text")
-result = tbl.search("hello", query_type="hybrid").rerank(reranker).to_list()
-```
-
-### Multi-vector reranking
-
-Most rerankers support reranking based on multiple vectors. To rerank based on multiple vectors, you can pass a list of vectors to the `rerank` method. Here's an example of how to rerank based on multiple vector columns using the `CrossEncoderReranker`:
-
-```python
-from lancedb.rerankers import CrossEncoderReranker
-
-reranker = CrossEncoderReranker()
-
-query = "hello"
-
-res1 = table.search(query, vector_column_name="vector").limit(3)
-res2 = table.search(query, vector_column_name="text_vector").limit(3)
-res3 = table.search(query, vector_column_name="meta_vector").limit(3)
-
-reranked = reranker.rerank_multivector([res1, res2, res3], deduplicate=True)
-```
-    
-## Available Rerankers
-
-LanceDB comes with the following built-in rerankers:
-
-- [Cohere Reranker](./cohere.md)
-- [Cross Encoder Reranker](./cross_encoder.md)
-- [ColBERT Reranker](./colbert.md)
-- [OpenAI Reranker](./openai.md)
-- [Linear Combination Reranker](./linear_combination.md)
-- [Jina Reranker](./jina.md)
-- [AnswerDotAI Rerankers](./answerdotai.md)
-- [Reciprocal Rank Fusion Reranker](./rrf.md)
-- [VoyageAI Reranker](./voyageai.md)
-
-## Creating Custom Rerankers
-
-LanceDB also allows you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](./custom_reranker.md) section.
+| Model | Use Case |
+|:------|:---------|
+| [Cohere Reranker](../reranking/cohere/) | Production applications requiring high accuracy |
+| [CrossEncoder](../reranking/cross_encoder/) | Semantic similarity and relevance scoring |
+| [ColBERT](../reranking/colbert/) | Fast and accurate reranking with context |
+| [OpenAI Reranker](../reranking/openai/) | OpenAI ecosystem integration |
+| [VoyageAI Reranker](../reranking/voyageai/) | High-performance semantic search |
+| [Jina Reranker](../reranking/jina/) | Jina ecosystem integration |
+| [AnswerDotAI Reranker](../reranking/answerdotai/) | Specialized for Q&A and conversational search |
+| [Linear Combination](../reranking/linear_combination/) | Ensemble methods for improved performance |
+| [Reciprocal Rank Fusion (RRF)](../reranking/rrf/) | Robust ensemble ranking without training |
+| [Evaluation](../reranking/eval/) | Model selection and optimization |

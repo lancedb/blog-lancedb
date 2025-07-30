@@ -1,11 +1,9 @@
 ---
-title: Custom Rerankers in LanceDB 
+title: Building Custom Rerankers in LanceDB
 sidebar_title: "Custom Rerankers"
 description: Learn how to create custom rerankers in LanceDB by extending the base Reranker class. Includes implementation examples, score handling, and best practices for hybrid search optimization.
 weight: 6
 ---
-
-# Building Custom Rerankers in LanceDB
 
 You can build your own custom reranker by subclassing the `Reranker` class and implementing the `rerank_hybrid()` method. Optionally, you can also implement the `rerank_vector()` and `rerank_fts()` methods if you want to support reranking for vector and FTS search separately.
 

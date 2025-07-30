@@ -1,14 +1,16 @@
 ---
-title: LanceDB Data Management Guide 
-sidebar_title: "Data"
-description: Master LanceDB's data management with our comprehensive guide. Learn about versioning, schema evolution, data organization, and best practices for efficient vector data storage and retrieval.
+title: Lance Columnar Format
+sidebar_title: "Lance Format"
+weight: 10
 ---
 
-This section covers essential concepts for managing your data effectively in LanceDB.
-
-## Understanding Lance Data Format
-
 Because LanceDB is built on top of the [Lance](https://lancedb.github.io/lance/) data format, it helps to understand some of its core ideas. Just like Apache Arrow, Lance is a fast columnar data format, but it has the added benefit of being versionable, query and train ML models on. Lance is designed to be used with simple and complex data types, like tabular data, images, videos audio, 3D point clouds (which are deeply nested) and more.
+
+{{< admonition >}}
+Looking for Lance columnar format docs? [Click here.](https://lancedb.github.io/lance/)
+{{< /admonition >}}
+
+## Core Concepts of Lance
 
 The following concepts are important to keep in mind:
 
