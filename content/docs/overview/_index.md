@@ -3,10 +3,45 @@ title: "What is LanceDB?"
 sidebar_title: "What is LanceDB?"
 description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
 weight: 3
-hide_toc: true
 ---
 
+LanceDB supports two very different use cases, both of which have grown out of [the powerful Lance format]() for multimodal storage and fast random lookups. 
+
+1. [Multimodal Vector Database]() </br>
+The first product we offer is a very popular vector database used by developers around the world to build end-user apps. It is offered under [OSS](), [Cloud]() and [Enterprise]() product lines. 
+
+2. [Multimodal Lakehouse]() </br>
+The second product is a platform lakehouse product that is used for internal multimodal data analytics and experimentation with AI models. It is offered under [OSS]() and [Enterprise]() product lines only.
+
+## LanceDB Products
+
 ### The Multimodal Vector Database
+
+LanceDB is often used by developers building dedicated search & generative AI applications, such as e-commerce search, recommendations, RAG and agentic systems. 
+
+The database holds vectors and multiple other data modalities (such as text, images or video), eliminating the need for a secondary database for source data.
+
+| Feature | LanceDB OSS | LanceDB Cloud | LanceDB Enterprise |
+| :----- | :----- | :----- | :----- |
+| **Search** | ✅ Local | ✅ Managed | ✅ Managed  |
+| **Storage** | ✅ Local Disk + AWS S3, Azure Blob, GCS | ✅ Managed  | ✅ Managed, with Caching |
+| **SQL** | ✅ Local, via DuckDB, Spark, Trino | ✅ Managed  | ✅ Managed  |
+
+### The Multimodal Lakehouse
+
+This is a platform for ML engineers and AI / data scientists training and fine-tuning in-house models over petabyte-scale multimodal data. 
+
+The database is used for internal search and analytics of organizational data, as well as to curate results during model training experiments. Additional components are added to the database to enable SQL analytics, training and feature engineering.
+
+| Feature | LanceDB OSS  | LanceDB Enterprise |
+| :----- | :----- | :----- |
+| **Search** | ✅ Local| ✅ Managed   |
+| **Storage** | ✅ Local Disk + AWS S3, Azure Blob, GCS |  ✅ Managed, with Caching |
+| **SQL** | ✅ Local, via DuckDB, Spark, Trino |  ✅ Managed |
+| **Training** | ✅ Local, via PyTorch |  ✅ Managed, via PyTorch  |
+| **Feature Engineering** | ✅ API-only (local compute, no caching) | ✅ Managed, via Geneva  |
+
+## Database Features
 
 **LanceDB** is a multimodal vector database that's designed to store and search data of different modalities. You can use LanceDB to build fast, scalable, and intelligent applications that rely on vector search and analytics. 
 
@@ -18,11 +53,13 @@ By combining columnar storage with cutting-edge indexing techniques, LanceDB ena
 
 - **Technology:** It is built on top of [Lance](https://github.com/lancedb/lance), an open-source columnar data format designed for extreme storage, performant ML workloads and fast random access.
 
-### LanceDB is Multimodal and Embedded
+### Multimodal 
 
 - **Multimodal:** You can store vectors, metadata, raw images, videos, text, audio files and more. All modalities are stored in the Lance format, which provides automatic data versioning and blazing fast retrievals and filtering.
 
 ![What is LanceDB?](/assets/docs/overview/multimodal.png)
+
+### Deployment Methods
 
 - **Embedded:** This database doesn't run as a server. Instead it runs *in-process* in your app, making it simple and cheap to implement. 
 
@@ -39,6 +76,7 @@ LanceDB integrates seamlessly with the modern AI ecosystem, providing connectors
 * Directly from a client application like a Jupyter notebook for analytical workloads
 * Deployed as a remote serverless database
 {{< /admonition >}}
+
 
 
 

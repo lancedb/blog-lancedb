@@ -4,6 +4,97 @@
 .post-content,
 .code-tab__content {
 
+  // Enhanced styling for bold text in blog content
+  strong, b {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05em;
+    letter-spacing: 0.02em;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -4px;
+      right: -4px;
+      bottom: -2px;
+      background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(255, 115, 74, 0.05) 100%);
+      border-radius: 4px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+
+  // Enhanced styling for numbered lists in blog content
+  ol {
+    counter-reset: list-counter;
+    list-style: none;
+    padding-left: 0;
+    position: relative;
+    
+    li {
+      list-style-type: none;
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+      
+      &::before {
+        content: counter(list-counter);
+        counter-increment: list-counter;
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95em;
+        z-index: 2;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.3),
+          0 1px 3px rgba(255, 115, 74, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 115, 74, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      &:hover::before {
+        transform: scale(1.05);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.4),
+          0 2px 6px rgba(255, 115, 74, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 115, 74, 0.5);
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 2.2rem;
+        width: 2px;
+        height: calc(100% + 1rem);
+        background: #718096;
+        z-index: 1;
+      }
+      
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+
   code {
     color: palette(primary-offwhite);
     font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
