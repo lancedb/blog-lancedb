@@ -40,7 +40,8 @@
                                     </span>
                                 {{ else }}
                                     <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}">
+                                    href="{{ .URL }}"
+                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ end }}
@@ -67,6 +68,10 @@
                                     {{ end }}
                                 </ul>
                             </div>
+                            <!-- Log in link -->
+                            <a class="nav__link nav__link--right" href="https://cloud.lancedb.com/sign-in" target="_blank" rel="noopener">
+                                Log in
+                            </a>
                             <a 
                                 href="{{ site.Params.header.button.url }}" 
                                 class="button button--secondary"

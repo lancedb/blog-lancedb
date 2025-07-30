@@ -103,6 +103,22 @@
   &.active {
     color: palette(primary-orange);
   }
+
+  // Styles for Careers link in right section
+  &.nav__link--right {
+    @include mq($lg) {
+      @include font(nav, 22, 400);
+      color: palette(primary-offwhite);
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+      white-space: nowrap;
+      margin-right: 2px;
+
+      &:hover {
+        color: palette(primary-dark, 400);
+      }
+    }
+  }
 }
 
 .nav__additional {
