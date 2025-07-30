@@ -343,7 +343,7 @@
     grid-column: span 2;
   }
 
-  *:has(> .hs-main-font-element) {
+  *:first-child:has(> .hs-main-font-element) {
     display: none;
   }
 
