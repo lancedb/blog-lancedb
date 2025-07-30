@@ -127,8 +127,11 @@ menus:
     - name: Documentation
       weight: 2
       pageRef: /docs
-    - name: Blog
+    - name: Careers
       weight: 3
+      url: https://lancedb.notion.site/LanceDB-Careers-ec2860ae897f4c1dbb8ba122657184b1
+    - name: Blog
+      weight: 4
       pageRef: /blog
   lancedb:
     - name: LanceDB Cloud

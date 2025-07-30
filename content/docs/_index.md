@@ -7,6 +7,8 @@ hide_toc: true
 
 **LanceDB** is an open-source vector database that fully supports multimodal data. Use LanceDB to build large-scale search, RAG and Agentic applications. 
 
+{{< cta-buttons >}}
+
 {{< admonition >}}
 Looking for Lance columnar format docs? [Click here.](https://lancedb.github.io/lance/)
 {{< /admonition >}}

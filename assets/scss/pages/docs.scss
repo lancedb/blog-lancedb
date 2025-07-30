@@ -732,3 +732,74 @@ a.sidebar-divider {
     opacity: 0.95;
   }
 } 
+
+// Side-by-side buttons for docs homepage
+.docs-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  
+  .button {
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    
+    &__icon {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      
+      svg {
+        transition: all 0.3s ease-in-out;
+      }
+    }
+    
+    &--primary {
+      background-color: #ff734a;
+      border-color: #ff734a;
+      color: #1a1d21;
+      
+      &:hover {
+        background-color: #ff5a1f;
+        border-color: #ff5a1f;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 115, 74, 0.3);
+      }
+    }
+    
+    &--secondary {
+      background-color: transparent;
+      border-color: #ff734a;
+      color: #ff734a;
+      
+      &:hover {
+        background-color: #ff734a;
+        color: #1a1d21;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 115, 74, 0.3);
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    
+    .button {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+} 
