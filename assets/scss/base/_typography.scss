@@ -26,6 +26,8 @@ $font-sizes: (
   B2_mob: 16,
   B3: 16,
   B3_mob: 14,
+  B4: 14,
+  B4_mob: 12,
 
   base: $base-font-size,
 
@@ -57,6 +59,8 @@ $fonts_schema: (
   "body-medium_mob": (size: B2_mob, leading: 24, weight: 400, spacing: 0),
   "body-small": (size: B3, leading: 24, weight: 400, spacing: 0),
   "body-small_mob": (size: B3_mob, leading: 20, weight: 400, spacing: 0),
+  "body-extra-small": (size: B4, leading: 20, weight: 400, spacing: 0),
+  "body-extra-small_mob": (size: B4_mob, leading: 16, weight: 400, spacing: 0),
   "button": (size: btn, leading: 24, weight: 400, spacing: 0),
   "button_mob": (size: btn_mob, leading: 21, weight: 400, spacing: 0),
   "caption": (size: caption, leading: 12, weight: 400, spacing: -2),

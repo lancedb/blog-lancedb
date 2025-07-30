@@ -50,13 +50,10 @@
 }
 
 .recent-posts__card-image {
-  height: 194px;
+  min-height: 194px;
   overflow: hidden;
   border-radius: 4px;
-
-  @include mq($md) {
-    height: 269px;
-  }
+  aspect-ratio: 16/9;
 
   img {
     max-width: none;

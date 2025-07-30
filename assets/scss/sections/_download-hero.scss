@@ -11,6 +11,19 @@
     position: relative;
     z-index: 2;
   }
+
+  &::after {
+    position: absolute;
+    content: '';
+    filter: blur(100px);
+    background-color: #503e32;
+    border-radius: 100%;
+    width: 50.375rem;
+    height: 22.125rem;
+    position: absolute;
+    top: 0%;
+    right: 15%;
+  }
 }
 
 .download-hero__vector {

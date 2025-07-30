@@ -49,7 +49,7 @@
   {{ with .Params.logos }}
   <section class="logos text-center js-logos" data-slider-speed="{{ .speed | default 5000 }}">
     <div class="container">
-      <h3 class="logos__caption text-body-medium">{{ .caption }}</h2>
+      <h3 class="logos__caption text-body-medium text-pro">{{ .caption }}</h2>
       <div class="swiper">
         <div class="swiper-wrapper">
           {{ range .items }}

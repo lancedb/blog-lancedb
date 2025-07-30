@@ -33,7 +33,7 @@
 
 .button--primary {
   background-color: palette(primary-orange);
-  border-color: palette(primary-orange);
+  border: 2px solid palette(primary-orange);
   color: palette(primary-dark);
 
   &:hover {
@@ -50,18 +50,39 @@
 
 .button--secondary {
   background-color: #181b1f;
-  border-color: #23262b;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
   color: #fff;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #ff734a, #ff8967, #ff734a);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
   &:hover {
-    border-color: #ff734a;
     color: #ff734a;
   }
 
   &:active,
   &:focus {
     background-color: #23262b;
-    border-color: #ff734a;
   }
 }
 

@@ -1,4 +1,8 @@
-<title>{{ if .Params.meta.title }}{{ .Params.meta.title }}{{ else }}{{ .Title }}{{ end }}</title>
+{{ $title:= .Title }}
+{{ $title = replace $title "<br>" ""}}
+
+
+<title>{{ if .Params.meta.title }}{{ .Params.meta.title }}{{ else }}{{ $title }}{{ end }}</title>
 
 {{ if .Params.meta.description }}
   <meta name="description" content="{{ .Params.meta.description | safeHTML }}"/>

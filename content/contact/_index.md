@@ -3,7 +3,24 @@ title: We’d love <br> to hear from you
 highlighted: hear from you
 description: Please fill out the form and we'll get back to you within 48 hours.
 form:
-  fields: 
+  embeded: '<script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
+  <script>
+  hbspt.forms.create({
+    portalId: "242023405",
+    formId: "57dc5cc2-672e-428d-8ddd-5bfe4c00945b",
+    region: "na2"
+  });
+  </script>'
+  success:
+    title: Thank you
+    description: Your submission has been received successfully. We’ll get back to you as soon as possible.
+    addition: In the meantime, please check your email — we’ve sent you a confirmation.
+    button:
+      href: /
+      version: secondary
+      text: Back to Homepage
+      icon: true
+  fields: # if need custom
     - label: First name
       name: first_name
       type: text
