@@ -22,11 +22,13 @@
   border-right: 1px solid #ff734a;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
+  top: 120px;
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   margin-top: 0;
   padding-top: 0;
+  align-self: start;
+  height: fit-content;
 
   // Solid, visible scrollbar for Webkit browsers
   &::-webkit-scrollbar {
@@ -275,10 +277,12 @@ a.sidebar-divider {
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
+  top: 140px;
+  max-height: calc(100vh - 160px);
   overflow-y: auto;
   margin-top: 0;
+  align-self: start;
+  height: fit-content;
   
   &--hidden {
     visibility: hidden;
@@ -385,6 +389,8 @@ a.sidebar-divider {
   box-shadow: none;
   padding: 0;
   margin: 0;
+  position: relative;
+  top: 0;
 }
 
 .docs-toc .toc {

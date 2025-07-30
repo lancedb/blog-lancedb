@@ -7,6 +7,25 @@ document.addEventListener('DOMContentLoaded', function () {
     return document.getElementById(id);
   });
 
+  // Add click handlers for smooth scrolling with offset
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').slice(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerHeight = 120; // Account for header height
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
   function onScroll() {
     let activeIndex = -1;
     for (let i = 0; i < headings.length; i++) {
