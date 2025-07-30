@@ -783,7 +783,7 @@ main .post-meta {
         0 4px 12px rgba(0, 0, 0, 0.4),
         0 1px 3px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    position: relative;
+    /* position: relative; */
     transition: all 0.3s ease;
 }
 
@@ -909,7 +909,7 @@ main .post-meta {
 
 /* Copy button for code blocks */
 .post-content pre {
-    position: relative;
+    /* position: relative; */
 }
 
 .post-content pre .copy-button {

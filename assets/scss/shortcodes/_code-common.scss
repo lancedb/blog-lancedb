@@ -21,7 +21,7 @@
     border: none !important;
     margin: 0 !important;
     padding: 0.5em 0.7em !important;
-    overflow: hidden;
+    //overflow: hidden;
   }
 
   code {
@@ -68,6 +68,7 @@
   padding: 0;
   margin: 0;
   display: block;
+  position: relative;
 }
 
 .code-tab__content .highlight {
@@ -86,7 +87,7 @@
   border: none !important;
   margin: 0 !important;
   padding: 0.5em 0.7em !important;
-  overflow: hidden;
+ // overflow: hidden;
 }
 
 // Documentation page code blocks (enhanced with hover effects)
@@ -102,7 +103,7 @@
   border: 1px solid rgba(255, 115, 74, 0.18);
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
   // Removed transition and hover/focus effects
-  position: relative;
+  //position: relative;
 
   // Removed &:hover and &:focus-within animations
 }

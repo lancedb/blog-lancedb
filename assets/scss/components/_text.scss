@@ -60,6 +60,10 @@
    @include font-family(pro);
 }
 
+.text-base {
+   @include font-family(base);
+}
+
 .text-center {
     text-align: center;
 }

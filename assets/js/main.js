@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Debounced scroll handler
     const handleScroll = debounce(() => {
-      header.classList.toggle('scrolled', window.scrollY > 10);
+      header.classList.toggle('scrolled', window.scrollY !== 0);
     }, 10);
 
     document.addEventListener('scroll', handleScroll);

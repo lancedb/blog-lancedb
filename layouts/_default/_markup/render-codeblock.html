@@ -1,0 +1,19 @@
+{{ $lang := .Type | default "text" }}
+{{ $params := .Options | default ""}}
+{{ if not (in (slice "rust" "typescript" "python") $lang) }}
+  {{ $lang = "code" }}
+{{ end }}
+{{ $iconSrc := printf "static/assets/icons/%s.svg" $lang }}
+<div class="code-tab">
+    <div class="code-tab__tabs">
+      <div class="code-tab__tab active" data-lang-switch="{{ $lang }}">
+        <div class="code-tab__icon">
+          {{ readFile $iconSrc | safeHTML }}
+        </div>
+        <span class="code-tab__name d-none d-md-block">{{$lang}}</span>
+      </div>
+    </div>
+    <div class="code-tab__content" data-lang="{{ $lang }}">
+      {{ highlight (trim .Inner "\n\r") $lang "" }}
+    </div>
+</div>
