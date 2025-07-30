@@ -8,6 +8,10 @@ LanceDB supports Full-Text Search (FTS) via [**Tantivy**](https://github.com/qui
 
 This feature is only available in Python Async SDK. You won't be able to build indexes on object storage or use incremental indexing. If you need these features, then switch over to native FTS.
 
+{{< admonition "warning" >}}
+Tantivy-based FTS is not supported on LanceDB Cloud.
+{{< /admonition >}}
+
 ## Basic Usage
 
 In this example, you will create a table named `my_table`. Then, you will index the `content` column and query it via keyword search. 

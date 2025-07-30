@@ -13,23 +13,25 @@ Raw data (e.g. text, images, audio, etc.) is converted into embeddings via an em
 
 ## Supported Distance Metrics
 
-Distance metrics determine how LanceDB compares vectors to find similar matches. Euclidean or `l2` is the default, and used for general-purpose similarity, `cosine` for normalized embeddings, `dot` for raw similarity scores, or `hamming` for binary vectors. 
+Distance metrics determine how LanceDB compares vectors to find similar matches. Euclidean or `l2` is the default, and used for general-purpose similarity, `cosine` for unnormalized embeddings, `dot` for normalized embeddings (best performance), or `hamming` for binary vectors. 
 
-**Important:** Use the same distance metric that your embedding model was trained with. Most modern embedding models use cosine similarity, so `cosine` is often the best choice.
+**Important:** Use the same distance metric that your embedding model was trained with. Most modern embedding models use cosine similarity, so `cosine` is often the best choice. However, if your vectors are normalized, we encourage using `dot` for best performance.
 
 The right metric improves both search accuracy and query performance. Currently, LanceDB supports the following metrics:
 
 | Metric | Description | Default |
 |:-------|:------------|:--------|
 | `l2` | [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) - measures the straight-line distance between two points in vector space. Calculated as the square root of the sum of squared differences between corresponding vector components. | ✓ |
-| `cosine` | [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) - measures the cosine of the angle between two vectors, ranging from -1 to 1. Computed as the dot product divided by the product of vector magnitudes. | x |
-| `dot` | [Dot product](https://en.wikipedia.org/wiki/Dot_product) - calculates the sum of products of corresponding vector components. Provides raw similarity scores without normalization, sensitive to vector magnitudes. | x |
+| `cosine` | [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) - measures the cosine of the angle between two vectors, ranging from -1 to 1. Computed as the dot product divided by the product of vector magnitudes. Use for unnormalized vectors. | x |
+| `dot` | [Dot product](https://en.wikipedia.org/wiki/Dot_product) - calculates the sum of products of corresponding vector components. Provides raw similarity scores without normalization, sensitive to vector magnitudes. Use for normalized vectors for best performance. | x |
 | `hamming` | [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) - counts the number of positions where corresponding bits differ between binary vectors. Only applicable to binary vectors stored as packed uint8 arrays. | x |
 
 ### Configure Distance Metric
 
 By default, `l2` will be used as metric type. You can specify the metric type as
 `cosine` or `dot` if required.
+
+**Note:** Distance metric configuration during search is only available when there's no vector index. If a vector index exists, the distance metric is always the one specified when creating the index.
 
 {{< code language="python" >}}
 tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
@@ -432,4 +434,5 @@ The outcome is a pandas DataFrame with the top 5 exact matches, guaranteeing 100
 
 This approach is particularly useful when:
 - Evaluating ANN index quality
-- Calculating recall metrics to tune `
+- Calculating recall metrics to tune index parameters
+- Ensuring exact results for critical applications

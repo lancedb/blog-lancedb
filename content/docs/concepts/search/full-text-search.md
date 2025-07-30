@@ -6,10 +6,6 @@ weight: 3
 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
 
-{{< admonition "note" >}}
-The Python SDK uses our native FTS implementation by default, you need to pass `use_tantivy=True` to use tantivy-based FTS.
-{{< /admonition >}}
-
 
 ## Basic Usage
 
@@ -62,9 +58,7 @@ let tbl = db
 Create a full-text search index on your text column:
 
 {{< code language="python" >}}
-# passing `use_tantivy=False` to use lance FTS index
-# `use_tantivy=True` by default
-table.create_fts_index("text", use_tantivy=False)
+table.create_fts_index("text")
 {{< /code >}}
 
 {{< code language="typescript" >}}
@@ -112,7 +106,7 @@ let results = tbl
 
 The search is conducted on all indexed columns by default, so it's useful when there are multiple indexed columns.
 
-If you want to specify which columns to search us `fts_columns="text"`
+If you want to specify which columns to search use `fts_columns="text"`
 
 {{< admonition "note" >}}
 LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
@@ -124,25 +118,32 @@ LanceDB automatically searches on the existing FTS index if the input to the sea
 
 By default, the text is tokenized by splitting on punctuation and whitespaces, and would filter out words that are longer than 40 characters. All words are converted to lowercase.
 
-Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages, you can specify the tokenizer name to enable stemming by the pattern `tokenizer_name="{language_code}_stem"`, e.g. `en_stem` for English.
+Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages. We encourage users to set the `language` parameter rather than `tokenizer_name` because you cannot customize the tokenizer if `tokenizer_name` is specified.
 
 For example, to enable stemming for English:
 
-
 ```python
-table.create_fts_index("text", tokenizer_name="en_stem", replace=True)
+table.create_fts_index("text", language="English", replace=True)
 ```
 
-the following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
+The following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
 
 The tokenizer is customizable, you can specify how the tokenizer splits the text, and how it filters out words, etc.
+
+**Default index parameters:**
+- `language`: English
+- `with_position`: false
+- `max_token_length`: 40
+- `lower_case`: true
+- `stem`: true
+- `remove_stop_words`: true
+- `ascii_folding`: true
 
 For example, for language with accents, you can specify the tokenizer to use `ascii_folding` to remove accents, e.g. 'é' to 'e':
 
 ```python
 table.create_fts_index(
         "text",
-        use_tantivy=False,
         language="French",
         stem=True,
         ascii_folding=True,
@@ -210,7 +211,7 @@ table
 ### Phrase vs. Terms Queries
 
 {{< admonition "warning" "Warn" >}}
-Lance-based FTS doesn't support queries using boolean operators `OR`, `AND`.
+Lance-based FTS doesn't support queries using boolean operators `OR`, `AND` in the search string.
 {{< /admonition >}}
 
 For full-text search you can specify either a **phrase** query like `"the old man and the sea"`,
@@ -220,7 +221,7 @@ query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/
 To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 
 ```python
-table.create_fts_index("text", use_tantivy=False, with_position=True, replace=True)
+table.create_fts_index("text", with_position=True, replace=True)
 ```
 
 
