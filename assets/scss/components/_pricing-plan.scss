@@ -16,6 +16,12 @@
 
   border-radius: 4px;
 
+  &:not(:has(.pricing-plan__scroll)) {
+    @include mq($max: $md) {
+      padding-bottom: 24px;
+    }
+  }
+
   &.active {
     border-color: transparent;
     background-image:
@@ -110,16 +116,20 @@
   background: transparent;
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: 0;
   width: fit-content;
-  transform: translate(-50%, 16px);
+  transform: translate(0, 24px);
   z-index: 2;
-  text-decoration: underline;
-
-  @include font-family(fono);
-  @include font(btn_mob, 21, 500);
+  text-align: left;
+  color: palette(primary-dark, 200);
+  @include font-family(pro);
+  @include font(B4, 20, 400);
 
   @include mq($md) {
+    left: 50%;
+    transform: translate(-50%, 16px);
+    text-align: center;
+    text-decoration: underline;
     @include font(btn, 24, 500);  
   }
 }
