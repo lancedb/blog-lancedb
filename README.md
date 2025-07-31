@@ -1,19 +1,16 @@
-# Hugo Example
+# LanceDB Website
 
-This directory is a brief example of a [Hugo](https://gohugo.io/) app that can be deployed to Vercel with zero configuration.
+## This repository contains three websites in one: 1) Marketing Website, 2) Docsite and 3) Blog.
 
-## Deploy Your Own
+## Using the Site
 
-Deploy your own Hugo project with Vercel.
+### 1. Install Hugo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/hugo&template=hugo)
+[https://gohugo.io/installation/](https://gohugo.io/installation/)
 
-_Live Example: https://hugo-template.vercel.app_
+### 2. Build Site
 
-### How We Created This Example
+`hugo serve`
 
-To get started with Hugo for deployment with Vercel, you can use the [Hugo CLI](https://gohugo.io/commands/) to initialize the project:
 
-```shell
-$ hugo new site project-name
-```
+
