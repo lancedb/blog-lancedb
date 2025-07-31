@@ -974,10 +974,10 @@ article img {
     object-fit: contain;
 }
 
-/* Specific handling for post content images - 75% width for all blog posts */
+/* Specific handling for post content images - full width but respect actual image size */
 .post-content img {
-    width: 75%;
-    max-width: 75%;
+    width: 100%;
+    max-width: 100%;
     height: auto;
     display: block;
     margin: 1.8em auto;

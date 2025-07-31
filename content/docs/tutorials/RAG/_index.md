@@ -4,11 +4,8 @@ sidebar_title: "RAG"
 description: "Explore a variety of RAG (Retrieval-Augmented Generation) applications with LanceDB."
 weight: 1
 sidebar_collapsed: true
+hide_toc: true
 ---
-
-This section provides a curated list of advanced RAG techniques and examples to help you build powerful and intelligent applications with LanceDB.
-
-## Available Tutorials
 
 | RAG Technique | Description |
 |----------|:------------|

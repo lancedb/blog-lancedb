@@ -7,10 +7,10 @@ weight: 3
 
 LanceDB serves two distinct market segments, both built on the foundation of [the powerful Lance format](/docs/overview/lance).
 
-1. [Multimodal Vector Database]() </br>
+1. [Multimodal Vector Database](#the-multimodal-vector-database) </br>
 Our flagship vector database empowers developers worldwide to build production-ready AI applications. Available in [OSS](/docs/overview/features), [Cloud](https://cloud.lancedb.com), and [Enterprise](/docs/overview/enterprise) editions. 
 
-2. [Multimodal Lakehouse]() </br>
+2. [Multimodal Lakehouse](#the-multimodal-lakehouse) </br>
 Our enterprise-grade platform enables ML engineers and data scientists to perform large-scale multimodal analytics and AI model experimentation. Available in [OSS](/docs/overview/features) and [Enterprise](/docs/overview/enterprise) editions.
 
 ## LanceDB Products
