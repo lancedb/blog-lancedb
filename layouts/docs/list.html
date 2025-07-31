@@ -1,24 +1,44 @@
 {{ define "main" }}
-<div class="container">
-    <div class="row">
-        {{ partial "docs-sidebar.html" . }}
-        <div class="col-12 col-md-6 col-lg-8">
+<div class="docs-layout">
+    <aside class="docs-sidebar__wrap">
+        <div class="docs-sidebar__header d-md-none">
+            <p class="text-body-medium text-medium">
+                {{ .Params.sidebar_title | default .Title }}
+            </p>
+            <p class="text-body-medium docs-sidebar__header-devider">/</p>
+            <p class="text-body-medium js-current-section text-pro docs-sidebar__header-current">
+            </p>
+            <button class="docs-sidebar__toggle">
+                {{readFile "static/assets/icons/arrow_left.svg" | safeHTML}}
+            </button>
+        </div>
+        <div class="docs-sidebar__content">
+            <div class="docs-sidebar">
+                <nav class="sidebar-nav">
+                    {{ partial "docs-sidebar-recursive.html" (dict "Pages" (.Site.GetPage "section" "docs").Pages "current" .) }}
+                </nav> 
+            </div>
+        </div>
+    </aside>
+    
+    <main class="docs-main">
+        <div class="container">
             <div class="docs-content">
                 <article class="docs-article">
                     <header class="docs-article-header">
                         <nav class="docs-breadcrumbs">
-                          <a href="/" aria-label="Home" class="breadcrumb-home">
-                            {{ readFile "static/assets/icons/home.svg" | safeHTML }}
-                          </a>
-                          {{ $ancestors := .CurrentSection.Ancestors.Reverse }}
-                          {{ range $i, $a := $ancestors }}
-                            {{ if and (in $a.RelPermalink "/docs/") (ne $a.Title "Docs") }}
-                              <span class="breadcrumb-sep">/</span>
-                              <a href="{{ $a.RelPermalink }}">{{ $a.Params.sidebar_title | default $a.Title }}</a>
+                            <a href="/" aria-label="Home" class="breadcrumb-home">
+                                {{ readFile "static/assets/icons/home.svg" | safeHTML }}
+                            </a>
+                            {{ $ancestors := .CurrentSection.Ancestors.Reverse }}
+                            {{ range $i, $a := $ancestors }}
+                                {{ if and (in $a.RelPermalink "/docs/") (ne $a.Title "Docs") }}
+                                    <span class="breadcrumb-sep">/</span>
+                                    <a href="{{ $a.RelPermalink }}">{{ $a.Params.sidebar_title | default $a.Title }}</a>
+                                {{ end }}
                             {{ end }}
-                          {{ end }}
-                          <span class="breadcrumb-sep">/</span>
-                          <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
+                            <span class="breadcrumb-sep">/</span>
+                            <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
                         </nav>
                         <h1>{{ .Title }}</h1>
                     </header>
@@ -28,14 +48,15 @@
                 </article>
             </div>
         </div>
-        <aside class="col-12 col-md-3 col-lg-2{{ if .Params.hide_toc }} d-none{{ end }} docs-toc">
-            <div class="toc-container">
-                {{ if not .Params.hide_toc }}
-                {{ .TableOfContents }}
-                {{ end }}
-            </div>
-        </aside>
-    </div>
+    </main>
+    
+    <aside class="docs-toc{{ if .Params.hide_toc }} d-none{{ end }}">
+        <div class="toc-container">
+            {{ if not .Params.hide_toc }}
+            {{ .TableOfContents }}
+            {{ end }}
+        </div>
+    </aside>
 </div>
 {{ end }}
 {{ define "page_js" }}
