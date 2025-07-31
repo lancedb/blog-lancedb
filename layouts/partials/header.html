@@ -35,9 +35,11 @@
                             {{ range .Site.Menus.main }}
                                 <li class="nav__item">
                                 {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
-                                    <span class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}">
+                                    <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
+                                    href="{{ .URL }}"
+                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
                                     {{ .Name }}
-                                    </span>
+                                    </a>
                                 {{ else }}
                                     <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
                                     href="{{ .URL }}"
@@ -100,12 +102,15 @@
                             {{ range .Site.Menus.main }}
                                 <li class="nav__item">
                                 {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
-                                    <span class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}">
+                                    <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
+                                    href="{{ .URL }}"
+                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
                                     {{ .Name }}
-                                    </span>
+                                    </a>
                                 {{ else }}
                                     <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}">
+                                    href="{{ .URL }}"
+                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ end }}
