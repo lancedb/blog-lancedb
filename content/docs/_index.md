@@ -3,6 +3,8 @@ title: "LanceDB Documentation"
 description: "Welcome to LanceDB documentation"
 weight: 1
 hide_toc: true
+aliases:
+  - /documentation/
 ---
 
 **LanceDB** is an open-source [multimodal lakehouse](/blog/multimodal-lakehouse/). You can use LanceDB in two ways:
