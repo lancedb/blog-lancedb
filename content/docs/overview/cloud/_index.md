@@ -1,46 +1,52 @@
 ---
-title: "LanceDB Cloud: The Multimodal Vector Database"
+title: "LanceDB Cloud: Features and Benefits"
 sidebar_title: "LanceDB Cloud"
 description: Learn about LanceDB Cloud, a serverless vector database service. Includes features, benefits, and best practices for cloud-based vector search applications.
 weight: 3
-hide_toc: true
 ---
 
-LanceDB Cloud is a serverless vector database service that makes it easy to build, deploy, and scale AI-powered applications.
+LanceDB Cloud is a fully managed, serverless vector database service that enables developers to build, deploy, and scale AI-powered applications without infrastructure management overhead. 
 
-![](/assets/docs/lancedb_cloud.png)
+Designed for production workloads, LanceDB Cloud provides cost-effective scaling that adapts to your application needs. The service is currently in public beta with general availability coming soon.
 
-LanceDB Cloud provides the same underlying fast vector store that powers the OSS version, but without the need to maintain your own infrastructure. Because it's serverless, you only pay for the storage you use, and you can scale compute up and down as needed depending on the size of your data and its associated index.
+Access your data through the [LanceDB Cloud UI](/docs/cloud/) and benefit from automatic scaling, built-in security, and enterprise-grade reliability.
 
-It's designed to be cost-effective and highly scalable without breaking the bank. LanceDB Cloud is currently in private beta with general availability coming soon, but you can apply for early access with the private beta release by signing up below.
-
-[Try out LanceDB Cloud (Public Beta) Now](https://cloud.lancedb.com)
+![What is LanceDB?](/assets/docs/overview/multimodal.png)
 
 ## Key Features
 
-- **Serverless & Cost Efficient**: Automatically scales to zero when idle, with usage-based pricing so you only pay for what you use. No need to manage or pay for always-on infrastructure.
+LanceDB Cloud provides the same underlying fast vector database and search engine that powers the OSS version, but without the need to maintain your own infrastructure. Because it's serverless, you only pay for the storage you use, and you can scale compute up and down as needed depending on the size of your data and its associated index.
 
-- **True Multimodal Storage**: Store raw data, embeddings, and metadata together for fast retrieval and filtering. Optimized for vectors, text, images and more.
+| Feature | Description |
+|:--------|:-------------|
+| **Serverless & Cost Efficient** | Automatically scales to zero when idle, with usage-based pricing so you only pay for what you use. No need to manage or pay for always-on infrastructure. |
+| **True Multimodal Storage** | Store raw data, embeddings, and metadata together for fast retrieval and filtering. Optimized for vectors, text, images and more. |
+| **Simple Migration** | Seamlessly migrate from open source LanceDB by just changing the connection URL. No code changes required. |
+| **Enterprise-Grade Security** | Data encryption at rest, SOC2 Type 2 compliance, and HIPAA compliance for regulated workloads. |
+| **Full Observability** | Native integration with OpenTelemetry for comprehensive logging, monitoring and distributed tracing. |
 
-- **Simple Migration**: Seamlessly migrate from open source LanceDB by just changing the connection URL. No code changes required.
+## Which LanceDB to Use?
 
-- **Enterprise-Grade Security**: Data encryption at rest, SOC2 Type 2 compliance, and HIPAA compliance for regulated workloads.
+### LanceDB OSS: Embedded Vector Database
 
-- **Full Observability**: Native integration with OpenTelemetry for comprehensive logging, monitoring and distributed tracing.
+LanceDB OSS is an embedded, in-process vector database designed for production in self-hosted deployments. It integrates seamlessly into your existing application architecture and ML pipelines, providing full control over your data and infrastructure.
 
-## What is the difference between LanceDB OSS and LanceDB Cloud?
+**Ideal for:** Self-hosting and organizations requiring complete data sovereignty in their own cloud.
 
-LanceDB OSS is an **embedded** (in-process) solution that can be used as the vector store of choice for your LLM and RAG applications. It can be embedded inside an existing application backend, or used in-process alongside existing ML and data engineering pipelines.
+### LanceDB Cloud: Managed Serverless Service
 
-LanceDB Cloud is a **serverless** solution — the database and data sit on the cloud and we manage the scalability of the application side via a remote client, without the need to manage any infrastructure.
+LanceDB Cloud is a fully managed, serverless vector database that eliminates infrastructure management overhead. The service automatically handles scaling, security, and operational tasks while providing enterprise-grade reliability and performance.
 
-Both flavors of LanceDB benefit from the blazing fast Lance data format and are built on the same open source foundations.
+**Ideal for:** Production applications, teams requiring rapid deployment, organizations needing automatic scaling, and workloads requiring enterprise security features.
 
-## Upgrading from OSS to Cloud
+{{< admonition "info" "Seamless Migration Path" >}}
+Both versions leverage the same high-performance Lance data format, ensuring consistent performance and enabling effortless migration from OSS to Cloud when your needs evolve. [Start with Cloud today](https://cloud.lancedb.com) to experience the benefits of managed infrastructure.
+{{< /admonition >}}
 
-The OSS version of LanceDB is designed to be embedded in your application, and it runs in-process. This makes it incredibly simple to self-host your own AI retrieval workflows for RAG and more and build and test out your concepts on your own infrastructure. The OSS version is forever free, and you can continue to build and integrate LanceDB into your existing backend applications without any added costs.
+## Upgrading to Cloud
 
-![](/assets/docs/lancedb_oss_and_cloud.png)
+When your application requires a managed deployment for production, you can seamlessly transition from OSS to Cloud by simply updating your connection string to point to the remote database.
 
-Should you decide that you need a managed deployment in production, it's possible to seamlessly transition from the OSS to the cloud version by changing the connection string to point to a remote database instead of a local one. With LanceDB Cloud, you can take your AI application from development to production without major code changes or infrastructure burden.
+LanceDB Cloud enables you to scale your AI applications from development to production without code changes or infrastructure management overhead.
 
+[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://lancedb.com/cloud)

@@ -4,12 +4,13 @@ sidebar_title: "Security"
 description: "Learn about LanceDB Enterprise security features and best practices. Includes authentication, encryption, access control, and compliance features."
 weight: 5
 ---
+LanceDB Enterprise maintains the highest security standards with SOC 2 Type II and HIPAA compliance certifications. Our security framework ensures enterprise-grade protection for your data and workloads across all deployment models.
 
-## LanceDB Achieves SOC 2 Type II & HIPAA Compliance: Your Data, Secured
+## Security Certifications
 
-We're proud to announce that LanceDB has successfully completed SOC 2 Type II and HIPAA audits. 
-At LanceDB, we uphold the highest standards of security, availability, and confidentiality 
-for our services and our customers' data.
+- **SOC 2 Type II**: Independent audit confirming our security controls and operational effectiveness
+- **HIPAA Compliance**: Certified to handle protected health information (PHI) in healthcare applications
+- **Regular Audits**: Ongoing security assessments to maintain compliance standards
 
 ### Future Compliance
 
