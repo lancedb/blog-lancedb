@@ -1,11 +1,11 @@
 ---
-title: "LanceDB Cloud: The Serverless Vector Database"
+title: "LanceDB Cloud: Serverless Vector Search"
 sidebar_title: "LanceDB Cloud"
-description: Learn about LanceDB Cloud, a serverless vector database service. Includes features, benefits, and best practices for cloud-based vector search applications.
+description: Learn about LanceDB Cloud, a serverless vector search service. Includes features, benefits, and best practices for cloud-based vector search applications.
 weight: 3
 ---
 
-LanceDB Cloud is a fully managed, serverless vector database service that enables developers to build, deploy, and scale AI-powered applications without infrastructure management overhead. 
+LanceDB Cloud is a fully managed, serverless vector search service that enables developers to build, deploy, and scale AI-powered applications without infrastructure management overhead. 
 
 Designed for production workloads, LanceDB Cloud provides cost-effective scaling that adapts to your application needs. The service is currently in public beta with general availability coming soon.
 
@@ -27,9 +27,9 @@ LanceDB Cloud provides the same underlying fast vector database and search engin
 
 ## Which LanceDB to Use?
 
-### LanceDB OSS: Embedded Vector Database
+### LanceDB OSS: Embedded Vector Search
 
-LanceDB OSS is an embedded, in-process vector database designed for production in self-hosted deployments. It integrates seamlessly into your existing application architecture and ML pipelines, providing full control over your data and infrastructure.
+LanceDB OSS acts an embedded, in-process vector database designed for production in self-hosted deployments. It integrates seamlessly into your existing application architecture and ML pipelines, providing full control over your data and infrastructure.
 
 **Ideal for:** Self-hosting and organizations requiring complete data sovereignty in their own cloud.
 

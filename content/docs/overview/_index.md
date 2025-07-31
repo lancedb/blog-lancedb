@@ -5,21 +5,21 @@ description: Comprehensive documentation for LanceDB, a vector database for AI a
 weight: 3
 ---
 
-LanceDB serves two distinct market segments, both built on the foundation of [the powerful Lance format](/docs/overview/lance).
+LanceDB serves two different use cases, both built on the foundation of [the powerful Lance format](/docs/overview/lance).
 
-1. [Multimodal Vector Database](#the-multimodal-vector-database) </br>
-Our flagship vector database empowers developers worldwide to build production-ready AI applications. Available in [OSS](/docs/overview/features), [Cloud](https://cloud.lancedb.com), and [Enterprise](/docs/overview/enterprise) editions. 
+1. [Vector Search and Generative AI](#vector-search-and-generative-ai) </br>
+LanceDB can be used as a vector database to build production-ready AI applications. Vector search is available in [OSS](/docs/overview/features), [Cloud](https://cloud.lancedb.com), and [Enterprise](/docs/overview/enterprise) editions. 
 
-2. [Multimodal Lakehouse](#the-multimodal-lakehouse) </br>
-Our enterprise-grade platform enables ML engineers and data scientists to perform large-scale multimodal analytics and AI model experimentation. Available in [OSS](/docs/overview/features) and [Enterprise](/docs/overview/enterprise) editions.
+2. [Training, Feature Engineering and Analytics](#training-feature-engineering-and-analytics) </br>
+Our enterprise-grade platform enables ML engineers and data scientists to perform large-scale training, multimodal EDA and AI model experimentation. Lakehouse features are available in [OSS](/docs/overview/features) and [Enterprise](/docs/overview/enterprise) editions.
 
-## LanceDB Products
+## Use Cases
 
-### The Multimodal Vector Database
+### Vector Search and Generative AI
 
 LanceDB is the preferred choice for developers building production-ready search and generative AI applications, including e-commerce search, recommendation systems, RAG (Retrieval-Augmented Generation), and autonomous agents.
 
-The database natively stores vectors alongside multiple data modalities (text, images, video, audio), serving as a unified data store that eliminates the need for separate databases to manage source data.
+Acting as a vector database, LanceDB natively stores vectors alongside multiple data modalities (text, images, video, audio), serving as a unified data store that eliminates the need for separate databases to manage source data.
 
 | Feature | LanceDB OSS | LanceDB Cloud | LanceDB Enterprise |
 | :----- | :----- | :----- | :----- |
@@ -31,10 +31,9 @@ The database natively stores vectors alongside multiple data modalities (text, i
 - **LanceDB Cloud** provides a fully managed, serverless experience with [automatic indexing, scaling and other quality of life features](/docs/overview/cloud/). 
 - **LanceDB Enterprise** offers a distributed & managed database with all the same benefits of LanceDB Cloud and OSS, [plus additional performance and security benefits](/docs/overview/enterprise/overview/).
 
+### Training, Feature Engineering and Analytics
 
-### The Multimodal Lakehouse
-
-Our enterprise lakehouse platform empowers ML engineers and data scientists to train and fine-tune custom models on petabyte-scale multimodal datasets.
+Our multimodal lakehouse platform empowers ML engineers and data scientists to train and fine-tune custom models on petabyte-scale multimodal datasets.
 
 The platform serves as a unified data hub for internal search, analytics, and model experimentation workflows. Enhanced with SQL analytics, training pipelines, and feature engineering capabilities to accelerate AI development.
 
@@ -49,9 +48,9 @@ The platform serves as a unified data hub for internal search, analytics, and mo
 - **LanceDB OSS** provides a free, self-hosted lakehouse platform that seamlessly works with training and analytics tools. 
 - **LanceDB Enterprise** delivers a managed lakehouse with distributed architecture, accelleration through caching, and custom-built training and feature engineering support. [Learn about Enterprise capabilities.](/docs/overview/enterprise/overview/)
 
-## Database Features
+## Vector Search and Storage
 
-**LanceDB** is a multimodal vector database that's designed to store and search data of different modalities. You can use LanceDB to build fast, scalable, and intelligent applications that rely on vector search and analytics. 
+**LanceDB** is used as a vector database that's designed to store and search data of different modalities. You can use LanceDB to build fast, scalable, and intelligent applications that rely on vector search and analytics. 
 
 It is ideal for powering [semantic search engines](/docs/tutorials/vector-search/), [recommendation systems](/docs/tutorials/vector-search/), and [AI-driven applications (RAG, Agents)](/docs/tutorials/rag/) that require real-time insights.
 
@@ -79,7 +78,7 @@ It is ideal for powering [semantic search engines](/docs/tutorials/vector-search
 
 - **Managed:** LanceDB Enterprise offers a dedicated, enterprise-grade deployment with advanced security, compliance features, and dedicated support for mission-critical AI applications.
 
-## Lakehouse Features
+## Training, Feature Engineering and Analytics
 
 ### 1. Distributed Architecture
 

@@ -11,10 +11,6 @@ This is a minimal tutorial for Python users on LanceDB Cloud. To run the noteboo
 1. [Sign up for LanceDB Cloud](https://accounts.lancedb.com/sign-up)
 2. [Follow our tutorial video to create a LanceDB Cloud API key](https://app.storylane.io/share/pudefwx54tun)
 
-{{< admonition >}}
-It is free for beginners, and you don't need a credit card.
-{{< /admonition >}}
-
 ## 1. Install LanceDB
 
 LanceDB requires Python 3.8+ and can be installed via `pip`. The `pandas` package is optional but recommended for data manipulation.
