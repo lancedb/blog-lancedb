@@ -5,7 +5,7 @@ description: Comprehensive documentation for LanceDB, a vector database for AI a
 weight: 3
 ---
 
-LanceDB serves two different use cases, both built on the foundation of [the powerful Lance format](/docs/overview/lance).
+LanceDB is a [multimodal lakehouse](/blog/multimodal-lakehouse/) that serves two different use cases, both built on the foundation of [the powerful Lance format](/docs/overview/lance).
 
 1. [Vector Search and Generative AI](#vector-search-and-generative-ai) </br>
 LanceDB can be used as a vector database to build production-ready AI applications. Vector search is available in [OSS](/docs/overview/features), [Cloud](https://cloud.lancedb.com), and [Enterprise](/docs/overview/enterprise) editions. 
