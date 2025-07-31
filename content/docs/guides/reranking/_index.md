@@ -1,8 +1,8 @@
 ---
 title: "Reranking Search Results"
-sidebar_title: "Reranking"
+sidebar_title: "Reranking Results"
 description: "Use a reranker to improve search relevance by re-ordering search results."
-weight: 4
+weight: 2
 ---
 
 Reranking re-orders search results to improve relevance, often using a more powerful model than the one used for the initial search. LanceDB has built-in support for reranking with models from Cohere, Sentence-Transformers, and more.

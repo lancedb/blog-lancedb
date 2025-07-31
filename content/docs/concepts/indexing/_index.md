@@ -2,7 +2,7 @@
 title: "Vector Indexing in LanceDB"
 sidebar_title: "Indexing"
 description: "description: Master LanceDB's vector indexing with our comprehensive guide. Learn about IVF-PQ and HNSW indexes, product quantization, clustering, and performance optimization for large-scale vector search."
-weight: 9
+weight: 3
 ---
 
 Embeddings for a given dataset are made searchable via an **index**. The index is constructed by using data structures that store the embeddings such that it's very efficient to perform scans and lookups on them. 

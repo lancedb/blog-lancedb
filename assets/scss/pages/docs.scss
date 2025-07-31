@@ -793,6 +793,11 @@ a.sidebar-divider {
   display: table-cell;
   min-height: 3.2rem;
   
+  &:first-child {
+    white-space: nowrap;
+    min-width: 200px;
+  }
+  
   &:last-child {
     border-right: none;
   }

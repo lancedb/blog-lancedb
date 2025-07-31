@@ -719,6 +719,8 @@ main .post-meta {
 .post-content table th:first-child,
 .post-content table td:first-child {
     padding-left: 1.25rem;
+    white-space: nowrap;
+    min-width: 200px;
 }
 
 .post-content table th:last-child,

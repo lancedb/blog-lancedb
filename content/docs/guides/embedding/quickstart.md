@@ -110,11 +110,9 @@ The search process:
 3. Returns the matching documents
 
 
-
-
 ## Complete Example 
 
-LanceDB currently supports the Embedding API via SDKs in Python, Typescript and Rust.
+LanceDB currently supports the [Embedding API via SDKs in Python, Typescript and Rust](/docs/reference/).
 
 {{< code language="python" source="examples/py/test_embeddings_optional.py" id="imports" />}}
 {{< code language="typescript" source="examples/ts/embedding.test.ts" id="imports" />}}
@@ -126,6 +124,6 @@ Here are some examples of queries in multiple languages.
 {{< code language="typescript" source="examples/ts/embedding.test.ts" id="openai_embeddings" />}}
 {{< code language="rust" source="examples/rs/openai.rs" id="openai_embeddings" />}}
 
-Learn about using the existing integrations and creating custom embedding functions in the [**Embedding Guide**](../embeddings/index.md).
+Learn about using the existing integrations and creating custom embedding functions in the [**Embedding Guide**](/docs/guides/embedding/).\
 
-Check out some [Basic Usage tips](../quickstart/basic-usage). After that, we'll teach you how to build a small app.
+Check out some [Basic Usage tips](/docs/quickstart/basic-usage/). After that, we'll teach you how to build a small app.

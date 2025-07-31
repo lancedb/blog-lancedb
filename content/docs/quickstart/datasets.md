@@ -5,11 +5,14 @@ description: Learn how to ingest datasets from Huggingface into LanceDB Cloud. F
 weight: 3
 ---
 
-In this tutorial, you will ingest a dataset from Huggingface into your **LanceDB Cloud** table. For interactive code, check out the [**Python Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  or the [**TypeScript Example**](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
+In this tutorial, you will ingest a dataset from Huggingface into your [LanceDB Cloud](/docs/overview/cloud/) table. You will connect to a remote LanceDB cluster, ingest data and run some searches.
+
+For interactive code, check out the [Python Notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  or the [TypeScript Example](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
 
 ## Prerequisites
 
-You will connect to a remote LanceDB cluster, ingest data and run some searches. Before you start, make sure you [**sign up for LanceDB Cloud**](https://accounts.lancedb.com/sign-up) and get your API key and cluster URI.
+1. [Sign up for LanceDB Cloud](https://accounts.lancedb.com/sign-up)
+2. [Follow our tutorial video to create a LanceDB Cloud Project](https://app.storylane.io/share/pudefwx54tun) 
 
 ## 1. Installation
 
@@ -23,9 +26,9 @@ npm install @lancedb/lancedb
 
 ## 2. Connect to LanceDB
 
-For **LanceDB Cloud** users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions, refer to our [**onboarding tutorial**](https://app.storylane.io/share/pudefwx54tun).
+For [LanceDB Cloud](/docs/overview/cloud/) users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. 
 
-For **LanceDB Enterprise** users, please contact [**our team**](mailto:contact@lancedb.com) to obtain your database URI, API key, and host_override URL.
+For [LanceDB Enterprise](/docs/overview/enterprise/) users, please contact [**our team**](mailto:contact@lancedb.com) to obtain your database URI, API key, and host_override URL.
 
 {{< code language="python" >}}
 import lancedb
