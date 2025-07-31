@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 sidebar_title: FAQ
 description: "Common questions and answers about LanceDB"
-weight: 102
+weight: 403
 hide_toc: true
 ---
 

@@ -2,7 +2,7 @@
 title: "LanceDB Integrations"
 sidebar_title: Integrations
 description: "Connect LanceDB with popular AI frameworks, embedding models, and development tools"
-weight: 11
+weight: 302
 hide_toc: true
 ---
 

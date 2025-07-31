@@ -1,6 +1,5 @@
 ---
-title: "Support"
-weight: 99
+title: "Build Apps"
+weight: 300
 layout: "divider"
-link: "/contact/"
 ---
