@@ -6,7 +6,7 @@ hide_toc: true
 ---
 
 **LanceDB** is a [multimodal lakehouse](/docs/overview/) and a [vector database](/docs/overview/cloud/). You can use LanceDB in two ways:
-1. [Builders, Developers & ML Engineers:](/docs/quickstart/)</br> Use the database as memory for large-scale Generative AI and Search applications, such as RAG Chatbots, Agents, E-cCommerce Search & Recommendations systems.
+1. [Builders, Developers & ML Engineers:](/docs/quickstart/)</br> Use the database as memory for large-scale Generative AI and Search applications, such as RAG Chatbots, Agents, E-Commerce Search & Recommendations systems.
 2. [Researchers & Data Scientists](/docs/overview/)</br>As a data management platform for large-scale AI workflows: model fine-tuning and training, feature engineering and explorative data analytics over [petabyte-size Lance datasets](/docs/overview/lance/).
 
 {{< cta-buttons >}}
