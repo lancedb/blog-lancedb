@@ -1,56 +1,42 @@
 ---
-title: Reranking Search Results in LanceDB 
+title: "Reranking Search Results"
 sidebar_title: "Reranking Results"
-description: Learn about LanceDB's reranking capabilities for improving search result quality. Includes built-in rerankers like Cohere, CrossEncoder, ColBERT, and custom reranker implementation.
+description: "Use a reranker to improve search relevance by re-ordering search results."
 weight: 2
 ---
 
-Reranking is the process of reordering a list of items based on some criteria. In the context of search, reranking is used to reorder the search results returned by a search engine based on some criteria. This can be useful when the initial ranking of the search results is not satisfactory or when the user has provided additional information that can be used to improve the ranking of the search results.
+Reranking re-orders search results to improve relevance, often using a more powerful model than the one used for the initial search. LanceDB has built-in support for reranking with models from Cohere, Sentence-Transformers, and more.
 
-LanceDB comes with some built-in rerankers. Some of the rerankers that are available in LanceDB are:
+### Quickstart
 
-| Reranker | Description |
-|:---------|:------------|
-| `LinearCombinationReranker` | Reranks search results based on a linear combination of FTS and vector search scores |
-| `CohereReranker` | Uses cohere Reranker API to rerank results |
-| `CrossEncoderReranker` | Uses a cross-encoder model to rerank search results |
-| `ColbertReranker` | Uses a colbert model to rerank search results |
-| `OpenaiReranker`(Experimental) | Uses OpenAI's chat model to rerank search results |
-| `VoyageAIReranker` | Uses voyageai Reranker API to rerank results |
-
-## Using a Reranker
-Using rerankers is optional for vector and FTS. However, for hybrid search, rerankers are required. To use a reranker, you need to create an instance of the reranker and pass it to the `rerank` method of the query builder:
+To use a reranker, you perform a search and then pass the results to the `rerank()` method.
 
 ```python
 import lancedb
-from lancedb.embeddings import get_registry
-from lancedb.pydantic import LanceModel, Vector
-from lancedb.rerankers import CohereReranker
+from lancedb.rerank import CohereReranker
 
-embedder = get_registry().get("sentence-transformers").create()
-db = lancedb.connect("~/.lancedb")
+db = lancedb.connect("/tmp/lancedb")
+table = db.open_table("my_table")
 
-class Schema(LanceModel):
-    text: str = embedder.SourceField()
-    vector: Vector(embedder.ndims()) = embedder.VectorField()
+query = "what is the capital of france"
 
-data = [
-    {"text": "hello world"},
-    {"text": "goodbye world"}
-    ]
-tbl = db.create_table("test", data)
-reranker = CohereReranker(api_key="your_api_key")
-
-# Run vector search with a reranker
-result = tbl.search("hello").rerank(reranker).to_list() 
-
-# Run FTS search with a reranker
-result = tbl.search("hello", query_type="fts").rerank(reranker).to_list()
-
-# Run hybrid search with a reranker
-tbl.create_fts_index("text")
-result = tbl.search("hello", query_type="hybrid").rerank(reranker).to_list()
+# Search with reranking
+reranker = CohereReranker()
+reranked_results = table.search(query).limit(10).rerank(reranker=reranker).to_df()
 ```
+
+### Supported Rerankers
+
+LanceDB supports several rerankers out of the box. Here are a few examples:
+
+| Reranker | Default Model |
+|---|---|
+| `CohereReranker` | `rerank-english-v2.0` |
+| `CrossEncoderReranker` | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
+| `ColbertReranker` | `colbert-ir/colbertv2.0` |
+
+You can find more details about these and other rerankers in the [**Integrations**](../../integrations/) section.
+
 
 ### Multi-vector reranking
 Most rerankers support reranking based on multiple vectors. To rerank based on multiple vectors, you can pass a list of vectors to the `rerank` method. Here's an example of how to rerank based on multiple vector columns using the `CrossEncoderReranker`:
@@ -68,19 +54,6 @@ res3 = table.search(query, vector_column_name="meta_vector").limit(3)
 
 reranked = reranker.rerank_multivector([res1, res2, res3],  deduplicate=True)
 ```
-    
-## Available Rerankers
-LanceDB comes with the following built-in rerankers:
-
-- [Cohere Reranker](./cohere.md)
-- [Cross Encoder Reranker](./cross_encoder.md)
-- [ColBERT Reranker](./colbert.md)
-- [OpenAI Reranker](./openai.md)
-- [Linear Combination Reranker](./linear_combination.md)
-- [Jina Reranker](./jina.md)
-- [AnswerDotAI Rerankers](./answerdotai.md)
-- [Reciprocal Rank Fusion Reranker](./rrf.md)
-- [VoyageAI Reranker](./voyageai.md)
 
 ## Creating Custom Rerankers
 

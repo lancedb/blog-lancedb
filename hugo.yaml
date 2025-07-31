@@ -15,7 +15,6 @@ pagination:
 
 # Permalinks Configuration
 permalinks:
-  blog: "/:filename/"
 
 # Taxonomy Configuration
 taxonomies:
@@ -124,7 +123,7 @@ menus:
     - name: Pricing
       weight: 1
       pageRef: /pricing
-    - name: Documentation
+    - name: Docs
       weight: 2
       pageRef: /docs
     - name: Careers

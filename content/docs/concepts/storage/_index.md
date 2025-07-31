@@ -2,7 +2,7 @@
 title: "Storage Architecture in LanceDB"
 sidebar_title: "Storage"
 description: "Master LanceDB's storage architecture with our comprehensive guide. Learn about local storage, cloud storage options, and best practices for efficient vector data management and persistence."
-weight: 11
+weight: 4
 ---
 
 LanceDB is among the only vector databases built on top of multiple modular components designed from the ground-up to be efficient on disk. This gives it the unique benefit of being flexible enough to support multiple storage backends, including local NVMe, EBS, EFS and many other third-party APIs that connect to the cloud.
@@ -28,7 +28,7 @@ This section reviews the characteristics of each storage option in four dimensio
 
 **We begin with the lowest cost option, and end with the lowest latency option.**
 
-### 1. Object Storage (S3 / GCS / Azure Blob)
+## 1. Object Storage (S3 / GCS / Azure Blob)
 
 {{< admonition tip "Lowest cost, highest latency" >}}
 - **Latency** ⇒ Has the highest latency. p95 latency is also substantially worse than p50. In general you get results in the order of several hundred milliseconds
@@ -39,7 +39,7 @@ This section reviews the characteristics of each storage option in four dimensio
 
 Another important point to note is that LanceDB is designed to separate storage from compute, and the underlying Lance format stores the data in numerous immutable fragments. Due to these factors, LanceDB is a great storage option that addresses the _N + 1_ query problem. i.e., when a high query throughput is required, query processes can run in a stateless manner and be scaled up and down as needed.
 
-### 2. File Storage (EFS / GCS Filestore / Azure File)
+## 2. File Storage (EFS / GCS Filestore / Azure File)
 
 {{< admonition info "Moderately low cost, moderately low latency (<100ms)" >}}
 - **Latency** ⇒ Much better than object/blob storage but not as good as EBS/Local disk; < 100ms p95 achievable
@@ -50,7 +50,7 @@ Another important point to note is that LanceDB is designed to separate storage 
 
 A recommended best practice is to keep a copy of the data on S3 for disaster recovery scenarios. If any downtime is unacceptable, then you would need another EFS with a copy of the data. This is still much cheaper than EC2 instances holding multiple copies of the data.
 
-### 3. Third-party Storage Solutions
+## 3. Third-party Storage Solutions
 
 Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-complexity/), WekaFS, etc. that deliver S3 compatible API with much better performance than S3.
 
@@ -61,7 +61,7 @@ Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-co
 - **Reliability/Availability** ⇒ These are all shareable by lots of nodes, quality/cost of replication/backup depends on the vendor
 {{< /admonition >}}
 
-### 4. Block Storage (EBS / GCP Persistent Disk / Azure Managed Disk)
+## 4. Block Storage (EBS / GCP Persistent Disk / Azure Managed Disk)
 
 {{< admonition info "Very low latency (<30ms), higher cost" >}}
 - **Latency** ⇒ Very good, pretty close to local disk. You're looking at <30ms latency in most cases
@@ -72,7 +72,7 @@ Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-co
 
 Just like EFS, an EBS or persistent disk setup requires more manual work to manage data sharding, backups and capacity.
 
-### 5. Local Storage (SSD/NVMe)
+## 5. Local Storage (SSD/NVMe)
 
 {{< admonition danger "Lowest latency (<10ms), highest cost" >}}
 - **Latency** ⇒ Lowest latency with modern NVMe drives, <10ms p95
