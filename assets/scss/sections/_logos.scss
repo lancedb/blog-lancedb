@@ -26,7 +26,14 @@
     }
   }
 
+  &:has(.swiper-initialized) {
+    .swiper-wrapper {
+      justify-content: unset;
+    }
+  }
+
   .swiper-wrapper {
+    justify-content: center;
     align-items: center;
     transition-timing-function: linear;
   }

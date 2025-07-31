@@ -1,4 +1,5 @@
 ---
+enableSwiper: true
 title: Designed for Multimodal. <br> Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
 hero:

@@ -243,25 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     addTouchSupport();
-    
-    // Add performance monitoring
-    function monitorPerformance() {
-        const codeBlocks = document.querySelectorAll('pre code');
-        
-        if (codeBlocks.length > 10) {
-            console.log(`Enhanced ${codeBlocks.length} code blocks`);
-        }
-        
-        // Monitor copy button usage
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('copy-button')) {
-                // Analytics could be added here
-                console.log('Code copied from:', e.target.parentElement.getAttribute('data-lang'));
-            }
-        });
-    }
-    
-    monitorPerformance();
 });
 
 // Add CSS animation class

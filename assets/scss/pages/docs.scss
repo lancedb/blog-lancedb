@@ -35,6 +35,7 @@
 }
 
 .docs-sidebar__content {
+
   @include  mq($max: $md) {
     max-height: 0;
     transition: max-height 0.4s ease;
@@ -48,6 +49,11 @@
     .open & {
       max-height: calc(100dvh - 155px);
     }
+  }
+
+  @include mq($md) {
+    height: 100%;
+    overflow-y: auto;
   }
 }
 
