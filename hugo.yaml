@@ -26,8 +26,8 @@ params:
   sign_upURL: https://accounts.lancedb.com/sign-up
   mainLanceDBURL: http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com
   cloudLanceDBURL: https://cloud.lancedb.com
-  privacyPdfURL: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
-  termsPdfUrl: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
+  privacyPdfURL: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf
+  termsPdfUrl: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/terms.pdf
   downloadURL: https://learn.lancedb.com/hubfs/lancedb-multimodal-lakehouse.pdf
   socials:
     - name: Discord
@@ -152,7 +152,7 @@ menus:
   legal:
     - name: Terms
       weight: 1
-      url: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
+      url: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/terms.pdf
     - name: Policy
       weight: 2
-      url: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
+      url: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf
