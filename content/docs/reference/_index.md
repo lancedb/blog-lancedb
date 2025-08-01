@@ -2,7 +2,7 @@
 title: LanceDB API & SDK Reference
 sidebar_title: "APIs & SDKs"
 description: "Comprehensive API reference for LanceDB. Includes Python, JavaScript, and Rust SDK documentation, with detailed examples and usage guidelines."
-weight: 6
+weight: 103
 ---
 
 | Reference | Description |
