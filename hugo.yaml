@@ -22,6 +22,7 @@ taxonomies:
 
 # Category Configuration
 params:
+  meta_image: /assets/blog/preview.png
   logo: static/assets/logo.svg
   sign_upURL: https://accounts.lancedb.com/sign-up
   mainLanceDBURL: http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com
