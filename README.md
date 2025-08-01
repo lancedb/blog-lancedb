@@ -48,21 +48,6 @@ This repository contains the complete LanceDB web presence, featuring three inte
 ├── static/           # Static files (images, etc.)
 └── hugo.yaml         # Hugo configuration
 ```
-
-### Key Commands
-
-- `hugo serve` - Start development server
-- `hugo serve --port 1314` - Use different port if 1313 is busy
-- `hugo --minify` - Build optimized production site
-
-
-### Content Guidelines
-
-- **Blog Posts**: Add to `content/blog/` with proper frontmatter
-- **Documentation**: Add to `content/docs/` following existing structure
-- **Images**: Place in `static/assets/` with descriptive names
-- **Styling**: Use SCSS in `assets/scss/` following BEM methodology
-
 ## Deployment
 
 The site is automatically deployed via:
@@ -95,32 +80,13 @@ We welcome contributions to improve the LanceDB website! Here's how you can help
 
 ### What We're Looking For
 
-- **Content improvements** - Better documentation, tutorials, blog posts
-- **Design enhancements** - UI/UX improvements, responsive fixes
-- **Performance optimizations** - Faster loading, better SEO
-- **Accessibility improvements** - Better screen reader support, keyboard navigation
-- **Bug fixes** - Broken links, layout issues, functionality problems
-
-### Content Guidelines
-
-- **Write clearly** - Use simple, direct language
-- **Include examples** - Code snippets and practical demonstrations
-- **Add images** - Screenshots, diagrams, and visual aids
-- **Test thoroughly** - Verify links, check responsive design
-- **Follow existing patterns** - Match the current style and structure
-
-### Getting Help
-
-- **Issues**: Report bugs or request features via GitHub Issues
-- **Discussions**: Ask questions in GitHub Discussions
-- **Documentation**: Check existing docs in `content/docs/`
-- **Community**: Join our [Discord](https://discord.gg/lancedb) or [Slack](https://lancedb.slack.com)
-
-### Code of Conduct
-
-We're committed to providing a welcoming and inclusive environment. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
-
----
+| Category | Description |
+|----------|-------------|
+| **Content improvements** | Better documentation, tutorials, blog posts |
+| **Design enhancements** | UI/UX improvements, responsive fixes |
+| **Performance optimizations** | Faster loading, better SEO |
+| **Accessibility improvements** | Better screen reader support, keyboard navigation |
+| **Bug fixes** | Broken links, layout issues, functionality problems |
 
 **Thank you for contributing to LanceDB!** 🚀
 
