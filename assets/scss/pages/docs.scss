@@ -1,10 +1,33 @@
 // Docs-specific styles
+
+// Layout
+.docs-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  
+  @include mq($md) {
+    grid-template-columns: 280px 1fr 280px;
+    gap: 40px;
+  }
+  
+  @include mq($lg) {
+    grid-template-columns: 320px 1fr 300px;
+    gap: 60px;
+  }
+}
+
+.docs-main {
+  min-width: 0; // Prevents grid item from overflowing
+}
+
 .docs-sidebar__wrap {
   position: sticky;
   z-index: 10;
   top: 83px;
   background: palette(primary-dark);
-  max-height: calc(100dvh - 83px);;
+  max-height: calc(100dvh - 83px);
+  
   @include mq($md) {
     max-height: none;
     top: 67px;
@@ -35,8 +58,7 @@
 }
 
 .docs-sidebar__content {
-
-  @include  mq($max: $md) {
+  @include mq($max: $md) {
     max-height: 0;
     transition: max-height 0.4s ease;
     will-change: max-height;
@@ -64,7 +86,7 @@
   padding-bottom: 20px;
 
   @include mq($md) {
-   height: 100%;
+    height: 100%;
   }
 
   // Solid, visible scrollbar for Webkit browsers
@@ -436,6 +458,11 @@ a.sidebar-divider {
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
+  top: 83px;
+  height: calc(100dvh - 83px);
+  overflow-y: auto;
+  margin-top: 0;
+  align-self: start;
   
   @include mq($md) {
     top: 67px;
@@ -446,15 +473,28 @@ a.sidebar-divider {
     top: 80px;
     height: calc(100dvh - 80px);
   }
-  overflow-y: auto;
-  margin-top: 0;
-  align-self: start;
-  height: fit-content;
   
   &--hidden {
     visibility: hidden;
     pointer-events: none;
   }
+  
+  // Solid, visible scrollbar for Webkit browsers
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: #23262b;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ff734a;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ff5a1f;
+  }
+
+  // Fallback for Firefox
+  scrollbar-color: #ff734a #23262b;
+  scrollbar-width: thin;
 }
 
 .toc-container h3 {
