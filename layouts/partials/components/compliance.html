@@ -35,7 +35,12 @@
               {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
             </div>
             <h3 class="compliance__item-title text-title-small text-center">
-              {{ $item.text }}
+              {{ if $item.text.mobile }}
+                <span class="d-md-none">{{ $item.text.mobile }}</span>
+                <span class="d-none d-md-block">{{ $item.text.desktop }}</span>
+              {{ else }}
+                {{ $item.text }}
+              {{ end }}
             </h3>
           </div>
           {{ end }}
@@ -52,7 +57,12 @@
               {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
             </div>
             <h3 class="compliance__item-title text-title-small text-center">
-              {{ $item.text }}
+              {{ if $item.text.mobile }}
+                <span class="d-md-none">{{ $item.text.mobile }}</span>
+                <span class="d-none d-md-block">{{ $item.text.desktop }}</span>
+              {{ else }}
+                {{ $item.text }}
+              {{ end }}
             </h3>
           </div>
           {{ end }}
@@ -69,7 +79,12 @@
               {{ readFile (printf "static/assets/icons/%s" $item.icon) | safeHTML }}
             </div>
             <h3 class="compliance__item-title text-title-small text-center">
-              {{ $item.text }}
+              {{ if $item.text.mobile }}
+                <span class="d-md-none">{{ $item.text.mobile }}</span>
+                <span class="d-none d-md-block">{{ $item.text.desktop }}</span>
+              {{ else }}
+                {{ $item.text }}
+              {{ end }}
             </h3>
           </div>
           {{ end }}

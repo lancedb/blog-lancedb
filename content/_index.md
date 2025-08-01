@@ -149,11 +149,17 @@ compliance:
   title: Enterprise-Grade Compliance
   description: Safety and security guaranteed for your data.
   cards:
-    - text: SOC2 Type II
+    - text: 
+        mobile: SOC2 
+        desktop: SOC2 Type II
       icon: aicpa.svg
-    - text: GDPR compliant
+    - text:
+        mobile: GDPR 
+        desktop: GDPR compliant
       icon: gdpr.svg
-    - text: HIPAA compliant
+    - text: 
+        mobile: HIPAA 
+        desktop: HIPAA compliant
       icon: hipaa.svg
 testimonials:
   title: Trusted By The Best
