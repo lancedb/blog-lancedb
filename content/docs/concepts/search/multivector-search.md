@@ -17,8 +17,8 @@ Each item in your dataset can have a column containing multiple vectors, which L
 LanceDB also integrates with [**ConteXtualized Token Retriever (XTR)**](https://arxiv.org/abs/2304.01982), an advanced retrieval model that prioritizes the most semantically important document tokens during search. This integration enhances the quality of search results by focusing on the most relevant token matches.
 
 {{< admonition tip "Multivector Search" >}}
-- Multivector search is currently supported in our Python SDK. 
-- Currently, only the `cosine` metric is supported for multivector search. 
+
+- Currently, only the `cosine` metric is supported for multivector search.
 - The vector value type can be `float16`, `float32`, or `float64`.
 {{< /admonition >}}
 
