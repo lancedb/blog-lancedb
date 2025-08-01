@@ -2,6 +2,14 @@
 enableSwiper: true
 title: Designed for Multimodal. <br> Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
+meta: # alternative meta 
+  title: Designed for Multimodal. <br> Built for Scale. # alternate meta title
+  description: "This is a demo for the Hugo Curate theme. Curate is a portfolio theme where you can showcase your projects and work." # alternate meta description
+  keywords: # meta keywords
+  og_title: # Open Graph title
+  og_description: # Open Graph description
+  og_image: # Open Graph image
+  og_twitter_image: # Twitter image
 hero:
   cta:
     - text: Get Started
@@ -141,11 +149,17 @@ compliance:
   title: Enterprise-Grade Compliance
   description: Safety and security guaranteed for your data.
   cards:
-    - text: SOC2 Type II
+    - text: 
+        mobile: SOC2 
+        desktop: SOC2 Type II
       icon: aicpa.svg
-    - text: GDPR compliant
+    - text:
+        mobile: GDPR 
+        desktop: GDPR compliant
       icon: gdpr.svg
-    - text: HIPAA compliant
+    - text: 
+        mobile: HIPAA 
+        desktop: HIPAA compliant
       icon: hipaa.svg
 testimonials:
   title: Trusted By The Best

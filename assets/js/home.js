@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return swiper;
       }
+
       return null;
     }
 
@@ -169,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
           startAutoRotation();
         } else {
           switchTab(tabId);
-        }
+        }infrastructure__badges
       });
     });
   })();

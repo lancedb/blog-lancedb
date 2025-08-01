@@ -87,9 +87,11 @@
   background: linear-gradient(180deg, palette(primary-dark, 700) 40%, palette(primary-grad-dark, start) 100%);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  max-width: 100%;
 
   @include mq($md) {
     padding: 24px 37px;
+    max-width: none;
   }
 
   &:hover {
