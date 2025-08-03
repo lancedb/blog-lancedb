@@ -119,10 +119,6 @@ S3 Vector focuses on storage. If you need ACID tables, versioned datasets, or fa
 
 But for 90% of developers building RAG systems, AI agents, or embedded search features, [LanceDB is the simpler, faster, and more productive choice.](https://www.lancedb.com) It gives you vector search, structured filtering, and local iteration—without needing five cloud services or a DevOps team.
 
-{{< admonition >}}
-In the end, S3 Vectors is cloud infrastructure. LanceDB is a developer tool.
-{{< /admonition >}}
-
 [![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://accounts.lancedb.com/sign-up)
 
 
