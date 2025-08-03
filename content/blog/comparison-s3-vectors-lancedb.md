@@ -17,7 +17,7 @@ author_linkedin: "davidmyriel"
 
 Vector databases often come with an unwelcome surprise.
 
-Once your RAG or Agentic prototype turns to production traffic, the bill can spike faster than you can say *“token limit.”*
+Once your RAG or Agentic prototype turns to production traffic, the storage and retrieval bill can spike faster than you can say *“token limit.”*
 
 [Vector search engines](https://lancedb.com/docs/concepts/vector-search/) such as [LanceDB](https://lancedb.com), Turbopuffer, Chroma, or [S3 Vectors](https://aws.amazon.com/s3/features/vectors/) offer a common solution: store your vectors in S3, pay pennies for storage, and only get charged per query.
 
