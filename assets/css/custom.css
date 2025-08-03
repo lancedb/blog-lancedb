@@ -1068,13 +1068,6 @@ article img {
         margin-bottom: 2rem;
     }
 
-    /* Post content tablet optimization */
-    .post-content {
-        max-width: 100%;
-        margin: 0;
-        padding: 0 1rem;
-    }
-
     .featured-section {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -1095,10 +1088,6 @@ article img {
 }
 
 @media (max-width: 768px) {
-    body {
-        overflow-x: hidden;
-    }
-
     .post-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -1123,13 +1112,6 @@ article img {
     .post-layout {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-    }
-
-    /* Post content mobile optimization */
-    .post-content {
-        max-width: 100%;
-        margin: 0;
-        padding: 0 1rem;
     }
 
     .toc-container {
@@ -2533,7 +2515,6 @@ nav.pagination .pagination-link.current {
     body {
         font-size: 0.95rem;
         line-height: 1.6;
-        overflow-x: hidden;
     }
 
     /* Header improvements for mobile */
@@ -2636,20 +2617,10 @@ nav.pagination .pagination-link.current {
         line-height: 1.6;
     }
 
-    /* Post content mobile optimization */
-    .post-content {
-        max-width: 100%;
-        margin: 0;
-        padding: 0 1rem;
-    }
-
     /* Table mobile optimization */
     .post-content table {
         font-size: 0.85rem;
         margin: 1rem 0;
-        width: 100%;
-        overflow-x: auto;
-        display: block;
     }
 
     .post-content table th,
@@ -2663,9 +2634,6 @@ nav.pagination .pagination-link.current {
         padding: 1rem;
         border-radius: 8px;
         margin: 1rem 0;
-        overflow-x: auto;
-        white-space: pre;
-        word-wrap: normal;
     }
 
     .post-content pre code {
