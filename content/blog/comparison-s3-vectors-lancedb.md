@@ -5,7 +5,7 @@ draft: false
 featured: false
 categories: ["Engineering"]
 image: /assets/blog/comparison-s3-vectors-lancedb/preview-image.png
-meta_image: /assets/blog/series-a-funding/preview-image.png
+meta_image: /assets/blog/comparison-s3-vectors-lancedb/preview-image.png
 description: "Is it worth the hype? Comparing Amazon S3 Vectors and LanceDB for RAG and agentic systems."
 author: David Myriel
 author_avatar: "/assets/authors/david-myriel.jpg"
