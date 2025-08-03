@@ -20,7 +20,7 @@ LanceDB handles both structured and unstructured data with ease. [Learn more abo
 ## Product Release: Announcing LanceDB Cloud!
 *<p style="text-align: center;">LanceDB Cloud: Serverless vector search with enterprise-grade performance!</p>*
 
-[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://lancedb.com/cloud)
+[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://accounts.lancedb.com/sign-up)
 
 With [LanceDB Cloud](/docs/overview/cloud/), you can build secure, scalable, and high-performance vector search solutions. Manage your Projects through the [LanceDB Cloud UI](/docs/overview/cloud/), and connect via our [simple REST API](/docs/reference/) and [SDKs in Python, Typescript and Rust](/docs/reference/). 
 
