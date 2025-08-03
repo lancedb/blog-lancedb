@@ -93,6 +93,8 @@ Let's look at LanceDB in a typical RAG stack:
 [LLM via anything]   
 ```
 
+![S3 Vector Integrations](/assets/blog/comparison-s3-vectors-lancedb/lancedb-workflow.png)
+
 LanceDB takes a streamlined path. Instead of mixing several services, you use a [single embedded, open-source library.](/docs/overview/) Indexing, search, analytics, and [lakehouse-style table support](/blog/multimodal-lakehouse/) are included (everything except the LLM itself). There are no additional services to monitor, and there is no vendor lock-in.
 
 Whether you run it in a notebook, a serverless function, or on-premise hardware, it behaves consistently.
