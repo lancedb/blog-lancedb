@@ -79,7 +79,9 @@ That's 5+ services, each with its own cost, IAM model, SDK/API, and potential la
 
 > Amazon S3 Vectors is the first cloud object store with native support to store and query vectors with sub-second search capabilities.
 
-However, sub-second latency is just for S3. What about the added latency of OpenSearch? Past this simple workflow, cold start and latency are real considerations when moving past S3 and adding OpenSearch. If the vector you need isn’t warmed up in the destination, the request path becomes **AWS S3 Vectors → OpenSearch**, easily pushing p95 well past a second.
+However, sub-second latency is just for S3. What about the added latency of OpenSearch? Past this simple workflow, cold start and latency are real considerations when moving past S3 and adding OpenSearch. 
+
+If the vector you need isn’t warmed up in the destination, the request path becomes **AWS S3 Vectors → OpenSearch**, easily pushing p95 well past a second.
 
 ## The Delivery of LanceDB
 
@@ -92,6 +94,8 @@ Let's look at LanceDB in a typical RAG stack:
      |                                       
 [LLM via anything]   
 ```
+**Figure 2:** Retrieval Augmented Generation (RAG) with LanceDB
+![S3 Vector Integrations](/assets/blog/comparison-s3-vectors-lancedb/lancedb-workflow.png)
 
 LanceDB takes a streamlined path. Instead of mixing several services, you use a [single embedded, open-source library.](/docs/overview/) Indexing, search, analytics, and [lakehouse-style table support](/blog/multimodal-lakehouse/) are included (everything except the LLM itself). There are no additional services to monitor, and there is no vendor lock-in.
 
