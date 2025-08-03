@@ -26,7 +26,7 @@ Storing 10M vectors with 50% overwrites and 500K queries can cost $500+ with a t
 [This can easily drop to $50/month](/pricing/) with LanceDB and similar alternatives.
 {{< /admonition >}}
 
-This is exactly why petabyte-scale GenAI startups, like Cursor (Turbopuffer) or [Harvey](https://www.harvey.ai) and Midjourney [(both on LanceDB)](https://www.harvey.ai/blog/enterprise-grade-rag-systems).
+This method of storage has become a huge reprieve for petabyte-scale GenAI startups, such as Cursor (Turbopuffer) or [Harvey](https://www.harvey.ai) and Midjourney [(both on LanceDB)](https://www.harvey.ai/blog/enterprise-grade-rag-systems). 
 
 ## The Promise of S3 Vectors
 
