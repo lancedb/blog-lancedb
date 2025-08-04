@@ -38,7 +38,7 @@ The appeal is clear. [S3 storage is inexpensive and centralized.](/docs/concepts
 
 ![S3 Vector Integrations](/assets/blog/comparison-s3-vectors-lancedb/s3-vector-integrations.png)
 
-Need more than GenAI? If you're into analytics and need a lakehouse - just plug it into S3 Tables and get the benefit of first-class vector support and tabular data.
+Need more than GenAI? If you're into analytics and need a lakehouse - you'll need to integrate with additional AWS services, such as S3 Tables, for structured data analytics.
 
 ## Wait...Isn't This Just LanceDB?
 
@@ -69,19 +69,18 @@ Let's take a look at a typical RAG workflow with all the AWS services:
      |
 [Embed via Bedrock] -------------------------
      |                                       |
-[S3 Vectors] (for similarity)        [S3 Tables] (for structured data)
+[S3 Vectors] (for similarity)        [Additional AWS Services] (for structured data)
      |                                       |
 [OpenSearch] (optional for latency)          |
      |                                       |
      -------------> [LLM via Bedrock] <------
 ```
-That's 5+ services, each with its own cost, IAM model, SDK/API, and potential latency. Also, the AWS announcement is very carefully written to stay ambiguous performance-wise:
+That's 5+ services, each with its own cost, IAM model, SDK/API, and data governance requirements. Also, the AWS announcement is very carefully written to stay ambiguous performance-wise:
 
-> Amazon S3 Vectors is the first cloud object store with native support to store and query vectors with sub-second search capabilities.
 
-However, sub-second latency is just for S3. What about the added latency of OpenSearch? Past this simple workflow, cold start and latency are real considerations when moving past S3 and adding OpenSearch. 
+However, the real trade-off isn't just complexity—it's data architecture. S3 Vectors requires you to export and duplicate your data across multiple services, creating data silos that contradict the lakehouse philosophy of unified data access. 
 
-If the vector you need isn’t warmed up in the destination, the request path becomes **AWS S3 Vectors → OpenSearch**, easily pushing p95 well past a second.
+When you need both vector search and structured analytics, you're forced to maintain separate data copies across multiple AWS services, each with their own indexing and governance models.
 
 ## The Delivery of LanceDB
 
