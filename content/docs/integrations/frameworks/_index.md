@@ -14,4 +14,4 @@ sidebar_collapsed: true
 | [PromptTools](/docs/integrations/frameworks/prompttools) | Evaluate and optimize LLM prompts with LanceDB for storing and retrieving evaluation results |
 | [Pydantic](/docs/integrations/frameworks/pydantic) | Define structured data models and schemas for LanceDB tables with type safety |
 | [GenKit](/docs/integrations/frameworks/genkit) | Build AI applications with Google's GenKit framework using LanceDB for vector storage |
-| [Llama Synthetic Data Kit](/docs/integrations/frameworks/synthetic-data-kit) | Generate high-quality synthetic datasets for fine-tuning large language models (LLMs) |
+| [Meta Llama Synthetic Data Kit](/docs/integrations/frameworks/synthetic-data-kit) | Generate high-quality synthetic datasets for fine-tuning large language models (LLMs) |
