@@ -1,6 +1,7 @@
 ---
 title: "Meta Llama Synthetic Data Kit"
 sidebar_title: "Synthetic Data Kit"
+description: "Use Meta Llama's Synthetic Data Kit with LanceDB to generating high-quality synthetic datasets for LLM fine-tuning and training."
 weight: 6
 ---
 
