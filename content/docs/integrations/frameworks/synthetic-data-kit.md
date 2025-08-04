@@ -1,12 +1,12 @@
 ---
-title: "Synthetic Data Kit"
+title: "Meta Llama Synthetic Data Kit"
 sidebar_title: "Synthetic Data Kit"
 weight: 6
 ---
 
-### meta-llama/synthetic-data-kit
 
-This is a tool from Meta LLAMA that helps you generate high-quality synthetic datasets for fine-tuning large language models (LLMs). It simplifies the process of preparing data for fine-tuning by providing a command-line interface (CLI) with a modular four-command flow.
+
+[Sythetic Data Kit](https://github.com/meta-llama/synthetic-data-kit) is a tool from Meta LLAMA that helps you generate high-quality synthetic datasets for fine-tuning large language models (LLMs). It simplifies the process of preparing data for fine-tuning by providing a command-line interface (CLI) with a modular four-command flow.
 
 One of the key features of the `synthetic-data-kit` is its use of the Lance format for storing and ingesting datasets. This allows for efficient storage and retrieval of data, which is crucial when working with large datasets.
 
@@ -73,6 +73,10 @@ This workflow allows you to go from a collection of documents to a high-quality,
 
 ### Getting Started:
 
-To get started with the synthetic-data-kit, you can clone the GitHub repository and install the necessary dependencies. You will also need to have access to a Llama model, either running locally or through a hosted API.
+To get started with the synthetic-data-kit, you can clone the [GitHub Repository](https://github.com/meta-llama/synthetic-data-kit) and install the necessary dependencies. 
 
-[GitHub Repository](https://github.com/meta-llama/synthetic-data-kit)
+{{< admonition >}}
+You will also need to have access to a Llama model, either running locally or through a hosted API.
+{{< /admonition >}}
+
+
