@@ -1,7 +1,7 @@
 ---
 title: "Advanced Guides"
 description: "Core concepts and fundamental understanding of LanceDB"
-weight: 6
+weight: 102
 ---
 
 | Guide | Description | Topics Covered |
