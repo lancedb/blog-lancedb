@@ -17,8 +17,11 @@ uv pip install -r requirements.txt
 ```bash
 python ingest.py
 ```
+3. Install and Setup ollama:
+    - Download ollama for your platform - https://ollama.com/download
+    - run ` ollama pull gpt-oss:20b `
 
-3. Start the Streamlit application:
+4. Start the Streamlit application:
 ```bash
 streamlit run rag_app.py
 ```

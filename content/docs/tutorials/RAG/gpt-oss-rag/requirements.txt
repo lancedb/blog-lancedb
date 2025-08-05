@@ -6,3 +6,4 @@ accelerate
 streamlit
 bitsandbytes
 datasets==3.6.0
+ollama
