@@ -1,0 +1,8 @@
+lancedb
+transformers
+sentence-transformers
+torch
+accelerate
+streamlit
+bitsandbytes
+datasets==3.6.0
