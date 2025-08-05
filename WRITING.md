@@ -1,22 +1,21 @@
 # Writing for LanceDB.com/blog
 
-To write the blog, you have to create its Markdown file in one location and then reference images in a separate Static folder.
+To write a blog post, you have to create its Markdown file in one location and then reference images in a separate static folder.
 
-
-It may appear clumsy at first - but the entire publication process becomes super easy, particularly when fixing issues and when collaborating with others on code and technical content.
+It may appear clumsy at first, but the entire publication process becomes super easy, particularly when fixing issues and collaborating with others on code and technical content.
 
 
 ## Step 1: Create the Markdown file
 
-Go to `content/blog/`. Create a new file with a short, SEO-friendly name, such as `multimodal-lakehouse.md`
+Go to `content/blog/`. Create a new file with a short, SEO-friendly name, such as `multimodal-lakehouse.md`.
 
 ## Step 2: Create the blog subdirectory
 
-Go to `static/assets/blog`. Create a new folder with the same name, such as `static/assets/blog/multimodal-lakehouse/`
+Go to `static/assets/blog`. Create a new folder with the same name, such as `static/assets/blog/multimodal-lakehouse/`.
 
 ## Step 3: Copy this front matter template
 
-Go back to your main markdown file and copy this on top.
+Go back to your main Markdown file and copy this on top.
 
 ```markdown
 ---
@@ -39,7 +38,7 @@ Your blog content starts here...
 
 ### Front matter specification
 
-Here is an explanation of common config for the front matter:
+Here is an explanation of common configuration for the front matter:
 
 | Field | Description | Notes |
 |-------|-------------|-------|
@@ -51,21 +50,21 @@ Here is an explanation of common config for the front matter:
 | `description` | SEO description | Can't be too long or it won't show properly |
 | `author` | Author name | Add picture to `static/assets/authors/` |
 
-Save everything. You should be able to run Hugo and see the empty blog posts on the Blog site.
+Save everything. You should be able to run Hugo and see the empty blog post on the blog site.
 
 ## Step 4: Add Your Images
 
-Add your preview image as `preview-image.png` (recommended: 1200x630px). Then, add any other images your post needs to this folder
+Add your preview image as `preview-image.png` (recommended: 1200x630px). Then, add any other images your post needs to this folder.
 
 Reference them in your post as: `![Alt text](/assets/blog/your-blog-post-title/image-name.png)`
 
 ## Step 5: Write Your Content
 
-Write your blog post in Markdown. Between 750 and 1000 words is optimal. 
+Write your blog post in Markdown. Between 750 and 1000 words is optimal.
 
-Highly technical content should go under `/docs/`. If you are writing a `/blog/`, then you shouldn't be exposing entire tutorials with long code blocks.
+Highly technical content should go under `/docs/`. If you are writing a blog post, then you shouldn't be exposing entire tutorials with long code blocks.
 
-A code block in a tutorial should serve to preview a feature or explain simple concepts. End-to-end instructions are for documentation.
+A code block in a blog post should serve to preview a feature or explain simple concepts. End-to-end instructions are for documentation.
 
 Use these common elements:
    - **Headers**: `## Section Title`
@@ -110,7 +109,7 @@ Use these common elements:
 
 ### Writing notes and warnings
 
-Use admonitions for warnings and notes
+Use admonitions for warnings and notes:
 
 ```markdown
 {{< admonition >}}Important note{{< /admonition >}}
@@ -118,7 +117,7 @@ Use admonitions for warnings and notes
 
 ### Writing a single code block
 
-This will render as a simple code block with a Python tab.
+This will render as a simple code block with a Python tab:
 
 ```markdown
 {{< code language="python" >}}print("Hello"){{< /code >}}
@@ -126,7 +125,7 @@ This will render as a simple code block with a Python tab.
 
 ### Writing three code tabs
 
-This will make three tabs next to each other.
+This will make three tabs next to each other:
 
 ```markdown
 {{< code language="python" >}}print("Hello"){{< /code >}}
