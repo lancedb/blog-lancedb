@@ -43,7 +43,7 @@ lakehouse:
   interact_mob: static/assets/vectors/lakehouse-mob.svg
 infrastructure:
   title: AI Needs Better <br> Data Infrastructure
-  description: Data lakes only handle tabular data, search engines just work with vectors, andneither work well with multimodal data. Researchers using today's infrastructure face more complexity, higher cost, and slower progress.
+  description: Data lakes only handle tabular data, search engines just work with vectors, and neither work well with multimodal data. Researchers using today's infrastructure face more complexity, higher cost, and slower progress.
   badges:
     - icon: binary.svg
       text: Chunking
