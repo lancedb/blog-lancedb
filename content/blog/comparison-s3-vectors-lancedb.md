@@ -58,9 +58,9 @@ We agree...the [Multimodal Lakehouse](/docs/) is another way users can harness t
 
 But let's get to the focus of S3 Vectors - GenAI Builders.
 
-## It's Not That Easy
+## The Complexity of AWS Microservices
 
-The trade-off is complexity. Each AWS service introduces its own configuration, IAM policies, and fees. Setting up and maintaining these connections can take as much time as tuning queries.
+Each AWS service introduces its own configuration, IAM policies, and fees. Setting up and maintaining these connections can take as much time as tuning queries.
 
 Let's take a look at a typical RAG workflow with all the AWS services:
 
@@ -75,10 +75,10 @@ Let's take a look at a typical RAG workflow with all the AWS services:
      |                                       |
      -------------> [LLM via Bedrock] <------
 ```
-That's 5+ services, each with its own cost, IAM model, SDK/API, and data governance requirements. Also, the AWS announcement is very carefully written to stay ambiguous performance-wise:
 
+That's 5+ services, each with its own cost, IAM model, SDK/API, and data governance requirements. The AWS announcement is very carefully written to stay ambiguous performance-wise.
 
-However, the real trade-off isn't just complexity—it's data architecture. S3 Vectors requires you to export and duplicate your data across multiple services, creating data silos that contradict the lakehouse philosophy of unified data access. 
+The real trade-off isn't just complexity—it's data architecture. S3 Vectors requires you to export and duplicate your data across multiple services, creating data silos that contradict the lakehouse philosophy of unified data access. 
 
 When you need both vector search and structured analytics, you're forced to maintain separate data copies across multiple AWS services, each with their own indexing and governance models.
 
@@ -104,13 +104,40 @@ Whether you run it in a notebook, a serverless function, or on-premise hardware,
 
 We believe this simplicity is a significant advantage in enterprise GenAI. Combined with the fact that LanceDB can be [hosted on-prem in completely custom environments](/docs/overview/enterprise/), we offer the flexibility and control enterprises need to meet strict security, compliance, and performance requirements.
 
-## How We See Things
+## The Hidden Trade-offs for GenAI Builders
 
+The complexity of S3 Vectors goes beyond just managing multiple services. Here are the key challenges GenAI builders face when building retrieval systems:
+
+| Challenge | S3 Vectors + OpenSearch | LanceDB |
+|-----------|-------------------------|---------|
+| **Data Freshness vs Performance** | Point-in-time export creates tension: stale but "performant" data vs fresh but slow | Real-time queries with consistent performance |
+| **Vector Search Performance** | OpenSearch limitations for sub-second latency | Optimized for fast RAG applications |
+| **Format Consistency** | Two different systems (S3 Vectors + OpenSearch) with different APIs | Single Lance format across all deployments |
+| **Data Portability** | Proprietary formats create vendor lock-in | Open Lance format ensures data portability |
+| **Multimodal Support** | Requires multiple AWS services (S3, S3 Tables, S3 Vectors) | Unified system handles all data types |
+
+## Key Questions for GenAI Builders
+
+When choosing between S3 Vectors and LanceDB, consider these critical factors:
+
+### Team & Integration
 - **How much integration work can your team support?** </br>
 If your organization already relies heavily on AWS, S3 Vector may feel natural, but every new integration adds configuration files to maintain. [LanceDB arrives pre-configured](/docs/overview/), offering less flexibility in exchange for reduced setup effort.
 
+### Performance & Latency
+- **What's your latency requirement?** </br>
+If you need sub-100ms response times for real-time RAG applications, the performance gap between OpenSearch and LanceDB becomes critical. S3 Vectors with OpenSearch export creates a performance vs. freshness trade-off that LanceDB eliminates.
+
+### Data Architecture
 - **Do you require lakehouse-grade analytics?** </br>
 S3 Vector focuses on storage. If you need ACID tables, versioned datasets, or fast aggregate queries, you must add another service. [LanceDB provides these functions natively](/blog/multimodal-lakehouse/), letting your BI dashboards and ML pipelines rely on one engine.
+
+- **Do you need multimodal data?** </br>
+If you're working with images, videos, features, and vectors together, S3 Vectors forces you into multiple AWS services. LanceDB's unified approach means one system handles all your data types without format fragmentation.
+
+### Future-Proofing
+- **How important is vendor lock-in?** </br>
+S3 Vectors and OpenSearch are proprietary formats. LanceDB's open Lance format means your data is portable and future-proof, regardless of where you choose to run it.
 
 ## Final Thoughts
 
