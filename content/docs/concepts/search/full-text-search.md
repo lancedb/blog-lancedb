@@ -737,7 +737,13 @@ console.log(shouldResults);
 - Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
 {{< /admonition >}}
 
-### Example: Search for Substring
+## Example: Substring Search
+
+LanceDB supports searching for substrings in text columns using n-gram tokenization. This is useful for finding partial matches within text content.
+
+### Setting Up the Table
+
+First, create a table with sample text data and configure n-gram tokenization:
 
 {{< code language="python" >}}
 import pyarrow as pa
@@ -748,7 +754,13 @@ db = lancedb.connect(":memory:")
 data = pa.table({"text": ["hello world", "lance database", "lance is cool"]})
 table = db.create_table("test", data=data)
 table.create_fts_index("text", base_tokenizer="ngram")
+{{< /code >}}
 
+### Basic Substring Search
+
+With the default n-gram settings (minimum length of 3), you can search for substrings of length 3 or more:
+
+{{< code language="python" >}}
 results = table.search("lan", query_type="fts").limit(10).to_list()
 assert len(results) == 2
 assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
@@ -758,12 +770,22 @@ results = (
 )  # spellchecker:disable-line
 assert len(results) == 2
 assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
+{{< /code >}}
 
-# the default min_ngram_length is 3, so "la" should not match
+### Handling Short Substrings
+
+By default, the minimum n-gram length is 3, so shorter substrings like "la" won't match:
+
+{{< code language="python" >}}
 results = table.search("la", query_type="fts").limit(10).to_list()
 assert len(results) == 0
+{{< /code >}}
 
-# test setting min_ngram_length and prefix_only
+### Customizing N-gram Parameters
+
+You can customize the n-gram behavior by adjusting the minimum length and using prefix-only matching:
+
+{{< code language="python" >}}
 table.create_fts_index(
     "text",
     use_tantivy=False,
@@ -772,7 +794,13 @@ table.create_fts_index(
     ngram_min_length=2,
     prefix_only=True,
 )
+{{< /code >}}
 
+### Testing Custom N-gram Settings
+
+With the new settings, you can now search for shorter substrings and use prefix-only matching:
+
+{{< code language="python" >}}
 results = table.search("lan", query_type="fts").limit(10).to_list()
 assert len(results) == 2
 assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
@@ -786,7 +814,6 @@ results = table.search("la", query_type="fts").limit(10).to_list()
 assert len(results) == 2
 assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
 {{< /code >}}
-
 
 ## Full-Text Search on Array Fields
 
