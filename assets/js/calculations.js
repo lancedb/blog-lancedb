@@ -59,12 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const numQueries = sliderMarkers[queriesIndex];
       const numVectorsStored = sliderMarkers[storageIndex];
 
-      // document.getElementById("writes-value").innerText =
-      //   prettifyNumber(numVectorsWritten);
-      // document.getElementById("queries-value").innerText =
-      //   prettifyNumber(numQueries);
-      // document.getElementById("storage-value").innerText =
-      //   prettifyNumber(numVectorsStored);
+      // Update slider value displays
+      const writesValueEl = calcWrap.querySelector('[data-slider-value="writes"]');
+      const queriesValueEl = calcWrap.querySelector('[data-slider-value="queries"]');
+      const storageValueEl = calcWrap.querySelector('[data-slider-value="storage"]');
+      
+      if (writesValueEl) writesValueEl.innerText = prettifyNumber(numVectorsWritten);
+      if (queriesValueEl) queriesValueEl.innerText = prettifyNumber(numQueries);
+      if (storageValueEl) storageValueEl.innerText = prettifyNumber(numVectorsStored);
 
       const totalWritesInBytes =
         numVectorsWritten * (dimensions * 4 + attributes);
