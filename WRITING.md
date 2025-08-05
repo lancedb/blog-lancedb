@@ -39,15 +39,17 @@ Your blog content starts here...
 
 ### Front matter specification
 
-Here is a explanation of common config for the front matter:
+Here is an explanation of common config for the front matter:
 
-`title` - Please make it short and SEO friendly. 
-`date` - Can't be a future date or the blog wont show.
-`featured` - `true` for big announcements on top `false` for regular updates in blog lineup
-`categories` - check Reference
-`image` - this is a different folder: `static/assets/blog/filename/`
-`description` - can't be too long or it won't show
-`author` - add picture to `static/assets/authors`
+| Field | Description | Notes |
+|-------|-------------|-------|
+| `title` | Blog post title | Make it short and SEO friendly |
+| `date` | Publication date | Can't be a future date or the blog won't show |
+| `featured` | Featured post status | `true` for big announcements on top, `false` for regular updates |
+| `categories` | Post category | Check Reference section below |
+| `image` | Preview image path | Points to `static/assets/blog/filename/` folder |
+| `description` | SEO description | Can't be too long or it won't show properly |
+| `author` | Author name | Add picture to `static/assets/authors/` |
 
 Save everything. You should be able to run Hugo and see the empty blog posts on the Blog site.
 
@@ -59,9 +61,9 @@ Reference them in your post as: `![Alt text](/assets/blog/your-blog-post-title/i
 
 ## Step 5: Write Your Content
 
-Write your blog post in Markdown. I think between 750 and 1000 words is optimal. 
+Write your blog post in Markdown. Between 750 and 1000 words is optimal. 
 
-Highly technical content should go under /docs/. If you are writing a /blog/, then you shouldn't be exposing entire tutorials with long code blocks.
+Highly technical content should go under `/docs/`. If you are writing a `/blog/`, then you shouldn't be exposing entire tutorials with long code blocks.
 
 A code block in a tutorial should serve to preview a feature or explain simple concepts. End-to-end instructions are for documentation.
 
@@ -131,6 +133,5 @@ This will make three tabs next to each other.
 {{< code language="typescript" >}}print("Hello"){{< /code >}}
 {{< code language="rust" >}}print("Hello"){{< /code >}}
 ```
-
 
 That's it! Your blog post will be live at `https://lancedb.com/blog/your-blog-post-title/` once deployed. 
