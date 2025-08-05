@@ -1,13 +1,12 @@
-{{ $fonts := resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "fonts.css" . | resources.Fingerprint }}
-{{ $custom := resources.Get "css/custom.css" }}
-{{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
+{{ $fonts := resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "css/fonts.generated.css" . | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $fonts.RelPermalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
 
-{{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | resources.Fingerprint }}
+{{/* Preload critical fonts */}}
+{{ $preloadFonts := slice "AeonikFono-Regular.woff2" "Aeonik-Pro-Regular.woff2" }}
+{{ range $preloadFonts }}
+  <link rel="preload" href="{{ "fonts/" | relURL }}{{ . }}" as="font" type="font/woff2" crossorigin="anonymous">
+{{ end }}
 
-<link href="{{ $swiper.RelPermalink | relURL }}" rel="stylesheet">
-<link href="{{ $fonts.RelPermalink | relURL }}" rel="stylesheet">
-<link href="{{ $custom.RelPermalink | relURL }}" rel="stylesheet">
-<link href="{{ $syntaxHighlighting.RelPermalink | relURL }}" rel="stylesheet">
 {{ with resources.Get "scss/main.scss" }}
   {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
   {{ with . | toCSS $opts }}
@@ -20,3 +19,14 @@
     {{ end }}
   {{ end }}
 {{ end }}
+
+{{ if .Params.enableSwiper }}
+  {{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | fingerprint }}
+  <link href="{{ $swiper.RelPermalink }}" rel="stylesheet">
+{{ end }}
+
+{{ $custom := resources.Get "css/custom.css" }}
+{{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
+<link href="{{ $custom.RelPermalink }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}"></noscript>

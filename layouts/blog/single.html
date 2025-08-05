@@ -1,82 +1,129 @@
 {{ define "main" }}
-<div class="content-wrapper">
-    {{ if .TableOfContents }}
-    <div class="toc-container">
-        <div class="toc">
-            <h2>Table of Contents</h2>
-            {{ .TableOfContents }}
-        </div>
-    </div>
-    {{ end }}
-    <main>
-        <h1>{{ .Title }}</h1>
-        <div class="post-meta">
-            {{ if .Params.categories }}
-                <span class="post-category">{{ index .Params.categories 0 }}</span>
-                <span class="meta-divider">•</span>
-            {{ end }}
-            <span class="post-author">{{ .Params.author }}</span>
-            <span class="meta-divider">•</span>
-            <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
-        </div>
-        <article class="single-post">
-            <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
-            <div class="post-content">
-                {{ $content := .Content }}
-                {{ $content := $content | replaceRE "<h2 id=\"([^\"]*)\">" "<h2 id=\"$1\">" }}
-                {{ $content := $content | replaceRE "<h3 id=\"([^\"]*)\">" "<h3 id=\"$1\">" }}
-                {{ $content := $content | replaceRE "<p>(<img[^>]+>)\\s*<em>([^<]+)</em></p>" "<figure>$1<figcaption>$2</figcaption></figure>" }}
-                {{ $content | safeHTML }}
-            </div>
-        </article>
-        {{ if .Params.author }}
-        <div class="author-section">
-            <img src="{{ .Params.author_avatar | default "/assets/authors/default-avatar.png" }}" alt="{{ .Params.author }}" class="author-avatar">
-            <div class="author-info">
-                <h3 class="author-name">{{ .Params.author }}</h3>
-                {{ if .Params.author_bio }}
-                <p class="author-bio">{{ .Params.author_bio }}</p>
-                {{ end }}
-                <div class="author-social">
-                    {{ if .Params.author_twitter }}
-                    <a href="https://twitter.com/{{ .Params.author_twitter }}" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                        Twitter
-                    </a>
-                    {{ end }}
-                    {{ if .Params.author_github }}
-                    <a href="https://github.com/{{ .Params.author_github }}" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                    </a>
-                    {{ end }}
-                    {{ if .Params.author_linkedin }}
-                    <a href="https://linkedin.com/in/{{ .Params.author_linkedin }}" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        LinkedIn
-                    </a>
-                    {{ end }}
-                </div>
+<div class="container">
+    <div class="content-wrapper">
+        {{ if .TableOfContents }}
+        <div class="toc-container">
+            <div class="toc">
+                <h2>Table of Contents</h2>
+                {{ .TableOfContents }}
             </div>
         </div>
         {{ end }}
-        <div class="related-posts">
-            <h2>Related Posts</h2>
-            <div class="related-posts-grid">
-                {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
-                    <article class="related-post">
-                        <a href="{{ .RelPermalink }}">
-                            <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
-                        </a>
-                        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                        <div class="post-meta">
-                            <span class="post-author">{{ .Params.author }}</span>
-                            <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+        <main>
+            <h1>{{ .Title }}</h1>
+            <div class="post-meta">
+                {{ if .Params.categories }}
+                    <span class="post-category">{{ index .Params.categories 0 }}</span>
+                    <span class="meta-divider">•</span>
+                {{ end }}
+                <span class="post-author">
+                    {{- if .Params.author2 -}}
+                        {{- .Params.author }} & {{ .Params.author2 -}}
+                    {{- else -}}
+                        {{- .Params.author -}}
+                    {{- end -}}
+                </span>
+                <span class="meta-divider">•</span>
+                <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+            </div>
+            <article class="single-post">
+                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                <div class="post-content">
+                    {{ $content := .Content }}
+                    {{ $content := $content | replaceRE "<h2 id=\"([^\"]*)\">" "<h2 id=\"$1\">" }}
+                    {{ $content := $content | replaceRE "<h3 id=\"([^\"]*)\">" "<h3 id=\"$1\">" }}
+                    {{ $content := $content | replaceRE "<p>(<img[^>]+>)\\s*<em>([^<]+)</em></p>" "<figure>$1<figcaption>$2</figcaption></figure>" }}
+                    {{ $content | safeHTML }}
+                </div>
+            </article>
+            
+            <!-- Authors Section -->
+            <div class="authors-section">
+                <!-- First Author -->
+                {{ if .Params.author }}
+                <div class="author-section">
+                    <img src="{{ .Params.author_avatar | default "/assets/authors/default-avatar.png" }}" alt="{{ .Params.author }}" class="author-avatar">
+                    <div class="author-info">
+                        <h3 class="author-name">{{ .Params.author }}</h3>
+                        {{ if .Params.author_bio }}
+                        <p class="author-bio">{{ .Params.author_bio }}</p>
+                        {{ end }}
+                        <div class="author-social">
+                            {{ if .Params.author_twitter }}
+                            <a href="https://twitter.com/{{ .Params.author_twitter }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                                Twitter
+                            </a>
+                            {{ end }}
+                            {{ if .Params.author_github }}
+                            <a href="https://github.com/{{ .Params.author_github }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub
+                            </a>
+                            {{ end }}
+                            {{ if .Params.author_linkedin }}
+                            <a href="https://linkedin.com/in/{{ .Params.author_linkedin }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                LinkedIn
+                            </a>
+                            {{ end }}
                         </div>
-                    </article>
+                    </div>
+                </div>
+                {{ end }}
+                
+                <!-- Second Author -->
+                {{ if .Params.author2 }}
+                <div class="author-section">
+                    <img src="{{ .Params.author2_avatar | default "/assets/authors/default-avatar.png" }}" alt="{{ .Params.author2 }}" class="author-avatar">
+                    <div class="author-info">
+                        <h3 class="author-name">{{ .Params.author2 }}</h3>
+                        {{ if .Params.author2_bio }}
+                        <p class="author-bio">{{ .Params.author2_bio }}</p>
+                        {{ end }}
+                        <div class="author-social">
+                            {{ if .Params.author2_twitter }}
+                            <a href="https://twitter.com/{{ .Params.author2_twitter }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                                Twitter
+                            </a>
+                            {{ end }}
+                            {{ if .Params.author2_github }}
+                            <a href="https://github.com/{{ .Params.author2_github }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub
+                            </a>
+                            {{ end }}
+                            {{ if .Params.author2_linkedin }}
+                            <a href="https://linkedin.com/in/{{ .Params.author2_linkedin }}" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                LinkedIn
+                            </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
                 {{ end }}
             </div>
-        </div>
-    </main>
+            
+            <div class="related-posts">
+                <h2>Related Posts</h2>
+                <div class="related-posts-grid">
+                    {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+                        <article class="related-post">
+                            <a href="{{ .RelPermalink }}">
+                                <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="related-preview-image">
+                            </a>
+                            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                            <div class="post-meta">
+                                <span class="post-author">{{ .Params.author }}</span>
+                                <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                            </div>
+                        </article>
+                    {{ end }}
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
 {{ end }}

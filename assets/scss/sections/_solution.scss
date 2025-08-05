@@ -230,6 +230,7 @@
   display: flex;
   align-items: center;
   overflow-x: auto;
+  max-width: 100%;
 
   @include mq($md) {
     padding: 20px 30px;
@@ -240,10 +241,23 @@
     background: transparent;
     border: none;
     overflow: visible;
+    position: relative;
+    width: 100%;
+  }
+
+  pre {
+    position: static;
   }
 
   .code-tab__content {
     width: fit-content;
+    position: relative;
+  }
+
+  .copy-button {
+    top: 0;
+    right: 0;
+    transform: translateY(-100%);
   }
 }
 

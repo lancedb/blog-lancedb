@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting 
-weight: 100
+weight: 301
 ---
 
 Most issues happen very frequently. There's a chance we covered the solution in our docs and dedicated FAQ sections:

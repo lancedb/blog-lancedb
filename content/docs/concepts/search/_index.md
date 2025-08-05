@@ -2,7 +2,7 @@
 title: Search Features in LanceDB
 sidebar_title: "Search"
 description: "Comprehensive guide to all search capabilities in LanceDB including vector search, full-text search, hybrid search, and more."
-weight: 1
+weight: 2
 hide_toc: true
 ---
 

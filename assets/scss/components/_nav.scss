@@ -52,11 +52,15 @@
     padding: 0;
     border: none;
     display: flex;
-    gap: 48px;
+    gap: 24px;
     align-items: center;
     justify-content: flex-start;
     width: auto;
     margin: 0;
+  }
+
+  @include mq($xl) {
+    gap: 48px;
   }
 }
 
@@ -102,6 +106,22 @@
 
   &.active {
     color: palette(primary-orange);
+  }
+
+  // Styles for Careers link in right section
+  &.nav__link--right {
+    @include mq($lg) {
+      @include font(nav, 22, 400);
+      color: palette(primary-offwhite);
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+      white-space: nowrap;
+      margin-right: 2px;
+
+      &:hover {
+        color: palette(primary-dark, 400);
+      }
+    }
   }
 }
 

@@ -3,6 +3,7 @@ title: "LanceDB Enterprise Architecture"
 sidebar_title: "Architecture"
 description: "Learn about LanceDB Enterprise architecture and system design. Includes components, scalability, and high-availability features for enterprise deployments."
 weight: 2
+aliases: ["/docs/overview/enterprise/architecture/", "/docs/overview/enterprise/architecture"]
 ---
 
 LanceDB Enterprise consists of the following key components:

@@ -8,6 +8,9 @@ weight: 2
 
 This is a minimal tutorial for Python users on LanceDB Cloud. To run the notebook, [open in Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb).
 
+1. [Sign up for LanceDB Cloud](https://accounts.lancedb.com/sign-up)
+2. [Follow our tutorial video to create a LanceDB Cloud API key](https://app.storylane.io/share/pudefwx54tun)
+
 ## 1. Install LanceDB
 
 LanceDB requires Python 3.8+ and can be installed via `pip`. The `pandas` package is optional but recommended for data manipulation.
@@ -18,7 +21,7 @@ pip install lancedb pandas
 
 ## 2. Import Libraries
 
-Import the libraries. LanceDB provides the core vector database functionality, while `pandas` helps with data handling.
+Import the libraries. `lancedb` provides the core vector database functionality, while `pandas` helps with data handling.
 
 ```python
 import lancedb
@@ -66,7 +69,7 @@ Now, go to LanceDB Cloud and verify that your remote table has been created:
 
 ## 6. Vector Search
 
-Perform a vector similarity search. The query vector should have the same dimensionality as your data vectors. The search returns the most similar vectors based on **euclidean distance**.
+Perform a vector similarity search. The query vector should have the same dimensionality as your data vectors. The search returns the most similar vectors based on euclidean distance.
 
 Our query is "warrior", represented by a vector `[0.8, 0.3, 0.8]`. Let's find the most similar adventurer:
 
@@ -92,7 +95,7 @@ Looks like the knight is the most similar to the warrior.
 
 This is, of course, a simplified scenario - but the engine offered by LanceDB allows you to conduct complex calculations at high volumes and extreme speeds.
 
-In real world scenarios, [embeddings](/docs/guides/embedding/) capture meaning and [vector search](/docs/concepts/search/vector-search/) gives you access to powerful ways of finding semantic relevance or contextual relations.
+In real world scenarios, embeddings capture meaning and [vector search](/docs/concepts/search/vector-search/) gives you access to powerful ways of finding semantic relevance or contextual relations.
 
 {{< admonition "Note" "What's Next?" >}}
 Check out the next [tutorial on Common Database Operations](/docs/quickstart/basic-usage/). 

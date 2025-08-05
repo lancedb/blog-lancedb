@@ -3,29 +3,27 @@ title: "LanceDB Documentation"
 description: "Welcome to LanceDB documentation"
 weight: 1
 hide_toc: true
+aliases:
+  - /documentation/
 ---
 
-**LanceDB** is an open-source vector database that fully supports multimodal data. Use LanceDB to build large-scale search, RAG and Agentic applications. 
+**LanceDB** is an open-source [multimodal lakehouse](/blog/multimodal-lakehouse/). You can use LanceDB in two ways:
+1. [Builders, Developers & ML Engineers:](/docs/quickstart/)</br> As a vector database and memory for large-scale Generative AI and Search applications, such as RAG Chatbots, Agents, E-Commerce Search & Recommendations systems.
+2. [Researchers & Data Scientists](/docs/overview/)</br>As a data management platform for large-scale AI workflows: model fine-tuning and training, feature engineering and explorative data analytics over [petabyte-size Lance datasets.](/docs/overview/lance/)
 
 {{< cta-buttons >}}
 
 {{< admonition >}}
-Looking for Lance columnar format docs? [Click here.](https://lancedb.github.io/lance/)
+LanceDB handles both structured and unstructured data with ease. [Learn more about LanceDB.](/docs/overview/)
 {{< /admonition >}}
 
 ## Product Release: Announcing LanceDB Cloud!
-***<p style="text-align: center;">Now you can deploy LanceDB in the cloud or on your own infrastructure!</p>***
+*<p style="text-align: center;">LanceDB Cloud: Serverless vector search with enterprise-grade performance!</p>*
 
-[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://lancedb.com/cloud)
+[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://accounts.lancedb.com/sign-up)
 
-With [LanceDB Cloud](/cloud/), you can build secure, scalable, and high-performance vector search solutions. Manage your clusters through the [LanceDB Cloud UI](/docs/cloud/), or run LanceDB on your own infrastructure for complete control and data sovereignty.
+With [LanceDB Cloud](/docs/overview/cloud/), you can build secure, scalable, and high-performance vector search solutions. Manage your Projects through the [LanceDB Cloud UI](/docs/overview/cloud/), and connect via our [simple REST API](/docs/reference/) and [SDKs in Python, Typescript and Rust](/docs/reference/). 
 
-## First-Time Users:
-
-| Get Started | Description |
-|:-------|:------------|
-| [Local or Cloud Quickstart](/docs/quickstart/) | `pip install lancedb` and run complex queries in five steps |
-| [Build a 5-Minute Chatbot](https://github.com/lancedb/lancedb) | Build AI apps with embedded & lightweight vector search and storage |
-| [Cloud Deployment](/cloud/) | Launch scalable clusters and prepare for prototyping and production |
-
-
+{{< admonition >}}
+Looking for Lance columnar format docs? [Click here.](https://lancedb.github.io/lance/)
+{{< /admonition >}}

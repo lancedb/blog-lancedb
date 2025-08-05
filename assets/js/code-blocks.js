@@ -1,14 +1,10 @@
 // Enhanced Code Block Functionality
-console.log('code-blocks.js loaded');
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOMContentLoaded fired');
     // Add language attributes and copy buttons to code blocks
     function enhanceCodeBlocks() {
         // Target code blocks in both regular and highlighted contexts
         const codeBlocks = document.querySelectorAll('pre code, .highlight pre code');
-        console.log('Found code blocks:', codeBlocks.length);
         codeBlocks.forEach(function(codeBlock, idx) {
-            console.log('Code block', idx, codeBlock);
             const pre = codeBlock.parentElement;
             if (pre.querySelector('.copy-button')) return;
             // Create copy button
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     enhanceCodeBlocks();
     addLineNumbers();
     highlightLines();
-    monitorPerformance();
 });
 
 // Add line numbers to code blocks with line-numbers class
@@ -211,25 +206,6 @@ function addTouchSupport() {
 }
 
 addTouchSupport();
-
-// Add performance monitoring
-function monitorPerformance() {
-    const codeBlocks = document.querySelectorAll('pre code');
-    
-    if (codeBlocks.length > 10) {
-        console.log(`Enhanced ${codeBlocks.length} code blocks`);
-    }
-    
-    // Monitor copy button usage
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('copy-button')) {
-            // Analytics could be added here
-            console.log('Code copied from:', e.target.parentElement.getAttribute('data-lang'));
-        }
-    });
-}
-
-monitorPerformance();
 
 // Add CSS animation class
 const style = document.createElement('style');

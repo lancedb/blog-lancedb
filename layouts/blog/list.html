@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main>  
+<div class="container">
 {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
 {{ $featuredPosts := where $allPosts ".Params.featured" true }}
 
@@ -31,7 +31,11 @@
                     {{- $category -}}
                 {{- end -}}
                 {{- if $mainFeatured.Params.categories }} / {{ end -}}
-                {{- $mainFeatured.Params.author }} / {{ $mainFeatured.Date.Format "January 2, 2006" -}}
+                {{- if $mainFeatured.Params.author2 -}}
+                    {{- $mainFeatured.Params.author }} & {{ $mainFeatured.Params.author2 -}}
+                {{- else -}}
+                    {{- $mainFeatured.Params.author -}}
+                {{- end -}} / {{ $mainFeatured.Date.Format "January 2, 2006" -}}
             </div>
             <p class="post-description">{{ $mainFeatured.Description | default (truncate 160 $mainFeatured.Summary) }}</p>
         </article>
@@ -49,7 +53,11 @@
                             {{- $category -}}
                         {{- end -}}
                         {{- if .Params.categories }} / {{ end -}}
-                        {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
+                        {{- if .Params.author2 -}}
+                            {{- .Params.author }} & {{ .Params.author2 -}}
+                        {{- else -}}
+                            {{- .Params.author -}}
+                        {{ end }} / {{ .Date.Format "January 2, 2006" -}}
                     </div>
                 </article>
             {{ end }}
@@ -101,7 +109,11 @@
                     {{- $category -}}
                 {{- end -}}
                 {{- if .Params.categories }} / {{ end -}}
-                {{- .Params.author }} / {{ .Date.Format "January 2, 2006" -}}
+                {{- if .Params.author2 -}}
+                    {{- .Params.author }} & {{ .Params.author2 -}}
+                {{- else -}}
+                    {{- .Params.author -}}
+                {{ end }} / {{ .Date.Format "January 2, 2006" -}}
             </div>
             <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
         </article>
@@ -137,6 +149,6 @@
     </div>
 </nav>
 {{ end }}
-</main>
+</div>
 {{ end }}
     

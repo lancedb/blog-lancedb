@@ -6,10 +6,6 @@ weight: 3
 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
 
-{{< admonition "note" >}}
-The Python SDK uses our native FTS implementation by default, you need to pass `use_tantivy=True` to use tantivy-based FTS.
-{{< /admonition >}}
-
 
 ## Basic Usage
 
@@ -62,9 +58,7 @@ let tbl = db
 Create a full-text search index on your text column:
 
 {{< code language="python" >}}
-# passing `use_tantivy=False` to use lance FTS index
-# `use_tantivy=True` by default
-table.create_fts_index("text", use_tantivy=False)
+table.create_fts_index("text")
 {{< /code >}}
 
 {{< code language="typescript" >}}
@@ -112,7 +106,7 @@ let results = tbl
 
 The search is conducted on all indexed columns by default, so it's useful when there are multiple indexed columns.
 
-If you want to specify which columns to search us `fts_columns="text"`
+If you want to specify which columns to search use `fts_columns="text"`
 
 {{< admonition "note" >}}
 LanceDB automatically searches on the existing FTS index if the input to the search is of type `str`. If you provide a vector as input, LanceDB will search the ANN index instead.
@@ -124,25 +118,33 @@ LanceDB automatically searches on the existing FTS index if the input to the sea
 
 By default, the text is tokenized by splitting on punctuation and whitespaces, and would filter out words that are longer than 40 characters. All words are converted to lowercase.
 
-Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages, you can specify the tokenizer name to enable stemming by the pattern `tokenizer_name="{language_code}_stem"`, e.g. `en_stem` for English.
+Stemming is useful for improving search results by reducing words to their root form, e.g. "running" to "run". LanceDB supports stemming for multiple languages. You should set the `base_tokenizer` parameter rather than `tokenizer_name` because you cannot customize the tokenizer if `tokenizer_name` is specified.
 
 For example, to enable stemming for English:
 
-
 ```python
-table.create_fts_index("text", tokenizer_name="en_stem", replace=True)
+table.create_fts_index("text", language="English", replace=True)
 ```
 
-the following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
+The following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
 
 The tokenizer is customizable, you can specify how the tokenizer splits the text, and how it filters out words, etc.
+
+**Default index parameters:**
+- `base_tokenizer`: `"simple"`
+- `language`: English
+- `with_position`: false
+- `max_token_length`: 40
+- `lower_case`: true
+- `stem`: true
+- `remove_stop_words`: true
+- `ascii_folding`: true
 
 For example, for language with accents, you can specify the tokenizer to use `ascii_folding` to remove accents, e.g. 'é' to 'e':
 
 ```python
 table.create_fts_index(
         "text",
-        use_tantivy=False,
         language="French",
         stem=True,
         ascii_folding=True,
@@ -210,7 +212,7 @@ table
 ### Phrase vs. Terms Queries
 
 {{< admonition "warning" "Warn" >}}
-Lance-based FTS doesn't support queries using boolean operators `OR`, `AND`.
+Lance-based FTS doesn't support queries using boolean operators `OR`, `AND` in the search string.
 {{< /admonition >}}
 
 For full-text search you can specify either a **phrase** query like `"the old man and the sea"`,
@@ -220,7 +222,7 @@ query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/
 To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 
 ```python
-table.create_fts_index("text", use_tantivy=False, with_position=True, replace=True)
+table.create_fts_index("text", with_position=True, replace=True)
 ```
 
 
@@ -232,13 +234,24 @@ Fuzzy search allows you to find matches even when the search terms contain typos
 LanceDB uses the classic [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) 
 to find similar terms within a specified edit distance.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| fuzziness | int | 0 | Maximum edit distance allowed for each term. If not specified, automatically set based on term length: 0 for length ≤ 2, 1 for length ≤ 5, 2 for length > 5 |
-| max_expansions | int | 50 | Maximum number of terms to consider for fuzzy matching. Higher values may improve recall but increase search time |
+| Parameter      | Type | Default | Description                                                                                                                                                 |
+| -------------- | ---- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| fuzziness      | int  | 0       | Maximum edit distance allowed for each term. If not specified, automatically set based on term length: 0 for length ≤ 2, 1 for length ≤ 5, 2 for length > 5 |
+| max_expansions | int  | 50      | Maximum number of terms to consider for fuzzy matching. Higher values may improve recall but increase search time                                           |
 
 Let's create a sample table and build full-text search indices to demonstrate 
 fuzzy search capabilities and relevance boosting features.
+
+### Search for Substring
+
+LanceDB supports searching for substrings in the text column, you can set the `base_tokenizer` parameter to `"ngram"` to enable this feature, and use the parameters `ngram_min_length` and `ngram_max_length` to control the length of the substrings:
+
+| Parameter        | Type | Default | Description                                        |
+| ---------------- | ---- | ------- | -------------------------------------------------- |
+| ngram_min_length | int  | 3       | Minimum length of the n-grams to search for        |
+| ngram_max_length | int  | 3       | Maximum length of the n-grams to search for        |
+| prefix_only      | bool | false   | Whether to only search for prefixes of the n-grams |
+
 
 ## Example: Fuzzy Search
 
@@ -542,11 +555,11 @@ in your queries. This feature is particularly useful when you need to:
 * Promote specific terms while demoting others 
 * Fine-tune relevance scoring for better search results
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| positive | Query | required | The primary query terms to match and promote in results |
-| negative | Query | required | Terms to demote in the search results |
-| negative_boost | float | 0.5 | Multiplier for negative matches (lower values = stronger demotion) |
+| Parameter      | Type  | Default  | Description                                                        |
+| -------------- | ----- | -------- | ------------------------------------------------------------------ |
+| positive       | Query | required | The primary query terms to match and promote in results            |
+| negative       | Query | required | Terms to demote in the search results                              |
+| negative_boost | float | 0.5      | Multiplier for negative matches (lower values = stronger demotion) |
 
 {{< code language="python" >}}
 from lancedb.query import MatchQuery, BoostQuery, MultiMatchQuery
@@ -724,6 +737,83 @@ console.log(shouldResults);
 - Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
 {{< /admonition >}}
 
+## Example: Substring Search
+
+LanceDB supports searching for substrings in text columns using n-gram tokenization. This is useful for finding partial matches within text content.
+
+### Setting Up the Table
+
+First, create a table with sample text data and configure n-gram tokenization:
+
+{{< code language="python" >}}
+import pyarrow as pa
+import lancedb
+
+db = lancedb.connect(":memory:")
+
+data = pa.table({"text": ["hello world", "lance database", "lance is cool"]})
+table = db.create_table("test", data=data)
+table.create_fts_index("text", base_tokenizer="ngram")
+{{< /code >}}
+
+### Basic Substring Search
+
+With the default n-gram settings (minimum length of 3), you can search for substrings of length 3 or more:
+
+{{< code language="python" >}}
+results = table.search("lan", query_type="fts").limit(10).to_list()
+assert len(results) == 2
+assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
+
+results = (
+    table.search("nce", query_type="fts").limit(10).to_list()
+)  # spellchecker:disable-line
+assert len(results) == 2
+assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
+{{< /code >}}
+
+### Handling Short Substrings
+
+By default, the minimum n-gram length is 3, so shorter substrings like "la" won't match:
+
+{{< code language="python" >}}
+results = table.search("la", query_type="fts").limit(10).to_list()
+assert len(results) == 0
+{{< /code >}}
+
+### Customizing N-gram Parameters
+
+You can customize the n-gram behavior by adjusting the minimum length and using prefix-only matching:
+
+{{< code language="python" >}}
+table.create_fts_index(
+    "text",
+    use_tantivy=False,
+    base_tokenizer="ngram",
+    replace=True,
+    ngram_min_length=2,
+    prefix_only=True,
+)
+{{< /code >}}
+
+### Testing Custom N-gram Settings
+
+With the new settings, you can now search for shorter substrings and use prefix-only matching:
+
+{{< code language="python" >}}
+results = table.search("lan", query_type="fts").limit(10).to_list()
+assert len(results) == 2
+assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
+
+results = (
+    table.search("nce", query_type="fts").limit(10).to_list()
+)  # spellchecker:disable-line
+assert len(results) == 0
+
+results = table.search("la", query_type="fts").limit(10).to_list()
+assert len(results) == 2
+assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
+{{< /code >}}
 
 ## Full-Text Search on Array Fields
 

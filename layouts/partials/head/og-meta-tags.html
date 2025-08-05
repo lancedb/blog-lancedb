@@ -1,18 +1,37 @@
-{{ $title:= .Title }}
-{{ $title = replace $title "<br>" ""}}
+{{ $title := .Title | replace "<br>" "" }}
+{{ $siteURL := .Site.BaseURL | replaceRE `^https?://` "" | replaceRE `/+$` "" }}
 
-<meta property="og:type" content="{{ if .Params.open_graph.type }}{{.Params.open_graph.type}}{{else}}website{{end}}"/>
-<meta property="og:url" content="{{ .Permalink }}"/>
-<meta property="og:site_name" content="{{ .Site.Params.open_graph.site_name}}">
+<meta property="og:type" content="{{ .Params.open_graph.type | default "website" }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.BaseURL }}" />
 
-{{ if .Params.meta.og_title }}<meta property="og:title" content="{{ .Params.meta.og_title }}"/>{{ else }}<meta property="og:title" content="{{ $title }}"/>{{ end }}
-{{ if .Params.meta.og_image }}<meta property="og:image" content="{{ .Params.meta.og_image | absURL }}"/>{{ else }}<meta property="og:image" content="{{ .Params.image | default "/assets/blog/preview.png" | absURL }}"/>{{ end }}
-{{ if .Params.meta.og_description }}<meta property="og:description" content="{{ .Params.meta.og_description | safeHTML }}"/>{{ else }}<meta property="og:description" content="{{ .Params.description | default .Summary | plainify | truncate 160  }}"/>{{ end }}
-<meta property="article:published_time" content="{{.Lastmod.Format "2006-01-02T15:04:05Z07:00"}}">
-<meta property="article:modified_time" content="{{.Date.Format "2006-01-02T15:04:05Z07:00"}}">
+<meta property="og:title" content="{{ .Params.meta.og_title | default $title }}" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="{{ .Permalink }}">
-<meta property="twitter:title" content="{{ $title }}">
-<meta property="twitter:description" content="{{ .Params.description | default .Summary | plainify | truncate 160 }}">
-<meta property="twitter:image" content="{{ (.Params.image | default "/assets/blog/preview.png") | absURL }}">
+{{ $ogImage := .Params.meta.og_image | default (.Params.image | default site.Params.meta_image) | absURL }}
+<meta property="og:image" content="{{ $ogImage }}" />
+<meta name="image" property="og:image:secure_url" content="{{ $ogImage }}" />
+
+{{ $description := .Params.meta.og_description | default (.Params.description | default .Summary | plainify | truncate 160) }}
+<meta property="og:description" content="{{ $description | safeHTML }}" />
+<meta property="twitter:description" content="{{ $description | safeHTML }}" />
+
+<meta property="article:published_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="article:modified_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta name="twitter:domain" content="{{ $siteURL }}" />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="{{ .Permalink }}" />
+<meta property="twitter:title" content="{{ $title }}" />
+<meta property="twitter:description" content="{{ $description }}" />
+
+{{ with .Params.meta.og_twitter_image }}
+  <meta property="twitter:image" content="{{ . | absURL }}" />
+  <meta property="twitter:image:src" content="{{ . | absURL }}" />
+{{ end }}
+
+{{ with .Params.author }}
+  <meta name="author" content="{{ . }}" />
+{{ end }}

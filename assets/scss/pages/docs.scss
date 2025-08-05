@@ -1,34 +1,71 @@
 // Docs-specific styles
-.docs-main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0;
+.docs-sidebar__wrap {
+  position: sticky;
+  z-index: 10;
+  top: 83px;
+  background: palette(primary-dark);
+  max-height: calc(100dvh - 83px);;
+  @include mq($md) {
+    max-height: none;
+    top: 67px;
+    border-right: 1px solid #ff734a;
+    height: calc(100dvh - 80px);
+  }
+
+  @include mq($lg) {
+    top: 80px;
+  }
 }
 
-.docs-container {
-  display: grid;
-  grid-template-columns: 220px 1fr 240px;
-  gap: 1.5rem;
-  min-height: calc(100vh - 160px);
-  padding: 0;
-  margin: 0;
+.docs-sidebar__header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid palette(primary-orange);
+  padding: 12px 24px; 
+  gap: 8px;
+  margin: 0 -20px;
+  width: calc(100% + 40px);
+  background: palette(primary-dark);
+
+  &:has(.docs-sidebar__header-current:empty) {
+    .docs-sidebar__header-devider {
+      display: none;
+    }
+  }
+}
+
+.docs-sidebar__content {
+
+  @include  mq($max: $md) {
+    max-height: 0;
+    transition: max-height 0.4s ease;
+    will-change: max-height;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+
+    .open & {
+      max-height: calc(100dvh - 155px);
+    }
+  }
+
+  @include mq($md) {
+    height: 100%;
+    overflow-y: auto;
+  }
 }
 
 .docs-sidebar {
-  background: #181b1f;
-  color: #fff;
-  padding: 0 0 1.2rem 0;
-  min-height: 100vh;
-  border-right: 1px solid #ff734a;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  position: sticky;
-  top: 120px;
-  max-height: calc(100vh - 140px);
+  height: calc(100dvh - 155px);
   overflow-y: auto;
-  margin-top: 0;
-  padding-top: 0;
-  align-self: start;
-  height: fit-content;
+  background: palette(primary-dark);
+  padding-bottom: 20px;
+
+  @include mq($md) {
+   height: 100%;
+  }
 
   // Solid, visible scrollbar for Webkit browsers
   &::-webkit-scrollbar {
@@ -46,6 +83,31 @@
   // Fallback for Firefox
   scrollbar-color: #ff734a #23262b;
   scrollbar-width: thin;
+}
+
+.docs-sidebar__header-current {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: palette(primary-orange);
+  font-weight: 400;
+}
+
+.docs-sidebar__toggle {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  border: 1px solid palette(primary-grey, 300);
+  background: linear-gradient(180deg, palette(primary-dark, 700) 40%, palette(primary-grad-dark, start) 100%);
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .sidebar-list {
@@ -145,13 +207,18 @@ a.sidebar-divider {
   font-size: 1em;
   color: #fff;
   line-height: 1.7;
-  max-width: 800px;
   margin: 0 auto;
-  padding-bottom: 4rem;
   margin-top: 0;
   padding-top: 0;
   width: 100%;
   box-sizing: border-box;
+}
+
+.docs-article-content {
+  padding-bottom: 32px;
+  @include mq($lg) {
+    padding-bottom: 4rem;
+  }
 }
 
 .docs-article-header h1 {
@@ -213,6 +280,12 @@ a.sidebar-divider {
 
 .docs-article-content ul {
   list-style-type: disc;
+
+  code {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
 }
 
 .docs-article-content ol {
@@ -229,7 +302,66 @@ a.sidebar-divider {
 }
 
 .docs-article-content ol li {
-  list-style-type: decimal;
+  list-style-type: none;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 1.5rem;
+  
+  &::before {
+    content: counter(list-counter);
+    counter-increment: list-counter;
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95em;
+    z-index: 2;
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      0 1px 3px rgba(255, 115, 74, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 115, 74, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover::before {
+    transform: scale(1.05);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      0 2px 6px rgba(255, 115, 74, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 115, 74, 0.5);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 2.2rem;
+    width: 2px;
+    height: calc(100% + 1rem);
+    background: #718096;
+    z-index: 1;
+  }
+  
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.docs-article-content ol {
+  counter-reset: list-counter;
+  list-style: none;
+  padding-left: 0;
+  position: relative;
 }
 
 .docs-article-content a {
@@ -241,6 +373,34 @@ a.sidebar-divider {
 .docs-article-content a:hover {
   color: #fff;
   text-decoration: underline;
+}
+
+// Enhanced styling for bold text in docs content
+.docs-article-content strong, 
+.docs-article-content b {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -4px;
+    right: -4px;
+    bottom: -2px;
+    background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(255, 115, 74, 0.05) 100%);
+    border-radius: 4px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
 }
 
 // Documentation page pre styles are now managed in _code-common.scss
@@ -273,12 +433,19 @@ a.sidebar-divider {
   background: #000000;
   color: #bfc2c7;
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  padding: 0 0 1.5rem 0;
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
-  top: 140px;
-  max-height: calc(100vh - 160px);
+  
+  @include mq($md) {
+    top: 67px;
+    height: calc(100dvh - 67px);
+  }
+
+  @include mq($lg) {
+    top: 80px;
+    height: calc(100dvh - 80px);
+  }
   overflow-y: auto;
   margin-top: 0;
   align-self: start;
@@ -387,10 +554,14 @@ a.sidebar-divider {
   background: none;
   border: none;
   box-shadow: none;
-  padding: 0;
+  padding: 0 0 20px 0;
   margin: 0;
   position: relative;
   top: 0;
+
+  @include mq($md) {
+    padding: 20px 0;
+  }
 }
 
 .docs-toc .toc {
@@ -560,10 +731,15 @@ a.sidebar-divider {
   padding: 1.2rem 1rem;
   border: none;
   border-right: 1px solid rgba(255, 115, 74, 0.2);
-  vertical-align: middle;
+  vertical-align: top;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: table-cell;
+  min-height: 3.2rem;
   
   &:last-child {
     border-right: none;
@@ -616,10 +792,17 @@ a.sidebar-divider {
   padding: 1rem 1.2rem;
   border: none;
   border-right: 1px solid rgba(255, 115, 74, 0.1);
-  vertical-align: middle;
+  vertical-align: top;
   text-align: center;
   line-height: 1.6;
   transition: all 0.3s ease;
+  display: table-cell;
+  min-height: 3.2rem;
+  
+  &:first-child {
+    white-space: nowrap;
+    min-width: 200px;
+  }
   
   &:last-child {
     border-right: none;
@@ -671,6 +854,63 @@ a.sidebar-divider {
       }
     }
   }
+  
+  // Enhanced styling for bold text in table cells
+  strong, b {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05em;
+    letter-spacing: 0.02em;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -4px;
+      right: -4px;
+      bottom: -2px;
+      background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(255, 115, 74, 0.05) 100%);
+      border-radius: 4px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+  
+  // Enhanced styling for headings in table cells
+  h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #ff734a 50%, transparent 100%);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::after {
+      opacity: 1;
+    }
+  }
 } 
 
 // Orange divider below header
@@ -687,6 +927,9 @@ a.sidebar-divider {
 
 // Orange divider below docs body
 .docs-content {
+  @include mq($md) {
+    padding: 0 20px;
+  }
 } 
 
 // Breadcrumbs for docs
@@ -889,3 +1132,8 @@ a.sidebar-divider {
     box-shadow: 0 8px 24px rgba(255, 115, 74, 0.2);
   }
 } 
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}

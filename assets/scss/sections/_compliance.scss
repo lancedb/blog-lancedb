@@ -18,6 +18,14 @@
   }
 }
 
+.compliance__item-title {
+  @include mq($max: $md) {
+    @include font(B4, 20, 400);
+    padding: 0 16px;
+    color: palette(primary-dark, 200);
+  }
+}
+
 .compliance__description {
   color: palette(primary-dark, 200);
 }
@@ -54,7 +62,9 @@
   & + & {
     .compliance__item-icon,
     .compliance__item-dots {
-      border-left: none;
+      @include mq($lg) {
+        border-left: none;
+      }
     }
   }
 }
@@ -63,8 +73,8 @@
 .compliance__item-dots {
   padding: 10px 24px;
   aspect-ratio: 1;
-  min-height: 162px;
   @include mq($lg) {
+    min-height: 162px;
     padding: 37px;
   }
 }
@@ -77,9 +87,11 @@
   background: linear-gradient(180deg, palette(primary-dark, 700) 40%, palette(primary-grad-dark, start) 100%);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  max-width: 100%;
 
   @include mq($md) {
     padding: 24px 37px;
+    max-width: none;
   }
 
   &:hover {

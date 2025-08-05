@@ -68,16 +68,22 @@ download:
       text: Download the Paper
       icon: true
       variant: primary
-    form_info: By submitting, you agree to our [Privacy Policy](#) and allow LanceDB to store and process the information above to provide you with the content requested.
+    form_info: By submitting, you agree to our [Privacy Policy](https://cdn.prod.website-files.com/6846da01d1da6e05973b02a0/685157c58b8986967135d6d2_LanceDB%20Privacy%20Policy.pdf) and allow LanceDB to store and process the information above to provide you with the content requested.
 compliance: 
   title: Enterprise-Grade Compliance
   description: Safety and security guaranteed for your data.
   cards:
-    - text: SOC2 Type II
+    - text: 
+        mobile: SOC2 
+        desktop: SOC2 Type II
       icon: aicpa.svg
-    - text: GDPR compliant
+    - text:
+        mobile: GDPR 
+        desktop: GDPR compliant
       icon: gdpr.svg
-    - text: HIPAA compliant
+    - text: 
+        mobile: HIPAA 
+        desktop: HIPAA compliant
       icon: hipaa.svg
 cta: 
   type: logo

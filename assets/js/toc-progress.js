@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const toc = document.querySelector('.toc');
     if (!toc) return;
-
+  
     const tocLinks = toc.querySelectorAll('a');
     const headings = Array.from(tocLinks).map(link => {
         const id = link.getAttribute('href').substring(1);

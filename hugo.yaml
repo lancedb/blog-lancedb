@@ -15,7 +15,6 @@ pagination:
 
 # Permalinks Configuration
 permalinks:
-  blog: "/:filename/"
 
 # Taxonomy Configuration
 taxonomies:
@@ -23,12 +22,13 @@ taxonomies:
 
 # Category Configuration
 params:
+  meta_image: /assets/blog/preview.png
   logo: static/assets/logo.svg
   sign_upURL: https://accounts.lancedb.com/sign-up
   mainLanceDBURL: http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com
   cloudLanceDBURL: https://cloud.lancedb.com
-  privacyPdfURL: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
-  termsPdfUrl: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
+  privacyPdfURL: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf
+  termsPdfUrl: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/terms.pdf
   downloadURL: https://learn.lancedb.com/hubfs/lancedb-multimodal-lakehouse.pdf
   socials:
     - name: Discord
@@ -124,14 +124,11 @@ menus:
     - name: Pricing
       weight: 1
       pageRef: /pricing
-    - name: Documentation
+    - name: Docs
       weight: 2
       pageRef: /docs
-    - name: Careers
-      weight: 3
-      url: https://lancedb.notion.site/LanceDB-Careers-ec2860ae897f4c1dbb8ba122657184b1
     - name: Blog
-      weight: 4
+      weight: 3
       pageRef: /blog
   lancedb:
     - name: LanceDB Cloud
@@ -147,13 +144,16 @@ menus:
     - name: Documentation
       weight: 2
       url: /docs
-    - name: Support
+    - name: Careers
       weight: 3
+      url: https://jobs.ashbyhq.com/lancedb
+    - name: Support
+      weight: 4
       url: mailto:support@lancedb.com
   legal:
     - name: Terms
       weight: 1
-      url: https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf
+      url: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/terms.pdf
     - name: Policy
       weight: 2
-      url: https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf
+      url: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf

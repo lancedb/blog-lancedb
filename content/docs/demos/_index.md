@@ -2,7 +2,7 @@
 title: "Live Demos of LanceDB in Production"
 sidebar_title: Demos
 description: "Interactive demonstrations and examples of LanceDB in action"
-weight: 9
+weight: 201
 ---
 
 {{< admonition "Note" "Searching Over 40 Million Wikipedia Entries" >}}

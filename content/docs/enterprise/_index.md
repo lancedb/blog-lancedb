@@ -1,11 +1,12 @@
 ---
-title: "LanceDB Enterprise: The Multimodal Lakehouse"
+title: "LanceDB Enterprise: Features and Benefits"
 sidebar_title: "LanceDB Enterprise"
 description: "Learn about LanceDB Enterprise, the enterprise-grade vector database solution. Includes features, benefits, and deployment options for production environments."
-weight: 4
+weight: 5
+aliases: ["/docs/overview/enterprise/", "/docs/overview/enterprise"]
 ---
 
-**LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance vector database that can operate at extreme scale.
+**LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance [vector database](/docs/overview/#the-multimodal-vector-database) or [lakehouse](/docs/overview/#the-multimodal-lakehouse) that can operate at extreme scale.
 
 With a vector database built for [lakehouse architecture](/docs/overview/enterpris/architecture/), you can serve millions of tables and tens of billions of rows in a single index, improve retrieval quality using hybrid search with blazing-fast metadata filters, and reduce costs by up to 200x with object storage.
 
@@ -13,7 +14,9 @@ With a vector database built for [lakehouse architecture](/docs/overview/enterpr
 For private deployments, high performance at extreme scale, or if you have strict security requirements, [talk to us about LanceDB Enterprise](mailto:contact@lancedb.com).
 {{< /admonition >}}
 
-## Perfect for Large Deployments
+## Key Benefits of LanceDB Enterprise
+
+### Perfect for Large Deployments
 
 LanceDB Enterprise powers global deployments with a secure, compliant distributed lakehouse system that ensures complete data sovereignty and high performance at scale.
 
@@ -25,7 +28,7 @@ LanceDB Enterprise powers global deployments with a secure, compliant distribute
 
 Read more about how [self-hosting with Enterprise compares to LanceDB OSS](/docs/overview/enterprise/overview/).
 
-## Best Performance for Petabyte Scale
+### Best Performance for Petabyte Scale
 
 LanceDB OSS is built on the highly-efficient Lance format and offers extensive features out of the box. Our Enterprise solution amplifies these benefits by means of a custom-build distributed system. 
 
@@ -36,7 +39,7 @@ LanceDB OSS is built on the highly-efficient Lance format and offers extensive f
 
 Learn more about [performance differences between LanceDB OSS and Enterprise](/docs/overview/enterprise/overview/).
 
-## Developer Experience
+### Developer Experience
 
 LanceDB Enterprise extends our OSS product with production-grade features while maintaining full compatibility. Move from prototype to production by simply updating your connection string - no code changes or data migration required.
 

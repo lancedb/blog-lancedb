@@ -4,11 +4,8 @@ sidebar_title: "Vector Search"
 description: "Master vector search with LanceDB through Python and TypeScript tutorials"
 weight: 1
 sidebar_collapsed: true
+hide_toc: true
 ---
-
-LanceDB's vector search capabilities are designed to provide fast, accurate, and scalable similarity search for a wide range of applications. This section provides a curated list of tutorials to help you get started with the different vector search features available in LanceDB.
-
-## Available Features
 
 | Feature | Description |
 |:--------|:------------|
