@@ -146,7 +146,7 @@ menus:
       url: /docs
     - name: Careers
       weight: 3
-      url: https://lancedb.notion.site/LanceDB-Careers-ec2860ae897f4c1dbb8ba122657184b1
+      url: https://jobs.ashbyhq.com/lancedb
     - name: Support
       weight: 4
       url: mailto:support@lancedb.com

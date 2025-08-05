@@ -3,6 +3,7 @@ title: "LanceDB Enterprise Deployment Guide"
 sidebar_title: "Deployment"
 description: "Learn how to deploy LanceDB Enterprise in production environments. Includes deployment options, configuration, and best practices for enterprise installations."
 weight: 4
+aliases: ["/docs/overview/enterprise/deployment/", "/docs/overview/enterprise/deployment"]
 ---
 
 There are two deployment models available for LanceDB Enterprise: **Managed** and **BYOC**.

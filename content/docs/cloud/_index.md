@@ -2,7 +2,8 @@
 title: "LanceDB Cloud: Serverless Vector Search"
 sidebar_title: "LanceDB Cloud"
 description: Learn about LanceDB Cloud, a serverless vector search service. Includes features, benefits, and best practices for cloud-based vector search applications.
-weight: 3
+weight: 4
+aliases: ["/docs/overview/cloud/", "/docs/overview/cloud"]
 ---
 
 LanceDB Cloud is a fully managed, serverless vector search service that enables developers to build, deploy, and scale AI-powered applications without infrastructure management overhead. 

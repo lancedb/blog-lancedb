@@ -2,7 +2,8 @@
 title: "LanceDB Enterprise: Features and Benefits"
 sidebar_title: "LanceDB Enterprise"
 description: "Learn about LanceDB Enterprise, the enterprise-grade vector database solution. Includes features, benefits, and deployment options for production environments."
-weight: 4
+weight: 5
+aliases: ["/docs/overview/enterprise/", "/docs/overview/enterprise"]
 ---
 
 **LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance [vector database](/docs/overview/#the-multimodal-vector-database) or [lakehouse](/docs/overview/#the-multimodal-lakehouse) that can operate at extreme scale.
