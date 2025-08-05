@@ -1,5 +1,5 @@
 ---
 title: "User Manual"
-weight: 4
+weight: 100
 layout: "divider"
 ---

@@ -2,7 +2,7 @@
 title: "LanceDB Tutorials"
 sidebar_title: "Tutorials"
 description: "Step-by-step tutorials for building applications with LanceDB"
-weight: 10
+weight: 202
 hide_toc: true
 ---
 

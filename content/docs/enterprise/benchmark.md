@@ -3,6 +3,7 @@ title: "LanceDB Enterprise Performance Benchmarks"
 sidebar_title: "Benchmarks"
 description: "Learn about LanceDB Enterprise performance benchmarks and metrics. Includes query performance, scalability tests, and comparison with other vector databases."
 weight: 3
+aliases: ["/docs/overview/enterprise/benchmark/", "/docs/overview/enterprise/benchmark"]
 ---
 
 LanceDB's architecture is designed to deliver **25ms** vector search latency.

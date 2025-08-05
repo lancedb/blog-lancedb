@@ -1,6 +1,6 @@
 ---
 title: "Support"
-weight: 99
+weight: 300
 layout: "divider"
 link: "/contact/"
 ---

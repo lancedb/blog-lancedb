@@ -3,6 +3,7 @@ title: "LanceDB Enterprise Security & Compliance"
 sidebar_title: "Security"
 description: "Learn about LanceDB Enterprise security features and best practices. Includes authentication, encryption, access control, and compliance features."
 weight: 5
+aliases: ["/docs/overview/enterprise/security/", "/docs/overview/enterprise/security"]
 ---
 LanceDB Enterprise maintains the highest security standards with SOC 2 Type II and HIPAA compliance certifications. Our security framework ensures enterprise-grade protection for your data and workloads across all deployment models.
 

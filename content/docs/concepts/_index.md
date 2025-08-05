@@ -2,7 +2,7 @@
 title: "Core Concepts"
 sidebar_title: "Core Concepts"
 description: "Core concepts and fundamental understanding of LanceDB"
-weight: 5
+weight: 101
 hide_toc: true
 ---
 

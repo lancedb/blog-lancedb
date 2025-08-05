@@ -2,6 +2,7 @@
 title: "LanceDB Enterprise vs OSS"
 sidebar_title: Benefits
 weight: 1
+aliases: ["/docs/overview/enterprise/overview/", "/docs/overview/enterprise/overview"]
 ---
 
 Modern AI workloads produce petabytes of multimodal data that must be queried in real time. On top of that, enterprise AI systems must stay completely private and air-gapped. 
