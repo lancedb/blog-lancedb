@@ -1,66 +1,65 @@
 ---
-title: "⚖️ Harvey’s Enterprise-Grade RAG on LanceDB, 💼 Dosu Case Study, Minimax&LumaLabs❤️LanceDB"
+title: "⚖️ Harvey’s Enterprise-Grade RAG on LanceDB, 💼 Dosu Case Study, Minimax&LumaLabs❤️Lance-Ray"
 date: 2025-08-05
 draft: false
 featured: false
-categories: ["Announcement"]
+categories: ["Newsletter"]
 image: "/assets/blog/newsletter-august-2025/JulyNews.png"
 description: "Our August newsletter features a new case study with Dosu, recaps from events with Harvey and Databricks, and the latest product and community updates."
-author: "The LanceDB Team"
-author_avatar: ""
-author_bio: ""
-author_github: "lancedb"
-author_linkedin: "lancedb"
+author: "Jasmine Wang"
+author_avatar: "/assets/authors/jasmine-wang.png"
+author_bio: "Ecosystem Engagement, Partnership, Community, DevRel"
+author_github: "onigiriisabunny"
+author_linkedin: "jasminechenwang"
 ---
 
----
+## 💼 LanceDB Powers the Heart of AI at Dosu
 
-### Case Study: Dosu's Living Knowledge Base for Code
+- 90% label accuracy
+- 70% less manual triage
+- Millisecond search on millions of vectors
 
-We are thrilled to showcase our latest case study with Dosu. By integrating LanceDB, Dosu has achieved:
--   **90% label accuracy** for context-aware labeling of GitHub issues.
--   **70% reduction** in manual issue triage, freeing up maintainers to focus on high-value work.
--   **Millisecond search** across millions of vectors for real-time indexing of code, docs, and discussions.
+Those are the numbers became real the moment the team switched to LanceDB inside Dosu. Learn more about how Dosu uses LanceDB as their living knowledge for codebases in this new [Case Study: Meet Dosu - the Intelligent Knowledge Base for Software Teams and Agents](https://lancedb.com/blog/case-study-dosu/)
 
-> "LanceDB powers the heart of our AI at Dosu. Its lightning-fast search, built-in versioning, and effortless scalability let us move faster, ship smarter, and deliver cutting-edge intelligence to millions of developers without compromise."
+> "LanceDB powers the heart of our AI at [Dosu](https://www.dosu.ai). Its lightning-fast search, built-in versioning, and effortless scalability let us move faster, ship smarter, and deliver cutting-edge intelligence to millions of developers without compromise."
 >
-> **Devin Stein, Founder & CEO, Dosu**
-
-Read the full story: [Case Study: Meet Dosu - the Intelligent Knowledge Base for Software Teams and Agents](https://lancedb.com/blog/case-study-dosu/)
+> **[Devin Stein, Founder & CEO](https://www.linkedin.com/in/devstein/), [Dosu](https://dosu.dev/)**
 
 
-
-## Event Recap!
-
-In case you missed them, recordings from our June events are now available!
-
--   **Scaling Enterprise-Grade RAG: Lessons from Legal Frontier**: A joint talk with Calvin Qi from Harvey at the AI Engineer World's Fair.
--   **LanceDB: A Complete Search and Analytical Store for Serving Production-scale AI Applications**: Our session at the Databricks DATA+AI SUMMIT with Chang She and Zhidong Qu.
+![Dosu Case Study](/assets/blog/newsletter-august-2025/Dosucase.png)
 
 
 
+## 🎤 Event Recap!
 
-## LanceDB Enterprise Product News
+In case you missed some of the cool events in June, the recordings are finally out! Check out the joint talks we did with Harvey and Databricks on how LanceDB helps scale enterprise AI systems in production!
 
-We've rolled out some powerful new features for LanceDB Enterprise:
+-   **Scaling Enterprise-Grade RAG: Lessons from Legal Frontier**: A joint talk with [Calvin Qi](https://www.linkedin.com/in/calvinqi/) from [Harvey](https://www.harvey.ai) at the AI Engineer World's Fair.
+    {{< youtube W1MiZChnkfA >}}
+-   **Lakehouse Architecture for AI Data: Search, Analytics, Processing, Training**: Our session at the <span style="color: #ff6f1a; font-weight: bold;">Databricks</span> DATA+AI SUMMIT with [Chang She](https://www.linkedin.com/in/changshe/) and [Zhidong Qu](https://www.linkedin.com/in/zhidong-qu/).
+    {{< youtube hJn1gHq5dI8 >}}
 
--   **Seamless streaming ingestion**: Automatically optimize indexes during streaming writes for consistently fast performance.
--   **Blazing-fast range queries**: Execute range filters hundreds of times faster, supercharging vector search with metadata.
--   **Multivector support in JavaScript SDK**: Store and search multiple vector embeddings for a single item.
--   **Easy data exploration from LanceDB Cloud UI**: Filter table data with SQL and select specific columns for a customizable view.
+
+
+
+## 📰 Product News: New Enterprise Features
+
+| Feature                                      | Description                                                                                                                         |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Seamless streaming ingestion**             | Automatically optimize indexes during streaming writes, providing consistently fast performance even under continuous data flow.     |
+| **Blazing-fast range queries**               | Range filters like "value >= 1000 and value < 2000" now can execute hundreds of times faster, supercharging vector search with metadata filtering. |
+| **Multivector support in JavaScript SDK**    | LanceDB JavaScript/TypeScript SDK enables you to store and search multiple vector embeddings for a single item.                      |
+| **Easy data exploration from LanceDB Cloud UI** | Filter table data with SQL and select specific columns for a customizable view of your LanceDB datasets.                             |
 
 ## Community Contributions
 
-A huge thank you to our amazing community contributors this month! Here are a few highlights:
-
--   **Enwen Jiao (@jiaoew1991)** from Luma.ai for contributions to Lance-Ray integration.
--   **Drew Gallardo (@geruh)** from AWS for work on AWS Glue integration.
--   **Kazuhito Takeuchi (@kazuhitoT)** for native integration with the Lindera tokenizer.
--   **Jinglun, Jin Ma, Bo Fang, Jay Ju, Chenghao Guo, and Vino Yang** from ByteDance for extensive work on Hive MetaStore integration, the Java SDK, SQL API, and dataset event tracing.
+- [@jiaoew1991](https://github.com/jiaoew1991) Enwen Jiao previously worked on Data Engine at Minimax and now at Luma.ai. He has made multiple contributions to support Lance-Ray integration: `add_column` supports Ray to add columns to existing tables in a distributed manner [PR1](https://github.com/lancedb/lance-ray/pull/21), and `add_dataset_options parameter` supports exposing more native parameters when reading lance tables based on version and tag [PR2](https://github.com/lancedb/lance-ray/pull/27) .
+- [@geruh](https://github.com/geruh) Drew Gallardo from AWS worked on AWS Glue integration with Lance [PR1](https://github.com/lancedb/lance-namespace/pull/167), [PR2](https://github.com/lancedb/lance-namespace/pull/158)
+- [@kazuhitoT](https://github.com/kazuhitoT) Kazuhito Takeuchi for native integration with Lindera tokenizer [PR1](https://github.com/lancedb/lance/pull/3932), [PR2](https://github.com/lancedb/lance/pull/4144)
+- A heartfelt thank you to our community contributors of lance and lancedb this past month: [@yanghua](https://github.com/yanghua) [@fangbo](https://github.com/fangbo) [@emmanuel-ferdman](https://github.com/emmanuel-ferdman) [@adi-ray](https://github.com/adi-ray) [@ddupg](https://github.com/ddupg) [@chenghao-guo](https://github.com/chenghao-guo) [@LeoReeYang](https://github.com/LeoReeYang) [@majin1102](https://github.com/majin1102) [@HaochengLIU](https://github.com/HaochengLIU) [@Jay-ju](https://github.com/Jay-ju) [@SaintBacchus](https://github.com/SaintBacchus) [@Sbargaoui](https://github.com/Sbargaoui) [@lalitx17](https://github.com/lalitx17) [@allenanswerzq](https://github.com/allenanswerzq) [@bjurkovski](https://github.com/bjurkovski) [@TaoKevinKK](https://github.com/TaoKevinKK) [@wojiaodoubao](https://github.com/wojiaodoubao) [@KazuhitoT](https://github.com/KazuhitoT) [@niyue](https://github.com/niyue) [@kilavvy](https://github.com/kilavvy) [@b4l](https://github.com/b4l) [@Dig-Doug](https://github.com/Dig-Doug) [@xhwhis](https://github.com/xhwhis)[@tristanz](https://github.com/tristanz) [@chenkovsky](https://github.com/chenkovsky) [@aniaan](https://github.com/aniaan) [@yihong0618](https://github.com/yihong0618) [@Kilerd](https://github.com/Kilerd) [@CyrusAttoun](https://github.com/CyrusAttoun) [@kemingy](https://github.com/kemingy) [@wengh](https://github.com/wengh) [@geruh](https://github.com/geruh)
 
 ## Open Source Releases Spotlight
 
 -   Lance now supports integration with various catalogs, including **Hive MetaStore (2.x and 3.x+), AWS Glue, and Unity catalog**.
 -   The Lance Spark connector now supports **Spark 4.0 and Scala 2.13**.
 
-That's all for this month. As always, we are grateful for your support and contributions. Stay connected with us for more exciting updates!
