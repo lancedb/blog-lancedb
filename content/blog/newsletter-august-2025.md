@@ -1,10 +1,10 @@
 ---
-title: "LanceDB Newsletter: August 2025"
+title: "⚖️ Harvey’s Enterprise-Grade RAG on LanceDB, 💼 Dosu Case Study, Minimax&LumaLabs❤️LanceDB"
 date: 2025-08-05
 draft: false
 featured: false
 categories: ["Announcement"]
-image: /assets/blog/newsletter-august-2025/image-003.png
+image: "/assets/blog/newsletter-august-2025/JulyNews.png"
 description: "Our August newsletter features a new case study with Dosu, recaps from events with Harvey and Databricks, and the latest product and community updates."
 author: "The LanceDB Team"
 author_avatar: ""
@@ -13,9 +13,7 @@ author_github: "lancedb"
 author_linkedin: "lancedb"
 ---
 
-Welcome to the August 2025 edition of the LanceDB newsletter! This month, we're excited to share a deep dive into how Dosu is leveraging LanceDB, recap some fantastic events, and highlight the latest updates to our products and community.
-
-## Highlights
+---
 
 ### Case Study: Dosu's Living Knowledge Base for Code
 
@@ -30,7 +28,7 @@ We are thrilled to showcase our latest case study with Dosu. By integrating Lanc
 
 Read the full story: [Case Study: Meet Dosu - the Intelligent Knowledge Base for Software Teams and Agents](https://lancedb.com/blog/case-study-dosu/)
 
-![Dosu and LanceDB partnership](/assets/blog/newsletter-august-2025/image-002.png)
+
 
 ## Event Recap!
 
@@ -39,8 +37,8 @@ In case you missed them, recordings from our June events are now available!
 -   **Scaling Enterprise-Grade RAG: Lessons from Legal Frontier**: A joint talk with Calvin Qi from Harvey at the AI Engineer World's Fair.
 -   **LanceDB: A Complete Search and Analytical Store for Serving Production-scale AI Applications**: Our session at the Databricks DATA+AI SUMMIT with Chang She and Zhidong Qu.
 
-![Harvey and LanceDB event](/assets/blog/newsletter-august-2025/image-005.png)
-![Databricks and LanceDB event](/assets/blog/newsletter-august-2025/image-006.png)
+
+
 
 ## LanceDB Enterprise Product News
 
