@@ -1,6 +1,6 @@
 ---
 title: "LanceDB Enterprise: Azure Deployment Guide"
-sidebar_title: "Deploying on Azure"
+sidebar_title: "Azure"
 description: "Learn how to deploy LanceDB Enterprise on Azure with AKS, Private Link, and Blob Storage. Includes architecture diagrams and deployment options."
 weight: 1
 ---
