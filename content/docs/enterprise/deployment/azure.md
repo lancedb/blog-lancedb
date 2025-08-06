@@ -66,7 +66,7 @@ graph LR
     subgraph "Azure AKS Cluster"
         PL[Private Link<br/>Service]
         QN[Query Nodes<br/>Phalanx]
-        PE[Plan Executors<br/>Distributed Cache]
+        PE[Plan Executors<br/>Distributed Data Cache]
     end
     
     subgraph "Storage"
@@ -76,7 +76,7 @@ graph LR
     C -->|Private<br/>Connection| PL
     PL --> QN
     QN -->|Query<br/>Request| PE
-    PE -->|Read<br/>Data| BS
+    PE -->|Cache Miss<br/>Read Data| BS
     
     style C fill:#e3f2fd
     style PL fill:#f3e5f5
@@ -89,8 +89,8 @@ graph LR
 
 1. **Client Application** sends query request through Private Link
 2. **Query Nodes** receive and process the request
-3. **Plan Executors** optimize and execute the query
-4. **Azure Blob Storage** provides data access with distributed caching
+3. **Plan Executors** optimize and execute the query using distributed data cache to speed up read queries
+4. **Azure Blob Storage** stores data and indices in Lance, while Plan Executors maintain distributed cache for performance
 
 ## Write Path Architecture
 
@@ -134,7 +134,7 @@ graph LR
 
 ### Write Path Flow
 
-Query nodes write data synchronously to Azure Blob Storage while asynchronously sending data modification events to Azure EventHub (or self-hosted Kafka cluster). These write events are processed by the Lance Agent, which launches indexing pods or data optimization pods to optimize data for better read performance.
+Query nodes write data and indices synchronously to Azure Blob Storage in Lance data format while asynchronously sending data modification events to Azure EventHub (or self-hosted Kafka cluster). These write events are processed by the Lance Agent, which launches indexing pods or data optimization pods to optimize data for better read performance.
 
 ## Deployment Options
 
@@ -174,13 +174,13 @@ LanceDB Enterprise supports three deployment models on Azure:
 
 #### 2. BYOC (Bring Your Own Cloud)
 - **Infrastructure and storage** in customer's Azure account
-- **Managed by LanceDB** or customer
+- **Fully Managed by LanceDB** 
 - **Full control** over data residency
 
 #### 3. Hybrid - Bring Your Own Container
 - **Infrastructure** in LanceDB's account
 - **Storage containers** in customer's account
-- **Available on request** (not implemented yet but not hard to implement)
+
 
 {{< admonition >}}
 For private deployments, high performance at extreme scale, or if you have strict security requirements, [contact us about LanceDB Enterprise](mailto:contact@lancedb.com).
