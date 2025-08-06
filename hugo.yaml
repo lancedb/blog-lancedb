@@ -157,3 +157,6 @@ menus:
     - name: Policy
       weight: 2
       url: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf
+services:
+  googleAnalytics:
+    id: "G-GD6BL36RN7"
