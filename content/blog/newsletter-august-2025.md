@@ -34,10 +34,10 @@ Those are the numbers became real the moment the team switched to LanceDB inside
 
 In case you missed some of the cool events in June, the recordings are finally out! Check out the joint talks we did with Harvey and Databricks on how LanceDB helps scale enterprise AI systems in production!
 
--   **Scaling Enterprise-Grade RAG: Lessons from Legal Frontier**: A joint talk with [Calvin Qi](https://www.linkedin.com/in/calvinqi/) from [Harvey](https://www.harvey.ai) at the AI Engineer World's Fair.
+-   **<span style="color: #ff6f1a; font-weight: bold;">[Scaling Enterprise-Grade RAG: Lessons from Legal Frontier](https://youtu.be/W1MiZChnkfA)</span>**: A joint talk with [Calvin Qi](https://www.linkedin.com/in/calvinqi/) from [Harvey](https://www.harvey.ai) at the AI Engineer World's Fair.
     {{< youtube W1MiZChnkfA >}}
--   **Lakehouse Architecture for AI Data: Search, Analytics, Processing, Training**: Our session at the <span style="color: #ff6f1a; font-weight: bold;">Databricks</span> DATA+AI SUMMIT with [Chang She](https://www.linkedin.com/in/changshe/) and [Zhidong Qu](https://www.linkedin.com/in/zhidong-qu/).
-    {{< youtube hJn1gHq5dI8 >}}
+-   **<span style="color: #ff6f1a; font-weight: bold;">[Lakehouse Architecture for AI Data: Search, Analytics, Processing, Training](https://youtu.be/SvXhXIJM7hA)</span>**: Our session at the <span style="color: #ff6f1a; font-weight: bold;">Databricks</span> DATA+AI SUMMIT with [Chang She](https://www.linkedin.com/in/changshe/) and [Zhidong Qu](https://www.linkedin.com/in/zhidong-qu/).
+    {{< youtube SvXhXIJM7hA >}}
 
 
 
@@ -60,6 +60,10 @@ In case you missed some of the cool events in June, the recordings are finally o
 
 ## Open Source Releases Spotlight
 
--   Lance now supports integration with various catalogs, including **Hive MetaStore (2.x and 3.x+), AWS Glue, and Unity catalog**.
--   The Lance Spark connector now supports **Spark 4.0 and Scala 2.13**.
+| Project | Version | Updates |
+| ------- | ------- | ------- |
+| LanceDB | [v0.21.2](https://github.com/lancedb/lancedb/releases/tag/v0.21.2) | Various improvements including support for [ngram tokenizer](https://github.com/lancedb/lancedb/pull/2507), [multivector for Javascript](https://github.com/lancedb/lancedb/pull/2527), [session support in python and javascript](https://github.com/lancedb/lancedb/pull/2530) |
+| LanceDB | [v0.21.1](https://github.com/lancedb/lancedb/releases/tag/v0.21.1) | Various improvements including [batch Ollama embed calls](https://github.com/lancedb/lancedb/pull/2453) |
+| Lance | [v0.32.0](https://github.com/lancedb/lance/releases/tag/v0.32.0) | Breaking changes: use [FilteredReadExec in the planner](https://github.com/lancedb/lance/pull/3813) & [consolidated index cache](https://github.com/lancedb/lance/pull/4047) |
+| Lance | [v0.31.1](https://github.com/lancedb/lance/releases/tag/v0.31.1) | New documentation website built with mkdocs |
 
