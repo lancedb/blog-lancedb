@@ -40,10 +40,25 @@
 {{ define "page_js" }}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const formField = document.querySelector("input[name='blog_source']");
-    if (formField && document.referrer.includes('/blog/')) {
-      formField.value = document.referrer;
-    }
+    const waitForField = (selector, callback) => {
+      const element = document.querySelector(selector);
+      if (element) return callback(element);
+
+      const observer = new MutationObserver((mutations, obs) => {
+        const el = document.querySelector(selector);
+        if (el) {
+          obs.disconnect();
+          callback(el);
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    };
+
+    waitForField("input[name='blog_source']", function (formField) {
+      if (document.referrer.includes("/blog/")) {
+        formField.value = document.referrer;
+      }
+    });
   });
 </script>
 {{ end }}
