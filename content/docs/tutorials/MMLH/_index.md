@@ -1,4 +1,9 @@
-# Feature Engineering
+---
+title: "Feature Engineering"
+sidebar_title: "Feature Engineering"
+description: "Learn how to transform raw data into meaningful features for AI models using LanceDB's powerful feature engineering capabilities."
+weight: 3
+---
 
 If you want your AI models to work well—whether for search, recommendations, or anything else—you need good data. But raw data is usually messy and incomplete. Before you can train a model or use it for search, you have to turn that raw data into clear, meaningful features.
 
@@ -38,26 +43,26 @@ To address these challenges, a data scientist or ML engineer typically embarks o
 
 1. **Engineer `popularity_score`:**  
    To create a more accurate measure of popularity, combine the average rating with the volume of reviews. A common approach is to use logarithmic scaling. This prevents products with massive review counts from overwhelming the score.
-   - **Logic:**  
+   **Logic:**  
      ```python
      popularity_score = log(review_count + 1) * avg_rating
      ```
 
 2. **Engineer `price_tier`:**  
    To help the model understand value, bucket raw prices into clear tiers such as 'budget', 'mid-range', or 'premium'.
-   - **Logic:**  
+   **Logic:**  
      Use conditional logic (for example, `CASE WHEN` in SQL or `np.select` in Python) to assign a tier based on price thresholds.
 
 3. **Engineer `discount_pct`:**  
    To explicitly signal a "deal" to the model, calculate the discount percentage by combining the original and current prices.
-   - **Logic:**  
+   **Logic:**  
      ```python
      discount_pct = (original_price - price) / original_price
      ```
 
 4. **Engineer `price_vs_cat_avg`:**  
    To contextualize a product's price, compare it to the average price within its category. This requires an aggregation step to compute the average price per category. Then, calculate the feature for each product.
-   - **Logic:**  
+   **Logic:**  
      For each product:
      ```python
      price_vs_cat_avg = price / avg_price_for_category
@@ -65,7 +70,7 @@ To address these challenges, a data scientist or ML engineer typically embarks o
 
 5. **Engineer `is_organic`:**  
    To surface key product attributes, process the `description` text to identify important keywords.
-   - **Logic:**  
+   **Logic:**  
      Use a regular expression or string search for the keyword "organic" to create a boolean (`true`/`false`) flag.
 
 Each of these steps requires careful data manipulation and domain knowledge. Iterative experimentation is also needed to ensure the resulting features are both accurate and useful for downstream models.
@@ -98,6 +103,6 @@ In this tutorial, we'll walk you through building an advanced product search eng
 
 The tutorial is divided into two parts:
 
-*   **Part 1: Feature Engineering with LanceDB and Geneva**: In this part, we'll focus on the crucial process of feature engineering. We'll use LanceDB and its Geneva feature engineering framework to enrich our data with meaningful features that will power our search engine.
+*   [**Part 1: Feature Engineering with LanceDB and Geneva**:]() In this part, we'll focus on the crucial process of feature engineering. We'll use LanceDB and its Geneva feature engineering framework to enrich our data with meaningful features that will power our search engine.
 
-*   **Part 2: Inference and Retrieval with LanceDB**: In this part, we'll build the inference and retrieval pipeline that uses the features we engineered in Part 1 to provide a powerful and intuitive search experience. We'll cover query routing, hybrid search, and reranking to build a state-of-the-art search engine. 
+*   [**Part 2: Inference and Retrieval with LanceDB**:]() In this part, we'll build the inference and retrieval pipeline that uses the features we engineered in Part 1 to provide a powerful and intuitive search experience. We'll cover query routing, hybrid search, and reranking to build a state-of-the-art search engine. 
