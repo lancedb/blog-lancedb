@@ -3,6 +3,8 @@
 public/
 resources/
 .hugo_build.lock
+*.lance
+
 
 # macOS system files
 .DS_Store
