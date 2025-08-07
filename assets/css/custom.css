@@ -673,6 +673,23 @@ main .post-meta {
 
 .post-content ol li {
     list-style-type: decimal;
+    position: static;
+    padding-left: 0;
+}
+
+.post-content ol li::before {
+    display: none;
+}
+
+.post-content ol li::after {
+    display: none;
+}
+
+.post-content ol {
+    counter-reset: none;
+    list-style: decimal;
+    padding-left: 1.5rem;
+    position: static;
 }
 
 .post-content strong {
