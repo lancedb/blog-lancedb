@@ -83,3 +83,14 @@
      {{ partial "components/cta.html" (dict "content" . "type" .type)}}
   {{end}}
 {{ end }}
+
+{{ define "page_js" }}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const formField = document.querySelector("input[name='blog_source']");
+    if (formField && document.referrer.includes('/blog/')) {
+      formField.value = document.referrer;
+    }
+  });
+</script>
+{{ end }}
