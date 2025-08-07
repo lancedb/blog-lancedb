@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-image.png
 meta_image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-image.png
-description: "We have closed another funding round to accelerate development of the Multimodal Lakehouse - a unified platform for AI data infrastructure."
+description: "Explore Lance's dual structural encoding: mini-block for small data and full-zip for large multimodal data, optimizing compression and random access performance."
 author: Weston Pace
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
@@ -15,7 +15,7 @@ author_github: "westonpace"
 author_linkedin: "weston-pace-cool-dude"
 ---
 
-Structural encoding describes how the "structure" of arrays are encoded into buffers and placed into file. The choice of structural encoding places rules on how data is compressed, how I/O is scheduled, and what kind of data we need to cache in RAM. Parquet, ORC, and the Arrow IPC format all define different styles of structural encoding. Lance is unique in that we have two different kinds of structural encoding that we choose between based on the data we need to write. In this blog post we will describe the structural encodings currently in use by Lance, why we need two, and how they compare to other approaches.
+Structural encoding describes how the "structure" of arrays is encoded into buffers and placed into a file. The choice of structural encoding places rules on how data is compressed, how I/O is scheduled, and what kind of data we need to cache in RAM. Parquet, ORC, and the Arrow IPC format all define different styles of structural encoding. Lance is unique in that we have two different kinds of structural encoding that we choose between based on the data we need to write. In this blog post we will describe the structural encodings currently in use by Lance, why we need two, and how they compare to other approaches.
 
 {{< admonition info "📚 Series Navigation" >}}
 This is part of a series of posts on the details we've encountered building a columnar file reader:
@@ -31,7 +31,7 @@ This is part of a series of posts on the details we've encountered building a co
 
 ## What is Structural Encoding?
 
-Structural encoding is the first step we encounter when we want to convert an Arrow array into an on-disk buffer. We start with a large chunk (~8MB by default) of array data. In the previous articles we described how we can take this array and convert it into a collection of compressed buffers. Now need to take that collection of buffers and write it into a "disk page" (which is basically one big buffer in our file).
+Structural encoding is the first step we encounter when we want to convert an Arrow array into an on-disk buffer. We start with a large chunk (~8MB by default) of array data. In the previous articles we described how we can take this array and convert it into a collection of compressed buffers. Now we need to take that collection of buffers and write it into a "disk page" (which is basically one big buffer in our file).
 
 {{< image-grid >}}
 ![Structural Encoding Overview](/assets/blog/columnar-file-readers-in-depth-structural-encoding/overview.png)
@@ -72,7 +72,7 @@ Unfortunately, we know nothing about the makeup of the buffers. Are these buffer
 _Read amplification_ is a bit of jargon that describes reading more than just the data we want. For example, if we need to read 8MB of data to access a single 8 byte nullable integer, then we have **a lot** of read amplification, the 8 byte (plus one bit) read is _amplified_ into 8MB.
 {{< /admonition >}}
 
-Note: both Arrow IPC and Orc try and solve this problem a little. Arrow IPC is able to perform random access into the buffers if the data is uncompressed but that requirement is not acceptable for us. Orc is able chunk the values in a buffer so that only target chunks need to be read but there is still considerable amplification.
+Note: both Arrow IPC and ORC try to solve this problem a little. Arrow IPC is able to perform random access into the buffers if the data is uncompressed but that requirement is not acceptable for us. ORC is able to chunk the values in a buffer so that only target chunks need to be read but there is still considerable amplification.
 
 There is one further problem with the above approach. If a value is split into N different streams then we need to perform at least N different IOPS to read that value. To use terms from a previous blog post, we are over-shredded and there is no zipping of values.
 
@@ -113,7 +113,7 @@ _With mini-block we allow a small amount of read amplification to maximize compr
 
 In order to support random access we need to translate row offsets quickly into block offsets and also be able to find the file offsets of the block. To support this we store a repetition index for the mini-block encoding. This lightweight structure consists of 2 bytes per mini-block.
 
-- The first 4 bits store the log base 2 of the number of values. This allows us to handle anywhere from 2-64Ki values (we cap it at 4Ki values for other reasons) Note: this means we need each mini-block (except the last) to have a power-of-two number of values. Since values are small this isn't much of a limitation and it has other benefits when it comes to aligning mini blocks across multiple columns into batches.
+- The first 4 bits store the log base 2 of the number of values. This allows us to handle anywhere from 2-64Ki values (we cap it at 4Ki values for other reasons). Note: this means we need each mini-block (except the last) to have a power-of-two number of values. Since values are small this isn't much of a limitation and it has other benefits when it comes to aligning mini-blocks across multiple columns into batches.
 - The remaining 12 bits returns the number of 8-byte words in the mini-block. If the data size is not exactly divisible by 8 then we pad. This ensures mini-blocks are 8-byte aligned and allows mini-blocks to be up to 32KiB.
 
 {{< image-grid >}}
@@ -131,7 +131,7 @@ Those of you who are familiar with Parquet will probably find mini block encodin
 
 ## Full Zip: Large Types Allow More Work Per Value
 
-Lance needs to deal with multi-modal data. Types like vector embeddings (3-6KiB/value), documents (10s of KBs/value) images (100s of KiB/value), audio (KBs-MBs/value), or video (MBs/value) do not fit into our normal database concept of "small values". These types would end up giving us a single mini-block per value and, not surprisingly, this does not perform well!
+Lance needs to deal with multi-modal data. Types like vector embeddings (3-6KiB/value), documents (10s of KBs/value), images (100s of KiB/value), audio (KBs-MBs/value), or video (MBs/value) do not fit into our normal database concept of "small values". These types would end up giving us a single mini-block per value and, not surprisingly, this does not perform well!
 
 To handle this we use a different structural encoding for large data types, called full zip encoding. During compression, we compress an entire 8MiB disk page, but we require transparent compression. This means we can take the resulting buffers (repetition, definition, and any value buffers) and zip them together. This allows us to read a single value without any read amplification.
 
@@ -195,7 +195,7 @@ I just used Lance's default configuration (ok, I did have to resort to synchrono
 
 ## Results
 
-Both Parquet and Lance are able to come quite close to maximizing the IOPS of a single NVMe (can hit ~400K values/second random access) but we hit non-format limitations (e..g syscall overhead) before we get there and we need a better I/O implementation.
+Both Parquet and Lance are able to come quite close to maximizing the IOPS of a single NVMe (can hit ~400K values/second random access) but we hit non-format limitations (e.g. syscall overhead) before we get there and we need a better I/O implementation.
 
 ![Random Access Results](/assets/blog/columnar-file-readers-in-depth-structural-encoding/random-access.png)
 _Syscall overhead limits the random access performance of both formats_
@@ -248,7 +248,7 @@ There are gaps while we wait for a thread to be notified, wake up, and grab the 
 
 For the next task I wanted to make sure that Lance's full scan performance could match Parquet and, even better, saturate S3's bandwidth. Once again, I was somewhat disappointed.
 
-**Lesson 3: Need rolling compression.** In order to saturate S3 bandwidth we need to make many (64-128) large (8-16 MB) parallel I/O requests. This is the rationale behind Lance's default page size of 8MB. Unfortunately, the way the a Lance column writer is currently implemented is as follows:
+**Lesson 3: Need rolling compression.** In order to saturate S3 bandwidth we need to make many (64-128) large (8-16 MB) parallel I/O requests. This is the rationale behind Lance's default page size of 8MB. Unfortunately, the way a Lance column writer is currently implemented is as follows:
 
 - Accumulate 8MB of uncompressed data
 - Pick the best compression strategy to use
