@@ -1,0 +1,23 @@
+{{- $searchable := where site.RegularPages "Type" "in" (slice "blog" "docs") -}}
+{{- $.Scratch.Add "index" slice -}}
+{{- range $searchable -}}
+  {{- $tags := slice -}}
+  {{- if .Params.categories -}}
+    {{- $tags = .Params.categories -}}
+  {{- end -}}
+  {{- if .Params.tags -}}
+    {{- $tags = $tags | append .Params.tags -}}
+  {{- end -}}
+  {{- $.Scratch.Add "index" (dict 
+    "id" .File.UniqueID
+    "title" .Title 
+    "content" (.Plain | truncate 500)
+    "summary" (or .Summary (.Plain | truncate 200))
+    "url" .RelPermalink 
+    "date" (.Date.Format "2006-01-02")
+    "type" .Type
+    "section" .Section
+    "tags" $tags
+  ) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

@@ -53,6 +53,16 @@
                         </nav>
                     </div>
                     <div class="header__right d-flex items-center">
+                        <!-- Search Component -->
+                        <div class="search-container d-none d-lg-block">
+                            <div class="search-input-wrapper">
+                                <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+                                <span class="search-icon">
+                                    {{ readFile "static/assets/icons/search.svg" | safeHTML }}
+                                </span>
+                            </div>
+                            <div id="search-results" class="search-results"></div>
+                        </div>
                         <div class="nav__additional d-none d-lg-flex">
                             <div class="nav__socials-wrap">
                                 <ul class="nav__socials">
@@ -158,4 +168,6 @@
             </div>
         </div>
     </div>
+    <!-- Search overlay for backdrop -->
+    <div id="search-overlay" class="search-overlay"></div>
 </header>
