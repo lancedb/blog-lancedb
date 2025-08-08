@@ -9,7 +9,7 @@ meta_image: /assets/blog/feature-engineering/preview-image.png
 description: "Learn how to transform raw data into meaningful features that improve machine learning model performance."
 author: David Myriel
 author_avatar: "/assets/authors/david-myriel.jpg"
-author_bio: "Data scientist and ML engineer focused on practical applications of machine learning and data engineering."
+author_bio: "Writer."
 author_twitter: "davidmyriel"
 author_github: "davidmyriel"
 author_linkedin: "davidmyriel"
