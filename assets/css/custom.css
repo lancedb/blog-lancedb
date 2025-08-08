@@ -12,6 +12,10 @@
     --offwhite: #F4EBE8;
 }
 
+body {
+    font-family: 'Aeonik', sans-serif;
+}
+
 /* Aeonik font successfully applied site-wide */
 
 /* Site header */
@@ -40,7 +44,6 @@
 }
 
 .site-title {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--text-accent);
@@ -63,7 +66,6 @@
 .header-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
     transition: color 0.2s;
 }
 
@@ -121,7 +123,6 @@
 }
 
 .main-featured h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 1.25rem 1.25rem 0.75rem 1.25rem;
@@ -143,7 +144,6 @@
 .main-featured .post-date {
     margin: 0 1.5rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
     font-weight: 500;
     opacity: 0.8;
 }
@@ -155,7 +155,6 @@
     gap: 0.5rem;
     margin: 0 1rem 0.4rem 1rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
     font-weight: 400;
     opacity: 0.8;
 }
@@ -170,14 +169,12 @@
 
 .main-featured .post-description {
     color: var(--text-secondary);
-    font-size: 1rem;
     line-height: 1.6;
     margin: 0 1.25rem 1.25rem 1.25rem;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: 0;
     opacity: 0.95;
     max-width: 90%;
@@ -217,8 +214,6 @@
 }
 
 .side-featured-post h2 {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1rem;
     font-weight: 500;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
@@ -237,7 +232,6 @@
     text-align: left !important;
     margin: 0.4rem 0.8rem 0.8rem !important;
     color: var(--text-secondary);
-    font-size: 0.85rem;
     line-height: 1.4;
 }
 
@@ -276,8 +270,6 @@
 }
 
 .post-card h2 {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1.1rem;
     font-weight: 500;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
@@ -300,13 +292,11 @@
     text-align: left !important;
     margin: 0.4rem 0.8rem 0.8rem !important;
     color: var(--text-secondary);
-    font-size: 0.85rem;
     line-height: 1.4;
 }
 
 .post-card .post-description {
     color: var(--text-secondary);
-    font-size: 0.9rem;
     line-height: 1.4;
     margin: 0 0.8rem 1rem;
     display: -webkit-box;
@@ -342,7 +332,6 @@
 }
 
 .toc {
-    font-size: 0.95rem;
     color: var(--text-secondary);
     background: none;
     border: none;
@@ -353,9 +342,7 @@
 }
 
 .toc h2 {
-    font-family: 'Aeonik', sans-serif;
     color: var(--text-accent);
-    font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 1rem;
     margin-top: 0;
@@ -380,7 +367,6 @@
 .toc ul ul>li {
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
-    font-size: 0.9rem;
     padding-left: 1rem;
     border-left: 1px solid var(--border-color);
 }
@@ -445,7 +431,6 @@
 }
 
 main h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.25rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -466,14 +451,12 @@ main .post-meta {
     gap: 1rem;
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
-    font-size: 1.05rem;
     font-weight: 400;
 }
 
 .single-post .post-date {
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
-    font-size: 1.05rem;
 }
 
 .single-post .preview-image {
@@ -492,13 +475,11 @@ main .post-meta {
     gap: 1rem;
     margin-bottom: 0.5rem;
     color: var(--text-secondary);
-    font-size: 1.05rem;
     font-weight: 400;
 }
 
 .single-post .post-description {
     color: var(--text-secondary);
-    font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -514,7 +495,6 @@ main .post-meta {
     background: var(--bg-primary);
     border-radius: 6px;
     color: var(--text-accent);
-    font-size: 0.9rem;
     transition: background-color 0.2s;
 }
 
@@ -537,19 +517,16 @@ main .post-meta {
 
 /* Post content */
 .post-content {
-    font-size: 1.125rem;
     line-height: 1.8;
     color: var(--text-primary);
     padding-bottom: 2rem;
     max-width: 750px;
     margin: 0 auto;
-    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400;
     letter-spacing: 0.01em;
 }
 
 .post-content h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.25rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -588,7 +565,6 @@ main .post-meta {
 }
 
 .post-content h3 .heading-link {
-    font-size: 1.1rem;
     line-height: 1;
 }
 
@@ -603,7 +579,6 @@ main .post-meta {
 }
 
 .post-content h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.75rem;
     font-weight: 600;
     margin: 3rem 0 1.5rem;
@@ -615,7 +590,6 @@ main .post-meta {
 }
 
 .post-content h3 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.375rem;
     font-weight: 600;
     margin: 2.5rem 0 1rem;
@@ -627,7 +601,6 @@ main .post-meta {
 }
 
 .post-content h4 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.125rem;
     font-weight: 600;
     margin: 2rem 0 1rem;
@@ -693,7 +666,6 @@ main .post-meta {
 }
 
 .post-content strong {
-    font-family: 'Aeonik', sans-serif;
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -737,7 +709,6 @@ main .post-meta {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.9rem;
     letter-spacing: 0.3px;
 }
 
@@ -745,7 +716,6 @@ main .post-meta {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     color: var(--text-secondary);
-    font-size: 0.9rem;
     line-height: 1.5;
 }
 
@@ -778,7 +748,6 @@ main .post-meta {
     }
 
     .post-content table {
-        font-size: 0.85rem;
         margin: 1rem 0;
     }
 
@@ -811,7 +780,6 @@ main .post-meta {
     border-left: 3px solid var(--text-accent);
     border-radius: 16px;
     font-style: italic;
-    font-size: 1.125rem;
     line-height: 1.8;
     color: var(--text-secondary);
     box-shadow:
@@ -838,7 +806,6 @@ main .post-meta {
     font-weight: bold;
     color: #f97316;
     opacity: 0.4;
-    font-family: Georgia, serif;
     line-height: 1;
 }
 
@@ -860,7 +827,6 @@ main .post-meta {
     font-style: normal;
     font-weight: 600;
     color: #f97316;
-    font-size: 0.95rem;
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(249, 115, 22, 0.2);
@@ -906,7 +872,6 @@ main .post-meta {
 .post-content blockquote blockquote {
     margin: 1rem 0;
     padding: 1rem 1.5rem;
-    font-size: 1rem;
     background: rgba(0, 0, 0, 0.3);
     border-left: 2px solid #64748b;
 }
@@ -943,7 +908,6 @@ main .post-meta {
         border-radius: 0;
         border-left: none;
         border-right: none;
-        font-size: 1rem;
     }
 
     .post-content blockquote::before {
@@ -957,7 +921,6 @@ main .post-meta {
     }
 
     .post-content blockquote p:last-child em {
-        font-size: 0.9rem;
         text-align: left;
     }
 }
@@ -1053,7 +1016,6 @@ article img {
     transition: background-color 0.2s;
     font-weight: 500;
     color: var(--text-accent);
-    font-size: 1.05rem;
 }
 
 .back-link:hover {
@@ -1119,7 +1081,6 @@ article img {
     }
 
     .main-featured .post-description {
-        font-size: 1rem;
     }
 
     .single-post h1 {
@@ -1148,7 +1109,6 @@ article img {
     }
 
     .header-link {
-        font-size: 0.9rem;
     }
 
     .site-logo {
@@ -1191,7 +1151,6 @@ article img {
 .footer-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s ease;
 }
@@ -1235,7 +1194,6 @@ article img {
     color: white;
     padding: 0.4rem 0;
     text-align: center;
-    font-size: 0.8rem;
 }
 
 .announcement-content {
@@ -1249,7 +1207,6 @@ article img {
 }
 
 .announcement-link {
-    font-family: 'Aeonik', sans-serif;
     color: white;
     text-decoration: none;
     font-weight: 500;
@@ -1282,7 +1239,6 @@ article img {
     gap: 0.5rem;
     margin: 0 1.25rem 0.5rem 1.25rem;
     color: var(--text-secondary);
-    font-size: 0.85rem;
     font-weight: 400;
     opacity: 0.8;
 }
@@ -1296,24 +1252,111 @@ article img {
 }
 
 .post-meta .meta-divider {
-    font-size: 1.2em;
     margin: 0 0.3em;
     opacity: 0.6;
 }
 
 .post-category {
-    font-family: 'Aeonik', sans-serif;
     color: var(--text-accent);
     font-weight: 500;
-    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* Docs Layout - No Container */
+.docs-layout {
+    display: flex;
+    min-height: calc(100vh - 67px);
+}
+
+.docs-row {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar positioned on the left */
+.docs-sidebar__wrap {
+    flex: 0 0 250px;
+    position: sticky;
+    top: 67px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Main content centered */
+.docs .col-12.col-md-6.col-lg-8 {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* TOC on the right */
+.docs .docs-toc {
+    flex: 0 0 200px;
+    position: sticky;
+    top: 67px;
+    height: calc(100vh - 67px);
+    overflow-y: auto;
+}
+
+/* Mobile sidebar improvements */
+@media screen and (max-width: 767px) {
+    /* Hide the breadcrumb elements on mobile to clean up the header */
+    .docs-sidebar__header-current,
+    .docs-sidebar__header-devider {
+        display: none;
+    }
+    
+    /* Make the header more compact */
+    .docs-sidebar__header {
+        padding: 8px 16px;
+        justify-content: space-between;
+    }
+    
+    /* Ensure the sidebar wrapper works with our new layout */
+    .docs-sidebar__wrap {
+        flex: none;
+        position: relative;
+        top: 0;
+        background: #171513;
+        border-bottom: 1px solid #2d3133;
+    }
+    
+    /* Override the absolute positioning for content in our layout */
+    .docs-sidebar__content {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 768px) {
+    .docs-layout {
+        flex-direction: column;
+    }
+    
+    .docs-row {
+        flex-direction: column;
+    }
+    
+    .docs .col-12.col-md-6.col-lg-8 {
+        flex: none;
+        max-width: none;
+        margin: 0;
+        padding: 1rem;
+    }
+    
+    .docs .docs-toc {
+        display: none;
+    }
 }
 
 .main-featured .post-meta {
     margin: 0.5rem 1rem 1rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
     line-height: 1.4;
 }
 
@@ -1323,7 +1366,6 @@ article img {
 
 .side-featured-post .post-meta {
     margin: 0.4rem 0.8rem 0.8rem;
-    font-size: 0.85rem;
     text-align: left;
 }
 
@@ -1371,7 +1413,6 @@ article img {
 }
 
 .related-posts h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -1410,7 +1451,6 @@ article img {
 }
 
 .related-post h3 {
-    font-size: 1rem;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
     line-height: 1.4;
@@ -1433,7 +1473,6 @@ article img {
     gap: 0.5rem;
     margin: 0 0.8rem 0.8rem 0.8rem;
     color: var(--text-secondary);
-    font-size: 0.85rem;
     font-weight: 400;
     opacity: 0.8;
 }
@@ -1528,7 +1567,6 @@ nav.pagination .pagination-link {
     color: var(--text-secondary) !important;
     text-decoration: none !important;
     border-radius: 8px !important;
-    font-size: 0.9rem !important;
     font-weight: 600 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     border: 1px solid rgba(249, 115, 22, 0.15) !important;
@@ -1610,7 +1648,6 @@ nav.pagination .pagination-link.current {
 }
 
 .pagination-arrow {
-    font-size: 1.1rem;
     line-height: 1;
     transition: transform 0.3s ease;
 }
@@ -1630,7 +1667,6 @@ nav.pagination .pagination-link.current {
     width: 2.25rem;
     height: 2.25rem;
     color: var(--text-accent);
-    font-size: 1rem;
     opacity: 0.5;
     animation: ellipsisPulse 1.5s ease-in-out infinite;
 }
@@ -1664,7 +1700,6 @@ nav.pagination .pagination-link.current {
     .pagination-link {
         min-width: 2.25rem;
         height: 2.25rem;
-        font-size: 0.85rem;
         border-radius: 6px;
     }
 
@@ -1702,7 +1737,6 @@ nav.pagination .pagination-link.current {
     .pagination-link {
         min-width: 2rem;
         height: 2rem;
-        font-size: 0.8rem;
     }
 
     .pagination-link.page-number {
@@ -1732,7 +1766,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-header h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -1740,7 +1773,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-description {
-    font-size: 1.1rem;
     color: var(--text-secondary);
     margin-bottom: 1rem;
     max-width: 600px;
@@ -1756,12 +1788,10 @@ nav.pagination .pagination-link.current {
 }
 
 .post-count {
-    font-family: 'Aeonik', sans-serif;
     background: var(--bg-secondary);
     color: var(--text-accent);
     padding: 0.3rem 0.8rem;
     border-radius: 12px;
-    font-size: 0.9rem;
     font-weight: 500;
 }
 
@@ -1811,7 +1841,6 @@ nav.pagination .pagination-link.current {
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: 15px;
-    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(249, 115, 22, 0.15);
@@ -1820,7 +1849,6 @@ nav.pagination .pagination-link.current {
     backdrop-filter: blur(10px);
     text-transform: capitalize;
     cursor: pointer;
-    font-family: inherit;
 }
 
 .filter-link::before {
@@ -1883,12 +1911,10 @@ nav.pagination .pagination-link.current {
 }
 
 .category-tag {
-    font-family: 'Aeonik', sans-serif;
     background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
     color: white;
     padding: 0.25rem 0.6rem;
     border-radius: 12px;
-    font-size: 0.8rem;
     font-weight: 500;
     text-transform: capitalize;
 }
@@ -1902,7 +1928,6 @@ nav.pagination .pagination-link.current {
 }
 
 .categories-header h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -1910,7 +1935,6 @@ nav.pagination .pagination-link.current {
 }
 
 .categories-description {
-    font-size: 1.1rem;
     color: var(--text-secondary);
     margin-bottom: 1rem;
 }
@@ -1937,7 +1961,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-card h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -1956,7 +1979,6 @@ nav.pagination .pagination-link.current {
 
 .category-card .category-description {
     color: var(--text-secondary);
-    font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 1.5rem;
 }
@@ -1967,7 +1989,6 @@ nav.pagination .pagination-link.current {
 
 .category-recent h4 {
     color: var(--text-accent);
-    font-size: 0.9rem;
     margin-bottom: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1986,7 +2007,6 @@ nav.pagination .pagination-link.current {
 .category-recent a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
     transition: color 0.2s ease;
 }
 
@@ -2007,7 +2027,6 @@ nav.pagination .pagination-link.current {
 }
 
 .empty-state h3 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -2038,7 +2057,6 @@ nav.pagination .pagination-link.current {
     .filter-link {
         min-width: 2.75rem;
         height: 2.75rem;
-        font-size: 0.85rem;
         border-radius: 12px;
         padding: 0 1rem;
     }
@@ -2071,7 +2089,6 @@ nav.pagination .pagination-link.current {
     .filter-link {
         min-width: 2.5rem;
         height: 2.5rem;
-        font-size: 0.8rem;
         padding: 0 0.8rem;
         border-radius: 10px;
     }
@@ -2107,7 +2124,6 @@ nav.pagination .pagination-link.current {
 }
 
 .author-name {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-accent);
@@ -2116,7 +2132,6 @@ nav.pagination .pagination-link.current {
 
 .author-bio {
     color: var(--text-secondary);
-    font-size: 1rem;
     line-height: 1.6;
     margin: 0 0 1rem 0;
 }
@@ -2214,8 +2229,6 @@ nav.pagination .pagination-link.current {
 }
 
 .admonition-title {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1.125rem;
     font-weight: 600;
     margin: 0 0 1rem 0;
     letter-spacing: 0.25px;
@@ -2234,7 +2247,6 @@ nav.pagination .pagination-link.current {
 .admonition.inline .admonition-title {
     margin: 0;
     flex-shrink: 0;
-    font-size: 1rem;
 }
 
 .admonition.inline .admonition-title::after {
@@ -2354,10 +2366,6 @@ nav.pagination .pagination-link.current {
             0 12px 48px rgba(0, 0, 0, 0.15);
     }
 
-    .admonition-title {
-        font-size: 1rem;
-    }
-
     .admonition:hover {
         transform: translateY(-1px) scale(1.005);
     }
@@ -2399,7 +2407,6 @@ nav.pagination .pagination-link.current {
 .post-content p:has(> img)+p em {
     margin-top: 1rem;
     color: var(--text-primary);
-    font-size: 1rem;
     font-style: italic;
     line-height: 1.6;
     display: block;
@@ -2432,7 +2439,6 @@ nav.pagination .pagination-link.current {
     }
 
     .post-content figcaption {
-        font-size: 1rem;
     }
 
     .image-grid {
@@ -2458,7 +2464,6 @@ nav.pagination .pagination-link.current {
 }
 
 .post-content strong {
-    font-family: 'Aeonik', sans-serif;
     font-weight: 700;
     color: var(--text-primary);
 }
@@ -2475,7 +2480,6 @@ nav.pagination .pagination-link.current {
 .side-featured-post .post-meta {
     margin: 0.5rem 1rem 1rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
     line-height: 1.4;
     text-align: left;
 }
@@ -2503,7 +2507,6 @@ nav.pagination .pagination-link.current {
 /* Adjust spacing for side featured posts */
 .side-featured-post .post-meta {
     margin: 0.4rem 0.8rem 0.8rem;
-    font-size: 0.85rem;
     text-align: left;
 }
 
@@ -2513,7 +2516,6 @@ nav.pagination .pagination-link.current {
     .main-featured .post-meta,
     .side-featured-post .post-meta {
         margin: 0.4rem 0.8rem 0.8rem;
-        font-size: 0.85rem;
     }
 }
 
@@ -2534,7 +2536,6 @@ nav.pagination .pagination-link.current {
 
     /* Typography scaling for very small screens */
     body {
-        font-size: 0.95rem;
         line-height: 1.6;
     }
 
@@ -2556,7 +2557,6 @@ nav.pagination .pagination-link.current {
     }
 
     .header-link {
-        font-size: 0.85rem;
         padding: 0.5rem 0.75rem;
     }
 
@@ -2572,13 +2572,11 @@ nav.pagination .pagination-link.current {
     }
 
     .main-featured h2 {
-        font-size: 1.2rem;
         margin: 1rem 1rem 0.5rem 1rem;
         line-height: 1.3;
     }
 
     .main-featured .post-description {
-        font-size: 0.9rem;
         margin: 0 1rem 1rem 1rem;
     }
 
@@ -2598,16 +2596,13 @@ nav.pagination .pagination-link.current {
     }
 
     .post-card h2 {
-        font-size: 1.1rem;
         line-height: 1.3;
     }
 
     .post-card .post-description {
-        font-size: 0.9rem;
     }
 
     .single-post h1 {
-        font-size: 1.8rem;
         line-height: 1.2;
         margin-bottom: 1rem;
     }
@@ -2629,18 +2624,15 @@ nav.pagination .pagination-link.current {
     }
 
     .post-content h3 {
-        font-size: 1.2rem;
         line-height: 1.3;
     }
 
     .post-content p {
-        font-size: 0.95rem;
         line-height: 1.6;
     }
 
     /* Table mobile optimization */
     .post-content table {
-        font-size: 0.85rem;
         margin: 1rem 0;
     }
 
@@ -2651,14 +2643,12 @@ nav.pagination .pagination-link.current {
 
     /* Code blocks mobile optimization */
     .post-content pre {
-        font-size: 0.85rem;
         padding: 1rem;
         border-radius: 8px;
         margin: 1rem 0;
     }
 
     .post-content pre code {
-        font-size: 0.85rem;
     }
 
     /* Blockquote mobile improvements */
@@ -2669,7 +2659,6 @@ nav.pagination .pagination-link.current {
     }
 
     .post-content blockquote p {
-        font-size: 0.95rem;
     }
 
     /* Admonition mobile improvements */
@@ -2680,12 +2669,10 @@ nav.pagination .pagination-link.current {
     }
 
     .admonition-title {
-        font-size: 1rem;
         margin-bottom: 0.75rem;
     }
 
     .admonition p {
-        font-size: 0.9rem;
     }
 
     /* Image mobile optimization */
@@ -2698,7 +2685,6 @@ nav.pagination .pagination-link.current {
     }
 
     .post-content figcaption {
-        font-size: 0.85rem;
         margin-top: 0.5rem;
     }
 
@@ -2713,7 +2699,6 @@ nav.pagination .pagination-link.current {
     }
 
     .footer-link {
-        font-size: 0.85rem;
     }
 
     /* Pagination mobile optimization */
@@ -2727,7 +2712,6 @@ nav.pagination .pagination-link.current {
 
     .pagination-link {
         padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
         min-width: 40px;
     }
 
@@ -2739,7 +2723,6 @@ nav.pagination .pagination-link.current {
 
     .filter-link {
         padding: 0.5rem 0.75rem;
-        font-size: 0.85rem;
     }
 
     /* Author section mobile improvements */
@@ -2753,21 +2736,9 @@ nav.pagination .pagination-link.current {
         height: 60px;
     }
 
-    .author-name {
-        font-size: 1.1rem;
-    }
-
-    .author-bio {
-        font-size: 0.9rem;
-    }
-
     /* Related posts mobile optimization */
     .related-posts-grid {
         gap: 1rem;
-    }
-
-    .related-post h3 {
-        font-size: 1rem;
     }
 
     /* Touch target improvements */
@@ -2785,11 +2756,6 @@ nav.pagination .pagination-link.current {
     .post-meta {
         gap: 0.5rem;
         flex-wrap: wrap;
-    }
-
-    .post-meta .post-author,
-    .post-meta .post-date {
-        font-size: 0.85rem;
     }
 
     /* Better mobile navigation */
@@ -2985,7 +2951,6 @@ nav.pagination .pagination-link.current {
 }
 
 .author-name {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-accent);
