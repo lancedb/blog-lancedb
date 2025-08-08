@@ -1,6 +1,6 @@
 ---
 title: Working With Tables in LanceDB
-sidebar_title: "Table Basics"
+sidebar_title: "Table Management"
 description: Learn about different methods to create tables in LanceDB, including from various data sources and empty tables.
 weight: 1
 aliases: ["/docs/concepts/tables/create/", "/docs/concepts/tables/create"]

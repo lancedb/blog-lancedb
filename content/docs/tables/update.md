@@ -1,6 +1,6 @@
 ---
 title: "Ingesting Data in LanceDB Tables"
-sidebar_title: "Ingesting Data"
+sidebar_title: "Working with Data"
 description: "Learn how to update and modify data in LanceDB. Includes incremental updates, batch modifications, and best practices for data maintenance."
 weight: 2
 aliases: ["/docs/concepts/tables/update/", "/docs/concepts/tables/update"]
