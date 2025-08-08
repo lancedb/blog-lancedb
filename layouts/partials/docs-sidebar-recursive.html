@@ -10,6 +10,9 @@
       {{- else if and .Pages (not .Params.sidebar_collapsed) }}
         <details {{ if or (eq .RelPermalink $.current.RelPermalink) (in $.current.RelPermalink .RelPermalink) }}open{{ end }}>
           <summary class="sidebar-summary">
+            <span class="sidebar-arrow">
+              {{ readFile "static/assets/icons/arrow_down.svg" | safeHTML }}
+            </span>
             <div class="sidebar-link-wrapper">
               {{- if .Params.link }}
                 {{- if hasPrefix .Params.link "http" }}
@@ -27,45 +30,54 @@
                 </a>
               {{- end }}
             </div>
-            <span class="sidebar-arrow">
-              {{ readFile "static/assets/icons/arrow_down.svg" | safeHTML }}
-            </span>
           </summary>
           {{ partial "docs-sidebar-recursive.html" (dict "Pages" .Pages "current" $.current) }}
         </details>
       {{- else if .Pages }}
         <!-- Section with children but collapsed - just show the link without expanding -->
-        {{- if .Params.link }}
-          {{- if hasPrefix .Params.link "http" }}
-            <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
-              {{ .Params.sidebar_title | default .Title }}
-            </a>
-          {{- else }}
-            <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
-              {{ .Params.sidebar_title | default .Title }}
-            </a>
-          {{- end }}
-        {{- else }}
-          <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
-            {{ .Params.sidebar_title | default .Title }}
-          </a>
-        {{- end }}
+        <div class="sidebar-summary">
+          <span class="sidebar-arrow">
+            {{ readFile "static/assets/icons/arrow_down.svg" | safeHTML }}
+          </span>
+          <div class="sidebar-link-wrapper">
+            {{- if .Params.link }}
+              {{- if hasPrefix .Params.link "http" }}
+                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                  {{ .Params.sidebar_title | default .Title }}
+                </a>
+              {{- else }}
+                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                  {{ .Params.sidebar_title | default .Title }}
+                </a>
+              {{- end }}
+            {{- else }}
+              <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                {{ .Params.sidebar_title | default .Title }}
+              </a>
+            {{- end }}
+          </div>
+        </div>
       {{- else }}
-        {{- if .Params.link }}
-          {{- if hasPrefix .Params.link "http" }}
-            <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
-              {{ .Params.sidebar_title | default .Title }}
-            </a>
-          {{- else }}
-            <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
-              {{ .Params.sidebar_title | default .Title }}
-            </a>
-          {{- end }}
-        {{- else }}
-          <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
-            {{ .Params.sidebar_title | default .Title }}
-          </a>
-        {{- end }}
+        <div class="sidebar-summary">
+          <span class="sidebar-arrow-placeholder"></span>
+          <div class="sidebar-link-wrapper">
+            {{- if .Params.link }}
+              {{- if hasPrefix .Params.link "http" }}
+                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                  {{ .Params.sidebar_title | default .Title }}
+                </a>
+              {{- else }}
+                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                  {{ .Params.sidebar_title | default .Title }}
+                </a>
+              {{- end }}
+            {{- else }}
+              <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                {{ .Params.sidebar_title | default .Title }}
+              </a>
+            {{- end }}
+          </div>
+        </div>
       {{- end }}
     </li>
   {{- end }}

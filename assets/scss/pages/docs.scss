@@ -62,8 +62,10 @@
   overflow-y: auto;
   background: palette(primary-dark);
   padding-bottom: 15px;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   padding-right: 0.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
 
   @include mq($md) {
    height: 100%;
@@ -116,10 +118,15 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   // Indent subpages and make all nested lists compact
   .sidebar-list {
-    padding-left: 0.8em;
+    padding-left: 1.2em;
+    width: 100%;
+    max-width: 100%;
     
     .sidebar-link {
       margin-bottom: 0.15em;
@@ -133,6 +140,24 @@
       padding-bottom: 0.06em;
       margin-bottom: 0.08em;
     }
+    
+    // Level 3 items - only slightly indented from level 2
+    .sidebar-list {
+      padding-left: 0.6em;
+      
+      .sidebar-link {
+        margin-bottom: 0.15em;
+        font-size: 0.92em;
+        padding-top: 0.06em;
+        padding-bottom: 0.06em;
+      }
+      details > summary > .sidebar-link {
+        font-size: 0.92em;
+        padding-top: 0.06em;
+        padding-bottom: 0.06em;
+        margin-bottom: 0.08em;
+      }
+    }
   }
 }
 
@@ -143,7 +168,7 @@
   letter-spacing: 0.04em;
   color: #ff734a;
   margin: 1em 0 0.5em 0;
-  padding: 0 0.75rem;
+  padding: 0 0 0 0; // Align with the left edge of the arrow (no padding)
   opacity: 0.95;
   line-height: 1.2;
 }
@@ -164,31 +189,31 @@ a.sidebar-divider {
   display: block;
   color: #fff;
   text-decoration: none;
-  padding: 0.12em 0.75rem;
+  padding: 0.12em 0;
   font-size: 0.97em;
   border-radius: 4px;
   margin-bottom: 0.05em;
-  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: normal; // Allow text wrapping
+  overflow: visible; // Show all content
+  word-wrap: break-word; // Break long words if needed
+  line-height: 1.4; // Better line height for wrapped text
 
   &:hover {
-    background: #23262b;
     color: #ff734a !important;
   }
 
   &.active {
-    background: #23262b;
     color: #ff734a !important;
     font-weight: 500;
   }
 }
 
 .sidebar-list details[open] > summary .sidebar-link {
-  background: #23262b;
   color: #fff; // Default color for open details
 }
 
 .sidebar-list details[open] > summary .sidebar-link.active {
-  background: #23262b;
   color: #ff734a !important; // Active color should be orange
   font-weight: 500;
 }
@@ -200,7 +225,8 @@ a.sidebar-divider {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .sidebar-list details summary::-webkit-details-marker {
@@ -212,36 +238,43 @@ a.sidebar-divider {
   padding-top: 0.08em;
   padding-bottom: 0.08em;
   margin-bottom: 0.1em;
+  padding-left: 0; // Remove left padding for summary items
 }
 
 // Sidebar arrow styling
 .sidebar-summary {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center; // Center align arrows with text
+  justify-content: flex-start;
   width: 100%;
-  padding: 0;
+  max-width: 100%;
+  padding: 0.12em 0;
+  flex-direction: row;
+  gap: 10px; // Increased spacing for larger arrows
+  box-sizing: border-box;
 }
 
 .sidebar-link-wrapper {
   flex: 1;
   min-width: 0; // Prevent flex item from overflowing
-  white-space: nowrap; // Prevent text wrapping
-  overflow: hidden; // Hide overflow
-  text-overflow: ellipsis; // Show ellipsis for overflow
+  white-space: normal; // Allow text wrapping
+  overflow: visible; // Show all content
+  word-wrap: break-word; // Break long words if needed
+  max-width: calc(100% - 30px); // Account for larger arrow space (20px) and gap (10px)
 }
 
 .sidebar-arrow {
   display: flex;
-  align-items: center;
+  align-items: center; // Center vertically with text
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  margin-left: 6px;
-  margin-right: 2px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
   transition: transform 0.2s ease, color 0.2s ease;
   color: #ff734a;
   flex-shrink: 0; // Prevent arrow from shrinking
+  order: -1; // Move arrow to the left
+  margin-top: 0; // Remove top margin for center alignment
   
   svg {
     width: 12px;
@@ -249,37 +282,49 @@ a.sidebar-divider {
   }
 }
 
-// Arrow points down by default (collapsed state)
+.sidebar-arrow-placeholder {
+  display: flex;
+  align-items: center; // Center vertically with text
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  flex-shrink: 0; // Prevent placeholder from shrinking
+  order: -1; // Move placeholder to the left
+  margin-top: 0; // Remove top margin for center alignment
+}
+
+// Arrow points right by default (collapsed state)
 .sidebar-arrow {
   transform: rotate(0deg);
 }
 
-// Rotate arrow to point up when details is open (expanded state)
+// Rotate arrow to point down when details is open (expanded state)
 // Only affect the direct child arrow, not nested ones
 .sidebar-list details[open] > summary .sidebar-arrow {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 // Hover effect for arrow
 .sidebar-summary:hover .sidebar-arrow {
   color: #ff734a;
+  transform: scale(1.1); // Slight scale effect on hover
 }
 
 // Ensure the link inside summary maintains proper styling
 .sidebar-summary .sidebar-link {
   margin-bottom: 0;
   flex: 1;
+  padding-left: 0; // Remove left padding since arrow is now on the left
 }
 
 // Ensure hover states work properly with the new structure
 .sidebar-summary:hover .sidebar-link {
-  background: #23262b;
   color: #ff734a !important;
 }
 
 // Active state for summary links
 .sidebar-summary .sidebar-link.active {
-  background: #23262b;
   color: #ff734a !important;
   font-weight: 500;
 }
