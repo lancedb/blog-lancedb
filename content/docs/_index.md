@@ -5,6 +5,10 @@ weight: 1
 hide_toc: true
 aliases:
   - /documentation/
+meta:
+  title: "LanceDB Documentation – Vector Database & Multimodal Lakehouse"
+  description: "Complete documentation for LanceDB vector database and multimodal lakehouse. Learn how to build AI applications, RAG systems, and manage petabyte-scale data."
+  keywords: "LanceDB documentation, vector database docs, multimodal lakehouse guide, AI documentation, RAG tutorial, vector search docs, embeddings guide, machine learning docs"
 ---
 
 **LanceDB** is an open-source [multimodal lakehouse](/blog/multimodal-lakehouse/). You can use LanceDB in two ways:

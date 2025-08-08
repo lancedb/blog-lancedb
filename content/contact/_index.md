@@ -1,7 +1,11 @@
 ---
-title: We’d love <br> to hear from you
+title: We'd love <br> to hear from you
 highlighted: hear from you
 description: Please fill out the form and we'll get back to you within 48 hours.
+meta:
+  title: "Contact LanceDB: Vector Database & Lakehouse"
+  description: "Contact LanceDB for support, sales inquiries, or technical questions about our vector database and AI multimodal lakehouse platform."
+  keywords: "contact LanceDB, support, sales inquiry, vector database support, AI platform contact, technical support, enterprise sales, customer service"
 form:
   embeded: '<script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
   <script>

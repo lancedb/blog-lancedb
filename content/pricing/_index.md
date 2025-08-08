@@ -3,6 +3,10 @@ type: pricing
 title: Simple Transparent Pricing
 highlighted: Transparent
 description: From the first POC to billion-scale production, a perfect option for every part of your AI journey
+meta:
+  title: "LanceDB Pricing: Vector Database & Lakehouse"
+  description: "Simple, transparent pricing for LanceDB Cloud and Enterprise. From free tier to billion-scale production. Pay-as-you-go or custom enterprise plans."
+  keywords: "LanceDB pricing, vector database pricing, AI platform pricing, cloud pricing, enterprise pricing, pay-as-you-go, serverless pricing, multimodal lakehouse pricing"
 plans:
   - title: LanceDB Cloud
     description: Serverless search engine. Best for growing teams who want to search more and manage less.

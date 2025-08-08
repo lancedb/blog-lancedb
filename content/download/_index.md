@@ -1,12 +1,16 @@
 ---
 title: Why Multimodal <br> Data Needs a Better <br> Lakehouse?
-description: Today’s lakehouses were built for tables, not tensors. It’s time for a data foundation that speaks the language of multimodal AI.
+description: Today's lakehouses were built for tables, not tensors. It's time for a data foundation that speaks the language of multimodal AI.
 highlighted: Lakehouse
 badge: Research Study
 image: images/lakehouse.png
 image_mob: images/lakehouse-mob.png
 image_alt: Multimodal Lakehouse
 vector: static/assets/vectors/download.svg
+meta:
+  title: "LanceDB: Your Multimodal Data Needs a Better Lakehouse."
+  description: "Download our research study on why current lakehouses fail for multimodal AI data. Learn how to build better data infrastructure for tensors, images, and video."
+  keywords: "multimodal lakehouse, AI data infrastructure, research study, data lakehouse, multimodal data, AI workloads, machine learning data, tensor storage, unstructured data"
 download: 
   title: "We explore the challenges and limitations of current data lakehouse architectures in handling multimodal data, crucial to modern machine learning and AI workloads:"
   list: 

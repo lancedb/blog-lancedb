@@ -3,9 +3,9 @@ enableSwiper: true
 title: Designed for Multimodal. <br> Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
 meta: # alternative meta 
-  title: Designed for Multimodal. <br> Built for Scale. # alternate meta title
-  description: "This is a demo for the Hugo Curate theme. Curate is a portfolio theme where you can showcase your projects and work." # alternate meta description
-  keywords: # meta keywords
+  title: "LanceDB: Vector Database & Multimodal Lakehouse"
+  description: "AI-native vector database and multimodal lakehouse for search, training, and analytics in one platform."
+  keywords: "vector database, multimodal lakehouse, AI data platform, vector search, machine learning, data engineering, feature engineering, AI training, analytics, embeddings, semantic search, RAG, retrieval augmented generation"
   og_title: # Open Graph title
   og_description: # Open Graph description
   og_image: # Open Graph image
