@@ -1,4 +1,8 @@
 ---
+title: Indexing Data in LanceDB
+sidebar_title: "Indexing Data"
+description: "Optimize search performance in LanceDB using vector indexes, full-text search, and scalar indexes. Understand IVF-PQ indexing for efficient vector similarity search."
+weight: 102
 aliases: ["/docs/concepts/indexing/", "/docs/concepts/indexing"]
 ---
 
