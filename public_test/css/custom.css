@@ -34,11 +34,9 @@
 body {
     background: var(--bg-primary);
     color: var(--text-primary);
-    font-family: 'Aeonik', Arial, sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    font-size: 0.95rem;
 }
 
 /* Aeonik font successfully applied site-wide */
@@ -69,7 +67,6 @@ body {
 }
 
 .site-title {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--text-accent);
@@ -157,7 +154,6 @@ main {
 }
 
 .main-featured h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.4rem;
     font-weight: 500;
     margin: 1rem 1rem 0.4rem 1rem;
@@ -212,7 +208,6 @@ main {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: -0.01em;
     opacity: 0.9;
     max-width: 90%;
@@ -251,8 +246,6 @@ main {
 }
 
 .side-featured-post h2 {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1rem;
     font-weight: 500;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
@@ -310,8 +303,6 @@ main {
 }
 
 .post-card h2 {
-    font-family: 'Aeonik', sans-serif;
-    font-size: 1.1rem;
     font-weight: 500;
     margin: 0.8rem 0.8rem 0.3rem 0.8rem;
     color: var(--text-primary);
@@ -387,9 +378,7 @@ main {
 }
 
 .toc h2 {
-    font-family: 'Aeonik', sans-serif;
     color: var(--text-accent);
-    font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 1rem;
     margin-top: 0;
@@ -478,7 +467,6 @@ main {
 }
 
 main h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -575,7 +563,6 @@ main .post-meta {
 }
 
 .post-content h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -627,7 +614,6 @@ main .post-meta {
 }
 
 .post-content h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
     margin: 2rem 0 1rem;
@@ -640,7 +626,6 @@ main .post-meta {
 }
 
 .post-content h3 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.4rem;
     font-weight: 600;
     margin: 1.5rem 0 0.8rem;
@@ -652,7 +637,6 @@ main .post-meta {
 }
 
 .post-content h4 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     margin: 1.2rem 0 0.6rem;
@@ -1489,7 +1473,6 @@ a:hover {
 }
 
 .announcement-link {
-    font-family: 'Aeonik', sans-serif;
     color: white;
     text-decoration: none;
     font-weight: 500;
@@ -1542,7 +1525,6 @@ a:hover {
 }
 
 .post-category {
-    font-family: 'Aeonik', sans-serif;
     color: var(--text-accent);
     font-weight: 500;
     font-size: 0.85rem;
@@ -1596,7 +1578,6 @@ a:hover {
 }
 
 .related-posts h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -1683,7 +1664,6 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Aeonik', sans-serif;
     font-weight: 500;
     color: #fff !important;
 }
@@ -1947,7 +1927,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-header h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -1971,7 +1950,6 @@ nav.pagination .pagination-link.current {
 }
 
 .post-count {
-    font-family: 'Aeonik', sans-serif;
     background: var(--bg-secondary);
     color: var(--text-accent);
     padding: 0.3rem 0.8rem;
@@ -2035,7 +2013,6 @@ nav.pagination .pagination-link.current {
     backdrop-filter: blur(10px);
     text-transform: capitalize;
     cursor: pointer;
-    font-family: inherit;
 }
 
 .filter-link::before {
@@ -2095,7 +2072,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-tag {
-    font-family: 'Aeonik', sans-serif;
     background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
     color: white;
     padding: 0.25rem 0.6rem;
@@ -2114,7 +2090,6 @@ nav.pagination .pagination-link.current {
 }
 
 .categories-header h1 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -2149,7 +2124,6 @@ nav.pagination .pagination-link.current {
 }
 
 .category-card h2 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -2219,7 +2193,6 @@ nav.pagination .pagination-link.current {
 }
 
 .empty-state h3 {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--text-primary);
@@ -2319,7 +2292,6 @@ nav.pagination .pagination-link.current {
 }
 
 .author-name {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-accent);
@@ -2427,7 +2399,6 @@ nav.pagination .pagination-link.current {
 }
 
 .admonition-title {
-    font-family: 'Aeonik', sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     margin: 0 0 0.75rem 0;
@@ -2650,7 +2621,6 @@ nav.pagination .pagination-link.current {
 }
 
 .post-content strong {
-    font-family: 'Aeonik', sans-serif;
     font-weight: 700;
     color: var(--text-primary);
 }

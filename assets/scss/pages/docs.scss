@@ -130,12 +130,10 @@
     
     .sidebar-link {
       margin-bottom: 0.15em;
-      font-size: 0.92em;
       padding-top: 0.06em;
       padding-bottom: 0.06em;
     }
     details > summary > .sidebar-link {
-      font-size: 0.92em;
       padding-top: 0.06em;
       padding-bottom: 0.06em;
       margin-bottom: 0.08em;
@@ -147,12 +145,10 @@
       
       .sidebar-link {
         margin-bottom: 0.15em;
-        font-size: 0.92em;
         padding-top: 0.06em;
         padding-bottom: 0.06em;
       }
       details > summary > .sidebar-link {
-        font-size: 0.92em;
         padding-top: 0.06em;
         padding-bottom: 0.06em;
         margin-bottom: 0.08em;
@@ -162,7 +158,6 @@
 }
 
 .sidebar-divider {
-  font-size: 0.92em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -190,7 +185,6 @@ a.sidebar-divider {
   color: #fff;
   text-decoration: none;
   padding: 0.12em 0;
-  font-size: 0.97em;
   border-radius: 4px;
   margin-bottom: 0.05em;
   transition: color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
@@ -234,7 +228,6 @@ a.sidebar-divider {
 }
 
 .sidebar-list details > summary > .sidebar-link {
-  font-size: 0.92em;
   padding-top: 0.08em;
   padding-bottom: 0.08em;
   margin-bottom: 0.1em;
@@ -330,8 +323,6 @@ a.sidebar-divider {
 }
 
 .docs-content, .docs-article-content {
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 1em;
   color: #fff;
   line-height: 1.7;
   margin: 0 auto;
@@ -377,7 +368,6 @@ a.sidebar-divider {
 }
 
 .docs-article-content h3 {
-  font-size: 1.18em;
   font-weight: 500;
   color: #ff734a;
   margin-top: 1.7em;
@@ -387,7 +377,6 @@ a.sidebar-divider {
 .docs-article-content h4,
 .docs-article-content h5,
 .docs-article-content h6 {
-  font-size: 1em;
   font-weight: 500;
   color: #ff734a;
   margin-top: 1.2em;
@@ -449,7 +438,6 @@ a.sidebar-divider {
     justify-content: center;
     color: #fff;
     font-weight: 700;
-    font-size: 0.95em;
     z-index: 2;
     box-shadow: 
       0 2px 8px rgba(0, 0, 0, 0.3),
@@ -507,7 +495,6 @@ a.sidebar-divider {
 .docs-article-content b {
   color: #fff;
   font-weight: 700;
-  font-size: 1.05em;
   letter-spacing: 0.02em;
   position: relative;
   
@@ -536,7 +523,6 @@ a.sidebar-divider {
   background: rgba(255, 115, 74, 0.1);
   color: #ffb38a;
   padding: 0.15em 0.3em;
-  font-size: 0.9em;
   font-weight: 500;
   border-radius: 3px;
   border: none;
@@ -559,9 +545,7 @@ a.sidebar-divider {
 .docs-toc {
   background: #000000;
   color: #bfc2c7;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   border-radius: 8px;
-  font-size: 1em;
   position: sticky;
   
   @include mq($md) {
@@ -585,8 +569,6 @@ a.sidebar-divider {
 }
 
 .toc-container h3 {
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 1.05em;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.01em;
@@ -616,8 +598,6 @@ a.sidebar-divider {
 .docs-toc .toc-container a {
   color: #bfc2c7;
   text-decoration: none;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 1em;
   font-weight: 400;
   transition: color 0.2s;
   line-height: 1.6;
@@ -631,7 +611,6 @@ a.sidebar-divider {
 }
 
 .docs-toc .toc-container ul ul a {
-  font-size: 0.97em;
   color: #bfc2c7;
   opacity: 0.8;
   font-weight: 400;
@@ -642,18 +621,6 @@ a.sidebar-divider {
   text-decoration: underline;
   opacity: 1;
 }
-
-.docs-article-header h1,
-.docs-article-content h1,
-.docs-article-content h2,
-.docs-article-content h3,
-.docs-article-content h4,
-.docs-article-content h5,
-.docs-article-content h6,
-.sidebar-divider,
-.toc-container h3 {
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
-} 
 
 .docs-article-content a,
 .sidebar-link,
@@ -700,8 +667,6 @@ a.sidebar-divider {
 }
 
 .docs-toc .toc h2 {
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 1.05em;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.01em;
@@ -730,8 +695,6 @@ a.sidebar-divider {
 .docs-toc .toc a {
   color: #bfc2c7;
   text-decoration: none;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 1em;
   font-weight: 400;
   transition: color 0.2s;
   line-height: 1.6;
@@ -745,7 +708,6 @@ a.sidebar-divider {
 }
 
 .docs-toc .toc ul ul a {
-  font-size: 0.97em;
   color: #bfc2c7;
   opacity: 0.8;
   font-weight: 400;
@@ -792,7 +754,6 @@ a.sidebar-divider {
   border-collapse: separate;
   border-spacing: 0;
   margin: 2rem 0;
-  font-size: 0.95em;
   background: linear-gradient(135deg, #1a1d21 0%, #23262b 100%);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(255, 115, 74, 0.1);
   border: 1px solid rgba(255, 115, 74, 0.2);
@@ -851,9 +812,7 @@ a.sidebar-divider {
 
 .docs-article-content th {
   color: #fff;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.9em;
   text-align: center;
   padding: 1.2rem 1rem;
   border: none;
@@ -915,7 +874,6 @@ a.sidebar-divider {
 
 .docs-article-content td {
   color: #e6e6e6;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   padding: 1rem 1.2rem;
   border: none;
   border-right: 1px solid rgba(255, 115, 74, 0.1);
@@ -944,7 +902,6 @@ a.sidebar-divider {
     background: #2d3748;
     color: #ffffff;
     padding: 0.25em 0.6em;
-    font-size: 0.9em;
     font-weight: 500;
     border-radius: 6px;
     border: none;
@@ -986,7 +943,6 @@ a.sidebar-divider {
   strong, b {
     color: #fff;
     font-weight: 700;
-    font-size: 1.05em;
     letter-spacing: 0.02em;
     position: relative;
     
@@ -1013,7 +969,6 @@ a.sidebar-divider {
   h1, h2, h3, h4, h5, h6 {
     color: #fff;
     font-weight: 600;
-    font-size: 1.1em;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -1064,13 +1019,11 @@ a.sidebar-divider {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 0.89em;
   color: #bfc2c7;
   opacity: 0.7;
   margin-bottom: 1.1em;
   margin-top: 1.1em;
   gap: 0.2em;
-  font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
 
   a {
     color: #ff734a;
@@ -1101,7 +1054,6 @@ a.sidebar-divider {
     margin: 0 0.3em;
     font-weight: 600;
     opacity: 0.7;
-    font-size: 1em;
     user-select: none;
   }
 
@@ -1130,7 +1082,6 @@ a.sidebar-divider {
     padding: 14px 32px;
     border: 1px solid;
     border-radius: 8px;
-    font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease-in-out;

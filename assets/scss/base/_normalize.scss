@@ -11,7 +11,7 @@ body {
 	font-weight: 400;
 	color: palette(primary-offwhite);
 	background-color: palette(primary-dark);
-	@include font-family(pro);
+	// @include font-family(pro);
 }
 
 h1,
@@ -28,7 +28,6 @@ h6 {
   }
 
 * {
-	font-family: inherit;
 	line-height: inherit;
 	color: inherit;
 	text-align: inherit;
