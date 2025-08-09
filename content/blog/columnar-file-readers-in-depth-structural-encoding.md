@@ -2,7 +2,7 @@
 title: "Columnar File Readers in Depth: Structural Encoding"
 date: 2025-08-07
 draft: false
-featured: false
+featured: true
 categories: ["Engineering"]
 image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-image.png
 meta_image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-image.png

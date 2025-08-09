@@ -2,7 +2,7 @@
 title: "What is the LanceDB Multimodal Lakehouse?"
 date: 2025-06-23
 draft: false
-featured: true
+featured: false
 categories: ["Engineering"]
 image: /assets/blog/multimodal-lakehouse/preview-image.png
 description: "Introducing the Multimodal Lakehouse - a unified platform for managing AI data from raw files to production-ready features, now part of LanceDB Enterprise."

@@ -15,7 +15,8 @@ author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
 ---
 
 Data management in AI and analytics workflows often involves juggling multiple systems and formats. 
-Today, we're excited to introduce **Lance Namespace**, 
+
+Today, we're excited to introduce [Lance Namespace](https://lancedb.github.io/lance/format/namespace/), 
 an open specification that standardizes access to collections of [Lance tables](/docs/concepts/tables/), 
 making it easier than ever to [integrate Lance](/docs/overview/lance/) with your existing data infrastructure.
 
