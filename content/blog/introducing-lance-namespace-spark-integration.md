@@ -1,10 +1,11 @@
 ---
 title: "Manage Lance Tables in Any Catalog using Lance Namespace and Spark"
-date: 2025-01-08
+date: 2025-08-08
 draft: false
-featured: false
+featured: true
 categories: ["Engineering"]
 image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
+meta_image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
 description: "Access and manage your Lance tables in Hive, Glue, Unity Catalog, or any catalog service using Lance Namespace with the latest Lance Spark connector."
 author: Jack Ye
 author_avatar: "/assets/authors/jack-ye.jpg"
@@ -15,15 +16,15 @@ author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
 
 Data management in AI and analytics workflows often involves juggling multiple systems and formats. 
 Today, we're excited to introduce **Lance Namespace**, 
-an open specification that standardizes access to collections of Lance tables, 
-making it easier than ever to integrate Lance with your existing data infrastructure.
+an open specification that standardizes access to collections of [Lance tables](/docs/concepts/tables/), 
+making it easier than ever to [integrate Lance](/docs/overview/lance/) with your existing data infrastructure.
 
 ## What is Lance Namespace?
 
 Lance Namespace is an open specification built on top of the storage-based Lance table and file format. 
 It provides a standardized way for metadata services like Apache Hive MetaStore, Apache Gravitino, Unity Catalog, 
 AWS Glue Data Catalog, and others to store and manage Lance tables. 
-This means you can seamlessly use Lance tables alongside your existing data lakehouse infrastructure.
+This means you can seamlessly use Lance tables alongside your existing [data lakehouse infrastructure](/blog/multimodal-lakehouse/).
 
 ### Why "Namespace" Instead of "Catalog"?
 
@@ -57,9 +58,9 @@ See the [Lance REST Namespace documentation](https://lancedb.github.io/lance/for
 
 One of the most highly requested features in the Lance community that is enabled by Lance Namespace is 
 seamless integration with Apache Spark, with the ability to use Lance not just as a data format plugin, 
-but as a complete Spark table catalog that users can access and manage Lance tables in Spark, run proper SQL analytics
+but as a complete Spark table catalog that users can access and manage Lance tables in Spark, run proper SQL analytics,
 and use Spark MLlib in the training process. 
-Here we walk though how you can do that now with Lance Namespace.
+Here we walk through how you can do that now with Lance Namespace.
 
 ## Getting Started: A Practical Example
 
@@ -89,7 +90,7 @@ spark = SparkSession.builder \
 ```
 
 This creates a Spark catalog `lance` that is configured to talk with the directory at `/path/to/lance/data`,
-and also set it as the default catalog in the current Spark session.
+and also sets it as the default catalog in the current Spark session.
 
 ### Step 2: Create and Manage Tables
 
@@ -118,9 +119,9 @@ spark.sql("""
 """)
 ```
 
-Notice that here when the user specifies an embedding column `embedding ARRAY<FLOAT>`,
-with table property `'embedding.arrow.fixed-size-list.size'='3'`.
-It creates a fixed-size vector column in the underlying Lance format table that is optimized for vector search performance.
+Notice that when the user specifies an embedding column `embedding ARRAY<FLOAT>`,
+with the table property `'embedding.arrow.fixed-size-list.size'='3'`,
+it creates a fixed-size vector column in the underlying Lance format table that is optimized for [vector search performance](/docs/concepts/search/).
 
 ### Step 3: Query Your Data
 
@@ -222,14 +223,18 @@ Lance Namespace with Spark integration brings several key benefits:
 4. **Simplicity**: Use familiar SQL and DataFrame APIs
 5. **Scalability**: Handle everything from local experiments to production workloads
 
+For more information on [LanceDB's features](/docs/overview/features) and capabilities, check out our [comprehensive documentation](/docs/).
+
 ## What's Next?
 
 Lance Namespace is designed to be extensible and community-driven. We're actively working on:
 
-- Additional namespace implementations, Unity Catalog, Apache Gravitino and Apache Polaris work in progress
-- Enhanced vector search capabilities within Spark
+- Additional namespace implementations: Unity Catalog, Apache Gravitino, and Apache Polaris work in progress
+- Enhanced [vector search capabilities](/docs/concepts/search/) within Spark
 - Tighter integration with ML frameworks with features like data evolution
 - Support for more compute engines beyond Spark
+
+If you're interested in [getting started](/docs/quickstart/) with LanceDB or exploring our [enterprise features](/docs/overview/enterprise/), we have comprehensive guides available.
 
 ## Thank You to Our Contributors
 
@@ -248,8 +253,8 @@ Lance Namespace is open source and we welcome all kinds of contributions!
 Whether you're interested in adding new namespace implementations, improving the Spark connector,
 building integration with more engines, or just trying it out, we'd love to hear from you.
 
-- **Documentation**: [Lance Namespace](https://lancedb.gitub.com/lance/format/namespace)
-- **Documentation**: [Lance Spark Connector](https://lancedb.gitub.com/lance/integrations/spark)
+- **Documentation**: [Lance Namespace](https://lancedb.github.io/lance/format/namespace)
+- **Documentation**: [Lance Spark Connector](https://lancedb.github.io/lance/integrations/spark)
 - **Roadmap**: [Lance Namespace](https://github.com/lancedb/lance-namespace/issues/168)
 - **Roadmap**: [Lance Spark Connector](https://github.com/lancedb/lance-spark/issues/47)
 
@@ -260,5 +265,5 @@ By providing a standardized way to manage Lance tables and seamless integration 
 it makes it easier than ever to build scalable AI and analytics pipelines.
 
 Try it out today and let us know what you think! Whether you're building a recommendation system, 
-managing embeddings for RAG applications, or analyzing large-scale datasets, 
+managing embeddings for [RAG applications](/docs/tutorials/rag/), or analyzing large-scale datasets, 
 Lance Namespace and Spark provide the foundation you need for success.
