@@ -44,6 +44,8 @@ But the quiet hero in the background is feature engineering. If you feed your mo
 
 ## What Counts as a Feature?  
 
+![Feature Engineering Process](/assets/blog/feature-engineering/image-1.jpeg)
+
 In machine learning, a **feature** is simply a measurable property of the thing you're trying to predict.  
 
 - In a house price prediction model, features could be square footage, number of bedrooms, or the age of the building.  
@@ -156,3 +158,5 @@ Without it, you're leaving accuracy, efficiency, and model interpretability on t
 If you remember one thing: models get the glory, but features win the game.
 
 ![Flow from Raw Data → Feature Engineering → Model Training → Predictions](/assets/blog/feature-engineering/diagram.png)
+
+![Feature Engineering Process](/assets/blog/feature-engineering/image-2.jpeg)
