@@ -601,7 +601,13 @@ class SimpleSearchEngine {
 
     // Global click handler
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-container')) {
+      const isInsideSearchContainer = e.target.closest('.search-container');
+      const isSearchInput = e.target.matches('.search-input');
+      const isSearchResult = e.target.closest('.search-result');
+      const isSearchOverlay = e.target.matches('.search-overlay');
+
+      // Close search if clicking outside the container OR on the overlay
+      if (!isInsideSearchContainer || isSearchOverlay) {
         this.hideSearchResults();
         this.hideSearchResultsMobile();
       }
