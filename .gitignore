@@ -1,6 +1,7 @@
 .env
 .env.build
 public/
+public_test/
 resources/
 .hugo_build.lock
 *.lance
