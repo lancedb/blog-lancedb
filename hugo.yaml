@@ -8,6 +8,12 @@ canonifyURLs: true
 # Build settings
 buildFuture: true
 
+# Output formats for search index
+outputs:
+  home:
+    - HTML
+    - JSON
+
 # Pagination settings
 pagination:
   pagerSize: 9
