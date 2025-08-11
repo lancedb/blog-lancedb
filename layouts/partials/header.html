@@ -13,7 +13,7 @@
                     </span>
                 {{ end }}
                 </a>
-    
+
                 <button class="header__announcement-close">
                     {{ readFile "static/assets/icons/close.svg" | safeHTML }}
                 </button>
@@ -53,6 +53,38 @@
                         </nav>
                     </div>
                     <div class="header__right d-flex items-center">
+                        <!-- Search Container -->
+                        <div class="search-container" style="display: none;">
+                            <div class="search-input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="search-input" 
+                                    class="search-input" 
+                                    placeholder="Search..." 
+                                    role="combobox"
+                                    aria-expanded="false"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="listbox"
+                                    aria-describedby="search-instructions"
+                                    autocomplete="off"
+                                    autocapitalize="off"
+                                    autocorrect="off"
+                                    spellcheck="false"
+                                />
+                                <div class="search-input-icon">
+                                    {{ readFile "static/assets/icons/search.svg" | safeHTML }}
+                                </div>
+                                <div class="search-keyboard-hint">
+                                    <kbd>Ctrl</kbd><kbd>K</kbd>
+                                </div>
+                            </div>
+                            <div id="search-overlay" class="search-overlay"></div>
+                            <div id="search-results" class="search-results" role="listbox" aria-label="Search suggestions"></div>
+                            <div id="search-instructions" class="sr-only">
+                                Press Ctrl+K or / to focus search. Use arrow keys to navigate suggestions, Enter to select, Escape to close.
+                            </div>
+                        </div>
+
                         <div class="nav__additional d-none d-lg-flex">
                             <div class="nav__socials-wrap">
                                 <ul class="nav__socials">
@@ -96,6 +128,32 @@
                 </div>
                 <div class="col-12 nav__container d-lg-none">
                     <div class="nav__wrap">
+                        <!-- Mobile Search -->
+                        <div class="search-container search-container--mobile" style="display: none;">
+                            <div class="search-input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="search-input-mobile" 
+                                    class="search-input" 
+                                    placeholder="Search..." 
+                                    role="combobox"
+                                    aria-expanded="false"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="listbox"
+                                    aria-describedby="search-instructions"
+                                    autocomplete="off"
+                                    autocapitalize="off"
+                                    autocorrect="off"
+                                    spellcheck="false"
+                                />
+                                <div class="search-input-icon">
+                                    {{ readFile "static/assets/icons/search.svg" | safeHTML }}
+                                </div>
+                            </div>
+                            <div id="search-overlay-mobile" class="search-overlay"></div>
+                            <div id="search-results-mobile" class="search-results" role="listbox" aria-label="Search suggestions"></div>
+                        </div>
+
                         <nav class="nav">
                             <ul class="nav__list">
                             {{ $current := . }}

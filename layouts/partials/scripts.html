@@ -3,9 +3,11 @@
 {{ $headingLinksJs := resources.Get "js/heading-links.js" | js.Build "headingLinks.js" | fingerprint }}
 {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js"  | fingerprint }}
 {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
+{{ $searchJS := resources.Get "js/search.js" | js.Build "search.js" | fingerprint }}
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
 <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
+<script src="{{ $searchJS.RelPermalink }}"></script>
 
 {{ if eq .Type "blog" }}
     <script src="{{ $tocJs.RelPermalink }}"></script> 
