@@ -11,6 +11,8 @@
     <script src="{{ $tocJs.RelPermalink }}"></script> 
     <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
     <script src="{{ $codeTabJS.RelPermalink }}"></script> 
+    {{ $subscribeJs := resources.Get "js/subscribe.js" | js.Build "subscribe.js" | fingerprint }}
+    <script src="{{ $subscribeJs.RelPermalink }}"></script>
 {{ else }}
     {{ $textAniamtionJs := resources.Get "js/text-animation.js" | minify | fingerprint }}
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>

@@ -65,8 +65,9 @@
     </div>
 {{ end }}
 
-<!-- Pagination Section -->
+<!-- Pagination and Subscribe Section -->
 <div class="pagination-subscribe-container">
+    <!-- Left side - Pagination -->
     <div class="pagination-section">
         <nav class="pagination">
             <div class="pagination-links">
@@ -92,16 +93,16 @@
                         <span class="pagination-arrow">→</span>
                     </a>
                 {{ end }}
-                
-                <!-- Subscribe button inside pagination-links -->
-                <div class="subscribe-section">
-                    <button class="subscribe-cta-button" onclick="openSubscribeModal()">
-                        <span class="subscribe-icon">✉️</span>
-                        <span class="subscribe-text">Subscribe</span>
-                    </button>
-                </div>
             </div>
         </nav>
+    </div>
+    
+    <!-- Right side - Subscribe -->
+    <div class="subscribe-section">
+        <button class="subscribe-cta-button" onclick="openSubscribeModal()">
+            <span class="subscribe-icon">📧</span>
+            <span class="subscribe-text">Subscribe to Newsletter</span>
+        </button>
     </div>
 </div>
 
@@ -132,34 +133,32 @@
 
 <!-- Pagination Navigation (Bottom) -->
 {{ if gt $paginator.TotalPages 1 }}
-<div class="pagination-subscribe-container">
-    <nav class="pagination">
-        <div class="pagination-links">
-            {{ if $paginator.HasPrev }}
-                <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
-                    <span class="pagination-arrow">←</span>
-                    <span class="pagination-text">Previous</span>
-                </a>
+<nav class="pagination">
+    <div class="pagination-links">
+        {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                <span class="pagination-arrow">←</span>
+                <span class="pagination-text">Previous</span>
+            </a>
+        {{ end }}
+        
+        <!-- All page numbers -->
+        {{ range $paginator.Pagers }}
+            {{ if eq .PageNumber $paginator.PageNumber }}
+                <span class="pagination-link current">{{ .PageNumber }}</span>
+            {{ else }}
+                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
             {{ end }}
-            
-            <!-- All page numbers -->
-            {{ range $paginator.Pagers }}
-                {{ if eq .PageNumber $paginator.PageNumber }}
-                    <span class="pagination-link current">{{ .PageNumber }}</span>
-                {{ else }}
-                    <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
-                {{ end }}
-            {{ end }}
-            
-            {{ if $paginator.HasNext }}
-                <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
-                    <span class="pagination-text">Next</span>
-                    <span class="pagination-arrow">→</span>
-                </a>
-            {{ end }}
-        </div>
-    </nav>
-</div>
+        {{ end }}
+        
+        {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                <span class="pagination-text">Next</span>
+                <span class="pagination-arrow">→</span>
+            </a>
+        {{ end }}
+    </div>
+</nav>
 {{ end }}
 </div>
 
@@ -167,8 +166,8 @@
 <div id="subscribeModal" class="subscribe-modal">
     <div class="subscribe-modal-content">
         <div class="subscribe-modal-header">
-                                            <h3 class="modal-title-primary">Become a LanceDB Insider!</h3>
-                <p class="modal-subtitle">Subscribe for our exclusive updates and early access.</p>
+            <h3>Subscribe to Our Newsletter</h3>
+            <button class="subscribe-modal-close" onclick="closeSubscribeModal()">&times;</button>
         </div>
         <form class="subscribe-form" id="subscribeForm">
             <div class="form-row">
@@ -185,8 +184,12 @@
                 <label for="email">Email Address *</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div class="form-group agreement-text">
-                <p>By subscribing, you agree to receive LanceDB updates. You can unsubscribe anytime. <a href="https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf" target="_blank">Read our Privacy Policy</a> for details.</p>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="marketing" name="marketing">
+                    <span class="checkmark"></span>
+                    I agree to receive marketing communications from LanceDB
+                </label>
             </div>
             <button type="submit" class="subscribe-submit-btn">
                 <span class="btn-text">Subscribe Now</span>
@@ -297,8 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="subscribe-success">
                 <div class="success-icon">✅</div>
                 <h3>Thank You!</h3>
-                <p>You're now on our early access list!</p>
-                <p>We'll notify you first about new features, updates, and insights from LanceDB.</p>
+                <p>You've been successfully subscribed to our newsletter.</p>
+                <p>We'll keep you updated with the latest insights and updates from LanceDB.</p>
             </div>
         `;
     }
@@ -306,3 +309,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 {{ end }}
+
