@@ -1,5 +1,12 @@
 # Writing for LanceDB.com/blog
 
+## Before you Write
+
+Please put together a Google Doc with the blog draft and share it with your peers for review.
+Then, after all the feedback is finalized - continue on with publishing.
+
+## Publishing in Hugo
+
 To write a blog post, you have to create its Markdown file in one location and then reference images in a separate static folder.
 
 It may appear clumsy at first, but the entire publication process becomes super easy, particularly when fixing issues and collaborating with others on code and technical content.
