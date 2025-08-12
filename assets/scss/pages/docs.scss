@@ -1110,6 +1110,25 @@ a.sidebar-divider {
     font-weight: 400;
     opacity: 0.95;
   }
+
+  .edit-github-link {
+    color: #ff734a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.18s;
+    opacity: 1;
+    font-size: 0.85em;
+    padding: 2px 8px;
+    border: 1px solid #ff734a;
+    border-radius: 4px;
+    margin-left: auto;
+    
+    &:hover {
+      color: #fff;
+      background-color: #ff734a;
+      text-decoration: none;
+    }
+  }
 } 
 
 // Side-by-side buttons for docs homepage
