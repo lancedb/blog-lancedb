@@ -19,6 +19,8 @@
                           {{ end }}
                           <span class="breadcrumb-sep">/</span>
                           <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
+                          <span class="breadcrumb-sep">/</span>
+                          <a href="https://github.com/lancedb/blog-lancedb/edit/main/content{{ if .IsPage }}{{ .RelPermalink | replaceRE "/$" "" }}.md{{ else }}{{ .RelPermalink | replaceRE "/$" "" }}/_index.md{{ end }}" target="_blank" rel="noopener" class="edit-github-link">Edit on GitHub</a>
                         </nav>
                         <h1>{{ .Title }}</h1>
                     </header>
