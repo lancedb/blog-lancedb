@@ -1128,6 +1128,11 @@ a.sidebar-divider {
       background-color: #ff734a;
       text-decoration: none;
     }
+    
+    // Hide on mobile devices
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 } 
 
