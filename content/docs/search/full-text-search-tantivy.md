@@ -7,7 +7,7 @@ aliases: ["/docs/concepts/search/full-text-search-tantivy/", "/docs/concepts/sea
 
 LanceDB supports Full-Text Search (FTS) via [**Tantivy**](https://github.com/quickwit-oss/tantivy). With Tantivy, you can incorporate keyword search (based on BM25) in your retrieval solutions.
 
-This feature is only available in Python Async SDK. You won't be able to build indexes on object storage or use incremental indexing. If you need these features, then switch over to native FTS.
+This feature is only available in Python synchronous SDK. You won't be able to build indexes on object storage or use incremental indexing. If you need these features, then switch over to native FTS.
 
 {{< admonition "warning" >}}
 Tantivy-based FTS is not supported on LanceDB Cloud. You should use the native FTS if you need cloud support.
