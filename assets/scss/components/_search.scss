@@ -3,6 +3,27 @@
   position: relative;
   margin-right: 1rem;
   z-index: 10000;
+
+  @include mq($max: $lg) {
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(palette(primary-dark), 0.9);
+    padding: 24px;
+    display: grid;
+    align-items: flex-start;
+    gap: 16px;
+    z-index: 1000;
+
+    &.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
 
 /* Search Input */
@@ -11,6 +32,10 @@
   display: flex;
   align-items: center;
   z-index: 10001;
+
+  @include mq($max: $lg) {
+    width: 100%;
+  }
 }
 
 .search-input {
@@ -27,6 +52,12 @@
   opacity: 1;
   position: relative;
   z-index: 10002;
+
+  @include mq($max: $lg) {
+    width: 100%;
+    padding-right: 0.75rem;
+    padding-left: 2.5rem;
+  }
 
   &::placeholder {
     color: #9ca3af;
@@ -56,9 +87,9 @@
   }
 }
 
-.search-input-icon {
+.search-input-icon ,
+.search-input-close {
   position: absolute;
-  right: 0.75rem;
   width: 1rem;
   height: 1rem;
   color: #6b7280;
@@ -70,6 +101,21 @@
     height: 100%;
   }
 }
+
+.search-input-close {
+  right: 0.75rem;
+}
+
+.search-input-icon  {
+  right: 0.75rem;
+
+  @include mq($max: $lg) {
+    right: unset;
+    left: 0.75rem;
+    pointer-events: none;
+  }
+}
+
 
 .search-keyboard-hint {
   position: absolute;
@@ -130,6 +176,10 @@
     visibility: visible;
     pointer-events: auto;
   }
+
+  @include mq($max: $lg) {
+    display: none;
+  }
 }
 
 /* Search Results */
@@ -150,6 +200,12 @@
   transition: all 0.2s ease-in-out;
   z-index: 9999;
   overflow-y: auto;
+
+  @include mq($max: $lg) {
+    max-height: 100%;
+    width: 100%;
+    position: static;
+  }
 
   &--active {
     opacity: 1;
@@ -286,26 +342,7 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 900px) {
-  .search-container {
-    display: none !important;
-  }
-  
-  .search-container--mobile {
-    display: none !important;
-  }
-}
-
 @media (max-width: 768px) {
-  .search-input {
-    width: 200px;
-  }
-
-  .search-results {
-    width: 350px;
-    left: -150px;
-  }
 
   .search-keyboard-hint {
     display: none;
@@ -313,18 +350,6 @@
 }
 
 @media (max-width: 640px) {
-  .search-container {
-    margin-right: 0.5rem;
-  }
-
-  .search-input {
-    width: 180px;
-  }
-
-  .search-results {
-    width: 300px;
-    left: -120px;
-  }
 
   .search-result-header {
     flex-direction: column;

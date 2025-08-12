@@ -8,11 +8,10 @@ canonifyURLs: true
 # Build settings
 buildFuture: true
 
-# Output formats for search index
+# Output formats for search functionality
 outputs:
-  home:
-    - HTML
-    - JSON
+  home: ["HTML", "JSON"]
+  section: ["HTML", "JSON"]
 
 # Pagination settings
 pagination:
