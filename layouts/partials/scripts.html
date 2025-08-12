@@ -7,7 +7,10 @@
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
 <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
+
+{{ if or (eq .Section "docs") (eq .Section "blog") }}
 <script src="{{ $searchJS.RelPermalink }}"></script>
+{{end}}
 
 {{ if eq .Type "blog" }}
     <script src="{{ $tocJs.RelPermalink }}"></script> 
