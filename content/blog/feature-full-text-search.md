@@ -6,13 +6,19 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/feature-full-text-search/preview-image.png
 meta_image: /assets/blog/feature-full-text-search/preview-image.png
-description: "No more Tantivy! We stress-tested native full-text search in our latest massive-scale search demo. Let's break down how it works and what we did to scale it!"
-author: David Myriel
+description: "No more Tantivy! We stress-tested native full-text search in our latest massive-scale search demo. Let's break down how it works and what we did to scale it."
+author: "David Myriel"
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer."
 author_twitter: "davidmyriel"
 author_github: "davidmyriel"
 author_linkedin: "davidmyriel"
+author2: "Ayush Chaurasia"
+author2_avatar: "/assets/authors/ayush-chaurasia.jpg"
+author2_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods.."
+author2_twitter: "ayushchaurasia"
+author2_github: "ayushchaurasia"
+author2_linkedin: "ayushchaurasia"
 ---
 
 {{< admonition >}}
