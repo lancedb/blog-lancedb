@@ -1122,11 +1122,18 @@ a.sidebar-divider {
     border: 1px solid #ff734a;
     border-radius: 4px;
     margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
     
     &:hover {
       color: #fff;
       background-color: #ff734a;
       text-decoration: none;
+    }
+    
+    // Hide on mobile devices 
+    @media (max-width: 900px) {
+      display: none;
     }
   }
 } 
