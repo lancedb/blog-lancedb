@@ -540,6 +540,14 @@ class SimpleSearchEngine {
     return path.startsWith('/blog') || path.startsWith('/docs');
   }
 
+  isMobileDevice() {
+    // Check both user agent for actual mobile devices AND screen width for narrow screens
+    const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isNarrowScreen = window.innerWidth <= 768;
+    
+    return isMobileUserAgent || isNarrowScreen;
+  }
+
   hideSearchContainers() {
     const searchContainers = document.querySelectorAll('.search-container');
     searchContainers.forEach(container => {
@@ -594,8 +602,8 @@ class SimpleSearchEngine {
       this.setupEventListeners();
     }
 
-    // Setup listeners for mobile
-    if (this.searchInputMobile && this.searchResultsMobile) {
+    // Setup listeners for mobile (only if not on actual mobile device)
+    if (this.searchInputMobile && this.searchResultsMobile && !this.isMobileDevice()) {
       this.setupMobileEventListeners();
     }
 
@@ -647,8 +655,8 @@ class SimpleSearchEngine {
       this.searchInput.focus();
       this.searchInput.select(); // Select any existing text
     }
-    // Fallback to mobile search input
-    else if (this.searchInputMobile && this.isElementVisible(this.searchInputMobile)) {
+    // Fallback to mobile search input (only if not on actual mobile device)
+    else if (this.searchInputMobile && this.isElementVisible(this.searchInputMobile) && !this.isMobileDevice()) {
       this.searchInputMobile.focus();
       this.searchInputMobile.select();
     }

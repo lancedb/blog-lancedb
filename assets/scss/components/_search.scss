@@ -289,7 +289,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .search-input {
-    width: 200px;
+    width: 0px;
+    min-width: 0px;
   }
 
   .search-results {
@@ -308,7 +309,8 @@
   }
 
   .search-input {
-    width: 180px;
+    width: 0px;
+    min-width: 0px;
   }
 
   .search-results {
