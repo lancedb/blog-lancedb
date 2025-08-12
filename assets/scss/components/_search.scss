@@ -287,6 +287,16 @@
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+  .search-container {
+    display: none !important;
+  }
+  
+  .search-container--mobile {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .search-input {
     width: 200px;
