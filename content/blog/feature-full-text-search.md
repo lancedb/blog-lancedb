@@ -25,7 +25,7 @@ author2_linkedin: "ayushchaurasia"
 
 Many of our users are building RAG and search apps, and they want three things above all: precision, scale and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
 
-WikiSearch is a very simple [search engine](https://wiki-search-2.vercel.app) that stores and searches through real Wikipedia entries.
+[WikiSearch](https://wiki-search-2.vercel.app) is a very simple [search engine](/docs/overview/) that stores and searches through real Wikipedia entries.
 You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/). 
 
 {{< admonition >}}
@@ -76,13 +76,18 @@ To learn more about Hybrid Search, [give this example a try](/docs/search/hybrid
 
 [![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://wiki-search-2.vercel.app/)
 
-{{< admonition "Try it!" "It was not Shakespeare." >}}
+{{< admonition "Try it out!" >}}
 Want to know who wrote Romeo and Juliet? [Give it a spin!](https://wiki-search-2.vercel.app/)
 {{< /admonition >}}
 
+The demo lets you switch between semantic (vector), full text (keyword), and hybrid search modes. [Semantic or Vector Search](/docs/search/vector-search/) finds conceptually related content, even when the exact words differ. [Full-text Search](/docs/search/full-text-search/) excels at finding precise terms and phrases. [Hybrid Search](/docs/search/hybrid-search/) combines both approaches - getting the best of semantic understanding while still catching exact matches. Try comparing the different modes to see how they handle various queries.
+
+
+## Behind the Scenes
+
 ### Step 1: Ingestion
 
-We start from the public Wikipedia dump and normalize content into pages and sections. Long articles are chunked on headings so each result points to a focused span of text rather than an entire page. 
+We start with raw articles from Wikipedia and normalize content into pages and sections. Long articles are chunked on headings so each result points to a focused span of text rather than an entire page. 
 
 During ingestion we create a schema and columns, such as `content`, `url` and `title`. Writes are batched (≈200k rows per commit) to maximize throughput.
 
@@ -121,7 +126,8 @@ Try looking something up, then switch to the Search Parameters</br> to see what'
 
 Now we're getting serious. `explain_plan` is a very valuable feature that we created to help debug search issues and [optimize performance](/docs/search/optimize-queries/). Toggle it to get a structured trace of how LanceDB executed your query. 
 
-![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan.png)
+The Full-Text Search query plan for a specific keyword.
+![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-2.png)
 
 The Query Plan shows:
 
@@ -129,6 +135,9 @@ The Query Plan shows:
 - Candidate counts from each stage (text and vector), plus the final returned set
 - Filters that applied early vs. at re‑rank
 - Timings per stage so you know where to optimize
+
+The Semantic Search query plan for a more abstract term that needs context.
+![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-1.png)
 
 ## Performance and Scaling
 
@@ -178,8 +187,10 @@ Check out the [GitHub Repository.](https://github.com/lancedb/saas-examples-larg
 
 ## The Search is Never Complete
 
-We built this entire app on [LanceDB Cloud](https://accounts.lancedb.com/sign-up). Beyond the endless exploration of a large dataset, this demo showcases what's possible when you combine LanceDB's native full-text search with vector embeddings. 
+Beyond the endless exploration of a large dataset, this demo showcased what's possible when you combine [LanceDB's native Full-Text Search](/docs/search/full-text-search/) with vector embeddings. 
 
 You get the precision of keyword matching, the semantic understanding of embeddings, and the scalability to handle massive datasets - all in one unified platform.
+
+We built this entire app on [LanceDB Cloud](https://accounts.lancedb.com/sign-up), which is free to try and comes with comprehensive tutorials, sample code, and documentation to help you build RAG applications, AI agents, and semantic search engines. 
 
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/outro.png)
