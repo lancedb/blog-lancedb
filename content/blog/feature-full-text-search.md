@@ -21,18 +21,20 @@ author2_github: "ayushchaurasia"
 author2_linkedin: "ayushchaurasia"
 ---
 
-{{< admonition >}}
-It's not about the vectors. It's about getting the right result.
-{{< /admonition >}}
+> It's not about the vectors. It's about getting the right result.
 
 Many of our users are building RAG and search apps, and they want three things above all: precision, scale and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
 
 WikiSearch is a very simple [search engine](https://wiki-search-2.vercel.app) that stores and searches through real Wikipedia entries.
 You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/). 
 
+{{< admonition >}}
+We previously used [Tantivy](https://github.com/quickwit-oss/tantivy) for our search implementation. Now, we have an in-house FTS solution that provides better integration with LanceDB and offers superior performance for our specific use cases. 
+{{< /admonition >}}
+
 ## Why Full-Text Search Matters
 
-[Full-Text Search (FTS)](/docs/search/full-text-search/) lets you find the exact words, phrases, and spellings people care about. It complements [vector search](/docs/search/vector-search/) by catching precise constraints, rare terms, and operators (phrases, boolean logic, field boosts) that embeddings alone often miss. 
+[Full-Text Search (FTS)](/docs/search/full-text-search/) lets you find the exact words, phrases, and spellings people care about. It complements [vector search](/docs/search/vector-search/) by catching precise constraints, rare terms, and operators (phrases, boolean logic, field boosts) that embeddings alone often miss.
 
 It works by tokenization: splitting text into small, searchable pieces called tokens. It lowercases words, removes punctuation, and can reduce words to a base form (e.g., “running” → “run”). 
 
