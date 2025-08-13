@@ -65,34 +65,45 @@
     </div>
 {{ end }}
 
-<!-- Pagination Navigation -->
+<!-- Pagination and Subscribe Section -->
 {{ if gt $paginator.TotalPages 1 }}
-<nav class="pagination">
-    <div class="pagination-links">
-        {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
-                <span class="pagination-arrow">←</span>
-                <span class="pagination-text">Previous</span>
-            </a>
-        {{ end }}
-        
-        <!-- All page numbers -->
-        {{ range $paginator.Pagers }}
-            {{ if eq .PageNumber $paginator.PageNumber }}
-                <span class="pagination-link current">{{ .PageNumber }}</span>
-            {{ else }}
-                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
-            {{ end }}
-        {{ end }}
-        
-        {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
-                <span class="pagination-text">Next</span>
-                <span class="pagination-arrow">→</span>
-            </a>
-        {{ end }}
+<div class="pagination-subscribe-container">
+    <!-- Left side - Pagination -->
+    <div class="pagination-section">
+        <nav class="pagination">
+            <div class="pagination-links">
+                {{ if $paginator.HasPrev }}
+                    <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                        <span class="pagination-arrow">←</span>
+                        <span class="pagination-text">Previous</span>
+                    </a>
+                {{ end }}
+                
+                <!-- All page numbers -->
+                {{ range $paginator.Pagers }}
+                    {{ if eq .PageNumber $paginator.PageNumber }}
+                        <span class="pagination-link current">{{ .PageNumber }}</span>
+                    {{ else }}
+                        <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+                    {{ end }}
+                {{ end }}
+                
+                {{ if $paginator.HasNext }}
+                    <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                        <span class="pagination-text">Next</span>
+                        <span class="pagination-arrow">→</span>
+                    </a>
+                {{ end }}
+            </div>
+        </nav>
     </div>
-</nav>
+    
+                    <!-- Right side - Subscribe -->
+                <div class="subscribe-section">
+                    <input type="email" id="subscribeEmail" class="subscribe-email" placeholder="Enter your email address" />
+                    <button class="subscribe-button" onclick="subscribeNewsletter('subscribeEmail')">Subscribe</button>
+                </div>
+</div>
 {{ end }}
 
 <!-- Posts Grid -->
