@@ -33,6 +33,7 @@ This all changes starting in 0.19.2. Appending data is much more flexible. Now w
 
 Users could already create tables with missing fields in some rows, as most tools know how to insert nulls:
 
+```python
     import lance
     import pyarrow as pa
     
@@ -64,6 +65,7 @@ But what's new is you can create a table that is completely missing some fields 
     1             None  {'x': 3.0, 'y': None}
     2  [2.0, 3.0, 5.0]  {'x': None, 'y': 4.0}
     3             None    {'x': None, 'y': 6}
+```
 
 User feedback has taught us that this development is important for schema evolution. 
 
@@ -92,12 +94,14 @@ The new balanced storage feature aims to solve this problem. Large columns can b
 
 To opt into this feature for a particular column, you must add a metadata field to the schema. For example, here's how to construct the PyArrow schema:
 
+```python
     import pyarrow as pa
     
     schema = pa.schema([
         pa.field("int_col", pa.int32()),
         pa.field("video_col", pa.large_binary(), metadata={"lance-schema:storage-class": "blob"}),
     ])
+```
 
 This feature is experimental and made available for prototyping. Additional work and testing will be done in the next few months before we will recommend it for production use.
 
@@ -107,6 +111,7 @@ This feature was developed by LanceDB engineer Weston Pace (@westonpace).
 
 Up until now, searching with full text search only included data that was in the table when the index was created or updated. If you added new data to the table, those new rows would be missing from the search results. You could update the index and the results would appear, but this meant a delay between inserting data and being able to search it. It's also different than all other indices in Lance: vector search and scalar indices could both automatically search new data. With 0.19.2, full text search now includes not-yet-indexed data.
 
+```python
     data = pa.table({"animal": ["wild horse", "domestic rabbit"]})
     ds = lance.write_dataset(data, "./demo_fts", mode="overwrite")
     ds.create_scalar_index("animal", index_type="INVERTED")
@@ -124,6 +129,7 @@ Up until now, searching with full text search only included data that was in the
     0  domestic rabbit  1.386294
     1      wild rabbit  0.871385
     2       wild horse  0.693147
+```
 
 Eventually, you will still want to update the index to include the new data. This is partially for performance reasons. But importantly it also will improve search results. The search on new data only works for terms that have already been indexed. So if you have a new term that wasn't in any documents previously, searching that term will not return any results until you update the index.
 
