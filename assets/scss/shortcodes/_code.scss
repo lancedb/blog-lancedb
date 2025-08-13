@@ -7,8 +7,8 @@
   // Enhanced styling for bold text in blog content
   strong, b {
     color: #fff;
+    @include text-style(body-small);
     font-weight: 700;
-    font-size: 1.05em;
     letter-spacing: 0.02em;
     position: relative;
     
@@ -98,7 +98,7 @@
   code {
     color: palette(primary-offwhite);
     font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
-    font-size: 0.9em;
+    @include text-style(body-small);
     font-weight: 500;
     background: transparent;
     border: none;
@@ -152,7 +152,6 @@
       @include mq($max: $md) {
         padding: 1rem;
         padding-top: 2.2rem;
-        font-size: 0.85rem;
       }
 
       .highlight-line {

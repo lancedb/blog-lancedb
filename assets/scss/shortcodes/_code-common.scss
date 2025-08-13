@@ -27,7 +27,7 @@
   code {
     color: palette(primary-offwhite);
     font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
-    font-size: 0.9em;
+    @include text-style(body-small);
     font-weight: 500;
     background: transparent;
     border: none;
@@ -43,7 +43,6 @@
 }
 
 // Hugo shortcode code blocks ({{< code language="python" >}})
-.post-content .highlight:has(code),
 .code-tab__content .highlight:has(code) {
   @extend .code-block-default;
   border: 2px solid transparent;
@@ -96,7 +95,7 @@
   background: linear-gradient(135deg, #23262b 60%, #181b1f 100%) !important;
   color: #ffe2c6;
   font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-  font-size: 1em;
+  @include text-style(body-small);
   padding: 1.1em 1.5em !important;
   border-radius: 10px !important;
   margin: 1.2em 0;
@@ -314,12 +313,11 @@ code:not(pre code) {
   background: #2d3748;
   color: #ffffff;
   padding: 0.25em 0.6em;
-  font-size: 0.9em;
+  @include text-style(body-small);
   font-weight: 500;
   border-radius: 6px;
   border: none;
   box-shadow: none;
   font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
   display: inline-block;
-  line-height: 1.4;
 } 
