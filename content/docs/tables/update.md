@@ -297,6 +297,10 @@ const batch3 = Array(15).fill(0).map((_, i) => ({
 await table.add(batch3);
 {{< /code >}}
 
+{{< admonition warning "Batch size" >}}
+LanceDB Cloud is a multi-tenant environment with a 100MB payload limit. Adjust your batch size accordingly.
+{{< /admonition >}}
+
 ## Data Modification
 
 ### Update Operations
@@ -404,6 +408,10 @@ await table.delete(predicate);
 Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
 {{< /admonition >}}
 
+{{< admonition warning "Index Deletion" >}}
+If a table is emptied, its existing indexes are removed. Recreate indexes after ingesting new data.
+{{< /admonition >}}
+
 ## Merge Operations
 
 The merge insert command is a flexible API that can be used to perform `upsert`, 
@@ -413,6 +421,10 @@ The merge insert command is a flexible API that can be used to perform `upsert`,
 The merge insert command performs a join between the input data and the target table `on` the key you provide. This requires scanning that entire column, which can be expensive for large tables. To speed up this operation, create a scalar index on the join column, which will allow LanceDB to find matches without scanning the whole table.
 
 Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
+{{< /admonition >}}
+
+{{< admonition tip "HTTP 400 on Merge Insert" >}}
+You may receive an HTTP 400 error from merge insert: `Bad request: Merge insert cannot be performed because the number of unindexed rows exceeds the maximum of 10000`. Verify that the scalar index on the join column is up to date before retrying.
 {{< /admonition >}}
 
 {{< admonition info "Embedding Functions" >}}
