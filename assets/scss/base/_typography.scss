@@ -38,6 +38,9 @@ $font-sizes: (
   caption_mob: 10,
   btn: 17,
   btn_mob: 15,
+
+  code: 15,
+  code_mob: 13
 );
 
 $fonts_schema: (
@@ -65,6 +68,8 @@ $fonts_schema: (
   "button_mob": (size: btn_mob, leading: 21, weight: 400, spacing: 0),
   "caption": (size: caption, leading: 12, weight: 400, spacing: -2),
   "caption_mob": (size: caption_mob, leading: 10, weight: 400, spacing: 0),
+  "code": (size: code, leading: 24, weight: 500, spacing: 0),
+  "code_mob": (size: code_mob, leading: 22, weight: 500, spacing: 0),
 );
 /**
    *	Here we assign short names for the font families
