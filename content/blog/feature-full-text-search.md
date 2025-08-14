@@ -131,7 +131,7 @@ A thin API fronts LanceDB Cloud. The web UI issues text, vector, or hybrid queri
 
 Trying out the search function will reveal a lot about the nature of each search. Semantic Search will count in meaning and context, with less direct precision, while Full-Text Search will look for the precise keyword you're looking for. 
 
-**Figure 3:** Semantic search is able to see detect that a cosmonaut is also an astronaut.
+**Figure 3:** Semantic search is able to detect that a cosmonaut is also an astronaut.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/semantic.png)
 
 ### Search Parameters
