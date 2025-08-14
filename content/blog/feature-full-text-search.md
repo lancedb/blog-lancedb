@@ -72,7 +72,13 @@ Now, when you search for the name René, you can afford to make a mistake!
 
 ### FTS and Hybrid Search
 
-FTS is a great way to control search outcomes and [makes vector search better and faster](/docs/search/optimize-queries/). Here's how: During hybrid search, FTS and vector search run in parallel, each finding their own candidate pools. FTS finds documents with exact term matches, while vector search finds semantically similar content. These results are then combined and reranked using techniques like Reciprocal Rank Fusion (RRF) or weighted scoring, giving you the best of both approaches - precise keyword matching and semantic understanding. You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can combine keyword scores with vector scores to rank by both meaning and exact wording, and show highlights to explain why a result matched. 
+FTS is a great way to control search outcomes and [makes vector search better and faster](/docs/search/optimize-queries/). Here's how: 
+
+1. During hybrid search, FTS and vector search run in parallel, each finding their own candidate pools. 
+2. FTS finds documents with exact term matches, while vector search finds semantically similar content. 
+3. These results are then combined and reranked using techniques like Reciprocal Rank Fusion (RRF) or weighted scoring, giving you the best of both approaches - precise keyword matching and semantic understanding. 
+
+You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can [combine keyword scores with vector scores to rank by both meaning and exact wording](/docs/reranking/), and show highlights to explain why a result matched. 
 
 In [LanceDB's Hybrid Search](/docs/overview/hybrid-search), native FTS blends text and vector signals with weights or via Reciprocal‑Rank Fusion (RRF) for a [completely reranked search solution](/docs/reranking/).
 
@@ -150,7 +156,7 @@ Now we're getting serious. `explain_plan` is a very valuable feature that we cre
 **Figure 5:** The Query Plan can be shown for Semantic & Full Text Search. Hybrid Search will be added soon, with detailed outline of the reranker and its effect.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-1.png)
 
-The Query Plan shows:
+[The Query Plan](/docs/search/optimize-queries/) shows:
 
 - Which indexes were used (FTS and/or vector) and with what parameters
 - Candidate counts from each stage (text and vector), plus the final returned set
