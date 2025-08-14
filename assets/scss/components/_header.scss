@@ -43,8 +43,12 @@
 .header__right {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
   justify-content: flex-end;
+
+  @include mq($lg) {
+    gap: 24px;
+  }
 }
 
 .header__announcement {
@@ -170,5 +174,22 @@
         transform: translateY(-6px) rotate(-45deg);
       }
     }
+  }
+}
+
+.header__search-toggle {
+  width: 38px;
+  height: 38px;
+  outline: none;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-color: palette(primary-dark);
   }
 }

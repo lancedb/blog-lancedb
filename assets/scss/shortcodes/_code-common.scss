@@ -27,8 +27,7 @@
   code {
     color: palette(primary-offwhite);
     font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
-    font-size: 0.9em;
-    font-weight: 500;
+    @include text-style(code);
     background: transparent;
     border: none;
     box-shadow: none;
@@ -43,7 +42,6 @@
 }
 
 // Hugo shortcode code blocks ({{< code language="python" >}})
-.post-content .highlight:has(code),
 .code-tab__content .highlight:has(code) {
   @extend .code-block-default;
   border: 2px solid transparent;
@@ -96,7 +94,7 @@
   background: linear-gradient(135deg, #23262b 60%, #181b1f 100%) !important;
   color: #ffe2c6;
   font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-  font-size: 1em;
+  @include text-style(code);
   padding: 1.1em 1.5em !important;
   border-radius: 10px !important;
   margin: 1.2em 0;
@@ -223,13 +221,11 @@
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.65rem;
-  font-weight: 500;
+  @include text-style(caption);
   text-transform: uppercase;
   letter-spacing: 0.3px;
   z-index: 3;
   opacity: 1 !important;
-  line-height: 1.2;
   height: auto;
   min-height: 1.2em;
 
@@ -311,15 +307,13 @@ pre {
 
 // Inline code styles (common across all code blocks)
 code:not(pre code) {
-  background: rgba(255, 115, 74, 0.1) !important;
-  color: #ffb38a !important;
-  padding: 0.15em 0.3em !important;
-  font-size: 0.9em !important;
-  font-weight: 500 !important;
-  border-radius: 3px !important;
-  border: none !important;
-  box-shadow: none !important;
-  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace !important;
-  display: inline-block !important;
-  line-height: 1.4 !important;
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.25em 0.6em;
+   @include text-style(code);
+  border-radius: 6px;
+  border: none;
+  box-shadow: none;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  display: inline-block;
 } 
