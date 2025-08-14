@@ -15,7 +15,7 @@ author_github: "davidmyriel"
 author_linkedin: "davidmyriel"
 author2: "Ayush Chaurasia"
 author2_avatar: "/assets/authors/ayush-chaurasia.jpg"
-author2_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods.."
+author2_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods."
 author2_twitter: "ayushchaurasia"
 author2_github: "ayushchaurasia"
 author2_linkedin: "ayushchaurasia"
@@ -23,7 +23,7 @@ author2_linkedin: "ayushchaurasia"
 
 > It's not about the vectors. It's about getting the right result.
 
-Many of our users are building RAG and search apps, and they want three things above all: precision, scale and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
+Many of our users are building RAG and search apps, and they want three things above all: precision, scale, and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
 
 [WikiSearch](https://wiki-search-2.vercel.app) is a very simple [search engine](/docs/overview/) that stores and searches through real Wikipedia entries.
 You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/). 
@@ -43,7 +43,7 @@ Here is how basic stemming is enabled for an English-language text:
 table.create_fts_index("text", language="English", replace=True)
 ```
 
-This request creates and stores tokens into an inverted (FTS) index. The tokenizer you choose can be [standard, language-aware, or n-gram & more](/docs/search/full-text-search/). Configuration directly shapes recall and precision, so you have a lot of freedom to play around the parameters and match it to your use case.
+This request creates and stores tokens into an inverted (FTS) index. The tokenizer you choose can be [standard, language-aware, or n-gram & more](/docs/search/full-text-search/). Configuration directly shapes recall and precision, so you have a lot of freedom to play around with the parameters and match them to your use case.
 
 FTS handles multilingual text, too. For French, enable `ascii_folding` during index creation to strip accents (e.g., “é” → “e”), so queries match words regardless of diacritics. 
 
@@ -64,9 +64,9 @@ Now, when you search for the name René, you can afford to make a mistake!
 
 ### FTS and Hybrid Search
 
-FTS is a great way to control search outcomes, and [makes vector search better and faster](/docs/search/optimize-queries/). You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can combine keyword scores with vector scores to rank by both meaning and exact wording, and show highlights to explain why a result matched. 
+FTS is a great way to control search outcomes and [makes vector search better and faster](/docs/search/optimize-queries/). You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can combine keyword scores with vector scores to rank by both meaning and exact wording, and show highlights to explain why a result matched. 
 
-In [LanceDB's Hybrid Search](/docs/overview/hybrid-search), native FTS blends text and vector signals with weights or via Reciprocal‑Rank Fusion (RRF) for [completely reranked search solution](/docs/reranking/).
+In [LanceDB's Hybrid Search](/docs/overview/hybrid-search), native FTS blends text and vector signals with weights or via Reciprocal‑Rank Fusion (RRF) for a [completely reranked search solution](/docs/reranking/).
 
 {{< admonition >}}
 To learn more about Hybrid Search, [give this example a try](/docs/search/hybrid-search/).
@@ -80,7 +80,7 @@ To learn more about Hybrid Search, [give this example a try](/docs/search/hybrid
 Want to know who wrote Romeo and Juliet? [Give it a spin!](https://wiki-search-2.vercel.app/)
 {{< /admonition >}}
 
-The demo lets you switch between semantic (vector), full text (keyword), and hybrid search modes. [Semantic or Vector Search](/docs/search/vector-search/) finds conceptually related content, even when the exact words differ. [Full-text Search](/docs/search/full-text-search/) excels at finding precise terms and phrases. [Hybrid Search](/docs/search/hybrid-search/) combines both approaches - getting the best of semantic understanding while still catching exact matches. Try comparing the different modes to see how they handle various queries.
+The demo lets you switch between semantic (vector), full-text (keyword), and hybrid search modes. [Semantic or Vector Search](/docs/search/vector-search/) finds conceptually related content, even when the exact words differ. [Full-text Search](/docs/search/full-text-search/) excels at finding precise terms and phrases. [Hybrid Search](/docs/search/hybrid-search/) combines both approaches - getting the best of semantic understanding while still catching exact matches. Try comparing the different modes to see how they handle various queries.
 
 
 ## Behind the Scenes
@@ -89,9 +89,9 @@ The demo lets you switch between semantic (vector), full text (keyword), and hyb
 
 We start with raw articles from Wikipedia and normalize content into pages and sections. Long articles are chunked on headings so each result points to a focused span of text rather than an entire page. 
 
-During ingestion we create a schema and columns, such as `content`, `url` and `title`. Writes are batched (≈200k rows per commit) to maximize throughput.
+During ingestion we create a schema and columns, such as `content`, `url`, and `title`. Writes are batched (≈200k rows per commit) to maximize throughput.
 
-**Figure 1:** Data is ingested, embedded and stored in LanceDB. The user runs queries and retrieves WikiSearch results via our Python SDK.
+**Figure 1:** Data is ingested, embedded, and stored in LanceDB. The user runs queries and retrieves WikiSearch results via our Python SDK.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/process.png)
 
 ### Step 2: Embedding 
@@ -102,7 +102,7 @@ To learn more about vectorization, [read our Embedding API docs](/docs/embedding
 
 ### Step 3: Indexing 
 
-We build two indexes per table: a vector index (`IVF_HNSW_PQ` or `IVF_PQ`, depending on your latency/recall/memory goals) over the embedded content and a native `FTS` index over title and body. 
+We build two indexes per table: a vector index (`IVF_HNSW_PQ` or `IVF_PQ`, depending on your latency/recall/memory goals) over the embedded content, and a native `FTS` index over title and body. 
 
 [This is where you define tokenization and matching options.](/docs/search/full-text-search/) As you configure the [FTS index](/docs/indexing/fts-index/), you can instruct the Wiki to be broken down in different ways.
 
