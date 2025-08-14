@@ -650,7 +650,10 @@ article img {
   }
 
   .single-post .preview-image {
-    height: 200px;
+    height: auto;
+    aspect-ratio: auto;
+    max-height: 250px;
+    object-fit: contain;
   }
 
   .post-layout {
@@ -1955,7 +1958,10 @@ nav.pagination .pagination-link.current {
     }
 
     .single-post .preview-image {
-        height: 180px;
+        height: auto;
+        aspect-ratio: auto;
+        max-height: 200px;
+        object-fit: contain;
         border-radius: 12px;
     }
 
