@@ -79,18 +79,63 @@
   }
 
   ol {
-    list-style-type: decimal;
-    counter-reset: none;
-    list-style: decimal;
-    position: static;
-
+    counter-reset: list-counter;
+    list-style: none;
+    padding-left: 0;
+    position: relative;
+    
     li {
-      list-style-type: decimal;
-      position: static;
-      padding-left: 0;
-
-      &::before,
+      list-style-type: none;
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+      
+      &::before {
+        content: counter(list-counter);
+        counter-increment: list-counter;
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95em;
+        z-index: 2;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.3),
+          0 1px 3px rgba(255, 115, 74, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 115, 74, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      &:hover::before {
+        transform: scale(1.05);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.4),
+          0 2px 6px rgba(255, 115, 74, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 115, 74, 0.5);
+      }
+      
       &::after {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 2.2rem;
+        width: 2px;
+        height: calc(100% + 1rem);
+        background: #718096;
+        z-index: 1;
+      }
+      
+      &:last-child::after {
         display: none;
       }
     }
@@ -224,39 +269,54 @@
 
   blockquote {
     position: relative;
-    margin: 2.5rem 0;
-    padding: 2rem 2.5rem;
-    background: linear-gradient(135deg, rgba(26, 29, 35, 0.6) 0%, rgba(36, 40, 49, 0.4) 100%);
-    border: 1px solid rgba(255, 140, 66, 0.2);
-    border-left: 3px solid var(--text-accent);
-    border-radius: 16px;
+    margin: 3rem 0;
+    padding: 3rem 3.5rem;
+    background: linear-gradient(135deg, 
+      rgba(15, 20, 25, 0.95) 0%, 
+      rgba(26, 29, 35, 0.9) 25%, 
+      rgba(36, 40, 49, 0.85) 50%, 
+      rgba(15, 20, 25, 0.95) 100%);
+    border: 2px solid rgba(255, 115, 74, 0.4);
+    border-left: 6px solid #ff734a;
+    border-radius: 24px;
     font-style: italic;
     @include text-style(body-large);
-    color: var(--text-secondary);
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 1.8;
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(255, 115, 74, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
 
-    animation: quoteSlideIn 0.5s ease-out;
+    animation: quoteSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+
 
     @include mq($max: $sm) {
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
+      padding: 2rem 2rem;
+      margin: 2rem 0;
+      border-radius: 16px;
+      border-left-width: 4px;
     }
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 115, 74, 0.6);
       box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 30px 80px rgba(0, 0, 0, 0.5),
+        0 15px 45px rgba(255, 115, 74, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.4);
     }
 
     &:focus-within {
-      outline: 2px solid #f97316;
-      outline-offset: 2px;
+      outline: 3px solid #ff734a;
+      outline-offset: 4px;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -271,39 +331,67 @@
     &::before {
       content: '"';
       position: absolute;
-      top: 1rem;
-      left: 1rem;
-      @include text-style(title-small);
-      color: #f97316;
-      opacity: 0.4;
+      top: 1.5rem;
+      left: 1.5rem;
+      @include text-style(title-large);
+      color: #ff734a;
+      opacity: 0.8;
       font-family: Georgia, serif;
       line-height: 1;
+      text-shadow: 0 0 20px rgba(255, 115, 74, 0.5);
+      z-index: 2;
+      font-size: 4rem;
 
       @include mq($max: $md) {
-        top: 0.75rem;
-        left: 0.75rem;
+        top: 1rem;
+        left: 1rem;
+        font-size: 3rem;
+      }
+    }
+    
+    &::after {
+      content: '"';
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      @include text-style(title-large);
+      color: #ff734a;
+      opacity: 0.6;
+      font-family: Georgia, serif;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(255, 115, 74, 0.3);
+      z-index: 2;
+      font-size: 4rem;
+      transform: rotate(180deg);
+
+      @include mq($max: $md) {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 3rem;
       }
     }
 
     p {
       margin: 0;
       position: relative;
-      z-index: 1;
-      padding-left: 1rem;
+      z-index: 2;
+      padding-left: 2rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
       @include mq($max: $md) {
-        padding-left: 0.75rem;
+        padding-left: 1.5rem;
       }
 
       &:last-child:has(em),
       &:last-child em {
         font-style: normal;
-        font-weight: 600;
-        color: #f97316;
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(249, 115, 22, 0.2);
+        font-weight: 700;
+        color: #ff734a;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid rgba(255, 115, 74, 0.3);
         text-align: right;
+        text-shadow: 0 0 15px rgba(255, 115, 74, 0.4);
 
         @include mq($max: $md) {
           text-align: left;
@@ -491,11 +579,12 @@
 @keyframes quoteSlideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px) scale(0.95);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
   }
 }
+

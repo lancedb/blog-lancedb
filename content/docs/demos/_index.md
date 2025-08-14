@@ -9,9 +9,9 @@ weight: 201
 This demo showcases LanceDB's ability to efficiently search through 40M+ Wikipedia entries, demonstrating production-grade performance at scale.
 {{< /admonition >}}
 
-<p style="text-align: center;">➡️ <a href="https://wiki-search-2.vercel.app/">Click to try the Live Wikipedia Search App!</a> ⬅️</p>
+<p style="text-align: center;">➡️ <a href="https://saas-examples-large-scale.vercel.app">Click to try the Live Wikipedia Search App!</a> ⬅️</p>
 
-[![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://wiki-search-2.vercel.app/)
+[![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://saas-examples-large-scale.vercel.app)
 
 ## Overview
 
