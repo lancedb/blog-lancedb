@@ -23,9 +23,9 @@ author2_linkedin: "ayushchaurasia"
 
 > It's not about the vectors. It's about getting the right result.
 
-Many of our users are building RAG and search apps, and they want three things above all: precision, scale, and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
+Many of our users are building RAG and search apps, and they want three things above all: precision, scale, and simplicity. In this article, we introduce [WikiSearch](https://saas-examples-large-scale.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
 
-[WikiSearch](https://wiki-search-2.vercel.app) is a very simple [search engine](/docs/overview/) that stores and searches through real Wikipedia entries.
+[WikiSearch](https://saas-examples-large-scale.vercel.app) is a very simple [search engine](/docs/overview/) that stores and searches through real Wikipedia entries.
 You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/).
 
 Scaling to 41 million documents in production presented significant engineering challenges. Here are the key performance breakthroughs we achieved:
@@ -68,7 +68,7 @@ table.create_fts_index(
 Now, when you search for the name René, you can afford to make a mistake!
 {{< /admonition >}}
 
-[FTS is especially important for an encyclopedia or a Wiki](https://wiki-search-2.vercel.app), where articles are long and packed with names and multi-word terms. Tokenization makes variants like “New York City,” “New-York,” and “NYC” findable, and enables phrase/prefix matches. The result is fast, precise lookup across millions of entries.
+[FTS is especially important for an encyclopedia or a Wiki](https://saas-examples-large-scale.vercel.app), where articles are long and packed with names and multi-word terms. Tokenization makes variants like “New York City,” “New-York,” and “NYC” findable, and enables phrase/prefix matches. The result is fast, precise lookup across millions of entries.
 
 ### FTS and Hybrid Search
 
@@ -82,10 +82,10 @@ To learn more about Hybrid Search, [give this example a try](/docs/search/hybrid
 
 ## The 41M WikiSearch Demo
 
-[![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://wiki-search-2.vercel.app/)
+[![Wikipedia Search Demo](/assets/docs/demos/wiki-search.png)](https://saas-examples-large-scale.vercel.app)
 
 {{< admonition "Try it out!" >}}
-Want to know who wrote Romeo and Juliet? [Give it a spin!](https://wiki-search-2.vercel.app/)
+Want to know who wrote Romeo and Juliet? [Give it a spin!](https://saas-examples-large-scale.vercel.app)
 {{< /admonition >}}
 
 The demo lets you switch between semantic (vector), full-text (keyword), and hybrid search modes. [Semantic or Vector Search](/docs/search/vector-search/) finds conceptually related content, even when the exact words differ. [Full-text Search](/docs/search/full-text-search/) excels at finding precise terms and phrases. [Hybrid Search](/docs/search/hybrid-search/) combines both approaches - getting the best of semantic understanding while still catching exact matches. Try comparing the different modes to see how they handle various queries.
