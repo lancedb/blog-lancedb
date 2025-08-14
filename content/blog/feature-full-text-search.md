@@ -91,6 +91,7 @@ We start with raw articles from Wikipedia and normalize content into pages and s
 
 During ingestion we create a schema and columns, such as `content`, `url` and `title`. Writes are batched (≈200k rows per commit) to maximize throughput.
 
+**Figure 1:** Data is ingested, embedded and stored in LanceDB. The user runs queries and retrieves WikiSearch results via our Python SDK.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/process.png)
 
 ### Step 2: Embedding 
@@ -105,6 +106,7 @@ We build two indexes per table: a vector index (`IVF_HNSW_PQ` or `IVF_PQ`, depen
 
 [This is where you define tokenization and matching options.](/docs/search/full-text-search/) As you configure the [FTS index](/docs/indexing/fts-index/), you can instruct the Wiki to be broken down in different ways.
 
+**Figure 2:** Sample LanceDB Cloud table with schema and defined indexes for each column.
 ![Indexed Table](/assets/docs/demos/indexed-table.png)
 
 ### Step 4: Service 
@@ -119,15 +121,15 @@ A thin API fronts LanceDB Cloud. The web UI issues text, vector, or hybrid queri
 
 3. [In hybrid mode](/docs/search/hybrid-search/) we normalize these signals and combine them into a reranked search result.
 
-Try looking something up, then switch to the Search Parameters</br> to see what's behind the curtain.
+**Figure 3:** Behind the scenes, you can see all the parameters for your search query.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/parameters.png)
 
 ### The Query Plan
 
 Now we're getting serious. `explain_plan` is a very valuable feature that we created to help debug search issues and [optimize performance](/docs/search/optimize-queries/). Toggle it to get a structured trace of how LanceDB executed your query. 
 
-The Full-Text Search query plan for a specific keyword.
-![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-2.png)
+**Figure 4:** The Query Plan can be shown for Semantic & Full Text Search. Hybrid Search will be added soon, with detailed outline of the reranker and its effect.
+![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-1.png)
 
 The Query Plan shows:
 
@@ -136,8 +138,7 @@ The Query Plan shows:
 - Filters that applied early vs. at re‑rank
 - Timings per stage so you know where to optimize
 
-The Semantic Search query plan for a more abstract term that needs context.
-![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-1.png)
+
 
 ## Performance and Scaling
 
