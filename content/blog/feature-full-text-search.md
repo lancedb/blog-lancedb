@@ -26,13 +26,21 @@ author2_linkedin: "ayushchaurasia"
 Many of our users are building RAG and search apps, and they want three things above all: precision, scale, and simplicity. In this article, we introduce [WikiSearch](https://wiki-search-2.vercel.app), our flagship demo that delivers all [with minimal code](https://github.com/lancedb/saas-examples-large-scale/tree/main/wikipedia-ingest). 
 
 [WikiSearch](https://wiki-search-2.vercel.app) is a very simple [search engine](/docs/overview/) that stores and searches through real Wikipedia entries.
-You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/). 
+You don't see it, but there is a lot of content sitting in [LanceDB Cloud](https://accounts.lancedb.com/sign-up) - and we use Full Text Search to go through it. Vector search is still there for semantic relevance, and we merge both into a [powerful Hybrid Search solution](/docs/search/hybrid-search/).
+
+Scaling to 41 million documents in production presented significant engineering challenges. Here are the key performance breakthroughs we achieved:
+
+|Metric|Performance|
+|-|-|
+|**Ingestion**|We processed 60,000+ documents per second with distributed GPU processing|
+|**Indexing**|We built vector indexes on 41M documents in just 30 minutes|
+|**Write Bandwidth**|We sustained 4 GB/s peak write rates for real-time applications| 
 
 {{< admonition >}}
-We previously used [Tantivy](https://github.com/quickwit-oss/tantivy) for our search implementation. Now, we have an in-house FTS solution that provides better integration with LanceDB and offers superior performance for our specific use cases. 
+We previously used [Tantivy](https://github.com/quickwit-oss/tantivy) for our search implementation. Now, we have a native FTS solution built directly into LanceDB that provides better integration and offers superior performance for our specific use cases. This native approach eliminates the need for external dependencies and ensures optimal performance.
 {{< /admonition >}}
 
-## Why Full-Text Search Matters
+## Why Full-Text Search Helped
 
 [Full-Text Search (FTS)](/docs/search/full-text-search/) lets you find the exact words, phrases, and spellings people care about. It complements [vector search](/docs/search/vector-search/) by catching precise constraints, rare terms, and operators (phrases, boolean logic, field boosts) that embeddings alone often miss.
 
@@ -64,7 +72,7 @@ Now, when you search for the name René, you can afford to make a mistake!
 
 ### FTS and Hybrid Search
 
-FTS is a great way to control search outcomes and [makes vector search better and faster](/docs/search/optimize-queries/). You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can combine keyword scores with vector scores to rank by both meaning and exact wording, and show highlights to explain why a result matched. 
+FTS is a great way to control search outcomes and [makes vector search better and faster](/docs/search/optimize-queries/). Here's how: During hybrid search, FTS and vector search run in parallel, each finding their own candidate pools. FTS finds documents with exact term matches, while vector search finds semantically similar content. These results are then combined and reranked using techniques like Reciprocal Rank Fusion (RRF) or weighted scoring, giving you the best of both approaches - precise keyword matching and semantic understanding. You can often find what embeddings miss, such as rare terms, names, numbers, and words with “must include/exclude” rules. Most of all, you can combine keyword scores with vector scores to rank by both meaning and exact wording, and show highlights to explain why a result matched. 
 
 In [LanceDB's Hybrid Search](/docs/overview/hybrid-search), native FTS blends text and vector signals with weights or via Reciprocal‑Rank Fusion (RRF) for a [completely reranked search solution](/docs/reranking/).
 
@@ -121,14 +129,25 @@ A thin API fronts LanceDB Cloud. The web UI issues text, vector, or hybrid queri
 
 3. [In hybrid mode](/docs/search/hybrid-search/) we normalize these signals and combine them into a reranked search result.
 
-**Figure 3:** Behind the scenes, you can see all the parameters for your search query.
+Trying out the search function will reveal a lot about the nature of each search. Semantic Search will count in meaning and context, with less direct precision, while Full-Text Search will look for the precise keyword you're looking for. 
+
+**Figure 3:** Semantic search is able to see detect that a cosmonaut is also an astronaut.
+![Wikipedia Search Demo](/assets/blog/feature-full-text-search/semantic.png)
+
+### Search Parameters
+
+The search interface gives you full visibility into how your queries are processed. You can see the exact search terms being used, which fields are being searched (title, content, or both), and the scoring weights applied to different components. 
+
+This transparency helps you understand why certain results ranked higher and allows you to fine-tune your search strategy.
+
+**Figure 3:** Behind the scenes, you can see all the Search Parameters for your query.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/parameters.png)
 
 ### The Query Plan
 
 Now we're getting serious. `explain_plan` is a very valuable feature that we created to help debug search issues and [optimize performance](/docs/search/optimize-queries/). Toggle it to get a structured trace of how LanceDB executed your query. 
 
-**Figure 4:** The Query Plan can be shown for Semantic & Full Text Search. Hybrid Search will be added soon, with detailed outline of the reranker and its effect.
+**Figure 5:** The Query Plan can be shown for Semantic & Full Text Search. Hybrid Search will be added soon, with detailed outline of the reranker and its effect.
 ![Wikipedia Search Demo](/assets/blog/feature-full-text-search/query-plan-1.png)
 
 The Query Plan shows:
@@ -137,8 +156,6 @@ The Query Plan shows:
 - Candidate counts from each stage (text and vector), plus the final returned set
 - Filters that applied early vs. at re‑rank
 - Timings per stage so you know where to optimize
-
-
 
 ## Performance and Scaling
 
@@ -162,13 +179,13 @@ Batching `table.add(list_of_dicts)` is much faster than adding records individua
 
 The core pattern is: parallelize data loading, chunking, and embedding generation, then use `table.add(batch)` within each parallel worker to write to LanceDB. LanceDB’s design efficiently handles these concurrent additions. This example uses modal for performing distributed embedding generation and ingestion. 
 
-Here are some performance metrics from our side:
+Here are some performance metrics from our side. These numbers represent enterprise-grade performance at massive scale:
 
 |Process|Performance| 
 |-|-| 
-| Ingestion:|Using a distributed setup with 50 GPUs (via Modal), we ingested ~41M rows in roughly 11 minutes end‑to‑end.| 
-| Indexing:|Vector index build completed in about 30 minutes for the same dataset.| 
-| Write bandwidth:|LanceDB’s ingestion layer can sustain multi‑GB/s write rates (4 GB/s peak observed in our tests) when batching and parallelism are configured properly.| 
+| Ingestion:|Using a distributed setup with 50 GPUs (via Modal), we ingested ~41M rows in roughly 11 minutes end‑to‑end. This translates to processing over 60,000 documents per second.| 
+| Indexing:|Vector index build completed in about 30 minutes for the same dataset. Building vector indexes on 41M documents typically takes hours with other solutions.| 
+| Write bandwidth:|LanceDB’s ingestion layer can sustain multi‑GB/s write rates (4 GB/s peak observed in our tests) when batching and parallelism are configured properly. This enables real-time data ingestion for live applications.| 
 
 ### Which Index to Use?
 
