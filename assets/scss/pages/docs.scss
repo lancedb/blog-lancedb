@@ -379,7 +379,7 @@ a.sidebar-divider {
 .docs-article-content h6 {
   font-weight: 400;
 
-  &:has(.heading-link){
+  &:has(.heading-link) {
     position: relative;
 
     &:hover {
@@ -595,6 +595,15 @@ a.sidebar-divider {
   align-self: start;
   height: fit-content;
 
+  @include mq($md) {
+    top: 67px;
+    height: calc(100dvh - var(--header-height));
+  }
+
+  @include mq($lg) {
+    top: 80px;
+  }
+
   &--hidden {
     visibility: hidden;
     pointer-events: none;
@@ -697,6 +706,7 @@ a.sidebar-divider {
   margin: 0;
   position: relative;
   top: 0;
+  height: unset;
 
   @include mq($md) {
     padding: 20px 0;
