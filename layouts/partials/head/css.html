@@ -7,6 +7,17 @@
   <link rel="preload" href="{{ "fonts/" | relURL }}{{ . }}" as="font" type="font/woff2" crossorigin="anonymous">
 {{ end }}
 
+{{ if .Params.enableSwiper }}
+  {{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | fingerprint }}
+  <link href="{{ $swiper.RelPermalink }}" rel="stylesheet">
+{{ end }}
+
+{{ $custom := resources.Get "css/custom.css" }}
+{{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
+<link href="{{ $custom.RelPermalink }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}"></noscript>
+
 {{ with resources.Get "scss/main.scss" }}
   {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
   {{ with . | toCSS $opts }}
@@ -20,13 +31,3 @@
   {{ end }}
 {{ end }}
 
-{{ if .Params.enableSwiper }}
-  {{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | fingerprint }}
-  <link href="{{ $swiper.RelPermalink }}" rel="stylesheet">
-{{ end }}
-
-{{ $custom := resources.Get "css/custom.css" }}
-{{ $syntaxHighlighting := resources.Get "css/syntax-highlighting.css" }}
-<link href="{{ $custom.RelPermalink }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ $syntaxHighlighting.RelPermalink }}"></noscript>

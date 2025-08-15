@@ -1,3 +1,19 @@
+/* Content wrapper */
+.content-wrapper {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  
+  gap: 2rem;
+
+  @include mq($lg) {
+    grid-template-columns: 250px 1fr;
+  }
+
+  & > * {
+    min-width: 0;
+  }
+}
 /* Post content */
 .post-content {
   color: var(--text-primary);
@@ -7,6 +23,14 @@
   @include font-family(pro);
   @include text-style(body-medium);
   color: palette(primary-offwhite, 100);
+
+  .content-wrapper:has(&) {
+    padding-top: 0;
+
+    @include mq($lg) {
+      padding-top: 40px;
+    }
+  }
 
   h1 {
     @include font-family(pro);
@@ -136,7 +160,10 @@
   h2,
   h3 {
     position: relative;
-    padding-right: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
     border-bottom: 2px solid palette(primary-orange, 200);
 
     &:hover {
@@ -466,19 +493,27 @@
 }
 
 .heading-link {
-  position: absolute;
-  right: -1.2rem;
   opacity: 0;
   color: var(--text-secondary);
   text-decoration: none;
   transition: opacity 0.2s ease;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  line-height: 1;
+  font-size: inherit;
+  line-height: inherit;
 
+  @include mq($max: $lg) {
+    opacity: 1;
+  }
+
+  @include mq($lg) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    padding-left: 10px;
+  }
+ 
   &:hover {
     color: var(--text-accent);
-    background-color: var(--bg-hover);
   }
 
   &.copied {

@@ -97,8 +97,7 @@
   code {
     color: palette(primary-offwhite);
     font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
-    @include text-style(body-small);
-    font-weight: 500;
+    @include text-style(code);
     background: transparent;
     border: none;
     box-shadow: none;

@@ -2,10 +2,19 @@
 <div class="container">
     <div class="content-wrapper">
         {{ if .TableOfContents }}
-        <div class="toc-container">
-            <div class="toc">
-                <h2>Table of Contents</h2>
-                {{ .TableOfContents }}
+        <div class="toc-container toc-container--blog js-sidebar">
+            <div class="toc-mobile-head js-sidebar-header">
+                <p class="text-body-large js-current-section text-pro docs-sidebar__header-current">
+                </p>
+                <button class="docs-sidebar__toggle js-sidebar-toggle">
+                {{readFile "static/assets/icons/arrow_left.svg" | safeHTML}}
+                </button>
+            </div>
+            <h2 class="text-title-medium text-base d-none d-lg-block">Table of Contents</h2>
+            <div class="toc-wrapper js-sidebar-container">
+                <div class="toc">
+                    {{ .TableOfContents }}
+                </div>
             </div>
         </div>
         {{ end }}
