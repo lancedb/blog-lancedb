@@ -62,6 +62,4 @@ New data added after creating the FTS index will appear in search results while 
 
 FTS Reindexing is **supported in LanceDB OSS, Cloud & Enterprise**. However, it requires manual rebuilding when a significant amount of new data needs to be reindexed.
 
-We [updated](https://github.com/lancedb/lancedb/pull/762) Tantivy's default heap size from 128MB to 1GB in LanceDB, making reindexing up to 10x faster than with default settings.
-
 

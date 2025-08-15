@@ -1,18 +1,17 @@
 ---
 title: Full-Text Search in LanceDB
-sidebar_title: Full-Text Search (Native)
+sidebar_title: Full-Text Search 
 weight: 3
-aliases: ["/docs/concepts/search/full-text-search/", "/docs/concepts/search/full-text-search"]
+aliases: ["/docs/concepts/search/full-text-search/", "/docs/concepts/search/full-text-search", "/docs/concepts/search/full-text-search-tantivy/", "/docs/concepts/search/full-text-search-tantivy"]
 ---
 
-LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
-
+LanceDB provides support for Full-Text Search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
 
 ## Basic Usage
 
 Consider that we have a LanceDB table named `my_table`, whose string column `text` we want to index and query via keyword search, the FTS index must be created before you can search via keywords.
 
-### Table setup
+### Table Setup
 
 First, open or create the table you want to search:
 
@@ -217,15 +216,13 @@ Lance-based FTS doesn't support queries using boolean operators `OR`, `AND` in t
 {{< /admonition >}}
 
 For full-text search you can specify either a **phrase** query like `"the old man and the sea"`,
-or a **terms** search query like `old man sea`. For more details on the terms
-query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/tantivy/query/struct.QueryParser.html).
+or a **terms** search query like `old man sea`. 
 
 To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 
 ```python
 table.create_fts_index("text", with_position=True, replace=True)
 ```
-
 
 This will allow you to search for phrases, but it will also significantly increase the index size and indexing time.
 
@@ -789,7 +786,6 @@ You can customize the n-gram behavior by adjusting the minimum length and using 
 {{< code language="python" >}}
 table.create_fts_index(
     "text",
-    use_tantivy=False,
     base_tokenizer="ngram",
     replace=True,
     ngram_min_length=2,
