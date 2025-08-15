@@ -1,6 +1,10 @@
-// Common Code Block Styles
-// This file manages all code block styles across the site
-// Default style is based on multi-language code tabs
+// COMPREHENSIVE CODE STYLES
+// This file combines code-common.scss, code.scss, and code-tab.scss
+// for a single source of truth for all code-related styling
+
+// -----------------------------------------------------
+// 1. DEFAULT CODE BLOCK STYLES (from code-common.scss)
+// -----------------------------------------------------
 
 // Default code block style (based on multi-language code tabs)
 .code-block-default {
@@ -35,6 +39,10 @@
   }
 }
 
+// -----------------------------------------------------
+// 2. SPECIFIC CODE BLOCK TYPES (from code-common.scss)
+// -----------------------------------------------------
+
 // Standard markdown code blocks (```python)
 .highlight:has(code) {
   @extend .code-block-default;
@@ -60,33 +68,6 @@
   @extend .code-block-default;
   border: 2px solid transparent;
   border-image: linear-gradient(45deg, #ff734a, #e7d2f6, #ff734a) 1;
-}
-
-.code-tab__content {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  display: block;
-  position: relative;
-}
-
-.code-tab__content .highlight {
-  @extend .code-block-default;
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.code-tab__content pre {
-  background: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  border: none !important;
-  margin: 0 !important;
-  padding: 0.5em 0.7em !important;
- // overflow: hidden;
 }
 
 // Documentation page code blocks (enhanced with hover effects)
@@ -144,6 +125,183 @@
   border: none !important;
   overflow: visible !important;
 }
+
+// -----------------------------------------------------
+// 4. CONTENT STYLING (from code.scss)
+// -----------------------------------------------------
+
+.code-tab__content {
+  // Enhanced styling for bold text in blog content
+  strong, b {
+    color: #fff;
+    @include text-style(body-small);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -4px;
+      right: -4px;
+      bottom: -2px;
+      background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(255, 115, 74, 0.05) 100%);
+      border-radius: 4px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+
+  // Enhanced styling for numbered lists in blog content
+  ol {
+    counter-reset: list-counter;
+    list-style: none;
+    padding-left: 0;
+    position: relative;
+    
+    li {
+      list-style-type: none;
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+      
+      &::before {
+        content: counter(list-counter);
+        counter-increment: list-counter;
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95em;
+        z-index: 2;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.3),
+          0 1px 3px rgba(255, 115, 74, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 115, 74, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      &:hover::before {
+        transform: scale(1.05);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.4),
+          0 2px 6px rgba(255, 115, 74, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 115, 74, 0.5);
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 2.2rem;
+        width: 2px;
+        height: calc(100% + 1rem);
+        background: #718096;
+        z-index: 1;
+      }
+      
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+
+  // Code styling
+  pre {
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    //overflow: hidden;
+    margin: 0;
+
+    &:focus-within {
+      .highlight:has(&) {
+        border: 2px solid #f97316;
+      }
+    }
+
+    @include mq($max: $md) {
+      margin: 1rem -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    code {
+      @include mq($max: $md) {
+        padding: 1rem;
+        padding-top: 2.2rem;
+      }
+    }
+
+    &:hover .copy-button {
+      opacity: 1;
+    }
+
+    &.line-numbers {
+      padding-left: 0;
+
+      code {
+        padding-left: 3.5rem;
+        position: relative;
+
+        &::before {
+          content: counter(line-number);
+          counter-increment: line-number;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 3rem;
+          padding: 1.25rem 0.5rem;
+          background: rgba(0, 0, 0, 0.3);
+          border-right: 1px solid #2d3748;
+          color: #64748b;
+          font-size: 0.8rem;
+          text-align: right;
+          user-select: none;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    &.terminal {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      border: 2px solid #333;
+
+      &::before {
+        content: "terminal";
+        background: linear-gradient(135deg, #333 0%, #555 100%);
+        color: #00ff00;
+      }
+
+      code {
+        color: #00ff00;
+        font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------
+// 5. UTILITY ELEMENTS (from code-common.scss)
+// -----------------------------------------------------
 
 // Copy button styles (common across all code blocks)
 .copy-button {
@@ -257,6 +415,21 @@
   }
 }
 
+// Line highlighting (common across all code blocks)
+.highlight-line {
+  background: rgba(249, 115, 22, 0.1);
+  border-left: 3px solid #f97316;
+  padding-left: 0.5rem;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding-right: 1.25rem;
+  display: block;
+}
+
+// -----------------------------------------------------
+// 6. SCROLLBAR AND INLINE CODE (from code-common.scss)
+// -----------------------------------------------------
+
 // Scrollbar styles (common across all code blocks)
 code {
   &::-webkit-scrollbar {
@@ -283,27 +456,9 @@ code {
 pre {
   position: relative;
   
-  // Removed focus-within animations
-  // &:focus-within {
-  //   .highlight:has(&) {
-  //     border: 2px solid #f97316;
-  //   }
-  // }
-
   &:hover .copy-button {
     opacity: 1;
   }
-}
-
-// Line highlighting (common across all code blocks)
-.highlight-line {
-  background: rgba(249, 115, 22, 0.1);
-  border-left: 3px solid #f97316;
-  padding-left: 0.5rem;
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
-  padding-right: 1.25rem;
-  display: block;
 }
 
 // Inline code styles (common across all code blocks)
@@ -317,4 +472,4 @@ code:not(pre code) {
   box-shadow: none;
   font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
   display: inline-block;
-} 
+}

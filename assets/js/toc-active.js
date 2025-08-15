@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const toc = document.querySelector('.docs-toc');
+  const toc = document.querySelector('.toc-container');
   if (!toc) return;
-  const links = toc.querySelectorAll('.toc-container a[href^="#"]');
+  const links = toc.querySelectorAll('a[href^="#"]');
   const headings = Array.from(links).map(link => {
     const id = decodeURIComponent(link.getAttribute('href').slice(1));
     return document.getElementById(id);

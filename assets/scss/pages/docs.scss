@@ -4,7 +4,9 @@
   z-index: 10;
   top: 83px;
   background: palette(primary-dark);
-  max-height: calc(100dvh - 83px);;
+  max-height: calc(100dvh - 83px);
+  ;
+
   @include mq($md) {
     max-height: none;
     top: 67px;
@@ -21,7 +23,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid palette(primary-orange);
-  padding: 12px 24px; 
+  padding: 12px 24px;
   gap: 8px;
   margin: 0 -20px;
   width: calc(100% + 40px);
@@ -36,7 +38,7 @@
 
 .docs-sidebar__content {
 
-  @include  mq($max: $md) {
+  @include mq($max: $md) {
     max-height: 0;
     transition: max-height 0.4s ease;
     will-change: max-height;
@@ -68,7 +70,7 @@
   box-sizing: border-box;
 
   @include mq($md) {
-   height: 100%;
+    height: 100%;
   }
 
   // Solid, visible scrollbar for Webkit browsers
@@ -76,10 +78,12 @@
     width: 8px;
     background: #23262b;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #ff734a;
     border-radius: 4px;
   }
+
   &::-webkit-scrollbar-thumb:hover {
     background: #ff5a1f;
   }
@@ -127,31 +131,33 @@
     padding-left: 1.2em;
     width: 100%;
     max-width: 100%;
-    
+
     .sidebar-link {
       margin-bottom: 0.15em;
       font-size: 0.92em;
       padding-top: 0.06em;
       padding-bottom: 0.06em;
     }
-    details > summary > .sidebar-link {
+
+    details>summary>.sidebar-link {
       font-size: 0.92em;
       padding-top: 0.06em;
       padding-bottom: 0.06em;
       margin-bottom: 0.08em;
     }
-    
+
     // Level 3 items - only slightly indented from level 2
     .sidebar-list {
       padding-left: 0.6em;
-      
+
       .sidebar-link {
         margin-bottom: 0.15em;
         font-size: 0.92em;
         padding-top: 0.06em;
         padding-bottom: 0.06em;
       }
-      details > summary > .sidebar-link {
+
+      details>summary>.sidebar-link {
         font-size: 0.92em;
         padding-top: 0.06em;
         padding-bottom: 0.06em;
@@ -179,7 +185,7 @@ a.sidebar-divider {
   display: block;
   cursor: pointer;
   transition: opacity 0.2s ease;
-  
+
   &:hover {
     opacity: 1;
   }
@@ -209,11 +215,11 @@ a.sidebar-divider {
   }
 }
 
-.sidebar-list details[open] > summary .sidebar-link {
+.sidebar-list details[open]>summary .sidebar-link {
   color: #fff; // Default color for open details
 }
 
-.sidebar-list details[open] > summary .sidebar-link.active {
+.sidebar-list details[open]>summary .sidebar-link.active {
   color: #ff734a !important; // Active color should be orange
   font-weight: 500;
 }
@@ -233,7 +239,7 @@ a.sidebar-divider {
   display: none;
 }
 
-.sidebar-list details > summary > .sidebar-link {
+.sidebar-list details>summary>.sidebar-link {
   font-size: 0.92em;
   padding-top: 0.08em;
   padding-bottom: 0.08em;
@@ -275,7 +281,7 @@ a.sidebar-divider {
   flex-shrink: 0; // Prevent arrow from shrinking
   order: -1; // Move arrow to the left
   margin-top: 0; // Remove top margin for center alignment
-  
+
   svg {
     width: 12px;
     height: 12px;
@@ -301,7 +307,7 @@ a.sidebar-divider {
 
 // Rotate arrow to point down when details is open (expanded state)
 // Only affect the direct child arrow, not nested ones
-.sidebar-list details[open] > summary .sidebar-arrow {
+.sidebar-list details[open]>summary .sidebar-arrow {
   transform: rotate(90deg);
 }
 
@@ -329,7 +335,8 @@ a.sidebar-divider {
   font-weight: 500;
 }
 
-.docs-content, .docs-article-content {
+.docs-content,
+.docs-article-content {
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif;
   font-size: 1em;
   color: #fff;
@@ -339,10 +346,18 @@ a.sidebar-divider {
   padding-top: 0;
   width: 100%;
   box-sizing: border-box;
+
+  .code-tab__content pre {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
 }
 
 .docs-article-content {
   padding-bottom: 32px;
+
   @include mq($lg) {
     padding-bottom: 4rem;
   }
@@ -363,6 +378,17 @@ a.sidebar-divider {
 .docs-article-content h5,
 .docs-article-content h6 {
   font-weight: 400;
+
+  &:has(.heading-link) {
+    position: relative;
+
+    &:hover {
+      .heading-link {
+        opacity: 1;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 .docs-article-content h2 {
@@ -433,7 +459,7 @@ a.sidebar-divider {
   position: relative;
   padding-left: 3rem;
   margin-bottom: 1.5rem;
-  
+
   &::before {
     content: counter(list-counter);
     counter-increment: list-counter;
@@ -451,23 +477,23 @@ a.sidebar-divider {
     font-weight: 700;
     font-size: 0.95em;
     z-index: 2;
-    box-shadow: 
+    box-shadow:
       0 2px 8px rgba(0, 0, 0, 0.3),
       0 1px 3px rgba(255, 115, 74, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 115, 74, 0.3);
     transition: all 0.3s ease;
   }
-  
+
   &:hover::before {
     transform: scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.4),
       0 2px 6px rgba(255, 115, 74, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 115, 74, 0.5);
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -478,7 +504,7 @@ a.sidebar-divider {
     background: #718096;
     z-index: 1;
   }
-  
+
   &:last-child::after {
     display: none;
   }
@@ -503,14 +529,14 @@ a.sidebar-divider {
 }
 
 // Enhanced styling for bold text in docs content
-.docs-article-content strong, 
+.docs-article-content strong,
 .docs-article-content b {
   color: #fff;
   font-weight: 700;
   font-size: 1.05em;
   letter-spacing: 0.02em;
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -524,7 +550,7 @@ a.sidebar-divider {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   &:hover::before {
     opacity: 1;
   }
@@ -563,21 +589,21 @@ a.sidebar-divider {
   border-radius: 8px;
   font-size: 1em;
   position: sticky;
-  
-  @include mq($md) {
-    top: 67px;
-    height: calc(100dvh - 67px);
-  }
 
-  @include mq($lg) {
-    top: 80px;
-    height: calc(100dvh - 80px);
-  }
   overflow-y: auto;
   margin-top: 0;
   align-self: start;
   height: fit-content;
-  
+
+  @include mq($md) {
+    top: 67px;
+    height: calc(100dvh - var(--header-height));
+  }
+
+  @include mq($lg) {
+    top: 80px;
+  }
+
   &--hidden {
     visibility: hidden;
     pointer-events: none;
@@ -653,7 +679,7 @@ a.sidebar-divider {
 .sidebar-divider,
 .toc-container h3 {
   font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
-} 
+}
 
 .docs-article-content a,
 .sidebar-link,
@@ -664,15 +690,10 @@ a.sidebar-divider {
 .docs-article-content a:hover,
 .docs-toc .toc-container a:hover {
   text-decoration: underline;
-} 
+}
 
-.code-tab__content pre {
-  background: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-} 
-
-.docs-sidebar, .docs-toc {
+.docs-sidebar,
+.docs-toc {
   background: #171513;
 }
 
@@ -685,6 +706,7 @@ a.sidebar-divider {
   margin: 0;
   position: relative;
   top: 0;
+  height: unset;
 
   @include mq($md) {
     padding: 20px 0;
@@ -761,14 +783,14 @@ a.sidebar-divider {
 .docs-article-header h1,
 .docs-article-content h1 {
   text-align: left !important;
-} 
+}
 
 .docs-article-content img {
   border-radius: 24px;
   display: block;
-  margin: 1.7em auto;  // Equal to one line of text height (1.7em based on line-height)
+  margin: 1.7em auto; // Equal to one line of text height (1.7em based on line-height)
   border: 3px solid #ff734a;
-  box-shadow: 
+  box-shadow:
     0 0 0 6px rgba(255, 115, 74, 0.1),
     0 8px 32px rgba(255, 115, 74, 0.15),
     0 4px 16px rgba(0, 0, 0, 0.3);
@@ -776,10 +798,10 @@ a.sidebar-divider {
   max-width: 100%;
   width: auto;
   height: auto;
-  
+
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
       0 0 0 6px rgba(255, 115, 74, 0.2),
       0 12px 40px rgba(255, 115, 74, 0.25),
       0 6px 20px rgba(0, 0, 0, 0.4);
@@ -797,7 +819,7 @@ a.sidebar-divider {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(255, 115, 74, 0.1);
   border: 1px solid rgba(255, 115, 74, 0.2);
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -813,7 +835,7 @@ a.sidebar-divider {
 .docs-article-content thead {
   background: linear-gradient(135deg, rgba(255, 115, 74, 0.15) 0%, rgba(255, 115, 74, 0.08) 100%);
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -823,7 +845,7 @@ a.sidebar-divider {
     height: 100%;
     background: linear-gradient(180deg, #ff734a 0%, #e7d2f6 50%, #ff734a 100%);
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -837,7 +859,7 @@ a.sidebar-divider {
 
 .docs-article-content thead tr {
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -867,11 +889,11 @@ a.sidebar-divider {
   text-overflow: ellipsis;
   display: table-cell;
   min-height: 3.2rem;
-  
+
   &:last-child {
     border-right: none;
   }
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -883,7 +905,7 @@ a.sidebar-divider {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   &:hover::before {
     opacity: 1;
   }
@@ -893,20 +915,20 @@ a.sidebar-divider {
   border-bottom: 1px solid rgba(255, 115, 74, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:hover {
     background: linear-gradient(135deg, rgba(255, 115, 74, 0.08) 0%, rgba(231, 210, 246, 0.05) 100%);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(255, 115, 74, 0.15);
   }
-  
+
   &:nth-child(even) {
     background: rgba(255, 115, 74, 0.02);
-    
+
     &:hover {
       background: linear-gradient(135deg, rgba(255, 115, 74, 0.1) 0%, rgba(231, 210, 246, 0.07) 100%);
     }
@@ -925,21 +947,21 @@ a.sidebar-divider {
   transition: all 0.3s ease;
   display: table-cell;
   min-height: 3.2rem;
-  
+
   &:first-child {
     white-space: nowrap;
     min-width: 200px;
   }
-  
+
   &:last-child {
     border-right: none;
   }
-  
+
   &:hover {
     color: #fff;
     background: rgba(255, 115, 74, 0.05);
   }
-  
+
   code {
     background: #2d3748;
     color: #ffffff;
@@ -953,14 +975,14 @@ a.sidebar-divider {
     display: inline-block;
     line-height: 1.4;
   }
-  
+
   a {
     color: #ff734a;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -971,25 +993,26 @@ a.sidebar-divider {
       background: linear-gradient(90deg, #ff734a 0%, #e7d2f6 100%);
       transition: width 0.3s ease;
     }
-    
+
     &:hover {
       color: #fff;
       text-decoration: none;
-      
+
       &::after {
         width: 100%;
       }
     }
   }
-  
+
   // Enhanced styling for bold text in table cells
-  strong, b {
+  strong,
+  b {
     color: #fff;
     font-weight: 700;
     font-size: 1.05em;
     letter-spacing: 0.02em;
     position: relative;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -1003,14 +1026,19 @@ a.sidebar-divider {
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    
+
     &:hover::before {
       opacity: 1;
     }
   }
-  
+
   // Enhanced styling for headings in table cells
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: #fff;
     font-weight: 600;
     font-size: 1.1em;
@@ -1020,7 +1048,7 @@ a.sidebar-divider {
     text-transform: none;
     letter-spacing: 0.01em;
     position: relative;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -1033,12 +1061,12 @@ a.sidebar-divider {
       opacity: 0.7;
       transition: opacity 0.3s ease;
     }
-    
+
     &:hover::after {
       opacity: 1;
     }
   }
-} 
+}
 
 // Orange divider below header
 // .header {
@@ -1057,7 +1085,7 @@ a.sidebar-divider {
   @include mq($md) {
     padding: 0 20px;
   }
-} 
+}
 
 // Breadcrumbs for docs
 .docs-breadcrumbs {
@@ -1078,6 +1106,7 @@ a.sidebar-divider {
     font-weight: 500;
     transition: color 0.18s;
     opacity: 1;
+
     &:hover {
       color: #fff;
       text-decoration: underline;
@@ -1089,6 +1118,7 @@ a.sidebar-divider {
     align-items: center;
     opacity: 1;
     margin-right: 0.1em;
+
     svg {
       display: inline-block;
       vertical-align: middle;
@@ -1124,19 +1154,19 @@ a.sidebar-divider {
     margin-left: auto;
     flex-shrink: 0;
     white-space: nowrap;
-    
+
     &:hover {
       color: #fff;
       background-color: #ff734a;
       text-decoration: none;
     }
-    
+
     // Hide on mobile devices 
     @media (max-width: 900px) {
       display: none;
     }
   }
-} 
+}
 
 // Side-by-side buttons for docs homepage
 .docs-cta-buttons {
@@ -1144,7 +1174,7 @@ a.sidebar-divider {
   gap: 1rem;
   margin: 2rem 0;
   flex-wrap: wrap;
-  
+
   .button {
     flex: 1;
     min-width: 200px;
@@ -1161,22 +1191,22 @@ a.sidebar-divider {
     font-weight: 500;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-    
+
     &__icon {
       width: 12px;
       height: 12px;
       flex-shrink: 0;
-      
+
       svg {
         transition: all 0.3s ease-in-out;
       }
     }
-    
+
     &--primary {
       background-color: #ff734a;
       border-color: #ff734a;
       color: #1a1d21;
-      
+
       &:hover {
         background-color: #ff5a1f;
         border-color: #ff5a1f;
@@ -1184,12 +1214,12 @@ a.sidebar-divider {
         box-shadow: 0 4px 12px rgba(255, 115, 74, 0.3);
       }
     }
-    
+
     &--secondary {
       background-color: transparent;
       border-color: #ff734a;
       color: #ff734a;
-      
+
       &:hover {
         background-color: #ff734a;
         color: #1a1d21;
@@ -1198,16 +1228,16 @@ a.sidebar-divider {
       }
     }
   }
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
-    
+
     .button {
       width: 100%;
       min-width: auto;
     }
   }
-} 
+}
 
 // Image modal styles
 #image-modal {
@@ -1279,12 +1309,12 @@ a.sidebar-divider {
 .docs-article-content img:not(a img),
 .docs-content img:not(a img) {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 24px rgba(255, 115, 74, 0.2);
   }
-} 
+}
 
 .table-wrapper {
   width: 100%;
