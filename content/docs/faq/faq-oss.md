@@ -43,10 +43,6 @@ No. LanceDB is blazing fast (due to its disk-based index) for even brute force k
 
 For large-scale (>1M) or higher dimension vectors, it is beneficial to create an ANN index. See the [ANN indexes](ann_indexes.md) section for more details.
 
-### Does LanceDB support full-text search?
-
-Yes, LanceDB supports full-text search (FTS) via [Tantivy](https://github.com/quickwit-oss/tantivy). Our current FTS integration is Python-only, and our goal is to push it down to the Rust level in future versions to enable much more powerful search capabilities available to our Python, JavaScript and Rust clients. Follow along in the [Github issue](https://github.com/lancedb/lance/issues/1195)
-
 ### How can I speed up data inserts?
 
 It's highly recommended to perform bulk inserts via batches (for e.g., Pandas DataFrames or lists of dicts in Python) to speed up inserts for large datasets. Inserting records one at a time is slow and can result in suboptimal performance because each insert creates a new data fragment on disk. Batching inserts allows LanceDB to create larger fragments (and their associated manifests), which are more efficient to read and write.
