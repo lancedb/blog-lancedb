@@ -3,7 +3,6 @@ title: "RAG Tutorials"
 sidebar_title: "RAG"
 description: "Explore a variety of RAG (Retrieval-Augmented Generation) applications with LanceDB."
 weight: 1
-sidebar_collapsed: true
 hide_toc: true
 ---
 
@@ -16,3 +15,4 @@ hide_toc: true
 | **Parent Document Retriever** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/parent_document_retriever/main.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/parent_document_retriever) | A RAG strategy that involves splitting documents into smaller child chunks for searching, but retrieving the larger parent chunk for context. This provides the LLM with more complete information to generate a better response. |
 | **Agentic RAG** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/Agentic_RAG/main.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/Agentic_RAG) | This tutorial demonstrates how to build a RAG system where multiple AI agents collaborate to retrieve information and generate answers, leading to more robust and intelligent applications. |
 | **GraphRAG** <br> <a href="https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Graphrag/main.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <br> [View on GitHub](https://github.com/lancedb/vectordb-recipes/tree/main/examples/Graphrag) | Explores a hierarchical approach to RAG using knowledge graphs. This example shows how to build a graph-based index of your data, which can be used to perform more efficient and context-aware retrievals. |
+| **Time-Travel RAG** <br> [View Tutorial](./time-travel-rag/) | Build production-ready RAG systems with LanceDB's time-travel capabilities for regulatory compliance, audit trails, and versioned knowledge bases. Perfect for financial services and other compliance-heavy industries. |
