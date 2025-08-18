@@ -212,6 +212,7 @@ table.backfill("area", where="area is null")
 
 ### UDF API
 
+Decorator for defining a User-Defined Function (UDF).
 All UDFs are decorated by ``@geneva.udf``.
 
 ```python
@@ -228,16 +229,14 @@ udf(
 ) -> UDF | partial
 ```
 
-Decorator for defining a User-Defined Function (UDF).
-
 **Parameters**
 
 | Name | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| **func** | `Callable` or `None` | None | The callable to be decorated. If `None`, returns a partial function. |
-| **data_type** | `DataType` or `None` | None | The data type of the output `pyarrow.Array`. If `None`, it is inferred from the function signature. |
-| **version** | `str` or `None` | None | Version string to manage function changes. If not provided, the hash of the serialized function is used. |
-| **cuda** | `bool` | `False` | If `True`, load CUDA-optimized kernels. |
+| func | `Callable` or `None` | None | The callable to be decorated. If `None`, returns a partial function. |
+| data_type | `DataType` or `None` | None | The data type of the output `pyarrow.Array`. If `None`, it is inferred from the function signature. |
+| version | `str` or `None` | None | Version string to manage function changes. If not provided, the hash of the serialized function is used. |
+| cuda | `bool` | `False` | If `True`, load CUDA-optimized kernels. |
 | field_metadata | `dict[str, str]` or `None` | None | Metadata to attach to the output `pyarrow.Field`. |
-| **input_columns** | `list[str]` or `None` | None | Explicit input column names for the UDF. If `None`, inferred from the function signature (or all columns may be scanned). |
-| **num_cpus** | `int` or `float` or `None` | None | The (fractional) number of CPUs to acquire for the job. |
+| input_columns | `list[str]` or `None` | None | Explicit input column names for the UDF. If `None`, inferred from the function signature (or all columns may be scanned). |
+| num_cpus | `int` or `float` or `None` | None | The (fractional) number of CPUs to acquire for the job. |
