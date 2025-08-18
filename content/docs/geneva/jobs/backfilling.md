@@ -41,3 +41,7 @@ tbl.backfill("content", where="(starts_with(filename, 'a') or starts_with(filena
 # only backfill embeddings of only those videos with content and no prevoius embeddings
 tbl.backfill("embedding", where="content is not null and embeddding is not null")
 ```
+
+Reference:
+* [`backfill` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill)
+* [`backfill_async` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill_async)

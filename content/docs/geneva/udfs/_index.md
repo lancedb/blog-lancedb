@@ -62,10 +62,7 @@ def recordbatch_filename_len(batch: pa.RecordBatch) -> pa.Array:
     return pa.array(lengths, type=pa.int32())
 ```
 
-!!! note
-
-    Batch UDFS require you to specify `data_type` in the ``@udf`` decorator for batched UDFs,
-    which defines `pyarrow.DataType` of the returned `pyarrow.Array`.
+> **Note**:  Batch UDFS require you to specify `data_type` in the ``@udf`` decorator for batched UDFs which defines `pyarrow.DataType` of the returned `pyarrow.Array`.
 
 
 ### Stateful UDFs
@@ -97,9 +94,7 @@ class OpenAIEmbedding(Callable):
         return pa.array(resp.data[0].embeddings)
 ```
 
-!!! note
-
-    The state is will be independently managed on each distributed Worker.
+> **Note**:  The state is will be independently managed on each distributed Worker.
 
 
 ## Registering Features with UDFs
@@ -227,4 +222,5 @@ For example, this filter would only update the rows where area was currently nul
 table.backfill("area", where="area is null")
 ```
 
-[`alter_columns` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.alter_columns)
+Reference:
+* [`alter_columns` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.alter_columns)

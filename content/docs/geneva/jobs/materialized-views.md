@@ -86,9 +86,8 @@ The operation is incremental. So the next time refresh on the table is called, o
 
 Materialized views are just tables so you can query them as well as modify them by adding new `add_columns`, `backfill` particular columns and deriving other materialized views or views from them.
 
-## API
-
-[`create_materialized_view` API] (https://lancedb.github.io/geneva/api/connection/#geneva.db.Connection.create_materialized_view)
+Reference:
+* [`create_materialized_view` API](https://lancedb.github.io/geneva/api/connection/#geneva.db.Connection.create_materialized_view)
 
 ## FAQ
 

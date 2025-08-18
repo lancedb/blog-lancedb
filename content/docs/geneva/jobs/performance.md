@@ -28,8 +28,9 @@ The `Table.backfill(..) ` method has several optional arguments to tune performa
 
 Setting `batch_size` smaller introduces finer-grained checkpoints and can help provide more frequent proof of life as a job is being executed.  This is useful if the computation on your data is expensive.
 
-[`backfill` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill)
-[`backfill_async` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill_async)
+Reference:
+* [`backfill` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill)
+* [`backfill_async` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.backfill_async)
 
 ## Balancing write bandwidth
 
