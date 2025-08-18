@@ -1,5 +1,5 @@
 ---
-title: "Python SDK"
+title: "Geneva Python SDK"
 description: "LanceDB Feature Engineering Python SDK Reference"
 weight: 10
 sidebar_collapsed: true
