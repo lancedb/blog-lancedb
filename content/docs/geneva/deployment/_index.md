@@ -122,7 +122,7 @@ Geneva needs the ability to deploy a KubeRay cluster and submit jobs to Ray. The
 - Google Service Account (GSA)
 - GKE settings (GKE workload identity)
 
-![eks-auth](/assets/docs/geneva/eks-auth.png)
+![geneva-security-reqs](/assets/docs/geneva/geneva-security-reqs.png)
 
 #### Geneva Security Requirements
 
@@ -243,11 +243,21 @@ kubectl apply -f nvidia-device-plugin.yml
 
 ### Configure Access Control
 
-![geneva-security-reqs](/assets/docs/geneva/geneva-security-reqs.png)
+![eks-auth](/assets/docs/geneva/eks-auth.png)
+
+#### Environment IAM Principal
+
+Geneva must be run in an environment with access to [AWS credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) with permissions to `sts:AssumeRole` on the Geneva Client IAM Role.
+
+For example, this could be a laptop with credentials provided by environment variables, or an EC2 instance with credentials provided via Instance Profile.
 
 #### Create IAM Role for Geneva Client
 
-The Geneva client requires IAM permissions to access the storage bucket and Kubernetes API. Create an IAM role with the following policy:
+The Geneva Client IAM Role is assumed by the Geneva client to provision the Kuberay cluster and run remote jobs.
+
+This role requires IAM permissions to access the storage bucket and Kubernetes API.
+
+Create an IAM role with the following policy:
 
 ```json
 {
@@ -285,11 +295,13 @@ The Geneva client requires IAM permissions to access the storage bucket and Kube
 }
 ```
 
+This role should also have a trust policy with `sts:AssumeRole` permissions for any principal initiating the Geneva client.
+
 When using Geneva, this role can be specified with the `role_name` RayCluster parameter.
 
 #### Create EKS Access Entry
 
-Create an EKS access entry to allow the Geneva client role to access the EKS cluster:
+Create an [EKS access entry](https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html) to allow the Geneva Client Role to access the Kubernetes API for the EKS Cluster.
 
 ```bash
 aws eks create-access-entry --cluster-name $CLUSTER --principal-arn <your geneva client role ARN> --type STANDARD
@@ -298,7 +310,7 @@ aws eks associate-access-policy --cluster-name $CLUSTER --principal-arn <your ge
 
 #### Create EKS OIDC Provider
 
-Create an OIDC provider for your EKS cluster. This is required to allow Kubernetes Service Accounts (KSA) to assume IAM roles. See AWS documentation.
+Create an OIDC provider for your EKS cluster. This is required to allow Kubernetes Service Accounts (KSA) to assume IAM roles. See [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html#_create_oidc_provider_console).
 
 #### Create IAM Role for Service Account
 
