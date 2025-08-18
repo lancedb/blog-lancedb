@@ -2,6 +2,7 @@
 title: "Geneva: Feature Engineering with LanceDB"
 sidebar_title: Feature Engineering
 description: Learn how to transform raw data into meaningful features for AI models using LanceDB's feature engineering capabilities. Scale your feature engineering workflows with distributed processing and UDFs.
+hide_toc: true
 weight: 107
 ---
 {{< admonition "note" "LanceDB Enterprise" >}}
