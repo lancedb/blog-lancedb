@@ -13,7 +13,7 @@ Triggering backfill creates a distributed job to run the UDF and populate the co
 
 ## Filtered Backfills
 
-Geneva allows you to specify filters on the backfill operation. This lets you to apply backfills to a specified subset of the table's rows.
+Geneva allows you to specify SQL-style filters on the backfill operation. This lets you to apply backfills to a specified subset of the table's rows.
 
 ```python
 # only backfill video content whose filenames start with 'a'

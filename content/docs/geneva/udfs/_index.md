@@ -189,7 +189,7 @@ class OpenAIEmbedding(Callable):
     def __call__(self, text: str) -> pa.Array:
         ...
 
-# OpenAIEbmedding's call method input is inferred to be 'text' of
+# OpenAIEmbedding's call method input is inferred to be 'text' of
 # type string from the __call__'s arguments, and its output type is
 # a fixed size list of float32.
 tbl.add_columns({"embedding": OpenAIEmbedding()})
@@ -210,33 +210,4 @@ For example, this filter would only update the rows where area was currently nul
 table.backfill("area", where="area is null")
 ```
 
-### UDF API
-
-Decorator for defining a User-Defined Function (UDF).
-All UDFs are decorated by ``@geneva.udf``.
-
-```python
-udf(
-    func: Callable | None = None,
-    *,
-    data_type: DataType | None = None,
-    version: str | None = None,
-    cuda: bool = False,
-    field_metadata: dict[str, str] | None = None,
-    input_columns: list[str] | None = None,
-    num_cpus: int | float | None = None,
-    **kwargs,
-) -> UDF | partial
-```
-
-**Parameters**
-
-| Name | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| func | `Callable` or `None` | None | The callable to be decorated. If `None`, returns a partial function. |
-| data_type | `DataType` or `None` | None | The data type of the output `pyarrow.Array`. If `None`, it is inferred from the function signature. |
-| version | `str` or `None` | None | Version string to manage function changes. If not provided, the hash of the serialized function is used. |
-| cuda | `bool` | `False` | If `True`, load CUDA-optimized kernels. |
-| field_metadata | `dict[str, str]` or `None` | None | Metadata to attach to the output `pyarrow.Field`. |
-| input_columns | `list[str]` or `None` | None | Explicit input column names for the UDF. If `None`, inferred from the function signature (or all columns may be scanned). |
-| num_cpus | `int` or `float` or `None` | None | The (fractional) number of CPUs to acquire for the job. |
+[`alter_columns` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.alter_columns)
