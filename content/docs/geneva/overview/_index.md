@@ -9,6 +9,10 @@ weight: 1
   <iframe width="560" height="315" src="https://www.youtube.com/embed/VAO4407nHTM?si=mwS7m8aArzvFR_8T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
+{{< admonition "note" "See the notebook & code" >}}
+We prepared a tutorial on how to build an advanced product search engine using LanceDB's Feature Engineering. [Check it out here!](/docs/tutorials/mmlh/)
+{{< /admonition >}}
+
 If you want your AI models to work well—whether for search, recommendations, or anything else—you need good data. But raw data is usually messy and incomplete. Before you can train a model or use it for search, you have to turn that raw data into clear, meaningful features.
 
 Feature engineering is the process of cleaning up your data and creating new signals that actually help your model learn or make better predictions. This step is just as important for preparing training data as it is for powering your AI in production.
@@ -91,7 +95,7 @@ After executing this complex chain of logic, we produce a new, enriched table. T
 | 102 |... | 15.9 | 'premium' | 0.4 | 1.95 | true |
 | 103 |... | 3.5 | 'budget' | 0.0 | 0.47 | false |
 
-## The Solution: LanceDB Scales Feature Engineering
+## Why Use Feature Engineering?
 
 Manual feature engineering works for small datasets. However, things change dramatically at scale. In real-world production systems, you often need to process tens or hundreds of millions of records. Sometimes this must happen in real time. The logic that was simple in a notebook, such as aggregations, conditional logic, or text processing, becomes much harder to manage and execute efficiently.
 
@@ -100,3 +104,9 @@ As data grows, so does complexity. You might need to generate features from new 
 Managing this at scale means dealing with distributed systems, scheduling, and monitoring. You must ensure that feature pipelines are reliable and reproducible. Experimenting with new features or updating existing ones can require major engineering work. This slows down iteration and innovation. Infrastructure challenges, such as orchestrating batch and streaming jobs, handling dependencies, and scaling inference, often become the main bottleneck.
 
 In short, the biggest challenge in modern feature engineering is not just coming up with good features. It is also about building infrastructure that can handle complex, multi-modal operations. The goal is to deliver fresh, high-quality features quickly and reliably at massive scale. 
+
+## Trying the Tutorial
+
+{{< admonition "note" "See the notebook & code" >}}
+We prepared a tutorial on how to build an advanced product search engine using LanceDB's Feature Engineering. [Check it out here!](/docs/tutorials/mmlh/)
+{{< /admonition >}}
