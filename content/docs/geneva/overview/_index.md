@@ -1,6 +1,7 @@
 ---
 title: What is Feature Engineering?
 sidebar_title: Overview
+meta_image: /assets/docs/geneva/preview-image.png
 description: Learn how to transform raw data into meaningful features for AI models using LanceDB's feature engineering capabilities. Scale your feature engineering workflows with distributed processing and UDFs.
 weight: 1
 ---

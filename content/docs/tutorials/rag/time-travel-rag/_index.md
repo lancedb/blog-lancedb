@@ -1,6 +1,7 @@
 ---
 title: "Time-Travel RAG With Versioned Data"
 sidebar_title: "Time-Travel RAG"
+meta_image: /assets/docs/geneva/preview-image.png
 description: "Learn how to build production-ready RAG systems with LanceDB's time-travel capabilities for regulatory compliance and audit trails."
 weight: 1
 ---
