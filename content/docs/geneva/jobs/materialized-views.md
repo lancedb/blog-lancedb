@@ -15,7 +15,7 @@ The process is straightforward:
 
 1. Define a query on table, optionally including UDFs in the select clause.
 2. Create the materialized view using `db.create_materialized_view(...)`.
-3. Populate the new materialized view table using the refresh operation.
+3. Populate the new materialized view table using the `refresh` operation.
 
 Just like with backfills, this operation is incremental, checkpointed, and run in a distributed manner.
 
@@ -86,27 +86,8 @@ The operation is incremental. So the next time refresh on the table is called, o
 
 Materialized views are just tables so you can query them as well as modify them by adding new `add_columns`, `backfill` particular columns and deriving other materialized views or views from them.
 
-## API
-
-### `meth` geneva.db.Connection.create_materialized_view
-
-Create a materialized view.
-
-```python
-create_materialized_view(
-    name: str,
-    query: GenevaQueryBuilder,
-    with_no_data: bool = True,
-) -> Table
-```
-
-#### Parameters
-
-| Name | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| name | `str` | — | Name of the materialized view. |
-| query | `GenevaQueryBuilder` | — | Query to create the view. |
-| with_no_data | `bool` | `True` | If `True`, the view is materialized; if `False`, it is ready for refresh. |
+Reference:
+* [`create_materialized_view` API](https://lancedb.github.io/geneva/api/connection/#geneva.db.Connection.create_materialized_view)
 
 ## FAQ
 

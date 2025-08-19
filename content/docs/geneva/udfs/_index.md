@@ -62,10 +62,7 @@ def recordbatch_filename_len(batch: pa.RecordBatch) -> pa.Array:
     return pa.array(lengths, type=pa.int32())
 ```
 
-!!! note
-
-    Batch UDFS require you to specify `data_type` in the ``@udf`` decorator for batched UDFs,
-    which defines `pyarrow.DataType` of the returned `pyarrow.Array`.
+> **Note**:  Batch UDFS require you to specify `data_type` in the ``@udf`` decorator for batched UDFs which defines `pyarrow.DataType` of the returned `pyarrow.Array`.
 
 
 ### Stateful UDFs
@@ -97,9 +94,7 @@ class OpenAIEmbedding(Callable):
         return pa.array(resp.data[0].embeddings)
 ```
 
-!!! note
-
-    The state is will be independently managed on each distributed Worker.
+> **Note**:  The state is will be independently managed on each distributed Worker.
 
 
 ## Registering Features with UDFs
@@ -189,15 +184,32 @@ class OpenAIEmbedding(Callable):
     def __call__(self, text: str) -> pa.Array:
         ...
 
-# OpenAIEbmedding's call method input is inferred to be 'text' of
+# OpenAIEmbedding's call method input is inferred to be 'text' of
 # type string from the __call__'s arguments, and its output type is
 # a fixed size list of float32.
 tbl.add_columns({"embedding": OpenAIEmbedding()})
 ```
 
+## Changing data in computed columns
+
+Let's say you backfilled data with your UDF then you noticed that your data has some issues.  Here are a few scenarios:
+
+1. All the values are incorrect due to a bug in the UDF.
+2. Most values are correct but some values are incorrect due to a failure in UDF execution.
+3. Values calculated correctly and you want to perform a second pass to fixup some of the values.
+
+In scenario 1, you'll most likely want to replaced the UDF with a new version and recalulate all the values.  You should perform a `alter_table` and then `backfill`.
+
+In scenario 2, you'll most likely want to re-execute `backfill` to fill in the values.  If the error is in your code (certain cases not handled), you can modify the UDF, and perform an `alter_table`, and then `backfill` with some filters.
+
+In scenario 3, you have a few options. A) You could `alter` your UDF and include the fixup operations in the UDF.  You'd `alter_table` and then `backfill` recalculating all the values.  B) You could have a chain of computed columns -- create a new column, calculate the "fixed" up values and have your application use the new column or a combination of the original column.  This is similar to A but does not recalulate A and can incur more storage.   C) You could `update` the values in the the column with the fixed up values.  This may be expedient but also sacrifices reproducability.
+
+The next section shows you how to change your column definition by `alter`ing the UDF.
+
 ## Altering UDFs
 
-Let's say you backfilled data with your UDF then you noticed that you had an issue.  You now want to revise the code.  To make the change, you'd update the UDF used to compute the column using the `alter_columns` API and the updated function.  The example below replaces the definition of column `area` to use the `area_udf_v2` function. 
+
+You now want to revise the code.  To make the change, you'd update the UDF used to compute the column using the `alter_columns` API and the updated function.  The example below replaces the definition of column `area` to use the `area_udf_v2` function.
 
 ```python
 table.alter_columns({"path": "area", "udf": area_udf_v2} )
@@ -210,33 +222,5 @@ For example, this filter would only update the rows where area was currently nul
 table.backfill("area", where="area is null")
 ```
 
-### UDF API
-
-Decorator for defining a User-Defined Function (UDF).
-All UDFs are decorated by ``@geneva.udf``.
-
-```python
-udf(
-    func: Callable | None = None,
-    *,
-    data_type: DataType | None = None,
-    version: str | None = None,
-    cuda: bool = False,
-    field_metadata: dict[str, str] | None = None,
-    input_columns: list[str] | None = None,
-    num_cpus: int | float | None = None,
-    **kwargs,
-) -> UDF | partial
-```
-
-**Parameters**
-
-| Name | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| func | `Callable` or `None` | None | The callable to be decorated. If `None`, returns a partial function. |
-| data_type | `DataType` or `None` | None | The data type of the output `pyarrow.Array`. If `None`, it is inferred from the function signature. |
-| version | `str` or `None` | None | Version string to manage function changes. If not provided, the hash of the serialized function is used. |
-| cuda | `bool` | `False` | If `True`, load CUDA-optimized kernels. |
-| field_metadata | `dict[str, str]` or `None` | None | Metadata to attach to the output `pyarrow.Field`. |
-| input_columns | `list[str]` or `None` | None | Explicit input column names for the UDF. If `None`, inferred from the function signature (or all columns may be scanned). |
-| num_cpus | `int` or `float` or `None` | None | The (fractional) number of CPUs to acquire for the job. |
+Reference:
+* [`alter_columns` API](https://lancedb.github.io/geneva/api/table/#geneva.table.Table.alter_columns)

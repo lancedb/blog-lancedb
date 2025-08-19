@@ -13,7 +13,7 @@ We currently support one processing backend: **Ray**. Geneva jobs can be deploye
 
 ## Ray Auto Connect
 
-To execute jobs without an external Ray cluster, you can just trigger the `Table.backfill` method or the `Table.add_columns(..., backfill=True)` method. This will auto-create a local Ray cluster and is only suitable for prototyping on small datasets.
+To execute jobs without an external Ray cluster, you can just trigger the `Table.backfill` method. This will auto-create a local Ray cluster and is only suitable for prototyping on small datasets.
 
 ```python
 tbl.backfill("area")
