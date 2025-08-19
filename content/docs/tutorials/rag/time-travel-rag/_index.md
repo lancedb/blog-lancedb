@@ -5,7 +5,7 @@ description: "Learn how to build production-ready RAG systems with LanceDB's tim
 weight: 1
 ---
 
-> **Complete Code**: All the scripts and code for this tutorial are available in the [LanceDB documentation repository](https://github.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/RAG/time-travel-rag/_index.html). 
+> **Complete Code**: All the scripts and code for this tutorial are available in the [LanceDB documentation repository](https://github.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/RAG/time-travel-rag/). 
 
 ## Use Case: Financial Services Regulatory Knowledge Base
 
