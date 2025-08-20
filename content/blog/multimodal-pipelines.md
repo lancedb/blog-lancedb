@@ -35,16 +35,26 @@ This capability is not limited to search. Compliance teams want to detect when r
 
 ## Enter LanceDB’s Multimodal Lakehouse
 
-LanceDB collapses this complexity into a single layer. Videos, audio, transcripts, and embeddings can all be represented in Lance tables. With **Geneva UDFs**, feature engineering happens *inside the lakehouse*. You can define how to compute features such as ASR transcripts or CLIP embeddings, and LanceDB will store them as columns in your tables. When models change, you can re-run and version features without losing consistency. Most importantly, the same data powers both production search and downstream analytics.
+LanceDB collapses this complexity into a single layer. Videos, audio, transcripts, and embeddings can all be represented in Lance tables. 
+
+The diagram below illustrates this unified architecture.
+
+![What is LanceDB?](/assets/docs/overview/multimodal.png)
+
+With **Geneva UDFs**, feature engineering happens inside the lakehouse. You can define how to compute features such as ASR transcripts or CLIP embeddings, and LanceDB will store them as columns in your tables. When models change, you can re-run and version features without losing consistency. Most importantly, the same data powers both production search and downstream analytics.
 
 Because LanceDB is designed for petabyte-scale storage on object stores, it brings the scalability of traditional data lakes together with the performance of vector search engines. Instead of splitting your architecture into “hot” and “cold” paths, you get one system that does both.
 
+### Improvements Brought by LanceDB
+
+The following table compares a traditional pipeline with a multimodal lakehouse across core aspects.
+
 | Aspect              | Traditional Pipeline                         | Multimodal Lakehouse                  |
 | ------------------- | -------------------------------------------- | ------------------------------------- |
-| Storage             | Scattered across object store, DB, vector DB | Unified in Lance tables               |
-| Feature Engineering | External ETL pipelines                       | Geneva UDFs inside the lakehouse      |
-| Consistency         | Risk of misalignment                         | Features + metadata always aligned    |
-| Analytics           | Separate warehouse                           | Same data powers training & analytics |
+| Storage             | Your org's files may end up scattered across object stores, relational databases, vector databases. | All org data is unified in a single Lance table that is versioned.               |
+| Feature Engineering | You need to build and maintain external ETL pipelines to connect all assets.                      | Geneva UDFs inside the lakehouse automate the tasks that maintain your Lance tables.      |
+| Consistency         | There is a risk of misalignment between different data sources and their versions.                        | Lance tables keep your columns/features and their metadata always aligned and versioned.    |
+| Analytics           | You may need a separate warehouse to examine all your data in one place.                          | LanceDB offers training, feature engineerg & analytics in one package. |
 
 ## Building a Pipeline Step by Step
 
