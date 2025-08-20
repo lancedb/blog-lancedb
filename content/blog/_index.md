@@ -1,6 +1,6 @@
 ---
-title: "LanceDB Blog | RAG, Search & Multimodal AI Insights"
-description: "Hands-on tutorials and insights on building RAG, search apps, and multimodal AI with LanceDB’s open source multimodal lakehouse."
+title: "LanceDB Blog | Vector Database for RAG, AI Agents & Search"
+description: "Tutorials, benchmarks, and case studies on RAG pipelines, agent memory, semantic search, and multimodal vector databases with versioning and object storage."
 ---
     
     

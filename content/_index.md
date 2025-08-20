@@ -3,8 +3,8 @@ enableSwiper: true
 title: Designed for Multimodal. <br> Built for Scale.
 description: From agents to models, from search to training, one platform for all your AI data and workloads
 meta: # alternative meta 
-  title: "LanceDB | Open Source Platform for AI & Multimodal Workloads" # alternate meta title
-  description: "LanceDB powers multimodal AI across text, images, audio, and video. Build RAG, search, train models, and engineer features with an open source platform." # alternate meta description
+  title: "LanceDB | Vector Database for RAG, Agents & Hybrid Search" # alternate meta title
+  description: "Build fast, reliable RAG, agents, and search engines with LanceDB— a multimodal vector database with native versioning and S3-compatible object storage." # alternate meta description
   keywords: # meta keywords
   og_title: # Open Graph title
   og_description: # Open Graph description
