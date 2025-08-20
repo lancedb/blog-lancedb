@@ -3,6 +3,14 @@ type: pricing
 title: Simple Transparent Pricing
 highlighted: Transparent
 description: From the first POC to billion-scale production, a perfect option for every part of your AI journey
+meta: # alternative meta 
+  title: "LanceDB Pricing | Plans for AI & Multimodal Workloads" # alternate meta title
+  description: "Clear pricing for LanceDB. Start free, then scale RAG, search, and multimodal workloads with enterprise readiness, security, and support when you need them." # alternate meta description
+  keywords: # meta keywords
+  og_title: # Open Graph title
+  og_description: # Open Graph description
+  og_image: # Open Graph image
+  og_twitter_image: # Twitter image
 plans:
   - title: LanceDB Cloud
     description: Serverless search engine. Best for growing teams who want to search more and manage less.

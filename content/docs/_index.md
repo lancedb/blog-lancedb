@@ -1,6 +1,8 @@
 ---
 title: "LanceDB Documentation"
-description: "Welcome to LanceDB documentation"
+description: "Everything you need to build with LanceDB: quickstarts, examples, and APIs for RAG, search, and multimodal AI workloads from prototype to production."
+meta: # alternative meta 
+  title: "LanceDB Docs | Build RAG, Search & Multimodal AI Apps" # alternate meta title
 weight: 1
 hide_toc: true
 aliases:
