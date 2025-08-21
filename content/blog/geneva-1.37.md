@@ -22,7 +22,9 @@ When you start a machine learning project, your first challenge usually isn’t 
 
 In this walkthrough, you’ll load [a dataset of cats and dogs](https://www.robots.ox.ac.uk/~vgg/data/pets/), define four feature extractors, and run them at scale: file size, dimensions, captions with BLIP, and embeddings with OpenCLIP. Along the way, you’ll see how Geneva keeps the process consistent whether you’re running on your laptop or across a Ray cluster.
 
-Figure 1: The Feature Engineering Workflow
+**Figure 1: The Feature Engineering Workflow**
+
+This diagram shows how Geneva transforms raw data into enriched features through UDFs, creating new columns for file size, dimensions, captions, and embeddings.
 
 ```mermaid
 flowchart LR
@@ -194,7 +196,9 @@ class GenEmbeddings:
 
 Once you run this, every image will have a 512-dimensional vector representation. That vector becomes the foundation for building similarity search, recommendations, or clustering workflows. Instead of just relying on labels or captions, you now have a mathematical representation of content that Geneva can index and query.
 
-Figure 2: Backfill Columns and Search 
+**Figure 2: Backfill Execution and Querying**
+
+This diagram shows Geneva's execution workflow: UDFs are processed in batches with partial commits, then results become available for searching and filtering.
 
 ```mermaid
 flowchart LR
