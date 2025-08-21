@@ -1,12 +1,12 @@
 ---
-title: "Geneva 1.37 Release: Scalable Feature Engineering"
+title: "LanceDB's Geneva 0.1.37: Scalable Feature Engineering"
 date: 2025-08-21
 draft: false
 featured: true
 categories: ["Engineering"]
-image: /assets/blog/geneva-1.37/preview-image.png
-meta_image: /assets/blog/geneva-1.37/preview-image.png
-description: "Learn how to build scalable feature engineering pipelines with Geneva and LanceDB. We walk through a live demo that transforms image data into rich features including captions, embeddings, and metadata using distributed Ray clusters."
+image: /assets/blog/geneva-0.1.37/preview-image.png
+meta_image: /assets/blog/geneva-0.1.37/preview-image.png
+description: "Learn how to build scalable feature engineering pipelines with Geneva and LanceDB. This demo transforms image data into rich features including captions, embeddings, and metadata using distributed Ray clusters."
 author: "Jonathan Hsieh"
 author_avatar: "/assets/authors/jonathan-hsieh.jpg"
 author_bio: "Software Engineer & Geneva Project Lead."
@@ -45,7 +45,7 @@ flowchart LR
 Geneva's basic promise is deceptively simple. Write Python like you normally would. Keep your functions pure. Geneva will serialize the code, ship the exact same environment to worker nodes, execute at scale, and persist results as new columns in LanceDB.
 {{< /admonition >}}
 
-### Watch the demo on YouTube
+## Watch the demo on YouTube
 
 The demo is quite complex, so we recommend reading the article first.
 The steps outlined in this blog will help guide you through the tutorial.
@@ -54,7 +54,7 @@ The steps outlined in this blog will help guide you through the tutorial.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4iKAOCw-_AA?si=pI98ifzKASgZ2vvT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-## Step 1: Install and check your environment
+### Step 1: Install and check your environment
 
 Start by installing the required packages. Geneva integrates with PyTorch, Hugging Face Transformers, and OpenCLIP, so you can use state-of-the-art models right out of the box.
 
@@ -73,11 +73,11 @@ print("CUDA available:", torch.cuda.is_available())
 
 This matters because GPU acceleration can dramatically reduce the time it takes to generate captions and embeddings. If CUDA isn’t available, you can still run everything on CPU, which is fine for testing smaller datasets. The important thing is that the exact same code will work in either environment.
 
-## Step 2: Load a dataset into Geneva
+### Step 2: Load a dataset into Geneva
 
 For this demo, we’ll use the [Oxford-IIIT Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) — a collection of cats and dogs with labels. 
 
-![cats-and-dogs](/assets/blog/geneva-1.37/dataset.png)
+![cats-and-dogs](/assets/blog/geneva-0.1.37/dataset.png)
 
 You can swap this for any dataset you like. Geneva ingests data into Arrow tables, which makes it efficient to store, process, and query.
 
@@ -122,7 +122,7 @@ for batch in load_images():
 
 At this point you’ve got a table of raw images with labels. It doesn’t do much on its own, but now you’re ready to enrich it with features.
 
-## Step 3: Add simple features (file size, dimensions)
+### Step 3: Add simple features (file size, dimensions)
 
 Start small. Geneva lets you define UDFs as simple Python functions, and the results become new columns in your table. The following examples show how to return both scalars and structured data:
 
@@ -147,7 +147,7 @@ def dimensions(image: bytes):
 
 The first UDF calculates the size of each image file in bytes. It’s a trivial example, but it demonstrates how easy it is to add scalar values. The second UDF extracts the width and height of each image and returns them as a structured record. With these two functions, you now have queryable columns that let you filter images by resolution or spot outliers based on file size. Even though these examples are simple, they highlight Geneva’s flexibility in handling different data types.
 
-## Step 4: Generate captions with BLIP
+### Step 4: Generate captions with BLIP
 
 Now let’s create something more useful. Geneva makes it easy to run expensive models at scale by letting you write stateful UDFs. That means the model is loaded once and reused across rows, instead of being reloaded every time. Here’s how you can generate captions using BLIP:
 
@@ -175,7 +175,7 @@ class BlipCaptioner:
 
 With this UDF, each image in your dataset now gets a natural language description. Instead of just having raw pixels and labels, you can run queries like “show me all the rows where the caption mentions a dog.” This transforms your dataset into something you can search and analyze in ways that weren’t possible before. And because the model is cached, it runs efficiently even across large batches.
 
-## Step 5: Create embeddings with OpenCLIP
+### Step 5: Create embeddings with OpenCLIP
 
 Captions give you text, but embeddings give you the ability to search semantically. With embeddings, you can ask questions like “find images most similar to this one” or “cluster my dataset into related groups.” Geneva makes it simple to generate these embeddings and store them as vector columns.
 
@@ -210,7 +210,7 @@ flowchart LR
     F --> G[Results]
 ```
 
-## Step 6: Run backfills
+### Step 6: Run backfills
 
 Defining UDFs is only half the story — you need to run them against your dataset. Geneva’s backfill API applies your UDFs across the table and writes the results into new columns. For lightweight tasks like file size, you can run them synchronously:
 
