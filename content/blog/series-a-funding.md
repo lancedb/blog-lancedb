@@ -2,7 +2,7 @@
 title: "LanceDB Raises $30M Series A to Build the Multimodal Lakehouse"
 date: 2025-06-24
 draft: false
-featured: false
+featured: true
 categories: ["Announcement"]
 image: /assets/blog/series-a-funding/preview-image.png
 meta_image: /assets/blog/series-a-funding/preview-image.png

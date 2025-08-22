@@ -1,6 +1,6 @@
 ---
 title: "LanceDB's Geneva: Scalable Feature Engineering"
-date: 2025-08-22
+date: 2025-08-21
 draft: false
 featured: true
 categories: ["Engineering"]
@@ -21,7 +21,7 @@ When you start a machine learning project, your first challenge usually isn’t 
 [LanceDB's Geneva](/docs/geneva/) is designed to take that pain away. Instead of writing ad hoc scripts that don’t scale, you define feature transformations once as Python functions, run them locally or on a distributed cluster, and Geneva materializes the results as typed, queryable columns.
 
 {{< admonition type="Note" title="Python Notebook" >}}
-[All the code in this tutorial is in our Python notebook.](https://colab.research.google.com/github/lancedb/blog-lancedb/tree/main/content/docs/tutorials/MMLH/geneva-feature-engineering.ipyb) We ran this from Google Vertex AI, so you will have to setup your own machine.
+[All the code in this tutorial is in our Python notebook.](https://githubtocolab.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine.
 {{< /admonition >}}
 
 In this walkthrough, you’ll load [a dataset of cats and dogs](https://www.robots.ox.ac.uk/~vgg/data/pets/), define four feature extractors, and run them at scale: file size, dimensions, captions with BLIP, and embeddings with OpenCLIP. Along the way, you’ll see how Geneva keeps the process consistent whether you’re running on your laptop or across a Ray cluster.
