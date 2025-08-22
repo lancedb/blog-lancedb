@@ -84,19 +84,17 @@ Hybrid querying combines [vector search](/docs/search/vector-search/), [full-tex
 
 On the compute side, [declarative Python UDFs](/docs/geneva/udfs/) allow engineers to define feature extraction jobs that scale across hundreds of thousands of CPU cores and GPU slots. 
 
-This UDF will take the value of x and value of y from each row and return the product. The @udf wrapper is all that is needed.
+This UDF will create an embeddings column directly from a text column. It uses a preloaded model to batch-encode sentences into fixed-length 384-dimensional vectors. 
 
 ```python
 from geneva import udf
-@udf
-def area_udf(x: int, y: int) -> int:
-    return x * y
-@udf
-def download_udf(filename:str) -> bytes:
-    import requests
-    resp = requests.get(filename)
-    res.raise_for_status()
-    return resp.content
+@udf(schema=pa.list_(pa.float32(), list_size=384))
+def embed_text(text: pa.Array) -> pa.Array: # batched udf
+    MODEL = load_model() 
+    sentences = text.to_pylist()
+    embeddings = MODEL.encode(sentences, show_progress_bar=False)
+
+    return pa.array(embeddings.tolist(), type=pa.list_(pa.float32(), list_size=384))
 ```
 
 Features can be computed incrementally with checkpointing and preemption. Expensive GPU inference runs can pause and resume without wasted cycles. [The system supports billions of vectors indexed in hours and tens of petabytes](/docs/enterprise/) managed under a single abstraction. 
