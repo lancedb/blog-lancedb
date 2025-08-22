@@ -163,7 +163,7 @@ For Netflix, it means faster iteration cycles, richer insights into creative wor
 
 The foundation that powers Netflix’s Media Data Lake is open source and available to everyone. [LanceDB](https://lancedb.com/) and the [Lance format](https://lancedb.github.io/lance/) bring the same capabilities to any team working with multimodal data. With fast random access, zero-copy schema evolution, hybrid search, and scalable feature engineering, LanceDB is redefining what a data lake can do in the age of AI.
 
-{{< admonition "Note" "Learn More" >}}
+{{< admonition "Note" "Technical White Paper" >}}
 To learn more about the Multimodal Lakehouse, read our study [Why Multimodal Data Needs a Better Lakehouse?](/download/)
 {{< /admonition >}}
 
