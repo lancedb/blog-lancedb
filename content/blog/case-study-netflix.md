@@ -69,20 +69,20 @@ The table contrasts traditional data lakes with the Media Data Lake. Traditional
 | Feature | Traditional Data Lake | Media Data Lake (Netflix \+ LanceDB) |
 | ----- | ----- | ----- |
 | Data Types | Structured tables (text, numeric) | Multimodal (video, audio, images, text, embeddings) |
-| Schema | Rigid, costly to evolve | Zero-copy schema evolution |
+| Schema | Rigid, costly to evolve | Zero-copy data evolution |
 | Query | SQL only | SQL, vector search, full-text search |
-| Scale | Batch analytics | Real-time queries and GPU batch |
+| Workload | Batch analytics | Real-time queries and GPU batch processing|
 | Users | Analysts, BI teams | Machine learning engineers, researchers, creative ops |
 
 ## Where the Multimodal Lakehouse Shines
 
-[The Multimodal Lakehouse](/blog/multimodal-lakehouse/) is built on LanceDB and the Lance format. It treats [unstructured blobs](/docs/storage/) as first-class citizens with uncompromised [random access I/O](/docs/overview/lance/). This is critical for shuffling and filtering media efficiently during training. [Zero-copy schema evolution](/docs/tables/schema/) means new features and annotations can be added without duplicating terabytes of data.
+[The Multimodal Lakehouse](/blog/multimodal-lakehouse/) is built on LanceDB and the Lance format. It treats [unstructured blobs](/docs/storage/) as first-class citizens with uncompromised [random access I/O](/docs/overview/lance/). This is critical for shuffling and filtering media efficiently during training. [Zero-copy schema evolution](/docs/tables/schema/) means new features and annotations can be added without duplicating petabytes of data.
 
-Hybrid querying combines [vector search](/docs/search/vector-search/), [full-text search](/docs/search/full-text-search/), and [SQ](/docs/search/sql-queries/) over the same table. This enables workflows like retrieving shots by visual similarity, filtering by dialogue, and joining against structured metadata. All of this happens in one unified system.
+Hybrid querying combines [vector search](/docs/search/vector-search/), [full-text search](/docs/search/full-text-search/), and [SQL](/docs/search/sql-queries/) over the same table. This enables workflows like retrieving shots by visual similarity, filtering by dialogue, and joining against structured metadata. All of this happens in one unified system.
 
 > With LanceDB, blobs and embeddings are not afterthoughts. They are core building blocks in the data model.
 
-On the compute side, [declarative Python UDFs](/docs/geneva/udfs/) allow engineers to define feature extraction jobs that scale across hundreds of thousands of CPU cores and GPU slots using Ray or Kubernetes. 
+On the compute side, [declarative Python UDFs](/docs/geneva/udfs/) allow engineers to define feature extraction jobs that scale across hundreds of thousands of CPU cores and GPU slots. 
 
 This UDF will take the value of x and value of y from each row and return the product. The @udf wrapper is all that is needed.
 
@@ -161,7 +161,7 @@ For Netflix, it means faster iteration cycles, richer insights into creative wor
 
 ## Learn More About LanceDB
 
-The foundation that powers Netflix’s Media Data Lake is open source and available to everyone. [LanceDB](https://lancedb.com/) and the [Lance format](https://lancedb.github.io/lance/) bring the same capabilities to any team working with multimodal data. With fast random access, zero-copy schema evolution, hybrid search, and scalable feature engineering, LanceDB is redefining what a data lake can do in the age of AI.
+The foundation that powers Netflix’s Media Data Lake is open source and available to everyone. [LanceDB](https://lancedb.com/) and the [Lance format](https://lancedb.github.io/lance/) bring the same capabilities to any team working with multimodal data. With fast random access, zero-copy data evolution, hybrid search, and scalable feature engineering, LanceDB is redefining what a data lake can do in the age of AI.
 
 {{< admonition "Note" "Technical White Paper" >}}
 To learn more about the Multimodal Lakehouse, read our study [Why Multimodal Data Needs a Better Lakehouse?](/download/)
