@@ -1,11 +1,11 @@
 ---
-title: "LanceDB's Geneva 0.1.37: Scalable Feature Engineering"
-date: 2025-08-21
+title: "LanceDB's Geneva: Scalable Feature Engineering"
+date: 2025-08-22
 draft: false
 featured: true
 categories: ["Engineering"]
-image: /assets/blog/geneva-0.1.37/preview-image.png
-meta_image: /assets/blog/geneva-0.1.37/preview-image.png
+image: /assets/blog/geneva-feature-engineering/preview-image.png
+meta_image: /assets/blog/geneva-feature-engineering/preview-image.png
 description: "Learn how to build scalable feature engineering pipelines with Geneva and LanceDB. This demo transforms image data into rich features including captions, embeddings, and metadata using distributed Ray clusters."
 author: "Jonathan Hsieh"
 author_avatar: "/assets/authors/jonathan-hsieh.jpg"
@@ -77,9 +77,9 @@ This matters because GPU acceleration can dramatically reduce the time it takes 
 
 For this demo, we’ll use the [Oxford-IIIT Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) — a collection of cats and dogs with labels. 
 
-![cats-and-dogs](/assets/blog/geneva-0.1.37/dataset.png)
+![cats-and-dogs](/assets/blog/geneva-feature-engineering/dataset.png)
 
-You can swap this for any dataset you like. Geneva ingests data into Arrow tables, which makes it efficient to store, process, and query.
+You can swap this for any dataset you like. You can ingest Arrow data into LanceDB tables, which makes it efficient to store, process, and query.
 
 ```python
 from datasets import load_dataset
@@ -108,7 +108,11 @@ def load_images(frag_size: int = 25):
 db = geneva.connect(GENEVA_DB_PATH)
 ```
 
-This function streams the dataset into batches instead of loading everything into memory at once. That means you can work comfortably with very large datasets, and Geneva will commit them piece by piece. To make the table, just loop through the batches and add them:
+This function streams the dataset into batches instead of loading everything into memory at once. 
+
+By breaking things into smaller batches, Geneva can process them in parallel more easily. If it was just one large partition, only one worker would take the work leaving the rest idle. By splitting into smaller batches, the batches can be farmed out to multiple workers for parallel processing. 
+
+To make the table, just loop through the batches and add them:
 
 ```python
 first = True
@@ -280,7 +284,8 @@ At this point, your dataset has evolved from a collection of raw images into a r
 What you’ve built here is more than just a demo. By combining UDFs with Geneva’s execution engine, you’ve taken raw data and turned it into something structured, searchable, and scalable. 
 
 - Scalars like file size show you that you can store simple numbers. 
-- Structs like dimensions let you work with richer metadata. - Captions give you natural language descriptions that make the dataset human-readable, while embeddings let you run semantic search and clustering. 
+- Structs like dimensions let you work with richer metadata. 
+- Captions give you natural language descriptions that make the dataset human-readable, while embeddings let you run semantic search and clustering. 
 
 Because Geneva backfills work asynchronously and are versioned, you don’t have to worry about reruns or failures — you always know where you left off. 
 
@@ -294,6 +299,6 @@ And perhaps most importantly, you don’t have to change your code when you scal
 
 3. Then, when you’re ready, scale it out with a cluster. Geneva gives you a smooth path from experimentation to production, without the usual friction of rewriting pipelines for distributed systems. 
 
-Once you’ve experienced how quickly you can go from raw pixels to searchable features, you’ll see why Geneva 0.1.37 changes the way you approach feature engineering.
+Once you’ve experienced how quickly you can go from raw pixels to searchable features, you’ll see why Geneva changes the way you approach feature engineering.
 
 
