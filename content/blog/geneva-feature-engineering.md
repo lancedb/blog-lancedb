@@ -306,5 +306,5 @@ And perhaps most importantly, you don’t have to change your code when you scal
 Once you’ve experienced how quickly you can go from raw pixels to searchable features, you’ll see why Geneva changes the way you approach feature engineering.
 
 {{< admonition type="Note" title="Python Notebook" >}}
-[All the code in this tutorial is in our Python notebook.](https://colab.research.google.com/github/lancedb/blog-lancedb/blob/main/content/docs/tutorials/mmlh/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine.
+[All the code in this tutorial is in our Python notebook.](https://colab.research.google.com/github/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine.
 {{< /admonition >}}
