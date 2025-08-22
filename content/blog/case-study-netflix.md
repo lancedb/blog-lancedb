@@ -164,5 +164,3 @@ The foundation that powers Netflix’s Media Data Lake is open source and availa
 {{< admonition "Note" "Technical White Paper" >}}
 To learn more about the Multimodal Lakehouse, read our study [Why Multimodal Data Needs a Better Lakehouse?](/download/)
 {{< /admonition >}}
-
-![lancedb](/assets/blog/case-study-netflix/lance.png)
