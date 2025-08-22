@@ -37,11 +37,15 @@ Traditional pipelines were good at producing structured tables for metrics. Medi
 
 The Media Data Lake organizes this into **Media Tables**. These are structured but flexible datasets that contain both canonical metadata and the outputs of advanced machine learning models. [With Lance as the underlying format](/docs/overview/lance/), Netflix can [evolve schemas](/docs/tables/schema/) without costly rewrites. It can index embeddings alongside raw blobs. And it can query petabytes of content with low-latency, high-concurrency performance proven in production.
 
+**Figure 1:** A sample media table used by the [Netflix Engineering Team](https://netflixtechblog.com/from-facts-metrics-to-media-machine-learning-evolving-the-data-engineering-function-at-netflix-6dcc91058d8d)
+
+![multimodal-lakehouse](/assets/blog/case-study-netflix/media-table.png)
+
 ## Architecture in Motion
 
 The architecture combines real-time and offline processing. Lightweight queries expose raw assets and derived features for exploration. A **distributed inference layer** executes [GPU-powered batch jobs over entire libraries](/docs/geneva/jobs/). A **pythonic API** provides programmatic access to the Media Tables. Visual interfaces allow interactive browsing of assets. This dual design enables both fast experimentation and reliable productionization. Traditional data lakes and warehouses were never built to support this balance.
 
-**Figure 1:** Conceptual architecture of a Media Data Lake
+**Figure 2:** Conceptual architecture of a Media Data Lake
 
 ```mermaid
 graph LR
@@ -56,11 +60,7 @@ graph LR
     style D fill:#f3e5f5
     style E fill:#ffebee
 ```
-Figure 1 shows how Media Tables unify raw media, derived features, and machine learning outputs under one schema. This integration eliminates silos between creative assets and ML workflows, allowing researchers to query, explore, and train models on the same foundation. Built on LanceDB, it ensures that both interactive exploration and large-scale training run from a single source of truth.
-
-**Figure 2:** A sample media table used by the [Netflix Engineering Team](https://netflixtechblog.com/from-facts-metrics-to-media-machine-learning-evolving-the-data-engineering-function-at-netflix-6dcc91058d8d)
-
-![multimodal-lakehouse](/assets/blog/case-study-netflix/media-table.png)
+Figure 2 shows how Media Tables unify raw media, derived features, and machine learning outputs under one schema. This integration eliminates silos between creative assets and ML workflows, allowing researchers to query, explore, and train models on the same foundation. Built on LanceDB, it ensures that both interactive exploration and large-scale training run from a single source of truth.
 
 ## Media Data Lake vs. Traditional Data Lakes
 
