@@ -17,7 +17,7 @@ author_linkedin: "davidmyriel"
 
 Hollywood may run on storytelling, but behind every frame of a Netflix production lies another narrative written in data. 
 
-Every scene, audio track, subtitle, and script fragment is not just creative output. It is raw material for the next generation of machine learning. Petabytes of multimodal assets are spread across formats and workflows. Each one must be discoverable, queryable, and ready for research, training, and production.
+Every scene, audio track, subtitle, and script fragment is not just creative output. It is raw material for the next generation of machine learning. Petabytes of multimodal assets are spread across formats and workflows. Each one must be discoverable, queryable, and ready for research and training.
 
 {{< admonition "note" "The Media Data Lake" >}}
 To meet this challenge, Netflix has introduced [Media ML Data Engineering](https://netflixtechblog.com/from-facts-metrics-to-media-machine-learning-evolving-the-data-engineering-function-at-netflix-6dcc91058d8d) and built the **Media Data Lake**. This is a new specialization at Netflix that bridges the gap between traditional data engineering and the unique demands of media-centric machine learning.
@@ -35,7 +35,7 @@ Traditional pipelines were good at producing structured tables for metrics. Medi
 
 > The nature of media data is fundamentally different. It is multi-modal, it contains derived fields from media, it is unstructured and massive in scale, and it is deeply intertwined with creative workflows and business asset lineage. </br> — Dao Mi and the Media ML Data Engineering team, Netflix Tech Blog
 
-The Media Data Lake organizes this into **Media Tables**. These are structured but flexible datasets that contain both canonical metadata and the outputs of advanced machine learning models. [With Lance as the underlying format](/docs/overview/lance/), Netflix can [evolve schemas](/docs/tables/schema/) without costly rewrites. It can index embeddings alongside raw blobs. And it can query petabytes of content with low-latency, high-concurrency performance proven in production.
+The Media Data Lake organizes this into **Media Tables**. These are structured but flexible datasets that contain both canonical metadata and the outputs of advanced machine learning models. [With Lance as the underlying format](/docs/overview/lance/), Netflix can [evolve data and schema](/docs/tables/schema/) without costly rewrites. It can index embeddings alongside raw blobs. And it can query petabytes of content with low-latency, high-concurrency performance proven in production.
 
 **Figure 1:** A sample media table used by the [Netflix Engineering Team](https://netflixtechblog.com/from-facts-metrics-to-media-machine-learning-evolving-the-data-engineering-function-at-netflix-6dcc91058d8d)
 
@@ -64,7 +64,7 @@ Figure 2 shows how Media Tables unify raw media, derived features, and machine l
 
 ## Media Data Lake vs. Traditional Data Lakes
 
-The table contrasts traditional data lakes with the Media Data Lake. Traditional systems handle structured data well but struggle with multimodal assets, schema evolution, and hybrid querying.
+The table contrasts traditional data lakes with the Media Data Lake. Traditional systems handle structured data well but struggle with multimodal assets, schema and data evolution, and hybrid querying.
 
 | Feature | Traditional Data Lake | Media Data Lake (Netflix \+ LanceDB) |
 | ----- | ----- | ----- |
@@ -76,7 +76,7 @@ The table contrasts traditional data lakes with the Media Data Lake. Traditional
 
 ## Where the Multimodal Lakehouse Shines
 
-[The Multimodal Lakehouse](/blog/multimodal-lakehouse/) is built on LanceDB and the Lance format. It treats [unstructured blobs](/docs/storage/) as first-class citizens with uncompromised [random access I/O](/docs/overview/lance/). This is critical for shuffling and filtering media efficiently during training. [Zero-copy schema evolution](/docs/tables/schema/) means new features and annotations can be added without duplicating petabytes of data.
+[The Multimodal Lakehouse](/blog/multimodal-lakehouse/) is built on LanceDB and the Lance format. It treats [unstructured blobs](/docs/storage/) as first-class citizens with uncompromised [random access I/O](/docs/overview/lance/). This is critical for shuffling and filtering media efficiently during training. [Zero-copy data evolution](/docs/tables/schema/) means new features and annotations can be added without duplicating petabytes of data.
 
 Hybrid querying combines [vector search](/docs/search/vector-search/), [full-text search](/docs/search/full-text-search/), and [SQL](/docs/search/sql-queries/) over the same table. This enables workflows like retrieving shots by visual similarity, filtering by dialogue, and joining against structured metadata. All of this happens in one unified system.
 
@@ -155,7 +155,7 @@ flowchart LR
   class RS research
 ```
 
-For Netflix, it means faster iteration cycles, richer insights into creative workflows, and new AI-powered capabilities at global scale. For the wider ecosystem, it signals the arrival of a new standard. One platform that unifies multimodal data, computation, and machine learning into a single, production-ready foundation.
+For Netflix, it means faster iteration cycles and richer insights into creative workflows. For the wider ecosystem, it signals the arrival of a new standard. One platform that unifies multimodal data, computation, and machine learning into a single, production-ready foundation.
 
 ## Learn More About LanceDB
 
