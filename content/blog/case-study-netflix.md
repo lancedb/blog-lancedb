@@ -100,7 +100,7 @@ def embed_text(text: pa.Array) -> pa.Array: # batched udf
 Features can be computed incrementally with checkpointing and preemption. Expensive GPU inference runs can pause and resume without wasted cycles. [The system supports billions of vectors indexed in hours and tens of petabytes](/docs/enterprise/) managed under a single abstraction. 
 
 {{< admonition "Note" "Production Tested" >}}
-This performance has been proven in production by AI leaders such as ByteDance, MidJourney, Runway and CharacterAI.
+This performance has been proven in production by AI leaders such as ByteDance, MidJourney, Runway and Character AI.
 {{< /admonition >}}
 
 ## Machine Learning Workflow Reimagined
