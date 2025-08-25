@@ -100,10 +100,10 @@ def embed_text(text: pa.Array) -> pa.Array: # batched udf
 Features can be computed incrementally with checkpointing and preemption. Expensive GPU inference runs can pause and resume without wasted cycles. [The system supports billions of vectors indexed in hours and tens of petabytes](/docs/enterprise/) managed under a single abstraction. 
 
 {{< admonition "Note" "Production Tested" >}}
-This performance has been proven in production by AI leaders such as ByteDance, MidJourney, and now Netflix.
+This performance has been proven in production by AI leaders such as ByteDance, MidJourney, Runway and Character AI.
 {{< /admonition >}}
 
-## AI Workflows Reimagined
+## Machine Learning Workflow Reimagined
 
 Training pipelines also benefit directly. The Multimodal Lakehouse integrates with [PyTorch and JAX loaders](https://lancedb.github.io/lance/integrations/pytorch/). Models can train on named SQL views over raw assets and features, with direct access to blob data through efficient APIs. [A distributed cache fleet delivers more than five million IOPS from NVMe SSDs.](/docs/enterprise/architecture/) It reduces cloud storage costs while sustaining more than twenty thousand QPS of vector search traffic. This allows Netflix to experiment with large multimodal models while maintaining production-grade cost efficiency.
 
