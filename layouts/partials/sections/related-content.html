@@ -1,0 +1,43 @@
+{{ $section:= .section }}
+{{ $bg_color := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
+{{ $posts := $section.posts }}
+
+<section class="related-content u-bg-{{ $bg_color }} {{ if $no_padding_top }}no-padding-top{{ end }}">
+  <div class="container">
+    <div class="row">
+      {{ range $posts }}
+        {{ $page := site.GetPage .path }}
+        {{ $_Params := $page.Params }}
+        {{ $title := .title | default $page.Title }}
+        {{ $image := .image | default $_Params.image }}
+        {{ $url := .url | default $page.RelPermalink }}
+        {{ $url_text := .cta_text | default (printf "Read the %s" $page.Section) }}
+        <div class="col-12 col-md-6">
+          <div class="related-content__item">
+            <div class="related-content__item-image">
+            {{ $image_object:= resources.Get $image }}
+            {{ if $image_object }}
+              {{ with $image_object }}
+                <img src="{{ .RelPermalink | relURL }}" alt="{{ $title }}">
+              {{ end }}
+            {{else}}
+                <img src="{{ $image  | relURL }}" alt="{{ $title }}">
+                {{ end }}
+              </div>
+            <h3 class="text-title-medium">{{ $title }}</h3>
+            {{ with $url }}
+                  <a class="button button--secondary" href="{{$url}}" {{ if in $url "http" }}
+                  target="_blank" rel="noopener" {{ end }}>
+                    {{ $url_text }}
+                    <span class="button__icon">
+                      {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                    </span>
+                  </a>
+                {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

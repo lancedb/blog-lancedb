@@ -1,8 +1,9 @@
 {{ $section := .section }}
 {{ $title := $section.title }}
 {{ $cta := $section.cta }}
+{{ $no_padding_top := $section.no_padding_top }}
 
-<section class="cta-product">
+<section class="cta-product {{ if $no_padding_top }}no-padding-top{{ end }}">
   <div class="container">
     <div class="cta-product__wrap u-bg-dark-700">
       <div class="cta-product__vector">

@@ -106,6 +106,7 @@ sections:
     position: CTO & Co-founder
     logo: /logos/logoipsum.svg
   - type: cta-product
+    no_paddint_top: true
     title: One engine for all your enterprise search needs.
     cta:
       text: Contact Us

@@ -1,0 +1,40 @@
+.related-content {
+  padding: 48px 0;
+}
+
+.related-content__item {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  height: 100%;
+  color: palette(primary-offwhite);
+
+  @include mq($md) {
+    border: 1px solid palette(primary-dark, 500);
+    padding: 24px;
+    gap: 32px;
+  }
+
+  .button {
+    margin-top: auto;
+  }
+}
+
+.related-content__item-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 4px;
+
+  img {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+
+    .related-content__item:hover & {
+      transform: scale(1.05);
+    }
+  }
+}

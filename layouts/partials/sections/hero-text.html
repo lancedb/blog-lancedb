@@ -1,0 +1,38 @@
+{{ $section:= .section }}
+{{ $title:= $section.title | default .page.Title}}
+{{ $description := $section.description | default .page.Description }}
+{{ $cta := $section.cta }}
+
+<section class="hero-text">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="col-12 col-md-10 col-lg-10">
+        <div class="hero-text__wrap text-center">
+          <div class="hero-text__heading">
+            <h1 class="text-heading-large">
+              {{ $title }}
+            </h1>
+            <p class="text-body-large hero-text__description">
+              {{ $description }}
+            </p>
+          </div>
+          {{ with $cta }}
+          <div class="hero-text__cta">
+            {{ range . }}
+              <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+                target="_blank" rel="noopener" {{ end }}>
+                {{ .text }}
+                {{ if .icon }}
+                <span class="button__icon">
+                  {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                </span>
+                {{ end }}
+              </a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
