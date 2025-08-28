@@ -1,0 +1,45 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $video_id := $section.video_id }}
+{{ $cta := $section.cta }}
+{{ $bg := $section.bg_color | default "dark" }}
+
+<section class="video u-bg-{{$bg}}">
+  <div class="container">
+    <div class="row justify-center">
+      {{ if or $title $description}}
+        <div class="col-12 col-md-8">
+          <div class="video__heading">
+            {{ with $title }}
+              <h2 class="text-heading-small text-center">{{ . }}</h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="text-body-large text-center">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{ if $video_id }}
+      <div class="col-12 col-md-10">
+        <div class="video__wrapper">
+          <iframe src="https://www.youtube.com/embed/{{ $video_id }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      {{ end }}
+      {{ with $cta }}
+        <div class="col-12">
+          <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+              target="_blank" rel="noopener" {{ end }}>
+              {{ .text }}
+              {{ if .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+              {{ end }}
+            </a>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

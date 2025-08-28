@@ -440,11 +440,13 @@
 {{ define "page_js" }}
   {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
   {{ $js := resources.Get "js/home.js" | minify | fingerprint }}
+  {{ $logosJs := resources.Get "js/logos.js" | minify | fingerprint }}
   {{ $gsapJs := resources.Get "js/gsap.js" | minify | fingerprint }}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
   <script src="{{ $swiper.RelPermalink }}"></script>
   <script src="{{ $js.RelPermalink }}"></script>
+  <script src="{{ $logosJs.RelPermalink }}"></script> 
   <script src="{{ $gsapJs.RelPermalink }}"></script>
 {{ end }}

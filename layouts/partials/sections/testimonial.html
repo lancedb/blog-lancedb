@@ -1,0 +1,36 @@
+{{ $section := .section }}
+{{ $text := $section.text }}
+{{ $name := $section.name }}
+{{ $position := $section.position }}
+{{ $logo := $section.logo }}
+
+<section class="testimonial">
+  <div class="testimonial__vector">
+    {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
+  </div>
+  <div class="container">
+    <div class="row justify-center">
+      <div class="col-12 col-md-10 col-lg-7">
+        <div class="testimonial__content">
+          <div class="testimonial__icon">
+            {{ readFile "static/assets/icons/quote.svg" | safeHTML}}
+          </div>
+          <div class="testimonial__text text-title-medium text-base">
+            {{ $text }}
+          </div>
+          <div class="testimonial__info">
+            <p class="text-base text-body-small testimonials__author">
+              <span>{{ $name }}</span>, {{ $position }}
+            </p>
+            {{ with $logo }}
+              {{ $logoSrc:= printf "static/assets/%s" $logo }}
+              <div class="testimonial__logo">
+                {{ readFile $logoSrc | safeHTML }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

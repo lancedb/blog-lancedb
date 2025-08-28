@@ -1,0 +1,31 @@
+{{ $section := .section }}
+{{ $home:= site.GetPage "/" }}
+{{ $text := $section.text }}
+{{ $items := $section.items | default $home.Params.logos.items }}
+{{ $speed := $section.speed | default 5000 }}
+{{ $bg_color := $section.bg_color}}
+
+<section class="logos text-center js-logos u-bg-{{ $bg_color }} {{if $section.no_padding_top}}no-padding-top{{end}}" data-slider-speed="{{ $speed }}">
+  <div class="container">
+    <h3 class="logos__caption text-body-medium text-pro">{{ $text }}</h3>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {{ range $items }}
+          <div class="swiper-slide">
+            <div class="logos__item">
+              {{ $logo_src := printf "static/assets/logos/%s" . }}
+              {{ readFile $logo_src | safeHTML }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+  </div>
+</section>
+
+{{ define "page_js" }}
+  {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
+  {{ $logosJs := resources.Get "js/logos.js" | minify | fingerprint }}
+  <script src="{{ $swiper.RelPermalink }}"></script>
+  <script src="{{ $logosJs.RelPermalink }}"></script>
+{{ end }}

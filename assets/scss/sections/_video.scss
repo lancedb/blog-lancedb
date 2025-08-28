@@ -1,0 +1,28 @@
+.video {
+  padding: 48px 0;
+
+  .button {
+    margin: 0 auto;
+  }
+}
+
+.video__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include mq($md) {
+    gap: 16px;
+  }
+}
+
+.video__wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}

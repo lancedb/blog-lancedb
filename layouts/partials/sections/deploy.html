@@ -1,0 +1,41 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $items := $section.items }}
+{{ $bg := $section.bg_color | default "dark" }}
+
+<section class="deploy u-bg-{{ $bg }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="deploy__heading">
+          <h2 class="text-heading-small">{{ $title }}</h2>
+          <p class="text-body-medium deploy__description">{{ $description }}</p>
+        </div>
+      </div>
+      {{range $items}}
+      <div class="col-12 col-lg-4">
+        <div class="deploy__item text-center">
+          <div class="deploy__item-icon">
+            {{$iconSrc:= printf "static/assets/%s" .icon}}
+            {{ readFile $iconSrc | safeHTML }}
+          </div>
+          <h3 class="text-title-medium">{{ .title }}</h3>
+          <p class="text-body-large deploy__description">{{ .text }}</p>
+          {{ with .cta }}
+            <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+            target="_blank" rel="noopener" {{ end }}>
+              {{ .text }}
+              {{ if .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+              {{ end }}
+            </a>
+          {{ end }}
+        </div>
+      </div>
+      {{end}}
+    </div>
+  </div>
+</section>

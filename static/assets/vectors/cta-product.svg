@@ -1,0 +1,42 @@
+<svg width="524" height="316" viewBox="0 0 524 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="106.291" y="211.423" width="104.154" height="104.154" fill="#1E1B19" fill-opacity="0.25" stroke="#37322E" stroke-width="0.765031"/>
+<circle cx="158.166" cy="263.477" r="16.4452" fill="#4C443F"/>
+<rect x="1.37135" y="106.505" width="104.304" height="104.304" stroke="#45403C" stroke-width="0.766136"/>
+<circle cx="53.9232" cy="158.629" r="5.0814" fill="#4C443F"/>
+<foreignObject x="98.3511" y="-6.93602" width="120.181" height="120.182"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.6px);clip-path:url(#bgblur_0_323_655_clip_path);height:100%;width:100%"></div></foreignObject><rect data-figma-bg-blur-radius="7.19578" x="105.906" y="0.619629" width="105.07" height="105.07" fill="url(#paint0_linear_323_655)" stroke="url(#paint1_linear_323_655)" stroke-opacity="0.7" stroke-width="0.719578" stroke-miterlimit="10"/>
+<circle cx="142.074" cy="53.1273" r="5.0814" fill="#4C443F"/>
+<circle cx="174.3" cy="53.1273" r="5.0814" fill="#FF734A"/>
+<foreignObject x="203.281" y="98.5768" width="120.008" height="120.008"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.59px);clip-path:url(#bgblur_1_323_655_clip_path);height:100%;width:100%"></div></foreignObject><rect data-figma-bg-blur-radius="7.1854" x="210.826" y="106.122" width="104.919" height="104.919" fill="url(#paint2_linear_323_655)" stroke="url(#paint3_linear_323_655)" stroke-opacity="0.7" stroke-width="0.71854" stroke-miterlimit="10"/>
+<circle cx="246.941" cy="144.963" r="5.07407" fill="#4C443F"/>
+<circle cx="279.121" cy="144.963" r="5.07407" fill="#E7D2F6"/>
+<circle cx="246.941" cy="172.991" r="5.07407" fill="#FF734A"/>
+<circle cx="279.121" cy="172.991" r="5.07407" fill="#4C443F"/>
+<rect x="-0.346111" y="0.346111" width="104.378" height="104.378" transform="matrix(-1 0 0 1 419.114 209.892)" fill="#1E1B19" stroke="#37322E" stroke-width="0.692222"/>
+<circle cx="5.08137" cy="5.08137" r="5.08137" transform="matrix(-1 0 0 1 356.619 257.317)" fill="#4C443F"/>
+<circle cx="5.08137" cy="5.08137" r="4.60326" transform="matrix(-1 0 0 1 388.885 257.317)" fill="#FF734A" stroke="#37322E" stroke-width="0.956217"/>
+<circle cx="5.08137" cy="5.08137" r="4.60326" transform="matrix(-1 0 0 1 356.619 43.7236)" fill="#E7D2F6" stroke="#37322E" stroke-width="0.956217"/>
+<circle cx="5.08137" cy="5.08137" r="5.08137" transform="matrix(-1 0 0 1 388.885 43.7236)" fill="#4C443F"/>
+<rect x="-0.346111" y="0.346111" width="104.378" height="104.378" transform="matrix(-1 0 0 1 523.306 105.292)" stroke="#37322E" stroke-width="0.692222"/>
+<rect x="419.462" y="105.153" width="104.378" height="104.378" transform="rotate(180 419.462 105.153)" stroke="#37322E" stroke-width="0.692222"/>
+<circle cx="5.08137" cy="5.08137" r="5.08137" transform="matrix(-1 0 0 1 475.6 153.145)" fill="#4C443F"/>
+<defs>
+<clipPath id="bgblur_0_323_655_clip_path" transform="translate(-98.3511 6.93602)"><rect x="105.906" y="0.619629" width="105.07" height="105.07"/>
+</clipPath><clipPath id="bgblur_1_323_655_clip_path" transform="translate(-203.281 -98.5768)"><rect x="210.826" y="106.122" width="104.919" height="104.919"/>
+</clipPath><linearGradient id="paint0_linear_323_655" x1="125.203" y1="2.14501" x2="151.853" y2="101.513" gradientUnits="userSpaceOnUse">
+<stop stop-color="#46372F"/>
+<stop offset="1" stop-color="#171614" stop-opacity="0.5"/>
+</linearGradient>
+<linearGradient id="paint1_linear_323_655" x1="111.35" y1="8.90754" x2="125.62" y2="60.3074" gradientUnits="userSpaceOnUse">
+<stop stop-color="#998783" stop-opacity="0.34"/>
+<stop offset="1" stop-color="#F2D4AA" stop-opacity="0.15"/>
+</linearGradient>
+<linearGradient id="paint2_linear_323_655" x1="230.095" y1="107.645" x2="256.706" y2="206.87" gradientUnits="userSpaceOnUse">
+<stop stop-color="#46372F"/>
+<stop offset="1" stop-color="#171614" stop-opacity="0.5"/>
+</linearGradient>
+<linearGradient id="paint3_linear_323_655" x1="216.262" y1="114.398" x2="230.511" y2="165.723" gradientUnits="userSpaceOnUse">
+<stop stop-color="#998783" stop-opacity="0.34"/>
+<stop offset="1" stop-color="#F2D4AA" stop-opacity="0.15"/>
+</linearGradient>
+</defs>
+</svg>

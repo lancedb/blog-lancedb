@@ -1,0 +1,70 @@
+.features-grid {
+  padding: 48px 0;
+}
+
+.features-grid__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+
+  @include mq($md) {
+    gap: 24px;
+  }
+}
+
+.features-grid__card {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  background: #9987830D;
+  height: 100%;
+
+  @include mq($md) {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .button {
+    margin-top: 8px;
+
+    @include mq($md) {
+      margin-top: 16px;
+    }
+  }
+}
+
+.features-grid__card-icon {
+  position: relative;
+  z-index: 2;
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+  border-image-slice: 1;
+  background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+  border-radius: 4px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px;
+
+  @include mq($md) {
+    width: 64px;
+    height: 64px;
+    padding: 15px;
+  }
+}
+
+.features-grid__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.features-grid__card-description {
+  color: palette(primary-dark, 100);
+  flex-grow: 1;
+}
+

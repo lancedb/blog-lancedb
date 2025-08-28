@@ -1,0 +1,30 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $cta := $section.cta }}
+
+<section class="cta-product">
+  <div class="container">
+    <div class="cta-product__wrap u-bg-dark-700">
+      <div class="cta-product__vector">
+        {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
+      </div>
+      <div class="cta-product__background">
+        {{ readFile "static/assets/vectors/cta-product.svg" | safeHTML }}
+      </div>
+      <div class="cta-product__content">
+        <h2 class="cta-product__title text-heading-small">{{ $title }}</h2>
+        {{ with $cta }}
+          <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+          target="_blank" rel="noopener" {{ end }}>
+            {{ .text }}
+            {{ if .icon }}
+            <span class="button__icon">
+              {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+            </span>
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

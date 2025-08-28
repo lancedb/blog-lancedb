@@ -1,0 +1,58 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $style := $section.style }}
+{{ $items := $section.items }}
+{{ $bg := $section.bg_color | default "dark" }}
+
+{{ $grid_classes := "col-12 col-md-6" }}
+
+{{ if eq $style "columns" }}
+  {{ $grid_classes = "col-12 col-md-6 col-lg-3" }}
+{{ end }}
+
+<section class="features-grid u-bg-{{$bg}}">
+  <div class="container">
+    <div class="row justify-center">
+      {{ if or $title $description}}
+        <div class="col-12 col-md-8">
+          <div class="features-grid__heading">
+            {{ with $title }}
+              <h2 class="text-heading-small">{{ . }}</h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="text-body-medium">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{ with $items }}
+        {{ range . }}
+          <div class="{{ $grid_classes }}">
+            <div class="features-grid__card">
+              <div class="features-grid__card-icon">
+                {{$iconSrc:= printf "static/assets/%s" .icon}}
+                {{ readFile $iconSrc | safeHTML }}
+              </div>
+              <div class="features-grid__card-body">
+                <h3 class="text-title-medium">{{ .title }}</h3>
+                <p class="text-body-large features-grid__card-description">{{ .text }}</p>
+                {{ with .cta }}
+                  <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+                  target="_blank" rel="noopener" {{ end }}>
+                    {{ .text }}
+                    {{ if .icon }}
+                    <span class="button__icon">
+                      {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                    </span>
+                    {{ end }}
+                  </a>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>

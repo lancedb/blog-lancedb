@@ -1,0 +1,66 @@
+{{ $section:= .section }}
+{{$title:= $section.title | default .page.Title}}
+{{ $description := $section.description | default .page.Description }}
+{{ $cta := $section.cta }}
+{{ $media := $section.media }}
+{{ $media_mob := $section.media_mob }}
+
+<section class="hero-product">
+  <div class="container">
+    <div class="row items-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="hero-product__heading">
+          <h1 class="text-heading-large">
+            {{ $title }}
+          </h1>
+          <p class="text-body-large hero-product__description">
+            {{ $description }}
+          </p>
+        </div>
+        {{ with $cta }}
+        <div class="hero-product__cta">
+          {{ range . }}
+            <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+              target="_blank" rel="noopener" {{ end }}>
+              {{ .text }}
+              {{ if .icon }}
+              <span class="button__icon">
+                {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+              </span>
+              {{ end }}
+            </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="col-12 col-md-6 col-lg-7">
+        {{ if and $media (in $media ".svg") }}
+        <div class="hero-product__vector">
+          {{ $svgSrc:= printf "static/assets/%s" $media }}
+          {{ readFile $svgSrc | safeHTML }}
+        </div>
+        {{else}}
+        <div class="hero-product__image">
+            {{ $alt := $title }}
+            {{ $image_src := $media }}
+            {{ $image_mobile_src := $media_mob | default $image_src }}
+            {{ $image := resources.GetMatch $image_src }}
+            {{ $image_mobile := resources.GetMatch $image_mobile_src }}
+            <picture>
+              <source srcset="{{ $image_mobile.Permalink | relURL }}" media="(max-width: 767px)">
+              <source srcset="{{ $image.Permalink | relURL }}" media="(min-width: 768px)">
+              <img 
+                  src="{{ $image.Permalink | relURL }}" 
+                  alt="{{ $alt }}" 
+                  width="{{ $image.Width }}" 
+                  height="{{ $image.Height }}">
+            </picture>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  <div class="hero-product__bg">
+    {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
+  </div>
+</section>

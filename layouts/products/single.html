@@ -1,0 +1,12 @@
+{{ define "body_class" }}
+  product-single text-base
+{{ end }}
+{{ define "main" }}
+  <div class="text-base">
+    {{ range .Params.sections }}
+      {{ if .type }}
+        {{ partial (printf "sections/%s" .type) (dict "section" . "page" $.Page "site" $.Site) }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}
