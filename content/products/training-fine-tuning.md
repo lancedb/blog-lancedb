@@ -58,7 +58,7 @@ sections:
   - type: how-it-works-product
     bg_color: dark-700
     title: How It Works
-    #description: otrional
+    #description: oprional
     items: 
     - icon: icons/union.svg
       title: Connect to your Data Lake

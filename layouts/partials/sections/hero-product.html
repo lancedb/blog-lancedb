@@ -1,5 +1,5 @@
 {{ $section:= .section }}
-{{$title:= $section.title | default .page.Title}}
+{{ $title:= $section.title | default .page.Title}}
 {{ $description := $section.description | default .page.Description }}
 {{ $cta := $section.cta }}
 {{ $media := $section.media }}
