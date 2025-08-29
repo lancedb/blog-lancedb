@@ -1,0 +1,42 @@
+.hero-text {
+  padding: 60px 0;
+
+  @include mq($md) {
+    padding: 72px 0;
+  }
+}
+
+.hero-text__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include mq($md) {
+    gap: 48px;
+  }
+}
+
+.hero-text__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mq($md) {
+    gap: 24px;
+  }
+}
+
+.hero-text__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+
+  @include mq($md) {
+    gap: 24px;
+  }
+}
+
+.hero-text__description {
+  color: palette(primary-dark, 100);
+}

@@ -6,6 +6,12 @@
     padding: 64px 0;
   }
 
+  .product-single & {
+    @include mq($md) {
+      padding: 48px 0;
+    }
+  }
+
   .container {
     display: flex;
     flex-direction: column;
