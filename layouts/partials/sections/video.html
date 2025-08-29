@@ -4,18 +4,19 @@
 {{ $video_id := $section.video_id }}
 {{ $cta := $section.cta }}
 {{ $bg := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
 
-<section class="video u-bg-{{$bg}}">
+<section class="video u-bg-{{$bg}} {{ if $no_padding_top }}no-padding-top{{ end }}">
   <div class="container">
     <div class="row justify-center">
       {{ if or $title $description}}
         <div class="col-12 col-md-8">
           <div class="video__heading">
             {{ with $title }}
-              <h2 class="text-heading-small text-center">{{ . }}</h2>
+              <h2 class="text-heading-small text-center js-text-animation">{{ . }}</h2>
             {{ end }}
             {{ with $description }}
-              <p class="text-body-large text-center">{{ . }}</p>
+              <p class="text-body-large text-center js-text-animation">{{ . }}</p>
             {{ end }}
           </div>
         </div>

@@ -10,3 +10,26 @@
     {{ end }}
   </div>
 {{ end }}
+{{ define "page_js" }}
+  {{ if .Params.enableSwiper }}
+    {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
+    <script src="{{ $swiper.RelPermalink }}"></script>
+  {{ end }}
+  {{ $types := slice }}
+  {{ range .Params.sections }}
+    {{ with .type }}
+      {{ $types = $types | append . }}
+    {{ end }}
+  {{ end }}
+
+  {{ range uniq $types }}
+    {{ if eq . "how-it-works-product" }}
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    {{ end }}
+    {{ $path := printf "js/%s.js" . }}
+    {{ with resources.Get $path }}
+      {{ $script := . | minify | fingerprint }}
+      <script src="{{ $script.RelPermalink }}"></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

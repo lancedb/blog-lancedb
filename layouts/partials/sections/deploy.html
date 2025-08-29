@@ -3,16 +3,23 @@
 {{ $description := $section.description }}
 {{ $items := $section.items }}
 {{ $bg := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
 
-<section class="deploy u-bg-{{ $bg }}">
+<section class="deploy u-bg-{{ $bg }} {{ if $no_padding_top }}u-no-padding-top{{ end }}">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="deploy__heading">
-          <h2 class="text-heading-small">{{ $title }}</h2>
-          <p class="text-body-medium deploy__description">{{ $description }}</p>
+      {{ if or $title $description }}
+        <div class="col-12">
+          <div class="deploy__heading">
+            {{ with $title }}
+              <h2 class="text-heading-small js-text-animation">{{ . }}</h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="text-body-medium deploy__description js-text-animation">{{ . }}</p>
+            {{ end }}
+          </div>
         </div>
-      </div>
+      {{end}}
       {{range $items}}
       <div class="col-12 col-lg-4">
         <div class="deploy__item text-center">
@@ -20,8 +27,8 @@
             {{$iconSrc:= printf "static/assets/%s" .icon}}
             {{ readFile $iconSrc | safeHTML }}
           </div>
-          <h3 class="text-title-medium">{{ .title }}</h3>
-          <p class="text-body-large deploy__description">{{ .text }}</p>
+          <h3 class="text-title-medium js-text-animation">{{ .title }}</h3>
+          <p class="text-body-large deploy__description js-text-animation">{{ .text }}</p>
           {{ with .cta }}
             <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
             target="_blank" rel="noopener" {{ end }}>

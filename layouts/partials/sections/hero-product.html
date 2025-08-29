@@ -8,12 +8,12 @@
 <section class="hero-product">
   <div class="container">
     <div class="row items-center">
-      <div class="col-12 col-md-6 col-lg-5">
+      <div class="col-12 col-md-6">
         <div class="hero-product__heading">
-          <h1 class="text-heading-large">
+          <h1 class="text-heading-large js-text-animation">
             {{ $title }}
           </h1>
-          <p class="text-body-large hero-product__description">
+          <p class="text-body-large hero-product__description js-text-animation">
             {{ $description }}
           </p>
         </div>
@@ -33,7 +33,7 @@
         </div>
         {{ end }}
       </div>
-      <div class="col-12 col-md-6 col-lg-7">
+      <div class="col-12 col-md-6">
         {{ if and $media (in $media ".svg") }}
         <div class="hero-product__vector">
           {{ $svgSrc:= printf "static/assets/%s" $media }}

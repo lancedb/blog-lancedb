@@ -1,0 +1,76 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $items := $section.items }}
+{{ $bg := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
+
+<section class="traine u-bg-{{ $bg }} {{ if $no_padding_top }}no-padding-top{{ end }}">
+  <div class="container">
+    <div class="row justify-center">
+      {{ if or $title $description }}
+        <div class="col-12">
+          <div class="traine__heading">
+            {{ with $title }}
+              <h2 class="text-heading-small js-text-animation">{{ . }}</h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="text-body-medium traine__description js-text-animation">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      {{range $items}}
+      <div class="col-12 col-md-6">
+        <div class="traine__item">
+          <div class="traine__item-heading">
+            <div class="traine__item-icon">
+              {{$iconSrc:= printf "static/assets/%s" .icon}}
+              {{ readFile $iconSrc | safeHTML }}
+            </div>
+            <h3 class="text-title-large js-text-animation">{{ .title }}</h3>
+          </div>
+          <div class="traine__item-body">
+            <p class="text-body-large text-base traine__description js-text-animation">{{ .text }}</p>
+            {{ with .content }}
+              <div class="traine__item-content">
+                {{ if eq .type "logos"}}
+                  <div class="traine__item-logo__wrap">
+                    {{ range .logos }}
+                      <div class="traine__item-logo">
+                        {{ $icon:= printf "static/assets/logos/%s" . }}
+                        {{ readFile $icon | safeHTML }}
+                      </div>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                {{ if eq .type "list" }}
+                  <div class="traine__item-list__wrap">
+                    <p class="text-body-small">{{ .title }}</p>
+                    <ul class="traine__item-list">
+                      {{ range .list }}
+                        <li class="text-body-small">{{ . }}</li>
+                      {{ end }}
+                    </ul>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+            {{ with .cta }}
+              <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
+              target="_blank" rel="noopener" {{ end }}>
+                {{ .text }}
+                {{ if .icon }}
+                <span class="button__icon">
+                  {{ readFile "static/assets/icons/arrow_right.svg" | safeHTML }}
+                </span>
+                {{ end }}
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      {{end}}
+    </div>
+  </div>
+</section>

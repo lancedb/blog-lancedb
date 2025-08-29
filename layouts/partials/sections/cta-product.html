@@ -13,7 +13,7 @@
         {{ readFile "static/assets/vectors/cta-product.svg" | safeHTML }}
       </div>
       <div class="cta-product__content">
-        <h2 class="cta-product__title text-heading-small">{{ $title }}</h2>
+        <h2 class="cta-product__title text-heading-small js-text-animation">{{ $title }}</h2>
         {{ with $cta }}
           <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in .href "http" }}
           target="_blank" rel="noopener" {{ end }}>

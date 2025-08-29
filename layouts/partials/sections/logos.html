@@ -4,8 +4,9 @@
 {{ $items := $section.items | default $home.Params.logos.items }}
 {{ $speed := $section.speed | default 5000 }}
 {{ $bg_color := $section.bg_color}}
+{{ $no_padding_top := $section.no_padding_top }}
 
-<section class="logos text-center js-logos u-bg-{{ $bg_color }} {{if $section.no_padding_top}}no-padding-top{{end}}" data-slider-speed="{{ $speed }}">
+<section class="logos text-center js-logos u-bg-{{ $bg_color }} {{if $no_padding_top}}no-padding-top{{end}}" data-slider-speed="{{ $speed }}">
   <div class="container">
     <h3 class="logos__caption text-body-medium text-pro">{{ $text }}</h3>
       <div class="swiper">
@@ -22,10 +23,3 @@
       </div>
   </div>
 </section>
-
-{{ define "page_js" }}
-  {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
-  {{ $logosJs := resources.Get "js/logos.js" | minify | fingerprint }}
-  <script src="{{ $swiper.RelPermalink }}"></script>
-  <script src="{{ $logosJs.RelPermalink }}"></script>
-{{ end }}

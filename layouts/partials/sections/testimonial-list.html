@@ -6,8 +6,10 @@
 {{ $name := $section.name }}
 {{ $position := $section.position }}
 {{ $logo := $section.logo }}
+{{ $no_padding_top := $section.no_padding_top }}
+{{ $bg_color := $section.bg_color | default "dark" }}
 
-<section class="testimonial-list js-testimonial-list">
+<section class="testimonial-list js-testimonial-list u-bg-{{ $bg_color }} {{ if $no_padding_top }}no-padding-top{{ end }}">
   <div class="testimonial-list__vector">
     {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
   </div>
@@ -17,7 +19,7 @@
         <div class="col-12 col-md-10 col-lg-8">
           <div class="testimonial-list__heading text-center">
             {{ with $title }}
-              <h2 class="testimonial-list__title text-heading-small">
+              <h2 class="testimonial-list__title text-heading-small js-text-animation">
                 {{ . }}
               </h2>
             {{ end }}
@@ -60,10 +62,3 @@
     <div class="testimonial-list__pagination"></div>
   </div>
 </section>
-
-{{ define "page_js" }}
-  {{ $swiper := resources.Get "js/vendors/swiper-bundle.min.js" | fingerprint }}
-  {{ $testimonialListJs := resources.Get "js/testimonial-list.js" | minify | fingerprint }}
-  <script src="{{ $swiper.RelPermalink }}"></script>
-  <script src="{{ $testimonialListJs.RelPermalink }}"></script>
-{{ end }}

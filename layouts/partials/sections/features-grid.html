@@ -4,6 +4,7 @@
 {{ $style := $section.style }}
 {{ $items := $section.items }}
 {{ $bg := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
 
 {{ $grid_classes := "col-12 col-md-6" }}
 
@@ -11,17 +12,17 @@
   {{ $grid_classes = "col-12 col-md-6 col-lg-3" }}
 {{ end }}
 
-<section class="features-grid u-bg-{{$bg}} features-grid--{{$style}}">
+<section class="features-grid u-bg-{{$bg}} features-grid--{{$style}} {{ if $no_padding_top }}u-no-padding-top{{ end }}">
   <div class="container">
     <div class="row justify-center">
       {{ if or $title $description}}
-        <div class="col-12 col-md-8">
+        <div class="col-12">
           <div class="features-grid__heading">
             {{ with $title }}
-              <h2 class="text-heading-small">{{ . }}</h2>
+              <h2 class="text-heading-small js-text-animation">{{ . }}</h2>
             {{ end }}
             {{ with $description }}
-              <p class="text-body-medium">{{ . }}</p>
+              <p class="text-body-medium js-text-animation">{{ . }}</p>
             {{ end }}
           </div>
         </div>

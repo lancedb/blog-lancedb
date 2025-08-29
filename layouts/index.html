@@ -230,15 +230,15 @@
         <div class="row items-stratch">
           {{ range .items }}
             <div class="col-12 col-lg-6">
-              <div class="how-it-works__item">
+              <div class="how-it-works__item js-how-it-works-wrapper">
                 <h3 class="how-it-works__item-title text-title-large">
                   {{ .title }}
                 </h3>
                 <div class="how-it-works__list-wrap">
-                  <div class="how-it-works__list-line"></div>
+                  <div class="how-it-works__list-line js-how-it-works-line"></div>
                   <ul class="how-it-works__list">
                     {{ range $index, $li:= .list }}
-                      <li class="how-it-works__list-item">
+                      <li class="how-it-works__list-item js-how-it-works-item">
                         <div class="how-it-works__list-icon">
                           {{ readFile (printf "static/assets/icons/%s" $li.icon) | safeHTML }}
                         </div>
@@ -442,6 +442,7 @@
   {{ $js := resources.Get "js/home.js" | minify | fingerprint }}
   {{ $logosJs := resources.Get "js/logos.js" | minify | fingerprint }}
   {{ $gsapJs := resources.Get "js/gsap.js" | minify | fingerprint }}
+  {{ $howItWorksJs := resources.Get "js/how-it-works-product.js" | minify | fingerprint }}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
@@ -449,4 +450,6 @@
   <script src="{{ $js.RelPermalink }}"></script>
   <script src="{{ $logosJs.RelPermalink }}"></script> 
   <script src="{{ $gsapJs.RelPermalink }}"></script>
+  <script src="{{ $howItWorksJs.RelPermalink }}"></script>
+
 {{ end }}

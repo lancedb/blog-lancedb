@@ -1,0 +1,120 @@
+.code-product {
+  padding: 48px 0;
+}
+
+.code-product__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @include mq($md) {
+    gap: 20px;
+  }
+}
+
+.code-product__content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+  @include mq($md) {
+    gap: 20px;
+  }
+}
+
+.code-product__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.code-product__content-text {
+  color: palette(primary-dark, 200);
+}
+
+
+.code-product__code-wrap {
+  display: flex;
+  flex-direction: column;
+  border: 12px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  height: 100%;
+  background-image:
+    linear-gradient(palette(primary-dark), palette(primary-dark)),
+    linear-gradient(90deg, palette(primary-lavende), palette(primary-orange));
+
+  @include mq($md) {
+    border-width: 24px;
+  }
+}
+
+.code-product__code-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background-color: palette(primary-dark, 700);
+
+  @include mq($md) {
+    padding: 17px 18px;
+  }
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+
+    &:first-child {
+      background-color: palette(primary-grey, 200);
+    }
+
+    &:nth-child(2) {
+      background-color: rgba(palette(primary-grey, 200), .6);
+    }
+
+    &:last-child {
+      background-color: rgba(palette(primary-grey, 200), .3);
+    }
+  }
+}
+
+.code-product__code {
+  flex-grow: 1;
+  padding: 17px 25px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  max-width: 100%;
+
+  @include mq($md) {
+    padding: 20px 30px;
+  }
+
+  .highlight:has(code) {
+    padding: 0;
+    background: transparent;
+    border: none;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+  }
+
+  pre {
+    position: static;
+  }
+
+  .code-tab__content {
+    width: fit-content;
+    position: relative;
+  }
+
+  .copy-button {
+    top: 0;
+    right: 0;
+    transform: translateY(-100%);
+  }
+}

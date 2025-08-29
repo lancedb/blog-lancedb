@@ -10,6 +10,8 @@
 
   @include mq($md) {
     gap: 24px;
+    max-width: calc(100%/12 * 8);
+    margin: 0 auto;
   }
 }
 
@@ -19,10 +21,17 @@
   gap: 12px;
   background: #9987830D;
   height: 100%;
+  flex-direction: column;
+
 
   @include mq($md) {
     padding: 24px;
     gap: 24px;
+    flex-direction: row;
+
+    .features-grid--columns & {
+      flex-direction: column;
+    }
   }
 
   .button {
@@ -33,9 +42,6 @@
     }
   }
 
-  .features-grid--columns & {
-    flex-direction: column;
-  }
 }
 
 .features-grid__card-icon {
@@ -47,16 +53,14 @@
   background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
   border-radius: 4px;
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 11px;
 
   @include mq($md) {
-    width: 64px;
-    height: 64px;
     padding: 15px;
   }
 }

@@ -25,6 +25,17 @@
   }
 }
 
+.testimonial__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  @include mq($md) {
+    gap: 24px;
+  }
+}
+
 .testimonial__content {
   position: relative;
   z-index: 2;

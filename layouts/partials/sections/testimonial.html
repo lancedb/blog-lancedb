@@ -1,15 +1,31 @@
 {{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
 {{ $text := $section.text }}
 {{ $name := $section.name }}
 {{ $position := $section.position }}
 {{ $logo := $section.logo }}
+{{ $bg_color := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
 
-<section class="testimonial">
+<section class="testimonial u-bg-{{ $bg_color }} {{ if $no_padding_top }}no-padding-top{{ end }}">
   <div class="testimonial__vector">
     {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
   </div>
   <div class="container">
     <div class="row justify-center">
+      {{ if or $title $description }}
+        <div class="col-12">
+          <div class="testimonial__heading text-center">
+            {{ with $title }}
+              <h2 class="text-heading-small js-text-animation">{{ . }}</h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="text-body-medium testimonial__description js-text-animation">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
       <div class="col-12 col-md-10 col-lg-7">
         <div class="testimonial__content">
           <div class="testimonial__icon">
