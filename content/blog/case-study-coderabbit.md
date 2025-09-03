@@ -41,7 +41,7 @@ Today, [CodeRabbit](https://www.coderabbit.ai/) performs tens of thousands of co
 - **Fewer Issues**: AI-powered context analysis reduces code issues by up to 50% when compared with manual code reviews
 - **Flexible Integration**: Instantly usable across leading Git platforms and code editors, delivering real-time feedback without disrupting developer flow.
 
-## Challenge: context-aware code reviews at scaleenge
+## Challenge: context-aware code reviews at scale
 
 For [CodeRabbit](https://www.coderabbit.ai/) to deliver AI code reviews at the level of a senior developer, it must construct meaningful context from fragmented signals across massive and evolving codebases. Unlike static linting tools, effective AI review requires connecting the dots across code changes, architectural patterns, historical decisions, and team conventions, all in real time.
 
@@ -71,10 +71,10 @@ Even perfect syntax and architecture can violate design intent. Great reviews de
     or violate implicit contracts.
 
 **And Then, Volatility**
-change. Context is high-dimensional, unstructured, and constantly evolving. Every new commit, comment, and design decision reshapes what matters.
+
+Context is high-dimensional, unstructured, and constantly evolving. Every new commit, comment, and design decision reshapes what matters.
 
 > "Retrieving the right context is like finding needles in a million haystacks... while the haystacks are constantly reshaping themselves."
-> 
 
 ### Why semantic search wasn't enough: Pinecone’s limits
 There’s no question that building this kind of context demands deep semantic intelligence. [CodeRabbit](https://www.coderabbit.ai/) initially adopted Pinecone to enable vector-based similarity search across its knowledge graph. It was a step in the right direction, but only part of the solution:
@@ -142,10 +142,10 @@ By integrating LanceDB as the backbone of its context engine, [CodeRabbit](https
 
 ## Summary
 LanceDB has become the semantic engine behind [CodeRabbit's](https://www.coderabbit.ai/) evolution into a category-defining AI code review platform, unlocking both massive scale and precision that was previously unattainable. LanceDB has empowered [CodeRabbit](https://www.coderabbit.ai/) to deliver:
-- sub-second latency for semantic search
- -millions of pull requests processed monthly: LanceDB’s optimized upsert and indexing pipeline ensures real-time ingestion without any performance degradation.
- - effortless on-prem and cloud deployment: LanceDB enables [CodeRabbit](https://www.coderabbit.ai/) to run securely in both air-gapped enterprise and cloud environments without code changes or operational overhead.
+- **Sub-second latency** for semantic search across millions of code interactions
+- **Millions of pull requests processed monthly**: LanceDB's optimized upsert and indexing pipeline ensures real-time ingestion without any performance degradation
+- **Effortless on-prem and cloud deployment**: LanceDB enables [CodeRabbit](https://www.coderabbit.ai/) to run securely in both air-gapped enterprise and cloud environments without code changes or operational overhead
 
 Looking ahead, [CodeRabbit](https://www.coderabbit.ai/) is setting its sights on redefining the future of AI-native engineering. The team is expanding its context graph to encompass even richer signals, runtime traces, architectural diagrams, CI/CD events, and more, creating a living blueprint of every system it touches. 
 
-With deeper integrations into planning tools and observability stacks, [CodeRabbit](https://www.coderabbit.ai/) aims to not just review code, but act as a centralized governance layer identifying risks and guiding developers with insight drawn from millions of engineering years worth of built-in intelligence. 
+With deeper integrations into planning tools and observability stacks, [CodeRabbit](https://www.coderabbit.ai/) aims to not just review code, but act as a centralized governance layer identifying risks and guiding developers with insights drawn from millions of engineering years worth of built-in intelligence. 
