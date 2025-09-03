@@ -76,14 +76,14 @@ Context is high-dimensional, unstructured, and constantly evolving. Every new co
 
 > "Retrieving the right context is like finding needles in a million haystacks... while the haystacks are constantly reshaping themselves."
 
-### Why semantic search wasn't enough: Pinecone’s limits
-There’s no question that building this kind of context demands deep semantic intelligence. [CodeRabbit](https://www.coderabbit.ai/) initially adopted Pinecone to enable vector-based similarity search across its knowledge graph. It was a step in the right direction, but only part of the solution:
-- **Cost at scale**: As usage expanded to millions of pull requests and tens of thousands of daily queries, Pinecone’s pricing model became unsustainable. Real-time retrieval over massive repositories incurred runaway costs, especially when processing large amounts of text.
-- **Deployment constraints**: Pinecone offered no viable path for true on-premises deployment. For [CodeRabbit's](https://www.coderabbit.ai/) enterprise customers, many operating in regulated or air-gapped environments, this was a dealbreaker. They required strict data residency guarantees and full infrastructure control.
+### Why semantic search wasn't enough
+There’s no question that building this kind of context demands deep semantic intelligence. [CodeRabbit](https://www.coderabbit.ai/) initially adopted a popular closed-source database to enable vector-based similarity search across its knowledge graph. It was a step in the right direction, but only part of the solution:
+- **Cost at scale**: As usage expanded to millions of pull requests and tens of thousands of daily queries, their pricing model became unsustainable. Real-time retrieval over massive repositories incurred runaway costs, especially when processing large amounts of text.
+- **Deployment constraints**: The existing product offered no viable path for true on-premises deployment. For [CodeRabbit's](https://www.coderabbit.ai/) enterprise customers, many operating in regulated or air-gapped environments, this was a dealbreaker. They required strict data residency guarantees and full infrastructure control.
 
 ### Why LanceDB became the only solution that worked
 
-Scaling semantic context retrieval in real-world environments meant **moving beyond Pinecone**. [CodeRabbit](https://www.coderabbit.ai/) needed a vector database designed not for theoretical benchmarks, but for the messy, high-velocity realities of software engineering.
+Scaling semantic context retrieval in real-world environments meant looking for other alternatives. [CodeRabbit](https://www.coderabbit.ai/) needed a vector database designed not for theoretical benchmarks, but for the messy, high-velocity realities of software engineering.
 
 | Task | [CodeRabbit](https://www.coderabbit.ai/) Requirements |
 |---------|-------------|
