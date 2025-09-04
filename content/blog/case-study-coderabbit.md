@@ -23,7 +23,7 @@ At the core of [CodeRabbit's](https://www.coderabbit.ai/) tech stack lies [Lance
 
 > "LanceDB transformed how we handle context at scale. While other vector databases hit cost and performance walls, LanceDB scales effortlessly with our growth—from startup to enterprise. Its multimodal capabilities and deployment flexibility were game-changers, enabling us to deliver the depth of analysis our customers expect while maintaining sub-second response times across millions of code reviews."
 >
-> — Rohit Khanna, VP of Engineering at [CodeRabbit](https://www.coderabbit.ai/)
+> — Rohit Khanna, VP of Engineering at CodeRabbit
 
 This is the contextual understanding that is critical for modern, complex codebases. Designed for enterprise customers, LanceDB supports cloud and on-prem deployments with secure, low-latency performance. As [CodeRabbit's](https://www.coderabbit.ai/) customer base exploded, LanceDB scaled effortlessly, preserving speed while avoiding spiraling infrastructure costs. 
 
