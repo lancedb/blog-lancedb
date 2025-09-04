@@ -1,6 +1,6 @@
 ---
 title: "Productionalize AI Workloads with Lance Namespace, LanceDB, and Ray"
-date: 2025-08-29
+date: 2025-09-04
 draft: false
 featured: false
 categories: ["Engineering"]
