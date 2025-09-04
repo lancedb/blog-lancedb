@@ -74,7 +74,7 @@ LanceDB's Full-Text Search now delivers dramatically faster performance and more
 
 * **Avoided column name collision in `merge_insert`**: Prevented potential column name conflicts in `merge_insert` operations by renaming an internal column, ensuring smooth data ingestion.[#lance4499](https://github.com/lancedb/lance/pull/4499)
 
-* **Fixed index out-of-bounds error in posting iterator**: RFixed an index out-of-bounds error in the posting list iterator that could cause crashes during vector search queries. [#lance4587](https://github.com/lancedb/lance/pull/4587)
+* **Fixed index out-of-bounds error in posting iterator**: Fixed an index out-of-bounds error in the posting list iterator that could cause crashes during vector search queries. [#lance4587](https://github.com/lancedb/lance/pull/4587)
 
 * **Fixed BTree Prewarm Offset Overflow**: Resolved an offset overflow issue when prewarming BTree indices, preventing crashes during startup.
 
