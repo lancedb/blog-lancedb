@@ -1,5 +1,5 @@
 ---
-title: "Productionalize Your AI Workload with Lance Namespace, LanceDB and Ray"
+title: "Productionalize AI Workloads with Lance Namespace, LanceDB, and Ray"
 date: 2025-08-29
 draft: false
 featured: false
@@ -19,24 +19,24 @@ we introduced Lance Namespace and its integration with Apache Spark.
 Today, we're excited to showcase how to **productionalize your AI workloads** by combining:
 - **Lance Namespace** for seamless enterprise stack integration with your existing metadata services
 - **Ray** for data ingestion and feature engineering at scale
-- **LanceDB** for efficient vector and full text search
+- **LanceDB** for efficient [vector search](/docs/search/vector-search/) and [full‑text search](/docs/search/full-text-search/)
 
 This powerful combination enables you to build production-ready AI applications that 
 integrate with your existing infrastructure while maintaining the scalability needed for real-world deployments.
 
 ## What's New
 
-### Lance-Ray Integration
+### Lance–Ray Integration
 
-The [lance-ray](https://pypi.org/project/lance-ray/) package has now evolved into its own independent sub-project, 
+The [lance-ray](https://pypi.org/project/lance-ray/) package has now evolved into its own independent subproject, 
 bringing seamless integration between Ray and Lance. It enables distributed read, write, and data evolution operations 
 on Lance datasets using Ray's parallel processing capabilities, making it simple to handle large-scale data transformations 
 and feature engineering workloads across your compute cluster.
 
-### Lance Namespace Python and Rust SDK
+### Lance Namespace Python and Rust SDKs
 
 Lance Namespace now provides native Python and Rust SDKs that enable seamless enterprise integration across languages. 
-This support is what makes the integration with both lance-ray and LanceDB possible.
+This is what enables integration with both `lance-ray` and LanceDB.
 
 ## Building an End-to-End AI Pipeline
 
@@ -79,7 +79,7 @@ import lance_namespace as ln
 # Example 1: Directory-based namespace (for development/testing)
 namespace = ln.connect("dir", {"root": "./lance_tables"})
 
-# Example 2: Hive MetaStore (for Hadoop/Spark ecosystems)
+# Example 2: Hive Metastore (for Hadoop/Spark ecosystems)
 # namespace = ln.connect("hive", {"uri": "thrift://hive-metastore:9083"})
 
 # Example 3: AWS Glue Catalog (for AWS-based infrastructure)
@@ -96,7 +96,7 @@ for detailed configuration options of each integrated service.
 
 ### Step 3: Distributed Data Ingestion with Ray
 
-Now let's load the Quora dataset and ingest it into Lance format using Ray's distributed processing:
+Now let's load the Quora dataset and ingest it into [Lance format](/docs/overview/lance/) using Ray's distributed processing:
 
 ```python
 # Load Quora dataset from Hugging Face
@@ -127,7 +127,7 @@ write_lance(
 print(f"Ingested {ray_dataset.count()} documents into Lance format")
 ```
 
-### Step 4: Feature Engineering with Lance-Ray
+### Step 4: Feature Engineering with Lance–Ray
 
 Now we'll use Ray's distributed processing to generate embeddings for all documents. 
 
@@ -171,7 +171,7 @@ add_columns(
 print("Embeddings generated successfully!")
 ```
 
-The `add_columns` functionality in Ray allows any ML/AI scientists to quickly start feature engineering
+The `add_columns` functionality in Ray allows ML/AI scientists to quickly start feature engineering
 with a local or remote Ray cluster.
 For more advanced feature engineering capabilities such as lazy materialization, partial backfill, 
 fault-tolerant execution, check out [LanceDB's Geneva](https://lancedb.com/docs/geneva/) - 
@@ -180,7 +180,7 @@ You can also follow our [multimodal lakehouse tutorial](https://lancedb.com/docs
 
 ### Step 5: Vector Search with LanceDB
 
-Now let's connect to our Lance dataset through LanceDB 
+Now let's connect to our Lance dataset through [LanceDB](/docs) 
 using the same namespace and perform vector similarity search:
 
 ```python
@@ -190,7 +190,7 @@ import lancedb
 db = lancedb.connect_namespace("dir", {"root": "./lance_tables"})
 table = db.open_table("quora_questions")
 
-# Create vector index for fast similarity search
+# Create [vector index](/docs/indexing/vector-index/) for fast similarity search
 print("Creating vector index...")
 table.create_index(
     metric="cosine",
@@ -218,16 +218,16 @@ for idx, row in vector_results.iterrows():
     print()
 ```
 
-### Step 6: Hybrid Search - Combining Vector and Full-Text
+### Step 6: Hybrid Search – Combining Vector and Full‑Text
 
-LanceDB supports hybrid search that combines the semantic understanding of vector search 
-with the precision of keyword matching:
+LanceDB supports [hybrid search](/docs/search/hybrid-search/) that combines the semantic understanding of [vector search](/docs/search/vector-search/) 
+with the precision of [keyword matching](/docs/search/full-text-search/):
 
 ```python
 print("Creating full-text search index...")
 table.create_fts_index(["title", "text"])
 
-# Example 1: Full-Text Search
+# Example 1: Full‑Text Search
 keyword_results = (
     table.search("machine learning algorithms", query_type="fts")
     .limit(5)
@@ -241,14 +241,14 @@ for idx, row in keyword_results.iterrows():
     print(f"   {row['text'][:150]}...")
     print()
 
-# Example 2: Hybrid Search - Best of Both Worlds
+# Example 2: Hybrid Search – Best of Both Worlds
 # Combines semantic vector search with keyword filtering
 query_text = "How to implement neural networks"
 query_embedding = model.encode([query_text], normalize_embeddings=True)[0]
 
 hybrid_results = (
     table.search(query_embedding, vector_column_name="vector", query_type="hybrid")
-    .where("text LIKE '%neural%' OR text LIKE '%network%'", prefilter=True)
+    .where("text LIKE '%neural%' OR text LIKE '%network%'", prefilter=True)  # see /docs/search/filtering/
     .limit(5)
     .to_pandas()
 )
@@ -261,12 +261,12 @@ for idx, row in hybrid_results.iterrows():
     print(f"   {row['text'][:150]}...")
     print()
 
-# Example 3: Reranking with hybrid search
+# Example 3: Reranking with Hybrid Search
 # Use full-text search for initial retrieval, then rerank with vectors
 rerank_results = (
     table.search("deep learning", query_type="fts")
     .limit(20)  # Get more candidates
-    .rerank(reranker=model.encode, query_text="practical deep learning tips")
+    .rerank(reranker=model.encode, query_text="practical deep learning tips")  # see /docs/reranking/
     .limit(5)  # Keep top 5 after reranking
     .to_pandas()
 )
@@ -287,7 +287,7 @@ This integration pattern is particularly powerful for:
 1. **RAG Applications**: Ingest documents, generate embeddings, and serve semantic search
 2. **Recommendation Systems**: Process user interactions and build vector indices at scale
 3. **Multimodal Search**: Process images and text together using Ray's distributed computing
-4. **Feature Stores**: Transform and store ML features with versioning through namespace
+4. **Feature Stores**: Transform and store ML features with versioning via Lance Namespace
 5. **Real-time Analytics**: Combine batch processing with low-latency search
 
 ## Getting Started Today
@@ -295,8 +295,8 @@ This integration pattern is particularly powerful for:
 Ready to scale your AI workloads? Here's how to get started:
 
 1. **Install the packages**: `pip install lance-ray lancedb`
-3. **Read the documentation**: [Lance-Ray](https://lancedb.github.io/lance/integrations/ray/), [LanceDB](https://lancedb.com/docs), [LanceDB Geneva](https://lancedb.com/docs/geneva/)
-4. **Join the community**: [Discord](https://discord.gg/zMM32dvNtd) and [GitHub Discussions](https://github.com/lancedb/lance/discussions)
+2. **Read the documentation**: [Lance–Ray](https://lancedb.github.io/lance/integrations/ray/), [LanceDB](/docs), [Vector Search](/docs/search/vector-search/), [Full‑Text Search](/docs/search/full-text-search/), [Hybrid Search](/docs/search/hybrid-search/), [Vector Indexing](/docs/indexing/vector-index/), [FTS Indexing](/docs/indexing/fts-index/), [Filtering](/docs/search/filtering/), [Reranking](/docs/reranking/), [Quickstart](/docs/quickstart/basic-usage/), [LanceDB Geneva](/docs/geneva/)
+3. **Join the community**: [Discord](https://discord.gg/zMM32dvNtd) and [GitHub Discussions](https://github.com/lancedb/lance/discussions)
 
 ## Thank You to Our Contributors
 
@@ -317,7 +317,7 @@ in shaping this integration to meet the needs of production AI workloads.
 The combination of Lance Namespace, Ray, and LanceDB provides a complete solution for productionalizing AI workloads. 
 Lance Namespace ensures seamless integration with your existing enterprise metadata services, 
 Ray delivers the distributed computing power needed for data ingestion and feature engineering at scale, 
-and LanceDB provides efficient vector and full-text search capabilities for serving your AI applications.
+and LanceDB provides efficient vector and full‑text search capabilities for serving your AI applications.
 
 This integrated approach bridges the gap between experimentation and production, 
 enabling you to build AI systems that not only scale but also fit naturally into your existing infrastructure.
