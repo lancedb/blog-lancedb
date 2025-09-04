@@ -15,7 +15,7 @@ author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
 ---
 
 In our [previous post](https://lancedb.com/blog/introducing-lance-namespace-spark-integration), 
-we introduced Lance Namespace and its integration with Apache Spark. 
+we introduced [Lance Namespace](https://lancedb.github.io/lance/format/namespace/) and its integration with Apache Spark. 
 Today, we're excited to showcase how to **productionalize your AI workloads** by combining:
 - **Lance Namespace** for seamless enterprise stack integration with your existing metadata services
 - **Ray** for data ingestion and feature engineering at scale
@@ -314,16 +314,16 @@ in shaping this integration to meet the needs of production AI workloads.
 
 ## Conclusion
 
-The combination of Lance Namespace, Ray, and LanceDB provides a complete solution for productionalizing AI workloads. 
-Lance Namespace ensures seamless integration with your existing enterprise metadata services, 
+The combination of [Lance Namespace](https://lancedb.github.io/lance/format/namespace/), Ray, and [LanceDB](/docs) provides a complete solution for productionalizing AI workloads. 
+[Lance Namespace](https://lancedb.github.io/lance/format/namespace/) ensures seamless integration with your existing enterprise metadata services, 
 Ray delivers the distributed computing power needed for data ingestion and feature engineering at scale, 
-and LanceDB provides efficient vector and full‑text search capabilities for serving your AI applications.
+and LanceDB provides efficient [vector search](/docs/search/vector-search/), [full‑text search](/docs/search/full-text-search/), and [hybrid search](/docs/search/hybrid-search/) capabilities for serving your AI applications.
 
 This integrated approach bridges the gap between experimentation and production, 
-enabling you to build AI systems that not only scale but also fit naturally into your existing infrastructure.
+enabling you to build AI systems that not only scale but also fit naturally into your existing infrastructure. Get started with the [Quickstart](/docs/quickstart/basic-usage/) or explore [indexing](/docs/indexing/vector-index/) options.
 
-Whether you're building a RAG system, recommendation engine, or multimodal search application, 
+Whether you're building a [RAG system](/docs/tutorials/rag/), recommendation engine, or [multimodal search](/docs/tutorials/mmlh/) application, 
 this powerful trio gives you the enterprise integration, scalability, and performance you need for production deployments.
 
-Try it out today and let us know what you build! We're excited to see how you use Lance Namespace, Ray, and LanceDB 
+Try it out today and let us know what you build! We're excited to see how you use [Lance Namespace](https://lancedb.github.io/lance/format/namespace/), Ray, and [LanceDB](/docs) 
 to productionalize your AI workloads.
