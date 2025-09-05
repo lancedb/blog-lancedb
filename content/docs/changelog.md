@@ -70,7 +70,7 @@ LanceDB's Full-Text Search now delivers dramatically faster performance and more
 
 * **Search Cache Integrity**: Fixed cache conflicts between different data partitions that could lead to inconsistent search results and degraded performance.[#lance4490](https://github.com/lancedb/lance/pull/4490)
 
-* **Accurate Performance Metrics: Corrected inaccurate elapsed time reporting for IVF index nodes, ensuring reliable performance monitoring.[#lance4491](https://github.com/lancedb/lance/pull/4491)
+* **Accurate Performance Metrics**: Corrected inaccurate elapsed time reporting for IVF index nodes, ensuring reliable performance monitoring.[#lance4491](https://github.com/lancedb/lance/pull/4491)
 
 * **Avoided column name collision in `merge_insert`**: Prevented potential column name conflicts in `merge_insert` operations by renaming an internal column, ensuring smooth data ingestion.[#lance4499](https://github.com/lancedb/lance/pull/4499)
 
@@ -114,11 +114,11 @@ Performance improvements across vector search and indexing and enhanced Cloud UI
 #### SDK and API 
 * **Session-Based Cache Control:**  Python and TypeScript users can now customize caching behavior per session—ideal for large datasets and enterprise deployments. [lancedb#2530](https://github.com/lancedb/lancedb/pull/2530). Specifically:
 
-* **Automatic Conflict Resolution for Updates:** Update operations now support retries with exponential backoff to handle concurrent writes. [lance#4167](https://github.com/lancedb/lance/pull/4167)
+  * **Automatic Conflict Resolution for Updates:** Update operations now support retries with exponential backoff to handle concurrent writes. [lance#4167](https://github.com/lancedb/lance/pull/4167)
 
-* **Multi-Vector Support (JavaScript):** Added multivector support to the JavaScript/TypeScript SDK. [lancedb#2527](https://github.com/lancedb/lancedb/pull/2527)
+  * **Multi-Vector Support (JavaScript):** Added multivector support to the JavaScript/TypeScript SDK. [lancedb#2527](https://github.com/lancedb/lancedb/pull/2527)
 
-* **Ngram Tokenizer for FTS:** Flexible tokenization for full-text search, supporting languages and use cases with partial or fuzzy matches. [lancedb#2507](https://github.com/lancedb/lancedb/pull/2507)
+  * **Ngram Tokenizer for FTS:** Flexible tokenization for full-text search, supporting languages and use cases with partial or fuzzy matches. [lancedb#2507](https://github.com/lancedb/lancedb/pull/2507)
 
 #### Cloud UI and User Experience
 * **LanceDB Cloud UI Improvements:**  
