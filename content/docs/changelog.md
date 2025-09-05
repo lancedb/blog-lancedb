@@ -5,6 +5,86 @@ description: Track LanceDB's latest features, improvements, and bug fixes. Stay 
 weight: 302
 ---
 
+## Aug 2025
+
+Full-Text Search runs dramatically faster, and index creation is now easier to manage.
+
+### Features
+
+#### Full-Text Search (FTS): 3-8x Faster with Better Accuracy
+LanceDB's Full-Text Search now delivers dramatically faster performance and more relevant results. Complex queries with _50-100 terms_ run **3-8x faster** with optimized algorithms, while improved caching and scoring ensure higher quality results at interactive speeds.
+
+* **Long query optimization**: - Complex queries with 50-100 terms now execute 3-8x faster through WAND algorithm improvements. [lance#4576](https://github.com/lancedb/lance/pull/4576)
+
+* **Smart query execution**: Automatic fallback between WAND and flat search based on selectivity, with configurable thresholds and block-level pruning to skip unpromising document blocks. [lance#4551](https://github.com/lancedb/lance/pull/4551), [lance#4570](https://github.com/lancedb/lance/pull/4570)
+
+* **Precision-Ranked Results**: Benefit from more relevant search rankings thanks to fixes in our BM25 scoring algorithm, ensuring the best answers surface first. [lance#4525](https://github.com/lancedb/lance/pull/4525)
+
+* **Performance telemetry removal**: Eliminated 80% overhead from hot paths, achieving 4-5x speedup. [lance#4536](https://github.com/lancedb/lance/pull/4536)
+
+#### API & Usability Improvements
+
+* **Paginated search results**: Support for `limit` and `offset` in both vector and full-text search queries.
+
+* **Custom index names**: Users can now set custom names for indices via API and SQL. Setting `train=false` disables training for certain index types.
+
+* **Empty index creation**: Introduced the ability to create empty scalar indices, enabling users to define index structures upfront without initial data. [lance#4033](https://github.com/lancedb/lance/pull/4033)
+
+* **More storage control**: Added new configuration options for object store caching and behavior. [lance#4509](https://github.com/lancedb/lance/pull/4509) #enterprise
+
+* **Configurable timeouts**: Set an overall request timeout for remote clients in Python and Node.js SDKs. This enhancement gives users more robust control over request reliability and latency. [lancedb#2550](https://github.com/lancedb/lancedb/pull/2550)
+
+#### Performance & Efficiency
+* **Streaming for large operations**:  Process massive `insert`, `merge`, and `create_table` requests without loading the entire dataset into memory.
+
+* **Empty projection support**: Introduced support for empty projections in queries, allowing users to execute queries that return no columns. This enhancement is particularly useful for operations like `insert` or `delete`, where the focus is on modifying data without retrieving any results.
+
+* **Optimized remote queries**: Improved performance for indexed queries by optimizing cache use and enabling remote filtered reads.
+
+* **Scalar index prewarming**: Preload frequently accessed scalar indices into memory on server startup for faster cold starts. #enterprise
+
+#### Observability & Debugging
+
+* **Enhanced Merge Insert Observability**: Introduced `explain_plan` and `analyze_plan` functions for `merge_insert` operations, enabling users to visualize and assess the execution plan and performance metrics of merge operations.[lance#4295](https://github.com/lancedb/lance/pull/4295)
+
+* **Detailed CPU metrics**: The `analyze_plan()` output now includes cumulative CPU time for each operator. [lance#4519](https://github.com/lancedb/lance/pull/4519)
+
+* **Granular FTS controls**: New tuning knobs and metrics for full-text search provide deeper insight and predictable performance. [lance#4555](https://github.com/lancedb/lance/pull/4555), [lance#4560](https://github.com/lancedb/lance/pull/4560)
+
+
+#### Stability & Reliability
+* **Automatic conflict resolution for `delete`**: Delete operations now handle conflicts gracefully to ensure data integrity. [lance#4407](https://github.com/lancedb/lance/pull/4407)
+
+* **Expression depth limit**: Implemented a safeguard to prevent panics from excessively deep filter expressions. [lance#4403](https://github.com/lancedb/lance/pull/4403)
+
+#### Cloud UI Improvement
+* **Visual index creation**: Cloud users can create vector, scalar, and FTS index through an intuitive UI workflow.
+
+---
+
+### Bug Fixes
+
+* **FTS Cache Performance**: Fixed a critical memory sizing issue that was causing premature cache evictions, increasing cache hit rates from ~5% to over 80% for dramatically faster repeated queries. [lance#4513](https://github.com/lancedb/lance/pull/4513)
+
+* **File Reading Stability**: Resolved a panic that could occur when attempting to read from a file after its last row had been deleted.[#lance4452](https://github.com/lancedb/lance/pull/4452)
+
+* **Search Cache Integrity**: Fixed cache conflicts between different data partitions that could lead to inconsistent search results and degraded performance.[#lance4490](https://github.com/lancedb/lance/pull/4490)
+
+* **Accurate Performance Metrics**: Corrected inaccurate elapsed time reporting for IVF index nodes, ensuring reliable performance monitoring.[#lance4491](https://github.com/lancedb/lance/pull/4491)
+
+* **Avoided column name collision in `merge_insert`**: Prevented potential column name conflicts in `merge_insert` operations by renaming an internal column, ensuring smooth data ingestion.[#lance4499](https://github.com/lancedb/lance/pull/4499)
+
+* **Fixed index out-of-bounds error in posting iterator**: Fixed an index out-of-bounds error in the posting list iterator that could cause crashes during vector search queries. [#lance4587](https://github.com/lancedb/lance/pull/4587)
+
+* **Fixed BTree Prewarm Offset Overflow**: Resolved an offset overflow issue when prewarming BTree indices, preventing crashes during startup.
+
+* **Azure Cache Isolation**: Fixed a critical bug where databases with identical names in different Azure storage accounts were sharing a cache, preventing potential data corruption. #enterprise
+
+* **Fixed incorrect boolean filter results**: Fixed bugs in negative filters (NOT EQUAL) that could cause missing rows or duplicates, ensuring accurate query results.
+
+* **Fixed performance regression in indexed point lookups**: Resolved a regression that caused efficient indexed point lookups to incorrectly fall back to slow full table scans.
+
+
 ## July 2025
 
 Performance improvements across vector search and indexing and enhanced Cloud UI.
@@ -34,11 +114,11 @@ Performance improvements across vector search and indexing and enhanced Cloud UI
 #### SDK and API 
 * **Session-Based Cache Control:**  Python and TypeScript users can now customize caching behavior per session—ideal for large datasets and enterprise deployments. [lancedb#2530](https://github.com/lancedb/lancedb/pull/2530). Specifically:
 
-* **Automatic Conflict Resolution for Updates:** Update operations now support retries with exponential backoff to handle concurrent writes. [lance#4167](https://github.com/lancedb/lance/pull/4167)
+  * **Automatic Conflict Resolution for Updates:** Update operations now support retries with exponential backoff to handle concurrent writes. [lance#4167](https://github.com/lancedb/lance/pull/4167)
 
-* **Multi-Vector Support (JavaScript):** Added multivector support to the JavaScript/TypeScript SDK. [lancedb#2527](https://github.com/lancedb/lancedb/pull/2527)
+  * **Multi-Vector Support (JavaScript):** Added multivector support to the JavaScript/TypeScript SDK. [lancedb#2527](https://github.com/lancedb/lancedb/pull/2527)
 
-* **Ngram Tokenizer for FTS:** Flexible tokenization for full-text search, supporting languages and use cases with partial or fuzzy matches. [lancedb#2507](https://github.com/lancedb/lancedb/pull/2507)
+  * **Ngram Tokenizer for FTS:** Flexible tokenization for full-text search, supporting languages and use cases with partial or fuzzy matches. [lancedb#2507](https://github.com/lancedb/lancedb/pull/2507)
 
 #### Cloud UI and User Experience
 * **LanceDB Cloud UI Improvements:**  
