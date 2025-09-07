@@ -1,25 +1,22 @@
 ---
-title: "Unlocking Real-time AI analytics with Apache Fluss, Apache Flink and Lance"
-date: 2025-09-04
+title: "Unlocking Real-time Multimodal AI Analytics with Apache Fluss and Lance"
+date: 2025-09-07
 draft: false
 featured: false
 categories: ["Engineering"]
 image: /assets/blog/fluss-integration/preview-image.png
 meta_image: /assets/blog/fluss-integration/preview-image.png
-description: "TODO"
-author: Cheng Wang
-author_avatar: "/assets/authors/cheng-wang.jpg"
-author_bio: "Software Engineer @ Tencent"
-author_github: "TODO"
-author_linkedin: "https://www.linkedin.com/in/TODO"
+description: "Learn how to build real-time multimodal AI analytics by integrating Apache Fluss streaming storage with Lance's AI-optimized lakehouse. This guide demonstrates streaming multimodal data processing for RAG systems and ML workflows."
+author: Wayne Wang
+author_bio: "Senior Software Engineer @ Tencent"
 ---
 
 With the advent of the generative AI era, 
-nearly all digital applications are integrating AI innovations to enhance their capabilities. 
-The successful deployment of AI applications relies heavily on data, 
+nearly all digital applications are integrating multimodal AI innovations to enhance their capabilities. 
+The successful deployment of multimodal AI applications relies heavily on data, 
 particularly for enterprise decision-making systems where high-quality, fresh data is critical. 
 For instance, in customer service and risk control systems, 
-AI models that lack access to real-time customer inputs will struggle to make accurate decisions.
+multimodal AI models that lack access to real-time customer inputs will struggle to make accurate decisions.
 
 Apache Fluss addresses this need as a purpose-built streaming storage for real-time analytics. 
 Serving as the real-time data layer for lakehouse architectures, 
@@ -31,12 +28,12 @@ enabling the "shared data" feature:
 - Lakehouse as Fluss's historical layer: The lakehouse provides optimized long-term storage with minute-level freshness, acting as the historical batch data foundation for real-time layer.
 
 Complementing the Fluss ecosystem, Lance emerges as the next-generation AI lakehouse platform 
-specialized for machine learning and AI applications. It efficiently handles multimodal data (text, images, vectors) and 
+specialized for machine learning and multimodal AI applications. It efficiently handles multimodal data (text, images, vectors) and 
 delivers high-performance queries such as lightning-fast vector search.
 
 ![Fluss with Lance Lakehouse](/assets/blog/fluss-integration/fluss1.png)
 
-Combining Lance and Apache Fluss unlocks true real-time AI analytics. 
+Combining Lance and Apache Fluss unlocks true real-time multimodal AI analytics. 
 Consider Retrieval-Augmented Generation (RAG), 
 a popular generative AI framework that enhances the capabilities of large language models (LLMs) 
 by incorporating up-to-date information during the generation process. 
@@ -179,7 +176,7 @@ Once it's running, your local tiering pipeline is good to go.
 ## Multimodal Data Processing
 
 We'll walk through a Python code example that demonstrates how to stream a dataset of images into Fluss, 
-and subsequently load the tiered Lance dataset into a Pandas DataFrame for further processing.
+and subsequently load the tiered Lance dataset into a Pandas `DataFrame` for further processing.
 
 ### Step 1: Create Connection
 
@@ -207,7 +204,7 @@ def create_table(conn, table_path, pa_schema):
 		fluss_schema,
 		properties={
 			"table.datalake.enabled": "true",
-			"table.datalake.freshness": "30s"
+			"table.datalake.freshness": "30s",
 		}
 	)
 	
@@ -237,7 +234,7 @@ def process_images(schema: pa.Schema):
 
 	# Get the list of image files
 	image_files = [filename for filename in os.listdir(images_folder)
-		  		 if filename.endswith((".png", ".jpg", ".jpeg"))]
+         if filename.endswith((".png", ".jpg", ".jpeg"))]
 
 	# Iterate over all images in the folder with tqdm
 	for filename in tqdm(image_files, desc="Processing Images"):
@@ -284,61 +281,79 @@ def write_to_fluss(conn, table_path, pa_schema):
 ### Step 4: Check Job Completion
 
 Wait a little while for the tiering job to finish. 
-Then, go to the Minio UI, and you'll see the Lance Files in your `lancebucket`.
+Then, go to the Minio UI, and you'll see the Lance dataset in your `lancebucket`.
 
 ![Check Job MinIO UI](/assets/blog/fluss-integration/fluss3.png)
 
 ### Step 5: Loading into Pandas
 
-The final step in the process is to load the data from the Lance datasets into Pandas `DataFrame`, 
-making the image data easily accessible for further processing and analysis in machine learning workflows.
+While Fluss is writing data into Lance at real time, you can load from the Lance datasets in MinIO.
+At this point, you can leverage anything that integrates with Lance to consume the data in any ML/AI applications,
+including [PyTorch for training](https://lancedb.github.io/lance/integrations/pytorch/), 
+[LangChain for RAG integration](https://lancedb.github.io/lancedb/integrations/langchain/), 
+and [LanceDB](https://lancedb.com) for hybrid search.
+You can also use Lance's [Blob API](https://lancedb.github.io/lance/guide/blob/) to have efficient low level access to the multimodal image data.
+
+Here, we present a simple `loading_into_pandas` example to describe how to load the image data from the Lance dataset 
+into a Pandas `DataFrame` using Lance's built in `to_pandas` API, making the image data accessible for further downstream AI analytics using Pandas.
 
 ```python
 import lance
 import pandas as pd
 
-def loading_into_pandas():
-	uri = "s3://lance/fluss/" + table_name + ".lance"
-	ds = lance.dataset(uri, storage_options={"access_key_id": "minio", "secret_access_key": "minioadmin", "endpoint": "http://localhost:9000", "allow_http": "true",})
-
-	# Accumulate data from batches into a list
-	data = []
-	for batch in ds.to_batches(columns=["image"], batch_size=10):
-    	tbl = batch.to_pandas()
-    	data.append(tbl)
-
-	# Concatenate all DataFrames into a single DataFrame
-	df = pd.concat(data, ignore_index=True)
+def loading_into_pandas(table_name):
+	dataset = lance.dataset(
+        "s3://lance/fluss/" + table_name + ".lance", 
+        storage_options={
+            "access_key_id": "minio", 
+            "secret_access_key": "minioadmin", 
+            "endpoint": "http://localhost:9000", 
+            "allow_http": "true",
+        },
+    )
+    
+    df = dataset.to_table().to_pandas()
 	print("Pandas DataFrame is ready")
 	print("Total Rows: ", df.shape[0])
-
 ```
-
-The `loading_into_pandas` function demonstrates how to load the image data from the Lance dataset into a Pandas `DataFrame`. 
-It first creates a Lance dataset object from Minio. 
-Then, it iterates over batches of data, converting each batch into a Pandas `DataFrame` and appending it to a list. 
-Finally, it concatenates all the DataFrames in the list into a single DataFrame, 
-making the image data accessible for further processing or analysis.
 
 ### Putting It All Together
 
-If you would like to run the whole script, use this main function in your python script:
+If you would like to run the whole example end to end, use this main function in your python script:
 
 ```python
-
 if __name__ == "__main__":
 	config_spec = {
 		"bootstrap.servers": "127.0.0.1:9123",
 	}
+    table_name = "images_minio"
 	conn = create_connection(config_spec)
 	table_path = fluss.TablePath("fluss", table_name)
 	pa_schema = pa.schema([('image', pa.binary())])
 	create_table(conn, table_path, pa_schema)
 	write_to_fluss(conn, table_path, pa_schema)
 	sleep(60)
-	df = loading_into_pandas()
+	df = loading_into_pandas(table_name)
 	print(df.head())
 	conn.close()
 ```
 
 ## Conclusion
+
+The integration of Apache Fluss and Lance creates a powerful foundation for real-time multimodal AI analytics. 
+By combining Fluss's streaming storage capabilities with Lance's AI-optimized lakehouse features, 
+organizations can build multimodal AI applications that leverage both real-time and historical data seamlessly.
+
+Key takeaways from this integration:
+
+- **Real-time Processing**: Stream and process multimodal data in real-time with sub-second latency, enabling immediate insights and responses for time-sensitive AI applications.
+- **Unified Architecture**: Fluss serves as the real-time layer while Lance provides efficient historical storage, creating a complete data lifecycle management solution.
+- **Multimodal Support**: The ability to handle diverse data types like images, text, and vectors makes this stack ideal for modern multimodal AI applications.
+- **RAG Enhancement**: Real-time data ingestion ensures that RAG systems always have access to the most current information, improving the accuracy and relevance of multimodal AI-generated responses.
+- **Simple Integration**: As demonstrated in our example, setting up the pipeline requires minimal configuration and can be easily integrated into existing ML workflows.
+
+As multimodal AI applications continue to demand fresher data and faster insights, 
+the combination of Fluss and Lance provides a robust, 
+scalable solution that bridges the gap between real-time streaming and AI-ready data storage. 
+Whether you're building recommendation systems, fraud detection, or customer service chatbots, 
+this integration ensures your multimodal AI models have access to both the timeliness of streaming data and the depth of historical context.
