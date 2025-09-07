@@ -4,14 +4,14 @@ date: 2025-09-04
 draft: false
 featured: false
 categories: ["Engineering"]
-image: /assets/blog/lance-namespace-lancedb-and-ray/preview-image.png
-meta_image: /assets/blog/lance-namespace-lancedb-and-ray/preview-image.png
+image: /assets/blog/fluss-integration/preview-image.png
+meta_image: /assets/blog/fluss-integration/preview-image.png
 description: "TODO"
 author: Cheng Wang
-author_avatar: "/assets/authors/jack-ye.jpg"
-author_bio: "Software Engineer @ Tencent, Apache Fluss "
-author_github: "jackye1995"
-author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
+author_avatar: "/assets/authors/cheng-wang.jpg"
+author_bio: "Software Engineer @ Tencent"
+author_github: "TODO"
+author_linkedin: "https://www.linkedin.com/in/TODO"
 ---
 
 With the advent of the generative AI era, 
@@ -33,6 +33,8 @@ enabling the "shared data" feature:
 Complementing the Fluss ecosystem, Lance emerges as the next-generation AI lakehouse platform 
 specialized for machine learning and AI applications. It efficiently handles multimodal data (text, images, vectors) and 
 delivers high-performance queries such as lightning-fast vector search.
+
+![Fluss with Lance Lakehouse](/assets/blog/fluss-integration/fluss1.png)
 
 Combining Lance and Apache Fluss unlocks true real-time AI analytics. 
 Consider Retrieval-Augmented Generation (RAG), 
@@ -172,6 +174,8 @@ Download the [Fluss Tiering Job Jar](https://fluss.apache.org/downloads)
 Check the Flink UI for the Fluss Lake Tiering Service job. 
 Once it's running, your local tiering pipeline is good to go.
 
+![Confirm Deployment UI](/assets/blog/fluss-integration/fluss2.png)
+
 ## Multimodal Data Processing
 
 We'll walk through a Python code example that demonstrates how to stream a dataset of images into Fluss, 
@@ -281,6 +285,8 @@ def write_to_fluss(conn, table_path, pa_schema):
 
 Wait a little while for the tiering job to finish. 
 Then, go to the Minio UI, and you'll see the Lance Files in your `lancebucket`.
+
+![Check Job MinIO UI](/assets/blog/fluss-integration/fluss3.png)
 
 ### Step 5: Loading into Pandas
 
