@@ -22,23 +22,14 @@ from lancedb.embeddings import get_registry
 - `lancedb`: The main database connection and operations
 - `LanceModel`: Pydantic model for defining table schemas
 - `Vector`: Field type for storing vector embeddings
-- `get_registry()`: Access to the embedding function registry
+- `get_registry()`: Access to the embedding function registry. It has all the supported as well custom embedding functions registered by the user
 
 ## Step 2: Connect to LanceDB Cloud
 
 Establish a connection to your LanceDB instance:
 
 ```python
-db = lancedb.connect(
-    uri="db://....",
-    api_key="sk_...",
-    region="us-east-1"
-)
-```
-
-For local development, you can use:
-```python
-db = lancedb.connect("/path/to/local/database")
+db = lancedb.connect(...)
 ```
 
 ## Step 3: Initialize the Embedding Function
@@ -46,10 +37,7 @@ db = lancedb.connect("/path/to/local/database")
 Choose and configure your embedding model:
 
 ```python
-model = get_registry().get("sentence-transformers").create(
-    name="BAAI/bge-small-en-v1.5", 
-    device="cpu"
-)
+model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", )
 ```
 
 This creates a Sentence Transformers embedding function using the BGE model. You can:
@@ -92,10 +80,9 @@ The `table.add()` call automatically:
 - Generates embeddings using your chosen model
 - Stores both the original text and the vector embeddings
 
-Here is your data in the LanceDB Cloud table:
-![Embedding Text](/assets/docs/quickstart/embedding-text.png)
-
 ## Step 6: Query with Automatic Embedding
+
+Note: On LanceDB cloud, automatic query embedding is not supported. You need to pass the embedding vector directly.
 
 Search your data using natural language queries:
 
