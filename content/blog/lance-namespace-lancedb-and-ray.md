@@ -48,7 +48,9 @@ We'll use the [BeIR/quora](https://huggingface.co/datasets/BeIR/quora) dataset t
 First, install the required packages:
 
 ```bash
-pip install lance-ray lancedb sentence-transformers datasets
+pip install lance-ray sentence-transformers datasets
+pip install --no-deps lancedb==0.25.0
+pip install --no-deps lance-namespace==0.0.14
 ```
 
 Initialize your Ray cluster and import the necessary libraries:
@@ -101,7 +103,7 @@ Now let's load the Quora dataset and ingest it into [Lance format](/docs/overvie
 ```python
 # Load Quora dataset from Hugging Face
 print("Loading Quora dataset...")
-dataset = load_dataset("BeIR/quora", "corpus", split="corpus[:10000]")
+dataset = load_dataset("BeIR/quora", "corpus", split="corpus[:10000]", trust_remote_code=True)
 
 # Convert to Ray Dataset for distributed processing
 ray_dataset = ray.data.from_huggingface(dataset)
@@ -159,6 +161,7 @@ def generate_embeddings(batch: pa.RecordBatch) -> pa.RecordBatch:
 # Add embeddings column using distributed processing with namespace
 print("Generating embeddings using Ray...")
 add_columns(
+    None, # no static URI
     namespace=namespace,
     table_id=["quora_questions"],
     transform=generate_embeddings,
@@ -185,6 +188,7 @@ using the same namespace and perform vector similarity search:
 
 ```python
 import lancedb
+from sentence_transformers import SentenceTransformer
 
 # Connect to LanceDB using the same namespace
 db = lancedb.connect_namespace("dir", {"root": "./lance_tables"})
@@ -202,6 +206,7 @@ table.create_index(
 
 # Perform vector similarity search
 query_text = "How do I learn machine learning?"
+model = SentenceTransformer('BAAI/bge-small-en-v1.5')
 query_embedding = model.encode([query_text], normalize_embeddings=True)[0]
 
 vector_results = (
@@ -218,14 +223,13 @@ for idx, row in vector_results.iterrows():
     print()
 ```
 
-### Step 6: Hybrid Search – Combining Vector and Full‑Text
+### Step 6: Full text search wit LanceDB
 
-LanceDB supports [hybrid search](/docs/search/hybrid-search/) that combines the semantic understanding of [vector search](/docs/search/vector-search/) 
-with the precision of [keyword matching](/docs/search/full-text-search/):
+Now let's also do a full text search against the `text` column:
 
 ```python
 print("Creating full-text search index...")
-table.create_fts_index(["title", "text"])
+table.create_fts_index("text")
 
 # Example 1: Full‑Text Search
 keyword_results = (
@@ -240,45 +244,15 @@ for idx, row in keyword_results.iterrows():
     print(f"{idx + 1}. {row['title']}")
     print(f"   {row['text'][:150]}...")
     print()
-
-# Example 2: Hybrid Search – Best of Both Worlds
-# Combines semantic vector search with keyword filtering
-query_text = "How to implement neural networks"
-query_embedding = model.encode([query_text], normalize_embeddings=True)[0]
-
-hybrid_results = (
-    table.search(query_embedding, vector_column_name="vector", query_type="hybrid")
-    .where("text LIKE '%neural%' OR text LIKE '%network%'", prefilter=True)  # see /docs/search/filtering/
-    .limit(5)
-    .to_pandas()
-)
-
-print("\n=== Hybrid Search Results ===")
-print(f"Query: {query_text}")
-print("With keyword filter: 'neural' OR 'network'\n")
-for idx, row in hybrid_results.iterrows():
-    print(f"{idx + 1}. {row['title']}")
-    print(f"   {row['text'][:150]}...")
-    print()
-
-# Example 3: Reranking with Hybrid Search
-# Use full-text search for initial retrieval, then rerank with vectors
-rerank_results = (
-    table.search("deep learning", query_type="fts")
-    .limit(20)  # Get more candidates
-    .rerank(reranker=model.encode, query_text="practical deep learning tips")  # see /docs/reranking/
-    .limit(5)  # Keep top 5 after reranking
-    .to_pandas()
-)
-
-print("\n=== Reranked Search Results ===")
-print("Initial: Full-text search for 'deep learning'")
-print("Reranked by: 'practical deep learning tips'\n")
-for idx, row in rerank_results.iterrows():
-    print(f"{idx + 1}. {row['title']}")
-    print(f"   {row['text'][:150]}...")
-    print()
 ```
+
+### Step 7: Beyond the Examples
+
+Now, you can continue playing around the dataset.
+You can add more columns with python functions through Ray.
+LanceDB also allows [hybrid search](/docs/search/hybrid-search/) that combines the semantic understanding of [vector search](/docs/search/vector-search/) 
+with the precision of [keyword matching](/docs/search/full-text-search/).
+You can also load data into tools like PyTorch and LangChain for other AI activities.
 
 ## Real-World Use Cases
 
