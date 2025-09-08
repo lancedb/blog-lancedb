@@ -9,17 +9,6 @@ You may want to search for a document that is semantically similar to a query do
 
 For detailed examples, try our [**Python Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Hybrid_search.ipynb) or the [**TypeScript Example**](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/hybrid-search)
 
-## Reranking 
-
-You can perform hybrid search in LanceDB by combining the results of semantic and full-text search via a reranking algorithm of your choice. LanceDB comes with [**built-in rerankers**](https://lancedb.github.io/lancedb/reranking/) and you can implement you own **custom reranker** as well. 
-
-By default, LanceDB uses `RRFReranker()`, which uses reciprocal rank fusion score, to combine and rerank the results of semantic and full-text search. You can customize the hyperparameters as needed or write your own custom reranker. Here's how you can use any of the available rerankers:
-
-| Argument | Type | Default | Description |
-|:---------|:-----|:--------|:------------|
-| `normalize` | `str` | `"score"` | The method to normalize the scores. Can be `rank` or `score`. If `rank`, the scores are converted to ranks and then normalized. If `score`, the scores are normalized directly. |
-| `reranker` | `Reranker` | `RRF()` | The reranker to use. If not specified, the default reranker is used. |
-
 ## Example: Hybrid Search
 
 ### 1. Setup
@@ -31,7 +20,6 @@ import lancedb
 import openai
 from lancedb.embeddings import get_registry
 from lancedb.pydantic import LanceModel, Vector
-from lancedb.rerankers import RRFReranker
 {{< /code >}}
 
 {{< code language="typescript" >}}
@@ -86,19 +74,12 @@ host_override=host_override
 ```
 
 ### 3. Configure Embedding Model
-Set up the OpenAI embedding model that will convert text into vector representations for semantic search.
+Set up the any embedding model that will convert text into vector representations for semantic search.
 
 {{< code language="python" >}}
-if "OPENAI_API_KEY" not in os.environ:
-    # OR set the key here as a variable
-    openai.api_key = "sk-..."
-embeddings = get_registry().get("openai").create()
+embeddings = get_registry().get("sentence-transformers").create()
 {{< /code >}}
 {{< code language="typescript" >}}
-if (!process.env.OPENAI_API_KEY) {
-  console.log("Skipping hybrid search - OPENAI_API_KEY not set");
-  return { success: true, message: "Skipped: OPENAI_API_KEY not set" };
-}
 
 const embedFunc = lancedb.embedding.getRegistry().get("openai")?.create({
   model: "text-embedding-ada-002",
@@ -166,8 +147,8 @@ await table.createIndex("text", {
 await waitForIndex(table as any, "text_idx");
 {{< /code >}}
 
-### 7. Set Reranker
-Initialize the reranker that will combine and rank results from both semantic and keyword search.
+### 7. Set Reranker [Optional]
+Initialize the reranker that will combine and rank results from both semantic and keyword search. By default, lancedb uses RRF reranker, but you can choose other rerankers like `Cohere`, `CrossEncoder`, or others lister in integrations section.
 
 {{< code language="python" >}}
 reranker = RRFReranker()
@@ -211,7 +192,7 @@ console.log("Hybrid search results:");
 console.log(hybridResults);
 {{< /code >}}
 
-### 9. Hybrid Search - Manual
+### 9. Hybrid Search - Explicit Vector and Text Query pattern
 You can also pass the vector and text query explicitly. This is useful if you're not using the embedding API or if you're using a separate embedder service.
 
 ```python
@@ -225,3 +206,14 @@ text_query = "flower moon"
     .to_pandas()
 )
 ```
+
+# More on Reranking 
+
+You can perform hybrid search in LanceDB by combining the results of semantic and full-text search via a reranking algorithm of your choice. LanceDB comes with [**built-in rerankers**](https://lancedb.github.io/lancedb/reranking/) and you can implement you own **custom reranker** as well. 
+
+By default, LanceDB uses `RRFReranker()`, which uses reciprocal rank fusion score, to combine and rerank the results of semantic and full-text search. You can customize the hyperparameters as needed or write your own custom reranker. Here's how you can use any of the available rerankers:
+
+| Argument | Type | Default | Description |
+|:---------|:-----|:--------|:------------|
+| `normalize` | `str` | `"score"` | The method to normalize the scores. Can be `rank` or `score`. If `rank`, the scores are converted to ranks and then normalized. If `score`, the scores are normalized directly. |
+| `reranker` | `Reranker` | `RRF()` | The reranker to use. If not specified, the default reranker is used. |
