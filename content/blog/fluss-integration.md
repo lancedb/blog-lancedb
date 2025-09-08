@@ -1,6 +1,6 @@
 ---
 title: "Setup Real-Time Multimodal AI Analytics with Apache Fluss (incubating) and Lance"
-date: 2025-09-07
+date: 2025-09-08
 draft: false
 featured: false
 categories: ["Engineering"]
