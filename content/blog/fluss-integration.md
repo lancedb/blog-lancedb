@@ -1,5 +1,5 @@
 ---
-title: "Setup Real-Time Multimodal AI Analytics with Apache Fluss and Lance"
+title: "Setup Real-Time Multimodal AI Analytics with Apache Fluss (incubating) and Lance"
 date: 2025-09-07
 draft: false
 featured: false
@@ -18,7 +18,7 @@ particularly for enterprise decision-making systems where high-quality, fresh da
 For instance, in customer service and risk control systems, 
 multimodal AI models that lack access to real-time customer inputs will struggle to make accurate decisions.
 
-[Apache Fluss](https://fluss.apache.org) addresses this need as a purpose-built streaming storage for real-time analytics. 
+[Apache Fluss (incubating)](https://fluss.apache.org) addresses this need as a purpose-built streaming storage for real-time analytics. 
 
 Serving as the real-time data layer for [lakehouse architectures](/blog/multimodal-lakehouse/), 
 Fluss features an intelligent tiering service that ensures seamless integration between stream and lake storage. 
@@ -34,7 +34,7 @@ delivers high-performance queries such as lightning-fast vector search (see [Lan
 
 ![Fluss with Lance Lakehouse](/assets/blog/fluss-integration/fluss1.png)
 
-Combining Lance and Apache Fluss unlocks true real-time multimodal AI analytics. 
+Combining Lance and Fluss unlocks true real-time multimodal AI analytics. 
 Consider [Retrieval-Augmented Generation (RAG)](/blog/graphrag-hierarchical-approach-to-retrieval-augmented-generation/), 
 a popular generative AI framework that enhances the capabilities of large language models (LLMs) 
 by incorporating up-to-date information during the generation process. 
@@ -121,7 +121,7 @@ Download [Fluss Connector Jar](https://fluss.apache.org/downloads) and copy it t
 
 ### Step 5: Configure Flink Fluss Connector
 
-The Fluss Lance connector utilizes the [Apache Arrow](https://arrow.apache.org) Java API, 
+The Flink Fluss connector utilizes the [Apache Arrow](https://arrow.apache.org) Java API, 
 which relies on direct memory. 
 Ensure sufficient off-heap memory for the Flink Task Manager by 
 configuring the `taskmanager.memory.task.off-heap.size` parameter
@@ -181,46 +181,39 @@ and subsequently load the tiered Lance dataset into a Pandas `DataFrame` for fur
 
 ### Step 1: Create Connection
 
-Create the connection and table (with the Fluss Python client)
+Create the connection and table with the Fluss Python client:
 
 ```python
-import asyncio
 import fluss
 import pyarrow as pa
 
-def create_connection(config_spec):
-	# Create connection
-	async def _inner():
-		config = fluss.Config(config_spec)
-		conn = await fluss.FlussConnection.connect(config)
-		return conn
-	
-	return asyncio.run(_inner())
+async def create_connection(config_spec):
+    # Create connection
+    config = fluss.Config(config_spec)
+    conn = await fluss.FlussConnection.connect(config)
+    return conn
 
-def create_table(conn, table_path, pa_schema):
-	# Create a Fluss Schema
-	fluss_schema = fluss.Schema(pa_schema)
-	# Create a Fluss TableDescriptor
-	table_descriptor = fluss.TableDescriptor(
-		fluss_schema,
-		properties={
-			"table.datalake.enabled": "true",
-			"table.datalake.freshness": "30s",
-		}
-	)
-	
-	async def _inner():
-		# Get the admin for Fluss
-		admin = await conn.get_admin()
-		
-		# Create a Fluss table
-		try:
-			await admin.create_table(table_path, table_descriptor, True)
-			print(f"Created table: {table_path}")
-		except Exception as e:
-			print(f"Table creation failed: {e}")
+async def create_table(conn, table_path, pa_schema):
+    # Create a Fluss Schema
+    fluss_schema = fluss.Schema(pa_schema)
+    # Create a Fluss TableDescriptor
+    table_descriptor = fluss.TableDescriptor(
+        fluss_schema,
+        properties={
+            "table.datalake.enabled": "true",
+            "table.datalake.freshness": "30s",
+        },
+    )
 
-	asyncio.run(_inner())
+    # Get the admin for Fluss
+    admin = await conn.get_admin()
+
+    # Create a Fluss table
+    try:
+        await admin.create_table(table_path, table_descriptor, True)
+        print(f"Created table: {table_path}")
+    except Exception as e:
+        print(f"Table creation failed: {e}")
 ```
 
 ### Step 2: Process Images
@@ -262,21 +255,18 @@ The `write_to_fluss` function creates a `RecordBatchReader` from the `process_im
 and writes the resulting data to the Fluss `fluss.images_minio` table. 
 
 ```python
-def write_to_fluss(conn, table_path, pa_schema):
-	# Get table and create writer
-	async def _inner():
-		table = await conn.get_table(table_path)
-		append_writer = await table.new_append_writer()
-		try:
-			print("\n--- Writing image data ---")
-			for record_batch in process_images(pa_schema):
-				append_writer.write_arrow_batch(record_batch)
-		except Exception as e:
-			print(f"Failed to write image data: {e}")
-		finally:
-			append_writer.close()
-	
-	asyncio.run(_inner())
+async def write_to_fluss(conn, table_path, pa_schema):
+    # Get table and create writer‘
+    table = await conn.get_table(table_path)
+    append_writer = await table.new_append_writer()
+    try:
+        print("\n--- Writing image data ---")
+        for record_batch in process_images(pa_schema):
+            append_writer.write_arrow_batch(record_batch)
+    except Exception as e:
+        print(f"Failed to write image data: {e}")
+    finally:
+        append_writer.close()
 ```
 
 ### Step 4: Check Job Completion
@@ -323,25 +313,30 @@ def loading_into_pandas(table_name):
 If you would like to run the whole example end-to-end, use this main function in your Python script:
 
 ```python
+import asyncio
+
+async def main():
+    config_spec = {
+        "bootstrap.servers": "127.0.0.1:9123",
+    }
+    conn = await create_connection(config_spec)
+    table_path = fluss.TablePath("fluss", table_name)
+    pa_schema = pa.schema([("image", pa.binary())])
+    await create_table(conn, table_path, pa_schema)
+    await write_to_fluss(conn, table_path, pa_schema)
+    # sleep a little while to wait for Fluss tiering
+    sleep(60)
+    df = loading_into_pandas()
+    print(df.head())
+    conn.close()
+
 if __name__ == "__main__":
-	config_spec = {
-		"bootstrap.servers": "127.0.0.1:9123",
-	}
-    table_name = "images_minio"
-	conn = create_connection(config_spec)
-	table_path = fluss.TablePath("fluss", table_name)
-	pa_schema = pa.schema([('image', pa.binary())])
-	create_table(conn, table_path, pa_schema)
-	write_to_fluss(conn, table_path, pa_schema)
-	sleep(60)
-	df = loading_into_pandas(table_name)
-	print(df.head())
-	conn.close()
+    asyncio.run(main())
 ```
 
 ## Conclusion
 
-The integration of [Apache Fluss](https://fluss.apache.org) and [Lance](https://lancedb.github.io/lance/) creates a powerful foundation for real-time multimodal AI analytics. 
+The integration of [Apache Fluss (inclubating)](https://fluss.apache.org) and [Lance](https://lancedb.github.io/lance/) creates a powerful foundation for real-time multimodal AI analytics. 
 By combining Fluss's streaming storage capabilities with Lance's AI-optimized [lakehouse](https://lancedb.github.io/lance/) features, 
 organizations can build multimodal AI applications that leverage both real-time and historical data seamlessly.
 
