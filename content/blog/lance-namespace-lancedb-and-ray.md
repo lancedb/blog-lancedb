@@ -248,8 +248,8 @@ for idx, row in keyword_results.iterrows():
 
 ### Step 7: Beyond the Examples
 
-Now, you can continue playing around the dataset.
-You can add more columns with python functions through Ray.
+Now, you can continue playing around with the dataset.
+You can add more feature columns with python functions through Ray.
 LanceDB also allows [hybrid search](/docs/search/hybrid-search/) that combines the semantic understanding of [vector search](/docs/search/vector-search/) 
 with the precision of [keyword matching](/docs/search/full-text-search/).
 You can also load data into tools like PyTorch and LangChain for other AI activities.
