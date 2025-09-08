@@ -8,6 +8,7 @@ image: /assets/blog/fluss-integration/preview-image.png
 meta_image: /assets/blog/fluss-integration/preview-image.png
 description: "Learn how to build real-time multimodal AI analytics by integrating Apache Fluss streaming storage with Lance's AI-optimized lakehouse. This guide demonstrates streaming multimodal data processing for RAG systems and ML workflows."
 author: Wayne Wang
+author_avatar: "/assets/authors/avatar.jpg"
 author_bio: "Senior Software Engineer @ Tencent"
 ---
 
