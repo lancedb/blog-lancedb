@@ -20,7 +20,7 @@ author_linkedin: "jasminechenwang"
 > 
 > - **Media ML Data Engineering, Netflix**
 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image11.png)  
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image11.png)](https://lancedb.com/blog/case-study-netflix/)  
 
 A deep dive on Netflix’s Media ML Data Engineering, a new specialization that bridges the gap between traditional data engineering and the unique demands of media-centric machine learning, and how they build the Media Data Lake with LanceDB. 
 
@@ -28,7 +28,7 @@ Read the Netflix Tech Blog [From Facts & Metrics to Media Machine Learning: Evol
 
 ## [Case Study: How CodeRabbit Leverages LanceDB for AI-Powered Code Reviews](https://lancedb.com/blog/case-study-coderabbit/)
 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image3.png)
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image3.png)](https://lancedb.com/blog/case-study-coderabbit/)
 
 > "LanceDB transformed how we handle context at scale. While other vector databases hit cost and performance walls, LanceDB scales effortlessly with our growth—from startup to enterprise. Its multimodal capabilities and deployment flexibility were game-changers, enabling us to deliver the depth of analysis our customers expect while maintaining sub-second response times across millions of code reviews."
 > 
@@ -38,7 +38,7 @@ Read the Netflix Tech Blog [From Facts & Metrics to Media Machine Learning: Evol
 
 Lance Namespace is an open specification built on top of the storage-based Lance table and file format. It provides a standardized way for metadata services like Apache Hive MetaStore, Apache Gravitino, Unity Catalog, AWS Glue Data Catalog, and others to store and manage Lance tables. This means you can seamlessly use Lance tables alongside your existing [**data lakehouse infrastructure**](https://lancedb.com/blog/multimodal-lakehouse/) .  
 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image4.png)
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image4.png)](https://lancedb.com/blog/introducing-lance-namespace-spark-integration/)
 
 ## 🎤 Event Recap\!
 
@@ -53,19 +53,19 @@ LanceDB made a small tour around the world in Aug. Started with a workshop with 
 Join us on September 25 for the live webinar: [𝗔𝗽𝗮𝗰𝗵𝗲 𝗦𝗽𝗮𝗿𝗸™ 𝗮𝗻𝗱 𝗟𝗮𝗻𝗰𝗲 𝗦𝗽𝗮𝗿𝗸 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗼𝗿\! 🚀](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
 Lance Spark Connector brings Lance’s AI-native multimodal storage to Spark. We’ll cover how Spark can work efficiently with embeddings, images, videos, and documents using Lance’s random access, indexing, and vector/blob support.  
 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image12.png)
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image12.png)](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
 
 ## Good Reads
 
 [Feature Engineering with Geneva](https://lancedb.com/blog/geneva-feature-engineering/)  
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image8.png)  
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image8.png)](https://lancedb.com/blog/geneva-feature-engineering/)  
 
 
 [Columnar File Reader in Depth – Structural Encoding](https://lancedb.com/blog/columnar-file-readers-in-depth-structural-encoding/)  
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image14.png) 
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image14.png)](https://lancedb.com/blog/columnar-file-readers-in-depth-structural-encoding/) 
 
 [LanceDB WikiSearch: Native Full-Text Search on 41M Wikipedia Docs](https://lancedb.com/blog/feature-full-text-search/)  
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image2.png)
+[![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image2.png)](https://lancedb.com/blog/feature-full-text-search/)
 
 ## LanceDB Enterprise Product News
 
