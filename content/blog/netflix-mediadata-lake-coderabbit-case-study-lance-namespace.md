@@ -44,16 +44,15 @@ Lance Namespace is an open specification built on top of the storage-based Lance
 
 LanceDB made a small tour around the world in Aug. Started with a workshop with dltHub at Berlin PyData Con. Then a stop in Amsterdam to present at the inaugural Open Lakehouse Meetup with Databricks and DuckDB, followed by a keynote at AI\_Dev Con. Our last stop was London started with a meetup generously hosted by AWS London, and we wrapped up the tour with our VLDB workshop on the [Lance paper](https://arxiv.org/abs/2504.15247).        
 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image6.png) 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image13.png) 
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image7.png)  
-![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image10.png)
+![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image15.png) 
+
 
 ## Coming up in Sep: 
-  
+
+
 Join us on September 25 for the live webinar: [𝗔𝗽𝗮𝗰𝗵𝗲 𝗦𝗽𝗮𝗿𝗸™ 𝗮𝗻𝗱 𝗟𝗮𝗻𝗰𝗲 𝗦𝗽𝗮𝗿𝗸 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗼𝗿\! 🚀](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
 Lance Spark Connector brings Lance’s AI-native multimodal storage to Spark. We’ll cover how Spark can work efficiently with embeddings, images, videos, and documents using Lance’s random access, indexing, and vector/blob support.  
-​​
+
 ![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image12.png)
 
 ## Good Reads
