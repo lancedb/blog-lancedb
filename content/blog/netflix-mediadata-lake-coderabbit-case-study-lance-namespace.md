@@ -1,5 +1,5 @@
 ---
-title: "Netflix’s Media Data Lake, CodeRabbit Case Study, Lance Namespace"
+title: "Netflix’s Media Data Lake ❤️ LanceDB, CodeRabbit 💼 Case Study, Lance Namespace"
 date: 2025-09-08
 draft: false
 featured: false
@@ -26,7 +26,7 @@ A deep dive on Netflix’s Media ML Data Engineering, a new specialization that 
 
 Read the Netflix Tech Blog [From Facts & Metrics to Media Machine Learning: Evolving the Data Engineering Function at Netflix](https://netflixtechblog.com/from-facts-metrics-to-media-machine-learning-evolving-the-data-engineering-function-at-netflix-6dcc91058d8d)
 
-## [Case Study: How CodeRabbit Leverages LanceDB for AI-Powered Code Reviews](https://lancedb.com/blog/case-study-coderabbit/)
+## [💼 Case Study: How CodeRabbit Leverages LanceDB for AI-Powered Code Reviews](https://lancedb.com/blog/case-study-coderabbit/)
 
 [![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image3.png)](https://lancedb.com/blog/case-study-coderabbit/)
 
@@ -47,7 +47,7 @@ LanceDB made a small tour around the world in Aug. Started with a workshop with 
 ![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image15.png) 
 
 
-## Coming up in Sep: 
+## 📣 Coming up in Sep: 
 
 
 Join us on September 25 for the live webinar: [𝗔𝗽𝗮𝗰𝗵𝗲 𝗦𝗽𝗮𝗿𝗸™ 𝗮𝗻𝗱 𝗟𝗮𝗻𝗰𝗲 𝗦𝗽𝗮𝗿𝗸 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗼𝗿\! 🚀](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
@@ -55,7 +55,7 @@ Lance Spark Connector brings Lance’s AI-native multimodal storage to Spark. We
 
 [![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image12.png)](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
 
-## Good Reads
+## 📚 Good Reads
 
 [Feature Engineering with Geneva](https://lancedb.com/blog/geneva-feature-engineering/)  
 [![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image8.png)](https://lancedb.com/blog/geneva-feature-engineering/)  
@@ -64,10 +64,11 @@ Lance Spark Connector brings Lance’s AI-native multimodal storage to Spark. We
 [Columnar File Reader in Depth – Structural Encoding](https://lancedb.com/blog/columnar-file-readers-in-depth-structural-encoding/)  
 [![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image14.png)](https://lancedb.com/blog/columnar-file-readers-in-depth-structural-encoding/) 
 
+
 [LanceDB WikiSearch: Native Full-Text Search on 41M Wikipedia Docs](https://lancedb.com/blog/feature-full-text-search/)  
 [![](/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image2.png)](https://lancedb.com/blog/feature-full-text-search/)
 
-## LanceDB Enterprise Product News
+## 🗞️ LanceDB Enterprise Product News
 
 | Feature | Description |
 | :---- | :---- |
@@ -76,15 +77,14 @@ Lance Spark Connector brings Lance’s AI-native multimodal storage to Spark. We
 | Flexible search results | Support for \`limit\` and \`offset\`  in both vector and full-text search allows easy pagination of large result sets. |
 | Better observability for \`merge\_insert\`  | Use \`explain\_plan\` and \`analyze\_plan\` to visualize execution and identify performance bottlenecks. |
 
-## Community contributions
+## 🤝 Community contributions
 
 GEO Data Type support coming to Lance\! ([git](https://github.com/lancedb/lance/discussions/4482)) Thanks to the contributions from our community [@ddupg](https://github.com/ddupg) and [@jaystarshot](https://github.com/jaystarshot), **Lance now supports Geo type**. Geo index and query optimizations are coming soon too\! A shoutout for the individual contributors from **Bytedance** and **Uber** for making this possible\!  
 
 A heartfelt thank you to our community contributors of lance and lancedb this past month:   [@majin1102](https://github.com/majin1102) [@fangbo](https://github.com/fangbo) [@wojiaodoubao](https://github.com/wojiaodoubao) [@pimdh](https://github.com/pimdh)[@ebyhr](https://github.com/ebyhr) [@yanghua](https://github.com/yanghua) [@HaochengLIU](https://github.com/HaochengLIU) [@imededin](https://github.com/imededin) [@HubertY](https://github.com/HubertY) [@chenghao-guo](https://github.com/chenghao-guo) [@lorinlee](https://github.com/lorinlee) [@vlovich](https://github.com/vlovich) [@adrian-wang](https://github.com/adrian-wang) [@ddupg](https://github.com/ddupg) [@LeoReeYang](https://github.com/LeoReeYang) [@emmanuel-ferdman](https://github.com/emmanuel-ferdman) [@adi-ray](https://github.com/adi-ray) [@yuvalif](https://github.com/yuvalif) [@Heisenberg208](https://github.com/Heisenberg208) [@mocobeta](https://github.com/mocobeta)  [@MarkMcCaskey](https://github.com/MarkMcCaskey) [@reedloden](https://github.com/reedloden)
+ 
 
-## 
-
-## Open Source Releases Spotlight 
+## 🔦 Open Source Releases Spotlight 
 
 | LanceDB | 0.22.0 | Integration with Lance Namespace, support multi-level namespace management.  |
 | :---- | :---- | :---- |
