@@ -1,4 +1,4 @@
-{{ $title := .Title | replace "<br>" "" }}
+{{ $title := .Title }}
 {{ $siteURL := .Site.BaseURL | replaceRE `^https?://` "" | replaceRE `/+$` "" }}
 
 <meta property="og:type" content="{{ .Params.open_graph.type | default "website" }}" />
@@ -24,7 +24,7 @@
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content="{{ .Permalink }}" />
-<meta property="twitter:title" content="{{ $title }}" />
+<meta property="twitter:title" content="{{ .Params.meta.og_title | default $title }}" />
 <meta property="twitter:description" content="{{ $description }}" />
 
 {{ with .Params.meta.og_twitter_image }}

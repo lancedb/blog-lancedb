@@ -1,16 +1,21 @@
 {{ $mainJS := resources.Get "js/main.js" | js.Build "main.js" | fingerprint }}
-{{ $tocJs := resources.Get "js/toc-progress.js" | js.Build "toc.js" | fingerprint }}
+{{ $tocJs := resources.Get "js/toc-active.js" | js.Build "toc.js" | fingerprint }}
 {{ $headingLinksJs := resources.Get "js/heading-links.js" | js.Build "headingLinks.js" | fingerprint }}
 {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js"  | fingerprint }}
 {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
+{{ $searchJS := resources.Get "js/search.js" | js.Build "search.js" | fingerprint }}
+{{ $sidebarJS := resources.Get "js/sidebar.js" | js.Build "sidebar.js" | fingerprint }}
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
 <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
 
-{{ if eq .Type "blog" }}
-    <script src="{{ $tocJs.RelPermalink }}"></script> 
+
+{{ if or (eq .Section "docs") (eq .Section "blog") }}
+    <script src="{{ $sidebarJS.RelPermalink }}"></script>
+    <script src="{{ $searchJS.RelPermalink }}"></script>
     <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
     <script src="{{ $codeTabJS.RelPermalink }}"></script> 
+    <script src="{{ $tocJs.RelPermalink }}"></script> 
 {{ else }}
     {{ $textAniamtionJs := resources.Get "js/text-animation.js" | minify | fingerprint }}
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>

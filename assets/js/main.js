@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".js-header");
     const anonncement = document.querySelector(".header__announcement");
     const headerToggle = header.querySelector(".header__toggle");
+    const headerSearchToggle = header.querySelector(".header__search-toggle");
+    const headerHeight = header.offsetHeight;
+    document.body.style.setProperty("--header-height", `${headerHeight}px`);
+    
     const debounce = (fn, delay) => {
       let timeoutId;
       return (...args) => {
@@ -19,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ".header__announcement-close"
       );
       const anonncementHeight = anonncement.offsetHeight;
-      header.style.setProperty(
+      document.body.style.setProperty(
         "--header-anonncement-height",
         `${anonncementHeight}px`
       );
@@ -31,10 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     headerToggle.addEventListener("click", () => {
       const headerHeight = header.offsetHeight;
-      header.style.setProperty("--header-height", `${headerHeight}px`);
+      document.body.style.setProperty("--header-height", `${headerHeight}px`);
       header.classList.toggle("open");
       document.body.classList.toggle("overflow-hidden");
     });
+
+    if (headerSearchToggle) {
+      const searchContainer = header.querySelector(".search-container");
+      const searchClose = searchContainer.querySelector(".search-input-close");
+      const searchInput = searchContainer.querySelector(".search-input");
+      headerSearchToggle.addEventListener("click", () => {
+        searchContainer.classList.toggle("show");
+        searchInput.focus();
+        document.body.classList.add("overflow-hidden");
+      });
+  
+      searchClose.addEventListener("click", () => {
+        searchContainer.classList.remove("show");
+        document.body.classList.remove("overflow-hidden");
+      });
+    }
 
    // Debounced resize handler
     const handleResize = debounce(() => {

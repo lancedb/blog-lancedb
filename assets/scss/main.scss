@@ -8,6 +8,7 @@
 
 // Common
 @import 'components/components';
+@import 'components/search';
 @import 'shortcodes/shortcodes';
 @import 'shortcodes/admonition';
 @import 'sections/sections';
@@ -21,4 +22,81 @@
 
 body, .docs-main, .docs-container, .docs-sidebar, .docs-content, .sidebar-link, .sidebar-list, .sidebar-nav, .sidebar-section, .sidebar-sublink, .sidebar-divider {
   color: #fff !important;
+}
+
+// Mermaid Diagram Styling
+.mermaid {
+  background-color: #ffffff !important;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  svg {
+    background-color: #ffffff !important;
+  }
+
+  .node {
+    rect, circle, ellipse, polygon {
+      fill: #ffffff !important;
+      stroke: #333333 !important;
+      stroke-width: 2px !important;
+    }
+
+    text, tspan {
+      color: #000000 !important;
+      fill: #000000 !important;
+    }
+  }
+
+  .cluster {
+    rect {
+      fill: #f8f9fa !important;
+      stroke: #333333 !important;
+      stroke-width: 2px !important;
+    }
+
+    text, tspan {
+      color: #000000 !important;
+      fill: #000000 !important;
+    }
+  }
+
+  .edgePath {
+    path {
+      stroke: #333333 !important;
+      stroke-width: 2px !important;
+    }
+  }
+
+  .edgeLabel {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+
+    text, tspan {
+      color: #000000 !important;
+      fill: #000000 !important;
+    }
+  }
+
+  .label {
+    color: #000000 !important;
+    font-weight: 500 !important;
+  }
+
+  // Force all text elements to be black
+  text, tspan {
+    color: #000000 !important;
+    fill: #000000 !important;
+  }
+
+  // Universal override for any Mermaid styling
+  * {
+    color: #000000 !important;
+
+    text, tspan {
+      fill: #000000 !important;
+      color: #000000 !important;
+    }
+  }
 }

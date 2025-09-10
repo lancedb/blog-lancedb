@@ -4,6 +4,162 @@ sidebar_title: Changelog
 description: Track LanceDB's latest features, improvements, and bug fixes. Stay updated with our vector database's development progress and new capabilities.
 weight: 302
 ---
+
+## Aug 2025
+
+Full-Text Search runs dramatically faster, and index creation is now easier to manage.
+
+### Features
+
+#### Full-Text Search (FTS): 3-8x Faster with Better Accuracy
+LanceDB's Full-Text Search now delivers dramatically faster performance and more relevant results. Complex queries with _50-100 terms_ run **3-8x faster** with optimized algorithms, while improved caching and scoring ensure higher quality results at interactive speeds.
+
+* **Long query optimization**: - Complex queries with 50-100 terms now execute 3-8x faster through WAND algorithm improvements. [lance#4576](https://github.com/lancedb/lance/pull/4576)
+
+* **Smart query execution**: Automatic fallback between WAND and flat search based on selectivity, with configurable thresholds and block-level pruning to skip unpromising document blocks. [lance#4551](https://github.com/lancedb/lance/pull/4551), [lance#4570](https://github.com/lancedb/lance/pull/4570)
+
+* **Precision-Ranked Results**: Benefit from more relevant search rankings thanks to fixes in our BM25 scoring algorithm, ensuring the best answers surface first. [lance#4525](https://github.com/lancedb/lance/pull/4525)
+
+* **Performance telemetry removal**: Eliminated 80% overhead from hot paths, achieving 4-5x speedup. [lance#4536](https://github.com/lancedb/lance/pull/4536)
+
+#### API & Usability Improvements
+
+* **Paginated search results**: Support for `limit` and `offset` in both vector and full-text search queries.
+
+* **Custom index names**: Users can now set custom names for indices via API and SQL. Setting `train=false` disables training for certain index types.
+
+* **Empty index creation**: Introduced the ability to create empty scalar indices, enabling users to define index structures upfront without initial data. [lance#4033](https://github.com/lancedb/lance/pull/4033)
+
+* **More storage control**: Added new configuration options for object store caching and behavior. [lance#4509](https://github.com/lancedb/lance/pull/4509) #enterprise
+
+* **Configurable timeouts**: Set an overall request timeout for remote clients in Python and Node.js SDKs. This enhancement gives users more robust control over request reliability and latency. [lancedb#2550](https://github.com/lancedb/lancedb/pull/2550)
+
+#### Performance & Efficiency
+* **Streaming for large operations**:  Process massive `insert`, `merge`, and `create_table` requests without loading the entire dataset into memory.
+
+* **Empty projection support**: Introduced support for empty projections in queries, allowing users to execute queries that return no columns. This enhancement is particularly useful for operations like `insert` or `delete`, where the focus is on modifying data without retrieving any results.
+
+* **Optimized remote queries**: Improved performance for indexed queries by optimizing cache use and enabling remote filtered reads.
+
+* **Scalar index prewarming**: Preload frequently accessed scalar indices into memory on server startup for faster cold starts. #enterprise
+
+#### Observability & Debugging
+
+* **Enhanced Merge Insert Observability**: Introduced `explain_plan` and `analyze_plan` functions for `merge_insert` operations, enabling users to visualize and assess the execution plan and performance metrics of merge operations.[lance#4295](https://github.com/lancedb/lance/pull/4295)
+
+* **Detailed CPU metrics**: The `analyze_plan()` output now includes cumulative CPU time for each operator. [lance#4519](https://github.com/lancedb/lance/pull/4519)
+
+* **Granular FTS controls**: New tuning knobs and metrics for full-text search provide deeper insight and predictable performance. [lance#4555](https://github.com/lancedb/lance/pull/4555), [lance#4560](https://github.com/lancedb/lance/pull/4560)
+
+
+#### Stability & Reliability
+* **Automatic conflict resolution for `delete`**: Delete operations now handle conflicts gracefully to ensure data integrity. [lance#4407](https://github.com/lancedb/lance/pull/4407)
+
+* **Expression depth limit**: Implemented a safeguard to prevent panics from excessively deep filter expressions. [lance#4403](https://github.com/lancedb/lance/pull/4403)
+
+#### Cloud UI Improvement
+* **Visual index creation**: Cloud users can create vector, scalar, and FTS index through an intuitive UI workflow.
+
+---
+
+### Bug Fixes
+
+* **FTS Cache Performance**: Fixed a critical memory sizing issue that was causing premature cache evictions, increasing cache hit rates from ~5% to over 80% for dramatically faster repeated queries. [lance#4513](https://github.com/lancedb/lance/pull/4513)
+
+* **File Reading Stability**: Resolved a panic that could occur when attempting to read from a file after its last row had been deleted.[#lance4452](https://github.com/lancedb/lance/pull/4452)
+
+* **Search Cache Integrity**: Fixed cache conflicts between different data partitions that could lead to inconsistent search results and degraded performance.[#lance4490](https://github.com/lancedb/lance/pull/4490)
+
+* **Accurate Performance Metrics**: Corrected inaccurate elapsed time reporting for IVF index nodes, ensuring reliable performance monitoring.[#lance4491](https://github.com/lancedb/lance/pull/4491)
+
+* **Avoided column name collision in `merge_insert`**: Prevented potential column name conflicts in `merge_insert` operations by renaming an internal column, ensuring smooth data ingestion.[#lance4499](https://github.com/lancedb/lance/pull/4499)
+
+* **Fixed index out-of-bounds error in posting iterator**: Fixed an index out-of-bounds error in the posting list iterator that could cause crashes during vector search queries. [#lance4587](https://github.com/lancedb/lance/pull/4587)
+
+* **Fixed BTree Prewarm Offset Overflow**: Resolved an offset overflow issue when prewarming BTree indices, preventing crashes during startup.
+
+* **Azure Cache Isolation**: Fixed a critical bug where databases with identical names in different Azure storage accounts were sharing a cache, preventing potential data corruption. #enterprise
+
+* **Fixed incorrect boolean filter results**: Fixed bugs in negative filters (NOT EQUAL) that could cause missing rows or duplicates, ensuring accurate query results.
+
+* **Fixed performance regression in indexed point lookups**: Resolved a regression that caused efficient indexed point lookups to incorrectly fall back to slow full table scans.
+
+
+## July 2025
+
+Performance improvements across vector search and indexing and enhanced Cloud UI.
+
+### Features
+
+#### Performance Optimizations
+* **HNSW-Accelerated Partition Computation:** Partition computation is now accelerated with HNSW (Hierarchical Navigable Small World), cutting end-to-end indexing time by up to 50%. The optimization maintains high recall while significantly reducing CPU and memory usage during index creation. [lance#4089](https://github.com/lancedb/lance/pull/4089)
+
+* **Up to 500× Faster Range Queries:** Range queries like "value >= 1000 and value < 2000" on 1M int32 values now execute in 100µs instead of 50ms, dramatically boosting hybrid search performance. [lance#4248](https://github.com/lancedb/lance/pull/4248)
+
+* **Faster L2 Distance Computation:** >10% speedup in vector search by optimizing common-dimension batch L2 operations. [lance#4321](https://github.com/lancedb/lance/pull/4321)
+
+* **B-tree Index Prewarm:** Frequently accessed index pages are now proactively cached in memory, improving query latency. [lance#4235](https://github.com/lancedb/lance/pull/4235)
+
+* **Faster Merge Insert Updates:** Improved update-only operations with optimized join strategy—speeding up data merges with conditional logic. [lance#4253](https://github.com/lancedb/lance/pull/4253)
+
+#### Infrastructure and Deployment Enhancements
+* **Improved Cloud Load Balancing:** Better tenant isolation and fault tolerance across query nodes.
+
+* **Streaming Ingestion with Automatic Index Optimization:** Automatic index updates during streaming ingestion for consistent performance. No block on other operations on the table, such as compaction.
+
+* **Storage Handle Reuse:** Reduced overhead for bulk table creation by fixing excessive object store handle creation. [lancedb#2505](https://github.com/lancedb/lancedb/pull/2505)
+
+* **GCP Autoscaling Support:** Enabled autoscaling in GCP deployments to automatically adjust resources based on demand, ensuring optimal performance and cost efficiency for customer's workloads. #enterprise
+
+#### SDK and API 
+* **Session-Based Cache Control:**  Python and TypeScript users can now customize caching behavior per session—ideal for large datasets and enterprise deployments. [lancedb#2530](https://github.com/lancedb/lancedb/pull/2530). Specifically:
+
+  * **Automatic Conflict Resolution for Updates:** Update operations now support retries with exponential backoff to handle concurrent writes. [lance#4167](https://github.com/lancedb/lance/pull/4167)
+
+  * **Multi-Vector Support (JavaScript):** Added multivector support to the JavaScript/TypeScript SDK. [lancedb#2527](https://github.com/lancedb/lancedb/pull/2527)
+
+  * **Ngram Tokenizer for FTS:** Flexible tokenization for full-text search, supporting languages and use cases with partial or fuzzy matches. [lancedb#2507](https://github.com/lancedb/lancedb/pull/2507)
+
+#### Cloud UI and User Experience
+* **LanceDB Cloud UI Improvements:**  
+    * **Enhanced Table Data Preview:** Added column filtering capabilities to the table data preview, enabling users to filter data with SQL and select only the columns they want to view.
+    * **Multi-Organization Support:** Seamlessly switch between orgs at login for easier team collaboration and access control.
+
+#### Documentation & Guides
+* **[Multimodal Lakehouse Documentation](https://lancedb.github.io/geneva/):** New examples and guides for Geneva-powered feature engineering and multimodal workflows.
+
+---
+
+### Bug Fixes
+
+#### Full-Text Search (FTS) Fixes
+* **Index Creation Stability:** Fixed errors when entire FTS posting lists were deleted.[lance#4156](https://github.com/lancedb/lance/pull/4156)
+
+* **Token Set Remapping:** Ensures proper index consistency when updating FTS data.[lance#4180](https://github.com/lancedb/lance/pull/4180)
+
+* **Phrase Query Precision Fix:** Addressed floating point precision issues to avoid missed results; also fixed decompression edge cases. [lance#4223](https://github.com/lancedb/lance/pull/4223)
+
+* **Phrase Query Error Message Fix:** Returns more informative error when phrase queries lack position support. [lance#4342](https://github.com/lancedb/lance/pull/4342) 
+
+#### Index and Query 
+* **B-tree Redundant Page Loads:** Eliminated duplicate page loads for better scalar index performance. [lance#4246](https://github.com/lancedb/lance/pull/4246)
+
+* **Filtered Read Pagination Fix:** Respects `offset`/`limit` for pagination even when rows are deleted. [lance#4351](https://github.com/lancedb/lance/pull/4351)
+
+#### SDK and API
+* **Schema Alignment with Missing Columns:** Fixed a Node.js bug where schema alignment would fail when using embedding functions with Arrow table inputs that had missing columns. [lancedb#2516](https://github.com/lancedb/lancedb/pull/2516)
+
+* **Python nprobes Fix:** Resolves validation errors when setting both min and max nprobes. [lancedb#2556](https://github.com/lancedb/lancedb/pull/2556)
+
+* **Empty List Table Creation Fix:** Fixed crashes when creating tables from empty lists with predefined schemas.
+
+ [lancedb#2548](https://github.com/lancedb/lancedb/pull/2548)
+
+#### Data Consistency
+* **Dataset Version Race Condition:** Prevents version rollbacks during concurrent queries. [lancedb#2479](https://github.com/lancedb/lancedb/pull/2479)
+
+* **Case-Insensitive Filter Comparison Fix:** Ensures accurate matching for string filters regardless of text case.[lance#4278](https://github.com/lancedb/lance/pull/4278)
+
 ## June 2025
 
 More advanced features added to Full-text Search and optimized BYOC deployment.
@@ -79,6 +235,8 @@ Revamped LanceDB Cloud onboarding, added Umap visualization and improved perform
     * Added UMAP visualization to help users visually explore embeddings in their tables.
 
 
+---
+
 ### Bug Fixes
 * **Upsert Page Size Calculation**: Page size for upsert operations now correctly considers pod memory instead of node memory, reducing the risk of out-of-memory errors in the plan executor. #enterprise
 * **Scalar Index**: 
@@ -113,6 +271,8 @@ Enhanced Performance and Improved Version Control
     * Consistent right-panel binary data display
 * **UI - Direct Page Navigation**: Added page selector for instant access to specific data pages in table preview.
 
+---
+
 ### Bug Fixes
 * **Query Performance**:
     * Fixed hybrid search distance range filtering to properly respect lower and upper bounds. [\[lancedb#2356\]](https://github.com/lancedb/lancedb/pull/2356)
@@ -141,6 +301,8 @@ Enhanced Full-Text Search and Advanced Query Debugging Features
 * **Binary vector support in TypeScript SDK**: LanceDB's TypeScript SDK now natively supports binary vector indexing and querying with production-grade efficiency.
 * **Support S3-compatible object store**: Extended LanceDB Enterprise deployment to work with S3-compatible object stores, such as Tigris, Minio and etc. #enterprise
 
+---
+
 ### Bug Fixes
 * **Improved Merge insert performance**: Enhanced the merge-insert operation to reduce error rates during upsert operations, improving data reliability.[\[lance#3603\]](https://github.com/lancedb/lance/pull/3603).
 * **Batch Ingestion Error**: Updated error codes for batch ingestion failures from 500 to 409 to accurately reflect resource conflict scenarios.
@@ -157,6 +319,8 @@ Multivector Search ready and Table data preview available in Cloud UI
 * **`Drop_index` added to SDK**: users can remove unused or outdated indexes from your tables.
 * **Explore Your Data at a Glance**: preview sample data from any table with a single click. #lancedb-cloud
 * **Search by Project/Table in Cloud UI**: allow users to quickly locate the desired project/table. #lancedb-cloud
+
+---
 
 ### Bug Fixes
 * **FTS stability fix**: Resolved a crash in Full Text Search (FTS) during flat-mode searches.
@@ -176,6 +340,8 @@ Support Hamming Distance and GPU based indexing ready
 * **float16 Vector Index Supports**: reduce storage size while maintaining search quality.
 * **Self-Serve Cloud Onboarding**: new workflow-based UI guides users for smooth experience. #lancedb-cloud
 
+---
+
 ### Bug Fixes
 * `list_indices` and `index_stats` now always fetch the latest version of the table by default unless a specific version is explicitly provided.
 * **Error message fix**: Improved clarity for cases where `create_index` is called to create a vector index on tables with fewer than 256 rows.
@@ -193,6 +359,8 @@ Performant SQL queries at scale and more cost-effective vector search
 * **Azure Stack Router Deployment**: route traffic efficiently to serve low query latency. #enterprise
 * **Distance range filtering**: filter query results using `distance_range()` to return search results with a lowerbound, upperbound or a range [\[lance#3326\]](https://github.com/lancedb/lance/pull/3326).
 * **Full-Text Search(FTS) indexing options**: configure tokenizers, stopword lists and more at FTS index creation.
+
+---
 
 ### Bug Fixes
 * **Full-text search parameters**: Fixed an issue where full-text search index configurations were not applied correctly. [lancedb#1928](https://github.com/lancedb/lancedb/pull/1928)

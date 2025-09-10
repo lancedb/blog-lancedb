@@ -1,18 +1,18 @@
 {{ $section := .Site.GetPage "section" "docs" }}
-<aside class="col-12 col-md-3 col-lg-2 docs-sidebar__wrap">
-  <div class="docs-sidebar__header d-md-none">
+<aside class="col-12 col-md-3 col-lg-2 docs-sidebar__wrap js-sidebar">
+  <div class="docs-sidebar__header d-md-none js-sidebar-header">
     <p class="text-body-medium text-medium">
       {{ .Params.sidebar_title | default .Title }}
     </p>
     <p class="text-body-medium docs-sidebar__header-devider">/</p>
     <p class="text-body-medium js-current-section text-pro docs-sidebar__header-current">
     </p>
-    <button class="docs-sidebar__toggle">
+    <button class="docs-sidebar__toggle js-sidebar-toggle">
        {{readFile "static/assets/icons/arrow_left.svg" | safeHTML}}
     </button>
   </div>
   <div class="docs-sidebar__content">
-    <div class="docs-sidebar">
+    <div class="docs-sidebar js-sidebar-container">
       <nav class="sidebar-nav">
         {{ partial "docs-sidebar-recursive.html" (dict "Pages" $section.Pages "current" .) }}
       </nav> 

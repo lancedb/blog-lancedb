@@ -2,7 +2,7 @@
 title: "Designing a Table Format for ML Workloads"
 date: 2024-03-25
 draft: false
-featured: true
+featured: false
 categories: ["Engineering"]
 image: /assets/blog/designing-a-table-format-for-ml-workloads/designing-a-table-format-for-ml-workloads.png
 description: "Explore designing a table format for ML workloads with practical insights and expert guidance from the LanceDB team."
