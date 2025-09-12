@@ -15,7 +15,7 @@ author_github: "davidmyriel"
 author_linkedin: "davidmyriel"
 ---
 
-[Nomic](https://nomic.ai) builds two related products: [Atlas](https://atlas.nomic.ai), a large-scale embedding visualization system that consumes tabular datasets and can either take precomputed embeddings or generate embeddings for any text column, and the newer [AEC product](https://www.nomic.ai/aec-whitepaper), which ingests documents such as PDFs and runs agentic workflows over them. Across both products, the team relies on the [Lance file format](https://lancedb.github.io/lance/), with [LanceDB](https://lancedb.com) powering the AEC product.
+[Nomic](https://nomic.ai) offers two related products: [Atlas](https://atlas.nomic.ai), a large-scale embedding visualization system that consumes tabular datasets and can either take precomputed embeddings or generate embeddings for any text column, and the newer [AEC product](https://www.nomic.ai/aec-whitepaper), which ingests documents such as PDFs and runs agentic workflows over them. Across both products, the team relies on the [Lance file format](https://lancedb.github.io/lance/), with [LanceDB](https://lancedb.com) powering the AEC product.
 
 **Figure 1:** Nomic Atlas for data exploration
 ![Nomic Atlas screenshot](/assets/blog/case-study-nomic/nomic-atlas.png)
@@ -89,5 +89,7 @@ In the AEC product, LanceDB enables vector search with SQL-style filtering so us
 
 ## Summary
 
-This is the story in the team’s own words: use Lance for derived data and embeddings across both products, use LanceDB from Node where developer ergonomics matter, favor scans until an index is truly needed, keep versions available for Atlas, split writes by stage to avoid contention, and store checkpoints with the data so the system can always pick up exactly where it left off.
+Nomic's journey with [Lance](/docs/overview/lance/) and [LanceDB](https://lancedb.com) demonstrates how the right data infrastructure can transform both research and production workflows. For Atlas, Lance's efficient scanning capabilities eliminated the need for expensive in-memory indexes while preserving [version history](/docs/overview/lance/) for reproducible research. For the AEC product, LanceDB's [Node.js](https://nodejs.org/) integration and [hybrid search](/docs/search/) capabilities enabled developer-friendly retrieval workflows with proper concurrency controls.
+
+The key lessons: use [Lance](/docs/overview/lance/) for derived data and embeddings across both products, leverage [LanceDB](https://lancedb.com) from Node where developer ergonomics matter, favor scans until an [index](/docs/indexing/vector-index/) is truly needed, keep versions available for research reproducibility, split writes by stage to avoid contention, and store checkpoints with the data so the system can always pick up exactly where it left off.
 
