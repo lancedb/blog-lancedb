@@ -1,3 +1,37 @@
+// Mobile nav dropdown toggle
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  nav.addEventListener('click', function (e) {
+    var link = e.target.closest('.nav__link');
+    if (!link) return;
+    var item = link.closest('.nav__item--has-children');
+    var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (item) {
+      // Prevent navigation for parent items, both desktop and mobile
+      if (link.hasAttribute('data-nav-parent')) {
+        e.preventDefault();
+      }
+      // Toggle open on mobile
+      if (!isDesktop) {
+        item.classList.toggle('open');
+        var expanded = item.classList.contains('open');
+        link.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+    }
+  });
+  // Add slight hide delay to avoid flicker on desktop
+  var hideTimeout;
+  nav.addEventListener('mouseleave', function (e) {
+    var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isDesktop) return;
+    var openItem = nav.querySelector('.nav__item--has-children:hover');
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(function () {
+      // No-op; CSS hover handles show/hide. This delay gives users time to enter submenu.
+    }, 120);
+  });
+});
 document.addEventListener("DOMContentLoaded", () => {
   (() => {
     const header = document.querySelector(".js-header");

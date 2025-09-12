@@ -128,14 +128,34 @@ markup:
     tabWidth: 2
 menus:
   main: 
-    - name: Pricing
+    - name: Products
+      weight: -10
+      identifier: products
+      url: /products/
+    - name: Vector Search
+      parent: products
       weight: 1
+      url: /products/vector-search
+    - name: Storage
+      parent: products
+      weight: 2
+      url: /products/storage
+    - name: Feature Engineering
+      parent: products
+      weight: 3
+      url: /products/feature-engineering
+    - name: Training & Fine-tuning
+      parent: products
+      weight: 4
+      url: /products/training-fine-tuning
+    - name: Pricing
+      weight: 10
       pageRef: /pricing
     - name: Docs
-      weight: 2
+      weight: 20
       pageRef: /docs
     - name: Blog
-      weight: 3
+      weight: 30
       pageRef: /blog
   lancedb:
     - name: LanceDB Cloud
