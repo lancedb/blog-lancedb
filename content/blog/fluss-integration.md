@@ -180,7 +180,15 @@ Once it's running, your local tiering pipeline is good to go.
 We'll walk through a Python code example that demonstrates how to stream a dataset of images into Fluss, 
 and subsequently load the tiered Lance dataset into a Pandas `DataFrame` for further processing.
 
-### Step 1: Create Connection
+### Step 1: Install Dependencies
+
+Install the required dependencies:
+
+```bash
+pip install python-for-fluss pyarrow pylance pandas
+```
+
+### Step 2: Create Connection
 
 Create the connection and table with the Fluss Python client:
 
@@ -217,7 +225,7 @@ async def create_table(conn, table_path, pa_schema):
         print(f"Table creation failed: {e}")
 ```
 
-### Step 2: Process Images
+### Step 3: Process Images
 
 ```python
 import os
@@ -250,7 +258,7 @@ This `process_images` function is the heart of our data conversion process.
 It is responsible for iterating over the image files in the specified directory, 
 reading the data of each image, and converting it into a [PyArrow](https://arrow.apache.org/docs/python/) `RecordBatch` object as binary.
 
-### Step 3: Writing to Fluss
+### Step 4: Writing to Fluss
 
 The `write_to_fluss` function creates a `RecordBatchReader` from the `process_images` generator 
 and writes the resulting data to the Fluss `fluss.images_minio` table. 
@@ -270,14 +278,14 @@ async def write_to_fluss(conn, table_path, pa_schema):
         append_writer.close()
 ```
 
-### Step 4: Check Job Completion
+### Step 5: Check Job Completion
 
 Wait a little while for the tiering job to finish. 
 Then, go to the [MinIO](https://min.io/) UI, and you'll see the Lance dataset in your `lance` bucket. You can load it with [Pandas](https://pandas.pydata.org/) using Lance’s `to_pandas` API.
 
 ![Check Job MinIO UI](/assets/blog/fluss-integration/fluss3.png)
 
-### Step 5: Loading into Pandas
+### Step 6: Loading into Pandas
 
 While Fluss is writing data into Lance in real time, you can load from the Lance datasets in MinIO.
 At this point, you can leverage anything that integrates with Lance to consume the data in any ML/AI application,
