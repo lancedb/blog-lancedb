@@ -5,7 +5,7 @@ description: Learn how to work with Lance Blobs in Geneva UDFs for handling larg
 weight: 2
 --- 
 
-Geneva supports UDFs that take [Lance Blobs](https://lancedb.github.io/lance/blob.html) (large binary objects) as input and has the ability to write out columns with binaries encoded as Lance Blobs.  Lance blobs are an optimization intended for large objects (1's MBs -> 100MB's) and provide a file-like object that lazily reads large binary objects.
+Geneva supports UDFs that take [Lance Blobs](https://lancedb.github.io/lance/guide/blob.html) (large binary objects) as input and has the ability to write out columns with binaries encoded as Lance Blobs.  Lance blobs are an optimization intended for large objects (1's MBs -> 100MB's) and provide a file-like object that lazily reads large binary objects.
 
 ## Reading Blobs
 
