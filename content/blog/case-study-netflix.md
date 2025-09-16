@@ -49,16 +49,16 @@ The architecture combines real-time and offline processing. Lightweight queries 
 
 ```mermaid
 graph LR
-    A[Data Sources] --> B[Media Data Lake<br/>LanceDB]
-    B --> C[Media Tables<br/>Metadata + Embeddings]
-    C --> D[API/UI Access]
-    D --> E[ML Training +<br/>Search Applications]
-    
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
-    style C fill:#fff3e0
-    style D fill:#f3e5f5
-    style E fill:#ffebee
+    classDef source fill:#e1f5fe,stroke:#333,stroke-width:1px,rx:6,ry:6
+    classDef lake fill:#c8e6c9,stroke:#333,stroke-width:1px,rx:6,ry:6
+    classDef table fill:#fff3e0,stroke:#333,stroke-width:1px,rx:6,ry:6
+    classDef access fill:#f3e5f5,stroke:#333,stroke-width:1px,rx:6,ry:6
+    classDef apps fill:#ffebee,stroke:#333,stroke-width:1px,rx:6,ry:6
+
+    A[Data Sources]:::source -->|ingest| B[Media Data Lake<br/>LanceDB]:::lake
+    B -->|organize| C[Media Tables<br/>Metadata + Embeddings]:::table
+    C -->|serve| D[API/UI Access]:::access
+    D -->|train + search| E[ML Training +<br/>Search Applications]:::apps
 ```
 Figure 2 shows how Media Tables unify raw media, derived features, and machine learning outputs under one schema. This integration eliminates silos between creative assets and ML workflows, allowing researchers to query, explore, and train models on the same foundation. Built on LanceDB, it ensures that both interactive exploration and large-scale training run from a single source of truth.
 
@@ -142,11 +142,11 @@ flowchart LR
   MDE --> RS
 
   %% Styling
-  classDef center fill:#f8c8c8,stroke:#e74c3c,stroke-width:2px,color:#000
-  classDef producers fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000
-  classDef analytics fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
-  classDef dataScience fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
-  classDef research fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+  classDef center fill:#f8c8c8,stroke:#e74c3c,stroke-width:2px,color:#000,rx:6,ry:6
+  classDef producers fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000,rx:6,ry:6
+  classDef analytics fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000,rx:6,ry:6
+  classDef dataScience fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000,rx:6,ry:6
+  classDef research fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000,rx:6,ry:6
 
   class MDE center
   class DP1,DP2,DP3 producers
@@ -159,7 +159,7 @@ For Netflix, it means faster iteration cycles and richer insights into creative 
 
 ## Learn More About LanceDB
 
-The foundation that powers Netflix’s Media Data Lake is open source and available to everyone. [LanceDB](https://lancedb.com/) and the [Lance format](https://lancedb.github.io/lance/) bring the same capabilities to any team working with multimodal data. With fast random access, zero-copy data evolution, hybrid search, and scalable feature engineering, LanceDB is redefining what a data lake can do in the age of AI.
+The foundation that powers Netflix’s Media Data Lake is open source and available to everyone. [LanceDB](/) and the [Lance format](https://lancedb.github.io/lance/) bring the same capabilities to any team working with multimodal data. With fast random access, zero-copy data evolution, hybrid search, and scalable feature engineering, LanceDB is redefining what a data lake can do in the age of AI.
 
 {{< admonition "Note" "Technical White Paper" >}}
 To learn more about the Multimodal Lakehouse, read our study [Why Multimodal Data Needs a Better Lakehouse?](/download/)
