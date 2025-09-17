@@ -143,3 +143,4 @@ RaBitQ is not theoretical. Elastic integrated it into their BBQ quantization fea
 
 Now RaBitQ is available in LanceDB alongside IVF_PQ. You can choose the method that best fits your workload, and even switch as your dataset grows. If you’re exploring LanceDB for the first time, check out our [quickstart](/docs/), the [WikiSearch demo](/blog/feature-full-text-search/), and how this ties into the [Multimodal Lakehouse](/blog/multimodal-lakehouse/).
 
+![outro](/assets/blog/feature-rabitq-quantization.md/outro.jpeg)
