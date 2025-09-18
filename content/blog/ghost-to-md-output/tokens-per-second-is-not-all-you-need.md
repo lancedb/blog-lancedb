@@ -1,10 +1,13 @@
 ---
-title: Tokens Per Second is NOT All You Need
+title: "Tokens Per Second is NOT All You Need"
 date: 2024-05-01
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
+meta_image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
+description: "***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*."
 ---
 
 ***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*
@@ -21,7 +24,7 @@ Typically, throughput measures the number of instances processed within a time w
 
 ## Long Input with Short Output
 
-AI agentic workflows, predominantly featuring agent-to-agent interactions as opposed to agent-human interactions, might initially seem to prioritize **Tokens per Second** as the key performance metric. However, upon closer inspection, the complexity of these workflows becomes apparent. In such systems, each model call typically involves a long input for a relatively short output, as the model continually updates the context to predict the next state. Consequently, **Time to First Token** remains crucial for effective system performance, not only in these workflows but also in applications like RAG that process multiple or lengthy documents. Additionally, the current model trend in supporting super long context windows further strengthened this situation and needless to mention those mutl-turn conversational chatbot systems. 
+AI agentic workflows, predominantly featuring agent-to-agent interactions as opposed to agent-human interactions, might initially seem to prioritize **Tokens per Second** as the key performance metric. However, upon closer inspection, the complexity of these workflows becomes apparent. In such systems, each model call typically involves a long input for a relatively short output, as the model continually updates the context to predict the next state. Consequently, **Time to First Token** remains crucial for effective system performance, not only in these workflows but also in applications like RAG that process multiple or lengthy documents. Additionally, the current model trend in supporting super long context windows further strengthened this situation and needless to mention those mutl-turn conversational chatbot systems.
 
 ## A More Balanced Approach
 
@@ -40,4 +43,4 @@ Leveraging these hardware advantages and innovative software techniques, such as
 
 ## Conclusion
 
-In conclusion, the exploration of Tokens per Second reveals its limitations as a sole metric for evaluating LLM systems. This evidence strongly supports the argument for a more comprehensive metric selection in system design. A balanced approach that includes both throughput metrics like Tokens per Second and latency metrics such as Time to First Token ensures a more accurate assessment and optimization of system performance, particularly in user-centric applications. 
+In conclusion, the exploration of Tokens per Second reveals its limitations as a sole metric for evaluating LLM systems. This evidence strongly supports the argument for a more comprehensive metric selection in system design. A balanced approach that includes both throughput metrics like Tokens per Second and latency metrics such as Time to First Token ensures a more accurate assessment and optimization of system performance, particularly in user-centric applications.

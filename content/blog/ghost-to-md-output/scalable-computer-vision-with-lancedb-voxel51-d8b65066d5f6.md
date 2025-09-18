@@ -1,13 +1,16 @@
 ---
-title: Scalable Computer Vision with LanceDB & Voxel51
+title: "Scalable Computer Vision with LanceDB & Voxel51"
 date: 2023-07-13
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/preview-image.png
+meta_image: /assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/preview-image.png
+description: "Importance of dataset analysis in CV."
 ---
 
-# Importance of dataset analysis in CV
+## Importance of dataset analysis in CV
 
 Dataset analysis is an essential step in any computer vision project. It allows us to understand the data that we are working with, identify any potential problems, and make sure that the data is as representative as possible of the real world. This is especially important once the model architecture is fixed due to deployment constraints, as the best way to improve performance is via iteration on datasets.
 
@@ -15,7 +18,7 @@ Voxel51 is a set of open-source tools for computer vision. The FiftyOne query la
 
 With this integration with LanceDB, Voxel51 can leverage its fast, robust and setup-free vector search capabilities.
 ![](https://miro.medium.com/v2/resize:fit:770/1*RFtus4W8XVeoG0Bc08IHdg.jpeg)
-# LanceDB: The serverless vectorDB
+## LanceDB: The serverless vectorDB
 
 LanceDB is an open-source, serverless, and a multi-modal vector database.
 
@@ -26,28 +29,29 @@ LanceDB is an open-source, serverless, and a multi-modal vector database.
 To enable the lancedb backend in voxel51, simply pass `backend="lancedb"` in supported operations
 
     import fiftyone.brain as fob
-    
+
     fob.compute_similarity(
         ...
         backend="lancedb",
     )
 
-# **Example use cases**
+## **Example use cases**
 
 ## Sort dataset by similarity
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*WIKrLZEtkYGwlXaCDdctJQ.gif)
 ## Get similar images to a given id
 
     import fiftyone as fo
     import fiftyone.brain as fob
-    
+
     fob.compute_similarity(
         ...
         backend="lancedb",
     )
     id = dataset.first().id
     view = dataset.sort_by_similarity(id, k=30)
-    
+
     session = fo.launch_app(view)
     session.wait()
 
@@ -64,7 +68,7 @@ LanceDB is compatible with python data ecosystem and can be used with pandas, nu
 
     lancedb_index = fob.compute_similarity(…)
     table = lancedb_index.table
-    
+
     # Integration with Python data ecosystem
     df = table.to_pandas() # get the table as a pandas dataframe
     pa = table.to_arrow() # get the table as an arrow table

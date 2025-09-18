@@ -5,17 +5,20 @@ author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/preview-image.png
+meta_image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/preview-image.png
+description: "by Mahesh Deshwal."
 ---
 
 by Mahesh Deshwal
 
-# What is Hybrid Search, and what’s the need for it?
+## What is Hybrid Search, and what’s the need for it?
 
 With the increasing usage of LLMs in RAG setting, there’s a lot of focus on Vector (Embedding) search. Everything works well when you’re dealing with toy problems or datasets, but you start to notice performance and evaluation constrains as the applications scale. What do I mean by that? Let’s take an example of a simple search from a global company where you know user preferences like taste in music, geo-location, etc.
 
 Now, if they love Rap music and search lyrics to a song, you wouldn’t want to recommend something they hate or a song having the same meaning in a different language, at any cost. Another example of a bad result is that if they want to literally search a book named “Elephant in the Room,” and you give them a paragraph providing the semantic meaning of it. That’s a pretty good recipe for user churn. So what’s the solution?
 
-# Hybrid search
+## Hybrid search
 
 There are a few common ways of searching for queries these days:
 
@@ -54,23 +57,21 @@ LanceDB uses `tantivity` for the full text search. It also provides a Reranking 
     import re
     import pandas as pd
     import random
-    
+
     from datasets import load_dataset
-    
+
     import torch
     import gc
-    
+
     import lance
-    
-    
+
     import os
-    
+
     import lancedb
     import openai
     from lancedb.embeddings import get_registry
     from lancedb.pydantic import LanceModel, Vector
-    
-    
+
     os.environ["OPENAI_API_KEY"] = "sk-......." #YOUR API
     embeddings = get_registry().get("openai").create()
 
@@ -78,22 +79,22 @@ Now let us create a LanceDB table and load the the good old BEIR data. Remember,
 
     queries = load_dataset("BeIR/scidocs", "queries")["queries"].to_pandas()
     full_docs = load_dataset('BeIR/scidocs', 'corpus')["corpus"].to_pandas().dropna(subset = "text")
-    
+
     docs = full_docs.head(64) # just random samples for faster embed demo
     docs["num_words"] = docs["text"].apply(lambda x: len(x.split())) # Insert some Metadata for a more "HYBRID" search
     docs.sample(3)
-    
+
     class Documents(LanceModel):
         vector: Vector(embeddings.ndims()) = embeddings.VectorField()
         text: str = embeddings.SourceField()
         title: str
         num_words: int
-    
+
     data = docs.apply(lambda row: {"title":row["title"], "text":row["text"], "num_words":row["num_words"]}, axis = 1).values.tolist()
-    
+
     db = lancedb.connect("./db")
     table = db.create_table("documents", schema=Documents)
-    
+
     table.add(data) # ingest docs with auto-vectorization
     table.create_fts_index("text") # Create a fts index before the hybrid search
 
@@ -105,9 +106,9 @@ Now let us create a LanceDB table and load the the good old BEIR data. Remember,
 Moment of truth? Let’s search first giving more weight to Full Text Search
 
     from lancedb.rerankers import LinearCombinationReranker
-    
+
     reranker = LinearCombinationReranker(weight=0.3) # Weight = 0 Means pure Text Search (BM-25) and 1 means pure Sementic (Vector) Search
-    
+
     table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
                 rerank(reranker=reranker).\
                 limit(5).\
@@ -123,23 +124,23 @@ That’s about it. If you want to add your custom filtering and re ranking, lear
     from typing import List, Union
     import pandas as pd
     import pyarrow as pa
-    
+
     class ModifiedLinearReranker(LinearCombinationReranker):
         def __init__(self, filters: Union[str, List[str]], **kwargs):
             super().__init__(**kwargs)
             filters = filters if isinstance(filters, list) else [filters]
             self.filters = filters
-    
+
         def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table)-> pa.Table:
             combined_result = super().rerank_hybrid(query, vector_results, fts_results)
             df = combined_result.to_pandas()
             for filter in self.filters:
                 df = df.query("(not text.str.contains(@filter)) & (num_words > 150) ") # THIS is where you implement your filters. You can hard code or pass dynamically too
-    
+
             return pa.Table.from_pandas(df)
-    
+
     modified_reranker = MofidifiedLinearReranker(filters=["dual-band"])
-    
+
     table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
                 rerank(reranker=modified_reranker).\
                 limit(5).\

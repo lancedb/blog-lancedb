@@ -1,10 +1,13 @@
 ---
-title: Lance v0.15.0
+title: "Lance v0.15.0"
 date: 2024-07-30
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/lance-v0-15-0/preview-image.png
+meta_image: /assets/blog/lance-v0-15-0/preview-image.png
+description: "Lance 0.15.0 introduces several experimental features, marking major milestones on important projects in our library."
 ---
 
 Lance 0.15.0 introduces several experimental features, marking major milestones on important projects in our library. It exposes the first public APIs for full-text search indices. It also provides opt-in support for two new encodings: better string compression using FSST and a packed struct encoding optimized for random access. These advancements move us another step closer to being the best format for AI data lakes.
@@ -19,7 +22,7 @@ You can pass the `full_text_query` parameter to the query APIs, such as `dataset
 
     import lance
     import pyarrow as pa
-    
+
     headlines = [
         "Scientists may have discovered 'dark oxygen' being created without photosynthesis",
         "A hydrothermal explosion sends Yellowstone visitors running",
@@ -30,11 +33,11 @@ You can pass the `full_text_query` parameter to the query APIs, such as `dataset
     ]
     data = pa.table({"headline": headlines})
     dataset = lance.write_dataset(data, "test_path")
-    
+
     # If you use without an index, will give error:
     # "LanceError(IO): Column headline has no inverted index"
     dataset.create_scalar_index("headline", index_type="INVERTED")
-    
+
     dataset.to_table(full_text_query="human")
 
     pyarrow.Table
@@ -61,14 +64,14 @@ Our Rust implementation of FSST was developed by community member Jun Wang (`bro
 In addition to better string compression, we also have released an experimental encoding for struct columns that makes them better for random access. Currently, if you read a row of a struct column, we must issue a separate IO call for each sub column. The packed struct encoding puts all the data for a single row together, so a full row can be retrieved in a single IO call. This makes random access much faster, including when retrieving rows for a vector search query.
 
     import pyarrow.compute as pc
-    
+
     # 10 columns of random float data
     inner_data = pa.table({
         f'x{i}': pc.random(1000)
         for i in range(10)
     }).to_batches()[0]
     struct_column = pa.StructArray.from_arrays(inner_data.columns, inner_data.schema.names)
-    
+
     schema = pa.schema([
         pa.field('before', struct_column.type),
         pa.field('packed', struct_column.type, metadata={b"packed": b"true"})
@@ -77,12 +80,12 @@ In addition to better string compression, we also have released an experimental 
         'before': struct_column,
         'packed': struct_column
     }, schema=schema)
-    
+
     dataset = lance.write_dataset(table, "test_packed_struct", use_legacy_format=False)
-    
+
     import random
     indices = [random.randint(0, 1000) for _ in range(25)]
-    
+
     %timeit dataset.take([42, 35, 12, 11], columns=['before'])
     %timeit dataset.take([42, 35, 12, 11], columns=['packed'])
 

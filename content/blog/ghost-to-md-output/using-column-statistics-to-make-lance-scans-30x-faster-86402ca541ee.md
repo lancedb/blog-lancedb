@@ -1,10 +1,13 @@
 ---
-title: Using column statistics to make Lance scans 30x faster
+title: "Using column statistics to make Lance scans 30x faster"
 date: 2023-12-20
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402ca541ee/preview-image.png
+meta_image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402ca541ee/preview-image.png
+description: "by Will Jones."
 ---
 
 by Will Jones
@@ -13,7 +16,7 @@ In Lance v0.8.21, we introduced column statistics and statistics-based page prun
 
 Today these statistics are used when scanning datasets or deleting data based on a predicate. This is the first of several improvements we’ll be making to filtering, so expect to see similar improvements for vector search pre-filtering.
 
-# Performance improvements for scans
+## Performance improvements for scans
 
 How much does this feature improve performance? As a simple example, we created a test dataset with 1 million rows. The data had the schema:
 
@@ -30,7 +33,7 @@ When filtering on `score` and `category` and projecting the `id` and `embedding`
 ![](https://miro.medium.com/v2/resize:fit:770/1*M0NV2WemCVfpZyEDdPeaQA.png)
 As expected, Lance outperforms Parquet when selecting vector columns. However, what about scalar columns? We also executed the same query, but only projected `id` and `score`. In this case, Lance's query time improved by 3x compared to previous versions, and it was only about 3 ms slower than Parquet. While Parquet excels in analytics data, we are confident that we can make additional optimizations to match or even surpass Parquet's performance.
 
-# How we prune pages
+## How we prune pages
 
 Lance uses an expression simplification approach to statistics based page pruning. This is different from other systems which can only prune entire sets of rows. There are two additional things we can do:
 
@@ -49,7 +52,7 @@ In the fourth and final page, `min(category) = 'C'`. This doesn’t eliminate th
 ![](https://miro.medium.com/v2/resize:fit:770/1*j_KLVrtfn0CJh0kBTn2P1Q.png)
 By performing these simplifications, we only needed to read 3 of the 8 pages of data. Additionally, in one of the cases we were able to simplify the filter to an equality check rather than set containment check, which is generally cheaper.
 
-# Implementing with DataFusion
+## Implementing with DataFusion
 
 Lance’s scanner uses DataFusion, a toolbox for creating query engines. We utilize this library for SQL parsing, query planning, expression optimization, and execution. Implementing this feature required two steps:
 
@@ -60,7 +63,7 @@ We contributed the first step to DataFusion ([PR](https://github.com/apache/arro
 
 Overall, our experience with DataFusion has been great. Many of the advanced features we look for have already been implemented, and those that we needed to implement got quick feedback and approval.
 
-# What’s next
+## What’s next
 
 These statistics are only useful to the extent the rows in your dataset are clustered for the columns are you are filtering on. Some tables will have a natural clustering based on insertion order. For example, if there is a insertion timestamp column or an incrementing id, those will already be ordered well and filtering on them will be very effective. In other cases, your data may need to be rearranged to be optimally clustered. We already have a compaction operation that requires moving your data, so during that phase we could optionally cluster data along columns of your choice. This is the first enhancement that is on our roadmap.
 

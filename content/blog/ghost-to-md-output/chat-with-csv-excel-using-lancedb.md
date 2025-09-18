@@ -1,10 +1,13 @@
 ---
-title: Chat with your stats using Langchain dataframe agent & LanceDB hybrid search
+title: "Chat with your stats using Langchain dataframe agent & LanceDB hybrid search"
 date: 2024-06-30
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/chat-with-csv-excel-using-lancedb/preview-image.png
+meta_image: /assets/blog/chat-with-csv-excel-using-lancedb/preview-image.png
+description: "In this blog, we’ll explore how to build a chat application that interacts with CSV and Excel files using LanceDB’s hybrid search."
 ---
 
 ![](__GHOST_URL__/content/images/2024/06/image-4-2.png)
@@ -25,6 +28,7 @@ Our objective is to extract the HS code for each commodity while also considerin
 I used Full-Text Search (FTS) for the ‘Commodity’ field. This FTS will check the query and if anything is related to it, it will try to fetch or retrieve the relevant data. You can always set the FTS based on your use case to ensure that the most relevant information is retrieved efficiently.
 
 #### Reranker model and hybrid search
+
 ![](__GHOST_URL__/content/images/2024/06/1_Zh4Jju6uiCYFO9HHvO5sIA.webp)
 We use a reranker model, specifically the `LinearCombinationReranker`, to enhance the search results. This reranker allows you to adjust the weight between text search (BM-25) and semantic (vector) search. A weight of 0 means pure text search, while a weight of 1 means pure semantic search. By using a hybrid search, we combine the strengths of both search methods to provide more accurate and relevant results.
 
@@ -36,15 +40,14 @@ For more details on the reranker model and hybrid search, you can check out the 
 
     func = registry.get("sentence-transformers").create(device="cpu")
 
-1. Defining the Data Model: 
+1. Defining the Data Model:
 
-    class Words(LanceModel):     
-      HSCode: int = func.SourceField()     
-      Year_2022_2023: str = func.SourceField()     
-      Year_2023_2024: str = func.SourceField()     
-      Commodity: str = func.SourceField()     
+    class Words(LanceModel):
+      HSCode: int = func.SourceField()
+      Year_2022_2023: str = func.SourceField()
+      Year_2023_2024: str = func.SourceField()
+      Commodity: str = func.SourceField()
       vector: Vector(func.ndims()) = func.VectorField()
-    
 
 **Creating a Table and Adding Data**:
 
@@ -58,13 +61,13 @@ I want to do FTS on `Commodity` column so I selected it
 
 1. **Using a Reranker for Hybrid Search**:
 
-    reranker = LinearCombinationReranker(weight=0.3) 
-    query = 'what is HS code of sugar' 
+    reranker = LinearCombinationReranker(weight=0.3)
+    query = 'what is HS code of sugar'
     lance_reranker_op = table.search(query, query_type="hybrid")\
-                      .rerank(reranker=reranker)\ 
-                      .limit(5)\                   
-                      .to_pandas() 
-    
+                      .rerank(reranker=reranker)\
+                      .limit(5)\
+                      .to_pandas()
+
     lance_reranker_op
 
 This code demonstrates how to set up and use LanceDB for hybrid search, leveraging both FTS and semantic search with a reranker to get accurate results from your dataset.
@@ -76,7 +79,7 @@ Now we can pass our results DataFrame to a pandas DataFrame agent for further pr
 First, let’s clean up the DataFrame by removing columns that are not important for the next steps:
 
     df = lance_reranker_op.drop(columns=['_relevance_score', 'vector'])
-    
+
     # The cleaned DataFrame
     result_from_lancedb = df
     lance_reranker_op = lance_reranker_op.copy()
@@ -88,8 +91,7 @@ Next, we will set up the pandas DataFrame agent using LangChain:
     from langchain_openai import ChatOpenAI
     import pandas as pd
     from langchain_openai import OpenAI
-    
-    
+
     agent = create_pandas_dataframe_agent(
         ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613"),
         result_from_lancedb,
@@ -102,16 +104,14 @@ Next, we will set up the pandas DataFrame agent using LangChain:
 output:
 
     > Entering new AgentExecutor chain...
-    
+
     Invoking: `python_repl_ast` with `{'query': "df[df['Commodity'] == 'OTHER COCONUTS']['HSCode'].values[0]"}`
-    
-    
+
     80119The HS code of "OTHER COCONUTS" is 80119.
-    
+
     > Finished chain.
     {'input': 'what is Hs code of OTHER COCONUTS ',
      'output': 'The HS code of "OTHER COCONUTS" is 80119.'}
-    
 
 That’s how you can build a system to interact with your data using LanceDB’s hybrid search capabilities. If your data is in CSV format, this approach is particularly helpful. Additionally, you can experiment with different hybrid methods and ranked models to compare your results and find the most effective solution for your use case.
 

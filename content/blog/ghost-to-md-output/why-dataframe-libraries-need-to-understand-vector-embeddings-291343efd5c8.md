@@ -1,22 +1,24 @@
 ---
-title: Open Vector Data Lakes
+title: "Open Vector Data Lakes"
 date: 2023-05-21
-excerpt: Why DataFrame libraries need to understand vector embeddings
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/why-dataframe-libraries-need-to-understand-vector-embeddings-291343efd5c8/preview-image.png
+meta_image: /assets/blog/why-dataframe-libraries-need-to-understand-vector-embeddings-291343efd5c8/preview-image.png
+description: "Why DataFrame libraries need to understand vector embeddings."
 ---
 
 by Ziheng Wang
 
 This post is an expanded version of the upcoming joint talk [Quokka](https://github.com/marsupialtail/quokka) + [LanceDB](https://github.com/lancedb/lancedb) talk at the [Data+AI Summit](https://www.databricks.com/dataaisummit/) this June.
 
-# Vector embeddings are here to stay
+## Vector embeddings are here to stay
 
 Vector embeddings are here to stay. It is hard to conceive of constructing recommendation system, search engine, or LLM-based app in this day and age without using vector embeddings and approximate/exact nearest neighbor search. Vector embeddings are the easiest way to do retrieval on unstructured data formats like text and images, and there are countless ways to generate them that get better each day.
 
-# Current approaches won’t scale
+## Current approaches won’t scale
 
 There are three main reasons that I believe the incumbent vector databases can’t succeed in the long-term.
 
@@ -26,7 +28,7 @@ Second is vendor lock-in — with the exception of LanceDB, the long term storag
 
 Third is flexibility — In the structured data world, *data lakes* have become popular as a long-term storage for OLTP stores like Postgres or MySQL. The data lake has much worse transactional performance for online workloads, but support cheap long term storage and relatively efficient querying. Most importantly, the long term storage is in an open format decoupled from the OLTP store, allowing different tools to compete and excel at different tasks, like dashboard reporting or machine learning training. None of this would be possible if your S3 was full of MySQL pages or Postgres WALs.
 
-# We need better vector embedding tools
+## We need better vector embedding tools
 
 It’s clear from the get-go that vector embeddings are a whole new data type, and significant changes to current data systems are needed to support them well. Hundreds of millions of investment dollars have poured into making a new generation of databases that are optimized around vectors. Existing SQL/noSQL players like Redis, Elastic, Postgres, Clickhouse, DuckDB have all built extensions that support vector operations. It is certainly a very active space.
 
@@ -46,7 +48,7 @@ This is the only option today, but it is quite suboptimal. Imagine having to con
 
 DataFrame engines should support native operations on vector embedding columns, such as exact/approximate nearest neighbor searches or range searches. Recently, a new format [Lance](https://github.com/eto-ai/lance) has come out as strong alternatives to Parquet that has native support for vector indices. That means any Arrow compatible DataFrame engine can immediately gain vector search capabilities if it was able to push the right syntax down to Lance.
 
-# Quokka’s Vector Operations
+## Quokka’s Vector Operations
 
 As a proof of concept and hopefully an example for other DataFrame engines, I have started implementing vector-embedding-native operations in Quokka.
 
@@ -74,7 +76,7 @@ If the source of the DataStream has indices (Lance), the `vector_nn_join` will b
 
 The vector embedding API is very much a work in progress. If people are interested, future APIs under consideration are `vector_range_join` and `vector_groupby` based on clustering. Check out the code examples [here](https://github.com/marsupialtail/quokka/blob/master/apps/vectors/do_lance.py). Contributions welcome!
 
-# What I hope this enables: open vector data lakes
+## What I hope this enables: open vector data lakes
 
 So what would a real vector data lake look like? Vector embeddings should be stored in Parquet, or Lance, as a native data type. Metadata formats such as Delta Lake or Iceberg should support rich indices to be added by the user, and support versioning on these indexes. Query engines such as Trino and SparkSQL should be able to do nearest neighbor search on the vector data, just like how they are able to filter or join relational data.
 

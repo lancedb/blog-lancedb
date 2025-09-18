@@ -1,10 +1,13 @@
 ---
-title: Multimodal Myntra Fashion Search Engine using LanceDB
+title: "Multimodal Myntra Fashion Search Engine using LanceDB"
 date: 2024-03-20
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/multimodal-myntra-fashion-search-engine-using-lancedb/preview-image.png
+meta_image: /assets/blog/multimodal-myntra-fashion-search-engine-using-lancedb/preview-image.png
+description: "In this comprehensive guide, we aim to explain the process of creating a multi-modal search app and break it down into manageable steps."
 ---
 
 In this comprehensive guide, we aim to explain the process of creating a multi-modal search app and break it down into manageable steps. The procedure involves several phases, including registering clip embeddings, setting up a data class and table, and executing a search query.
@@ -40,7 +43,7 @@ LanceDB supports 3 methods of working with embeddings.
 For this project, we use the embedding function. We define a global embedding function registry with the OpenAI CLIP Model. With the EmbeddingFunctionRegistry function, you can generate the embeddings easily with just a few lines of code and do not need to worry about the boilerplate code.
 
     from lancedb.embeddings import EmbeddingFunctionRegistry
-    
+
     def register_model(model_name):
         registry = EmbeddingFunctionRegistry.get_instance()
         model = registry.get(model_name).create()
@@ -57,13 +60,13 @@ For this project, we will define the schema with two fields -
 
     from PIL import Image
     from lancedb.pydantic import LanceModel, Vector
-    
+
     clip = register_model("open-clip")
-    
+
     class Myntra(LanceModel):
         vector: Vector(clip.ndims()) = clip.VectorField()
         image_uri: str = clip.SourceField()
-    
+
         @property
         def image(self):
             return Image.open(self.image_uri)
@@ -77,34 +80,34 @@ Now that we have our embedding function and schema, we will create the table.
     from pathlib import Path
     from random import sample
     import argparse
-    
+
     def create_table(database, table_name, data_path, schema=Myntra, mode="overwrite"):
-    
+
         # Connect to the lancedb database
         db = lancedb.connect(database)
-    
+
         # Check if the table already exists in the database
         if table_name in db:
             print(f"Table {table_name} already exists in the database")
             table = db[table_name]
-    
+
         # if it does not exist then create a new table
-        else:   
-    
+        else:
+
             print(f"Creating table {table_name} in the database")
-    
+
             # Create the table with the given schema
             table = db.create_table(table_name, schema=schema, mode=mode)
-    
+
             # Define the Path of the images and obtain the Image uri
             p = Path(data_path).expanduser()
             uris = [str(f) for f in p.glob("*.jpg")]
             print(f"Found {len(uris)} images in {p}")
-            
-            # Sample 1000 images from the data 
+
+            # Sample 1000 images from the data
             # Select more samples for a wider search
             uris = sample(uris, 1000)
-    
+
             # Add the data to the table
             print(f"Adding {len(uris)} images to the table")
             table.add(pd.DataFrame({"image_uri": uris}))
@@ -128,11 +131,11 @@ The OpenCLIP query embedding function supports querying via both text and images
                 os.remove(os.path.join(output_folder, file))
         else:
             os.makedirs(output_folder)
-    
+
         db = lancedb.connect(database)
         table = db.open_table(table_name)
         rs = table.search(search_query).limit(limit).to_pydantic(schema)
-        
+
         for i in range(limit):
             image_path = os.path.join(output_folder, f"image_{i}.jpg")
             rs[i].image.save(image_path, "JPEG")
@@ -145,7 +148,7 @@ Once this is done, we create a streamlit app to build an interface.
     import argparse
     import streamlit as st
     from PIL import Image
-    
+
     def main(args):
         # Define the title and sidebar options
         st.sidebar.title('Vector Search')
@@ -153,7 +156,7 @@ Once this is done, we create a streamlit app to build an interface.
         search_query = st.sidebar.text_input('Search query', args.search_query)
         limit = st.sidebar.slider('Limit the number of results', args.limit_min, args.limit_max, args.limit_default)
         output_folder = st.sidebar.text_input('Output folder path', args.output_folder)
-    
+
         # Image Based Search
         # Add an option for uploading an image for query
         uploaded_image = st.sidebar.file_uploader('Upload an image')
@@ -161,15 +164,15 @@ Once this is done, we create a streamlit app to build an interface.
             image = Image.open(uploaded_image)
             st.sidebar.image(image, caption='Uploaded Image', use_column_width=True)
             search_query = image  # Set the search query as the uploaded image
-    
+
         # Run the vector search when the button is clicked
         if st.sidebar.button('Run Vector Search'):
             run_vector_search("~/.lancedb", table_name, Myntra, search_query, limit, output_folder)
-    
+
         # Initialize session state for image index if it doesn't exist
         if 'current_image_index' not in st.session_state:
             st.session_state.current_image_index = 0
-    
+
         # Display images in output folder
         if os.path.exists(output_folder):
             image_files = [f for f in os.listdir(output_folder) if f.endswith('.jpg') or f.endswith('.png')]
@@ -181,7 +184,7 @@ Once this is done, we create a streamlit app to build an interface.
                 image_path = os.path.join(output_folder, image_file)
                 image = Image.open(image_path)
                 st.image(image, caption=image_file, use_column_width=True)
-    
+
                 # Navigation buttons for previous and next images
                 col1, col2 = st.columns(2)
                 with col1:

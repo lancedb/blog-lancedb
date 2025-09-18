@@ -1,10 +1,13 @@
 ---
-title: An attempt to build cursor's @codebase feature - RAG on codebases - part 2/2
+title: "An attempt to build cursor's @codebase feature - RAG on codebases - part 2/2"
 date: 2024-11-07
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/building-rag-on-codebases-part-2/preview-image.png
+meta_image: /assets/blog/building-rag-on-codebases-part-2/preview-image.png
+description: "."
 ---
 
 💡
@@ -56,11 +59,11 @@ I found a cool blogpost which validated my thoughts later on. I quote them below
 [Three LLM tricks that boosted embeddings search accuracy by 37% — Cosine](https://www.buildt.ai/blog/3llmtricks)
 
 > ### Meta-characteristic search
-> 
+>
 > One of the core things we wanted to have is for people to be able to search for characteristics of their code which weren't directly described in their code, for example a user might want to search for **all generic recursive functions**, which would be very difficult if not impossible to search for through conventional string matching/regex and likely wouldn't perform at all well through a simple embedding implementation. This could also be applied to non-code spaces too; a user may want to ask a question of an embedded corpus of Charles Dickens asking **find all cases where Oliver Twist is self-reflective** which would not really be possible with a basic embedding implementation.
-> 
+>
 > **Our solution with Buildt was:** For each element/snippet we embed a textual description of the code to get all of the meta characteristics, and we get those characteristics from a fine-tuned LLM. By embedding the textual description of the code alongside the code itself, it allows you to search both against raw code as well as the characteristics of the code, which is why we say you can "search for what your code does, rather than what your code is". This approach works extremely well and without it questions regarding functionality rarely return accurate results. This approach could easily be ported to prose or any other textual form which could be very exciting for large knowledge bases.
-> 
+>
 > **There are pitfalls to this approach:** it obviously causes a huge amount of extra cost relative to merely embedding the initial corpus, and increases latency when performing the embedding process - so it may not be useful in all cases, but for us it is a worthwhile trade-off as it produces a magical searching experience.
 
 Next section - let's look into embeddings and vectorDB.
@@ -98,7 +101,7 @@ Privacy for data is a major concern for several people and companies. For my pro
 I quote a Sourcegraph blogpost here.
 
 > While embeddings worked for retrieving context, they had some drawbacks for our purposes. Embeddings require all of your code to be represented in the vector space and to do this, we need to send source code to an OpenAI API for embedding. Then, those vectors need to be stored, maintained, and updated. This isn’t ideal for three reasons:
-> 
+>
 > - Your code has to be sent to a 3rd party (OpenAI) for processing, and not everyone wants their code to be relayed in this way.
 > - The process of creating embeddings and keeping them up-to-date introduces complexity that Sourcegraph admins have to manage.
 > - As the size of a codebase increases, so does the respective vector database, and searching vector databases for codebases with >100,000 repositories is complex and resource-intensive. This complexity was limiting our ability to build our new multi-repository context feature.
@@ -162,13 +165,12 @@ or BERT (encoder-only transformer, BERT base is 12 encoders stacked together).
 Both GPT-3 / BERT type of models can be made to operate in two styles → cross-encoder and bi-encoder. They have to be trained (or fine-tuned) for the same. I will not go into the training details here.
 
     from sentence_transformers import SentenceTransformer, CrossEncoder
-    
+
     # Load the embedding model
     embedding_model = SentenceTransformer("all-MiniLM-L6-v2") # biencoder
-    
+
     # Load the cross-encoder model
     cross_model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-12-v2") # cross-encoder
-    
 
 ---
 
@@ -176,7 +178,6 @@ A cross encoder concats the query with each document and computes relevance scor
 
     <query><doc1>
     <query><doc2>
-    
 
 Each pair of concatenated query+doc is passed through the pre-trained model (like BERT) going through several layers of attention and mlps. The self-attention mechanism helps to capture the interaction between the query and the doc (all tokens of query interact with document)
 
@@ -210,49 +211,49 @@ In the below example, note that `How many people live in New Delhi? No idea.` ha
 
     from sentence_transformers import SentenceTransformer, CrossEncoder
     import numpy as np
-    
+
     # Load the bi-encoder model
     embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-    
+
     # Load the cross-encoder model
     cross_model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-12-v2")
-    
+
     # Function to calculate cosine similarity
     def cosine_similarity(v1, v2):
         return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
-    
+
     query = "How many people live in New Delhi?"
     documents = [
         "New Delhi has a population of 33,807,000 registered inhabitants in an area of 42.7 square kilometers.",
         "In 2020, the population of India's capital city surpassed 33,807,000.",
-        "How many people live in New Delhi? No idea.", 
+        "How many people live in New Delhi? No idea.",
         "I visited New Delhi last year; it seemed overcrowded. Lots of people.",
         "New Delhi, the capital of India, is known for its cultural landmarks."
     ]
-    
+
     # Encode the query and documents using bi-encoder
     query_embedding = embedding_model.encode(query)
     document_embeddings = embedding_model.encode(documents)
-    
+
     # Calculate cosine similarities
     scores = [cosine_similarity(query_embedding, doc_embedding) for doc_embedding in document_embeddings]
-    
+
     # Print initial retrieval scores
     print("Initial Retrieval Scores (Bi-Encoder):")
     for i, score in enumerate(scores):
         print(f"Doc{i+1}: {score:.2f}")
-    
+
     # Combine the query with each document for the cross-encoder
     cross_inputs = [[query, doc] for doc in documents]
-    
+
     # Get relevance scores for each document using cross-encoder
     cross_scores = cross_model.predict(cross_inputs)
-    
+
     # Print reranked scores
     print("\nReranked Scores (Cross-Encoder):")
     for i, score in enumerate(cross_scores):
         print(f"Doc{i+1}: {score:.2f}")
-    
+
     Outputs:
     ❯ python demo.py
     Initial Retrieval Scores (Bi-Encoder):
@@ -261,23 +262,23 @@ In the below example, note that `How many people live in New Delhi? No idea.` ha
     Doc3: 0.97
     Doc4: 0.75
     Doc5: 0.54
-    
+
     Reranked Scores (Cross-Encoder):
     Doc1: 9.91
     Doc2: 3.74
     Doc3: 5.64
     Doc4: 1.67
     Doc5: -2.20
-    
-    
 
 Outputs after better formatting to demonstrate the effectiveness of cross-encoder.
 
 ### Initial Retrieval Scores (Bi-Encoder)
+
 DocumentSentenceScoreDoc1New Delhi has a population of 33,807,000 registered inhabitants in an area of 42.7 square kilometers.**0.77**Doc2In 2020, the population of India's capital city surpassed 33,807,000.0.58Doc3How many people live in New Delhi? No idea.0.97Doc4I visited New Delhi last year; it seemed overcrowded. Lots of people.0.75Doc5New Delhi, the capital of India, is known for its cultural landmarks.0.54
 The answer to our question was Doc1 but due to lexical similarity, doc3 is has highest score. Now cosine similarity is kinda dumb so we can’t help it.
 
 ### Reranked Scores (Cross-Encoder)
+
 DocumentSentenceScoreDoc1New Delhi has a population of 33,807,000 registered inhabitants in an area of 42.7 square kilometers.**9.91**Doc2In 2020, the population of India's capital city surpassed 33,807,000.3.74Doc3How many people live in New Delhi? No idea.5.64Doc4I visited New Delhi last year; it seemed overcrowded. Lots of people.1.67Doc5New Delhi, the capital of India, is known for its cultural landmarks.-2.20
 Reference:
 
@@ -300,7 +301,7 @@ Using `gpt-4o-mini` for both HyDE queries as it's cheap, fast and decent with co
 Here's how HyDE query looks like:
 
     # app.py
-    
+
     def openai_hyde(query):
         chat_completion = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -316,11 +317,10 @@ Here's how HyDE query looks like:
             ]
         )
         return chat_completion.choices[0].message.content
-    
 
     # prompts.py
     HYDE_SYSTEM_PROMPT = '''You are an expert software engineer. Your task is to predict code that answers the given query.
-    
+
     Instructions:
     1. Analyze the query carefully.
     2. Think through the solution step-by-step.
@@ -328,12 +328,11 @@ Here's how HyDE query looks like:
     4. Include specific method names, class names, and key concepts in your response.
     5. If applicable, suggest modern libraries or best practices for the given task.
     6. You may guess the language based on the context provided.
-    
-    Output format: 
+
+    Output format:
     - Provide only the improved query or predicted code snippet.
     - Do not include any explanatory text outside the code.
     - Ensure the response is directly usable for further processing or execution.'''
-    
 
 The hallucinated query is used to perform an initial embedding search, retrieving the top 5 results from our tables. These results serve as context for a second HyDE query. In the first query, the programming language was not known but with the help of fetched context, the language is most likely known now.
 
@@ -355,11 +354,10 @@ Second HyDE query is more context aware and expands the query with relevant code
             ]
         )
         return chat_completion.choices[0].message.content
-    
 
     # prompts.py
     HYDE_V2_SYSTEM_PROMPT = '''You are an expert software engineer. Your task is to enhance the original query: {query} using the provided context: {temp_context}.
-    
+
     Instructions:
     1. Analyze the query and context thoroughly.
     2. Expand the query with relevant code-specific details:
@@ -370,9 +368,8 @@ Second HyDE query is more context aware and expands the query with relevant code
     4. Add any crucial terminology or best practices that might be relevant.
     5. Ensure the enhanced query remains focused and concise while being more descriptive and targeted.
     6. You may guess the language based on the context provided.
-    
+
     Output format: Provide only the enhanced query. Do not include any explanatory text or additional commentary.'''
-    
 
 By leveraging the LLM's understanding of both code and natural language, it generates an expanded, more contextually-aware query that incorporates relevant code terminology and natural language descriptions. This two-step process helps bridge the semantic gap between the user's natural language query and the codebase's technical content.
 
@@ -380,38 +377,35 @@ A vector search is performed using the second query and topK results are re-rank
 
 Note that **references are fetched from meta data and combined with code to be feeded as context for the LLM**.
 
-    
     # app.py, from the function def generate_context(query, rerank=False)
-    
+
         hyde_query = openai_hyde(query)
-    
+
         method_docs = method_table.search(hyde_query).limit(5).to_pandas()
         class_docs = class_table.search(hyde_query).limit(5).to_pandas()
-    
+
         temp_context = '\n'.join(method_docs['code'] + '\n'.join(class_docs['source_code']) )
-    
+
         hyde_query_v2 = openai_hyde_v2(query, temp_context)
-    
+
         logging.info("-query_v2-")
         logging.info(hyde_query_v2)
-    
+
         method_search = method_table.search(hyde_query_v2)
         class_search = class_table.search(hyde_query_v2)
-    
+
         if rerank: # if reranking is selected by user from the UI
             method_search = method_search.rerank(reranker)
             class_search = class_search.rerank(reranker)
-    
+
         method_docs = method_search.limit(5).to_list()
         class_docs = class_search.limit(5).to_list()
-    
+
         top_3_methods = method_docs[:3]
         methods_combined = "\n\n".join(f"File: {doc['file_path']}\nCode:\n{doc['code']}" for doc in top_3_methods)
-    
+
         top_3_classes = class_docs[:3]
         classes_combined = "\n\n".join(f"File: {doc['file_path']}\nClass Info:\n{doc['source_code']} References: \n{doc['references']}  \n END OF ROW {i}" for i, doc in enumerate(top_3_classes))
-    
-    
 
 All the above context is plugged into an LLM which chats with the user. I use `gpt-4o` for this as we need a strong LLM for figuring out the context and best chatting UX (available with OpenAI key otherwise Claude 3.5 Sonnet).
 
@@ -421,7 +415,7 @@ is not confident about the context, it will tell the user to mention @codebase (
 
     # app.py, from the function def home()
         rerank = True if rerank in [True, 'true', 'True', '1'] else False
-    
+
                 if '@codebase' in query:
                     query = query.replace('@codebase', '').strip()
                     context = generate_context(query, rerank)
@@ -433,10 +427,9 @@ is not confident about the context, it will tell the user to mention @codebase (
                         context = ""
                     else:
                         context = context.decode()
-    
+
                 # Now, apply reranking during the chat response if needed
                 response = openai_chat(query, context[:12000])  # Adjust as needed
-    
 
 This completes the walkthrough.
 
@@ -446,13 +439,13 @@ This completes the walkthrough.
 
 There are a lot of improvements possible especially in the latency department. Currently, queries with @codebase and no re-ranking take about 10-20 seconds and with re-ranking enabled are in 20-30 second range (which is slow). To my defense, Cursor also hovers around the 15-20 second mark usually.
 
-- 
+-
 Easiest way to cut latency is to use an LLM like Llama3.1 70B from a high throughput inference provider like Groq or Cerebras. This should cut latency by atleast 10 seconds (speed up the HyDE calls by gpt4o-mini).
 
-- 
+-
 Try out using local embeddings to tackle network latency
 
-- 
+-
 Our latency bottleneck are the HyDE queries. Is it possible to reduce them to one or totally eliminate? Maybe a combination of Bm25 based keyword search on the [repository map](https://aider.chat/docs/repomap.html) can help reduce atleast 1 HyDE query.
 
 ### Accuracy

@@ -1,11 +1,13 @@
 ---
-title: Custom Datasets for efficient LLM training using Lance
+title: "Custom Datasets for efficient LLM training using Lance"
 date: 2024-03-08
-excerpt: Learn how to craft custom text datasets for LLM training and fine-tuning using Lance.
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/custom-dataset-for-llm-training-using-lance/preview-image.png
+meta_image: /assets/blog/custom-dataset-for-llm-training-using-lance/preview-image.png
+description: "Learn how to craft custom text datasets for LLM training and fine-tuning using Lance."
 ---
 
 ## Introduction
@@ -44,27 +46,25 @@ First, we’ll import all the necessary frameworks and define the tokenizer and 
 
     import lance
     import pyarrow as pa
-    
+
     from tqdm.auto import tqdm
-    
+
     import datasets
     from transformers import AutoTokenizer
-    
+
     # Change based on your need
     tokenizer = AutoTokenizer.from_pretrained(
         "EleutherAI/gpt-neox-20b"
     )
-    
+
     # Only load the Python code files from codeparrot dataset
     dataset = load_dataset(
-        "codeparrot/github-code", 
-        streaming=True, 
-        split="train", 
+        "codeparrot/github-code",
+        streaming=True,
+        split="train",
         languages=["Python"]
     )
     dataset = dataset.shuffle(seed=42)
-    
-    
 
 **Note**: In the above code snippet, make sure that `streaming` is set to `True` in `load_dataset` function otherwise it will start downloading the entire codeparrot dataset! Learn more about the streaming mode [here](https://huggingface.co/docs/datasets/en/stream).
 
@@ -72,7 +72,6 @@ Now, let’s define a function that tokenizes the dataset. Remember, we haven’
 
     def tokenize(sample):
         return tokenizer(sample['code'])['input_ids']
-    
 
 The actual code of each sample is in the `code` attribute.
 
@@ -81,7 +80,7 @@ Now that we have a dataset and tokenizer function ready, let’s write a functio
 We’ll also specify how many total samples we need in our subset. I am going ahead with 5M samples for now.
 
     total_samples = 5_000_000 # 5 Million samples
-    
+
     def process_samples():
         current_sample = 0
         for sample in tqdm(dataset, total=total_samples):
@@ -94,42 +93,40 @@ We’ll also specify how many total samples we need in our subset. I am going ah
             current_sample += 1
             # Yield a PyArrow RecordBatch
             yield pa.RecordBatch.from_arrays(
-                [tokenized_sample], 
+                [tokenized_sample],
                 names=["value"]
             )
-    
+
     # Define the dataset schema
     schema = pa.schema([
         pa.field("value", pa.int64())
     ])
-    
 
 A few things to note from above:
 
-- 
+-
 The `process_samples` function doesn’t directly receive any arguments because it will be converted to a Pyarrow `RecordBatchReader` which is a fancy way of saying an ‘iterator that follows a schema’.
 
-- 
+-
 The `names` argument just describes the name of the fields in your Batch. In this case, our batch only consists of `input_ids` but I have named it `value` to avoid any confusion.
 
-- 
+-
 Schema describes what type of data (with what field name and data type) will be present in our Pyarrow table.
 
 Finally, let’s convert our `process_samples()` function to `RecordBatchReader` which can iterate over the dataset and then write that dataset to disk.
 
     # The reader takes in a schema and the function
     reader = pa.RecordBatchReader.from_batches(
-        schema, 
+        schema,
         process_samples()
     )
-    
+
     # Write the dataset to disk
     lance.write_dataset(
-        reader, 
-        "code_parrot_5M_subset.lance", 
+        reader,
+        "code_parrot_5M_subset.lance",
         schema
     )
-    
 
 Once we run the above snippet, it will start reading the samples one by one, tokenize them and then save them to a Pyarrow table that will be saved as the Lance dataset.
 
@@ -140,14 +137,13 @@ Loading the dataset will require a bit of a list of trickery, the function below
     # First make a dataset descriptor and see row count
     dataset = lance.dataset("code_parrot_5M_subset.lance")
     print(dataset.count_rows()) # Should be 5M total samples
-    
+
     def load_data(dataset, indices):
         # Load the data at these indices
         data = dataset.take(indices).to_pylist()
         # A little short-cut to get the tokens in one list
         data = list(map(lambda x: x['value'], data))
         return data
-    
 
 In the above function, we will pass in the dataset descriptor defined before it and the indices we need to fetch. These indices can be a normal list or a numpy array.
 

@@ -1,10 +1,13 @@
 ---
-title: Benchmarking New OpenAI Embedding Models with LanceDB
+title: "Benchmarking New OpenAI Embedding Models with LanceDB"
 date: 2024-02-13
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png
+meta_image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png
+description: "A couple of weeks ago, OpenAI launched their new and most performant embedding models with higher multilingual performance and new."
 ---
 
 A couple of weeks ago, OpenAI launched their new and most performant embedding models with higher multilingual performance and new parameters to control the overall size, updated moderation models, API usage management tools, and reduced pricing for GPT-3.5 Turbo.
@@ -29,6 +32,7 @@ Length of embeddings (by omitting specific numbers from the end of the sequence)
 Here are the Results of the MTEB benchmark on the ***StackOverflowDupQuestions*** task.
 ![](https://miro.medium.com/v2/resize:fit:567/1*JkCenLsWfEwx45NrewdcLw.png)MTEB Benchmark mAP scores
 ## **OpenAI Embedding Models with LanceDB**
+
 ![](https://miro.medium.com/v2/resize:fit:408/1*jv8RjdLjF8wD_1OZbuFStg.png)
 The new OpenAI embedding models work well with LanceDB. Combining these developer-friendly embedding models with LanceDB’s vector database is excellent for tasks like Semantic Search, Knowledge Retrieval, and many other applications.
 
@@ -36,15 +40,15 @@ OpenAI embeddings function can be called via LanceDB while creating a table that
 
     import lancedb
     from lancedb.embeddings import EmbeddingFunctionRegistry
-    
+
     db = lancedb.connect("/tmp/db")
     registry = EmbeddingFunctionRegistry.get_instance(name="text-embedding-3-small")
     func = registry.get("openai").create()
-    
+
     class Words(LanceModel):
         text: str = func.SourceField()
         vector: Vector(func.ndims()) = func.VectorField()
-    
+
     table = db.create_table("words", schema=Words)
     table.add(
         [
@@ -52,21 +56,21 @@ OpenAI embeddings function can be called via LanceDB while creating a table that
             {"text": "goodbye world"}
         ]
         )
-    
+
     query = "greetings"
     actual = table.search(query).limit(1).to_pydantic(Words)[0]
     print(actual.text)
     The OpenAI embedding function is already ingested in the table. It doesn’t require loading it again while adding text to the table.
     table = db.open_table("words")
-    
+
     # Automatically vectorized text across all sessions
     table.add(
         [{"text": "changing world"}])
-    
+
     query = "world"
     result = table.search(query).limit(1).to_pydantic(Words)[0]
     print(result.text)
 
-# Conclusion
+## Conclusion
 
 This was a short intro to new OpenAI embedding models and how LanceDB’s Embedding API simplifies working with embedding functions. Check out other interesting [blogs](__GHOST_URL__/) and solutions on [**vectordb-recipes**](https://github.com/lancedb/vectordb-recipes).

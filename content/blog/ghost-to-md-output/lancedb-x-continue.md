@@ -5,6 +5,9 @@ author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/lancedb-x-continue/preview-image.png
+meta_image: /assets/blog/lancedb-x-continue/preview-image.png
+description: "Remember flipping through coding manuals? Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for."
 ---
 
 Remember flipping through coding manuals? Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for developer queries. Now, the tides are turning again as LLMs are rapidly becoming the primary source for coding assistance.
@@ -17,7 +20,7 @@ That's where **Continue** steps in. A new generation of LLM developer tools puts
 
 ## Continue: A modular AI software development system
 
-The basic use-case of continue is that it removes the need of repetitive copy/pasting from ChatGPT or similar services. Instead, you can simply highlight the context and ask questions in the sidebar or have an edit streamed directly to your editor. 
+The basic use-case of continue is that it removes the need of repetitive copy/pasting from ChatGPT or similar services. Instead, you can simply highlight the context and ask questions in the sidebar or have an edit streamed directly to your editor.
 
 Continue is available as** open-source **[**VSCode**](https://marketplace.visualstudio.com/items?itemName=Continue.continue)** and **[**JetBrains**](https://plugins.jetbrains.com/plugin/22707-continue-extension)** extensions. **
 ![](__GHOST_URL__/content/images/2024/05/Screenshot-2024-05-22-at-4.26.28-PM.png)
@@ -29,9 +32,10 @@ It automatically gathers information about how you code. This includes things li
 
 By combining this data with the code you commit, Continue can actually improve the Large Language Model (LLM) used by your team. This means the AI coding assistant everyone uses will get smarter and more helpful over time, based on your contributions!
 
-#  Continue 
- ❤️ 
- LanceDB 
+## Continue
+
+ ❤️
+ LanceDB
 ![](__GHOST_URL__/content/images/2024/05/Screenshot-2024-05-12-at-3.18.44-PM.png)
 As Continue offers local-first IDE extensions, most of the codebase is written in Typescript, and the data is stored locally in the `~/.continue` folder. The tooling choices are made such that there are no separate processes required to handle database operations.  It uses SQLite as a transactional database because there are libraries with great Typescript support, it is embedded, and is stored gracefully as a single file. Continue's codebase retrieval features are powered by LanceDB, as it is the only vectorDB with an embedded Typescript library that is capable of fast lookup times while being stored on disk and also supports SQL-like filtering.
 

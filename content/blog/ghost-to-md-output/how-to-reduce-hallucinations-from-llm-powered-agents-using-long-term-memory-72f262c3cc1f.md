@@ -1,11 +1,13 @@
 ---
-title: Reduce Hallucinations from LLM-powered Agents using Long-Term Memory
+title: "Reduce Hallucinations from LLM-powered Agents using Long-Term Memory"
 date: 2023-07-19
-excerpt: Introduction to Critique-Based Contexting with OpenAI, LangChain, and LanceDB
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/how-to-reduce-hallucinations-from-llm-powered-agents-using-long-term-memory-72f262c3cc1f/preview-image.png
+meta_image: /assets/blog/how-to-reduce-hallucinations-from-llm-powered-agents-using-long-term-memory-72f262c3cc1f/preview-image.png
+description: "Introduction to Critique-Based Contexting with OpenAI, LangChain, and LanceDB."
 ---
 
 by Tevin Wang
@@ -66,20 +68,20 @@ Then, let’s import the required libraries for our LangChain agent.
 Now let’s import our environment variables via `load_dotenv()`.
 
     from dotenv import load_dotenv
-    
+
     load_dotenv()
 
 We’ll now specify and connect to the path `data/agent-lancedb` to store our vector database.
 
     import lancedb
-    
+
     db = lancedb.connect("data/agent-lancedb")
 
 To create embeddings out of the text, we’ll call the OpenAI embeddings API (ada2 text embeddings model) to get embeddings.
 
     import openai
-    
-    def embed_func(c):    
+
+    def embed_func(c):
         rs = openai.Embedding.create(input=c, engine="text-embedding-ada-002")
         return [record["embedding"] for record in rs["data"]]
 
@@ -91,13 +93,12 @@ This tool will create a Table if it does not exist and store the relevant inform
 
     from langchain.tools import tool
     from pydantic import BaseModel, Field
-    
+
     class InsertCritiquesInput(BaseModel):
         info: str = Field(description="should be demographics or interests or other information about the exercise request provided by the user")
         actions: str = Field(description="numbered list of langchain agent actions taken (searched for, gave this response, etc.)")
         critique: str = Field(description="negative constructive feedback on the actions you took, limitations, potential biases, and more")
-    
-    
+
     @tool("insert_critiques", args_schema=InsertCritiquesInput)
     def insert_critiques(info: str, actions: str, critique: str) -> str:
         "Insert actions and critiques for similar exercise requests in the future."""
@@ -113,7 +114,7 @@ Similarly, let’s create a tool for retrieving critiques. We’ll retrieve the 
 
     class RetrieveCritiquesInput(BaseModel):
         query: str = Field(description="should be demographics or interests or other information about the exercise request provided by the user")
-    
+
     @tool("retrieve_critiques", args_schema=RetrieveCritiquesInput)
     def retrieve_critiques(query: str) -> str:
         "Retrieve actions and critiques for similar exercise requests."""
@@ -143,7 +144,7 @@ Before we run our agent, let’s create a function that defines our prompt that 
             "\n\n1. Retrieve using user info and review the past actions and critiques if there is any\n"+
             "2. Keep past actions and critiques in mind while researching for an exercise routine with steps which we respond to the user\n"+
             "3. Before returning the response, it is of upmost importance to insert the actions you took (numbered list: searched for, found this, etc.) and critiques (negative feedback: limitations, potential biases, and more) into the database for getting better exercise routines in the future. \n"
-        )   
+        )
         return prompt_start + info + prompt_end
 
 Finally, let’s create our run_agent function. We’ll use the `STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION` agent in order to allow us to use multi-input tools (since we need to add client input, actions, and critiques as arguments when inserting critiques).
@@ -171,7 +172,7 @@ Here are the results for a particular run when the context has been populated by
     Observation: List with relevant actions and critiques which are in the format [[action, critique], ...]:
     [["Searched for 'exercise routine for running enthusiasts', found 'The Ultimate Strength Training Plan For Runners: 7 Dynamite Exercises'", 'The routine provided is focused on strength training, which may not be suitable for all runners. It would be helpful to include some cardiovascular exercises and flexibility training as well.', 0.04102211445569992], ["Searched for 'exercise routine for running enthusiasts', found 'The Ultimate Strength Training Plan For Runners: 7 Dynamite Exercises'", 'The routine provided is focused on strength training, which may not be suitable for all runners. It would be helpful to include some cardiovascular exercises and flexibility training as well.', 0.04102211445569992], ["Searched for 'exercise routine for runners', found 'Core Work for Runners: 6 Essential Exercises'", 'The routine includes core exercises, which are beneficial for runners. However, it would be helpful to also include cardiovascular exercises and flexibility training.', 0.19422659277915955]]
     Thought:Based on the user's information and interests, I need to research and provide an exercise routine that is suitable for a 19-year-old university student who loves running. I should also keep in mind the past actions and critiques to ensure a well-rounded routine. After that, I will insert the actions and critiques into the database for future reference.
-    
+
     Action:
     ```
     {
@@ -181,7 +182,7 @@ Here are the results for a particular run when the context has been populated by
     ```
     Observation: Work with maximum effort and intensity for 20 seconds and take an active rest for 10 seconds. Then when you are ready, begin again.
     Thought:Based on my search, I found an exercise routine that may be suitable for you as a 19-year-old university student who loves running. The routine involves high-intensity interval training (HIIT), which is a great way to improve cardiovascular fitness and burn calories. Here's the routine:
-    
+
     1. Warm-up: Start with a 5-minute jog or brisk walk to warm up your muscles.
     2. High Knees: Stand in place and lift your knees as high as possible, alternating legs. Do this for 20 seconds.
     3. Active Rest: Take a 10-second break, walking or jogging in place.
@@ -193,11 +194,11 @@ Here are the results for a particular run when the context has been populated by
     9. Active Rest: Take a 10-second break, walking or jogging in place.
     10. Repeat: Repeat the entire circuit (steps 2-9) for a total of 3-4 rounds.
     11. Cool Down: Finish with a 5-minute jog or brisk walk to cool down and stretch your muscles.
-    
+
     Remember to listen to your body and modify the exercises as needed. Stay hydrated and take breaks if necessary. This routine can be done 2-3 times per week, alternating with your running sessions.
-    
+
     I hope you find this routine helpful! Let me know if you have any other questions.
-    
+
     Action:
     ```
     {
@@ -209,14 +210,14 @@ Here are the results for a particular run when the context has been populated by
       }
     }
     ```
-    
+
     Observation: Inserted and done.
     Thought:I have provided an exercise routine that involves high-intensity interval training (HIIT), which is suitable for a 19-year-old university student who loves running. However, I should note that the routine may not be suitable for all university students, as it focuses on HIIT. It would be beneficial to include some strength training exercises and flexibility training as well.
-    
+
     I have inserted the actions and critiques into the database for future reference. This will help improve the exercise routines provided in the future.
-    
+
     Let me know if there's anything else I can assist you with!
-    
+
     > Finished chain.
 
 We have retrieved critiques related to past strength trainings for runners, such as:
@@ -226,7 +227,7 @@ We have retrieved critiques related to past strength trainings for runners, such
 The critique given was that strength training might not be suitable for all runners, so the agent proceeded with a cardiovascular fitness routine that the agent thought was suitable:
 
     Based on my search, I found an exercise routine that may be suitable for you as a 19-year-old university student who loves running. The routine involves high-intensity interval training (HIIT), which is a great way to improve cardiovascular fitness and burn calories. Here's the routine:
-    
+
     1. Warm-up: Start with a 5-minute jog or brisk walk to warm up your muscles.
     2. High Knees: Stand in place and lift your knees as high as possible, alternating legs. Do this for 20 seconds.
     3. Active Rest: Take a 10-second break, walking or jogging in place.

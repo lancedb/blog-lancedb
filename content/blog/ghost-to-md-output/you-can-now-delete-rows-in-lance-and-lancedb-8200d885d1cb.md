@@ -1,10 +1,13 @@
 ---
-title: You can now delete rows in Lance and LanceDB!
+title: "You can now delete rows in Lance and LanceDB!"
 date: 2023-06-28
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/you-can-now-delete-rows-in-lance-and-lancedb-8200d885d1cb/preview-image.png
+meta_image: /assets/blog/you-can-now-delete-rows-in-lance-and-lancedb-8200d885d1cb/preview-image.png
+description: "by Will Jones."
 ---
 
 by Will Jones
@@ -49,7 +52,7 @@ Lance uses SQL expressions, which allows for complex predicates during deletion.
 
 See [our documentation](https://lancedb.github.io/lance/read_and_write.html#filter-push-down) for a full list of supported SQL in predicates.
 
-# Implementation and expected performance
+## Implementation and expected performance
 
 How does Lance implement deletion? When we delete rows, we save a new file called a deletion file for each affected fragment. The file contains the row ids of all deleted rows.
 
@@ -61,7 +64,7 @@ To see which fragments in the datasets have deletion files, use the **get_fragme
     [LanceFileFragment(id=0,
                        data_files=['605be8b8-8b01-47b3-b4a8-45af4b2acdea.lance'])]
     >>> dataset.get_fragments()
-    [LanceFileFragment(id=0, 
+    [LanceFileFragment(id=0,
                        data_files=['605be8b8-8b01-47b3-b4a8-45af4b2acdea.lance'],
                        deletion_file='_deletions/0-14-16447660214542675320.arrow')]
 
@@ -122,7 +125,7 @@ By deleting whole fragments, we avoided the need for any deletion files. This wo
 
 Admittedly, without partition values, it’s hard to see what columns the fragment boundaries align with. Once partitioning is added to Lance datasets, such a query could be written without having to know the details of the write pattern, making it much easier to work with.
 
-# Future directions
+## Future directions
 
 Next on our roadmap, we’ll be implementing partitioning and updates.
 
@@ -168,7 +171,7 @@ Lance uses SQL expressions, which allows for complex predicates during deletion.
 
 See [our documentation](https://lancedb.github.io/lance/read_and_write.html#filter-push-down) for a full list of supported SQL in predicates.
 
-# Implementation and expected performance
+## Implementation and expected performance
 
 How does Lance implement deletion? When we delete rows, we save a new file called a deletion file for each affected fragment. The file contains the row ids of all deleted rows.
 
@@ -180,7 +183,7 @@ To see which fragments in the datasets have deletion files, use the **get_fragme
     [LanceFileFragment(id=0,
                        data_files=['605be8b8-8b01-47b3-b4a8-45af4b2acdea.lance'])]
     >>> dataset.get_fragments()
-    [LanceFileFragment(id=0, 
+    [LanceFileFragment(id=0,
                        data_files=['605be8b8-8b01-47b3-b4a8-45af4b2acdea.lance'],
                        deletion_file='_deletions/0-14-16447660214542675320.arrow')]
 
@@ -191,20 +194,20 @@ In cases where a predicate aligns with the write pattern, we can avoid writing d
     >>> from datetime import datetime, timedelta
     >>> import shutil
     >>> import pyarrow as pa
-    
+
     >>> def new_data(timestamp: datetime) -> pa.Table:
     ...     nrows = 10_000
     ...     return pa.table({
     ...         "insertion_timestamp": pa.array([timestamp] * nrows),
     ...         "locxal_id": pa.array(range(nrows), pa.uint64()),
     ...     })
-    
+
     >>> for hours in range(10):
     ...     timestamp = datetime(2023, 1, 1) + timedelta(hours=hours)
     ...     data = new_data(timestamp)
     ...     dataset = lance.write_dataset(data, 'time_series', mode="append")
     ...
-    
+
     >>> dataset.head(9).to_pandas()
       insertion_timestamp  locxal_id
     0          2023-01-01          0
@@ -245,7 +248,7 @@ By deleting whole fragments, we avoided the need for any deletion files. This wo
 
 Admittedly, without partition values, it’s hard to see what columns the fragment boundaries align with. Once partitioning is added to Lance datasets, such a query could be written without having to know the details of the write pattern, making it much easier to work with.
 
-# Future directions
+## Future directions
 
 Next on our roadmap, we’ll be implementing partitioning and updates.
 

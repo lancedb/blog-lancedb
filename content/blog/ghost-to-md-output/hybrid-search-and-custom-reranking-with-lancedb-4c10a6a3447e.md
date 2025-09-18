@@ -1,10 +1,13 @@
 ---
-title: Hybrid search and custom reranking with LanceDB
+title: "Hybrid search and custom reranking with LanceDB"
 date: 2024-02-19
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/preview-image.png
+meta_image: /assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/preview-image.png
+description: "Search has historically been a complex problem in computer science."
 ---
 
 Search has historically been a complex problem in computer science. This is partly due to limitations in natural language or contextual understanding, and partly due to the absence of a universal ranking method that works well for all cases. Although the original premise still applies today, LLMs have vastly improved contextual reasoning and understanding. This allows searching for semantically similar points in a knowledge base and tests for ranking them based on a given context. Let's see how!
@@ -22,6 +25,7 @@ The position of an embedding in vector space captures some semantics of the data
 This is the well-known and traditional way of searching through a knowledge base. There are varied algorithms designed for some specific cases, but the general premise of keyword-based search is that it works on the lexical attributes of the query and not its semantics. This is useful in some cases, as we'll see next.
 
 ### Hybrid Search
+
 ![](__GHOST_URL__/content/images/2024/02/1_Zh4Jju6uiCYFO9HHvO5sIA.webp)
 Hybrid Search is a broad (often misused) term. It can mean anything from combining multiple methods for searching, to applying ranking methods to better sort the results. In this blog, we use the definition of “hybrid search” to mean using a combination of keyword-based and vector search.
 
@@ -70,7 +74,6 @@ Using LangChain makes this a single line process. Here's how your LanceDB table 
 In the original example, tvectorDB is queried to retrieve the specific reasons as to why Airbnb's operating costs were high for that year.
 
     query = "What are the specific factors contributing to Airbnb's increased operational expenses in the last fiscal year?"
-    
 
 ## Semantic Search
 
@@ -78,15 +81,13 @@ Let's first take a look at the semantic search results:
 
     vector_query = embedding_function.embed_query(query)
     docs = table.search(vector_query).limit(5).to_pandas()
-    
 
     In addition, the number of listings on Airbnb may decline as a result of a number of other factors affecting Hosts, including: the COVID-19 pandemic; enforcement or threatened
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
     associations, adopting and enforcing contracts that prohibit or restrict home sharing; leases, mortgages, and other agreements, or regulations that purport to ban or otherwise restrict
     home sharing; Hosts opting for long-term rentals on other third-party platforms as an alternative to listing on our platform; economic, social, and political factors; perceptions of trust
     and safety on and off our platform; negative experiences with guests, including guests who damage Host property, throw unauthorized parties, or engage in violent and unlawful
-    
-    
+
     Made Possible by Hosts, Strangers, AirCover, Categories, and OMG marketing campaigns and launches, a $67.9 million increase in our search engine marketing and advertising
     spend, a $25.1 million increase in payroll-related expenses due to growth in headcount and increase in compensation costs, a $22.0 million increase in third-party service provider
     expenses, and a $11.1 million increase in coupon expense in line with increase in revenue and launch of AirCover for guests, partially offset by a decrease of $22.9 million related to
@@ -97,25 +98,21 @@ Let's first take a look at the semantic search results:
     General and administrative $ 836 $ 950 14 %
     Percentage of revenue 14 % 11 %
     General and administrative expense increased $114.0 million, or 14%, in 2022 compared to 2021, primarily due to an increase in other business and operational taxes of $41.3
-    
-    
+
     Our success depends significantly on existing guests continuing to book and attracting new guests to book on our platform. Our ability to attract and retain guests could be materially
     adversely affected by a number of factors discussed elsewhere in these “Risk Factors,” including:
     ...
-    
+
     Table of Contents
     Airbnb, Inc.
     Consolidated Statements of Operations
     (in millions, except per share amounts)
     Year Ended December 31,
     2020 2021 2022
-    Revenue $ 3,378 $ 5,992 $ 8,399 
+    Revenue $ 3,378 $ 5,992 $ 8,399
     Costs and expenses:
-    Cost of revenue 876 1,156 1,499 
+    Cost of revenue 876 1,156 1,499
     ...
-    
-    
-    
 
 The latency is very reasonable as can be seen below:
 
@@ -142,26 +139,23 @@ The results are shown below:
     if relevant, was not available at such time (the date of the Administrative Agent’s receipt thereof, each a “Pricing Certificate Date”). Upon
     delivery of a Pricing Certificate in respect of a fiscal year, (i) the Applicable Rate for the Loans incurred by the Borrower shall be increased or
     decreased (or neither increased nor decreased), as applicable, pursuant to the Sustainability Margin Adjustment as set forth in the KPI Metrics
-    
-    
+
     In addition, the number of listings on Airbnb may decline as a result of a number of other factors affecting Hosts, including: the COVID-19 pandemic; enforcement or threatened
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
     associations, adopting and enforcing contracts that prohibit or restrict home sharing; leases, mortgages, and other agreements, or regulations that purport to ban or otherwise restrict
     home sharing; Hosts opting for long-term rentals on other third-party platforms as an alternative to listing on our platform; economic, social, and political factors; perceptions of trust
     and safety on and off our platform; negative experiences with guests, including guests who damage Host property, throw unauthorized parties, or engage in violent and unlawful
-    
-    
+
     (a) The Borrower may, at its election, deliver a Pricing Certificate to the Administrative Agent in respect of the most recently
     ended fiscal year, commencing with the fiscal year ended December 31, 2022, on any date prior to the date that is 270 days following the last
     day of such fiscal year (the
     -50-
-    
-    
+
     Made Possible by Hosts, Strangers, AirCover, Categories, and OMG marketing campaigns and launches, a $67.9 million increase in our search engine marketing and advertising
     spend, a $25.1 million increase in payroll-related expenses due to growth in headcount and increase in compensation costs, a $22.0 million increase in third-party service provider
     expenses, and a $11.1 million increase in coupon expense in line with increase in revenue and launch of AirCover for guests, partially offset by a decrease of $22.9 million related to
     ...
-    
+
     Our success depends significantly on existing guests continuing to book and attracting new guests to book on our platform. Our ability to attract and retain guests could be materially
     adversely affected by a number of factors discussed elsewhere in these “Risk Factors,” including:
     •events beyond our control such as the ongoing COVID-19 pandemic, other pandemics and health concerns, restrictions on travel, immigration, trade disputes, economic
@@ -174,11 +168,10 @@ When you don't specify any reranker, LanceDB uses the `LinearCombinationReranker
 By default, this method assigns a vector search score a weighting factor of `0.7 `and full-text or FTS search score a weight of `0.3`.
 
     from lancedb.rerankers import LinearCombinationReranker
-    
+
     reranker = LinearCombinationReranker(weight=0.9)
-    
+
     docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
-    
 
 This method faster than other model-based rerankers, as no model inference or API requests are made during the reranking operation.
 
@@ -187,10 +180,9 @@ This method faster than other model-based rerankers, as no model inference or AP
 This uses Cohere's [Rerank API](https://docs.cohere.com/docs/rerank-guide) to rerank the results. It accepts the reranking model name as a parameter. By default, it uses the `english-v3` model, but you can easily switch to a multi-lingual model if your data isn’t just in English.
 
     from lancedb.rerankers import CohereReranker
-    
+
     reranker = CohereReranker() # or CohereReranker(model_name="")
     docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
-    
 
 > 605 ms ± 78.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
@@ -201,30 +193,27 @@ This uses Cohere's [Rerank API](https://docs.cohere.com/docs/rerank-guide) to re
     In addition, we will continue to incur significant expenses to operate our outbound business in China, and we may never achieve profitability in that market. These factors, combined
     with sentiment of the workforce in China, and China’s policy towards foreign direct investment may particularly impact our operations in China. In addition, we need to ensure that
     our business practices in China are compliant with local laws and regulations, which may be interpreted and enforced in ways that are different from our interpretation, and/or create
-    
-    
+
     Made Possible by Hosts, Strangers, AirCover, Categories, and OMG marketing campaigns and launches, a $67.9 million increase in our search engine marketing and advertising
     spend, a $25.1 million increase in payroll-related expenses due to growth in headcount and increase in compensation costs, a $22.0 million increase in third-party service provider
     expenses, and a $11.1 million increase in coupon expense in line with increase in revenue and launch of AirCover for guests, partially offset by a decrease of $22.9 million related to
     ...
-    
+
     Table of Contents
     Airbnb, Inc.
     Consolidated Statements of Operations
     (in millions, except per share amounts)
     ...
-    
+
     Our success depends significantly on existing guests continuing to book and attracting new guests to book on our platform. Our ability to attract and retain guests could be materially
     adversely affected by a number of factors discussed elsewhere in these “Risk Factors,” including:
     •events beyond our control such as the ongoing COVID-19 pandemic, other pandemics and health concerns, restrictions on travel, immigration, trade disputes, economic
     ...
-    
+
     In addition, the number of listings on Airbnb may decline as a result of a number of other factors affecting Hosts, including: the COVID-19 pandemic; enforcement or threatened
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
     associations, adopting and enforcing contracts that prohibit or restrict home sharing; leases, mortgages, and other agreements, or regulations that purport to ban or otherwise restrict
     ...
-    
-    
 
 Cohere Reranker better ranks the results as it is powered by a model designed for this task, i.e., calculating the relevance of given documents in relation to the given query. This is different from the linear combination as it relies only on the existing scores of individual search algorithms (vector search and FTS). Here are the relevance scores given to each of these docs by the cohere reranker. It is evident that the first two docs are highly relevant.
 ![](https://miro.medium.com/v2/resize:fit:1400/1*0U6v0riXpGC2icbD4L0kIA.png)
@@ -233,10 +222,9 @@ Cohere Reranker better ranks the results as it is powered by a model designed fo
 The ColBERT model powers Colbert Reranker. It uses the [Hugging Face implementation](https://huggingface.co/vjeronymo2/mColBERT) locally.
 
     from lancedb.rerankers import ColbertReranker
-    
+
     reranker = ColbertReranker()
     docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()["text"].to_list()
-    
 
 > 950 ms ± 5.78 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
@@ -246,28 +234,26 @@ The results are below.
     spend, a $25.1 million increase in payroll-related expenses due to growth in headcount and increase in compensation costs, a $22.0 million increase in third-party service provider
     expenses, and a $11.1 million increase in coupon expense in line with increase in revenue and launch of AirCover for guests, partially offset by a decrease of $22.9 million related to
     ...
-    
-    
+
     Our future revenue growth depends on the growth of supply and demand for listings on our platform, and our business is affected by general economic and business conditions
     worldwide as well as trends in the global travel and hospitality industries and the short and long-term accommodation regulatory landscape. In addition, we believe that our revenue
     growth depends upon a number of factors, including:
     ...
-    
+
     Our success depends significantly on existing guests continuing to book and attracting new guests to book on our platform. Our ability to attract and retain guests could be materially
     adversely affected by a number of factors discussed elsewhere in these “Risk Factors,” including:
     •events beyond our control such as the ongoing COVID-19 pandemic, other pandemics and health concerns, restrictions on travel, immigration, trade disputes, economic
     ...
-    
+
     In addition, the number of listings on Airbnb may decline as a result of a number of other factors affecting Hosts, including: the COVID-19 pandemic; enforcement or threatened
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
     associations, adopting and enforcing contracts that prohibit or restrict home sharing; leases, mortgages, and other agreements, or regulations that purport to ban or otherwise restrict
     ...
-    
+
     Table of Contents
     Airbnb, Inc.
     Consolidated Statements of Operations
     ...
-    
 
 Colbert is similar to the Cohere reranker in that it doesn't use the existing scores from vector and full-text searches. The results are similar to Cohere’s, except for the top 1 result.
 
@@ -282,17 +268,16 @@ Subjectively, Cohere had a slight edge in getting the most relevant result (top 
 Recognizing that ranking is a complex problem with varying requirements for every use case, hybrid Search in LanceDB is designed to be **very** flexible. You can easily plug in your own reranking logic. To do so, you can implement the base `Reranker` class as follows:
 
     from lancedb.rerankers import Reranker
-    
+
     class MyCustomReranker(Reranker):
         def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table)-> pa.Table:
             combined_results = self.merge(vector_results, fts_results) # Or custom merge algo
             # Custom Reranking logic here
-    
+
             return combined_results
-    
+
     reranker = MyCustomReranker()
     table.search((vector_query, query)).rerank(reranker=reranker).to_pandas()
-    
 
 We’ve shown how you can apply reranking to significantly improve your retrieval quality with relatively small additions to your code base (by only adding a small additional latency). For RAG applications, better retrieval can significantly improve downstream generation, so it’s worth spending some time trying out this feature on your existing LanceDB workflows. We’d love to hear back from the community wwhat you build with this exciting feature!
 

@@ -5,13 +5,16 @@ author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/optimizing-llms-a-step-by-step-guide-to-fine-tuning-with-peft-and-qlora-22eddd13d25b/preview-image.png
+meta_image: /assets/blog/optimizing-llms-a-step-by-step-guide-to-fine-tuning-with-peft-and-qlora-22eddd13d25b/preview-image.png
+description: "**A Practical Guide to Fine-Tuning LLM using QLora**."
 ---
 
 **A Practical Guide to Fine-Tuning LLM using QLora**
 
 Conducting inference with large language models (LLMs) demands significant GPU power and memory resources, which can be prohibitively expensive. To enhance inference performance and speed, it is imperative to explore lightweight LLM models. Researchers have developed a few techniques. In this blog, we’ll delve into these essential concepts that enable cost-effective and resource-efficient deployment of LLMs.
 
-# What is Instruction Fine-Tuning?
+## What is Instruction Fine-Tuning?
 
 Instruction fine-tuning is a critical technique that empowers large language models (LLMs) to follow specific instructions effectively. When we begin with a base model, pre-trained on an immense corpus of worldly knowledge, it boasts extensive knowledge but might not always comprehend and respond to specific prompts or queries. In essence, it requires fine-tuning to tailor its behavior.
 
@@ -50,7 +53,7 @@ ii)**Multitask Fine-Tuning Example** — FLAN-T5: FLAN-T5 serves as an excellent
 
 **2. Parameter Efficient Fine-Tuning (PEFT)**: PEFT offers a more memory-efficient alternative to full fine-tuning. It preserves most of the original LLM’s weights while training only a small number of task-specific adapter layers and parameters. We’ll explore PEFT further in this blog series.
 
-# Parameter Efficient Fine-Tuning (PEFT): Making LLMs More Efficient
+## Parameter Efficient Fine-Tuning (PEFT): Making LLMs More Efficient
 
 Training large language models (LLMs) is a computational behemoth. Full fine-tuning, where all model weights are updated during supervised learning, demands immense memory capacity, including storage for model weights, optimizer states, gradients, forward activations, and temporary memory throughout the training process. This memory load can swiftly surpass what’s feasible on consumer hardware.
 
@@ -71,7 +74,7 @@ Stay tuned as we explore specific PEFT techniques like prompt tuning and LoRA to
 
 Now we’ll delve into specific PEFT techniques QLora, a deeper understanding of how these methods reduce memory requirements during LLM fine-tuning
 
-# LoRA (Low-rank Adaptation): Reducing Memory for LLM Fine-Tuning
+## LoRA (Low-rank Adaptation): Reducing Memory for LLM Fine-Tuning
 
 Low-rank Adaptation, or LoRA, is a parameter-efficient fine-tuning technique categorized under re-parameterization methods. LoRA aims to drastically cut down the number of trainable parameters while fine-tuning large language models (LLMs). Here’s a closer look at how LoRA works:
 ![](https://miro.medium.com/v2/resize:fit:770/1*iGTsCbqOE_RuaqE_mBYapg.png)
@@ -93,7 +96,7 @@ In practice, LoRA is an invaluable tool for efficiently fine-tuning LLMs and ada
 
 But wait, there’s a game-changer on the horizon — QLoRA.
 
-# What Is QLoRA?
+## What Is QLoRA?
 
 [QLoRA](https://arxiv.org/pdf/2305.14314.pdf), which stands for Quantized Low-rank Adaptation, takes fine-tuning to the next level. It empowers you to fine-tune LLMs on a single GPU, pushing the boundaries of what’s possible. How does QLoRA differ from LoRA?
 
@@ -117,7 +120,7 @@ QLora’s Memory-Efficient Innovations:
 
 These innovations collectively enable more efficient and memory-friendly training of large-scale language models, making QLORA a groundbreaking approach for AI research and development
 
-# Getting Hands-On with QLORA: Implementation and Fine-Tuning
+## Getting Hands-On with QLORA: Implementation and Fine-Tuning
 
 Enough theory; it’s time to roll up our sleeves and dive into the exciting world of QLORA. In this hands-on session, we’ll walk through the steps to fine-tune a model using QLORA and save it in a quantized form. To achieve this, we’ll rely on two powerful libraries: Transformers and Bits & Bytes. These libraries are the cornerstone of implementing QLoRA, a remarkable evolution of the Low-Rank Adapter (LoRA) technique, supercharged with quantization.
 
@@ -215,7 +218,7 @@ Finally, we load our model and tokenizer with these configurations:
         trust_remote_code=True,
         quantization_config=bnb_config,
     )
-    
+
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     tokenizer.pad_token = tokenizer.eos_token
     def print_trainable_parameters(model):
@@ -240,11 +243,11 @@ This code snippet enables gradient checkpointing to reduce memory usage during t
 [**LoraConfig**](https://huggingface.co/docs/peft/conceptual_guides/lora) allows you to control how LoRA is applied to the base model through the following parameters:
 
     from peft import LoraConfig, get_peft_model
-    
+
     lora_alpha = 16
     lora_dropout = 0.1
     lora_r = 64
-    
+
     config = LoraConfig(
         lora_alpha=lora_alpha,
         lora_dropout=lora_dropout,
@@ -252,7 +255,7 @@ This code snippet enables gradient checkpointing to reduce memory usage during t
         bias="none",
         task_type="CAUSAL_LM"
     )
-    
+
     model = get_peft_model(model, config)
     print_trainable_parameters(model)
 
@@ -269,10 +272,10 @@ below are the hyperparameters we can choose; you can always do the experiments &
     %%time
     # Specify the target device for model execution, typically a GPU.
     device = "cuda:0"
-    
+
     # Tokenize the input prompt and move it to the specified device.
     encoding = tokenizer(prompt, return_tensors="pt").to(device)
-    
+
     # Run model inference in evaluation mode (inference_mode) for efficiency.
     with torch.inference_mode():
         outputs = model.generate(
@@ -280,8 +283,7 @@ below are the hyperparameters we can choose; you can always do the experiments &
             attention_mask=encoding.attention_mask,
             generation_config=generation_config,
         )
-    
-    
+
     # Decode the generated output and print it, excluding special tokens.
     print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
@@ -292,12 +294,12 @@ Now we can prepare prompts for text-generation tasks
     : {data_point["question"]}
     : {data_point["answer"]}
     """.strip()
-    
+
     def generate_and_tokenize_prompt(data_point):
         full_prompt = generate_prompt(data_point)
         tokenized_full_prompt = tokenizer(full_prompt, padding=True, truncation=True)
         return tokenized_full_prompt
-        
+
     data = data["train"].shuffle().map(generate_and_tokenize_prompt)
 
 create an output folder for saving all experiments
@@ -326,7 +328,7 @@ Below are several training parameters. To explore all of them, please refer to t
         warmup_ratio=0.05,
         report_to="tensorboard",
     )
-    
+
     trainer = transformers.Trainer(
         model=model,
         train_dataset=data,
@@ -350,7 +352,7 @@ now we are pushing our weights to Huggingface hub, so later we can use these wei
 load the trained model
 
     PEFT_MODEL = "akashAD/Llama2-7b-qlora-chat-support-bot-faq"
-    
+
     config = PeftConfig.from_pretrained(PEFT_MODEL)
     model = AutoModelForCausalLM.from_pretrained(
         config.base_model_name_or_path,
@@ -361,7 +363,7 @@ load the trained model
     )
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
     tokenizer.pad_token = tokenizer.eos_token
-    
+
     model = PeftModel.from_pretrained(model, PEFT_MODEL)
 
 below are some experimental hyperparameters you can play with it to get the best results
@@ -379,14 +381,14 @@ below are some experimental hyperparameters you can play with it to get the best
     : How can I create an account?
     :
     """.strip()
-    
+
     encoding = tokenizer(prompt, return_tensors="pt").to(DEVICE)
     with torch.inference_mode():
         outputs = model.generate(
             input_ids=encoding.input_ids,
             attention_mask=encoding.attention_mask,
             generation_config=generation_config,
-     
+
         )
     print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
@@ -405,7 +407,7 @@ The below code utilizes our model to generate text responses from user questions
                 generation_config=generation_config,
             )
         response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    
+
         assistant_start = ":"
         response_start = response.find(assistant_start)
         return response[response_start + len(assistant_start) :].strip()
@@ -422,7 +424,7 @@ That's it; you can try to play with these hyperparameters to achieve better resu
 
 Feel free to explore the power of LLMs on your own data with this[ **Colab notebook**](https://colab.research.google.com/drive/1cDGWbgnkTaGwF-HMWCewoqBM_Ir2ywFf?usp=sharing)
 
-# Summary
+## Summary
 
 This blog explores instruction fine-tuning and mitigating catastrophic forgetting in large language models (LLMs). It covers how instruction fine-tuning improves LLMs for precision tasks but may face challenges with smaller models and resource constraints.
 

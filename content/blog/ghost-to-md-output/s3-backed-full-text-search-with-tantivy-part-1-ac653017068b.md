@@ -1,10 +1,13 @@
 ---
-title: S3 Backed Full-Text Search with Tantivy (Part 1)
+title: "S3 Backed Full-Text Search with Tantivy (Part 1)"
 date: 2023-08-14
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/preview-image.png
+meta_image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/preview-image.png
+description: "by Rob Meng."
 ---
 
 by Rob Meng
@@ -36,10 +39,12 @@ Since there is only one `meta.json` file, the following could happen
 To avoid readers from reading partially written `meta.json` file, we decided to implement a CoW `meta.json` file. What does that mean? See this diagram.
 ![](https://miro.medium.com/v2/resize:fit:770/1*ReeLhxHyF4zWF1phSvl4xQ.png)
 ## Read Path
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*RuOecvFfhr7dvSh7vD9gAg.png)
 On read path, we asynchronously check the latest version of the index. In the diagram above, we use a S3 file, updated by writer, to indicate the latest version of the an index. When a version change is detected, the reader switches to the new version.
 
 ## Write Path
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*gw3qLodnW_VwK8wrvAc-1A.png)
 On the write path, we read from `meta.json.{read}`before the first write happens. This is because `meta.json.{write}` doesn’t exist yet. However, after the write, reads are routed to `meta.json.{write}` , as we have copied the file on write. Finally, when index update is complete, the writer updates the version file in s3.
 

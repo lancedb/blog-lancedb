@@ -1,10 +1,13 @@
 ---
-title: Practical introduction to Late Chunking or Chunked Pooling
+title: "Practical introduction to Late Chunking or Chunked Pooling"
 date: 2024-10-29
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png
+meta_image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png
+description: "."
 ---
 
 💡
@@ -13,9 +16,9 @@ This is a community blog by Mahesh Deshwal
 
 *Improved Contextual Retrieval over large Documents for RAG applications*
 
-The pronoun is the King (or Queen), and so is the Context. I hope the previous line gave you the gist that, given the right context, you can use your brain or LLM more effectively to produce even better outcomes. In terms of RAG pipelines that we know and use, there are some inherent issues for long documents, especially ***Context loss***. 
+The pronoun is the King (or Queen), and so is the Context. I hope the previous line gave you the gist that, given the right context, you can use your brain or LLM more effectively to produce even better outcomes. In terms of RAG pipelines that we know and use, there are some inherent issues for long documents, especially ***Context loss***.
 
-Let's take the example of a long document where the first paragraph talks about Messi, Football, Barca, and a lot of things. The second paragraph talks in pronouns about Messi's unmatched numbers and the third paragraph, it's all about the club's stats using "it", "them" etc. We make the chunks out of documents, embed each of those as usual, and search. 
+Let's take the example of a long document where the first paragraph talks about Messi, Football, Barca, and a lot of things. The second paragraph talks in pronouns about Messi's unmatched numbers and the third paragraph, it's all about the club's stats using "it", "them" etc. We make the chunks out of documents, embed each of those as usual, and search.
 
 **Issue? Given a query:**
 
@@ -28,7 +31,7 @@ How do you think the chunks would come out? There could be a sentence somewhere 
 Don't get confused by the Late Chunking topic in this blog. In this idea, what we do is:
 
 1. ***Pass the Whole Document*** to the Model
-2. Get ***`Token Embedding`*** for each token 
+2. Get ***`Token Embedding`*** for each token
 3. ***Similarly***, get Token Embedding for each token in the query
 4. Take the ***maximum similarity between each token of query*** to the document
 5. Add those and ***retrieve***
@@ -43,6 +46,7 @@ Nice and easy but with a twist here. You see, in the Vanilla model if there are 
 So what now?
 
 ### **Late Chunking**
+
 ![](__GHOST_URL__/content/images/2024/10/7421f971-d1f5-43e8-9552-38fdad4e36a0_text.gif)
 Researchers from [Jina AI published a paper](https://arxiv.org/abs/2409.04701) that seems to be the middle ground for both issues. The idea is simple:
 
@@ -70,12 +74,11 @@ Google Colab
     import pandas as pd
     import lancedb
     pd.set_option('max_colwidth', 200)
-    
+
     # Any model which supports mean pooling can be used here. However, models with a large maximum context-length are preferred
     tokenizer = AutoTokenizer.from_pretrained('jinaai/jina-embeddings-v2-base-en', trust_remote_code=True)
     model = AutoModel.from_pretrained('jinaai/jina-embeddings-v2-base-en', trust_remote_code=True)
-    
-    
+
     def chunk_by_sentences(input_text: str, tokenizer: callable):
         """
         Split the input text into sentences using the tokenizer
@@ -106,10 +109,9 @@ Google Colab
             (x[0], y[0]) for (x, y) in zip([(1, 0)] + chunk_positions[:-1], chunk_positions)
         ]
         return chunks, span_annotations
-    
-    
+
     # -------------------------------
-    
+
     def late_chunking(model_output, span_annotation: list, max_length=None):
         token_embeddings = model_output[0]
         outputs = []
@@ -131,7 +133,7 @@ Google Colab
                 embedding.detach().cpu().numpy() for embedding in pooled_embeddings
             ]
             outputs.append(pooled_embeddings)
-    
+
         return outputs
 
 Let's create a dummy example by using indirect references
@@ -149,9 +151,9 @@ This one has 5 Chunks:
 Let's create both Vanilla and Late Chunking Table Embeddings
 
     db = lancedb.connect("./db")
-    
+
     vanilla_chunk_embeddings = model.encode(chunks)
-    
+
     vanilla_data = []
     for index, chunk in enumerate(chunks):
         vanilla_data.append(
@@ -159,24 +161,24 @@ Let's create both Vanilla and Late Chunking Table Embeddings
                 "vector": vanilla_chunk_embeddings[index],
             }
         )
-    
+
     vanilla_table = db.create_table("vanilla_table", data=vanilla_data)
-    
+
     # -------------------------------
-    
+
     inputs = tokenizer(dummy_long_document, return_tensors='pt')
     model_output = model(**inputs)
     late_chunk_embeddings = late_chunking(model_output, [span_annotations])[0]
-    
+
     late_chunk_data = []
     for index, chunk in enumerate(chunks):
         late_chunk_data.append(
             {   "text": chunk,
                 "vector": late_chunk_embeddings[index],
-    
+
             }
         )
-    
+
     late_chunk_table = db.create_table("late_chunk_table", data=late_chunk_data)
 
 Now let's take 3 Queries that test the idea to the core:
@@ -184,14 +186,14 @@ Now let's take 3 Queries that test the idea to the core:
     QUERY_EMBED_1 = model.encode('What are some of the attributes about the capital of a country whose Oktoberfest is famous?')
     QUERY_EMBED_2 = model.encode('What are some of the attributes about capital of Germany?')
     QUERY_EMBED_3 = model.encode('What are some of the attributes about Berlin?')
-    
+
     METRIC = "cosine" # "cosine" "l2" "dot"
 
 Want to get surprised?
 ![](__GHOST_URL__/content/images/2024/10/Screenshot-2024-10-16-at-2.22.19-PM.png)
 **Did you notice something?**
 
-You see, in the Vanilla Chunking, in the 3rd query where `Berlin` is explicitly mentioned, the naive (Vanilla) chunking gave Top-3 results where there are no real specifications mentioned about Berlin BUT only the word is used. 
+You see, in the Vanilla Chunking, in the 3rd query where `Berlin` is explicitly mentioned, the naive (Vanilla) chunking gave Top-3 results where there are no real specifications mentioned about Berlin BUT only the word is used.
 
 But when you look at the Late chunking, Top-3 results are specifically about the specifications even though the word is out of scope.
 
@@ -205,7 +207,7 @@ is having last place with a distance `0.28` is very relevant to the query and fo
 
 which has a distance of `0.23`
 
-On the other hand, Late Chunking gave reasonable distances and rankings. Also, the distance for the best result is far off in the distance (`0.2`) while in the Late chunking, the minimum distance is (`0.15`). 
+On the other hand, Late Chunking gave reasonable distances and rankings. Also, the distance for the best result is far off in the distance (`0.2`) while in the Late chunking, the minimum distance is (`0.15`).
 
 ### **Conclusion**
 

@@ -1,10 +1,13 @@
 ---
-title: Better RAG with Active Retrieval Augmented Generation FLARE
+title: "Better RAG with Active Retrieval Augmented Generation FLARE"
 date: 2023-11-17
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/preview-image.png
+meta_image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/preview-image.png
+description: "by Akash A. Desai."
 ---
 
 by Akash A. Desai
@@ -13,13 +16,13 @@ Welcome to our deep dive into Forward-Looking Active Retrieval Augmented Generat
 
 Hallucination in LLMs refers to generating incorrect or baseless content. This issue becomes more pronounced in tasks involving extensive outputs, such as long-form question answering, open-domain summarization, and Chain of Thought reasoning. FLARE aims to mitigate these inaccuracies by integrating external, verified information during the generation process.
 
-# **What is FLARE:**
+## **What is FLARE:**
 
 FLARE stands for Forward-Looking Active Retrieval Augmented Generation. It’s a methodology that supplements LLMs by actively **incorporating external information as the model generates content**. This process significantly reduces the risk of hallucination, ensuring the content is continuously checked and supported by external data.
 
 **Traditional Retrieval-Augmented Generation **In traditional retrieval-augmented generation models, the approach is generally to perform a **single retrieval at the beginning of the generation process**. This method involves taking an initial query, for instance, “Summarize the Wikipedia page for Narendra Modi,” and retrieving relevant documents based on this query. The model then uses these documents to generate content. This approach, however, has its limitations, especially when dealing with long and complex texts.
 
-# **Limitations of Traditional Methods:**
+## **Limitations of Traditional Methods:**
 
 - **Single Retrieval**: Once the initial documents are retrieved, the model continues to generate content based solely on this initial information.
 - **Absence of Flexibility**: As the generation progresses, the model doesn’t update or retrieve new information to adapt to the evolving context of the generated content.
@@ -94,7 +97,7 @@ Below is the code for Gradio, you can run it on a local system. We are using `ar
 Here is an example [https://arxiv.org/pdf/2305.06983.pdf](https://arxiv.org/pdf/2305.06983.pdf).
 You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06983.pdf) and then you can ask any questions based on the paper.
 
-# Other important parameters to understand:
+## Other important parameters to understand:
 
 1. `max_generation_len`: The maximum number of tokens to generate before stopping to check if any are uncertain
 2. `min_prob`: Any tokens generated with probability below this will be considered uncertain
@@ -115,12 +118,12 @@ You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06
     from io import BytesIO
     from langchain.llms import OpenAI
     import getpass
-    
+
     # pass your api key
     os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
-    
+
     llm = OpenAI()
-    
+
     os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
     llm = OpenAI()
     model_name = "BAAI/bge-large-en"
@@ -163,8 +166,8 @@ You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06
                     placeholder="Enter your prompt",
                     container=False,
                 )
-    iface = gr.Interface(fn=generate_flare_output, 
-                 inputs=input, 
+    iface = gr.Interface(fn=generate_flare_output,
+                 inputs=input,
                  outputs="text",
                  title="My AI bot",
                  description="FLARE implementation with lancedb & bge embedding.",
@@ -174,7 +177,7 @@ You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06
     iface.launch(debug=True)
 
 ![](https://miro.medium.com/v2/resize:fit:770/1*pQnW_zp1wMWgIt5DLtEaLw.png)
-# Summary
+## Summary
 
 FLARE, short for Forward-Looking Active Retrieval Augmented Generation, improves Large Language Models (LLMs) by actively incorporating external information to minimize false information in content creation. It outperforms conventional models by dynamically retrieving information from multiple sources and adjusting to changing contexts. FLARE Instruct and FLARE Direct demonstrate their ability to produce more precise and trustworthy content. The blog also discusses key implementation details and real-world uses utilizing LanceDB and vector databases.
 

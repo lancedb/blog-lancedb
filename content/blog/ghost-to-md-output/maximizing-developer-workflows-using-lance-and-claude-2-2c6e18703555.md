@@ -1,10 +1,13 @@
 ---
-title: Maximizing Developer Workflows using Lance and Claude 2
+title: "Maximizing Developer Workflows using Lance and Claude 2"
 date: 2023-08-06
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png
+meta_image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png
+description: "by Leon Yee."
 ---
 
 by Leon Yee
@@ -37,7 +40,7 @@ First, we download the documentation and load the Anthropic Claude API.
     const anthropic = new Anthropic({
         apiKey: process.env.CLAUDE_API,
     });
-    
+
     import { download } from '@guoyunhe/downloader';
     await download("https://docs.python.org/3/archives/python-3.11.4-docs-text.zip", "data/", { extract: true })
 
@@ -45,8 +48,8 @@ Now, for every file in the folders and subfolders, we want to input it into Clau
 
     // Iterate docPath through every folder.
     var output = fs.readFileSync(docPath).toString();
-    const prompt = `\n\n${Anthropic.HUMAN_PROMPT}: You are to act as a summarizer bot whose task is to read the following code documentation about a python function and summarize it in a few paragraphs without bullet points. 
-                                                    You should include what the function does and potentially a few examples on how to use it, in multiple paragraphs, but leave out any unrelated information that is not about the functionality of it in python, including a preface to the response, 
+    const prompt = `\n\n${Anthropic.HUMAN_PROMPT}: You are to act as a summarizer bot whose task is to read the following code documentation about a python function and summarize it in a few paragraphs without bullet points.
+                                                    You should include what the function does and potentially a few examples on how to use it, in multiple paragraphs, but leave out any unrelated information that is not about the functionality of it in python, including a preface to the response,
                                                     such as 'Here is a summary...'. \n\nREMEMBER: \nDo NOT begin your response with an introduction. \nMake sure your entire response can fit in a research paper. \nDo not use bullet points. \nKeep responses in paragraph form. \nDo not respond with extra context or your introduction to the reponse.
                                                     \n\nNow act like the summarizer bot, and follow all instructions. Do not add any additional context or introduction in your response. Here is the documentation file:
                                                     \n${output}\n\n${Anthropic.AI_PROMPT}:`
@@ -62,13 +65,13 @@ Now, for every file in the folders and subfolders, we want to input it into Clau
 With all of the documentation now read and summarized, we can go ahead and use LangChain to split the texts, and then format it to be inserted into LanceDB.
 
     import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-    
+
     const splitter = new RecursiveCharacterTextSplitter({
         chunkSize: 250,
         chunkOverlap: 50,
     });
     docs = await splitter.createDocuments(docs);
-    
+
     let data = [];
     for (let doc of docs) {
         data.push({text: doc['pageContent'], metadata: JSON.stringify(doc['metadata'])});
@@ -78,7 +81,7 @@ We’re almost ready to insert the data! All we have to do now is to create an e
 
     const { pipeline } = await import('@xenova/transformers')
     const pipe = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-    
+
     const embed_fun = {}
     embed_fun.sourceColumn = 'text'
     embed_fun.embed = async function (batch) {
@@ -93,7 +96,7 @@ We’re almost ready to insert the data! All we have to do now is to create an e
 Then, we can create our table including the embedding function. The benefit of using LanceDB is that it stores everything locally, so inserting and retrieving takes a really short amount of time.
 
     const lancedb = await import("vectordb");
-    
+
     const db = await lancedb.connect("data/sample-lancedb")
     const table = await db.createTable("python_docs", data, embed_fun, { writeMode: WriteMode.Overwrite });
 
@@ -103,11 +106,11 @@ We now need to embed the query, AKA the lines of the files. By iterating through
 
     const db = await lancedb.connect("data/sample-lancedb")
     const table = await db.openTable("python_docs", embed_fun);
-    
+
     let input = "FILE LINES INPUT HERE";
-    
+
     let result = await table.search(input).select(['text']).limit(1).execute();
-    
+
     console.log(result);
 
 The piece of code above is going to call the `table.search` function on the input, select the specific `text` column, and output a single text response: the context.
@@ -125,7 +128,7 @@ Joining everything together, (the file contents, split lines, and line context),
         f.write('</files>')
 
     # LOOKS LIKE
-    
+
     # <files>
     #     <file>
     #         <file_path>path/to/file.py</file_path>
@@ -158,8 +161,8 @@ Joining everything together, (the file contents, split lines, and line context),
 
 Finally, our last step is to input our `python_files.txt` back into Claude, with all of its instructions. Because of its 100k context window, we can stack a lot of information into the prompt, including exactly what we want to be outputted.
 
-    # {python_files} is read from the file `python_files.txt` 
-    
+    # {python_files} is read from the file `python_files.txt`
+
     prompt = f"""{HUMAN_PROMPT}
     Description:
     In this prompt, you are given a open source codebase that requires thorough cleanup, additional comments, and the implementation of documentation tests (doc tests). Your task is to enhance the readability, maintainability, and understanding of the codebase through comments and clear documentation. Additionally, you will implement doc tests to ensure the accuracy of the documentation while also verifying the code's functionality.
@@ -248,16 +251,16 @@ Finally, our last step is to input our `python_files.txt` back into Claude, with
     +++ b/app/01_❓_Ask.py
     @@ -2,6 +2,7 @@
      import os
-    
+
      import streamlit as st
     +from components.utils import query_gpt, show_pdf
      from components.sidebar import sidebar
      from s3 import S3
     @@ -35,11 +36,9 @@
-    
+
      if "chosen_pdf" not in st.session_state:
          st.session_state.chosen_pdf = "--"
-    
+
     -if "memory" not in st.session_state:
     -    st.session_state.memory = ""
 

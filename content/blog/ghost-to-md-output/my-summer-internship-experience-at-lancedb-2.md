@@ -1,26 +1,29 @@
 ---
-title: My summer internship experience at LanceDB
+title: "My summer internship experience at LanceDB"
 date: 2024-08-15
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png
+meta_image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png
+description: "I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign."
 ---
 
-I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign. This summer, I had the opportunity to intern as a Software Engineer at LanceDB, an early-stage startup based in San Francisco. 
+I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign. This summer, I had the opportunity to intern as a Software Engineer at LanceDB, an early-stage startup based in San Francisco.
 
-LanceDB is a database company, specializing in the storage and retrieval of multimodal data at scale. I worked on the open-source file format ([Lance](https://github.com/lancedb/lance)). The main codebase is in Rust, built on top of Apache Arrow, with a user-facing API in Python. Working at Lance has been a great learning experience that has broadened my perspective and increased my confidence as an engineer. 
+LanceDB is a database company, specializing in the storage and retrieval of multimodal data at scale. I worked on the open-source file format ([Lance](https://github.com/lancedb/lance)). The main codebase is in Rust, built on top of Apache Arrow, with a user-facing API in Python. Working at Lance has been a great learning experience that has broadened my perspective and increased my confidence as an engineer.
 
 I worked on several [features](https://github.com/lancedb/lance/commits/main/?author=raunaks13) intended to improve the extent of compression and reduce the read time of data, for both full scans and random access. I got extensive hands-on experience working within the Apache Arrow ecosystem, doing asynchronous programming in Rust, and was able to delve deep into the internals of a real database system, allowing me to understand things at a fundamental level.
 
 A significant portion of my work involved implementing compressive encodings that intelligently processed data at a bit level. For instance, previously strings were encoded using a logical encoding - more specifically, as a `List` of bytes. My initial goal was to add dictionary encoding to improve string compression. This required first re-implementing the basic binary (string) encoding as a physical encoder from scratch ([PR](https://github.com/lancedb/lance/pull/2426)). In the new encoder, I encoded the bytes and offsets of the string array separately. For example:
 
     StringArray: ["abc", "d", "efg"]
-    Physical Binary Encoding: 
+    Physical Binary Encoding:
       Bytes: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
       Offsets: [0, 3, 4, 7]
 
- Once this was done, I added dictionary encoding ([PR](https://github.com/lancedb/lance/pull/2409)). Since a large dictionary size can be suboptimal, this encoding is only used for columns with low cardinality. 
+ Once this was done, I added dictionary encoding ([PR](https://github.com/lancedb/lance/pull/2409)). Since a large dictionary size can be suboptimal, this encoding is only used for columns with low cardinality.
 
     StringArray: ["abc", "d", "abc", "d", "efg"]
     Dictionary Encoding:
@@ -52,9 +55,9 @@ Apart from encodings, it was also fun to do some work on the indexing side of th
 
 ---
 
-One of the most rewarding aspects of this internship was the opportunity to contribute to an open-source project within a corporate setting. Since the code is public, I can see how the impact of my work (and the project as a whole) evolves over time as the community grows and more developers contribute. 
+One of the most rewarding aspects of this internship was the opportunity to contribute to an open-source project within a corporate setting. Since the code is public, I can see how the impact of my work (and the project as a whole) evolves over time as the community grows and more developers contribute.
 
-For instance, our dictionary encoding implementation sped up even further after a community contribution, when [a user used the hyperloglog approximation](https://github.com/lancedb/lance/pull/2555) for cardinality estimation (this is used in a check to decide whether to use dictionary encoding or not). 
+For instance, our dictionary encoding implementation sped up even further after a community contribution, when [a user used the hyperloglog approximation](https://github.com/lancedb/lance/pull/2555) for cardinality estimation (this is used in a check to decide whether to use dictionary encoding or not).
 
 Another example was when we found and fixed a bug reported by a user - previously, when randomly accessing multiple rows, each request for a row was scheduled separately. In this [PR](https://github.com/lancedb/lance/pull/2636), I coalesced multiple read requests based on how close the requested rows were, reducing the number of decode tasks being created. When fixed, this helped recover a **10x** speed gap on random access.
 

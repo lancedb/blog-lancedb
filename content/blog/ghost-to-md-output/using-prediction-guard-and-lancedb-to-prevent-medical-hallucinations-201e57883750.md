@@ -1,10 +1,13 @@
 ---
-title: Using Prediction Guard and LanceDB to Prevent Medical Hallucinations
+title: "Using Prediction Guard and LanceDB to Prevent Medical Hallucinations"
 date: 2024-01-02
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/using-prediction-guard-and-lancedb-to-prevent-medical-hallucinations-201e57883750/preview-image.png
+meta_image: /assets/blog/using-prediction-guard-and-lancedb-to-prevent-medical-hallucinations-201e57883750/preview-image.png
+description: "This is a collective work of the following authors:."
 ---
 
 This is a collective work of the following authors:
@@ -13,7 +16,7 @@ This is a collective work of the following authors:
 
 [*Bingyang (Icy) Wang (Emory University)*](https://www.linkedin.com/in/bingyang-icy-wang/)* *[*Guangming (Dola) Qiu (Emory University) *](https://www.linkedin.com/in/dolaqiu/)[*Jerry (Yuzhong) M. (Emory University)*](https://www.linkedin.com/in/jerryyzmei/)* *[*Yige Wang (Emory University)*](https://www.linkedin.com/in/yigewang65/)
 
-# Introduction
+## Introduction
 
 In spite of their eloquence and popularity, Large Language Models (LLMs) often struggle to generate output that is factually accurate. In particular, they can hallucinate information due to a limited grounding in reality. This problem is magnified in high-stakes domains like healthcare, where any faulty information could lead to critical errors or patient harm. Even minor inaccuracies cannot be tolerated when lives are at stake.
 
@@ -28,31 +31,31 @@ The Data4Good Competition concluded on December 2nd, 2023, bringing together und
 The competition addressed the pressing issue of automating medical form filling, recognizing the labor-intensive nature of this process within the healthcare and hospice sectors. Participants were challenged to leverage open-source LLMs (like Llama 2 and WizardCoder) to extract, rephrase, summarize, and validate information needed for medical forms based on simulated medical transcription (e.g., patient-doctor conversations or doctor dictations). These open-source models were accessed via [Prediction Guard](https://www.predictionguard.com/), a company developing private LLM APIs with features focusing on safety and trust (PII and prompt injection filtering, factuality checking, toxicity checks, etc.). The competition provided (as input data) synthesized transcriptions of medical conversations similar to:
 
 > D: What brings you in?
-> 
+>
 > P: Hi, I’ve I’ve had this pain on the outside of my uh right elbow now it’s it I first started knowing, noticing it several months ago, but recently it’s just been more painful.
-> 
+>
 > D: OK, so you said several months ago. Um did anything happen several months ago? Was there any sort of trigger, trauma, anything like that to that area?
-> 
+>
 > P: No, there wasn’t any any trauma or any triggers that that I noticed, I was just um feeling it, uh, a bit more at the end of of work. Um yeah, I was just having it uh, feeling the pain a bit more at the end of work.
-> 
+>
 > D: OK, does uh anything make it better or worse, the pain?
-> 
+>
 > P: Um yeah, if I, really if I’m just resting the elbow um it makes it better, and I’ve tried uh things like ibuprofen um which has helped with the pain, I’ll I’ll do that for um hoping I can get through work sometimes if the pain is bad enough.
-> 
+>
 > D: Right, OK. Um and if you were to describe the quality of the pain, is it sharp, throbby, achy?
-> 
+>
 > P: Uh it’s um kind of uh, well, it’s achy and then sometimes depending on the movement it can get, it can be sharp as well.
-> 
+>
 > D: It can be sharp, OK. OK, um and what sorts of movements make it worse?
-> 
+>
 > P: Um, so like, really it’s mostly the movements at my wrist, if I’m bending my wrist down, uh I can I can feel it, or um if I’m having to pick things up or hold heavy objects at work, I do a lot of repetitive uh things at at work, I work on a line.
-> 
+>
 > D: OK, OK. And 1 to 10, 10 being the worst pain you’ve ever felt, how bad is this pain?
-> 
+>
 > P: It is about a four.
-> 
+>
 > D: About a four, OK. And have you ever experienced this type of pain before?
-> 
+>
 > P: etc…
 
 Based on these kinds of transcriptions, teams needed to create an LLM-based system to answer specific medical form questions like:

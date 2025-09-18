@@ -1,22 +1,24 @@
 ---
 title: "Customer Support Bot : RASA x LanceDB"
 date: 2024-12-31
-excerpt: Advanced Customer Support Chatbot using Rasa, LanceDB, and OpenAI api ! Rasa is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants.
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/customer-support-bot-rasa-x-lancedb/preview-image.png
+meta_image: /assets/blog/customer-support-bot-rasa-x-lancedb/preview-image.png
+description: "Advanced Customer Support Chatbot using Rasa, LanceDB, and OpenAI api ! Rasa is an open-source framework designed to build intelligent,."
 ---
 
 💡
 
 This is a community blog by Rithik Kumar
 
-Have you ever wondered how businesses manage to provide instant, accurate, and personalized customer support around the clock? This article will teach us how to make an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI’s Large Language Models (LLMs)**. 
+Have you ever wondered how businesses manage to provide instant, accurate, and personalized customer support around the clock? This article will teach us how to make an **Advanced Customer Support Chatbot** using **Rasa**, **LanceDB**, and **OpenAI’s Large Language Models (LLMs)**.
 
-## What is RASA? 
+## What is RASA?
 
-**Rasa** is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants. Unlike some one-size-fits-all solutions, Rasa offers the flexibility to customize your bot’s behavior, making it perfectly tailored to your business needs. 
+**Rasa** is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants. Unlike some one-size-fits-all solutions, Rasa offers the flexibility to customize your bot’s behavior, making it perfectly tailored to your business needs.
 
 1. **Open-Source Goodness:** Free to use and highly customizable.
 2. **Natural Language Understanding (NLU):** Rasa interprets user inputs to identify intents and extract relevant entities, enabling the chatbot to understand the purpose behind each query.
@@ -25,7 +27,7 @@ Have you ever wondered how businesses manage to provide instant, accurate, and p
 
 ## Quick Overview
 
-This guide explains the process of building an **Advanced Customer Support Chatbot** by integrating **Rasa**, a robust conversational framework; **LanceDB**, a high-performance vector database; and **OpenAI’s LLM**, a state-of-the-art language model. 
+This guide explains the process of building an **Advanced Customer Support Chatbot** by integrating **Rasa**, a robust conversational framework; **LanceDB**, a high-performance vector database; and **OpenAI’s LLM**, a state-of-the-art language model.
 ![](__GHOST_URL__/content/images/2024/12/NLU--2--1.jpg)How RASA performs custom actions to do the query on Lance Table and then perform API call to LLM to generate refined response
 So, you’ve got Rasa, LanceDB, and OpenAI LLMs ready to join forces. How do these components work together to create a seamless customer support chatbot? Let’s break it down:
 
@@ -46,7 +48,7 @@ So, you’ve got Rasa, LanceDB, and OpenAI LLMs ready to join forces. How do the
 
 This integration ensures that your chatbot is not only responsive but also intelligent, capable of handling a wide array of customer inquiries with ease.
 
-# Let's begin
+## Let's begin
 
 Now we are clear about the flow of this project, let's delve into coding it. Make sure you have OPENAI_API key for this project.
 
@@ -64,7 +66,6 @@ This command sets up the basic directory structure with sample data.  To verify 
 
     rasa train
     rasa shell
-    
 
 #### Create a .env file and store necessary environment variables in it
 
@@ -84,33 +85,33 @@ This command sets up the basic directory structure with sample data.  To verify 
     import json
     from lancedb.pydantic import LanceModel, Vector
     from lancedb.embeddings import get_registry
-    
+
     # Initialize LanceDB
     db = lancedb.connect("./content/lancedb")  # Local storage within Colab
-    
+
     # Initialize the language model for generating embeddings
     model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", device="cpu")
-    
+
     # Create table from schema
     class Documents(LanceModel):
         vector: Vector(model.ndims()) = model.VectorField()
         content: str = model.SourceField() # Field to store the actual content/response
-    
+
     company_support_data = [
         { "content": "To reset your password, navigate to the login page and click on 'Forgot Password'. You'll receive an email with instructions to create a new password." },
         { "content": "To update your account information, log in to your profile and click on 'Edit Profile'. From there, you can change your email, phone number, and other personal details." }
         #,.... rest of the data
     ]
-        
+
     # Knowledge data from the data above
     knowledge_data = company_support_data
-    
+
     # Define table name
     table_name = "knowledge_base"
-    
+
     # Retrieve existing table names
     existing_tables = db.table_names()
-    
+
     if table_name not in existing_tables:
         # Create a new table with the schema and insert data
         tbl = db.create_table(table_name, schema=Documents)
@@ -121,7 +122,6 @@ This command sets up the basic directory structure with sample data.  To verify 
         table = db.open_table(table_name)
         table.add(knowledge_data, mode="overwrite")
         print(f"Overwrited data to the existing table '{table_name}'.")
-    
 
 We will be using pre-trained **Sentence Transformer model** (BAAI/bge-small-en-v1.5) to convert textual support data into vector embeddings. You can change it accordingly.
 
@@ -137,7 +137,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
       - greet
       - ask_knowledge
       - goodbye
-    
+
     entities:
       - project
       - service
@@ -151,7 +151,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
     actions:
       - action_search_knowledge
 
-- **endpoints.yml** - It specifies the URLs and connection details for services like the custom action server (actions.py), enabling Rasa to communicate with it. 
+- **endpoints.yml** - It specifies the URLs and connection details for services like the custom action server (actions.py), enabling Rasa to communicate with it.
 
     action_endpoint:
       url: "http://localhost:5055/webhook"
@@ -166,17 +166,17 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
           - action: utter_greet
           - intent: ask_knowledge
           - action: action_search_knowledge
-    
+
       - story: ask question
         steps:
           - intent: ask_knowledge
           - action: action_search_knowledge
-    
+
       - story: Goodbye
         steps:
           - intent: goodbye
           - action: utter_goodbye
-    
+
       - story: greet and goodbye
         steps:
           - intent: greet
@@ -192,17 +192,16 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
         steps:
           - intent: greet
           - action: utter_greet
-    
+
       - rule: Goodbye
         steps:
           - intent: goodbye
           - action: utter_goodbye
-    
+
       - rule: Answer Knowledge Questions
         steps:
           - intent: ask_knowledge
           - action: action_search_knowledge
-    
 
 - **data/nlu.yml** - The nlu.yml file contains Natural Language Understanding (NLU) training data. It includes examples of user inputs categorized by intents and annotated with entities to train Rasa’s NLU component.
 
@@ -216,7 +215,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
           - good morning
           - good evening
           - greetings
-    
+
       - intent: goodbye
         examples: |
           - bye
@@ -225,7 +224,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
           - catch you later
           - see ya
           - take care
-    
+
       - intent: ask_knowledge
         examples: |
           - I need help with my account
@@ -238,7 +237,6 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
           - I have a question about Project Alpha
           - Help me understand Project Beta
           - How can I track my purchase?
-    
 
 - **config.yml** - The config.yml file defines the pipeline and policies used by Rasa for processing natural language inputs and managing dialogue workflows.
 
@@ -258,7 +256,7 @@ The code above will create a table - "knowledge_base" in the DB and insert all t
     - name: EntitySynonymMapper
     - name: ResponseSelector
       epochs: 100
-    
+
     policies:
     - name: RulePolicy
     - name: UnexpecTEDIntentPolicy
@@ -287,14 +285,14 @@ Let's breakdown and see how to implement actions.py
     import openai
     import os
     from dotenv import load_dotenv
-    
+
     # Load environment variables from .env
     load_dotenv()
-    
+
     # Configure logging
     logger = logging.getLogger(__name__)
     logging.basicConfig(level=logging.INFO)
-    
+
     class ActionSearchKnowledge(Action):
         def name(self) -> Text:
             return "action_search_knowledge"
@@ -305,15 +303,14 @@ We will implement 3 functions in this class
 - Sets up the OpenAI API key.
 - Establishes a connection to LanceDB and accesses the `knowledge_base` table.
 
-    
         def __init__(self):
-    
+
             # Initialize OpenAI API key from environment variables
             self.openai_api_key = os.getenv("OPENAI_API_KEY")
             if not self.openai_api_key:
                 logger.error("OpenAI API key not found. Please set OPENAI_API_KEY in your environment.")
             openai.api_key = self.openai_api_key
-    
+
             # Initialize LanceDB connection once
             try:
                 self.db = lancedb.connect("./content/lancedb")
@@ -327,7 +324,6 @@ We will implement 3 functions in this class
             except Exception as e:
                 logger.error(f"Error connecting to LanceDB: {e}")
                 self.table = None
-    
 
 - **Run Method (`run`):**
 - **Get User Message:** Retrieve user message from the tracker.
@@ -338,24 +334,23 @@ We will implement 3 functions in this class
       def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-    
-    
+
         # Get the latest user message
         user_message = tracker.latest_message.get('text')
         logger.info(f"User message: {user_message}")
-    
+
         if not user_message:
             dispatcher.utter_message(text="Sorry, I didn't catch that. Could you please repeat?")
             return []
-    
+
         try:
             # Perform similarity search in LanceDB
             query_result = self.table.search(user_message).limit(1).to_pandas()
-    
+
             # Filter results based on the _distance parameter (smaller _distance means more similar)
             relevant_content = [query_result.loc[0, "content"] if query_result.loc[0, "_distance"] < 0.65 else None][0]
             response_text = "Null"
-    
+
             # If we find relevant content , sent it to LLM or Else send automated reply
             if not relevant_content == None:
                 logger.info(f"Retrieved answer from knowledge base.")
@@ -365,14 +360,14 @@ We will implement 3 functions in this class
                 # If user has ask not a relevant question, reply with the following
                 response_text = "I'm sorry, I don't have an answer to that question."
                 logger.info(f"No matching content found in knowledge base.")
-    
+
             # Send the answer back to the user
             dispatcher.utter_message(text=response_text)
-    
+
         except Exception as e:
             logger.error(f"Error during search operation: {e}")
             dispatcher.utter_message(text="Sorry, something went wrong while processing your request.")
-    
+
         return []
 
 - **`generate_response` Method:**
@@ -386,13 +381,13 @@ We will implement 3 functions in this class
         """
         try:
             system_prompt = "You are an company support assistant that provides helpful and accurate answers based on the provided information. You talk professionally and like a customer support executive."
-    
+
             prompt = (
                 f"User Question: {user_message}\n"
                 f"Relevant Information: {relevant_content}\n\n"
                 f"Provide a detailed and helpful response to the user's question based on the relevant information above."
             )
-    
+
             response = openai.ChatCompletion.create(
                 model="gpt-4o-mini",
                 messages=[
@@ -402,18 +397,18 @@ We will implement 3 functions in this class
                 max_tokens=450,
                 temperature=0.7,
             )
-    
+
             generated_text = response.choices[0].message['content'].strip()
             logger.info("Generated response using OpenAI API.")
             return generated_text
-    
+
         except Exception as e:
             logger.error(f"Error generating response with OpenAI API: {e}")
             return relevant_content  # Fallback to relevant content if OpenAI fails
 
 #### Step 4 - Training RASA Model
 
-After setting up the configuration and integrating necessary components, the next step is to train the Rasa model. 
+After setting up the configuration and integrating necessary components, the next step is to train the Rasa model.
 
     rasa train
 
@@ -446,7 +441,7 @@ Action server runs on port `5055` while the Rasa server run on port `5005`. Make
             return response.json()
         except requests.exceptions.ConnectionError:
             return {"error": "Could not connect to Rasa server."}
-    
+
     # Example interactions
     print("User: Hi")
     assistant_response = send_message("Hi")
@@ -456,7 +451,7 @@ Action server runs on port `5055` while the Rasa server run on port `5005`. Make
                 print("Assistant:", resp["text"])
             else:
                 print("Assistant:", resp)
-    
+
     print("\nUser: How do I reset my password? Explain in french")
     assistant_response = send_message("How do I delete my account? Explain in french")
     if assistant_response:
@@ -468,6 +463,7 @@ Action server runs on port `5055` while the Rasa server run on port `5005`. Make
                 print(resp)
 
 ## Colab Walkthrough
+
 [
 
 Google Colab

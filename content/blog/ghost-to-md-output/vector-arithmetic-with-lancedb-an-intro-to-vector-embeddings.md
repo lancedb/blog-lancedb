@@ -5,6 +5,9 @@ author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/vector-arithmetic-with-lancedb-an-intro-to-vector-embeddings/preview-image.png
+meta_image: /assets/blog/vector-arithmetic-with-lancedb-an-intro-to-vector-embeddings/preview-image.png
+description: "."
 ---
 
 💡
@@ -68,7 +71,7 @@ Install the necessary packages
 
     import torch
     from lancedb.embeddings import get_registry
-    
+
     DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 Import libraries and set device
@@ -91,18 +94,18 @@ We have our setup ready. The one thing that we are missing is our embedding mode
         .create(name="all-mpnet-base-v2", device="cuda:0")
     )
 
-Let's take our embedding model for a ride, shall we? We will take three texts and compute the semantic distance between them. 
+Let's take our embedding model for a ride, shall we? We will take three texts and compute the semantic distance between them.
 
 > Semantic meaning changes with the task and dataset with which the model was trained. You might find some texts to be semantically similar which are not supposed to be. Now you know why.
 
     text1 = "king"
     text2 = "queen"
     text3 = "apple"
-    
+
     embedding1 = get_embedding(text1)
     embedding2 = get_embedding(text2)
     embedding3 = get_embedding(text3)
-    
+
     print(f"Similarity between `{text1}` and `{text2}`: {embedding1.dot(embedding2):.2f}")
     print(f"Similarity between `{text1}` and `{text3}`: {embedding1.dot(embedding3):.2f}")
 
@@ -114,7 +117,7 @@ Storing vector embeddings efficiently is crucial for leveraging their full poten
 
 LanceDB is an open-source vector database specifically designed for this purpose. It allows you to store, manage, and query embeddings, making it easier to integrate them with your data.
 
-We will be taking LanceDB for a spin on our multi-modal dataset, and understand how to perform vector arithmetic with the embeddings. 
+We will be taking LanceDB for a spin on our multi-modal dataset, and understand how to perform vector arithmetic with the embeddings.
 
     import os
     import io
@@ -138,7 +141,6 @@ I have used the [Kaggle dataset](https://www.kaggle.com/datasets/adityajn105/fli
 
     IMAGE_DIR = "/content/Images"
     ANNOTATION_FILE = "/content/captions.txt"
-    
 
 Detour: The Flickr-8k dataset consists of `5` captions per image. I found it to be more efficient to group all the captions together for an image. This decreases the number of rows in the dataset. You can skip this section, and follow along with the original dataset too.
 
@@ -176,15 +178,15 @@ This section of the code is responsible for processing and ingesting the dataset
             try:
                 with open(os.path.join(IMAGE_DIR, image_id), "rb") as image:
                     binary_image = image.read()
-    
+
             except FileNotFoundError:
                 print(f"image_id '{image_id}' not found in the folder, skipping.")
                 continue
-    
+
             image_id = pa.array([image_id], type=pa.string())
             image = pa.array([binary_image], type=pa.binary())
             caption = pa.array([caption], type=pa.string())
-    
+
             yield pa.RecordBatch.from_arrays(
                     [image_id, image, caption],
                     ["image_id", "image", "captions"]
@@ -223,12 +225,12 @@ With LanceDB, performing semantic search is pretty straightforward. The API desi
 Utility for images
 
     query = "dog running through sand"
-    
+
     hit_lists = tbl.search(query) \
         .metric("cosine") \
         .limit(2) \
         .to_list()
-    
+
     for hit in hit_lists:
         show_image(hit["image"])
 
@@ -250,18 +252,18 @@ Let's dive into the code and see this in action:
     query = "dog running through sand"
     sub_query = "dog"
     rep_query = "human"
-    
+
     query_emb = get_embedding(query)
     sub_query_emb = get_embedding(sub_query)
     rep_query_emb = get_embedding(rep_query)
-    
+
     emb = query_emb - sub_query_emb + rep_query_emb
-    
+
     hit_lists = tbl.search(emb) \
         .metric("cosine") \
         .limit(6) \
         .to_list()
-    
+
     for hit in hit_lists:
         show_image(hit["image"])
 
@@ -280,18 +282,18 @@ Let's dive into the code and see this in action:
     query = "many people happy"
     sub_query = "many people"
     rep_query = "single man"
-    
+
     query_emb = get_embedding(query)
     sub_query_emb = get_embedding(sub_query)
     rep_query_emb = get_embedding(rep_query)
-    
+
     emb = query_emb - sub_query_emb + rep_query_emb
-    
+
     hit_lists = tbl.search(emb) \
         .metric("cosine") \
         .limit(6) \
         .to_list()
-    
+
     for hit in hit_lists:
         show_image(hit["image"])
 

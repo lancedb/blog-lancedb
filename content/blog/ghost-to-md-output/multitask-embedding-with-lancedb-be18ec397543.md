@@ -1,10 +1,13 @@
 ---
-title: Multitask Embedding with LanceDB
+title: "Multitask Embedding with LanceDB"
 date: 2023-11-14
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
+meta_image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
+description: "By Kaushal Choudhary."
 ---
 
 By Kaushal Choudhary
@@ -60,7 +63,7 @@ Here, we also pass the instruction while calling the embedding model.
     from lancedb.pydantic import LanceModel, Vector
     from lancedb.embeddings import get_registry
     from lancedb.embeddings import InstructorEmbeddingFunction
-    
+
     instructor = get_registry().get("instructor").create(
                                 source_instruction="represent the document for retreival",
                                 query_instruction="represent the document for most similar definition")
@@ -73,7 +76,7 @@ We will instantiate the DB and create a table to store the data.
     class Schema(LanceModel):
         vector: Vector(instructor.ndims()) = instructor.VectorField()
         text: str = instructor.SourceField()
-    
+
     #intializing the db and creating a table
     db = lancedb.connect("~/.lancedb")
     tbl = db.create_table("intruct-multitask", schema=Schema, mode="overwrite")
@@ -86,7 +89,7 @@ Add the data to the table.
         {"instruction": "Represent the science title:", "text": "Amoxicillin is an antibiotic medication commonly prescribed to treat various bacterial infections, such as respiratory, ear, throat, and urinary tract infections. It belongs to the penicillin class of antibiotics and works by inhibiting bacterial cell wall synthesis."},
         {"instruction": "Represent the science title:", "text": "Atorvastatin is a lipid-lowering medication used to manage high cholesterol levels and reduce the risk of cardiovascular events. It belongs to the statin class of drugs and works by inhibiting an enzyme involved in cholesterol production in the liver."},
     ]
-    
+
     """
     #we pass the data in this format to lancedb for embedding
     data = [
@@ -94,7 +97,7 @@ Add the data to the table.
         {"text": "Amoxicillin is an antibiotic medication commonly prescribed to treat various bacterial infections, such as respiratory, ear, throat, and urinary tract infections. It belongs to the penicillin class of antibiotics and works by inhibiting bacterial cell wall synthesis."},
         {"text": "Atorvastatin is a lipid-lowering medication used to manage high cholesterol levels and reduce the risk of cardiovascular events. It belongs to the statin class of drugs and works by inhibiting an enzyme involved in cholesterol production in the liver."}
     ]
-    
+
     tbl.add(data)
 
 Did you notice the commented out data variable? Now, if you were not using LanceDB’s embedding API for the Instructor model, you would have to pass the instruction along with the data like shown above. But because we have already defined the instruction while calling the model, we don’t have to pass it again.
@@ -110,10 +113,10 @@ LanceDB facilitates direct text search, obviating the necessity for manual query
 Which will give us an output like this:
 
                                                   vector  \
-    0  [-0.024510665, 0.0005563133, 0.0288403, 0.0807...   
-    
-                                                    text  _distance  
-    0  Amoxicillin is an antibiotic medication common...   0.163671 
+    0  [-0.024510665, 0.0005563133, 0.0288403, 0.0807...
+
+                                                    text  _distance
+    0  Amoxicillin is an antibiotic medication common...   0.163671
 
 ## **Same Data with Different Instruction Pair**
 
@@ -129,9 +132,9 @@ This is the new instruction pair for the same input data as above. For brevity, 
 From this we will get an output like this:
 
                                                   vector  \
-    0  [-0.024483299, 0.000932854, 0.033273745, 0.077...   
-    
-                                                    text  _distance  
+    0  [-0.024483299, 0.000932854, 0.033273745, 0.077...
+
+                                                    text  _distance
     0  Amoxicillin is an antibiotic medication common...    0.18135
 
 The* **_distance*** value is different for each embedding we calculated on the same data, but with different instruction pairs.
@@ -144,7 +147,7 @@ You can just call the model from registry, and change the query instruction.
     from lancedb.pydantic import LanceModel, Vector
     from lancedb.embeddings import get_registry
     from lancedb.embeddings import InstructorEmbeddingFunction
-    
+
     instructor = get_registry().get("instructor").create(
                                 source_instruction="represent the docuement for retreival",
                                 query_instruction="Represent the wikipedia question for retreving supporting documnents"
@@ -155,7 +158,7 @@ Creating the schema and the DB.
     class Schema(LanceModel):
         vector: Vector(instructor.ndims()) = instructor.VectorField()
         text: str = instructor.SourceField()
-    
+
     db = lancedb.connect("~/.lancedb-qa")
     tbl = db.create_table("intruct-multitask-qa", schema=Schema, mode="overwrite")
 
@@ -175,9 +178,9 @@ Querying the database using text search.
     print(result.text)
 
                                                   vector  \
-    0  [0.021844529, 0.0017777127, 0.022723941, 0.049...   
-    
-                                                    text  _distance  
+    0  [0.021844529, 0.0017777127, 0.022723941, 0.049...
+
+                                                    text  _distance
     0  A cinema, also known as a movie theater or mov...   0.131036
 
 You can find various types of instructions for your use case. Check out the official project page of [Instruct](https://instructor-embedding.github.io/).

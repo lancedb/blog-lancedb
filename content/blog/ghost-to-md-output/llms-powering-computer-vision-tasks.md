@@ -1,10 +1,13 @@
 ---
-title: LLMs powering Computer Vision tasks
+title: "LLMs powering Computer Vision tasks"
 date: 2024-12-01
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
+meta_image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
+description: "."
 ---
 
 💡
@@ -37,9 +40,10 @@ Second, ***LLMs enhance the flexibility of vision tasks***. For example, models 
 
 These advancements are improving tasks like answering questions about images, finding objects in images, and classifying images, where LLMs break down complex problems into smaller steps and combine the results. As these models continue to evolve, they will make computer vision even more powerful and adaptable across a wide range of industries.
 
-In LanceDB's [vectordb-recipes](https://github.com/lancedb/vectordb-recipes), a few examples demonstrate some of these tasks. Let's explore them one by one, Let's start 
+In LanceDB's [vectordb-recipes](https://github.com/lancedb/vectordb-recipes), a few examples demonstrate some of these tasks. Let's explore them one by one, Let's start
 
 #### Zero-Shot Object Localization and Detection with OpenAI's CLIP
+
 [
 
 Google Colab
@@ -76,6 +80,7 @@ Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centr
 Read more about this example - [https://blog.lancedb.com/cambrian-1-vision-centric-exploration/](__GHOST_URL__/cambrian-1-vision-centric-exploration/)
 
 #### Social Media Caption Generation using Llama3.2 11B Vision
+
 [
 
 Google Colab

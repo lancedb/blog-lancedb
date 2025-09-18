@@ -1,10 +1,13 @@
 ---
-title: Convert any Image dataset to Lance
+title: "Convert any Image dataset to Lance"
 date: 2024-04-10
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/convert-any-image-dataset-to-lance/preview-image.png
+meta_image: /assets/blog/convert-any-image-dataset-to-lance/preview-image.png
+description: "In our article, we explored the remarkable capabilities of the Lance format, a modern, columnar data storage solution designed to."
 ---
 
 In our[previous](https://vipul-maheshwari.github.io/2024/03/29/effortlessly-loading-and-processing-images-with-lance-a-code-walkthrough) article, we explored the remarkable capabilities of the Lance format, a modern, columnar data storage solution designed to revolutionize the way we work with large image datasets in machine learning. For the same purpose, I have converted the *cinic* and *mini-imagenet* datasets to their lance versions. For this write-up, I will use the example of *cinic* dataset to explain how to convert any image dataset into the Lance format with a single script and unlocking the full potential of this powerful technology.
@@ -18,31 +21,31 @@ The `process_images` function is the heart of our data conversion process. It is
     def process_images(data_type):
         # Get the current directory path
         images_folder = os.path.join("mini_imagenet", data_type)
-    
+
         # Define schema for RecordBatch
-        schema = pa.schema([('image', pa.binary()), 
-                            ('filename', pa.string()), 
-                            ('category', pa.string()), 
+        schema = pa.schema([('image', pa.binary()),
+                            ('filename', pa.string()),
+                            ('category', pa.string()),
                             ('data_type', pa.string())])
-    
+
         # Iterate over the categories within each data type
         for category in os.listdir(images_folder):
             category_folder = os.path.join(images_folder, category)
-            
+
             # Iterate over the images within each category
             for filename in tqdm(os.listdir(category_folder), desc=f"Processing {data_type} - {category}"):
                 # Construct the full path to the image
                 image_path = os.path.join(category_folder, filename)
-    
+
                 # Read and convert the image to a binary format
                 with open(image_path, 'rb') as f:
                     binary_data = f.read()
-    
+
                 image_array = pa.array([binary_data], type=pa.binary())
                 filename_array = pa.array([filename], type=pa.string())
                 category_array = pa.array([category], type=pa.string())
                 data_type_array = pa.array([data_type], type=pa.string())
-    
+
                 # Yield RecordBatch for each image
                 yield pa.RecordBatch.from_arrays(
                     [image_array, filename_array, category_array, data_type_array],
@@ -67,13 +70,13 @@ The function first creates a `PyArrow` schema that defines the structure of the 
             pa.field("category", pa.string()),
             pa.field("data_type", pa.string())
         ])
-    
+
         # Specify the path where you want to save the Lance files
         images_folder = "mini_imagenet"
-        
+
         for data_type in ['train', 'test', 'val']:
             lance_file_path = os.path.join(images_folder, f"mini_imagenet_{data_type}.lance")
-            
+
             reader = pa.RecordBatchReader.from_batches(schema, process_images(data_type))
             lance.write_dataset(
                 reader,
@@ -95,29 +98,29 @@ The `loading_into_pandas` function demonstrates this process. It first locates t
         # Load Lance files from the same folder
         current_dir = os.getcwd()
         images_folder = os.path.join(current_dir, "cinic")
-        
+
         data_frames = {}  # Dictionary to store DataFrames for each data type
-        
+
         for data_type in ['test', 'train', 'val']:
             uri = os.path.join(images_folder, f"cinic_{data_type}.lance")
-    
+
             ds = lance.dataset(uri)
-    
+
             # Accumulate data from batches into a list
             data = []
             for batch in tqdm(ds.to_batches(columns=["image", "filename", "category", "data_type"], batch_size=10), desc=f"Loading {data_type} batches"):
                 tbl = batch.to_pandas()
                 data.append(tbl)
-    
+
             # Concatenate all DataFrames into a single DataFrame
             df = pd.concat(data, ignore_index=True)
-            
+
             # Store the DataFrame in the dictionary
             data_frames[data_type] = df
-            
+
             print(f"Pandas DataFrame for {data_type} is ready")
             print("Total Rows: ", df.shape[0])
-        
+
         return data_frames
 
 This approach offers several advantages. By loading the data in batches, the function can efficiently handle large-scale image datasets without running into memory constraints. Additionally, the use of Pandas DataFrames provides a familiar and intuitive interface for working with the data, allowing you to leverage the rich ecosystem of Pandas-compatible libraries and tools for data manipulation, visualization, and analysis.
@@ -136,41 +139,41 @@ here is the complete script for your reference..
     import lance
     import time
     from tqdm import tqdm
-    
+
     def process_images(data_type):
         # Get the current directory path
         images_folder = os.path.join("cinic", data_type)
-    
+
         # Define schema for RecordBatch
-        schema = pa.schema([('image', pa.binary()), 
-                            ('filename', pa.string()), 
-                            ('category', pa.string()), 
+        schema = pa.schema([('image', pa.binary()),
+                            ('filename', pa.string()),
+                            ('category', pa.string()),
                             ('data_type', pa.string())])
-    
+
         # Iterate over the categories within each data type
         for category in os.listdir(images_folder):
             category_folder = os.path.join(images_folder, category)
-            
+
             # Iterate over the images within each category
             for filename in tqdm(os.listdir(category_folder), desc=f"Processing {data_type} - {category}"):
                 # Construct the full path to the image
                 image_path = os.path.join(category_folder, filename)
-    
+
                 # Read and convert the image to a binary format
                 with open(image_path, 'rb') as f:
                     binary_data = f.read()
-    
+
                 image_array = pa.array([binary_data], type=pa.binary())
                 filename_array = pa.array([filename], type=pa.string())
                 category_array = pa.array([category], type=pa.string())
                 data_type_array = pa.array([data_type], type=pa.string())
-    
+
                 # Yield RecordBatch for each image
                 yield pa.RecordBatch.from_arrays(
                     [image_array, filename_array, category_array, data_type_array],
                     schema=schema
                 )
-    
+
     # Function to write PyArrow Table to Lance dataset
     def write_to_lance():
         # Create an empty RecordBatchIterator
@@ -180,51 +183,50 @@ here is the complete script for your reference..
             pa.field("category", pa.string()),
             pa.field("data_type", pa.string())
         ])
-    
+
         # Specify the path where you want to save the Lance files
         images_folder = "cinic"
-        
+
         for data_type in ['train', 'test', 'val']:
             lance_file_path = os.path.join(images_folder, f"cinic_{data_type}.lance")
-            
+
             reader = pa.RecordBatchReader.from_batches(schema, process_images(data_type))
             lance.write_dataset(
                 reader,
                 lance_file_path,
                 schema,
             )
-    
+
     def loading_into_pandas():
         # Load Lance files from the same folder
         current_dir = os.getcwd()
         print(current_dir)
         images_folder = os.path.join(current_dir, "cinic")
-        
+
         data_frames = {}  # Dictionary to store DataFrames for each data type
-        
+
         for data_type in ['test', 'train', 'val']:
             uri = os.path.join(images_folder, f"cinic_{data_type}.lance")
-    
+
             ds = lance.dataset(uri)
-    
+
             # Accumulate data from batches into a list
             data = []
             for batch in tqdm(ds.to_batches(columns=["image", "filename", "category", "data_type"], batch_size=10), desc=f"Loading {data_type} batches"):
                 tbl = batch.to_pandas()
                 data.append(tbl)
-    
+
             # Concatenate all DataFrames into a single DataFrame
             df = pd.concat(data, ignore_index=True)
-            
+
             # Store the DataFrame in the dictionary
             data_frames[data_type] = df
-            
+
             print(f"Pandas DataFrame for {data_type} is ready")
             print("Total Rows: ", df.shape[0])
-        
+
         return data_frames
-    
-    
+
     if __name__ == "__main__":
         start = time.time()
         write_to_lance()

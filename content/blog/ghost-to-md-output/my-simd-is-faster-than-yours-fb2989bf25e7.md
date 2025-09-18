@@ -1,10 +1,13 @@
 ---
-title: My SIMD is faster than Yours
+title: "My SIMD is faster than Yours"
 date: 2023-04-24
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/my-simd-is-faster-than-yours-fb2989bf25e7/preview-image.png
+meta_image: /assets/blog/my-simd-is-faster-than-yours-fb2989bf25e7/preview-image.png
+description: "> An untold story about how we make LanceDB vector search fast."
 ---
 
 > An untold story about how we make LanceDB vector search fast.
@@ -79,14 +82,14 @@ LanceDB is built on top of Apache Arrow (Rust), can we do better by using Arrow 
     // Use arrow arith kernels.
     use arrow_arith::arithmetic::{multiply, subtract};
     use arrow_arith::arity::binary;
-    
+
     #[inline]
     fn l2_arrow_1(x: &Float32Array, y: &Float32Array) -> f32 {
         let s = subtract(x, y).unwrap();
         let m = multiply(&s, &s).unwrap();
         sum(&m).unwrap()
     }
-    
+
     #[inline]
     fn l2_arrow_2(x: &Float32Array, y: &Float32Array) -> f32 {
         let m: Float32Array = binary(x, y, |a, b| (a - b).powi(2)).unwrap();
@@ -136,10 +139,10 @@ Running a simple python script on the same AWS `c6in` instance takes `5.498s`
 
     import numpy as np
     import time
-    
+
     x = np.random.random((1, 1024))
     y = np.random.random((1024*1024, 1024))
-    
+
     total = 10
     start = time.time()
     for i in range(total):
@@ -155,7 +158,7 @@ Modern CPUs are extraordinarily capable. We strongly believe that we can do bett
 We re-write the L2 distance computation using Intel AVX-2 instructions in `std::arch::x86_64`
 
     use std::arch::x86_64::*;
-    
+
     #[inline]
     pub(crate) fn l2_f32(from: &[f32], to: &[f32]) -> f32 {
         unsafe {
@@ -179,7 +182,7 @@ We re-write the L2 distance computation using Intel AVX-2 instructions in `std::
             sums = _mm256_hadd_ps(sums, sums);
             let mut results: [f32; 8] = [0f32; 8];
             _mm256_storeu_ps(results.as_mut_ptr(), sums);
-    
+
             // Remaining unaligned values
             results[0] += l2_scalar(&from[len..], &to[len..]);
             results[0]
@@ -195,7 +198,7 @@ Our team shares a love for Apple Silicon M1/M2 MacBooks. We are committed to mak
 Apple M1/M2 chips are based on Arm `aarch64` architecture, with `NEON` instructions. Unfortunately, Arm Scalable Vector Extension (SVE) is not available on these chips yet. So, we have only implemented the NEON version of `L2 distance.`
 
     use std::arch::aarch64::*;
-    
+
     #[inline]
     pub(crate) fn l2_f32(from: &[f32], to: &[f32]) -> f32 {
         unsafe {

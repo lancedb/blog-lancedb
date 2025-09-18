@@ -1,10 +1,13 @@
 ---
-title: Training a Variational AutoEncoder from scratch with Lance file format
+title: "Training a Variational AutoEncoder from scratch with Lance file format"
 date: 2024-09-02
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/training-a-variational-autoencoder-from-scratch-with-the-lance-file-format/preview-image.png
+meta_image: /assets/blog/training-a-variational-autoencoder-from-scratch-with-the-lance-file-format/preview-image.png
+description: "Autoencoders encode an input into a latent space and decode the latent representation into an output."
 ---
 
 Autoencoders encode an input into a latent space and decode the latent representation into an output. The output is often referred to as **the reconstruction**, as the primary goal is to reconstruct the input from the latent code.
@@ -44,20 +47,19 @@ We begin with setting up our imports for the experiment.
     import torchvision.transforms as transforms
     from torch.utils.data import DataLoader
     from torchvision.datasets import ImageFolder
-    
+
     import io
-    
+
     from PIL import Image
     from tqdm import tqdm
-    
-    
+
     from matplotlib import pyplot as plt
-    
+
     import requests
     import tarfile
     import os
     import time
-    
+
     import pyarrow as pa
     import lance
 
@@ -83,85 +85,84 @@ Here we will download the CINC-10 dataset and convert it into a Lance dataset. A
 
     # Define the URL for the dataset file
     data_url = "https://datashare.ed.ac.uk/bitstream/handle/10283/3192/CINIC-10.tar.gz"
-    
+
     # Create the data directory if it doesn't exist
     data_dir = "cinic-10-data"
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
-    
+
     # Download the dataset file
     print("Downloading CINIC-10 dataset...")
     data_file = os.path.join(data_dir, "CINIC-10.tar.gz")
-    
+
     response = requests.get(data_url, stream=True)
     total_size = int(response.headers.get('content-length', 0))
     block_size = 1024
-    
+
     start_time = time.time()
     progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
-    
+
     with open(data_file, 'wb') as f:
         for chunk in response.iter_content(chunk_size=block_size):
             if chunk:
                 f.write(chunk)
                 progress_bar.update(len(chunk))
-    
+
     end_time = time.time()
     download_time = end_time - start_time
     progress_bar.close()
-    
+
     print(f"\nDownload time: {download_time:.2f} seconds")
-    
+
     # Extract the dataset files
     print("Extracting dataset files...")
     with tarfile.open(data_file, 'r:gz') as tar:
         tar.extractall(path=data_dir)
-    
+
     print("Dataset downloaded and extracted successfully!")
 
     def process_images(images_folder, split, schema):
-    
+
         # Iterate over the categories within each data type
         label_folder = os.path.join(images_folder, split)
         for label in os.listdir(label_folder):
             label_folder = os.path.join(images_folder, split, label)
-            
+
             # Iterate over the images within each label
             for filename in tqdm(os.listdir(label_folder), desc=f"Processing {split} - {label}"):
                 # Construct the full path to the image
                 image_path = os.path.join(label_folder, filename)
-    
+
                 # Read and convert the image to a binary format
                 with open(image_path, 'rb') as f:
                     binary_data = f.read()
-    
+
                 image_array = pa.array([binary_data], type=pa.binary())
                 filename_array = pa.array([filename], type=pa.string())
                 label_array = pa.array([label], type=pa.string())
                 split_array = pa.array([split], type=pa.string())
-    
+
                 # Yield RecordBatch for each image
                 yield pa.RecordBatch.from_arrays(
                     [image_array, filename_array, label_array, split_array],
                     schema=schema
                 )
-    
+
     # Function to write PyArrow Table to Lance dataset
     def write_to_lance(images_folder, dataset_name, schema):
         for split in ['test', 'train', 'valid']:
             lance_file_path = os.path.join(images_folder, f"{dataset_name}_{split}.lance")
-            
+
             reader = pa.RecordBatchReader.from_batches(schema, process_images(images_folder, split, schema))
             lance.write_dataset(
                 reader,
                 lance_file_path,
                 schema,
             )
-    
-    
+
     dataset_path = "cinic-10-data"
     dataset_name = os.path.basename(dataset_path)
-    
+
     start = time.time()
     schema = pa.schema([
         pa.field("image", pa.binary()),
@@ -169,7 +170,7 @@ Here we will download the CINC-10 dataset and convert it into a Lance dataset. A
         pa.field("label", pa.string()),
         pa.field("split", pa.string())
     ])
-    
+
     start = time.time()
     write_to_lance(dataset_path, dataset_name, schema)
     end = time.time()
@@ -193,23 +194,23 @@ Let us now build the Data Generator
             self.classes = classes
             self.ds = lance.dataset(lance_dataset)
             self.transform = transform
-    
+
         def __len__(self):
             return self.ds.count_rows()
-    
+
         def __getitem__(self, idx):
             raw_data = self.ds.take([idx], columns=['image', 'label']).to_pydict()
             img_data, label = raw_data['image'][0], raw_data['label'][0]
-    
+
             img = Image.open(io.BytesIO(img_data))
-    
+
             # Convert grayscale images to RGB
             if img.mode != 'RGB':
                 img = img.convert('RGB')
-    
+
             if self.transform:
                 img = self.transform(img)
-    
+
             label = self.classes.index(label)
             return img, label
 
@@ -222,13 +223,13 @@ To instantiate a data loader we use the following code.
         ]
     )
     classes = ('airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-    
+
     lance_train_dataset = CustomImageDataset(
         classes,
         "cinic-10-data/cinic-10-data_train.lance/",
         transform=train_transform
     )
-    
+
     lance_train_loader = torch.utils.data.DataLoader(
         lance_train_dataset,
         batch_size=vae_config["BATCH_SIZE"],
@@ -265,7 +266,7 @@ By incorporating these probabilistic elements and regularization techniques, VAE
     class VAE(nn.Module):
         def __init__(self):
             super(VAE, self).__init__()
-    
+
             # Encoder
             self.encoder = nn.Sequential(
                 nn.Conv2d(vae_config["IN_CHANNELS"], 32, kernel_size=4, stride=2, padding=1),
@@ -276,13 +277,13 @@ By incorporating these probabilistic elements and regularization techniques, VAE
                 nn.ReLU(),
                 nn.Flatten()
             )
-    
+
             self.fc_mu = nn.Linear(128*4*4, vae_config["LATENT_DIM_SIZE"])
             self.fc_logvar = nn.Linear(128*4*4, vae_config["LATENT_DIM_SIZE"])
-    
+
             # Decoder
             self.decoder_input = nn.Linear(vae_config["LATENT_DIM_SIZE"], 128*4*4)
-    
+
             self.decoder = nn.Sequential(
                 nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1),
                 nn.ReLU(),
@@ -291,12 +292,12 @@ By incorporating these probabilistic elements and regularization techniques, VAE
                 nn.ConvTranspose2d(32, vae_config["IN_CHANNELS"], kernel_size=4, stride=2, padding=1),
                 nn.Tanh()  # Output values in range [-1, 1]
             )
-    
+
         def reparameterize(self, mu, logvar):
             std = torch.exp(0.5 * logvar)
             eps = torch.randn_like(std)
             return mu + eps * std
-    
+
         def forward(self, x):
             x = self.encoder(x)
             mu = self.fc_mu(x)
@@ -305,7 +306,7 @@ By incorporating these probabilistic elements and regularization techniques, VAE
             z = self.decoder_input(z)
             z = z.view(-1, 128, 4, 4)
             return self.decoder(z), mu, logvar
-    
+
         def sample(self, num_samples):
             z = torch.randn(num_samples, vae_config["LATENT_DIM_SIZE"]).to(device)
             return self.decoder(self.decoder_input(z).view(-1, 128, 4, 4))
@@ -313,13 +314,13 @@ By incorporating these probabilistic elements and regularization techniques, VAE
 ## Time to TRAIN!
 
     device = "cuda"
-    
+
     # Loss Function
     def vae_loss(recon_x, x, mu, logvar):
         recon_loss = nn.functional.mse_loss(recon_x, x, reduction='sum')
         kl_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         return recon_loss + kl_loss
-    
+
     # Initialize model, optimizer
     model = VAE().to(device)
     optimizer = optim.Adam(model.parameters(), lr=vae_config["LEARNING_RATE"])
@@ -327,26 +328,26 @@ By incorporating these probabilistic elements and regularization techniques, VAE
     for epoch in range(vae_config["NUM_EPOCHS"]):
         model.train()
         train_loss = 0
-    
+
         # Use tqdm for the progress bar
         pbar = tqdm(enumerate(lance_train_loader), total=len(lance_train_loader), desc=f'Epoch {epoch+1}/{vae_config["NUM_EPOCHS"]}')
-    
+
         for batch_idx, (data, _) in pbar:
             data = data.to(device)
-    
+
             optimizer.zero_grad()
             recon_batch, mu, logvar = model(data)
             loss = vae_loss(recon_batch, data, mu, logvar)
             loss.backward()
             train_loss += loss.item()
             optimizer.step()
-    
+
             # Update tqdm description with current loss
             pbar.set_postfix({'Loss': loss.item()})
-    
+
         avg_loss = train_loss / len(lance_train_loader.dataset)
         print(f'Epoch [{epoch + 1}/{vae_config["NUM_EPOCHS"]}] Average Loss: {avg_loss:.4f}')
-    
+
         # show and display a sample of the reconstructed images
         if epoch % 10 == 0:
             with torch.no_grad():

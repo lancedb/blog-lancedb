@@ -1,10 +1,13 @@
 ---
-title: Multi-Modal AI made easy with LanceDB & CLIP
+title: "Multi-Modal AI made easy with LanceDB & CLIP"
 date: 2023-11-27
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939/preview-image.png
+meta_image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939/preview-image.png
+description: "by Kaushal Choudhary."
 ---
 
 by Kaushal Choudhary
@@ -16,7 +19,7 @@ One of the most exciting areas of research in deep learning currently is multi-m
 - Multi-Modal Video Search
 
 ![](https://miro.medium.com/v2/resize:fit:770/1*goBzf9Hb8abalCmIiheffQ.jpeg)CLIP model from OpenAI
-# Overview
+## Overview
 
 In the above picture you can see the CLIP model(**Contrastive Language-Image Pre-Training**), which is trained on humongous corpus of image-text pairs. This is model on which we are going to focus on this blog.
 
@@ -26,7 +29,7 @@ First, we will discuss about the Multi-Modal Search using CLIP.
 
 We will be using keywords, **SQL** commands and Embeddings to search the most relevant image.
 
-# Notebook Walk through
+## Notebook Walk through
 
 ## Example I : Multi-Modal Search
 
@@ -66,7 +69,7 @@ The dataset only labels the images with numbers, which is not very easy to under
         tiger_cat = 12
         white_wolf = 13
         timber_wolf = 14
-        
+
     print(dataset[0])
     print(Animal(dataset[0]['labels']).name)
 
@@ -74,7 +77,7 @@ We will be using 32 bit precision pretrained ViT (vision transformer) from CLIP.
 
     import clip
     import torch
-    
+
     #use GPU if available
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, preprocess = clip.load("ViT-B/32", device=device)
@@ -103,7 +106,7 @@ We are going to create a PyArrow schema and enter the data into LanceDB.
 Let’s append the data to the table.
 
     import pyarrow as pa
-    
+
     #create the db with defined schema
     db = lancedb.connect('./data/tables')
     schema = pa.schema(
@@ -113,12 +116,12 @@ Let’s append the data to the table.
           pa.field("label", pa.int32()),
       ])
     tbl = db.create_table("animal_images", schema=schema, mode="overwrite")
-    
+
     #append the data into the table
     data = []
     for i in tqdm(range(1, len(dataset))):
         data.append({'vector': embed(dataset[i]['img']), 'id': i, 'label': dataset[i]['labels']})
-        
+
     tbl.add(data)
     #converting to pandas for better visibility
     tbl.to_pandas()
@@ -128,7 +131,7 @@ Now to test the image search, a good practice would be to check with the validat
 
     #load the dataset
     test = load_dataset("CVdatasets/ImageNet15_animals_unbalanced_aug1", split="validation")#display the data along with length
-    
+
     print(len(test))
     print(test[100])
     print(Animal(test[100]['labels']).name)
@@ -143,7 +146,7 @@ To search the table, we can use this way
 - Returning a Pandas DataFrame.
 
     embs = embed(test[100]['img'])
-    
+
     #search the db after embedding the question(image)
     res = tbl.search(embs).limit(1).to_df()
     res
@@ -154,8 +157,8 @@ We can also put everything into a function for easier inference.
     #creating an image search function
     def image_search(id):
         print(Animal(test[id]['labels']).name)
-        display(test[id]['img'])    
-        
+        display(test[id]['img'])
+
         res = tbl.search(embed(test[id]['img'])).limit(5).to_df()
         print(res)
         for i in range(5):
@@ -174,7 +177,7 @@ We will use `encode_text` function here instead of encode_image.
         text = clip.tokenize([txt]).to(device)
         embs = model.encode_text(text)
         return embs.detach().cpu().numpy()[0].tolist()
-        
+
     #check the length of the embedded text
     len(embed_txt("Black and white dog"))
 
@@ -183,7 +186,7 @@ Searching the table
     #search through the database
     res = tbl.search(embed_txt("a french_bulldog ")).limit(1).to_df()
     res
-    
+
     print(Animal(res['label'][0]).name)
     data_id = int(res['id'][0])
     display(dataset[data_id]['img'])
@@ -216,7 +219,7 @@ Create and open the LanceDB table.
 
     import pyarrow.compute as pc
     import lance
-    
+
     db = lancedb.connect("~/datasets/demo")
     if "diffusiondb" in db.table_names():
         tbl= db.open_table("diffusiondb")
@@ -230,9 +233,9 @@ Create and open the LanceDB table.
 Creating the CLIP Embeddings, for the text. If you want to know more about embeddings, you can read more about them [**here**](__GHOST_URL__/multitask-embedding-with-lancedb-be18ec397543).
 
     from transformers import CLIPModel, CLIPProcessor, CLIPTokenizerFast
-    
+
     MODEL_ID = "openai/clip-vit-base-patch32"
-    
+
     tokenizer = CLIPTokenizerFast.from_pretrained(MODEL_ID)
     model = CLIPModel.from_pretrained(MODEL_ID)
     processor = CLIPProcessor.from_pretrained(MODEL_ID)
@@ -261,7 +264,7 @@ Now, to properly visualize our embeddings and data, we will create a Gradio Inte
             "tbl.search(embedding).limit(9).to_df()"
         )
         return (_extract(tbl.search(emb).limit(9).to_df()), code)
-    
+
     #find the image keywords
     def find_image_keywords(query):
         code = (
@@ -271,7 +274,7 @@ Now, to properly visualize our embeddings and data, we will create a Gradio Inte
             f"tbl.search('{query}').limit(9).to_df()"
         )
         return (_extract(tbl.search(query).limit(9).to_df()), code)
-    
+
     #using SQL style commands to find the image
     def find_image_sql(query):
         code = (
@@ -281,10 +284,10 @@ Now, to properly visualize our embeddings and data, we will create a Gradio Inte
             "tbl = db.open_table('diffusiondb')\n\n"
             "diffusiondb = tbl.to_lance()\n"
             f"duckdb.sql('{query}').to_df()"
-        )    
+        )
         diffusiondb = tbl.to_lance()
         return (_extract(duckdb.sql(query).to_df()), code)
-    
+
     #extract the image
     def _extract(df):
         image_col = "image"
@@ -293,7 +296,7 @@ Now, to properly visualize our embeddings and data, we will create a Gradio Inte
 Let’s set up the Gradio Interface.
 
     import gradio as gr
-    
+
     #gradio block
     with gr.Blocks() as demo:
         with gr.Row():
@@ -311,12 +314,12 @@ Let’s set up the Gradio Interface.
         with gr.Row():
             gallery = gr.Gallery(
                     label="Found images", show_label=False, elem_id="gallery"
-                ).style(columns=[3], rows=[3], object_fit="contain", height="auto")   
-            
+                ).style(columns=[3], rows=[3], object_fit="contain", height="auto")
+
         b1.click(find_image_vectors, inputs=vector_query, outputs=[gallery, code])
         b2.click(find_image_keywords, inputs=keyword_query, outputs=[gallery, code])
         b3.click(find_image_sql, inputs=sql_query, outputs=[gallery, code])
-        
+
     demo.launch()
 
 ![](https://miro.medium.com/v2/resize:fit:1100/1*fjcthhO2vBIPHSi0aG6OLg.gif)Gradio Interface for MultiModal Search using CLIP
@@ -347,14 +350,14 @@ Create the Table
 CLIP model with tokenizer, processor, and the embedding function
 
     from transformers import CLIPModel, CLIPProcessor, CLIPTokenizerFast
-    
+
     MODEL_ID = "openai/clip-vit-base-patch32"
-    
+
     #load the tokenizer and processor for CLIP model
     tokenizer = CLIPTokenizerFast.from_pretrained(MODEL_ID)
     model = CLIPModel.from_pretrained(MODEL_ID)
     processor = CLIPProcessor.from_pretrained(MODEL_ID)
-    
+
     #embedding function for the query
     def embed_func(query):
         inputs = tokenizer([query], padding=True, return_tensors="pt")
@@ -374,7 +377,7 @@ We will be using Gradio, so let’s define some search utility functions beforeh
             "tbl.search(embedding).limit(9).to_df()"
         )
         return (_extract(tbl.search(emb).limit(9).to_df()), code)
-    
+
     #function to find the search for the video keywords from lancedb
     def find_video_keywords(query):
         code = (
@@ -384,7 +387,7 @@ We will be using Gradio, so let’s define some search utility functions beforeh
             f"tbl.search('{query}').limit(9).to_df()"
         )
         return (_extract(tbl.search(query).limit(9).to_df()), code)
-    
+
     #create a SQL command to retrieve the video from the db
     def find_video_sql(query):
         code = (
@@ -397,29 +400,29 @@ We will be using Gradio, so let’s define some search utility functions beforeh
         )
         videos = tbl.to_lance()
         return (_extract(duckdb.sql(query).to_df()), code)
-    
+
     #extract the video from the df
     def _extract(df):
         video_id_col = "video_id"
         start_time_col = "start_time"
         grid_html = '<div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 20px;">'
-    
+
         for _, row in df.iterrows():
             iframe_code = f'<iframe width="100%" height="315" src="https://www.youtube.com/embed/{row[video_id_col]}?start={str(row[start_time_col])}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
             grid_html += f'<div style="width: 100%;">{iframe_code}</div>'
-    
+
         grid_html += '</div>'
         return grid_html
 
 Setting up the Gradio Interface
 
     import gradio as gr
-    
+
     #gradio block
     with gr.Blocks() as demo:
         gr.Markdown('''
                 # Multimodal video search using CLIP and LanceDB
-                We used LanceDB to store frames every thirty seconds and the title of 13000+ videos, 5 random from each top category from the Youtube 8M dataset. 
+                We used LanceDB to store frames every thirty seconds and the title of 13000+ videos, 5 random from each top category from the Youtube 8M dataset.
                 Then, we used the CLIP model to embed frames and titles together. With LanceDB, we can perform embedding, keyword, and SQL search on these videos.
                 ''')
         with gr.Row():
@@ -436,11 +439,11 @@ Setting up the Gradio Interface
             code = gr.Code(label="Code", language="python")
         with gr.Row():
             gallery = gr.HTML()
-            
+
         b1.click(find_video_vectors, inputs=vector_query, outputs=[gallery, code])
         b2.click(find_video_keywords, inputs=keyword_query, outputs=[gallery, code])
         b3.click(find_video_sql, inputs=sql_query, outputs=[gallery, code])
-        
+
     demo.launch()
 
 ![](https://miro.medium.com/v2/resize:fit:1100/1*Dkb4OdnXSOVncfgzhRbqAw.gif)MultiModal Video search using CLIP and LanceDB

@@ -1,10 +1,13 @@
 ---
-title: Accelerate Vector Search Applications Using OpenVINO & LanceDB
+title: "Accelerate Vector Search Applications Using OpenVINO & LanceDB"
 date: 2023-12-06
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
+meta_image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
+description: "In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the."
 ---
 
 In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the Pytorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup.
@@ -42,7 +45,7 @@ OpenVINO toolkit is a free toolkit facilitating the optimization of a deep learn
 ![](https://miro.medium.com/v2/resize:fit:700/1*950zBYcU5-9hySxX8d9Yng.png)
 This write-up uses OpenVINO to accelerate the LanceDB embedding pipeline.
 
-# Implementation
+## Implementation
 
 In the Implementation section, we see the ***comparative implementation of the CLIP model from Hugging Face and OpenVINO formats, using the conceptual caption dataset***.
 
@@ -70,19 +73,19 @@ Helper ***functions to validate image URLs*** and get images and captions from i
           return True
         except:
           return False
-    
+
     def get_image(image_URL):
-    
+
         response = requests.get(image_URL)
         image = Image.open(BytesIO(response.content)).convert("RGB")
-    
+
         return image
-    
+
     def get_image_caption(image_ID):
-    
+
         return image_data[image_ID]["caption"]# Transform dataframe
     image_data_df["is_valid"] = image_data_df["image_url"].apply(check_valid_URLs)
-    
+
     #removing all the in_valid URLs
     image_data_df = image_data_df[image_data_df["is_valid"]==True]
     image_data_df.head()
@@ -95,22 +98,22 @@ We’ll start with ***CLIP using Hugging Face ***and the time taken to extract e
 
     def get_model_info(model_ID, device):
       """
-      Loading CLIP from HuggingFace  
+      Loading CLIP from HuggingFace
       """
       # Save the model to device
       model = CLIPModel.from_pretrained(model_ID).to(device)
-    
+
       # Get the processor
       processor = CLIPProcessor.from_pretrained(model_ID)
-    
+
       # Get the tokenizer
       tokenizer = CLIPTokenizer.from_pretrained(model_ID)
-    
+
       # Return model, processor & tokenizer
       return model, processor, tokenizer# Set the device
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model_ID = "openai/clip-vit-base-patch16"
-    
+
     model, processor, tokenizer = get_model_info(model_ID, device)
 
 Let’s write a **Helper Function to extract Text and Image Embeddings**
@@ -118,14 +121,13 @@ Let’s write a **Helper Function to extract Text and Image Embeddings**
     def get_single_text_embedding(text):
       # Get single text embeddings
       inputs = tokenizer(text, return_tensors = "pt").to(device)
-    
+
       text_embeddings = model.get_text_features(**inputs)
-    
+
       # convert the embeddings to numpy array
       embedding_as_np = text_embeddings.cpu().detach().numpy()
       return embedding_as_np
-    
-    
+
     def get_all_text_embeddings(df, text_col):
        # Get all the text embeddings
        df["text_embeddings"] = df[str(text_col)].apply(get_single_text_embedding)
@@ -136,14 +138,13 @@ Let’s write a **Helper Function to extract Text and Image Embeddings**
           images = my_image,
           return_tensors="pt"
       )["pixel_values"].to(device)
-    
+
       embedding = model.get_image_features(image)
-    
+
       # convert the embeddings to numpy array
       embedding_as_np = embedding.cpu().detach().numpy()
       return embedding_as_np
-    
-    
+
     def get_all_images_embedding(df, img_column):
       # Get all image embeddings
       df["img_embeddings"] = df[str(img_column)].apply(get_single_image_embedding)
@@ -172,20 +173,19 @@ Time Taken to extract Embeddings of 83 Images(in seconds):  55.79
         """
         image_url = image_data_df.image_url.tolist()
         image_embeddings = [arr.astype(np.float32).tolist() for arr in image_data_df.img_embeddings.tolist()]
-    
+
         data = []
         for i in range(len(image_url)):
             temp = {}
             temp['vector'] = image_embeddings[i][0]
             temp['image'] = image_url[i]
-    
+
             data.append(temp)
-    
+
         # Create a Table
         tbl = db.create_table(name= table_name, data=data, mode= "overwrite")
         return tbl
-    
-    
+
     #create and ingest embeddings for pt model
     pt_tbl = create_and_ingest(image_data_df, "pt_table")
 
@@ -195,12 +195,12 @@ Time taken to extract embeddings of all the images and query the stored embeddin
 
     # Get the image embedding and query for each caption
     pt_img_results = {}
-    
+
     start_time = time.time()
     for i in range(len(image_data_df)):
         img_query = image_data_df.iloc[i].image
         query_embedding = get_single_image_embedding(img_query).tolist()
-    
+
         #querying with image
         result = pt_tbl.search(query_embedding[0]).limit(4).to_list()
         pt_img_results[str(i)] = result
@@ -210,7 +210,7 @@ Time taken to extract embeddings of all the images and query the stored embeddin
 Now we’ll start with ***CLIP F16 OpenVINO format ***and the time taken to extract embeddings and ***ingesting in the LanceDB vector database***.
 
     import openvino as ov
-    
+
     #saving openvino model
     model.config.torchscript = True
     ov_model = ov.convert_model(model, example_input=dict(inputs))
@@ -221,7 +221,7 @@ Compiling the CLIP OpenVINO model
     import numpy as np
     from scipy.special import softmax
     from openvino.runtime import Core
-    
+
     """
       Compiling CLIP in Openvino FP16 format
     """
@@ -234,7 +234,7 @@ Compiling the CLIP OpenVINO model
 **Extracting Embeddings of 83 images using CLIP FP16 OpenVINO model **and time taken to extract embeddings.
 
     import time
-    
+
     #time taken to extract embeddings using CLIP OpenVINO format
     start_time = time.time()
     image_embeddings = extract_openvino_embeddings(image_data_df)
@@ -255,14 +255,13 @@ Time Taken to extract Embeddings of 83 Images(in seconds):  31.79
             temp = {}
             temp['vector'] = image_embeddings[i]
             temp['image'] = image_url[i]
-    
+
             data.append(temp)
-    
+
         # Create a Table
         tbl = db.create_table(name= table_name, data=data, mode= "overwrite")
         return tbl
-    
-    
+
     # create and ingest embeddings for OpenVINO fp16 model
     ov_tbl = create_and_ingest_openvino(image_url, image_embeddings, "ov_tbl")Query the stored embeddings
 
@@ -276,21 +275,21 @@ Time taken to extract embeddings of all the images and query the stored embeddin
         image = image_data_df.iloc[i].image
         inputs = processor(images=[image], return_tensors="np", padding=True)
         query_embedding = compiled_model(dict(inputs))["image_embeds"][0]
-    
+
         #querying with query image
         result = ov_tbl.search(query_embedding).limit(4).to_list()
         ov_img_results[str(i)] = result
 
-# NNCF INT 8-bit Quantization
+## NNCF INT 8-bit Quantization
 
 Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Framework) and infer quantized model via OpenVINO Toolkit.
 
     %pip install -q datasets
     %pip install -q "nncf>=2.7.0"import os
     from transformers import CLIPProcessor, CLIPModel
-    
+
     fp16_model_path = 'clip-vit-base-patch16.xml'
-    
+
     #inputs preparation for conversion and creating processor
     model = CLIPModel.from_pretrained("openai/clip-vit-base-patch16")
     max_length = model.config.text_config.max_position_embeddings
@@ -304,7 +303,7 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
     from PIL import Image
     from requests.packages.urllib3.exceptions import InsecureRequestWarning
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-    
+
     def check_text_data(data):
         """
         Check if the given data is text-based.
@@ -314,7 +313,7 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
         if isinstance(data, list):
             return all(isinstance(x, str) for x in data)
         return False
-    
+
     def get_pil_from_url(url):
         """
         Downloads and converts an image from a URL to a PIL Image object.
@@ -322,7 +321,7 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
         response = requests.get(url, verify=False, timeout=20)
         image = Image.open(BytesIO(response.content))
         return image.convert("RGB")
-    
+
     def collate_fn(example, image_column="image_url", text_column="caption"):
         """
         Preprocesses an example by loading and transforming image and text data.
@@ -333,10 +332,10 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
         """
         assert len(example) == 1
         example = example[0]
-    
+
         if not check_text_data(example[text_column]):
             raise ValueError("Text data is not valid")
-    
+
         url = example[image_column]
         try:
             image = get_pil_from_url(url)
@@ -345,7 +344,7 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
                 return None
         except Exception:
             return None
-    
+
         #preparing inputs for processor
         inputs = processor(text=example[text_column], images=[image], return_tensors="pt", padding=True)
         if inputs['input_ids'].shape[1] > max_length:
@@ -357,22 +356,21 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
     import logging
     import nncf
     from openvino.runtime import Core, serialize
-    
+
     core = Core()
-    
-    #Initialize NNCF 
+
+    #Initialize NNCF
     nncf.set_log_level(logging.ERROR)
-    
+
     int8_model_path = 'clip-vit-base-patch16_int8.xml'
     calibration_data = prepare_dataset()
     ov_model = core.read_model(fp16_model_path)
-    
-    
+
     if len(calibration_data) == 0:
         raise RuntimeError(
             'Calibration dataset is empty. Please check internet connection and try to download images manually.'
         )
-    
+
     #Quantize CLIP fp16 model using NNCF
     calibration_dataset = nncf.Dataset(calibration_data)
     quantized_model = nncf.quantize(
@@ -380,7 +378,7 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
         calibration_dataset=calibration_dataset,
         model_type=nncf.ModelType.TRANSFORMER,
     )
-    
+
     #Saving Quantized model
     serialize(quantized_model, int8_model_path)
 
@@ -389,20 +387,19 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
     import numpy as np
     from scipy.special import softmax
     from openvino.runtime import Core
-    
+
     # create OpenVINO core object instance
     core = Core()
     # compile model for loading on device
     compiled_model = core.compile_model(quantized_model, device_name="AUTO", config={"PERFORMANCE_HINT": "CUMULATIVE_THROUGHPUT"})
-    
+
     # obtain output tensor for getting predictions
     image_embeds = compiled_model.output(0)
     logits_per_image_out = compiled_model.output(0)
-    
-    
+
     image_url = image_data_df.image_url.tolist()
     image_embeddings = []
-    
+
     def extract_quantized_openvino_embeddings(image_data_df, compiled_model):
         """
         Extract embeddings of Images using CLIP Quantized model
@@ -411,14 +408,14 @@ Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Fra
             image = image_data_df.iloc[i].image
             inputs = processor(images=[image], return_tensors="np", padding=True)
             image_embeddings.append(compiled_model(dict(inputs))["image_embeds"][0])
-    
+
         return image_embeddingsimport time
-    
+
     start_time = time.time()
-    
+
     #time taken to extract embeddings using CLIP OpenVINO format
     image_embeddings = extract_quantized_openvino_embeddings(image_data_df, compiled_model)
-    
+
     print(f"Time Taken to extract Embeddings of {len(image_data_df)} Images(in seconds): ", time.time()-start_time)
 
 Here are the results
@@ -440,7 +437,7 @@ Time taken to extract embeddings of all the images and query the stored embeddin
         image = image_data_df.iloc[i].image
         inputs = processor(images=[image], return_tensors="np", padding=True)
         query_embedding = compiled_model(dict(inputs))["image_embeds"][0]
-    
+
         #querying with query image
         result = qov_tbl.search(query_embedding).limit(4).to_list()
         ov_img_results[str(i)] = result

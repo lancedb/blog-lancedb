@@ -1,10 +1,13 @@
 ---
-title: Improving LLM-based web applications with easy-to-use and free serverless vector database LanceDB
+title: "Improving LLM-based web applications with easy-to-use and free serverless vector database LanceDB"
 date: 2023-08-16
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/improving-llm-based-web-applications-with-easy-to-use-and-free-serverless-vector-database-lancedb-254e1442a9b0/preview-image.png
+meta_image: /assets/blog/improving-llm-based-web-applications-with-easy-to-use-and-free-serverless-vector-database-lancedb-254e1442a9b0/preview-image.png
+description: "by Tevin Wang."
 ---
 
 by Tevin Wang
@@ -38,33 +41,33 @@ In the `/api/context` route, we’ll use Cheerio to get website links from the s
 
     async function getEntriesFromLinks(links: string[]): Promise<Entry[]> {
       let allEntries: Entry[] = [];
-    
+
       for (const link of links) {
         console.log('Scraping ', link);
         try {
           const response = await fetch(link);
           const $ = load(await response.text());
-    
+
           const contentArray: string[] = [];
           $('p').each((index: number, element: Element) => {
             contentArray.push($(element).text().trim());
           });
-    
+
           const content = contentArray
             .join('\n')
             .split('\n')
             .filter(line => line.length > 0)
             .map(line => ({ link: link, text: line }));
-    
+
           allEntries = allEntries.concat(content);
         } catch (error) {
           console.error(`Error processing ${link}:`, error);
         }
       }
-    
+
       return allEntries;
     }
-    
+
     export async function getDomObjects(url: string, pages: number): Promise<Entry[]> {
       const sitemapUrls = await getWebsiteSitemap(url, pages);
       const allEntries = await getEntriesFromLinks(sitemapUrls);
@@ -87,7 +90,7 @@ Before we insert, we should provide expanded context for each text entry. This w
         }
         grouped[row[groupColumn]].push(row)
       })
-    
+
       const data: EntryWithContext[] = []
       Object.keys(grouped).forEach(key => {
         for (let i = 0; i < grouped[key].length; i++) {
@@ -122,20 +125,20 @@ Once a text query is recieved, we send a request to `/api/chat` with the followi
     import { OpenAIStream, StreamingTextResponse } from 'ai'
     import { Configuration, OpenAIApi } from 'openai-edge'
     import { createPrompt } from './prompt'
-    
+
     // Create an OpenAI API client (that's edge friendly!)
     const config = new Configuration({
       apiKey: process.env.OPENAI_API_KEY
     })
     const openai = new OpenAIApi(config)
-    
+
     // IMPORTANT! Set the runtime to edge
     export const runtime = 'edge'
-    
+
     export async function POST(req: Request) {
       // Extract the `messages` from the body of the request
       const { messages, table } = await req.json()
-    
+
       const baseUrl = process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'http://localhost:3000'
       const context = await fetch(`${baseUrl}/api/retrieve`, {
         method: "POST",
@@ -174,7 +177,7 @@ Then, we utilize these results to create and augment our prompt.
       let prompt =
         'The context that follows is pulled from a website. Respond based on the website information below, acting as an agent guiding someone through the website.\n\n' +
         'Context:\n'
-    
+
       // need to make sure our prompt is not larger than max size
       prompt = prompt + context.map(c => c.context).join('\n\n---\n\n').substring(0, 3750)
       prompt = prompt + `\n\nQuestion: ${query}\nAnswer:`

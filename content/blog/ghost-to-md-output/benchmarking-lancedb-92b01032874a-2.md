@@ -5,6 +5,9 @@ author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/benchmarking-lancedb-92b01032874a-2/preview-image.png
+meta_image: /assets/blog/benchmarking-lancedb-92b01032874a-2/preview-image.png
+description: "Vector similarity search is finding similar vectors from a list of given vectors in a particular embedding space."
 ---
 
 Vector similarity search is finding similar vectors from a list of given vectors in a particular embedding space. It plays a vital role in various fields and applications because it efficiently retrieves relevant information from large datasets.
@@ -31,16 +34,16 @@ Product Quantization can be broken down into steps listed below:
 Let's see how it works in the implementation, of that we’ll create a random array of size 12 and keep the chunk size as 3.
 
     import random
-    
+
     #consider this as a high dimensional vector
     vec = v = [random.randint(1,20)) for i in range(12)]chunk_count = 4
     vector_size = len(vec)
-    
+
     # vector_size must be divisable by chunk_size
     assert vector_size % chunk_count == 0
     # length of each subvector will be vector_size/ chunk_count
     subvector_size = int(vector_size / chunk_count)
-    
+
     # subvectors
     sub_vectors = [vec[row: row+subvector_size] for row in range(0, vector_size, subvector_size)]
     sub_vectors
@@ -48,31 +51,30 @@ Let's see how it works in the implementation, of that we’ll create a random ar
 The output looks like this:
 
     [[13, 3, 2], [5, 13, 5], [17, 8, 5], [3, 12, 9]]
-    
 
 These subvectors are substituted with a designated centroid vector called Reproduction Value because it helps identify each subvector. Subsequently, this centroid vector can be substituted with a distinct ID that is unique to it.
 
     k = 2**5
     assert k % chunk_count == 0
     k_ = int(k/chunk_count)
-    
+
     from random import randint
     # reproduction values
-    c = []  
+    c = []
     for j in range(chunk_count):
         # each j represents a subvector position
         c_j = []
         for i in range(k_):
-            # each i represents a cluster/reproduction value position 
+            # each i represents a cluster/reproduction value position
            c_ji = [randint(0, 9) for _ in range(subvector_size)]
            c_j.append(c_ji)  # add cluster centroid to subspace list
-        
+
       # add subspace list of centroids
         c.append(c_j)#helper function to calculate euclidean distance
     def euclidean(v, u):
         distance = sum((x - y) ** 2 for x, y in zip(v, u)) ** .5
         return distance
-    
+
     #helper function to create unique ids
     def nearest(c_j, chunk_j):
         distance = 9e9
@@ -95,7 +97,6 @@ Now, Let's see How we can get unique centroid IDs using the ***nearest helper fu
 Output shows unique centroid IDs for each subvector:
 
     [5, 6, 7, 7]
-    
 
 When utilizing PQ to handle a vector, we divide it into subvectors. These subvectors are then processed and linked to their closest centroids, also known as reproduction values, within the respective subclusters.
 
@@ -105,13 +106,12 @@ When utilizing PQ to handle a vector, we divide it into subvectors. These subvec
     for j in range(chunk_count):
         c_ji = c[j][ids[j]]
         quantized.extend(c_ji)
-    
+
     print(quantized)
 
 Here is the reconstructed vector using Centroid IDs:
 
     [9, 9, 2, 5, 7, 6, 8, 3, 5, 2, 9, 4]
-    
 
 In doing so, **we’ve condensed a 12-dimensional vector into a 4-dimensional vector represented by IDs**. We opted for a smaller dimensionality for simplicity, which might make the advantages of this technique less immediately apparent.
 
@@ -137,14 +137,14 @@ Creating an IVF_PQ Index
     import numpy as np
     uri = "./lancedb"
     db = lancedb.connect(uri)
-    
+
     # Create 10,000 sample vectors
     data = [{"vector": row, "item": f"item {i}"}
        for i, row in enumerate(np.random.random((10_000, 1536)).astype('float32'))]
-    
+
     # Add the vectors to a table
     tbl = db.create_table("my_vectors", data=data)
-    
+
     # Create and train the index - you need to have enough data in the table for an effective training step
     tbl.create_index(num_partitions=256, num_sub_vectors=96)
 
@@ -165,14 +165,13 @@ All of this can be applied using the IVF+PQ Index using [LanceDB](https://github
         .nprobes(20) \
         .refine_factor(10) \
         .to_pandas()
-        
 
 - **limit** (default: 10): The number of results that will be returned
 - **n-probes** (default: 20): The quantity of probes (sections) determines the distribution of vector space. While a higher number enhances search accuracy, it also results in slower performance. Typically, setting the number of probes (n-probes) to cover 5–10% of the dataset proves effective in achieving high recall with minimal latency.
 - **refine_factor** (default: None): Refine the results by reading extra elements and re-ranking them in memory.
 A higher number makes the search more accurate but also slower.
 
-# Conclusion
+## Conclusion
 
 In summary, Product Quantization helps reduce memory usage when storing high-dimensional vectors. Along with the IVF index, it significantly speeds up the search process by focusing only on the nearest vectors.
 

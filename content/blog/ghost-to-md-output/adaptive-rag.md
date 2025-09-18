@@ -1,10 +1,13 @@
 ---
-title: Practical introduction to Adaptive-RAG
+title: "Practical introduction to Adaptive-RAG"
 date: 2024-04-24
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/adaptive-rag/preview-image.png
+meta_image: /assets/blog/adaptive-rag/preview-image.png
+description: "Traditional LLMs provide answers based on a fixed knowledge database on which they are trained."
 ---
 
 ![](https://cdn-images-1.medium.com/max/1200/1*dK5Kkum58gauwytt3PkQtg.png)[Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf)
@@ -35,7 +38,7 @@ Our RAG application is structured to route user queries to the most relevant dat
 1. **Web Search**: This route is selected for questions related to recent events, utilizing the Tavily Search API for real-time information retrieval.
 2. **Self-Corrective RAG**: For more specialized queries that pertain to our indexed data, we use a self-corrective mechanism that leverages our own curated knowledge base.
 
-![](https://cdn-images-1.medium.com/max/1200/1*okNdKS-83oBKEGGFeSDr4w.png)source from langchain 
+![](https://cdn-images-1.medium.com/max/1200/1*okNdKS-83oBKEGGFeSDr4w.png)source from langchain
 implementation Details:
 
 - **Indexing Documents:** We begin by indexing documents using LanceDB, a vector database within the LangChain suite. This setup allows us to quickly retrieve relevant documents based on the user’s query.
@@ -64,7 +67,7 @@ This example demonstrates how the system processes a general knowledge question 
             # Optional: print full state at each node
             # pprint.pprint(value["keys"], indent=2, width=80, depth=None)
         pprint("\n---\n")
-    
+
     # Final generation
     pprint(value["generation"])
 
@@ -89,7 +92,6 @@ output:
     '\n---\n'
     ('Narendra Modi is the Prime Minister of India. He has been in office since '
      '2014 and was reelected for a second term in 2019.')
-    
 
 In this scenario, the system successfully finds the answer through a web search node, as shown:
 
@@ -111,7 +113,7 @@ example 2:
             # Optional: print full state at each node
             # pprint.pprint(value["keys"], indent=2, width=80, depth=None)
         pprint("\n---\n")
-    
+
     # Final generation
     pprint(value["generation"])
 
@@ -145,7 +147,6 @@ Output:
      'with each other based on past experiences. The design includes a memory '
      'stream, retrieval model, reflection mechanism, and planning & reacting '
      "components to inform the agent's behavior.")
-    
 
 The system routes the question to the RAG (Retrieval-Augmented Generation) system and retrieves relevant documents to generate an accurate response.
 

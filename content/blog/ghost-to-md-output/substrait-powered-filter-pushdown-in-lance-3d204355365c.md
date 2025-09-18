@@ -1,10 +1,13 @@
 ---
-title: Substrait Powered Filter Pushdown in Lance
+title: "Substrait Powered Filter Pushdown in Lance"
 date: 2024-01-31
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/substrait-powered-filter-pushdown-in-lance-3d204355365c/preview-image.png
+meta_image: /assets/blog/substrait-powered-filter-pushdown-in-lance-3d204355365c/preview-image.png
+description: "by Weston Pace."
 ---
 
 by Weston Pace
@@ -19,7 +22,7 @@ Between Datafusion, Lance, DuckDb, Pyarrow, and Polars we have four different re
 
 Fortunately, using [Substrait](https://substrait.io/), we’ve managed to find a more maintainable solution. Substrait is an open standard for query plans and, since expressions are a part of query plans, it gives us an open standard for compute expressions too. Support for Substrait has been growing over past year and both pyarrow and Datafusion now support converting expressions to and from Substrait. In a recent release of Lance we added support for accepting filter expressions as Substrait and it’s now used internally to support our pushdown from pyarrow, duckdb, and polars, which allows us to retire our custom conversion logic.
 ![If each system can consume/produce Substrait then we don’t need all N² conversion between systems.](https://miro.medium.com/v2/resize:fit:770/1*HpT662Epn8FQ2K1VSzixXA.png)Substrait can server as a common interchange between the different libraries
-# What’s Next?
+## What’s Next?
 
 By simplifying our code this feature is a win on its own. However, we believe the future of Substrait is bright and its potential has just begun to show. Let me describe a few of the potential developments that we’ve got our eye on.
 ![](https://miro.medium.com/v2/resize:fit:770/1*ldcaGpLJuG9qbsSICbe7sw.png)With Substrait we can simplify Lance integration

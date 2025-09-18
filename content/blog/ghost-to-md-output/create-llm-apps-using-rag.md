@@ -1,11 +1,13 @@
 ---
-title: Create LLM apps using RAG
+title: "Create LLM apps using RAG"
 date: 2024-03-21
-excerpt: If you're considering making a personalized bot for your documents or website that responds to you, you're in the right spot. I'm here to help you create a bot using Langchain and RAG strategies for this purpose.
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/create-llm-apps-using-rag/preview-image.png
+meta_image: /assets/blog/create-llm-apps-using-rag/preview-image.png
+description: "If you're considering making a personalized bot for your documents or website that responds to you, you're in the right spot."
 ---
 
 ## **Understanding the Limitations of ChatGPT and LLMs**
@@ -30,7 +32,7 @@ To make it easier, Imagine an LLM as your knowledgeable friend who seems to know
 - "Who lives next door to me?"
 - "What brand of peanut butter do I prefer?"
 
-Chances are, your friend wouldn't be able to answer these questions. Most of the time, no. But let's say this distant friend becomes closer to you over time; he comes to your place regularly, knows your parents very well, you both hang out pretty often, you go on outings, blah blah blah.. You got the point.  
+Chances are, your friend wouldn't be able to answer these questions. Most of the time, no. But let's say this distant friend becomes closer to you over time; he comes to your place regularly, knows your parents very well, you both hang out pretty often, you go on outings, blah blah blah.. You got the point.
 
 I mean, he is gaining access to personal and insider information about you. Now, when you pose the same questions, he can somehow answer those questions more relevantly now because he is better suited to your personal insights.
 
@@ -70,26 +72,24 @@ With Langchain for the interface, Hugging Face for fetching the models, along wi
 
 I am using a MacBook Air M1, and it's important to note that specific dependencies and configurations may vary depending on your system type. Now open your favorite editor, create a Python environment, and install the relevant dependencies.
 
-    
     # Create a virtual environment
     python3 -m venv env
-    
+
     # Activate the virtual environment
     source env/bin/activate
-    
+
     # Upgrade pip in the virtual environment
     pip install --upgrade pip
-    
+
     # Install required dependencies
     pip3 install lancedb langchain langchain_community prettytable sentence-transformers huggingface-hub bs4 pypdf pandas
-    
+
     # This is optional, I did it for removing a warning
     pip3 uninstall urllib3
     pip3 install 'urllib3<2.0'
 
 Create a .env file in the same directory to place your Hugging Face API credentials like this.
 
-    
     HUGGINGFACEHUB_API_TOKEN = hf_........
 
 Ensure the name ***HUGGINGFACEHUB_API_TOKEN***remains unchanged, which is crucial for authentication purposes.
@@ -109,19 +109,19 @@ To get your RAG application running, the first thing we need to do is extract th
 
     import os
     from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader, DirectoryLoader
-    
+
     # Put the token values inside the double quotes
     HF_TOKEN = "hf_......"
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = HF_TOKEN
-    
+
     # Loading the web URL and data
     url_loader = WebBaseLoader("https://gameofthrones.fandom.com/wiki/Jon_Snow")
     documents_loader = DirectoryLoader('data', glob="./*.pdf", loader_cls=PyPDFLoader)
-    
+
     # Creating the instances
     url_docs = url_loader.load()
     data_docs = documents_loader.load()
-    
+
     # Combining all the data that we ingested
     docs = url_docs + data_docs
 
@@ -136,7 +136,7 @@ Think of it like this: If you're tasked with digesting a 100-page book all at on
 Picture the book as your extracted information, with each 10-page segment representing a small chunk of data and the index pages as the embedding. We'll apply an embedding model to these chunks to transform the information into their respective embeddings. While, as humans, we may not directly comprehend or relate to these embeddings, they serve as numeric representations of the chunks of our application.  This is how you can do this in Python
 
     from langchain.text_splitter import RecursiveCharacterTextSplitter
-    
+
     text_splitter = RecursiveCharacterTextSplitter(chunk_size = 1000, chunk_overlap = 50)
     chunks = text_splitter.split_documents(docs)
 
@@ -155,7 +155,7 @@ Opting for the latter approach allows us to utilize one of Hugging Face's embedd
 Hugging Face's model hub provides numerous options for embedding models, and you can explore the [leaderboard](https://huggingface.co/spaces/mteb/leaderboard) to select the most suitable one for your requirements. For now, we'll proceed with "sentence-transformers/all-MiniLM-L6-v2." This model is fast and highly efficient in our task!!
 
     from langchain_community.embeddings import HuggingFaceEmbeddings
-    
+
     embedding_model_name = 'sentence-transformers/all-MiniLM-L6-v2'
     embeddings = HuggingFaceEmbeddings(model_name=embedding_model_name, model_kwargs={'device': 'cpu'})
 
@@ -174,11 +174,11 @@ But wait, I am dropping a bomb here. I've recently come across LanceDB, an open-
 
 Surprisingly, LanceDB is the most scalable vector database available, outperforming even the likes of Pinecone, Chroma, Qdrant, and others. Scaling up to a billion vectors locally on your laptop is only achievable with LanceDB. This capability is a game-changer, especially when you compare it to other vector databases struggling even with a hundred million vectors. LanceDB manages to offer this unprecedented scalability at a fraction of the cost; they are offering the utilities and database tools at much cheaper rates than its closest counterparts.
 
-So now, We'll create an instance of the LanceDB vector database by calling 
+So now, We'll create an instance of the LanceDB vector database by calling
 
     lancedb.connect ("lance_database")
 
- This line essentially sets up a connection to the LanceDB database named "*lance_database*" Next, we create a table within the database named "*rag_sample*" using the create_table function. Now we initialized this table with a single data entry which includes a numeric vector generated by the embed_query function. 
+ This line essentially sets up a connection to the LanceDB database named "*lance_database*" Next, we create a table within the database named "*rag_sample*" using the create_table function. Now we initialized this table with a single data entry which includes a numeric vector generated by the embed_query function.
 
 So, the text "Hello World" is first converted to its numeric representation (fancy name of embeddings), and then mapped to `id` number 1. Like a key-value pair. Lastly, the mode="overwrite" parameter ensures that if the table "rag_sample" already exists, it will be overwritten with the new data.
 
@@ -186,7 +186,7 @@ This happens with all the text chunks, and it's pretty straightforward.
 
     import lancedb
     from langchain_community.vectorstores import LanceDB
-    
+
     db = lancedb.connect("lance_database")
     table = db.create_table(
     	"rag_sample",
@@ -199,14 +199,14 @@ This happens with all the text chunks, and it's pretty straightforward.
     	],
     	mode="overwrite",
     )
-    
+
     docsearch = LanceDB.from_documents(chunks, embeddings, connection=table)
 
 **NO ROCKET SCIENCE, HA!**
 
 ## **Step 4: Create a prompt template, which will be fed to the LLM**
 
-Okay, now comes the prompt template. When you write a question to the ChatGPT, and it answers that question, you are providing a prompt to the model so that it can understand what the question is. When companies train the models, they decide what kind of prompt they will use to invoke the model and ask the question. 
+Okay, now comes the prompt template. When you write a question to the ChatGPT, and it answers that question, you are providing a prompt to the model so that it can understand what the question is. When companies train the models, they decide what kind of prompt they will use to invoke the model and ask the question.
 
 For example, if you are working with "Mistral 7B instruct" and you want the optimal results, it's recommended to use the following chat template:
 
@@ -219,7 +219,7 @@ Now, for our case, we will use [huggingfaceh4/zephyr-7b-alpha](https://huggingfa
 Instead of writing a Prompt of our own, I will use the *ChatPromptTemplate* class, which creates a prompt template for the chat models. In layman's terms, instead of writing a specified prompt, I am letting *ChatPromptTemplate* do it for me. Here is an example prompt template generated from the manual messages.
 
     from langchain_core.prompts import ChatPromptTemplate
-    
+
     chat_template = ChatPromptTemplate.from_messages(
     	[
         	("system", "You are a helpful AI bot. Your name is {name}."),
@@ -228,17 +228,17 @@ Instead of writing a Prompt of our own, I will use the *ChatPromptTemplate* clas
         	("human", "{user_input}"),
     	]
     )
-    
+
     messages = chat_template.format_messages(name="Bob", user_input="What is your name?")
 
 If you don't want to write the manual instructions, you can use the *from_template* function to generate a more generic prompt template I used for this project. Here it is.
 
     from langchain_core.prompts import ChatPromptTemplate
-    
+
     template = """
     {query}
     """
-    
+
     prompt = ChatPromptTemplate.from_template(template)
 
 Our prompt is set! We've crafted a single message, assuming it's from a human xD. If you're not using the *from_messages* function, the ChatPromptTemplate will ensure your prompt works seamlessly with the language model by reserving some additional system messages. There's always room for improvement with more generic prompts to achieve better results. For now, this setup should work.
@@ -270,7 +270,7 @@ So far, we've asked our retriever to fetch a set number of relevant documents fr
 Now, let's dive into implementing the language model (LLM) aspect of our RAG setup. We'll be using the Zephyr model architecture from the Hugging Face Hub. Here's how we do it in Python:
 
     from langchain_community.llms import HuggingFaceHub
-    
+
     # Model architecture
     llm_repo_id = "huggingfaceh4/zephyr-7b-alpha"
     model_kwargs = {"temperature": 0.5, "max_length": 4096, "max_new_tokens": 2048}
@@ -290,7 +290,7 @@ For now, we just need a chain that can combine our retrieved contexts and pass i
 
     from langchain_core.output_parsers import StrOutputParser
     from langchain_core.runnables import RunnablePassthrough
-    
+
     rag_chain = (
     	{"context": retriever,  "query": RunnablePassthrough()}
     	| prompt
@@ -302,13 +302,14 @@ For now, we just need a chain that can combine our retrieved contexts and pass i
 We have our Prompt, model, context, and the query! All of them are combined into a single chain. It's what all the chains do! Now, before running the final code, I want to give a quick check on these two helper functions:
 
 1. RunnablePassthrough()
-2. StrOutputParser()  
+2. StrOutputParser()
 
 The *RunnablePassthrough* class in *LangChain* serves to pass inputs unchanged or with additional keys. In our chain, a prompt expects input in the form of a map with keys "context" and "question." However, user input only includes the "question." or the "query".  Here, *RunnablePassthrough* is utilized to pass the user's question under the "question" key while retrieving the context using a retriever. It just ensures that the input to the prompt conforms to the expected format.
 
 Second, *StrOutputParser* is typically employed in RAG chains to parse the model's output into a human-readable string. In layman's terms, it is responsible for transforming the model's output into a more coherent and grammatically correct sentence, which is generally better readable by Humans! That's it!
 
 ## **D-Day**
+
 ![](https://lh7-us.googleusercontent.com/qF59U_HImv4SZ3d6tdqMJNtfYSf12aEaF63p94MAkOpBzB1hGlSZ4JZw6ZfEEkqGd5i3--eRi_mR7K1aDFrVWkmzx6VkL2z0kawnSbCK2HcxHzG3lkeExbGAXhbr15bFD1ahVIztXrvYraI_Swn7-BU)
 To ensure we get the entire idea even if the response gets cut off, I've implemented a function called *get_complete_sentence()*. This function helps extract the last complete sentence from the text. So, even if the response hits the maximum token limit that we set and gets truncated midway, we will still get a coherent understanding of the message.
 
@@ -318,7 +319,7 @@ For testing, I suggest storing some low-sized PDFs in your project's data folder
     import time
     import lancedb
     from langchain_community.vectorstores import LanceDB
-    
+
     from langchain_community.llms import HuggingFaceHub
     from langchain.text_splitter import RecursiveCharacterTextSplitter
     from langchain_community.vectorstores import LanceDB
@@ -328,37 +329,35 @@ For testing, I suggest storing some low-sized PDFs in your project's data folder
     from langchain_core.prompts import ChatPromptTemplate
     from langchain_core.runnables import RunnablePassthrough
     from pretty table import PrettyTable
-    
+
     HF_TOKEN = "hf*********"
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = HF_TOKEN
-    
+
     # Loading the web URL and breaking down the information into chunks
     start_time = time.time()
-    
+
     loader = WebBaseLoader("https://gameofthrones.fandom.com/wiki/Jon_Snow")
     documents_loader = DirectoryLoader('data', glob="./*.pdf", loader_cls=PyPDFLoader)
-    
+
     # URL loader
     url_docs = loader.load()
-    
-    
-    
+
     # Document loader
     data_docs = documents_loader.load()
-    
+
     # Combining all the information into a single variable
     docs = url_docs + data_docs
-    
+
     # Specify chunk size and overlap
     chunk_size = 256
     chunk_overlap = 20
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     chunks = text_splitter.split_documents(docs)
-    
+
     # Specify Embedding Model
     embedding_model_name = 'sentence-transformers/all-MiniLM-L6-v2'
     embeddings = HuggingFaceEmbeddings(model_name=embedding_model_name, model_kwargs={'device': 'cpu'})
-    
+
     # Specify Vector Database
     vectorstore_start_time = time.time()
     database_name = "LanceDB"
@@ -376,22 +375,22 @@ For testing, I suggest storing some low-sized PDFs in your project's data folder
     )
     docsearch = LanceDB.from_documents(chunks, embeddings, connection=table)
     vectorstore_end_time = time.time()
-    
+
     # Specify Retrieval Information
     search_kwargs = {"k": 3}
     retriever = docsearch.as_retriever(search_kwargs = {"k": 3})
-    
+
     # Specify Model Architecture
     llm_repo_id = "huggingfaceh4/zephyr-7b-alpha"
     model_kwargs = {"temperature": 0.5, "max_length": 4096, "max_new_tokens": 2048}
     model = HuggingFaceHub(repo_id=llm_repo_id, model_kwargs=model_kwargs)
-    
+
     template = """
     {query}
     """
-    
+
     prompt = ChatPromptTemplate.from_template(template)
-    
+
     rag_chain_start_time = time.time()
     rag_chain = (
     	{"context": retriever, "query": RunnablePassthrough()}
@@ -400,34 +399,34 @@ For testing, I suggest storing some low-sized PDFs in your project's data folder
     	| StrOutputParser()
     )
     rag_chain_end_time = time.time()
-    
+
     def get_complete_sentence(response):
     	last_period_index = response.rfind('.')
     	if last_period_index != -1:
         	return response[:last_period_index + 1]
     	else:
         	return response
-    
+
     # Invoke the RAG chain and retrieve the response
     rag_invoke_start_time = time.time()
     response = rag_chain.invoke("Who killed Jon Snow?")
     rag_invoke_end_time = time.time()
-    
+
     # Get the complete sentence
     complete_sentence_start_time = time.time()
     complete_sentence = get_complete_sentence(response)
     complete_sentence_end_time = time.time()
-    
+
     # Create a table
     table = PrettyTable()
     table.field_names = ["Task", "Time Taken (Seconds)"]
-    
+
     # Add rows to the table
     table.add_row(["Vectorstore Creation", round(vectorstore_end_time - vectorstore_start_time, 2)])
     table.add_row(["RAG Chain Setup", round(rag_chain_end_time - rag_chain_start_time, 2)])
     table.add_row(["RAG Chain Invocation", round(rag_invoke_end_time - rag_invoke_start_time, 2)])
     table.add_row(["Complete Sentence Extraction", round(complete_sentence_end_time - complete_sentence_start_time, 2)])
-    
+
     # Additional information in the table
     table.add_row(["Embedding Model", embedding_model_name])
     table.add_row(["LLM (Language Model) Repo ID", llm_repo_id])
@@ -438,15 +437,13 @@ For testing, I suggest storing some low-sized PDFs in your project's data folder
     table.add_row(["Chunk Size", chunk_size])
     table.add_row(["Chunk Overlap", chunk_overlap])
     table.add_row(["Number of Documents", len(docs)])
-    
-    
+
     print("\nComplete Sentence:")
     print(complete_sentence)
-    
+
     # Print the table
     print("\nExecution Timings:")
     print(table)
-    
 
     +------------------------------+----------------------------------------+
     |         	Task         	|      	Time Taken (Seconds)      	|
@@ -472,7 +469,7 @@ So this is the response I received in less than < 1 minute, which is quite consi
 
     Human:
     Question: Who killed Jon Snow?
-    
+
     Answer:
     In the TV series Game of Thrones, Jon Snow was stabbed by his
     fellow Night's Watch members in season 5, episode 9,

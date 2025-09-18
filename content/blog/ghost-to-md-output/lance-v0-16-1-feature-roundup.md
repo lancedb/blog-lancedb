@@ -1,10 +1,13 @@
 ---
-title: Lance v0.16.1 Feature Roundup
+title: "Lance v0.16.1 Feature Roundup"
 date: 2024-08-26
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/lance-v0-16-1-feature-roundup/preview-image.png
+meta_image: /assets/blog/lance-v0-16-1-feature-roundup/preview-image.png
+description: "In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors."
 ---
 
 In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors. Lance is an OSS project that is open-to-contribution, so we are very pleased to have major features brought by community members.
@@ -26,43 +29,37 @@ For example, we can create three versions of a dataset by applying three write o
 
     import pyarrow as pa
     import lance
-    
+
     assert lance.__version__ == "0.16.1", "wrong version: %s" % lance.__version__
-    
+
     data = pa.table({"x": [1, 2, 3]})
     ds = lance.write_dataset(data, "dataset")
     ds = lance.write_dataset(data, "dataset", mode="append")
     ds = lance.write_dataset(data, "dataset", mode="overwrite")
-    
+
     ds.version
-    
 
     3
-    
 
 We can label the first two versions with a tag. The first one we label as `original` and the second we label as `duplicated`. Now we can pass the `duplicated` tag when opening a dataset to see the version where we duplicated some of the data:
 
     ds.tags.create("original", 1)
     ds.tags.create("duplicated", 2)
     lance.dataset("dataset", version="duplicated").to_table()
-    
 
     pyarrow.Table
     x: int64
     ----
     x: [[1,2,3],[1,2,3]]
-    
 
 We can also pass the `original` tag to the `checkout_version` method:
 
     ds.checkout_version("original").to_table()
-    
 
     pyarrow.Table
     x: int64
     ----
     x: [[1,2,3]]
-    
 
 We hope these tags open up new workflows for working with datasets and managing versions. We currently support creating and deleting tags. But we also have [an open `good-first-issue` to add support for updating tags](https://github.com/lancedb/lance/issues/2742) too, which could unlock other use cases. For example, imagine maintaining a `production` tag that is live to users, allowing you to perform operations on your dataset and validate the correctness and performance *first* before updating the tag to point to a new version.
 
@@ -81,7 +78,6 @@ One use case is where you have a table of documents, and you have a metrics colu
     ])
     ds = lance.write_dataset(documents, "documents", mode="overwrite")
     ds.to_table()
-    
 
     pyarrow.Table
     id: int64
@@ -91,7 +87,6 @@ One use case is where you have a table of documents, and you have a metrics colu
     id: [[1,2,3]]
     text: [["hello","beautiful","world"]]
     popularity: [[100,5000,1000]]
-    
 
 Updating the `popularity` column:
 
@@ -102,7 +97,6 @@ Updating the `popularity` column:
     ])
     ds.merge_insert(on="id").when_matched_update_all().execute(new_metrics)
     ds.to_table()
-    
 
     pyarrow.Table
     id: int64
@@ -112,14 +106,13 @@ Updating the `popularity` column:
     id: [[1,2,3]]
     text: [["hello","world","!"]]
     popularity: [[200,10000,2000]]
-    
 
 This is an optimized code path that will only rewrite the relevant columns, even if it affects all rows. This can be a huge savings in AI data, where unstructured data like text or vector embeddings would be expensive to rewrite. For example, we can show a 5,000-fold speedup in rewriting a metric column in a vector dataset with 1 million 1536-dimensional vectors:
 
     # 1 million 1536 dimensional 32-bit vectors
     import pyarrow.compute as pc
     dim = 1536
-    
+
     def next_batch(batch_size, offset):
         global i
         values = pc.random(dim * batch_size).cast('float32')
@@ -128,26 +121,23 @@ This is an optimized code path that will only rewrite the relevant columns, even
             'vector': pa.FixedSizeListArray.from_arrays(values, dim),
             'metric': pc.random(batch_size),
         }).to_batches()[0]
-    
+
     def batch_iter(num_rows):
         i = 0
         while i < num_rows:
             batch_size = min(10_000, num_rows - i)
             yield next_batch(batch_size, i)
             i += batch_size
-    
+
     schema = next_batch(1, 0).schema
-    
+
     ds = lance.write_dataset(batch_iter(1_000_000), "vectors", schema=schema, mode="overwrite", data_storage_version="2.0")
-    
 
 Previously, you would have to rewrite all columns, which takes over 50s:
 
     %timeit ds.merge_insert(on="id").when_matched_update_all().execute(pa.RecordBatchReader.from_batches(schema, batch_iter(1_000_000)))
-    
 
     52.9 s ± 4.26 s per loop (mean ± std. dev. of 7 runs, 1 loop each)
-    
 
 Now you can just update the metric column in 10ms, which is about 5,000x times faster:
 
@@ -157,10 +147,8 @@ Now you can just update the metric column in 10ms, which is about 5,000x times f
     update_schema = schema.remove(schema.get_field_index("vector"))
     reader = pa.RecordBatchReader.from_batches(update_schema, narrow_iter(1_000_000))
     %timeit ds.merge_insert(on="id").when_matched_update_all().execute(reader)
-    
 
     9.73 ms ± 776 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
-    
 
 We hope this feature unlocks new use cases for storing metrics along side vectors in Lance and LanceDB.
 
@@ -181,20 +169,16 @@ When creating new dataset, you can select any of these versions. The legacy / 0.
     ds_legacy = lance.write_dataset(data, "new_dataset",
                                     data_storage_version="stable")
     ds_legacy.data_storage_version
-    
 
     '2.0'
-    
 
 Or you can pass an explicit version:
 
     ds_legacy = lance.write_dataset(data, "experimental_dataset",
                                     data_storage_version="2.1")
     ds_legacy.data_storage_version
-    
 
     '2.1'
-    
 
 Explicit versions will be a good choice if you know the exact version you want to use. Whereas `stable` is a good choice if you want to pick up the latest features, and `next` if you want to try out some unstable features. (We do not recommend `next` for any production use case. It's there for the purposes of collecting feedback on in-progress features.)
 
@@ -209,7 +193,7 @@ On the indexing front, we are exposing new APIs to scale up indexing performance
 The most intensive steps are now able to be run in parallel. One of these is transforming the vectors from their lossless representation to their PQ-compressed representation. The other is assigning vectors to IVF partitions. These can be performed as a single transformation, and done completely in parallel. The other step that can be done in parallel is local shuffling vectors into partitions.
 
     import pyarrow.compute as pc
-    
+
     dims = 128
     nrows = 100_000
     inner_vector = pc.cast(pc.random(nrows * dims), pa.float32())
@@ -221,7 +205,6 @@ The most intensive steps are now able to be run in parallel. One of these is tra
     # Using a small number of rows per file, to simulate a large dataset with
     # many files.
     ds = lance.write_dataset(table, 'test', mode='overwrite', max_rows_per_file=2_000)
-    
 
 Previously, creating an index was one step. This is still a good way to do indexing on a single machine, as it still uses multiple threads to take advantage of multi-core CPUs. Only when you want to do distributed indexing does the new API make sense.
 
@@ -233,38 +216,35 @@ Previously, creating an index was one step. This is still a good way to do index
         num_partitions=256,
         num_sub_vectors=32,
     )
-    
 
 The first two steps are creating the IVF and PQ models:
 
     from lance.indices import IvfModel, PqModel, IndicesBuilder
-    
+
     builder = IndicesBuilder(ds, "vector")
-    
+
     ivf = builder.train_ivf(
         num_partitions=256,
         sample_rate=256,
         distance_type="l2",
     )
-    
+
     pq = builder.train_pq(ivf, num_subvectors=32)
-    
 
 Both of these can be saved to file. This is so they can be re-used, but also because in the distributed steps later they will need to be read by other processes.
 
     import tempfile
     import os
-    
+
     tmp_dir = tempfile.TemporaryDirectory()
-    
+
     ivf.save(os.path.join(tmp_dir.name, "ivf.index"))
     pq.save(os.path.join(tmp_dir.name, "pq.index"))
-    
 
 Now we are at the step we can parallelize. As a simple example, we use a `ThreadPoolExecutor`, but this can be any sort of distributed process. (In fact, using a thread pool is a bad idea for real work. The `transform_vectors` step already has internal threading, so there's no point in trying to distribute multiple invocations across threads.) We use the fragments as the unit of parallelism, creating one task per fragment. Each of these becomes one output file.
 
     from concurrent.futures import ThreadPoolExecutor
-    
+
     def transform_step(
         ds_uri: str,
         working_dir: str,
@@ -272,42 +252,41 @@ Now we are at the step we can parallelize. As a simple example, we use a `Thread
     ) -> str:
         ds = lance.dataset(ds_uri)
         fragment = ds.get_fragment(fragment_id)
-    
+
         ivf = IvfModel.load(os.path.join(working_dir, "ivf.index"))
         pq = PqModel.load(os.path.join(working_dir, "pq.index"))
-    
+
         filename = "partition_" + str(fragment_id)
         uri = os.path.join(working_dir, filename)
         builder.transform_vectors(ivf, pq, uri, fragments=[fragment])
         return filename
-    
+
     pool = ThreadPoolExecutor(max_workers=4)
-    
+
     fragment_ids = [frag.fragment_id for frag in ds.get_fragments()]
     transformed_files = list(pool.map(
         lambda fragment_id: transform_step(ds.uri, tmp_dir.name, fragment_id),
         fragment_ids
     ))
-    
 
 Next, we can do the shuffle steps, which can also be done in parallel:
 
     from typing import List
-    
+
     def shuffle_step(
         working_dir: str,
         transformed_files: List[str],
         job_id: int,
     ):
         ivf = IvfModel.load(os.path.join(working_dir, "ivf.index"))
-    
+
         return builder.shuffle_transformed_vectors(
             transformed_files,
             dir_path=tmp_dir.name,
             ivf=ivf,
             shuffle_output_root_filename=f"shuffled_{job_id}",
         )
-    
+
     # Do one shuffle job per file
     jobs = pool.map(
         lambda x: shuffle_step(tmp_dir.name, [x[1]], x[0]),
@@ -323,7 +302,7 @@ The final step is to combine these shuffled files into an index file and commit 
         ivf=ivf,
         pq=pq
     )
-    
+
     ds = ds.checkout_version(ds.latest_version)
     ds.list_indices()
 
@@ -338,7 +317,6 @@ The final step is to combine these shuffled files into an index file and commit 
        3,
        ...
        }}]
-    
 
 Given the complexity of the steps, this is a low-level API we don’t expect any but the most motivated power users to call. Instead, these power users may wrap them in distributed frameworks familiar to users, such as Ray and Spark. This will allow users to leverage their existing cluster infrastructure for their large-scale indexing jobs.
 

@@ -1,10 +1,13 @@
 ---
-title: Lance v2 is now in Beta
+title: "Lance v2 is now in Beta"
 date: 2024-06-05
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png
+meta_image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png
+description: "We've been talking for a while about a ."
 ---
 
 We've been talking for a while about a [new iteration of our file format](__GHOST_URL__/lance-v2/).  We're pleased to announce that the new v2 format is now in available as an opt-in feature for Lance (in release [0.12.1](https://github.com/lancedb/lance/releases/tag/v0.12.1)) and LanceDB (release [0.8.2](https://github.com/lancedb/lancedb/releases/tag/python-v0.8.2)) for users that want to try it out ahead of time and give us some early feedback.
@@ -32,7 +35,7 @@ Turning on support for the new format is easy, but limited to creating new table
 
     # By default, tables are still created in v1 mode
     v1_tbl = await db.create_table("v1", data)
-    
+
     # The use_legacy_format flag will let you opt-in to v2 files
     v2_tbl = await db.create_table("v2", data, use_legacy_format=False)
 
@@ -44,7 +47,7 @@ These instructions are now outdated. The v2 format is the default in pylance and
 
 The beta supports all *existing* dataset operations today (except dictionary encoding).  In addition, most of the *new* functionality is already available.  This means you can already start taking advantage of the following features.
 
-### ❓ Support for nulls (not placeholders) in all data types (except struct)
+### Support for nulls (not placeholders) in all data types (except struct)
 
 In Lance v1 we automatically converted nulls to a placeholder value (0 for numeric types and empty lists/strings for string/list types).  This is a problem since it is impossible to distinguish between a null and a placeholder after the data is written.  We now support nulls for all data types except struct (which we will be working on shortly).
 
@@ -57,27 +60,26 @@ In Lance v1 we automatically converted nulls to a placeholder value (0 for numer
             "vectors": pa.array([[1.0, 2.0], None], pa.list_(pa.float64(), 2)),
         }
     )
-    
+
     def print_table(tbl):
         for name in tbl.column_names:
             print(name, tbl.column(name).to_pylist())
-    
+
     v1_tbl = await db.create_table("v1", data)
     print("With legacy format")
     print_table(await v1_tbl.query().to_arrow())
-    
+
     # With legacy format
     # ints [1, 0]
     # floats [1.1, 0.0]
     # strings [None, None]
     # lists [[1, 2, 3], []]
     # vectors [[1.0, 2.0], [0.0, 0.0]]
-    
-    
+
     v2_tbl = await db.create_table("v2", data, use_legacy_format=False)
     print("With new v2 format")
     print_table(await v2_tbl.query().to_arrow())
-    
+
     # With new v2 format
     # ints [1, None]
     # floats [1.1, None]
@@ -85,21 +87,21 @@ In Lance v1 we automatically converted nulls to a placeholder value (0 for numer
     # lists [[1, 2, 3], None]
     # vectors [[1.0, 2.0], None]
 
-### 💾 Easily create files without using excessive RAM
+### Easily create files without using excessive RAM
 
 In Lance v1 both the RAM used by the file readers/writers and the performance of the resulting file were controlled by the row group size.  In Lance v2 there is no row group size.  It's now much easier to create large multi-modal datasets without using an excessive amount of memory.
 
     db = await lancedb.connect_async("/tmp/my_db")
-    
+
     image_paths = glob.glob("/home/pace/dev/data/Dogs/**/*.jpg")
-    
+
     def load_images():
         for idx, image_path in enumerate(image_paths):
             img = Image.open(image_path)
             img_bytes = io.BytesIO()
             img.save(img_bytes, format="PNG")
             yield pa.table({"img": [img_bytes.getvalue()], "ids": [idx]})
-    
+
     # With the v1 format this command could potentially run out of memory
     # with large images or videos as it had to buffer an entire row group.
     #
@@ -113,21 +115,21 @@ In Lance v1 both the RAM used by the file readers/writers and the performance of
         schema=pa.schema([pa.field("img", pa.binary()), pa.field("ids", pa.int64())]),
         use_legacy_format=False,
     )
-    
+
     # Since we don't need to clump data into small row groups any more the
     # performance of this query is 6x faster than the v1 counterpart.
     await tbl.query().select(["ids"]).to_arrow()
 
-### 🚀 Faster scans
+### Faster scans
 
 LanceDB has always supported lightning fast vector searches.  However, with the Lance v1 format, full scans of the dataset could sometimes be slow, especially when smaller row groups were needed.  In Lance v2 a full dataset scan is much more efficient, giving stellar performance for scalar columns and vector columns alike.
 
     db = await lancedb.connect_async("/tmp/my_db")
-    
+
     data = pq.read_table("/home/pace/dev/data/lineitem_10.parquet")
-    
+
     tbl = await db.create_table("lineitem", data, use_legacy_format=False)
-    
+
     # Querying TPC-H data is over 3x faster with Lance v2
     async for batch in await tbl.query().to_batches(max_batch_length=8192):
         pass

@@ -1,10 +1,13 @@
 ---
-title: A Primer on Text Chunking and its Types
+title: "A Primer on Text Chunking and its Types"
 date: 2023-10-24
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/a-primer-on-text-chunking-and-its-types-a420efc96a13/preview-image.png
+meta_image: /assets/blog/a-primer-on-text-chunking-and-its-types-a420efc96a13/preview-image.png
+description: "Text chunking is a technique in natural language processing that divides text into smaller segments, usually based on the parts of speech."
 ---
 
 Text chunking is a technique in natural language processing that divides text into smaller segments, usually based on the parts of speech and grammatical meanings of the words. Text chunking can help extract important information from a text, such as noun phrases, verb phrases, or other semantic units.
@@ -43,11 +46,11 @@ The output will look like this
 
 2. **NLTK Text Splitter** — NLTK is a library used for working with Language data. It provides a sentence tokenizer that can split the text into sentences, helping to create more meaningful chunks.
 
-    import nltk  
-    
-    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand"  
-    
-    sentences = nltk.sent_tokenize(input_text)  
+    import nltk
+
+    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand"
+
+    sentences = nltk.sent_tokenize(input_text)
     print(sentences)
 
 Here we have not used any character to split sentences. Further, many other chunking techniques can be used, like tokenizing, POS tagging, etc.
@@ -60,8 +63,8 @@ Here we have not used any character to split sentences. Further, many other chun
 3. **Spacy Text Splitter** — The Spacy library is used for performing various tasks of NLP. Text Splitter of Scapy creates text splits, preserving contexts of resultant splits.
 
     import spacy
-    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand"  
-    
+    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand"
+
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(input_text)
     for s in doc.sents:
@@ -69,7 +72,7 @@ Here we have not used any character to split sentences. Further, many other chun
 
 Spacy can be used in the processing of raw text intelligently.
 
-    #output 
+    #output
     Much of refactoring is devoted to correctly composing methods.
     In most cases, excessively long methods are the root of all evil.
     The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand
@@ -81,21 +84,21 @@ Recursive Splitting splits the input text into small chunks in iterative matter 
 Here is an example of using Recursive Splitting using Langchain.
 
     # input text
-    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand" 
-    
+    input_text ="Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand"
+
     from langchain.text_splitter import RecursiveCharacterTextSplitter
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size = 100, #set desired text size
         chunk_overlap  = 20 )
-    
+
     chunks = text_splitter.create_documents([input_text])
     print(chunks)
 
 The output of Recursive Splitting looks like this
 
     # output
-    [Document(page_content='Much of refactoring is devoted to correctly composing methods. In most cases, excessively long'), 
-    Document(page_content='excessively long methods are the root of all evil. The vagaries of code inside these methods'), 
+    [Document(page_content='Much of refactoring is devoted to correctly composing methods. In most cases, excessively long'),
+    Document(page_content='excessively long methods are the root of all evil. The vagaries of code inside these methods'),
     Document(page_content='these methods conceal the execution logic and make the method extremely hard to understand')]
 
 **Specialized Structured Splitting**
@@ -128,44 +131,43 @@ The output of Recursive Splitting looks like this
     </body>
     </html>
     """
-    
+
     headers_to_split_on = [
         ("h1", "Header 1"),
         ("h2", "Header 2"),
         ("h3", "Header 3"),
     ]
-    
-    
+
     from langchain.text_splitter import HTMLHeaderTextSplitter
     html_splitter = HTMLHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
-    
+
     html_header_splits = html_splitter.split_text(html_string)
     print(html_header_split)
 
 HTML header will extract only the headers mentioned in *header_to_split_on*
 
     #output
-    [Document(page_content='Foo'), 
-    Document(page_content='Some intro text about Foo.  \nBar main section Bar subsection 1 Bar subsection 2', metadata={'Header 1': 'Foo'}), 
-    Document(page_content='Some intro text about Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section'}), 
-    Document(page_content='Some text about the first subtopic of Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section', 'Header 3': 'Bar subsection 1'}), 
-    Document(page_content='Some text about the second subtopic of Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section', 'Header 3': 'Bar subsection 2'}), 
-    Document(page_content='Baz', metadata={'Header 1': 'Foo'}), 
-    Document(page_content='Some text about Baz', metadata={'Header 1': 'Foo', 'Header 2': 'Baz'}), 
+    [Document(page_content='Foo'),
+    Document(page_content='Some intro text about Foo.  \nBar main section Bar subsection 1 Bar subsection 2', metadata={'Header 1': 'Foo'}),
+    Document(page_content='Some intro text about Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section'}),
+    Document(page_content='Some text about the first subtopic of Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section', 'Header 3': 'Bar subsection 1'}),
+    Document(page_content='Some text about the second subtopic of Bar.', metadata={'Header 1': 'Foo', 'Header 2': 'Bar main section', 'Header 3': 'Bar subsection 2'}),
+    Document(page_content='Baz', metadata={'Header 1': 'Foo'}),
+    Document(page_content='Some text about Baz', metadata={'Header 1': 'Foo', 'Header 2': 'Baz'}),
     Document(page_content='Some concluding text about Foo', metadata={'Header 1': 'Foo'})]
 
 2. **Markdown Text Splitting — **Markdown Splitting is used to chunk based on Markdown syntax like heading, bash code, images, and lists. It can also structure-aware chunker.
 
     #input markdown string
-    markdown_text = '# Foo\n\n ## Bar\n\nHi this is Jim  \nHi this is Joe\n\n ## Baz\n\n Hi this is Molly' 
-    
+    markdown_text = '# Foo\n\n ## Bar\n\nHi this is Jim  \nHi this is Joe\n\n ## Baz\n\n Hi this is Molly'
+
     from langchain.text_splitter import MarkdownHeaderTextSplitter
     headers_to_split_on = [
         ("#", "Header 1"),
         ("##", "Header 2"),
         ("###", "Header 3"),
     ]
-    
+
     markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
     md_header_splits = markdown_splitter.split_text(markdown_text)
     print(md_header_splits)
@@ -173,7 +175,7 @@ HTML header will extract only the headers mentioned in *header_to_split_on*
 *MarkdownHeaderTextSplitter *splits markdown text based on *headers_to_split_on*.
 
     #output
-    [Document(page_content='Hi this is Jim\nHi this is Joe', metadata={'Header 1': 'Foo', 'Header 2': 'Bar'}), 
+    [Document(page_content='Hi this is Jim\nHi this is Joe', metadata={'Header 1': 'Foo', 'Header 2': 'Bar'}),
     Document(page_content='Hi this is Molly', metadata={'Header 1': 'Foo', 'Header 2': 'Baz'})]
 
 3. **LaTex Text Splitting — **LaTex Splitting is another *code-split *chunker that parses LaTex commands to create chunks that are the logical organization, like sections and subsections, leading to more accurate and contextually relevant results.
@@ -181,26 +183,26 @@ HTML header will extract only the headers mentioned in *header_to_split_on*
     #input latex string
     latex_text = """
     \documentclass{article}
-    
+
     \begin{document}
-    
+
     \maketitle
-    
+
     \section{Introduction}
     Large language models (LLMs) are a type of machine learning model that can be trained on vast amounts of text data to generate human-like language. In recent years, LLMs have made significant advances in a variety of natural language processing tasks, including language translation, text generation, and sentiment analysis.
-    
+
     \subsection{History of LLMs}
     The earliest LLMs were developed in the 1980s and 1990s, but they were limited by the amount of data that could be processed and the computational power available at the time. In the past decade, however, advances in hardware and software have made it possible to train LLMs on massive datasets, leading to significant improvements in performance.
-    
+
     \subsection{Applications of LLMs}
     LLMs have many applications in industry, including chatbots, content creation, and virtual assistants. They can also be used in academia for research in linguistics, psychology, and computational linguistics.
-    
+
     \end{document}
     """
-    
+
     from langchain.text_splitter import LatexTextSplitter
     latex_splitter = LatexTextSplitter(chunk_size=100, chunk_overlap=0)
-    
+
     latex_splits = latex_splitter.create_documents([latex_text])
     print(latex_splits)
 

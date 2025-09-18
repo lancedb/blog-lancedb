@@ -5,15 +5,18 @@ author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/preview-image.png
+meta_image: /assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/preview-image.png
+description: "In the world of search engines, the quest to find the most relevant information is a constant challenge."
 ---
 
 In the world of search engines, the quest to find the most relevant information is a constant challenge. Researchers are always on the lookout for innovative ways to improve the effectiveness of search results. One such innovation is [HyDE](https://arxiv.org/pdf/2212.10496.pdf), which stands for Hypothetical Document Embeddings, a novel approach to dense retrieval that promises to make searching for information even more efficient and accurate.
 
-# The Challenge of Dense Retrieval
+## The Challenge of Dense Retrieval
 
 Dense retrieval, a method used by search engines to find relevant documents by comparing their semantic similarities, has shown great promise across various tasks and languages. However, building fully zero-shot dense retrieval systems without any relevant labels has been a significant challenge. Traditional methods rely on supervised learning, which requires a large dataset of labeled examples to train the model effectively.
 ![](https://miro.medium.com/v2/resize:fit:770/1*mCjvp4YeeGn-T6XTfDcwgw.png)
-# Introducing HyDE
+## Introducing HyDE
 
 The HyDE approach recognizes the difficulty of zero-shot learning and encoding relevance without labeled data. Instead, it leverages the power of language models and hypothetical documents. Here’s how it works:
 
@@ -21,7 +24,7 @@ The HyDE approach recognizes the difficulty of zero-shot learning and encoding r
 2. **Unsupervised Encoding**: The generated hypothetical document is then encoded into an embedding vector using an unsupervised contrastive encoder. This vector identifies a neighbourhood in the corpus embedding space, where similar real documents are retrieved based on vector similarity.
 3. **Retrieval Process**: HyDE searches for real documents in the corpus that are most similar to the encoded hypothetical document. The retrieved documents are then presented as search results.
 
-# The Benefits of HyDE
+## The Benefits of HyDE
 
 What makes HyDE intriguing is its ability to perform effectively without the need for relevant labels. It offloads the task of modeling relevance from traditional retrieval models to a language model that can generalize to a wide range of queries and tasks. This approach has several advantages:
 
@@ -29,7 +32,7 @@ What makes HyDE intriguing is its ability to perform effectively without the nee
 - Cross-Lingual: It performs well across various languages, making it suitable for multilingual search applications.
 - Flexibility: HyDE’s approach allows it to adapt to different tasks without extensive fine-tuning.
 
-# Implementing HyDE in Langchain
+## Implementing HyDE in Langchain
 
 To utilize HyDE effectively, one needs to provide a base embedding model and an LLMChain for generating documents. The HyDE class comes with default prompts, but there’s also the flexibility to create custom prompts.
 
@@ -79,9 +82,9 @@ Let’s try this out. We’ll make a prompt which we’ll use in the next exampl
 
     prompt_template = """
     As a knowledgeable and helpful research assistant, your task is to provide informative answers based on the given context. Use your extensive knowledge base to offer clear, concise, and accurate responses to the user's inquiries.
-    
+
     Question: {question}
-    
+
     Answer:
     """
 
@@ -98,14 +101,14 @@ loading the pdf we are using
 
     from langchain.text_splitter import RecursiveCharacterTextSplitter
     from langchain.document_loaders import PyPDFLoader
-    
+
     #Load the  multiple pdfs
     pdf_folder_path = '/content/book'
-    
+
     from langchain.document_loaders import PyPDFDirectoryLoader
     loader = PyPDFDirectoryLoader(pdf_folder_path)
     docs = loader.load()
-    
+
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
         chunk_overlap=50,
@@ -115,8 +118,8 @@ loading the pdf we are using
 let’s create a vector store for retrieving information
 
     from langchain.vectorstores import LanceDB
-    import lancedb# lancedb as vectorstore 
-    
+    import lancedb# lancedb as vectorstore
+
     db = lancedb.connect('/tmp/lancedb')
     table = db.create_table("documentsai", data=[
         {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
@@ -140,13 +143,13 @@ passing the string query to get some reference
 
     # passing in the string query to get some refrence
     query = "which factors appear to be the major nutritional limitations of fast-food meals"
-    
+
     vector_store.similarity_search(query)
-    
+
     llm_chain.run("which factors appear to be the major nutritional limitations of fast-food meals")
-    
-    The major nutritional limitations of fast-food meals 
-    are typically high levels of saturated fat, trans fat, Sodium, 
+
+    The major nutritional limitations of fast-food meals
+    are typically high levels of saturated fat, trans fat, Sodium,
     and added sugar. These ingredients can lead to an increased risk of obesity,
      type 2 diabetes, cardiovascular disease, and other health issues.
      Additionally, fast-food meals often lack essential vitamins, minerals,
@@ -156,7 +159,7 @@ HyDE response: here we can see that we are getting the output. which is very goo
 ![](https://miro.medium.com/v2/resize:fit:770/1*VskgpwscCiFdhKeLHNCx8g.png)![](https://miro.medium.com/v2/resize:fit:770/1*ICbqfWSAFNmWLGni7MOF7A.png)
 A vanilla RAG is not able to get the correct answer because it's directly searching similar keywords in the database.
 
-# *Normal RAG System:*
+## *Normal RAG System:*
 
 - In a typical RAG system, the retrieval phase involves searching for relevant information from a corpus using traditional keyword-based or semantic matching methods.
 - The retrieved documents are then used to augment the generation process, providing context and information for generating responses or answers.
@@ -166,7 +169,7 @@ A vanilla RAG is not able to get the correct answer because it's directly search
 ![](https://miro.medium.com/v2/resize:fit:770/1*EZpfcbs4ssfVJ8tuXWlqIw.png)![](https://miro.medium.com/v2/resize:fit:770/1*VZfhPM515sQq70WAXU0hog.png)
 you can check our blog for a [vanilla RAG](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/chatbot_using_Llama2_&amp;_lanceDB)
 
-Here is whole code to try 
+Here is whole code to try
 [
 
 Google Colab

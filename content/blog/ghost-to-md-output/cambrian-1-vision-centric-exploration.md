@@ -5,6 +5,9 @@ author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png
+meta_image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png
+description: "Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach."
 ---
 
 Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach. While stronger language models can boost multimodal capabilities, the design choices for vision components are often insufficiently explored and disconnected from visual representation learning research.
@@ -31,7 +34,7 @@ This blog contains code snippets, for the whole code with their description use 
 
 In this example, We will be working with the [Flickr-8k](https://paperswithcode.com/dataset/flickr-8k) dataset. It is a multi-modal dataset comprising images and their corresponding captions.
 
-We'll index these images based on their captions using the `all-mpnet-base-v2` model from the sentence-transformer. The [LanceDB Embedding API ](https://lancedb.github.io/lancedb/embeddings/default_embedding_functions/)will retrieve embeddings from the sentence transformer models. 
+We'll index these images based on their captions using the `all-mpnet-base-v2` model from the sentence-transformer. The [LanceDB Embedding API ](https://lancedb.github.io/lancedb/embeddings/default_embedding_functions/)will retrieve embeddings from the sentence transformer models.
 
     embedding_model = (
         get_registry()
@@ -47,7 +50,7 @@ Now we are ready to integrate this embedding function into the schema of the tab
         pa.field("image", pa.binary()),
         pa.field("captions",pa.string()),
     ])
-    
+
     class Schema(LanceModel):
         vector: Vector(embedding_model.ndims()) = embedding_model.VectorField()
         image_id: str
@@ -71,16 +74,16 @@ The above snippet populates a table that you can use to query using captions.
 With LanceDB, performing vector search is pretty straightforward. LanceDB Embedding API implicitly converts the query into embedding and performs vector search to give desired results. Let's take a look at the following example:
 
     query = "cat sitting on couch"
-    
+
     hit_lists = tbl.search(query) \
         .metric("cosine") \
         .limit(2) \
         .to_list()
-    
+
     for hit in hit_lists:
         show_image(hit["image"])
 
-This code sample returns the top two similar images, you can increase the number by changing `limit` parameter. 
+This code sample returns the top two similar images, you can increase the number by changing `limit` parameter.
 
 The results would look like this
 ![](__GHOST_URL__/content/images/2024/07/Screenshot-from-2024-07-17-11-17-51.png)![](__GHOST_URL__/content/images/2024/07/s.png)
@@ -88,14 +91,14 @@ Now we have obtained images from the vector search, let's explore these images w
 
 ### Setup vision-centric Exploration
 
-We'll use Cambrian-1, a family of multimodal LLMs (MLLMs) designed with a **vision-*centric*** approach. For setting up Cambrian-1, we'll use their official GitHub repo [https://github.com/cambrian-mllm/cambrian](https://github.com/cambrian-mllm/cambrian). 
+We'll use Cambrian-1, a family of multimodal LLMs (MLLMs) designed with a **vision-*centric*** approach. For setting up Cambrian-1, we'll use their official GitHub repo [https://github.com/cambrian-mllm/cambrian](https://github.com/cambrian-mllm/cambrian).
 
-Clone the repo and install requirements 
+Clone the repo and install requirements
 
-    # clone 
+    # clone
     !git clone https://github.com/cambrian-mllm/cambrian
     %cd cambrian
-    
+
     # install gpu related requirements
     !pip install ".[gpu]" -q
 
@@ -106,9 +109,9 @@ Full code can be found here - [https://www.kaggle.com/code/prasantdixit/cambrian
     for hit in hit_lists:
         image_path = f"/kaggle/working/Images/{hit['image_id']}"
         images_path.append(image_path)
-        
+
     infer_cambrian(images_path, prompt)
-    
+
     import subprocess
     command = "python3 inference.py"
     output = subprocess.check_output(command, shell=True, text=True)

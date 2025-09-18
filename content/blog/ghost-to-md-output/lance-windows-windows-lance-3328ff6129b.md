@@ -1,11 +1,13 @@
 ---
-title: Lance, Windows. Windows, Lance
+title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
-excerpt: This is a love letter to Christoph Gohlke
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
+meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
+description: "This is a love letter to Christoph Gohlke."
 ---
 
 It was Spring of 2012. After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time. We worked out of an apartment in Brooklyn on pandas by day. By night Wes was working on the first edition of Python for Data Analysis while I was working on what probably was the very first python package for quantitative portfolio management.
@@ -16,7 +18,7 @@ It was Spring of 2012. After being an avid user for 2+ years, I finally decided 
 
 😢 I was saddened to come across this [old Reddit post](https://www.reddit.com/r/Python/comments/vcaibq/christoph_gohlkes_windows_wheels_site_is_shutting/) saying that Christoph’s lab has lost funding and the windows binaries would stop updating. I sincerely hope that work is able to continue elsewhere and he’s able to find funding elsewhere. Without his contributions to each and every package he maintained, the python data community would be largely devoid of windows users.
 
-# Windows support is coming to Lance
+## Windows support is coming to Lance
 
 Christoph and so many unsung heroes of the python OSS community have been keeping the whole scientific python stack standing all these years. It is with this feeling of immense gratitude that we’re announcing windows support in Lance starting v0.4.0.
 
@@ -47,7 +49,7 @@ In this first milestone for windows support, we don’t yet link to LAPACK, whic
 
 Windows support would not be possible without the great work of Giancarlo Silvestrin, with additional contributions from Dennis Collinson.
 
-# Feedback welcome
+## Feedback welcome
 
 If you’re on windows and interested in working with data on python, you can try out lance with `pip install -U pylance` . We’d love to hear your feedback. For more details, please check us out [on github](http://github.com/eto-ai/lance) and don’t forget to give us a 🌟 if you like us!
 

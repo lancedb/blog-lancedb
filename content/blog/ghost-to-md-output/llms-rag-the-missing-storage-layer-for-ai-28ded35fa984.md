@@ -1,17 +1,20 @@
 ---
-title: LLMs, RAG, & the missing storage layer for AI
+title: "LLMs, RAG, & the missing storage layer for AI"
 date: 2023-09-05
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
+meta_image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
+description: "by Ayush Chaurasia."
 ---
 
 by Ayush Chaurasia
 
 In the rapidly evolving landscape of artificial intelligence, Generative AI, especially Language Model Machines (LLMs) have emerged as the veritable backbone of numerous applications, from natural language processing and machine translation to virtual assistants and content generation. The advent of GPT-3 and its successors marked a significant milestone in AI development, ushering in an era where machines could not only understand but also generate human-like text with astonishing proficiency. However, beneath the surface of this AI revolution lies a crucial missing element, one that has the potential to unlock even greater AI capabilities: the storage layer.
 
-# The objective truths about LLMs
+## The objective truths about LLMs
 
 Let’s set the context with an LLM refresher. Here are some of the highlights with what has happened in the last couple years.
 
@@ -39,7 +42,7 @@ This just one example of hallucination, there are many others that are subtler, 
 
 Personally I don’t like the term “black box” thrown at all of deep learning because most of these models can be easily dissected and modified. In fact, in most cases the modified versions of originally published models have been more popular and useful. Interpretability has historically been challenging but that is not enough to call these models black boxes. But this is different for LLMs. The most powerful LLMs are closed source and are only accessible via API requests. Additionally, due to the high cost of training and proprietary datasets, there aren’t enough resources or engineering expertise to reproduce the result. These do fit the definition of a black box.
 ![](https://miro.medium.com/v2/resize:fit:770/1*roOanTKp6futZWH3_VIFpQ.png)Originally published on [cohere blog](https://docs.cohere.com/docs/prompt-engineering)
-# Response Vs Representation based systems
+## Response Vs Representation based systems
 
 In prompt based approach, you rely on LLMs to generate responses directly from your (or your users’) queries. Using LLMs to generate responses if pretty powerful, and simple to get started with. But it gets scary soon enough when you realise that you don’t(can’t) control any aspect of the lifecycle of these systems. Combined with objective truths discussed above, this can soon become a recipe for disaster.
 
@@ -55,7 +58,7 @@ We have all the pieces needed to build a RAG system. In a RAG setting, instead o
 ![](https://miro.medium.com/v2/resize:fit:770/1*_ahHXf5Hf-TgFIf3KwHuDg.png)
 Now, you can provide exact citations from the knowledge base documents that were used to generate the response. It becomes possible to trace back response to its source
 
-# A change in domain
+## A change in domain
 
 What we’ve accomplished so far with RAG is that we’ve reduced reliance on LLM to answer on our behalf. Instead, we now have a modular system that has different parts, each of which operates independently:
 
@@ -72,7 +75,7 @@ This quote has stuck with me ever since I head it almost a decade ago. I think i
 
 The general idea is that now we’ve changed the domain of the problem in way that the retriever becomes the centre piece of the system and we can now utilise the research work in CS sub-domains such as information retrieval, ranking, etc.
 
-# Sounds like I need to spend $$$ ?
+## Sounds like I need to spend $$$ ?
 
 Costs depend on a lot of factors. Let us now shift our attention to common problems a deployed ML system faces and how this approach to generative AI aims to solve them.
 
@@ -92,7 +95,7 @@ So it turns out this methods not only provides you finer control and modularity,
 
 The debate on what’s better between fine-tuning a model on domain specific data and using a general model with for RAG is pointless. Of course ideally, you want both. A fine-tuned model with better context of the domain will provide better “general” response with contexual vocabulary. But you need a RAG model for better control & interpretability of the responses.
 
-# The need for the AI native Database
+## The need for the AI native Database
 
 At this point it is pretty clear that there is a need for well maintained knowledge base. Although there are many traditional solutions, we need to rethink those for AI solutions. Here are the main requirements:
 
@@ -116,22 +119,21 @@ Let’s take a look at an example of using np.array for storing vectors and find
 
     import numpy as np
     import pandas as pd
-    
+
     embeddings = []
     ids = []
     for i, item in enumerate(data):
         embeddings.append(embedding_model(item))
         ids.append(i)
-        
+
     df = pd.DataFrame({"id": ids, "embedding": embeddings})
     df.to_pickle("./dummy.pkl")
-    
-    ... 
+
+    ...
     df = pd.read_pickle("./dummy.pkl")
     embeddings, ids = df["embedding"].to_numpy(), df["id"]
     sim = cosine_sim(embeddings[0], embeddings[1])
     ...
-    
 
 This is great for rapid-prototyping **but how does this scale to millions of entries? What about billions? **Is loading all the embeddings in memory efficient at scale? What about multimodal data?
 
@@ -150,15 +152,15 @@ Here’s how you can integrate the above example with LanceDB
     db = lancedb.connect("db")
     embeddings = []
     ids = []
-    
+
     for i, item in enumerate(data):
         embeddings.append(embedding_model(item))
         ids.append(i)
-        
+
     df = pd.DataFrame({"id": ids, "embedding": embeddings})
     tbl = db.create_table("tbl", data=df)
     ...
-    
+
     tbl = db.open_table("tbl")
     sim = tbl.search(embedding_model(data)).metric("cosine").to_pandas()
 

@@ -1,10 +1,13 @@
 ---
-title: Sentiment Analysis powered by semantic search using LanceDB
+title: "Sentiment Analysis powered by semantic search using LanceDB"
 date: 2023-11-19
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/sentiment-analysis-using-lancedb-2da3cb1e3fa6/preview-image.png
+meta_image: /assets/blog/sentiment-analysis-using-lancedb-2da3cb1e3fa6/preview-image.png
+description: "**Sentiment Analysis** also known as Opinion Mining is a NLP technique that is used **to analyze texts for polarity, from positive to."
 ---
 
 **Sentiment Analysis** also known as Opinion Mining is a NLP technique that is used **to analyze texts for polarity, from positive to negative**. It helps businesses to monitor customer feedback, product reputation, and social media sentiment.
@@ -32,7 +35,7 @@ You can check out the attached [Google Colab](https://colab.research.google.com/
 In the Implementation section, we see the step-by-step implementation of NER on the Medium dataset. We are starting with the first step of ***loading the hotel reviews dataset from huggingface*.**
 
     from datasets import load_dataset
-    
+
     # load the dataset and convert to pandas dataframe
     df = load_dataset(
         "ashraq/hotel-reviews",
@@ -53,7 +56,7 @@ Now, we’ll initialize the Sentiment Analysis Model, we’ll use a ***RoBERTa o
     # set device to GPU if available
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     # @title Select Sentiment Analysis Model and run this cell
-    
+
     model_id = "cardiffnlp/twitter-roberta-base-sentiment" # @param {type:"string"}
     select_model = 'cardiffnlp/twitter-roberta-base-sentiment' # @param ["cardiffnlp/twitter-roberta-base-sentiment", "lxyuan/distilbert-base-multilingual-cased-sentiments-student"]
     model_id = select_model
@@ -66,16 +69,16 @@ This code will create a dropdown in Google Colab from there y***ou can select Ro
         AutoTokenizer,
         AutoModelForSequenceClassification
         )
-    
+
     # load the model from huggingface
     model = AutoModelForSequenceClassification.from_pretrained(
         model_id,
         num_labels=3
     )
-    
+
     # load the tokenizer from huggingface
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    
+
     # load the tokenizer and model into a sentiment analysis pipeline
     nlp = pipeline(
         "sentiment-analysis",
@@ -100,10 +103,10 @@ Now we’ll test the sentiment analysis pipeline that we created using the BERT 
 
 This will output a review
 
-     Room was small for a superior room and poorly lit especially as 
-    it was an inside room and overlooked the inside wall of the hotel 
-    No view therefore needed better lighting within Restaurant tables 
-    were not well laid and had to go searching for cutlery at breakfast 
+     Room was small for a superior room and poorly lit especially as
+    it was an inside room and overlooked the inside wall of the hotel
+    No view therefore needed better lighting within Restaurant tables
+    were not well laid and had to go searching for cutlery at breakfast
 
     # get the sentiment label and score for review number 241
     nlp(test_review)
@@ -119,7 +122,7 @@ A ***Retriever model is used to embed passages and queries, and it creates embed
 We will use a sentence-transformer model as our retriever. The model can be loaded as follows:
 
     from sentence_transformers import SentenceTransformer
-    
+
     # load the model from huggingface
     retriever = SentenceTransformer(
         'sentence-transformers/all-MiniLM-L6-v2',
@@ -146,7 +149,7 @@ Let’s first write a helper function to generate sentiment labels and scores fo
 Let’s write another helper function to convert dates to timestamps.
 
     import dateutil.parser
-    
+
     # convert date to timestamp
     def get_timestamp(dates):
         timestamps = [dateutil.parser.parse(d).timestamp() for d in dates]
@@ -155,7 +158,7 @@ Let’s write another helper function to convert dates to timestamps.
 Now generating embeddings and storing them in the table of LanceDB with their respective metadata
 
     from tqdm.auto import tqdm
-    
+
     # we will use batches of 64
     batch_size = 64
     data = []
@@ -217,7 +220,7 @@ We will start with a general question about the room sizes of hotels in London a
     query = "What is customers opinion about room sizes in London?"
     # generate dense vector embeddings for the query
     xq = retriever.encode(query).tolist()
-    
+
     # query lancedb
     metadata = ["hotel_name", "label", "review", "review_date", "timestamp"]
     result = tbl.search(xq).select(metadata).limit(100).to_list()
@@ -226,7 +229,7 @@ We will start with a general question about the room sizes of hotels in London a
 Plotting the results for better analysis
 
     import seaborn as sns
-    
+
     # plot a barchart using seaborn
     sns.barplot(x=list(sentiment.keys()), y = list(sentiment.values()))
 
@@ -243,11 +246,11 @@ The resultant graph looks like this
     query = "are the customers satisified with the room sizes of hotels in London?"
     # generate query embeddings
     xq = retriever.encode(query).tolist()
-    
+
     # query lancedb with query embeddings and appling prefiltering for given time period
     where_filter = f"{start_time} <= timestamp <= {end_time}"
     result = tbl.search(xq).where(where_filter, prefilter=True).limit(10).to_list()
-    
+
     # get an overall count of customer sentiment
     sentiment = count_sentiment(result)
     # plot a barchart using seaborn
@@ -286,22 +289,22 @@ Now, We need to iterate through all the hotels and run these queries for each ho
 
     import matplotlib.pyplot as plt
     import pandas as pd
-    
+
     hotel_sentiments = []
-    
+
     # iterate through the hotels
     for hotel in hotels:
         final_result = []
-    
+
         # iterate through the keys and values in the queries dict
         for area, query in queries.items():
             # generate query embeddings
             xq = retriever.encode(query).tolist()
-    
+
             # query lancedb with query embeddings and appling prefiltering for hotel names
             where_filter = f"hotel_name= '{hotel}'"
             result = tbl.search(xq).where(where_filter, prefilter=True).limit(100).to_list()
-    
+
             # get an overall count of customer sentiment
             sentiment = count_sentiment(result)
             # sort the sentiment to show area and each value side by side
@@ -313,7 +316,7 @@ Now, We need to iterate through all the hotels and run these queries for each ho
                 }
                 # add the data to final_result list
                 final_result.append(analysis_data)
-    
+
         #dataframe of final results
         df = pd.DataFrame(final_result)
         # mapping dataframe records with hotel
@@ -324,7 +327,7 @@ We may now plot the final data to make inferences.
     # create the figure and axes to plot barchart for all hotels
     fig, axs = plt.subplots(nrows=1, ncols=5, figsize=(25, 4.5))
     plt.subplots_adjust(hspace=0.25)
-    
+
     counter = 0
     # iterate through each hotel in the list and plot a barchart
     for d, ax in zip(hotel_sentiments, axs.ravel()):

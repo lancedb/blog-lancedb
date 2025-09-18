@@ -1,10 +1,13 @@
 ---
-title: Benchmarking Cohere Rerankers with LanceDB
+title: "Benchmarking Cohere Rerankers with LanceDB"
 date: 2024-05-07
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/benchmarking-cohere-reranker-with-lancedb/preview-image.png
+meta_image: /assets/blog/benchmarking-cohere-reranker-with-lancedb/preview-image.png
+description: "Reranking is a process of re-arranging the results of a retriever based on some metric that can be independent of the retrieval scores."
 ---
 
 Reranking is a process of re-arranging the results of a retriever based on some metric that can be independent of the retrieval scores. In this blog, we'll see how you can use LanceDB to use any of the popular reranking techniques including the new cohere reranker-V3 along with some results.
@@ -17,31 +20,29 @@ LanceDB comes with built-in support for reranking across all search types - vect
     from lancedb.rerankers import CohereReranker
     from lancedb.pydantic import LanceModel, Vector
     from lancedb.embeddings import get_registry
-    
+
     db = lancedb.connect("~/tmp/db")
     embedding_fcn =  get_registry().get("huggingface").create()
     class Schema(LanceModel):
         text: str = embedding_fcn.SourceField()
         vector: Vector(embedding_fcn.ndims()) = embedding_fcn.VectorField()
-    
+
     tbl = db.create_table("tbl_example", schema=Schema)
     tbl.add([ {"text": "hey"}, {"text": "bye"}, {"text": "hello"}, {"text": "goodbye"}])
-    
+
     reranker = CohereReranker(api_key="...") # Requires cohere API key
-    
 
 With this setup, you can now use this reranker for reranking results of any search type.
 
     # Reranking Vector Search
     tbl.search("hey").rerank(reranker=reranker).to_pandas()
-    
+
     # Reranking Full-Text Search
     tbl.create_fts_index("text") # Create FTS index
     tbl.search("bye", query_type="fts").rerank(reranker=reranker).to_pandas()
-    
+
     # Reranking Hybrid Search
     tbl.search("bye", query_type="hybrid").rerank(reranker=reranker).to_pandas()
-    
 
 ## Benchmarking Cohere Reranker
 
@@ -73,8 +74,7 @@ Here we are not evaluating a RAG. Our tests are limited to testing the quality o
     ):
         # Create vector store from docs
         tbl = vector_store._connection.open_table(vector_store.table_name)
-    
-    
+
         eval_results = []
         for idx in tqdm(range(len(datasets))):
             query = ds['query'][idx]
@@ -89,7 +89,7 @@ Here we are not evaluating a RAG. Our tests are limited to testing the quality o
             except Exception as e:
                 print(f'Error with query: {idx} {e}')
                 continue
-    
+
             retrieved_texts = rs['text'].tolist()[:top_k]
             expected_text = reference_context[0]
             is_hit = expected_text in retrieved_texts  # assume 1 relevant doc
@@ -111,10 +111,10 @@ With this evaluation function, let's test rerankers across different datasets an
 First dataset that we'll be using is Uber 10K dataset that contains more than 800 query-and -ontext pairs based on Uber's 2021 SEC filing. This dataset can be dowloaded and loaded from llama-index as follows:
 
     !llamaindex-cli download-llamadataset Uber10KDataset2021 --download-dir ./data
-    
+
     from llama_index.core import SimpleDirectoryReader
     from llama_index.core.llama_dataset import LabelledRagDataset
-    
+
     rag_dataset = LabelledRagDataset.from_json("./data/rag_dataset.json")
     documents = SimpleDirectoryReader(input_dir="./data/source_files").load_data()
 
@@ -125,12 +125,12 @@ The 2nd dataset used is [Evaluating LLM Survey Paper Dataset](https://llamahub.a
 The script calculates the evaluation score for each of these rerankers with other params remaining constant:
 
     datasets = [ "Uber10Kdataset2021", "LLMevalData" ]
-    
+
     embed_models = {
     "bge": HuggingFaceEmbedding(model_name="BAAI/bge-large-en-v1.5")
     "colbert": HuggingFaceEmbedding(model_name="colbert-ir/colbertv2.0")
     }
-    
+
     rerankers = {
         "Vector-baseline": None,
         "cohere-v2": CohereReranker(),
@@ -156,7 +156,7 @@ Apart from accuracy, rerank-v3 model API is also supposed to be much faster v2. 
 ![](__GHOST_URL__/content/images/2024/05/Screenshot-2024-05-06-at-8.14.10-PM.png)Illustration taken from - [https://cohere.com/blog/rerank-3](https://cohere.com/blog/rerank-3)
 ### Conclusion
 
-This blog covers  LanceDB's reranker API that allows you to plug in popular or custom reranking methods in your retrieval pipelines across all query types. In this part, we show the results of a couple of datasets but based on other similar datasets, cohere reranker performed the best across all of them. It beats every reranker including cross-encoders, linear combination, etc. across different embedding models. In the next parts, we'll cover more advanced datasets like structured and semi-structured retrieval to see if the the results change. 
+This blog covers  LanceDB's reranker API that allows you to plug in popular or custom reranking methods in your retrieval pipelines across all query types. In this part, we show the results of a couple of datasets but based on other similar datasets, cohere reranker performed the best across all of them. It beats every reranker including cross-encoders, linear combination, etc. across different embedding models. In the next parts, we'll cover more advanced datasets like structured and semi-structured retrieval to see if the the results change.
 
 Drop us a 🌟
 [

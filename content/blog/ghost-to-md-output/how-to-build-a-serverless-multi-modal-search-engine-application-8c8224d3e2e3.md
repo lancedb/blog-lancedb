@@ -1,10 +1,13 @@
 ---
-title: Serverless Multi-Modal search engine application
+title: "Serverless Multi-Modal search engine application"
 date: 2023-09-25
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
+meta_image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
+description: "by Ayush Chaurasia."
 ---
 
 by Ayush Chaurasia
@@ -17,11 +20,12 @@ Full implementation can be found [here](https://github.com/lancedb/vectordb-reci
 ![](https://miro.medium.com/v2/resize:fit:651/1*CkRyPrIi5OXiqxh82Jl3Wg.gif)
 Let’s get started!
 
-# CLIP
+## CLIP
 
 CLIP (Contrastive Language-Image Pre-Training) is a neural network trained on a variety of (image, text) pairs. It can be instructed in natural language to predict the most relevant text snippet, given an image, without directly optimizing for the task, similarly to the zero-shot capabilities of GPT-2 and 3
 ![](https://miro.medium.com/v2/resize:fit:770/1*JZey6K72V64VOxoVw7drbQ.png)[source](https://towardsdatascience.com/simple-implementation-of-openai-clip-model-a-tutorial-ace6ff01d9f2)
-# LanceDB: Serverless VectorDB in browser
+## LanceDB: Serverless VectorDB in browser
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*QWz_uromVPB5LKAgfrfKIg.png)
 Let us now set up the vector database. We’ll use nextjs serverless functions.
 
@@ -53,7 +57,7 @@ Roboflow CLIP inference API accepts images as base64 strings. The following snip
           "Content-Type": "application/json",
         },
       });
-    
+
       return response.data.embeddings[0];
     }
 
@@ -76,16 +80,16 @@ Similarly, you can also get the text embeddings.
           "Content-Type": "application/json",
         },
       });
-    
+
       return response.data.embeddings[0];
     }
 
-# Create LanceDB table
+## Create LanceDB table
 
 Now we can simply call the above functions as nextjs apis to create LanceDB embeddings table.
 
     async function getImgEmbeddings(img_files: Array<string>, db: any){
-    
+
     for (var i = 0; i < img_files.length; i++) {
     const response = await fetch(`${baseUrl}/api/embed`, {
     method: "POST",
@@ -95,8 +99,7 @@ Now we can simply call the above functions as nextjs apis to create LanceDB embe
     const json = await response.json();
     embeddings.push(json.embedding);
     }
-    
-    
+
     var data = [];
     for (var i = 0; i < img_files.length; i++) {
     data.push({
@@ -106,7 +109,7 @@ Now we can simply call the above functions as nextjs apis to create LanceDB embe
     }
     await db.createTable("table", data);
 
-# Searching for similar images
+## Searching for similar images
 
 Now that we’ve created the embedding table, let’s see how we can use it to search for similar Images using text or another image. The thing to keep in mind is that the CLIP model is capable of projecting both images and texts in the same embedding space, which is what we’ll utilize here.
 

@@ -1,15 +1,18 @@
 ---
-title: Efficient RAG with Compression and Filtering
+title: "Efficient RAG with Compression and Filtering"
 date: 2024-01-09
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/preview-image.png
+meta_image: /assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/preview-image.png
+description: "by Kaushal Choudhary."
 ---
 
 by Kaushal Choudhary
 
-# Why Contextual Compressors and Filters?
+## Why Contextual Compressors and Filters?
 
 RAG (Retrieval Augmented Generation) is a technique that helps add additional data sources to our existing LLM Models; however, in most cases, it also brings unnecessary data that is not relevant to the use case.
 
@@ -19,7 +22,8 @@ Contextual compression is self-explanatory, which means that it compresses the r
 
 Filtering is a process that further cleans the data after compression from the large dataset. Both in sync can help us drastically reduce storage, retrieval, and cost of operation.
 
-# Working of Contextual Compression
+## Working of Contextual Compression
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*WZToanVYGWBLlaI00seH4A.png)
 RAG (Retrieval Augmented Generation) lacks transparency in revealing what it retrieves, making it uncertain which questions the system will encounter. This results in valuable information getting lost amid a mass of irrelevant text, which is not ideal for a production-grade application.
 
@@ -31,7 +35,7 @@ RAG (Retrieval Augmented Generation) lacks transparency in revealing what it ret
 
 You can observe a step-by-step demonstration of this process in an interactive Colab notebook.
 
-# Notebook Walk-through
+## Notebook Walk-through
 
 > Follow along with this* *[**Colab Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Contextual-Compression-with-RAG/main.ipynb).
 
@@ -84,14 +88,13 @@ Let’s add Contextual Compression with **LLMChainExtractor**
 
     from langchain.retrievers import ContextualCompressionRetriever
     from langchain.retrievers.document_compressors import LLMChainExtractor
-    
+
     #creating the compressor
     compressor = LLMChainExtractor.from_llm(llm=llm)
-    
+
     #compressor retriver = base retriever + compressor
     compression_retriever = ContextualCompressionRetriever(base_retriever=retriever_d,
                                                            base_compressor=compressor)
-    
 
 Now, will add ***Filters ***to Contextual Compressions
 
@@ -99,12 +102,12 @@ Now, will add ***Filters ***to Contextual Compressions
     import os
     from langchain.embeddings import OpenAIEmbeddings
     from langchain.retrievers.document_compressors import EmbeddingsFilter
-    
+
     os.environ["OPENAI_API_KEY "] = getpass()
     embdeddings_filter = EmbeddingsFilter(embeddings=embeddings)
     compression_retriever_filter = ContextualCompressionRetriever(base_retriever=retriever_d,
                                                            base_compressor=embdeddings_filter)
-    
+
     compressed_docs = compression_retriever_filter.get_relevant_documents(query="What is the Environment?")
     pretty_print_docs(compressed_docs)
 
@@ -119,7 +122,7 @@ To get the result, we will utilize `RetrievalQA Chain` from Langchain.
     qa("What is Environment?")
 
 ![](https://miro.medium.com/v2/resize:fit:644/1*D7rXwGlKsdelh5NlYrlt6w.png)
-# Pipelines
+## Pipelines
 
 We can also join compressors and document transformers for better output and efficiency.
 
@@ -130,20 +133,20 @@ Here, we will create a pipeline comprising of redundant filter + relevant filter
 
     from langchain.document_transformers import EmbeddingsRedundantFilter
     from langchain.retrievers.document_compressors import DocumentCompressorPipeline
-    
+
     redundant_filter = EmbeddingsRedundantFilter(embeddings=embeddings)
     relevant_filter = EmbeddingsFilter(embeddings=embeddings,k=5)
-    
+
     #creating the pipeline
     compressed_pipeline = DocumentCompressorPipeline(transformers=[redundant_filter,relevant_filter])
-    
+
     # compressor retriever
     comp_pipe_retrieve = ContextualCompressionRetriever(base_retriever=retriever_d,
                                                            base_compressor=compressed_pipeline)
-    
+
     # print the prompt
     print(comp_pipe_retrieve)
-    
+
     # Get relevant documents
     compressed_docs = comp_pipe_retrieve.get_relevant_documents(query="What is Environment?")
     pretty_print_docs(compressed_docs)compressed_docs = compression_retriever_pipeline.get_relevant_documents(query="What is Environment?")

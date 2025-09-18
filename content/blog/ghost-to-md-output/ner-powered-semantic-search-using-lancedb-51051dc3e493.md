@@ -1,10 +1,13 @@
 ---
-title: NER-powered Semantic Search using LanceDB
+title: "NER-powered Semantic Search using LanceDB"
 date: 2023-11-08
 author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
+image: /assets/blog/ner-powered-semantic-search-using-lancedb-51051dc3e493/preview-image.png
+meta_image: /assets/blog/ner-powered-semantic-search-using-lancedb-51051dc3e493/preview-image.png
+description: "**NER stands for Named Entity Recognition**, a form of natural language processing (NLP) that involves extracting and identifying essential."
 ---
 
 **NER stands for Named Entity Recognition**, a form of natural language processing (NLP) that involves extracting and identifying essential information from text. The information that is extracted and categorized is called an **entity**. It can be any word or a series of words that consistently refers to the same thing. Some examples of entities are:
@@ -37,7 +40,7 @@ In short, we use the NER model to further filter the semantic search results. Th
 In the Implementation section, we see the step-by-step implementation of NER on the Medium dataset. Starting with the first step of ***loading the dataset from huggingface***.
 
     from datasets import load_dataset
-    
+
     # load the dataset and convert to pandas dataframe
     df = load_dataset(
         "fabiochiu/medium-articles",
@@ -50,7 +53,7 @@ Once a dataset is loading, we’ll ***preprocess a loaded dataset ***which will 
     # drop empty rows and select 20k articles
     df = df.dropna().sample(20000, random_state=32)
     df.head()
-    
+
     # select first 1000 characters
     df["text"] = df["text"].str[:1000]
     # join article title and the text
@@ -62,9 +65,9 @@ To extract named entities, we will ***use a NER model finetuned on a BERT-base m
 
     from transformers import AutoTokenizer, AutoModelForTokenClassification
     from transformers import pipeline
-    
+
     model_id = "dslim/bert-base-NER"
-    
+
     # load the tokenizer from huggingface
     tokenizer = AutoTokenizer.from_pretrained(
         model_id
@@ -102,7 +105,7 @@ Now we have the NER pipeline, we’ll initialize the Retriever.
 A ***Retriever ***model is used to embed passages (article title + first 1000 characters) and queries. It ***creates embeddings such that queries and passages with similar meanings are close in the vector space***. We will use a sentence-transformer model as our retriever. The model can be loaded using the following code.
 
     from sentence_transformers import SentenceTransformer
-    
+
     # load the model from huggingface
     retriever = SentenceTransformer(
         'flax-sentence-embeddings/all_datasets_v3_mpnet-base',
@@ -134,16 +137,15 @@ Now generating embeddings and storing them in the table of LanceDB with their re
     import warnings
     import pandas as pd
     import numpy as np
-    
+
     warnings.filterwarnings('ignore', category=UserWarning)
-    
+
     # we will use batches of 64
     batch_size = 64
     data = []
     from collections import defaultdict
     # table_data = defaultdict(list)
-    
-    
+
     for i in tqdm(range(0, len(df), batch_size)):
         # find end of batch
         i_end = min(i+batch_size, len(df))

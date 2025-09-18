@@ -1,10 +1,13 @@
 ---
-title: An attempt to build cursor's @codebase feature - RAG on codebases - part 1/2
+title: "An attempt to build cursor's @codebase feature - RAG on codebases - part 1/2"
 date: 2024-11-06
 author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
+image: /assets/blog/rag-codebase-1/preview-image.png
+meta_image: /assets/blog/rag-codebase-1/preview-image.png
+description: "."
 ---
 
 💡
@@ -233,20 +236,20 @@ I started digging deeper - reading technical blogs, exploring GitHub repositorie
 
 What made this discovery interesting wasn't just finding tree-sitter, but realizing how widely adopted it was in the developer tools ecosystem. Here's what I found:
 
-1. 
+1.
 YC-backed companies were using it:
 
 - Buildt (YC 23) mentioned it in their [technical discussions](https://news.ycombinator.com/item?id=35000562)
 
 ![Screenshot_2024-05-03_at_12.50.54_AM.png](__GHOST_URL__/content/images/2024/11/Screenshot_2024-05-03_at_12.50.54_AM.png)
 
-2. 
+2.
 Modern code editors were built on it:
 
 - Cursor.sh uses it for their [codebase indexing](https://x.com/amanrsanger/status/1750023209733464559)
 - Their approach to constructing code graphs relies heavily on tree-sitter's capabilities
 
-3. 
+3.
 Developer tools were standardizing on it:
 
 - Aider.chat, an AI-powered terminal-based pair programmer, uses tree-sitter for their AST processing
@@ -255,7 +258,7 @@ Developer tools were standardizing on it:
 ## What's [treesitter](https://tree-sitter.github.io/tree-sitter/)?
 
 > Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. Tree-sitter aims to be:
-> 
+>
 > - **General** enough to parse any programming language
 > - **Fast** enough to parse on every keystroke
 > - **Robust** enough to provide useful results even with syntax errors
@@ -276,7 +279,6 @@ Tree sitter explainer: [video](https://youtu.be/09-9LltqWLY?si=gg4ECnCPr_W7duMR)
 The simplest way to get started is with the `tree_sitter_languages` module. It comes with pre-built parsers for all supported programming languages.
 
     pip install tree-sitter-languages
-    
 
 You can try playing on [tree-sitter playground](https://tree-sitter.github.io/tree-sitter/playground) .
 
@@ -290,14 +292,13 @@ Let's look at the tree-sitter's AST for the following code:
         def __init__(self, width, height):
             self.width = width
             self.height = height
-        
+
         def calculate_area(self):
             """Calculate the area of the rectangle."""
             return self.width * self.height
-            
+
     my_rectangle = Rectangle(5, 3)
     area = my_rectangle.calculate_area()
-    
 
 Tree-sitter's AST for the above code (simplified):
 
@@ -311,14 +312,14 @@ Tree-sitter's AST for the above code (simplified):
               // ... parameter details ...
             body: block [2, 8] - [3, 28]
               // ... constructor implementation ...
-          
+
           function_definition [5, 4] - [7, 39]  # calculate_area
             name: identifier [5, 8] - [5, 22]
             parameters: parameters [5, 22] - [5, 28]
               // ... parameter details ...
             body: block [6, 8] - [7, 39]
               // ... method implementation ...
-      
+
       expression_statement [9, 0] - [9, 30]  # my_rectangle = Rectangle(5, 3)
         assignment
           left: identifier  # my_rectangle
@@ -327,7 +328,7 @@ Tree-sitter's AST for the above code (simplified):
             arguments: argument_list
               integer  # 5
               integer  # 3
-      
+
       expression_statement [10, 0] - [10, 36]  # area = my_rectangle.calculate_area()
         assignment
           left: identifier  # area
@@ -336,15 +337,13 @@ Tree-sitter's AST for the above code (simplified):
               object: identifier  # my_rectangle
               attribute: identifier  # calculate_area
             arguments: argument_list  # ()
-    
 
 ### Using recursive tree traversal to extract methods and classes
 
 Reading the code from a file and parsing it into an AST.
 
-    
     from tree_sitter_languages import get_parser
-    
+
     # Initialize parser and read code
     parser = get_parser("python")
     code = """
@@ -352,19 +351,17 @@ Reading the code from a file and parsing it into an AST.
         def __init__(self, width, height):
             self.width = width
             self.height = height
-        
+
         def calculate_area(self):
             \"\"\"Calculate the area of the rectangle.\"\"\"
             return self.width * self.height
-            
+
     my_rectangle = Rectangle(5, 3)
     area = my_rectangle.calculate_area()
     """
-    
+
     # Parse into AST
     tree = parser.parse(bytes(code, "utf8"))
-    
-    
 
 We traverse the AST recursively and look for node types that we want to extract.
 
@@ -373,24 +370,23 @@ We traverse the AST recursively and look for node types that we want to extract.
 - We can get the text of the node using the `text` attribute. Text content is stored in bytes so we need to decode it.
 - Nodes form a tree like structure and we can access children using `node.children`
 
-    
     # Extract classes and methods from AST
     def extract_classes_and_methods(node):
         results = {
             'classes': [],
             'methods': []
         }
-        
+
         def traverse_tree(node):
             # Extract class definitions
             if node.type == "class_definition":
-                class_name = node.child_by_field_name("name").text.decode('utf8') 
+                class_name = node.child_by_field_name("name").text.decode('utf8')
                 class_code = node.text.decode('utf8') # Gets entire source code for the class
                 results['classes'].append({
                     'name': class_name,
                     'code': class_code
                 })
-                
+
             # Extract method definitions
             elif node.type == "function_definition":
                 method_name = node.child_by_field_name("name").text.decode('utf8')
@@ -399,26 +395,25 @@ We traverse the AST recursively and look for node types that we want to extract.
                     'name': method_name,
                     'code': method_code
                 })
-                
+
             # Recursively traverse children
             for child in node.children:
                 traverse_tree(child)
-        
+
         traverse_tree(node)
         return results
-    
+
     # Use the extraction function
     extracted = extract_classes_and_methods(tree.root_node)
-    
+
     # Print results
     for class_info in extracted['classes']:
         print(f"\nFound class {class_info['name']}:")
         print(class_info['code'])
-    
+
     for method_info in extracted['methods']:
         print(f"\nFound method {method_info['name']}:")
         print(method_info['code'])
-    
 
 ### Using Tree-sitter Queries
 
@@ -426,26 +421,25 @@ We traverse the AST recursively and look for node types that we want to extract.
 
 Below is a snippet showing how to define queries and use them to extract classes and methods.
 
-    
     class_query = language.query("""
         (class_definition
             name: (identifier) @class.name
         ) @class.def
     """)
-    
+
     # Query for function (method) definitions, capturing the name and definition
     method_query = language.query("""
         (function_definition
             name: (identifier) @method.name
         ) @method.def
     """)
-    
+
     def extract_classes_and_methods(root_node):
         results = {
             'classes': [],
             'methods': []
         }
-        
+
         # Extract classes
         for match in class_query.matches(root_node):
             captures = {name: node for node, name in match.captures}
@@ -455,7 +449,7 @@ Below is a snippet showing how to define queries and use them to extract classes
                 'name': class_name,
                 'code': class_code
             })
-        
+
         # Extract methods
         for match in method_query.matches(root_node):
             captures = {name: node for node, name in match.captures}
@@ -465,10 +459,8 @@ Below is a snippet showing how to define queries and use them to extract classes
                 'name': method_name,
                 'code': method_code
             })
-        
+
         return results
-    
-    
 
 You can read more about Tree-sitter [queries](https://tree-sitter.github.io/tree-sitter/using-parsers#pattern-matching-with-queries) and [tagged captures](https://tree-sitter.github.io/tree-sitter/code-navigation-systems#tagging-and-captures) from the docs.
 
@@ -480,7 +472,6 @@ You can read more about Tree-sitter [queries](https://tree-sitter.github.io/tree
             body: (block) @class.body
         ) @class.def
     """)
-    
 
 **Queries** in Tree-sitter are patterns that match specific syntactic structures within the abstract syntax tree (AST) of your code. They allow you to search for language constructs, such as class definitions or function declarations, by specifying the hierarchical arrangement of nodes that represent these constructs.
 
@@ -509,14 +500,14 @@ code from `preprocessing.py` for the same:
     def find_references(file_list, class_names, method_names):
         references = {'class': defaultdict(list), 'method': defaultdict(list)}
         files_by_language = defaultdict(list)
-        
+
         # Convert names to sets for O(1) lookup
         class_names = set(class_names)
         method_names = set(method_names)
-    
+
         for file_path, language in file_list:
             files_by_language[language].append(file_path)
-    
+
         for language, files in files_by_language.items():
             treesitter_parser = Treesitter.create_treesitter(language)
             for file_path in files:
@@ -524,16 +515,16 @@ code from `preprocessing.py` for the same:
                     code = file.read()
                     file_bytes = code.encode()
                     tree = treesitter_parser.parser.parse(file_bytes)
-                    
+
                     # Single pass through the AST
                     stack = [(tree.root_node, None)]
                     while stack:
                         node, parent = stack.pop()
-                        
+
                         # Check for identifiers
                         if node.type == 'identifier':
                             name = node.text.decode()
-                            
+
                             # Check if it's a class reference
                             if name in class_names and parent and parent.type in ['type', 'class_type', 'object_creation_expression']:
                                 references['class'][name].append({
@@ -542,7 +533,7 @@ code from `preprocessing.py` for the same:
                                     "column": node.start_point[1] + 1,
                                     "text": parent.text.decode()
                                 })
-                            
+
                             # Check if it's a method reference
                             if name in method_names and parent and parent.type in ['call_expression', 'method_invocation']:
                                 references['method'][name].append({
@@ -551,12 +542,11 @@ code from `preprocessing.py` for the same:
                                     "column": node.start_point[1] + 1,
                                     "text": parent.text.decode()
                                 })
-                        
+
                         # Add children to stack with their parent
                         stack.extend((child, node) for child in node.children)
-    
+
         return references
-    
 
 It's a stack based tree traversal to find the references. I took a simpler approach here rather than using queries/tags. If the `identifier`'s name matches a known class name and its parent node type indicates class usage (e.g., type annotation, object creation), it's recorded as a class reference. Same for methods.
 
