@@ -33,20 +33,20 @@
                             <ul class="nav__list">
                             {{ $current := . }}
                             {{ range .Site.Menus.main }}
-                                <li class="nav__item">
-                                {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
-                                    <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
-                                    {{ .Name }}
+                                <li class="nav__item{{ if .HasChildren }} nav__item--has-children{{ end }}">
+                                    {{ $isActive := or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
+                                    <a class="nav__link{{ if $isActive }} active{{ end }}{{ with .Params.class }} {{ . }}{{ end }}" href="{{ .URL }}" {{ if .HasChildren }} aria-haspopup="true" aria-expanded="false" data-nav-parent="true"{{ end }} {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                        {{ .Name }}{{ if .HasChildren }} <span class="nav__caret" aria-hidden="true">▾</span>{{ end }}
                                     </a>
-                                {{ else }}
-                                    <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
-                                    {{ .Name }}
-                                    </a>
-                                {{ end }}
+                                    {{ if .HasChildren }}
+                                    <ul class="nav__submenu">
+                                        {{ range .Children }}
+                                        <li class="nav__submenu-item">
+                                            <a class="nav__submenu-link" href="{{ .URL }}">{{ .Name }}</a>
+                                        </li>
+                                        {{ end }}
+                                    </ul>
+                                    {{ end }}
                                 </li>
                             {{ end }}
                             </ul>
@@ -141,20 +141,20 @@
                             <ul class="nav__list">
                             {{ $current := . }}
                             {{ range .Site.Menus.main }}
-                                <li class="nav__item">
-                                {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
-                                    <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
-                                    {{ .Name }}
+                                <li class="nav__item{{ if .HasChildren }} nav__item--has-children{{ end }}">
+                                    {{ $isActive := or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
+                                    <a class="nav__link{{ if $isActive }} active{{ end }}{{ with .Params.class }} {{ . }}{{ end }}" href="{{ .URL }}" {{ if .HasChildren }} aria-haspopup="true" aria-expanded="false" data-nav-parent="true"{{ end }} {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                        {{ .Name }}{{ if .HasChildren }} <span class="nav__caret" aria-hidden="true">▾</span>{{ end }}
                                     </a>
-                                {{ else }}
-                                    <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
-                                    href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
-                                    {{ .Name }}
-                                    </a>
-                                {{ end }}
+                                    {{ if .HasChildren }}
+                                    <ul class="nav__submenu">
+                                        {{ range .Children }}
+                                        <li class="nav__submenu-item">
+                                            <a class="nav__submenu-link" href="{{ .URL }}">{{ .Name }}</a>
+                                        </li>
+                                        {{ end }}
+                                    </ul>
+                                    {{ end }}
                                 </li>
                             {{ end }}
                             </ul>
