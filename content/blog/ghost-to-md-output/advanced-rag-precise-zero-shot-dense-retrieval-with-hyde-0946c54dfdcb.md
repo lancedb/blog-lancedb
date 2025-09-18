@@ -1,9 +1,10 @@
 ---
 title: "Advanced RAG: Precise Zero-Shot Dense Retrieval with HyDE"
-slug: advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb
-date_published: 2023-11-27T23:48:00.000Z
-date_updated: 2024-05-11T09:28:56.000Z
-tags: Blog
+date: 2023-11-27
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 In the world of search engines, the quest to find the most relevant information is a constant challenge. Researchers are always on the lookout for innovative ways to improve the effectiveness of search results. One such innovation is [HyDE](https://arxiv.org/pdf/2212.10496.pdf), which stands for Hypothetical Document Embeddings, a novel approach to dense retrieval that promises to make searching for information even more efficient and accurate.

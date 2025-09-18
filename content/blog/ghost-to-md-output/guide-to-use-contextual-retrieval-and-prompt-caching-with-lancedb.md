@@ -1,9 +1,10 @@
 ---
 title: Implement contextual retrieval and prompt caching with LanceDB
-slug: guide-to-use-contextual-retrieval-and-prompt-caching-with-lancedb
-date_published: 2024-10-08T14:48:05.000Z
-date_updated: 2024-12-12T01:06:10.000Z
-tags: community
+date: 2024-10-08
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 ### Decrease chunk retrieval failure rate by 35% to 50%

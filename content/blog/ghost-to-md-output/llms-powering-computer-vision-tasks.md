@@ -1,9 +1,10 @@
 ---
 title: LLMs powering Computer Vision tasks
-slug: llms-powering-computer-vision-tasks
-date_published: 2024-12-01T05:08:37.000Z
-date_updated: 2024-12-12T01:04:23.000Z
-tags: community
+date: 2024-12-01
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

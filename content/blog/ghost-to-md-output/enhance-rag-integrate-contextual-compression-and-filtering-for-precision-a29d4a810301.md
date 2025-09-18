@@ -1,9 +1,10 @@
 ---
 title: Efficient RAG with Compression and Filtering
-slug: enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301
-date_published: 2024-01-09T22:44:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2024-01-09
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Kaushal Choudhary

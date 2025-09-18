@@ -1,9 +1,10 @@
 ---
 title: "Inverted File Product Quantization (IVF_PQ): Accelerate vector search by creating indices"
-slug: benchmarking-lancedb-92b01032874a-2
-date_published: 2023-12-17T22:00:00.000Z
-date_updated: 2024-05-08T17:03:10.000Z
-tags: Blog, #prashant
+date: 2023-12-17
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Vector similarity search is finding similar vectors from a list of given vectors in a particular embedding space. It plays a vital role in various fields and applications because it efficiently retrieves relevant information from large datasets.

@@ -1,9 +1,10 @@
 ---
 title: Hybrid search, New OpenAI Embedding Models, Multimodal RAG for Video Processing
-slug: hybrid-search-new-openai-embedding-models-multimodal-rag-for-video-processing
-date_published: 2024-03-06T17:15:08.000Z
-date_updated: 2024-04-02T05:47:44.000Z
-tags: Newsletter, #shawn
+date: 2024-03-06
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## Highlights

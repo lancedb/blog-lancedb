@@ -1,9 +1,10 @@
 ---
 title: Search within an Image with Segment Anything 🔎
-slug: search-within-an-image-331b54e4285e
-date_published: 2023-12-12T19:38:00.000Z
-date_updated: 2024-06-24T12:52:45.000Z
-tags: Blog
+date: 2023-12-12
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*xPo7B0KrVUBKcmDNHJ_n0Q.png)

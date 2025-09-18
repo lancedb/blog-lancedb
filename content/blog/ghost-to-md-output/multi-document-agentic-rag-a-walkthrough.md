@@ -1,9 +1,10 @@
 ---
 title: "Multi document agentic RAG: A walkthrough"
-slug: multi-document-agentic-rag-a-walkthrough
-date_published: 2024-08-28T10:21:12.000Z
-date_updated: 2024-12-12T01:08:06.000Z
-tags: community
+date: 2024-08-28
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

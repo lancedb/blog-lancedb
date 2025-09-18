@@ -1,10 +1,11 @@
 ---
 title: Lance, Windows. Windows, Lance
-slug: lance-windows-windows-lance-3328ff6129b
-date_published: 2023-05-31T00:00:00.000Z
-date_updated: 2024-03-01T20:04:26.000Z
-tags: Blog
+date: 2023-05-31
 excerpt: This is a love letter to Christoph Gohlke
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 It was Spring of 2012. After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time. We worked out of an apartment in Brooklyn on pandas by day. By night Wes was working on the first edition of Python for Data Analysis while I was working on what probably was the very first python package for quantitative portfolio management.

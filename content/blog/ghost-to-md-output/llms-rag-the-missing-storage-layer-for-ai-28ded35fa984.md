@@ -1,9 +1,10 @@
 ---
 title: LLMs, RAG, & the missing storage layer for AI
-slug: llms-rag-the-missing-storage-layer-for-ai-28ded35fa984
-date_published: 2023-09-05T02:22:00.000Z
-date_updated: 2024-03-03T19:03:27.000Z
-tags: Blog
+date: 2023-09-05
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Ayush Chaurasia

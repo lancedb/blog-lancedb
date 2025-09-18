@@ -1,9 +1,10 @@
 ---
 title: Chat with your stats using Langchain dataframe agent & LanceDB hybrid search
-slug: chat-with-csv-excel-using-lancedb
-date_published: 2024-06-30T06:32:10.000Z
-date_updated: 2024-12-12T01:10:22.000Z
-tags: community
+date: 2024-06-30
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 ![](__GHOST_URL__/content/images/2024/06/image-4-2.png)

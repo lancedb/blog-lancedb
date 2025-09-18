@@ -1,9 +1,10 @@
 ---
 title: "Simplest Method to improve RAG pipeline: Re-Ranking"
-slug: simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544
-date_published: 2023-11-21T00:12:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2023-11-21
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Mahesh Deshwal

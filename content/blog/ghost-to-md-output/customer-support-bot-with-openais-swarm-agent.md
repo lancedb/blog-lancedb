@@ -1,9 +1,10 @@
 ---
 title: Customer support bot with OpenAI's Swarm Agent
-slug: customer-support-bot-with-openais-swarm-agent
-date_published: 2024-11-04T05:23:13.000Z
-date_updated: 2024-11-04T05:23:13.000Z
-tags: community
+date: 2024-11-04
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

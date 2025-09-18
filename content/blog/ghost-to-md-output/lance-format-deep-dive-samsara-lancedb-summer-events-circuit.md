@@ -1,9 +1,10 @@
 ---
 title: 🧠Lance Format Deep Dive, Samsara❤️LanceDB, 🏖️Summer Events Circuit
-slug: lance-format-deep-dive-samsara-lancedb-summer-events-circuit
-date_published: 2025-06-04T13:07:52.000Z
-date_updated: 2025-06-04T13:07:51.000Z
-tags: Newsletter
+date: 2025-06-04
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🎤 Catch Us on Stage This June!

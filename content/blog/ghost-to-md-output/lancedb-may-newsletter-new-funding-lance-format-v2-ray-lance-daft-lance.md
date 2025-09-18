@@ -1,9 +1,10 @@
 ---
 title: New Funding, Lance Format v2, Ray-Lance & Daft-Lance
-slug: lancedb-may-newsletter-new-funding-lance-format-v2-ray-lance-daft-lance
-date_published: 2024-06-05T16:21:34.000Z
-date_updated: 2024-06-05T16:21:34.000Z
-tags: Newsletter
+date: 2024-06-05
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥 Milestone Achieved with $8 Million Seed Round🔥

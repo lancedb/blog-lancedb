@@ -1,9 +1,10 @@
 ---
 title: The case for random access I/O
-slug: the-case-for-random-access-i-o
-date_published: 2024-08-20T13:42:53.000Z
-date_updated: 2024-12-12T01:08:25.000Z
-tags: Engineering
+date: 2024-08-20
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 One of the reasons we started the Lance file format and have been investigating new encodings is because we wanted a format with better support for random access.  Random access I/O has traditionally been ignored by columnar formats, and with reasonably good arguments...or at least, arguments that sound reasonably good.  In this post we break down the old reasoning and explain why it falls short.

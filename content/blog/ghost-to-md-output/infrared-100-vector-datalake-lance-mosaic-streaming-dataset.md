@@ -1,9 +1,10 @@
 ---
 title: InfraRed 100, Vector Datalake, Lance + Mosaic Streaming Dataset
-slug: infrared-100-vector-datalake-lance-mosaic-streaming-dataset
-date_published: 2024-07-02T17:19:43.000Z
-date_updated: 2024-07-02T17:19:43.000Z
-tags: Newsletter
+date: 2024-07-02
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥 LanceDB Makes the 2024 InfraRed 100 List🔥

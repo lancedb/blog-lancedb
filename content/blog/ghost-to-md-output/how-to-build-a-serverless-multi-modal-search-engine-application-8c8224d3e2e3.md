@@ -1,9 +1,10 @@
 ---
 title: Serverless Multi-Modal search engine application
-slug: how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3
-date_published: 2023-09-25T02:15:00.000Z
-date_updated: 2024-03-01T19:52:52.000Z
-tags: Blog
+date: 2023-09-25
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Ayush Chaurasia

@@ -1,9 +1,10 @@
 ---
 title: 🌟 Exciting News for LanceDB Community!🚀
-slug: exciting-news-for-lancedb-community
-date_published: 2024-04-02T15:55:40.000Z
-date_updated: 2024-12-12T01:15:26.000Z
-tags: News, Announcement
+date: 2024-04-02
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 Dear LanceDB Community,

@@ -1,9 +1,10 @@
 ---
 title: Practical introduction to Late Chunking or Chunked Pooling
-slug: late-chunking-aka-chunked-pooling-2
-date_published: 2024-10-29T21:12:20.000Z
-date_updated: 2024-10-30T09:44:41.000Z
-tags: community
+date: 2024-10-29
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

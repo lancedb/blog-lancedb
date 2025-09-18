@@ -1,9 +1,10 @@
 ---
 title: Foundation of Compound AI Meetup Kicking Off, More LanceDB Integrations
-slug: foundation-of-compound-ai-meetup-kicking-off-more-lancedb-integrations
-date_published: 2024-10-10T14:20:51.000Z
-date_updated: 2024-10-10T14:20:51.000Z
-tags: Newsletter
+date: 2024-10-10
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## Community contributions

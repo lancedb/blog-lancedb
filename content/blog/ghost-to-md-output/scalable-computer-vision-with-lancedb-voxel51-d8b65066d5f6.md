@@ -1,9 +1,10 @@
 ---
 title: Scalable Computer Vision with LanceDB & Voxel51
-slug: scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6
-date_published: 2023-07-13T00:00:00.000Z
-date_updated: 2024-03-01T20:02:54.000Z
-tags: Blog
+date: 2023-07-13
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 # Importance of dataset analysis in CV

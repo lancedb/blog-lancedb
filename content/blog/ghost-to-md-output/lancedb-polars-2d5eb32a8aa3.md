@@ -1,9 +1,10 @@
 ---
 title: LanceDB + Polars
-slug: lancedb-polars-2d5eb32a8aa3
-date_published: 2024-01-19T22:35:00.000Z
-date_updated: 2024-05-30T21:00:53.000Z
-tags: Blog
+date: 2024-01-19
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ### A (near) perfect match

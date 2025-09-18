@@ -1,10 +1,11 @@
 ---
 title: Reduce Hallucinations from LLM-powered Agents using Long-Term Memory
-slug: how-to-reduce-hallucinations-from-llm-powered-agents-using-long-term-memory-72f262c3cc1f
-date_published: 2023-07-19T00:00:00.000Z
-date_updated: 2024-05-13T05:30:20.000Z
-tags: Blog, #shawn
+date: 2023-07-19
 excerpt: Introduction to Critique-Based Contexting with OpenAI, LangChain, and LanceDB
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Tevin Wang

@@ -1,8 +1,10 @@
 ---
 title: "Agentic RAG using LangGraph: Build autonomous Customer support agent"
-slug: agentic-rag-using-langgraph-building-a-simple-customer-support-autonomous-agent
-date_published: 2025-01-26T08:47:31.000Z
-date_updated: 2025-01-27T11:25:55.000Z
+date: 2025-01-26
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ### Agent? What's that?

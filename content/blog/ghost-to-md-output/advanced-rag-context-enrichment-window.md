@@ -1,9 +1,10 @@
 ---
 title: Advanced RAG with context enrichment window
-slug: advanced-rag-context-enrichment-window
-date_published: 2024-10-17T08:52:35.000Z
-date_updated: 2024-12-12T01:06:01.000Z
-tags: community
+date: 2024-10-17
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 .... and some advanced filtering and re-ranking technique

@@ -1,9 +1,10 @@
 ---
 title: Implementing Corrective RAG in the Easiest Way
-slug: implementing-corrective-rag-in-the-easiest-way-2
-date_published: 2024-03-04T14:58:27.000Z
-date_updated: 2024-05-07T20:22:18.000Z
-tags: Blog
+date: 2024-03-04
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Even though text-generation models are good at generating content, they sometimes need to improve in returning facts. This happens because of the way they are trained. Retrieval Augmented Generation(RAG) techniques have been introduced to address this issue by fetching context from a knowledge base. 

@@ -1,9 +1,10 @@
 ---
 title: ☁️LanceDB Cloud Public Beta, Lance 2.1 , 🎮Game Studio Case Study
-slug: lancedb-cloud-public-beta-lance-2-1-game-studio-case-study
-date_published: 2025-04-03T15:30:25.000Z
-date_updated: 2025-04-03T15:30:24.000Z
-tags: Newsletter
+date: 2025-04-03
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## ☁️ LanceDB Cloud Public Beta

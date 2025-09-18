@@ -1,9 +1,10 @@
 ---
 title: GPU-accelerated Indexing in LanceDB
-slug: gpu-accelerated-indexing-in-lancedb-27558fa7eee5
-date_published: 2023-11-02T01:55:00.000Z
-date_updated: 2024-03-01T19:49:48.000Z
-tags: Blog
+date: 2023-11-02
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Vector databases are extremely useful for RAG, RecSys, computer vision, and a whole host of other ML/AI applications. Because of the rise of LLMs, there has been a lot of focus on vector indices, query latency, as well as the tradeoffs between latency and recall of various indices. What’s often neglected is the time it takes to *build* a vector index. Building a vector index is a very computationally intensive process that increases quadratically with the number of vectors or vector dimensions. As you scale up in production, this becomes a much bigger bottleneck for your AI stack.

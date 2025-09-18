@@ -1,9 +1,10 @@
 ---
 title: New Funding and A New Foundation for Multimodal AI Data
-slug: new-funding-and-a-new-foundation-for-multimodal-ai-data
-date_published: 2024-05-15T15:17:39.000Z
-date_updated: 2025-03-27T21:25:26.000Z
-tags: News, Newsletter, Announcement
+date: 2024-05-15
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 I’ve been building data tooling for ML/AI for almost two decades, beginning with being one of the original contributors to pandas. My cofounder Lei Xu and I have both spent years bridging the world of databases with the world of models and predictions. One constant throughout my career has been the fact that data has always been crucial for the quality of ML/AI models and applications. This is still true for AI today.

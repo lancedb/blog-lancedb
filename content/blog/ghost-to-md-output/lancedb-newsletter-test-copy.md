@@ -1,8 +1,10 @@
 ---
 title: LanceDB Newsletter test 2
-slug: lancedb-newsletter-test-copy
-date_published: 2024-02-23T15:39:24.000Z
-date_updated: 2024-02-23T15:39:24.000Z
+date: 2024-02-23
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ## This is OSS features section

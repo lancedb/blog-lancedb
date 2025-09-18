@@ -1,9 +1,10 @@
 ---
 title: Training a Variational AutoEncoder from scratch with Lance file format
-slug: training-a-variational-autoencoder-from-scratch-with-the-lance-file-format
-date_published: 2024-09-02T16:19:05.000Z
-date_updated: 2024-12-12T01:07:57.000Z
-tags: community
+date: 2024-09-02
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 Autoencoders encode an input into a latent space and decode the latent representation into an output. The output is often referred to as **the reconstruction**, as the primary goal is to reconstruct the input from the latent code.

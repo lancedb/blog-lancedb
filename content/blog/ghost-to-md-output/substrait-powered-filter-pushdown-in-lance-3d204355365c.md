@@ -1,9 +1,10 @@
 ---
 title: Substrait Powered Filter Pushdown in Lance
-slug: substrait-powered-filter-pushdown-in-lance-3d204355365c
-date_published: 2024-01-31T22:33:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2024-01-31
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Weston Pace

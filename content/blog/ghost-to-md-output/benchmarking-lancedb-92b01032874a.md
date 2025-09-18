@@ -1,9 +1,10 @@
 ---
 title: Benchmarking LanceDB
-slug: benchmarking-lancedb-92b01032874a
-date_published: 2023-12-18T11:42:00.000Z
-date_updated: 2024-03-01T19:35:29.000Z
-tags: Blog
+date: 2023-12-18
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 I came upon a[ blog post](https://medium.com/@plaggy/lancedb-vs-qdrant-caf01c89965a) yesterday benchmarking LanceDB. The numbers looked very surprising to me, so I decided to do a quick investigation on my own. First, I want to express gratitude to the post’s author for taking the time to do a run down and publishing their results. Running these benchmarks is often a tedious exercise in chasing down details and analyzing tradeoffs. If we feel something was missed in a benchmark of LanceDB, I believe it’s the fault of our documentation and *not* the fault of the author.

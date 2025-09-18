@@ -1,9 +1,10 @@
 ---
 title: Lance v0.15.0
-slug: lance-v0-15-0
-date_published: 2024-07-30T20:08:08.000Z
-date_updated: 2024-12-12T01:07:03.000Z
-tags: Engineering
+date: 2024-07-30
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Lance 0.15.0 introduces several experimental features, marking major milestones on important projects in our library. It exposes the first public APIs for full-text search indices. It also provides opt-in support for two new encodings: better string compression using FSST and a packed struct encoding optimized for random access. These advancements move us another step closer to being the best format for AI data lakes.

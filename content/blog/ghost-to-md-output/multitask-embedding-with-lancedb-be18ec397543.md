@@ -1,9 +1,10 @@
 ---
 title: Multitask Embedding with LanceDB
-slug: multitask-embedding-with-lancedb-be18ec397543
-date_published: 2023-11-14T01:47:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2023-11-14
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 By Kaushal Choudhary

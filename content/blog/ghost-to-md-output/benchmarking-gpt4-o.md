@@ -1,9 +1,10 @@
 ---
 title: Benchmarking GPT4-o
-slug: benchmarking-gpt4-o
-date_published: 2024-05-23T07:35:03.000Z
-date_updated: 2024-12-12T01:11:24.000Z
-tags: community
+date: 2024-05-23
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 Last week, OpenAI announced its latest LLM, GPT-4o, which follows GPT-4 Turbo. In this blog, we benchmark GPT4-o using a new benchmarking toolkit called "Needle in a Needlestack".

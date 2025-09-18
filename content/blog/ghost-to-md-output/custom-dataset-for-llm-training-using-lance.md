@@ -1,10 +1,11 @@
 ---
 title: Custom Datasets for efficient LLM training using Lance
-slug: custom-dataset-for-llm-training-using-lance
-date_published: 2024-03-08T14:43:39.000Z
-date_updated: 2024-03-08T14:43:39.000Z
-tags: #tanay
+date: 2024-03-08
 excerpt: Learn how to craft custom text datasets for LLM training and fine-tuning using Lance.
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ## Introduction

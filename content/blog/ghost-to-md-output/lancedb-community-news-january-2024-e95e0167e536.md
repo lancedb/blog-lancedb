@@ -1,9 +1,10 @@
 ---
 title: LanceDB Community News — January 2024
-slug: lancedb-community-news-january-2024-e95e0167e536
-date_published: 2024-01-31T22:34:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: News, #shawn
+date: 2024-01-31
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 We’re kicking off 2024 with a new LanceDB community newsletter to showcase all the updates in the LanceDB ecosystem, news, blogs, and important links. If you’ve written a blog about LanceDB and want us to help spread the word, email us at contact@lacedb.com with a link!

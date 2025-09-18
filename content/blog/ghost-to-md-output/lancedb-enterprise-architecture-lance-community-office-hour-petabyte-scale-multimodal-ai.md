@@ -1,9 +1,10 @@
 ---
 title: LanceDB Enterprise Architecture, Lance Community Office Hour, Petabyte Scale Multimodal AI
-slug: lancedb-enterprise-architecture-lance-community-office-hour-petabyte-scale-multimodal-ai
-date_published: 2024-11-05T17:00:47.000Z
-date_updated: 2024-12-12T01:04:44.000Z
-tags: Newsletter
+date: 2024-11-05
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥LanceDB Enterprise Documentation

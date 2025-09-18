@@ -1,9 +1,10 @@
 ---
 title: Convert any Image dataset to Lance
-slug: convert-any-image-dataset-to-lance
-date_published: 2024-04-10T16:02:12.000Z
-date_updated: 2024-04-10T20:00:16.000Z
-tags: community
+date: 2024-04-10
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 In our[previous](https://vipul-maheshwari.github.io/2024/03/29/effortlessly-loading-and-processing-images-with-lance-a-code-walkthrough) article, we explored the remarkable capabilities of the Lance format, a modern, columnar data storage solution designed to revolutionize the way we work with large image datasets in machine learning. For the same purpose, I have converted the *cinic* and *mini-imagenet* datasets to their lance versions. For this write-up, I will use the example of *cinic* dataset to explain how to convert any image dataset into the Lance format with a single script and unlocking the full potential of this powerful technology.

@@ -1,8 +1,10 @@
 ---
 title: End to End Evaluation Template for RAG Apps
-slug: evaluate-rag-app-on-2
-date_published: 2025-02-22T08:58:15.000Z
-date_updated: 2025-02-23T16:46:53.000Z
+date: 2025-02-22
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 💡

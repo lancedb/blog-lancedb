@@ -1,9 +1,10 @@
 ---
 title: My SIMD is faster than Yours
-slug: my-simd-is-faster-than-yours-fb2989bf25e7
-date_published: 2023-04-24T00:00:00.000Z
-date_updated: 2024-12-12T01:17:32.000Z
-tags: Blog, Engineering
+date: 2023-04-24
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 > An untold story about how we make LanceDB vector search fast.

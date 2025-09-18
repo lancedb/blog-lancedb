@@ -1,9 +1,10 @@
 ---
 title: Streamlining Our SDKs
-slug: streamlining-our-sdks
-date_published: 2024-07-16T03:11:15.000Z
-date_updated: 2024-12-12T01:08:36.000Z
-tags: Engineering
+date: 2024-07-16
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 In the fast-evolving landscape of software development, maintaining multiple SDKs in various languages can be a challenging endeavor, especially for a small startup! Each bespoke implementation comes with its own set of intricacies, making updates and bug fixes a time-consuming process. To address these challenges, we've embarked on a journey to rewrite our SDKs in Python and JavaScript as thin wrappers around our Rust SDK.

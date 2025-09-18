@@ -1,9 +1,10 @@
 ---
 title: GraphRAG, Full-Text Search, LanceDB+Character.AI
-slug: graphrag-full-text-search-lancedb-character-ai
-date_published: 2024-08-06T16:30:10.000Z
-date_updated: 2024-12-12T01:08:56.000Z
-tags: Newsletter
+date: 2024-08-06
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥LanceDB as the Local Vector Database of Choice of GraphRAG🔥

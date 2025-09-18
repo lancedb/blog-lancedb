@@ -1,10 +1,11 @@
 ---
 title: GTA5 Multimodal RAG application
-slug: multimodal-rag-applications
-date_published: 2024-03-07T18:05:53.000Z
-date_updated: 2024-05-11T07:30:54.000Z
-tags: Blog
+date: 2024-03-07
 excerpt: Artificial Intelligence (AI) has been actively working with text for quite some time, but the world isn't solely centered around words. If you take a moment to look around, you'll find a mix of text, images, videos, audio, and their combinations.
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Today, we will work on Multimodality, a concept that empowers AI models with the capacity to perceive, listen to, and comprehend data in diverse formats together with text—pretty much like how we do!

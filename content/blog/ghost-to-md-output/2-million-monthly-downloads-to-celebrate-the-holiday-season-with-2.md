@@ -1,9 +1,10 @@
 ---
 title: 🎉 2 Million Monthly Downloads to Celebrate the Holiday Season
-slug: 2-million-monthly-downloads-to-celebrate-the-holiday-season-with-2
-date_published: 2024-12-03T16:00:22.000Z
-date_updated: 2024-12-12T01:03:59.000Z
-tags: Newsletter
+date: 2024-12-03
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥2 Million Monthly Downloads🔥

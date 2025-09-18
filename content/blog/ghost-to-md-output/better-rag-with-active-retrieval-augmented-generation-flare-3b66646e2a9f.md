@@ -1,9 +1,10 @@
 ---
 title: Better RAG with Active Retrieval Augmented Generation FLARE
-slug: better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f
-date_published: 2023-11-17T01:40:00.000Z
-date_updated: 2024-05-11T09:48:48.000Z
-tags: Blog
+date: 2023-11-17
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Akash A. Desai

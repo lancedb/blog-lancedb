@@ -1,9 +1,11 @@
 ---
 title: "Customer Support Bot : RASA x LanceDB"
-slug: customer-support-bot-rasa-x-lancedb
-date_published: 2024-12-31T07:01:40.000Z
-date_updated: 2024-12-31T15:09:41.000Z
+date: 2024-12-31
 excerpt: Advanced Customer Support Chatbot using Rasa, LanceDB, and OpenAI api ! Rasa is an open-source framework designed to build intelligent, contextual, and scalable chatbots and virtual assistants.
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 💡

@@ -1,9 +1,10 @@
 ---
 title: "The Lancelot Chronicles: Your Quest in the Realm of Open Source"
-slug: the-lancelot-chronicles-your-quest-in-the-realm-of-open-source
-date_published: 2025-01-15T15:30:55.000Z
-date_updated: 2025-03-03T08:40:11.000Z
-tags: Announcement
+date: 2025-01-15
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## Answering the Clarion Call

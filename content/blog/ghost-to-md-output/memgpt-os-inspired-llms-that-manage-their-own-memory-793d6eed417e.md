@@ -1,9 +1,10 @@
 ---
 title: "MemGPT: OS inspired LLMs that manage their own memory"
-slug: memgpt-os-inspired-llms-that-manage-their-own-memory-793d6eed417e
-date_published: 2023-12-11T23:20:00.000Z
-date_updated: 2024-03-01T19:40:13.000Z
-tags: Blog
+date: 2023-12-11
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Ayush Chaurasia

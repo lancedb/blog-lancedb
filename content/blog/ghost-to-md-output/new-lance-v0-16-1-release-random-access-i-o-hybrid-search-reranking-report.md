@@ -1,9 +1,10 @@
 ---
 title: New Lance v0.16.1 Release, Random Access I/O, Hybrid Search+Reranking Report
-slug: new-lance-v0-16-1-release-random-access-i-o-hybrid-search-reranking-report
-date_published: 2024-09-04T16:00:34.000Z
-date_updated: 2024-12-12T01:07:17.000Z
-tags: Newsletter
+date: 2024-09-04
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥New release of Lance v0.16.1🔥

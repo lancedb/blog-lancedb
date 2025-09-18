@@ -1,9 +1,10 @@
 ---
 title: Practical introduction to Adaptive-RAG
-slug: adaptive-rag
-date_published: 2024-04-24T07:28:06.000Z
-date_updated: 2024-05-11T09:19:30.000Z
-tags: Blog, project-walkthrough, community
+date: 2024-04-24
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 ![](https://cdn-images-1.medium.com/max/1200/1*dK5Kkum58gauwytt3PkQtg.png)[Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf)

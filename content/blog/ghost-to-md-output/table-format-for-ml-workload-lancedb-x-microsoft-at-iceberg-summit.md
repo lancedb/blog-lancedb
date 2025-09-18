@@ -1,9 +1,10 @@
 ---
 title: Table Format for ML Workload, LanceDB x Microsoft at Iceberg Summit
-slug: table-format-for-ml-workload-lancedb-x-microsoft-at-iceberg-summit
-date_published: 2025-03-11T15:00:50.000Z
-date_updated: 2025-04-03T06:01:00.000Z
-tags: Newsletter
+date: 2025-03-11
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 🔥 New Blog: Designing a Table Format for ML Workloads

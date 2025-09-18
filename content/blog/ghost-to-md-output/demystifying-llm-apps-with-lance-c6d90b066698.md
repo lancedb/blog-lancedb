@@ -1,9 +1,10 @@
 ---
 title: Demystifying LLM Apps with Lance
-slug: demystifying-llm-apps-with-lance-c6d90b066698
-date_published: 2023-05-22T00:00:00.000Z
-date_updated: 2024-03-01T20:03:43.000Z
-tags: Blog
+date: 2023-05-22
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 There’s a lot of justifiable excitement around using LLMs as the basis for building a new generation of smart apps. While tools like LangChain or GPT-Index makes it easy to create prototypes, it’s useful to look behind the curtain to see what the wizard looks like before taking these apps into production. In this post, we’ll show you how to build a Q&A chatbot using just base-level OSS python tooling, OpenAI, and Lance.

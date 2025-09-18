@@ -1,8 +1,10 @@
 ---
 title: Geospatial Restaurant Recommendation System
-slug: geospatial-restaurant-recommendation-system
-date_published: 2024-12-31T15:07:50.000Z
-date_updated: 2024-12-31T15:08:34.000Z
+date: 2024-12-31
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 💡

@@ -1,9 +1,10 @@
 ---
 title: "Vector Arithmetic with LanceDB: An intro to Vector Embeddings"
-slug: vector-arithmetic-with-lancedb-an-intro-to-vector-embeddings
-date_published: 2024-07-02T15:18:37.000Z
-date_updated: 2024-12-12T01:09:25.000Z
-tags: community
+date: 2024-07-02
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

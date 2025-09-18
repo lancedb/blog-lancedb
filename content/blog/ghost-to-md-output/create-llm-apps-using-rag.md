@@ -1,10 +1,11 @@
 ---
 title: Create LLM apps using RAG
-slug: create-llm-apps-using-rag
-date_published: 2024-03-21T02:08:38.000Z
-date_updated: 2024-05-11T07:58:22.000Z
-tags: Blog
+date: 2024-03-21
 excerpt: If you're considering making a personalized bot for your documents or website that responds to you, you're in the right spot. I'm here to help you create a bot using Langchain and RAG strategies for this purpose.
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 ## **Understanding the Limitations of ChatGPT and LLMs**

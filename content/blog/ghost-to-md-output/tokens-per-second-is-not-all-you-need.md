@@ -1,9 +1,10 @@
 ---
 title: Tokens Per Second is NOT All You Need
-slug: tokens-per-second-is-not-all-you-need
-date_published: 2024-05-01T18:10:18.000Z
-date_updated: 2024-12-12T01:14:32.000Z
-tags: Blog, community
+date: 2024-05-01
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 ***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*

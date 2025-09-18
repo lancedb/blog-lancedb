@@ -1,10 +1,11 @@
 ---
 title: Benchmarking random access in Lance
-slug: benchmarking-random-access-in-lance
-date_published: 2023-03-14T00:00:00.000Z
-date_updated: 2024-05-30T21:01:13.000Z
-tags: Blog, Engineering
+date: 2023-03-14
 excerpt: In this short blog post we’ll take you through some simple benchmarks to show the random access performance of Lance format.
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 In this short blog post we’ll take you through some simple benchmarks to show the random access performance of Lance format.

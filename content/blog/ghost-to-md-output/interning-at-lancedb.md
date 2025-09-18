@@ -1,8 +1,10 @@
 ---
 title: Interning at LanceDB
-slug: interning-at-lancedb
-date_published: 2024-12-20T18:50:25.000Z
-date_updated: 2024-12-20T18:50:25.000Z
+date: 2024-12-20
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 My name is Jun Wang, I am a master's student at Clark University, this fall semester I was very fortunate to have the opportunity working at LanceDB as a software engineer intern.

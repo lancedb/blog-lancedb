@@ -1,9 +1,10 @@
 ---
 title: "Hybrid search: RAG for real-life production-grade applications"
-slug: hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a
-date_published: 2024-02-18T23:03:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2024-02-18
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Mahesh Deshwal

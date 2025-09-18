@@ -1,9 +1,10 @@
 ---
 title: Hybrid search and custom reranking with LanceDB
-slug: hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e
-date_published: 2024-02-19T11:31:00.000Z
-date_updated: 2024-05-30T21:00:43.000Z
-tags: Blog
+date: 2024-02-19
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Search has historically been a complex problem in computer science. This is partly due to limitations in natural language or contextual understanding, and partly due to the absence of a universal ranking method that works well for all cases. Although the original premise still applies today, LLMs have vastly improved contextual reasoning and understanding. This allows searching for semantically similar points in a knowledge base and tests for ranking them based on a given context. Let's see how!

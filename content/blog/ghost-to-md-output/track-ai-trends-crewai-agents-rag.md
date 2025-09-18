@@ -1,9 +1,10 @@
 ---
 title: "Track AI Trends: CrewAI Agents & RAG"
-slug: track-ai-trends-crewai-agents-rag
-date_published: 2024-03-25T15:33:41.000Z
-date_updated: 2024-05-09T03:25:27.000Z
-tags: Blog
+date: 2024-03-25
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 This article will teach us how to make an AI Trends Searcher using CrewAI Agents and their Tasks. But before diving into that, let's first understand what CrewAI is and how we can use it for these applications.

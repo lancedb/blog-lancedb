@@ -1,9 +1,10 @@
 ---
 title: Lance v0.16.1 Feature Roundup
-slug: lance-v0-16-1-feature-roundup
-date_published: 2024-08-26T17:25:14.000Z
-date_updated: 2024-12-12T01:07:31.000Z
-tags: Engineering
+date: 2024-08-26
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors. Lance is an OSS project that is open-to-contribution, so we are very pleased to have major features brought by community members.

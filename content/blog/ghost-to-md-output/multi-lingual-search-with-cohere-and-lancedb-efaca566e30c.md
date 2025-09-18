@@ -1,9 +1,10 @@
 ---
 title: Multi-Lingual Search With Cohere and LanceDB
-slug: multi-lingual-search-with-cohere-and-lancedb-efaca566e30c
-date_published: 2023-12-03T23:35:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2023-12-03
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Kaushal Choudhary

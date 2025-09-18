@@ -1,9 +1,10 @@
 ---
 title: Accelerating deep learning workflows with Lance
-slug: accelerating-deep-learning-workflows-with-lance
-date_published: 2024-04-30T11:16:00.000Z
-date_updated: 2024-04-30T14:56:28.000Z
-tags: Blog, Announcement, Internal, #tanay
+date: 2024-04-30
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 Lance is a columnar data format that is easy and fast to version, query and train on. It’s designed to be used with images, videos, 3D point clouds, audio, and, of course, tabular data.

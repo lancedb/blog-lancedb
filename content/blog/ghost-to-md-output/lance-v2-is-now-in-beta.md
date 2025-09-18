@@ -1,9 +1,10 @@
 ---
 title: Lance v2 is now in Beta
-slug: lance-v2-is-now-in-beta
-date_published: 2024-06-05T13:48:59.000Z
-date_updated: 2025-03-03T08:39:44.000Z
-tags: Engineering
+date: 2024-06-05
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 We've been talking for a while about a [new iteration of our file format](__GHOST_URL__/lance-v2/).  We're pleased to announce that the new v2 format is now in available as an opt-in feature for Lance (in release [0.12.1](https://github.com/lancedb/lance/releases/tag/v0.12.1)) and LanceDB (release [0.8.2](https://github.com/lancedb/lancedb/releases/tag/python-v0.8.2)) for users that want to try it out ahead of time and give us some early feedback.

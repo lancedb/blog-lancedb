@@ -1,9 +1,10 @@
 ---
 title: "Effortlessly Loading and Processing Images with Lance: A Code Walkthrough"
-slug: effortlessly-loading-and-processing-images-with-lance-a-code-walkthrough
-date_published: 2024-03-29T15:49:22.000Z
-date_updated: 2024-04-15T10:08:43.000Z
-tags: Blog
+date: 2024-03-29
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Working with large image datasets in machine learning can be challenging, often requiring significant computational resources and efficient data-handling techniques. While widely used for image storage, traditional file formats like JPEG or PNG are not optimized for efficient data loading and processing in Machine learning workflows. This is where the Lance format shines, offering a modern, columnar data storage solution designed specifically for machine learning applications.

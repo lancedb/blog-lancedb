@@ -1,9 +1,10 @@
 ---
 title: "Optimizing LLMs: A Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
-slug: optimizing-llms-a-step-by-step-guide-to-fine-tuning-with-peft-and-qlora-22eddd13d25b
-date_published: 2023-09-28T02:12:00.000Z
-date_updated: 2024-05-11T09:52:26.000Z
-tags: Blog
+date: 2023-09-28
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 **A Practical Guide to Fine-Tuning LLM using QLora**

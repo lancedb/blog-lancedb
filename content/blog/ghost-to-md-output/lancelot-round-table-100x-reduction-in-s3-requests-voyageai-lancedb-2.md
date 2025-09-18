@@ -1,9 +1,10 @@
 ---
 title: ⚔️ Lancelot Round Table, 100x Reduction in S3 Requests, VoyageAI❤️LanceDB
-slug: lancelot-round-table-100x-reduction-in-s3-requests-voyageai-lancedb-2
-date_published: 2025-02-06T16:00:01.000Z
-date_updated: 2025-04-03T06:02:23.000Z
-tags: Newsletter
+date: 2025-02-06
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 To inaugurate the new year, we proudly unveiled the first ⚔️**Lancelot Round Table** in January, celebrating the founding knights who have been instrumental in shaping the future of AI infrastructure since LanceDB's inception. These Lancelot pioneers are driving innovation by implementing and collaborating with `lance` and `lancedb` across their organizations, democratizing access to advanced AI tools, empowering innovators worldwide, and expanding the frontiers of data management.

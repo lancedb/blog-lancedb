@@ -1,9 +1,10 @@
 ---
 title: "Columnar File Readers in Depth: Scheduling vs Decoding"
-slug: splitting-scheduling-from-decoding
-date_published: 2024-05-22T01:18:46.000Z
-date_updated: 2025-03-03T08:39:32.000Z
-tags: Engineering
+date: 2024-05-22
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 We've been working on readers / writers for our recently announced [Lance v2 file format](__GHOST_URL__/lance-v2/) and are posting in-depth articles about writing a high performance file reader.  In the first article I talked about how we obtain [parallelism without row groups](__GHOST_URL__/file-readers-in-depth-parallelism-without-row-groups/).  Today, I want to explain how, and why, we separate scheduling from decoding.

@@ -1,9 +1,10 @@
 ---
 title: An attempt to build cursor's @codebase feature - RAG on codebases - part 2/2
-slug: building-rag-on-codebases-part-2
-date_published: 2024-11-07T12:05:38.000Z
-date_updated: 2024-12-12T01:05:04.000Z
-tags: community
+date: 2024-11-07
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

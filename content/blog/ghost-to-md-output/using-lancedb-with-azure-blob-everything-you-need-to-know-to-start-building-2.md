@@ -1,8 +1,10 @@
 ---
 title: Speaker Identification and Transcription Mapping Using Vector Search
-slug: using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2
-date_published: 2025-02-26T10:03:13.000Z
-date_updated: 2025-02-26T10:03:13.000Z
+date: 2025-02-26
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 💡

@@ -1,9 +1,10 @@
 ---
 title: A Primer on Text Chunking and its Types
-slug: a-primer-on-text-chunking-and-its-types-a420efc96a13
-date_published: 2023-10-24T02:02:00.000Z
-date_updated: 2024-05-08T17:29:12.000Z
-tags: Blog, #prashant
+date: 2023-10-24
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 Text chunking is a technique in natural language processing that divides text into smaller segments, usually based on the parts of speech and grammatical meanings of the words. Text chunking can help extract important information from a text, such as noun phrases, verb phrases, or other semantic units.

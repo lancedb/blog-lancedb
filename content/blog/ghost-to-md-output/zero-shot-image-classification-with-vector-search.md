@@ -1,9 +1,10 @@
 ---
 title: Zero shot image classification with vector search
-slug: zero-shot-image-classification-with-vector-search
-date_published: 2024-07-12T12:37:47.000Z
-date_updated: 2024-07-12T12:38:29.000Z
-tags: community
+date: 2024-07-12
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 💡

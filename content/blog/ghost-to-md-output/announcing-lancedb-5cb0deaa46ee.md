@@ -1,9 +1,10 @@
 ---
 title: Announcing LanceDB
-slug: announcing-lancedb-5cb0deaa46ee
-date_published: 2023-05-01T20:23:00.000Z
-date_updated: 2024-05-30T21:01:06.000Z
-tags: News, Announcement
+date: 2023-05-01
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 🙋 Are you building a generative AI app using an LLM or API? Are you working on a new recsys, a modern search engine, or a new analytical tool for unstructured data? Good news: you no longer have to struggle with Pinecone’s high cost, over the top complexity, or data privacy concerns.

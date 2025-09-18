@@ -1,9 +1,10 @@
 ---
 title: "Langroid: Multi-Agent Programming framework for LLMs"
-slug: langoid-multi-agent-programming-framework-for-llms-e609377de227
-date_published: 2024-01-08T22:00:00.000Z
-date_updated: 2024-05-07T20:05:43.000Z
-tags: Blog, #prashant
+date: 2024-01-08
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 In this era of Large Language Models (LLMs), there is unprecedented demand to create intelligent applications powered by this transformative technology. What is the best way for developers to harness the potential of LLMs in complex application scenarios?

@@ -1,9 +1,10 @@
 ---
 title: Multi-Modal AI made easy with LanceDB & CLIP
-slug: multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939
-date_published: 2023-11-27T00:07:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2023-11-27
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Kaushal Choudhary

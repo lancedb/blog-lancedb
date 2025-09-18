@@ -1,9 +1,10 @@
 ---
 title: My summer internship experience at LanceDB
-slug: my-summer-internship-experience-at-lancedb-2
-date_published: 2024-08-15T17:13:43.000Z
-date_updated: 2024-12-12T01:15:40.000Z
-tags: Blog
+date: 2024-08-15
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign. This summer, I had the opportunity to intern as a Software Engineer at LanceDB, an early-stage startup based in San Francisco. 

@@ -1,9 +1,10 @@
 ---
 title: "Modified RAG: Parent Document & Bigger chunk Retriever"
-slug: modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6
-date_published: 2023-12-15T23:18:00.000Z
-date_updated: 2024-04-02T05:47:43.000Z
-tags: Blog, #shawn
+date: 2023-12-15
+author: LanceDB
+categories: ["Engineering"]
+draft: false
+featured: false
 ---
 
 by Mahesh Deshwal

@@ -1,9 +1,10 @@
 ---
 title: Chunking techniques with Langchain and LlamaIndex
-slug: chunking-techniques-with-langchain-and-llamaindex
-date_published: 2024-04-20T22:39:17.000Z
-date_updated: 2025-01-07T04:54:24.000Z
-tags: community
+date: 2024-04-20
+author: LanceDB
+categories: ["Community"]
+draft: false
+featured: false
 ---
 
 In our last blog, we talked about chunking and why it is necessary for processing data through LLMs. We covered some simple techniques to perform text chunking.

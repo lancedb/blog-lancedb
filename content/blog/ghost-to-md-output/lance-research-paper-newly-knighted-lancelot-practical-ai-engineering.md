@@ -1,9 +1,10 @@
 ---
 title: 🧠Lance Research Paper,🛡️Newly Knighted Lancelot, ⚙️Practical AI Engineering
-slug: lance-research-paper-newly-knighted-lancelot-practical-ai-engineering
-date_published: 2025-05-05T14:30:33.000Z
-date_updated: 2025-05-05T14:30:33.000Z
-tags: Newsletter
+date: 2025-05-05
+author: LanceDB
+categories: ["Announcement"]
+draft: false
+featured: false
 ---
 
 ## 📄🌐The Lance Research Paper 
