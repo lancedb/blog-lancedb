@@ -11,7 +11,6 @@ description: "Get about search within an image with segment anything. Get practi
 ---
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*xPo7B0KrVUBKcmDNHJ_n0Q.png)
-by Kaushal Choudhary
 
 ## Introduction
 

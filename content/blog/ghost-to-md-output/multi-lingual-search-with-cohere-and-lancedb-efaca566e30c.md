@@ -10,8 +10,6 @@ meta_image: /assets/blog/multi-lingual-search-with-cohere-and-lancedb-efaca566e3
 description: "Master about multi-lingual search with cohere and lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
-by Kaushal Choudhary
-
 ## Overview
 
 [**Cohere**](https://txt.cohere.com/multilingual/)** **provides a Multi-Lingual Embedding model which promises to cross the language barriers in language models which were predominantly based on English. Their models support over 100 languages and can deliver [3X better performance](https://txt.cohere.com/multilingual/#benchmarks) than existing open-source models. We are going to use the cohere API to build, test and create a python app with this model on multilingual data, embedding and retrieving through LanceDB.

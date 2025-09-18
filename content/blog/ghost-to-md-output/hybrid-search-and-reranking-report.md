@@ -1,7 +1,7 @@
 ---
 title: "Improve (almost) Every Retriever with LanceDB Hybrid Search and Reranking"
 date: 2024-08-26
-author: chatbot can only be
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: "Effortlessly Loading and Processing Images with Lance: a Code Walkthrough"
 date: 2024-03-29
-author: converting all data into
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

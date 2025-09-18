@@ -1,7 +1,7 @@
 ---
 title: "GPU-Accelerated Indexing in LanceDB"
 date: 2023-11-02
-author: supporting GPU acceleration for
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

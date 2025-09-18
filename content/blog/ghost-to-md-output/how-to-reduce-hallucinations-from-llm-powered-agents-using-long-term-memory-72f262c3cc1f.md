@@ -1,7 +1,7 @@
 ---
 title: "Reduce Hallucinations from LLM-Powered Agents Using Long-Term Memory"
 date: 2023-07-19
-author: Tevin Wang
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

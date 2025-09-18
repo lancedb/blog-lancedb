@@ -1,7 +1,7 @@
 ---
 title: "Vector Arithmetic with LanceDB: an Intro to Vector Embeddings"
 date: 2024-07-02
-author: Artitra Roy Gosthipaty
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

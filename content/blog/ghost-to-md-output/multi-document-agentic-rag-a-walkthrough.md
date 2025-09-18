@@ -2,8 +2,6 @@
 title: "Multi Document Agentic RAG: a Walkthrough"
 date: 2024-08-28
 author: Vipul Maheshwari
-
-Agentic RAG
 categories: ["Community"]
 draft: false
 featured: false
@@ -11,10 +9,6 @@ image: /assets/blog/multi-document-agentic-rag-a-walkthrough/preview-image.png
 meta_image: /assets/blog/multi-document-agentic-rag-a-walkthrough/preview-image.png
 description: "Unlock about multi document agentic rag: a walkthrough. Get practical steps, examples, and best practices you can use now."
 ---
-
-💡
-
-This is a community post by Vipul Maheshwari
 
 Agentic RAG (Retrieval-Augmented Generation) brings a notable improvement in how information is managed. While traditional RAG systems focus on retrieving relevant data and delivering it to a language model (LLM) for generating responses, Agentic RAG goes beyond that by introducing a higher level of autonomy. The system now does more than just gather data; it can also make decisions and take action independently.
 

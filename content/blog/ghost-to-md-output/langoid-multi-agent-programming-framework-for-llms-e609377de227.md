@@ -1,7 +1,7 @@
 ---
 title: "Langroid: Multi-Agent Programming Framework for LLMs"
 date: 2024-01-08
-author: this transformative technology. What
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

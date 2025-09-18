@@ -10,8 +10,6 @@ meta_image: /assets/blog/movie-recommendation-system-using-lancedb-and-doc2vec/p
 description: "This is a LanceDB community blog post written by \"Vipul Maheshwari\". Get practical steps and examples from 'Movie recommendation system using Doc2Vec and genre classification'."
 ---
 
-> This is a LanceDB community blog post written by "Vipul Maheshwari".
-
 This article provides a comprehensive guide on creating a movie recommendation system by using vector similarity search and multi-label genre classification.
 ![](__GHOST_URL__/content/images/2024/05/1_AatBvnpVpEPoQvZAMeqU-A.webp)
 Here's what we'll cover:

@@ -1,7 +1,7 @@
 ---
 title: "NER-Powered Semantic Search Using LanceDB"
 date: 2023-11-08
-author: comparing it with the
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

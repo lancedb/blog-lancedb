@@ -2,8 +2,6 @@
 title: "Multitask Embedding with LanceDB"
 date: 2023-11-14
 author: Kaushal Choudhary
-
-In this
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -11,8 +9,6 @@ image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.
 meta_image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
 description: "Explore about multitask embedding with lancedb. Get practical steps, examples, and best practices you can use now."
 ---
-
-By Kaushal Choudhary
 
 In this blog, we’ll cover InstructOR embedding model and how it can be used with LanceBD. LanceDB embedding API already supports this model so we can simply use it from the registry.
 

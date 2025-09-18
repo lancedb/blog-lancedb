@@ -1,9 +1,7 @@
 ---
 title: "MemGPT: OS Inspired LLMs That Manage Their Own Memory"
 date: 2023-12-11
-author: Ayush Chaurasia
-
-In the
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

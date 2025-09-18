@@ -1,9 +1,7 @@
 ---
 title: "Zero Shot Image Classification with Vector Search"
 date: 2024-07-12
-author: Vipul Maheshwari
-
-This post
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

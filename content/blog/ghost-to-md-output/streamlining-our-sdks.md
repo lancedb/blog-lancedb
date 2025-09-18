@@ -1,7 +1,7 @@
 ---
 title: "Streamlining Our SDKs"
 date: 2024-07-16
-author: rewriting our SDKs to
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

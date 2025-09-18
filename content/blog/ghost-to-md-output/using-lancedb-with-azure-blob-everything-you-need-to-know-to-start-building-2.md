@@ -1,7 +1,7 @@
 ---
 title: "Speaker Identification and Transcription Mapping Using Vector Search"
 date: 2025-02-26
-author: Shresth Shukla
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: "Efficient RAG with Compression and Filtering"
 date: 2024-01-09
-author: Kaushal Choudhary
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

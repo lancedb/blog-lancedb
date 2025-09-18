@@ -1,7 +1,7 @@
 ---
 title: "End to End Evaluation Template for RAG Apps"
 date: 2025-02-22
-author: Mahesh Deshwal
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

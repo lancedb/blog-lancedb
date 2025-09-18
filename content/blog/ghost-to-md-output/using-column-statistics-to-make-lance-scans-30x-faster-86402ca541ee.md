@@ -1,9 +1,7 @@
 ---
 title: "Using Column Statistics to Make Lance Scans 30x Faster"
 date: 2023-12-20
-author: Will Jones
-
-In Lance
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -11,8 +9,6 @@ image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402
 meta_image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402ca541ee/preview-image.png
 description: "Unlock about using column statistics to make lance scans 30x faster. Get practical steps, examples, and best practices you can use now."
 ---
-
-by Will Jones
 
 In Lance v0.8.21, we introduced column statistics and statistics-based page pruning. This enhancement reduces the number of IO calls needed for scanning with a filter, making scans 30x faster in some cases. This is a common optimization in analytics formats like Parquet. However, combined with Lance’s superior handling of vector and unstructured data, we get 3x faster scans with predicates for vector data versus Parquet.
 

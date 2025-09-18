@@ -1,7 +1,7 @@
 ---
 title: "Demystifying LLM Apps with Lance"
 date: 2023-05-22
-author: concatenating the next
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

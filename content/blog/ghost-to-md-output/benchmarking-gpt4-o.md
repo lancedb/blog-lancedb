@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking GPT4-O"
 date: 2024-05-23
-author: majority vote. The evaluation
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

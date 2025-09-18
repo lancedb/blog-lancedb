@@ -1,7 +1,7 @@
 ---
 title: "Open Vector Data Lakes"
 date: 2023-05-21
-author: some systems will be
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -10,7 +10,6 @@ meta_image: /assets/blog/why-dataframe-libraries-need-to-understand-vector-embed
 description: "Discover about open vector data lakes. Get practical steps, examples, and best practices you can use now."
 ---
 
-by Ziheng Wang
 
 This post is an expanded version of the upcoming joint talk [Quokka](https://github.com/marsupialtail/quokka) + [LanceDB](https://github.com/lancedb/lancedb) talk at the [Data+AI Summit](https://www.databricks.com/dataaisummit/) this June.
 

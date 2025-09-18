@@ -1,7 +1,7 @@
 ---
 title: "Practical Introduction to Late Chunking or Chunked Pooling"
 date: 2024-10-29
-author: Mahesh Deshwal
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

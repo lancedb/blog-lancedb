@@ -1,9 +1,7 @@
 ---
 title: "Substrait Powered Filter Pushdown in Lance"
 date: 2024-01-31
-author: Weston Pace
-
-Filter pushdown
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

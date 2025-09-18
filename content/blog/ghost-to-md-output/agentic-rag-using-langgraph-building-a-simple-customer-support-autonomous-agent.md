@@ -10,7 +10,7 @@ meta_image: /assets/blog/agentic-rag-using-langgraph-building-a-simple-customer-
 description: "### Agent?  What's that?"
 ---
 
-### Agent? What's that?
+## What is an Agent?
 
 In the current world where everything is running with and for AI, retrieval-augmented generation (RAG) systems have become essential for handling simple queries and generating contextually relevant responses. However, as ever evolving human we are, the need for complex, autonomous problem-solving has emerged. Here I present, behold the mighty: **AI Agents** — autonomous entities that redefine how we interact with technology. In simple terms, it's a sophisticated Graph and even simpler, complex and advanced `for` loops which use LLMs as the core of working.
 

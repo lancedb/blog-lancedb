@@ -2,8 +2,6 @@
 title: "Multi-Modal AI Made Easy with LanceDB & CLIP"
 date: 2023-11-27
 author: Kaushal Choudhary
-
-One of
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -12,7 +10,7 @@ meta_image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939
 description: "Understand about multi-modal ai made easy with lancedb & clip. Get practical steps, examples, and best practices you can use now."
 ---
 
-by Kaushal Choudhary
+by 
 
 One of the most exciting areas of research in deep learning currently is multi-modality and its applications. Kick-started by open sourcing of the CLIP model by OpenAI, multi-modal capabilities have evolved rapidly over the span of last couple of years. This primer covers 3 multi-modal applications built using CLIP powered by LanceDB as vector store.
 

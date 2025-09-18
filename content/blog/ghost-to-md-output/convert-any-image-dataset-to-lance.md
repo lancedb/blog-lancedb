@@ -1,7 +1,7 @@
 ---
 title: "Convert Any Image Dataset to Lance"
 date: 2024-04-10
-author: leveraging the
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

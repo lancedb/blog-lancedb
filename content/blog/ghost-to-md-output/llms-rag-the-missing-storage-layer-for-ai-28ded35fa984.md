@@ -2,8 +2,6 @@
 title: "LLMs, RAG, & the Missing Storage Layer for AI"
 date: 2023-09-05
 author: Ayush Chaurasia
-
-In the
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -11,8 +9,6 @@ image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/previ
 meta_image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
 description: "Build about llms, rag, & the missing storage layer for ai. Get practical steps, examples, and best practices you can use now."
 ---
-
-by Ayush Chaurasia
 
 In the rapidly evolving landscape of artificial intelligence, Generative AI, especially Language Model Machines (LLMs) have emerged as the veritable backbone of numerous applications, from natural language processing and machine translation to virtual assistants and content generation. The advent of GPT-3 and its successors marked a significant milestone in AI development, ushering in an era where machines could not only understand but also generate human-like text with astonishing proficiency. However, beneath the surface of this AI revolution lies a crucial missing element, one that has the potential to unlock even greater AI capabilities: the storage layer.
 

@@ -1,7 +1,7 @@
 ---
 title: "Improving LLM-Based Web Applications with Easy-to-Use and Free Serverless Vector Database LanceDB"
 date: 2023-08-16
-author: Tevin Wang
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

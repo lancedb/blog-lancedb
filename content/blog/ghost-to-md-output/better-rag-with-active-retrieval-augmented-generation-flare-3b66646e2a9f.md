@@ -1,7 +1,7 @@
 ---
 title: "Better RAG with Active Retrieval Augmented Generation FLARE"
 date: 2023-11-17
-author: "Akash Desai"
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -9,8 +9,6 @@ image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-
 meta_image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/preview-image.png
 description: "by Akash A. Get practical steps and examples from 'Better RAG with Active Retrieval Augmented Generation FLARE'."
 ---
-
-by Akash A. Desai
 
 Welcome to our deep dive into Forward-Looking Active Retrieval Augmented Generation (FLARE), an innovative approach enhancing the accuracy and reliability of large language models (LLMs). we’ll explore how FLARE tackles the challenge of hallucination in LLMs, especially in complex, long-form content generation tasks.
 

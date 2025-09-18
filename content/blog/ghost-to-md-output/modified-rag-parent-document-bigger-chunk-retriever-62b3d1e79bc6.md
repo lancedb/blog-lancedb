@@ -1,9 +1,7 @@
 ---
 title: "Modified RAG: Parent Document & Bigger Chunk Retriever"
 date: 2023-12-15
-author: Mahesh Deshwal
-
-In case
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

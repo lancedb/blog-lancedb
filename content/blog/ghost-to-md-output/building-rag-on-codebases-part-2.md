@@ -1,9 +1,7 @@
 ---
 title: "An Attempt to Build Cursor's @codebase Feature - RAG on Codebases - Part 2/2"
 date: 2024-11-07
-author: Sankalp Shubham
-
-What this
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

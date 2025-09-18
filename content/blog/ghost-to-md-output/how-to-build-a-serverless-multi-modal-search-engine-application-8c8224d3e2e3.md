@@ -2,8 +2,6 @@
 title: "Serverless Multi-Modal Search Engine Application"
 date: 2023-09-25
 author: Ayush Chaurasia
-
-In this
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -11,8 +9,6 @@ image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-applicat
 meta_image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
 description: "Master about serverless multi-modal search engine application. Get practical steps, examples, and best practices you can use now."
 ---
-
-by Ayush Chaurasia
 
 In this writeup, you’ll learn the process of building a multi-modal search engine using roboflow’s CLIP inference API and LanceDB, serverless vector with native javascript support.
 

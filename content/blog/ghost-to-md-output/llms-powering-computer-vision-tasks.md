@@ -2,8 +2,6 @@
 title: "LLMs Powering Computer Vision Tasks"
 date: 2024-12-01
 author: Prashant Kumar
-
-Computer vision
 categories: ["Community"]
 draft: false
 featured: false
@@ -11,10 +9,6 @@ image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
 meta_image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
 description: "Understand about llms powering computer vision tasks. Get practical steps, examples, and best practices you can use now."
 ---
-
-💡
-
-This is a community post by Prashant Kumar
 
 Computer vision turns visual data into valuable insights, making it exciting. Now, with Large Language Models (LLMs), combining vision and language opens up even more possibilities. Before we explore how LLMs are powering computer vision, let’s first take a quick look at how they differ.
 

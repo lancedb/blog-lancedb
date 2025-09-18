@@ -1,7 +1,7 @@
 ---
 title: "Create LLM Apps Using RAG"
 date: 2024-03-21
-author: converting the query into
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

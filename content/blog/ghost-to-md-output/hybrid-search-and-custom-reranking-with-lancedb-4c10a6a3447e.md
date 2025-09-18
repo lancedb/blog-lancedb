@@ -1,7 +1,7 @@
 ---
 title: "Hybrid Search and Custom Reranking with LanceDB"
 date: 2024-02-19
-author: GitHub user virattt
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

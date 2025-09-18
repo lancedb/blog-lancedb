@@ -1,7 +1,7 @@
 ---
 title: "My Summer Internship Experience at LanceDB"
 date: 2024-08-15
-author: around
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

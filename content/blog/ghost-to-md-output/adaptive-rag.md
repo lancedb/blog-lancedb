@@ -1,7 +1,7 @@
 ---
 title: "Practical Introduction to Adaptive-RAG"
 date: 2024-04-24
-author: combining LLMs with external
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

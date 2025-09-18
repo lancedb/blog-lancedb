@@ -1,7 +1,7 @@
 ---
 title: "S3 Backed Full-Text Search with Tantivy (Part 1)"
 date: 2023-08-14
-author: Rob Meng
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -9,8 +9,6 @@ image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/
 meta_image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/preview-image.png
 description: "Discover about s3 backed full-text search with tantivy (part 1). Get practical steps, examples, and best practices you can use now."
 ---
-
-by Rob Meng
 
 [Tantivy](https://github.com/quickwit-oss/tantivy) is a highly performant full text search library written in Rust. The python version of tantivy powers the full-text search (FTS) feature in [LanceDB](https://github.com/lancedb/lancedb).
 

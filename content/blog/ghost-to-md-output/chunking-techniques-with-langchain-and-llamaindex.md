@@ -1,9 +1,7 @@
 ---
 title: "Chunking Techniques with Langchain and LlamaIndex"
 date: 2024-04-20
-author: number of characters.
-
-    from
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

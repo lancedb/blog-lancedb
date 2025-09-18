@@ -1,7 +1,7 @@
 ---
 title: "Interning at LanceDB"
 date: 2024-12-20
-author: bit left
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

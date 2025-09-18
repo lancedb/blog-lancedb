@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking LanceDB"
 date: 2023-12-18
-author: setting this parameter
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

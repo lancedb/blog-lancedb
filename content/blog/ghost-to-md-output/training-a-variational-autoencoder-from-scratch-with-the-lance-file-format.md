@@ -1,7 +1,7 @@
 ---
 title: "Training a Variational AutoEncoder from Scratch with Lance File Format"
 date: 2024-09-02
-author: traditional autoencoders can be
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false

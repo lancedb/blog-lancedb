@@ -1,7 +1,7 @@
 ---
 title: "Context-Aware Chatbot Using Llama 2 & LanceDB Serverless Vector Database"
 date: 2023-09-19
-author: Akash A. Desai
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

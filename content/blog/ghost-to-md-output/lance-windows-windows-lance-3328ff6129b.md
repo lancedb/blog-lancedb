@@ -1,7 +1,7 @@
 ---
 title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
-author: day. By night Wes
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

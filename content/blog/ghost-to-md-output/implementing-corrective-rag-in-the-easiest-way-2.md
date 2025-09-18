@@ -1,7 +1,7 @@
 ---
 title: "Implementing Corrective RAG in the Easiest Way"
 date: 2024-03-04
-author: fetching context from
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

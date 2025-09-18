@@ -1,7 +1,7 @@
 ---
 title: "Optimizing LLMs: a Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
 date: 2023-09-28
-author: creating new low-rank transformations
+author: LanceDB
 categories: ["Engineering"]
 draft: false
 featured: false

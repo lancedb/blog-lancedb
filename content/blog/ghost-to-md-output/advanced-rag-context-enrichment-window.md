@@ -1,7 +1,7 @@
 ---
 title: "Advanced RAG with Context Enrichment Window"
 date: 2024-10-17
-author: the company he keeps
+author: LanceDB
 categories: ["Community"]
 draft: false
 featured: false
@@ -9,8 +9,6 @@ image: /assets/blog/advanced-rag-context-enrichment-window/preview-image.png
 meta_image: /assets/blog/advanced-rag-context-enrichment-window/preview-image.png
 description: ". ."
 ---
-
-.... and some advanced filtering and re-ranking technique
 
 We all know what's Vanilla RAG, how it works, and how to use it but sometimes there are use cases that go beyond the traditional rules. For example, there are some use cases where we need to create very small chunks as larger ones can add noise like conversation history. Using a sentence or couple-level strategy is pretty decent in this case but don't you think the context to the current reply might be hidden somewhere in the previous one or the answer to something can be somewhere in the future ones? This is just one use case and I know you might be thinking why not use a bigger chunk if you're going in that direction? A few reasons such as no. of chunks to send are limited and bigger chunk sizes can add more noise. So? What's the solution?
 
