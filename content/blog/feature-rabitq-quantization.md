@@ -27,7 +27,7 @@ Today we are adding **RaBitQ quantization** to LanceDB. You now have a choice. `
 
 High-dimensional vectors behave in ways that seem strange if you are used to 2D or 3D. In high dimensions almost every coordinate of a unit vector is close to zero. This is the **concentration of measure** phenomenon often discussed in [retrieval systems](/docs/search/optimize-queries/).
 
-RaBitQ takes advantage of this. It stores only the binary “sign pattern” of each normalized vector and relies on the fact that the error introduced is bounded. The RaBitQ paper proves the estimation error is **O(1/D)**, which is asymptotically optimal. In practice, the more dimensions your embeddings have, the more RaBitQ gives you for free.
+RaBitQ takes advantage of this. It stores only the binary "sign pattern" of each normalized vector and relies on the fact that the error introduced is bounded. The RaBitQ paper proves the estimation error is **O(1/√D)**, which is asymptotically optimal. In practice, the more dimensions your embeddings have, the more RaBitQ gives you for free.
 
 {{< admonition >}}
 RaBitQ is most effective with embeddings of 512, 768, or 1024 dimensions. IVF_PQ often struggles more as dimensionality grows, making RaBitQ a strong complement.
@@ -65,11 +65,11 @@ For you this means recall above 95 percent with lower latency, even on large [mu
 Always re-rank candidates with full precision vectors. IVF_PQ and RaBitQ both rely on approximation for candidate generation.
 {{< /admonition >}}
 
-## Research context: RaBitQ-S
+## Research context: extended-RaBitQ
 
-The RaBitQ paper also introduces **RaBitQ-S**, a generalization to multi-bit quantization. Instead of limiting each coordinate to 1 bit, RaBitQ-S allows for 2–4 bits per dimension. This reduces error further and can outperform product quantization under the same compression budget. For background on token-based search that pairs well with these methods, see [Full‑Text Search](/docs/search/full-text-search/).
+The [RaBitQ paper](https://arxiv.org/abs/2409.09913) also introduces **extended-RaBitQ**, a generalization to multi-bit quantization. Instead of limiting each coordinate to 1 bit, extended-RaBitQ allows for 2–4 bits per dimension. This reduces error further and can outperform product quantization under the same compression budget. For background on token-based search that pairs well with these methods, see [Full‑Text Search](/docs/search/full-text-search/).
 
-⚠️ **RaBitQ-S is not yet available in LanceDB.** We mention it here only as research context. It shows the trajectory of this work, and the same principles that make RaBitQ efficient at 1 bit can be extended to higher precision when needed.
+⚠️ **extended-RaBitQ is not yet available in LanceDB.** We mention it here only as research context. It shows the trajectory of this work, and the same principles that make RaBitQ efficient at 1 bit can be extended to higher precision when needed.
 
 *(Figure 8: Illustration of binary vs multi-bit quantization bins)*
 
@@ -119,7 +119,7 @@ When you use LanceDB today, the default quantization method is IVF_PQ. It works 
 
 | Feature | IVF_PQ (default) | RaBitQ (new) |
 | ----- | ----- | ----- |
-| **Compression ratio** | 8–16x typical | 32x and higher |
+| **Compression ratio** | 8–16x typical | Up to 32x |
 | **Index build time** | Slower, requires codebook training | Faster, no training needed |
 | **Recall in high dimensions** | Good but drops with >512d | Stays high, error shrinks with more dimensions |
 | **Query speed** | Good, but PQ distance estimation is slower | Faster, binary dot products dominate |
