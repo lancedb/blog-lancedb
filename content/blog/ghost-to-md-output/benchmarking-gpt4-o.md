@@ -1,13 +1,13 @@
 ---
-title: "Benchmarking GPT4-o"
+title: "Benchmarking GPT4-O"
 date: 2024-05-23
-author: LanceDB
+author: majority vote. The evaluation
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/benchmarking-gpt4-o/preview-image.png
 meta_image: /assets/blog/benchmarking-gpt4-o/preview-image.png
-description: "Last week, OpenAI announced its latest LLM, GPT-4o, which follows GPT-4 Turbo."
+description: "Last week, OpenAI announced its latest LLM, GPT-4o, which follows GPT-4 Turbo.  In this blog, we benchmark GPT4-o using a new benchmarking toolkit called \"Needle in a Needlestack\"."
 ---
 
 Last week, OpenAI announced its latest LLM, GPT-4o, which follows GPT-4 Turbo. In this blog, we benchmark GPT4-o using a new benchmarking toolkit called "Needle in a Needlestack".

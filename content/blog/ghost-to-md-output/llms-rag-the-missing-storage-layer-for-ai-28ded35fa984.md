@@ -1,13 +1,15 @@
 ---
-title: "LLMs, RAG, & the missing storage layer for AI"
+title: "LLMs, RAG, & the Missing Storage Layer for AI"
 date: 2023-09-05
-author: LanceDB
+author: Ayush Chaurasia
+
+In the
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
 meta_image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
-description: "by Ayush Chaurasia."
+description: "Build about llms, rag, & the missing storage layer for ai. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Ayush Chaurasia

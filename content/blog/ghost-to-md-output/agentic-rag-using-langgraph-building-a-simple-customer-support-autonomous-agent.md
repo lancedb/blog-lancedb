@@ -1,13 +1,13 @@
 ---
-title: "Agentic RAG using LangGraph: Build autonomous Customer support agent"
+title: "Agentic RAG Using LangGraph: Build Autonomous Customer Support Agent"
 date: 2025-01-26
-author: LanceDB
+author: goals rather than specific
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/agentic-rag-using-langgraph-building-a-simple-customer-support-autonomous-agent/preview-image.png
 meta_image: /assets/blog/agentic-rag-using-langgraph-building-a-simple-customer-support-autonomous-agent/preview-image.png
-description: "Agent? What's that?"
+description: "### Agent?  What's that?"
 ---
 
 ### Agent? What's that?

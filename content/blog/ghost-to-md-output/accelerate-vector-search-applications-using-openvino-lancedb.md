@@ -1,13 +1,15 @@
 ---
 title: "Accelerate Vector Search Applications Using OpenVINO & LanceDB"
 date: 2023-12-06
-author: LanceDB
+author: Intel
+
+OpenVINO toolkit is
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
 meta_image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
-description: "In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the."
+description: "In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the Pytorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup."
 ---
 
 In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the Pytorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup.

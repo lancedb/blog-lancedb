@@ -1,13 +1,13 @@
 ---
 title: "Implementing Corrective RAG in the Easiest Way"
 date: 2024-03-04
-author: LanceDB
+author: fetching context from
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/implementing-corrective-rag-in-the-easiest-way-2/preview-image.png
 meta_image: /assets/blog/implementing-corrective-rag-in-the-easiest-way-2/preview-image.png
-description: "Even though text-generation models are good at generating content, they sometimes need to improve in returning facts."
+description: "Even though text-generation models are good at generating content, they sometimes need to improve in returning facts.  This happens because of the way they are trained."
 ---
 
 Even though text-generation models are good at generating content, they sometimes need to improve in returning facts. This happens because of the way they are trained. Retrieval Augmented Generation(RAG) techniques have been introduced to address this issue by fetching context from a knowledge base.

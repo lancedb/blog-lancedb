@@ -1,5 +1,5 @@
 ---
-title: "Chat with your stats using Langchain dataframe agent & LanceDB hybrid search"
+title: "Chat with Your Stats Using Langchain Dataframe Agent & LanceDB Hybrid Search"
 date: 2024-06-30
 author: LanceDB
 categories: ["Community"]
@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/chat-with-csv-excel-using-lancedb/preview-image.png
 meta_image: /assets/blog/chat-with-csv-excel-using-lancedb/preview-image.png
-description: "In this blog, we’ll explore how to build a chat application that interacts with CSV and Excel files using LanceDB’s hybrid search."
+description: "In this blog, we’ll explore how to build a chat application that interacts with CSV and Excel files using LanceDB’s hybrid search capabilities."
 ---
 
 ![](__GHOST_URL__/content/images/2024/06/image-4-2.png)

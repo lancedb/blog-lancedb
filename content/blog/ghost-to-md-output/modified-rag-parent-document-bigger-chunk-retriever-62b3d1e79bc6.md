@@ -1,13 +1,15 @@
 ---
-title: "Modified RAG: Parent Document & Bigger chunk Retriever"
+title: "Modified RAG: Parent Document & Bigger Chunk Retriever"
 date: 2023-12-15
-author: LanceDB
+author: Mahesh Deshwal
+
+In case
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/preview-image.png
 meta_image: /assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/preview-image.png
-description: "by Mahesh Deshwal."
+description: "Get about modified rag: parent document & bigger chunk retriever. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Mahesh Deshwal

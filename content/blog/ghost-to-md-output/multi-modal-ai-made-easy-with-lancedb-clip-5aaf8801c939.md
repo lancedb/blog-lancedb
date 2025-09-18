@@ -1,13 +1,15 @@
 ---
-title: "Multi-Modal AI made easy with LanceDB & CLIP"
+title: "Multi-Modal AI Made Easy with LanceDB & CLIP"
 date: 2023-11-27
-author: LanceDB
+author: Kaushal Choudhary
+
+One of
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939/preview-image.png
 meta_image: /assets/blog/multi-modal-ai-made-easy-with-lancedb-clip-5aaf8801c939/preview-image.png
-description: "by Kaushal Choudhary."
+description: "Understand about multi-modal ai made easy with lancedb & clip. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Kaushal Choudhary

@@ -1,13 +1,13 @@
 ---
-title: "Improving LLM-based web applications with easy-to-use and free serverless vector database LanceDB"
+title: "Improving LLM-Based Web Applications with Easy-to-Use and Free Serverless Vector Database LanceDB"
 date: 2023-08-16
-author: LanceDB
+author: Tevin Wang
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/improving-llm-based-web-applications-with-easy-to-use-and-free-serverless-vector-database-lancedb-254e1442a9b0/preview-image.png
 meta_image: /assets/blog/improving-llm-based-web-applications-with-easy-to-use-and-free-serverless-vector-database-lancedb-254e1442a9b0/preview-image.png
-description: "by Tevin Wang."
+description: "Unlock about improving llm-based web applications with easy-to-use and free serverless vector database lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Tevin Wang

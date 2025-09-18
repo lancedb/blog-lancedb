@@ -1,13 +1,13 @@
 ---
 title: "Benchmarking LanceDB"
 date: 2023-12-18
-author: LanceDB
+author: setting this parameter
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/benchmarking-lancedb-92b01032874a/preview-image.png
 meta_image: /assets/blog/benchmarking-lancedb-92b01032874a/preview-image.png
-description: "I came upon a yesterday benchmarking LanceDB. The numbers looked very surprising to me, so I decided to do a quick investigation on my own."
+description: "I came upon a yesterday benchmarking LanceDB.  The numbers looked very surprising to me, so I decided to do a quick investigation on my own."
 ---
 
 I came upon a[ blog post](https://medium.com/@plaggy/lancedb-vs-qdrant-caf01c89965a) yesterday benchmarking LanceDB. The numbers looked very surprising to me, so I decided to do a quick investigation on my own. First, I want to express gratitude to the post’s author for taking the time to do a run down and publishing their results. Running these benchmarks is often a tedious exercise in chasing down details and analyzing tradeoffs. If we feel something was missed in a benchmark of LanceDB, I believe it’s the fault of our documentation and *not* the fault of the author.

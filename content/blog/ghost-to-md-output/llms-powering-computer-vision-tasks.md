@@ -1,13 +1,15 @@
 ---
-title: "LLMs powering Computer Vision tasks"
+title: "LLMs Powering Computer Vision Tasks"
 date: 2024-12-01
-author: LanceDB
+author: Prashant Kumar
+
+Computer vision
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
 meta_image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
-description: "."
+description: "Understand about llms powering computer vision tasks. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

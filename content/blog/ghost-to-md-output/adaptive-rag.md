@@ -1,13 +1,13 @@
 ---
-title: "Practical introduction to Adaptive-RAG"
+title: "Practical Introduction to Adaptive-RAG"
 date: 2024-04-24
-author: LanceDB
+author: combining LLMs with external
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/adaptive-rag/preview-image.png
 meta_image: /assets/blog/adaptive-rag/preview-image.png
-description: "Traditional LLMs provide answers based on a fixed knowledge database on which they are trained."
+description: "Traditional LLMs provide answers based on a fixed knowledge database on which they are trained.  This limits their ability to respond with current or specific information."
 ---
 
 ![](https://cdn-images-1.medium.com/max/1200/1*dK5Kkum58gauwytt3PkQtg.png)[Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf)

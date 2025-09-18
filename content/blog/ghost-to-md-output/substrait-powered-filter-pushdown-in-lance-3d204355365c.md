@@ -1,13 +1,15 @@
 ---
 title: "Substrait Powered Filter Pushdown in Lance"
 date: 2024-01-31
-author: LanceDB
+author: Weston Pace
+
+Filter pushdown
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/substrait-powered-filter-pushdown-in-lance-3d204355365c/preview-image.png
 meta_image: /assets/blog/substrait-powered-filter-pushdown-in-lance-3d204355365c/preview-image.png
-description: "by Weston Pace."
+description: "Build about substrait powered filter pushdown in lance. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Weston Pace

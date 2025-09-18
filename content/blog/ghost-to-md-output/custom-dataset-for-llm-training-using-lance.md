@@ -1,13 +1,13 @@
 ---
-title: "Custom Datasets for efficient LLM training using Lance"
+title: "Custom Datasets for Efficient LLM Training Using Lance"
 date: 2024-03-08
-author: LanceDB
+author: how your data is
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/custom-dataset-for-llm-training-using-lance/preview-image.png
 meta_image: /assets/blog/custom-dataset-for-llm-training-using-lance/preview-image.png
-description: "Learn how to craft custom text datasets for LLM training and fine-tuning using Lance."
+description: "See about custom datasets for efficient llm training using lance. Get practical steps, examples, and best practices you can use now."
 ---
 
 ## Introduction

@@ -1,13 +1,15 @@
 ---
-title: "Chunking techniques with Langchain and LlamaIndex"
+title: "Chunking Techniques with Langchain and LlamaIndex"
 date: 2024-04-20
-author: LanceDB
+author: number of characters.
+
+    from
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/chunking-techniques-with-langchain-and-llamaindex/preview-image.png
 meta_image: /assets/blog/chunking-techniques-with-langchain-and-llamaindex/preview-image.png
-description: "In our last blog, we talked about chunking and why it is necessary for processing data through LLMs."
+description: "In our last blog, we talked about chunking and why it is necessary for processing data through LLMs.  We covered some simple techniques to perform text chunking."
 ---
 
 In our last blog, we talked about chunking and why it is necessary for processing data through LLMs. We covered some simple techniques to perform text chunking.

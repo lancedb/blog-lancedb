@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/preview-image.png
 meta_image: /assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/preview-image.png
-description: "Have you ever thought about how search engines find exactly what you're looking for? They usually use a mix of looking for specific words."
+description: "Have you ever thought about how search engines find exactly what you're looking for?  They usually use a mix of looking for specific words and understanding the meaning behind them."
 ---
 
 Have you ever thought about how search engines find exactly what you're looking for? They usually use a mix of looking for specific words and understanding the meaning behind them. This is called a hybrid search. Now, let's see how we can make a simple way to find documents using this mix.

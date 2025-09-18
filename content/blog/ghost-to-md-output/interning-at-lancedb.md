@@ -1,13 +1,13 @@
 ---
 title: "Interning at LanceDB"
 date: 2024-12-20
-author: LanceDB
+author: bit left
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/interning-at-lancedb/preview-image.png
 meta_image: /assets/blog/interning-at-lancedb/preview-image.png
-description: "My name is Jun Wang, I am a master's student at Clark University, this fall semester I was very fortunate to have the opportunity working at."
+description: "My name is Jun Wang, I am a master's student at Clark University, this fall semester I was very fortunate to have the opportunity working at LanceDB as a software engineer intern."
 ---
 
 My name is Jun Wang, I am a master's student at Clark University, this fall semester I was very fortunate to have the opportunity working at LanceDB as a software engineer intern.

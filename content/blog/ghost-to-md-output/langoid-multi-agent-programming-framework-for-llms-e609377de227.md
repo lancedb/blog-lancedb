@@ -1,13 +1,13 @@
 ---
-title: "Langroid: Multi-Agent Programming framework for LLMs"
+title: "Langroid: Multi-Agent Programming Framework for LLMs"
 date: 2024-01-08
-author: LanceDB
+author: this transformative technology. What
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/langoid-multi-agent-programming-framework-for-llms-e609377de227/preview-image.png
 meta_image: /assets/blog/langoid-multi-agent-programming-framework-for-llms-e609377de227/preview-image.png
-description: "In this era of Large Language Models (LLMs), there is unprecedented demand to create intelligent applications powered by this transformative."
+description: "In this era of Large Language Models (LLMs), there is unprecedented demand to create intelligent applications powered by this transformative technology."
 ---
 
 In this era of Large Language Models (LLMs), there is unprecedented demand to create intelligent applications powered by this transformative technology. What is the best way for developers to harness the potential of LLMs in complex application scenarios?

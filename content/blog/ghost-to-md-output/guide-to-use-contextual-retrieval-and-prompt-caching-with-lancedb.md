@@ -1,5 +1,5 @@
 ---
-title: "Implement contextual retrieval and prompt caching with LanceDB"
+title: "Implement Contextual Retrieval and Prompt Caching with LanceDB"
 date: 2024-10-08
 author: LanceDB
 categories: ["Community"]
@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/guide-to-use-contextual-retrieval-and-prompt-caching-with-lancedb/preview-image.png
 meta_image: /assets/blog/guide-to-use-contextual-retrieval-and-prompt-caching-with-lancedb/preview-image.png
-description: "Decrease chunk retrieval failure rate by 35% to 50%."
+description: "Unlock about implement contextual retrieval and prompt caching with lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
 ### Decrease chunk retrieval failure rate by 35% to 50%

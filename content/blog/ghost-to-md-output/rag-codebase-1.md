@@ -1,13 +1,15 @@
 ---
-title: "An attempt to build cursor's @codebase feature - RAG on codebases - part 1/2"
+title: "An Attempt to Build Cursor's @codebase Feature - RAG on Codebases - Part 1/2"
 date: 2024-11-06
-author: LanceDB
+author: Sankalp Shubham
+
+The project
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/rag-codebase-1/preview-image.png
 meta_image: /assets/blog/rag-codebase-1/preview-image.png
-description: "."
+description: "Build about an attempt to build cursor's @codebase feature - rag on codebases - part 1/2. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

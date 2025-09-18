@@ -1,13 +1,15 @@
 ---
-title: "Using column statistics to make Lance scans 30x faster"
+title: "Using Column Statistics to Make Lance Scans 30x Faster"
 date: 2023-12-20
-author: LanceDB
+author: Will Jones
+
+In Lance
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402ca541ee/preview-image.png
 meta_image: /assets/blog/using-column-statistics-to-make-lance-scans-30x-faster-86402ca541ee/preview-image.png
-description: "by Will Jones."
+description: "Unlock about using column statistics to make lance scans 30x faster. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Will Jones

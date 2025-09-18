@@ -1,13 +1,13 @@
 ---
-title: "Create LLM apps using RAG"
+title: "Create LLM Apps Using RAG"
 date: 2024-03-21
-author: LanceDB
+author: converting the query into
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/create-llm-apps-using-rag/preview-image.png
 meta_image: /assets/blog/create-llm-apps-using-rag/preview-image.png
-description: "If you're considering making a personalized bot for your documents or website that responds to you, you're in the right spot."
+description: "Get about create llm apps using rag. Get practical steps, examples, and best practices you can use now."
 ---
 
 ## **Understanding the Limitations of ChatGPT and LLMs**

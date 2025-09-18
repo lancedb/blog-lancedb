@@ -1,13 +1,13 @@
 ---
-title: "Hybrid search: RAG for real-life production-grade applications"
+title: "Hybrid Search: RAG for Real-Life Production-Grade Applications"
 date: 2024-02-18
-author: LanceDB
+author: Mahesh Deshwal
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/preview-image.png
 meta_image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/preview-image.png
-description: "by Mahesh Deshwal."
+description: "Get about hybrid search: rag for real-life production-grade applications. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Mahesh Deshwal

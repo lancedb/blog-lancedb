@@ -1,13 +1,13 @@
 ---
 title: "Efficient RAG with Compression and Filtering"
 date: 2024-01-09
-author: LanceDB
+author: Kaushal Choudhary
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/preview-image.png
 meta_image: /assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/preview-image.png
-description: "by Kaushal Choudhary."
+description: "Discover about efficient rag with compression and filtering. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Kaushal Choudhary

@@ -1,13 +1,15 @@
 ---
 title: "Multitask Embedding with LanceDB"
 date: 2023-11-14
-author: LanceDB
+author: Kaushal Choudhary
+
+In this
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
 meta_image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
-description: "By Kaushal Choudhary."
+description: "Explore about multitask embedding with lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
 By Kaushal Choudhary

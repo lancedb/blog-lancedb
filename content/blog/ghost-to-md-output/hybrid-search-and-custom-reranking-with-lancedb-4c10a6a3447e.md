@@ -1,13 +1,13 @@
 ---
-title: "Hybrid search and custom reranking with LanceDB"
+title: "Hybrid Search and Custom Reranking with LanceDB"
 date: 2024-02-19
-author: LanceDB
+author: GitHub user virattt
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/preview-image.png
 meta_image: /assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/preview-image.png
-description: "Search has historically been a complex problem in computer science."
+description: "Combine keyword and vector search for higher‑quality results with LanceDB. This post shows how to run hybrid search and compare rerankers (linear combination, Cohere, ColBERT) with code and benchmarks."
 ---
 
 Search has historically been a complex problem in computer science. This is partly due to limitations in natural language or contextual understanding, and partly due to the absence of a universal ranking method that works well for all cases. Although the original premise still applies today, LLMs have vastly improved contextual reasoning and understanding. This allows searching for semantically similar points in a knowledge base and tests for ranking them based on a given context. Let's see how!

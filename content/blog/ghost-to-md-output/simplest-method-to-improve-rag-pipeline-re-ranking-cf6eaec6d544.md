@@ -1,13 +1,13 @@
 ---
-title: "Simplest Method to improve RAG pipeline: Re-Ranking"
+title: "Simplest Method to Improve RAG Pipeline: Re-Ranking"
 date: 2023-11-21
-author: LanceDB
+author: Mahesh Deshwal
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544/preview-image.png
 meta_image: /assets/blog/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544/preview-image.png
-description: "by Mahesh Deshwal."
+description: "Unlock about simplest method to improve rag pipeline: re-ranking. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Mahesh Deshwal

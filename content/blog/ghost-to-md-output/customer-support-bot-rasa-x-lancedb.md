@@ -1,13 +1,15 @@
 ---
-title: "Customer Support Bot : RASA x LanceDB"
+title: "Customer Support Bot : RASA X LanceDB"
 date: 2024-12-31
-author: LanceDB
+author: Rithik Kumar
+
+Have you
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/customer-support-bot-rasa-x-lancedb/preview-image.png
 meta_image: /assets/blog/customer-support-bot-rasa-x-lancedb/preview-image.png
-description: "Advanced Customer Support Chatbot using Rasa, LanceDB, and OpenAI api ! Rasa is an open-source framework designed to build intelligent,."
+description: "Unlock about customer support bot : rasa x lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

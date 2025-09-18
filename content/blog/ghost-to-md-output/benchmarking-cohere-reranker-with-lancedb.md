@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/benchmarking-cohere-reranker-with-lancedb/preview-image.png
 meta_image: /assets/blog/benchmarking-cohere-reranker-with-lancedb/preview-image.png
-description: "Reranking is a process of re-arranging the results of a retriever based on some metric that can be independent of the retrieval scores."
+description: "Improve retrieval quality by reranking LanceDB results with Cohere and ColBERT. You’ll plug rerankers into vector, FTS, and hybrid search and compare accuracy on real datasets."
 ---
 
 Reranking is a process of re-arranging the results of a retriever based on some metric that can be independent of the retrieval scores. In this blog, we'll see how you can use LanceDB to use any of the popular reranking techniques including the new cohere reranker-V3 along with some results.

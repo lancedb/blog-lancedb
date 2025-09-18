@@ -1,13 +1,13 @@
 ---
-title: "Lance v2 is now in Beta"
+title: "Lance V2 Is Now in Beta"
 date: 2024-06-05
-author: LanceDB
+author: default
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png
 meta_image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png
-description: "We've been talking for a while about a ."
+description: "Lance v2 beta brings faster scans, true null support, and easier large multimodal ingestion. This post shows how to enable v2, what’s improved over v1, and the roadmap ahead."
 ---
 
 We've been talking for a while about a [new iteration of our file format](__GHOST_URL__/lance-v2/).  We're pleased to announce that the new v2 format is now in available as an opt-in feature for Lance (in release [0.12.1](https://github.com/lancedb/lance/releases/tag/v0.12.1)) and LanceDB (release [0.8.2](https://github.com/lancedb/lancedb/releases/tag/python-v0.8.2)) for users that want to try it out ahead of time and give us some early feedback.

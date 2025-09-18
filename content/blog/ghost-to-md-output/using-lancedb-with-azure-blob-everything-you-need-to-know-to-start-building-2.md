@@ -1,13 +1,13 @@
 ---
 title: "Speaker Identification and Transcription Mapping Using Vector Search"
 date: 2025-02-26
-author: LanceDB
+author: Shresth Shukla
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2/preview-image.png
 meta_image: /assets/blog/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2/preview-image.png
-description: "."
+description: "Master about speaker identification and transcription mapping using vector search. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

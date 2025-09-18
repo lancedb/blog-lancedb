@@ -1,13 +1,13 @@
 ---
-title: "Vector Arithmetic with LanceDB: An intro to Vector Embeddings"
+title: "Vector Arithmetic with LanceDB: an Intro to Vector Embeddings"
 date: 2024-07-02
-author: LanceDB
+author: Artitra Roy Gosthipaty
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/vector-arithmetic-with-lancedb-an-intro-to-vector-embeddings/preview-image.png
 meta_image: /assets/blog/vector-arithmetic-with-lancedb-an-intro-to-vector-embeddings/preview-image.png
-description: "."
+description: "Build about vector arithmetic with lancedb: an intro to vector embeddings. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

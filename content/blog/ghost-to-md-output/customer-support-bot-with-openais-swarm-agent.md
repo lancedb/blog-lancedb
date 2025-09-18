@@ -1,13 +1,15 @@
 ---
-title: "Customer support bot with OpenAI's Swarm Agent"
+title: "Customer Support Bot with OpenAI's Swarm Agent"
 date: 2024-11-04
-author: LanceDB
+author: Prashant Kumar
+
+Difference between
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/customer-support-bot-with-openais-swarm-agent/preview-image.png
 meta_image: /assets/blog/customer-support-bot-with-openais-swarm-agent/preview-image.png
-description: "."
+description: "Master about customer support bot with openai's swarm agent. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

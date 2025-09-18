@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png
 meta_image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png
-description: "Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach."
+description: "Run vision‑centric exploration with Cambrian‑1 MLLMs over images retrieved via LanceDB. The guide indexes captions, searches similar images, and prompts the model for grounded answers."
 ---
 
 Cambrian-1 is a family of multimodal LLMs (MLLMs) designed with a **vision-centric** approach. While stronger language models can boost multimodal capabilities, the design choices for vision components are often insufficiently explored and disconnected from visual representation learning research.

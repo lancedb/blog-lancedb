@@ -1,13 +1,13 @@
 ---
-title: "Practical introduction to Late Chunking or Chunked Pooling"
+title: "Practical Introduction to Late Chunking or Chunked Pooling"
 date: 2024-10-29
-author: LanceDB
+author: Mahesh Deshwal
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png
 meta_image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png
-description: "."
+description: "Master about practical introduction to late chunking or chunked pooling. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

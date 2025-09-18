@@ -1,13 +1,15 @@
 ---
-title: "Lance v0.16.1 Feature Roundup"
+title: "Lance V0.16.1 Feature Roundup"
 date: 2024-08-26
-author: LanceDB
+author: community members.
+
+In this
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/lance-v0-16-1-feature-roundup/preview-image.png
 meta_image: /assets/blog/lance-v0-16-1-feature-roundup/preview-image.png
-description: "In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors."
+description: "In Lance v0. 16."
 ---
 
 In Lance v0.16.1 we introduced several new features, implemented by a combination of LanceDB engineers and community contributors. Lance is an OSS project that is open-to-contribution, so we are very pleased to have major features brought by community members.

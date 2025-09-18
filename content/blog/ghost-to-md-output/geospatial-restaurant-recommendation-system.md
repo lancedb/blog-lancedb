@@ -1,13 +1,13 @@
 ---
 title: "Geospatial Restaurant Recommendation System"
 date: 2024-12-31
-author: LanceDB
+author: Vipul Maheshwari
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/geospatial-restaurant-recommendation-system/preview-image.png
 meta_image: /assets/blog/geospatial-restaurant-recommendation-system/preview-image.png
-description: "."
+description: "Get about geospatial restaurant recommendation system. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

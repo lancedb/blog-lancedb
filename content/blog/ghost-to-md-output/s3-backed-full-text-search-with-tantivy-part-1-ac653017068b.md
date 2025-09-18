@@ -1,13 +1,13 @@
 ---
 title: "S3 Backed Full-Text Search with Tantivy (Part 1)"
 date: 2023-08-14
-author: LanceDB
+author: Rob Meng
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/preview-image.png
 meta_image: /assets/blog/s3-backed-full-text-search-with-tantivy-part-1-ac653017068b/preview-image.png
-description: "by Rob Meng."
+description: "Discover about s3 backed full-text search with tantivy (part 1). Get practical steps, examples, and best practices you can use now."
 ---
 
 by Rob Meng

@@ -1,13 +1,13 @@
 ---
-title: "Tokens Per Second is NOT All You Need"
+title: "Tokens per Second Is NOT All You Need"
 date: 2024-05-01
-author: LanceDB
+author: several key metrics
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
 meta_image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
-description: "***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*."
+description: "Explore about tokens per second is not all you need. Get practical steps, examples, and best practices you can use now."
 ---
 
 ***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*

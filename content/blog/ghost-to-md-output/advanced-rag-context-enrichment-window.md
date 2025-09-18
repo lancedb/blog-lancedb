@@ -1,13 +1,13 @@
 ---
-title: "Advanced RAG with context enrichment window"
+title: "Advanced RAG with Context Enrichment Window"
 date: 2024-10-17
-author: LanceDB
+author: the company he keeps
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/advanced-rag-context-enrichment-window/preview-image.png
 meta_image: /assets/blog/advanced-rag-context-enrichment-window/preview-image.png
-description: ".... and some advanced filtering and re-ranking technique."
+description: ". ."
 ---
 
 .... and some advanced filtering and re-ranking technique

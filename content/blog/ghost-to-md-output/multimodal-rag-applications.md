@@ -1,13 +1,13 @@
 ---
-title: "GTA5 Multimodal RAG application"
+title: "GTA5 Multimodal RAG Application"
 date: 2024-03-07
-author: LanceDB
+author: machines very well
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/multimodal-rag-applications/preview-image.png
 meta_image: /assets/blog/multimodal-rag-applications/preview-image.png
-description: "Artificial Intelligence (AI) has been actively working with text for quite some time, but the world isn't solely centered around words."
+description: "Today, we will work on Multimodality, a concept that empowers AI models with the capacity to perceive, listen to, and comprehend data in diverse formats together with text—pretty much like how we do! Get practical steps."
 ---
 
 Today, we will work on Multimodality, a concept that empowers AI models with the capacity to perceive, listen to, and comprehend data in diverse formats together with text—pretty much like how we do!

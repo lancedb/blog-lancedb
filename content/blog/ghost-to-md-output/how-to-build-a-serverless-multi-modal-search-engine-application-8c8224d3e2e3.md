@@ -1,13 +1,15 @@
 ---
-title: "Serverless Multi-Modal search engine application"
+title: "Serverless Multi-Modal Search Engine Application"
 date: 2023-09-25
-author: LanceDB
+author: Ayush Chaurasia
+
+In this
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
 meta_image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
-description: "by Ayush Chaurasia."
+description: "Master about serverless multi-modal search engine application. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Ayush Chaurasia

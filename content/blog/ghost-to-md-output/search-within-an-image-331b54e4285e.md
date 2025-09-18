@@ -1,13 +1,13 @@
 ---
-title: "Search within an Image with Segment Anything "
+title: "Search Within an Image with Segment Anything "
 date: 2023-12-12
-author: LanceDB
+author: Kaushal Choudhary
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/search-within-an-image-331b54e4285e/preview-image.png
 meta_image: /assets/blog/search-within-an-image-331b54e4285e/preview-image.png
-description: "by Kaushal Choudhary."
+description: "Get about search within an image with segment anything. Get practical steps, examples, and best practices you can use now."
 ---
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*xPo7B0KrVUBKcmDNHJ_n0Q.png)

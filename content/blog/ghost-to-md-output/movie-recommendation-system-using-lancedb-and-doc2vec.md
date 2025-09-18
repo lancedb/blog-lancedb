@@ -1,13 +1,13 @@
 ---
-title: "Movie recommendation system using Doc2Vec and genre classification"
+title: "Movie Recommendation System Using Doc2Vec and Genre Classification"
 date: 2024-05-27
-author: LanceDB
+author: Vipul Maheshwari
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/movie-recommendation-system-using-lancedb-and-doc2vec/preview-image.png
 meta_image: /assets/blog/movie-recommendation-system-using-lancedb-and-doc2vec/preview-image.png
-description: 
+description: "This is a LanceDB community blog post written by \"Vipul Maheshwari\". Get practical steps and examples from 'Movie recommendation system using Doc2Vec and genre classification'."
 ---
 
 > This is a LanceDB community blog post written by "Vipul Maheshwari".

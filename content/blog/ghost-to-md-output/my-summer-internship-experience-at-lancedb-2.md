@@ -1,13 +1,13 @@
 ---
-title: "My summer internship experience at LanceDB"
+title: "My Summer Internship Experience at LanceDB"
 date: 2024-08-15
-author: LanceDB
+author: around
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png
 meta_image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png
-description: "I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign."
+description: "I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign.  This summer, I had the opportunity to intern as a Software Engineer at LanceDB, an early-stage startup based in San Francisco."
 ---
 
 I'm Raunak, a master's student at the University of Illinois, Urbana-Champaign. This summer, I had the opportunity to intern as a Software Engineer at LanceDB, an early-stage startup based in San Francisco.

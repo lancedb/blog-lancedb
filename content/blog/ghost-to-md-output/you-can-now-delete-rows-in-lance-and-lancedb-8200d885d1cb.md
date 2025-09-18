@@ -1,13 +1,15 @@
 ---
-title: "You can now delete rows in Lance and LanceDB!"
+title: "You Can Now Delete Rows in Lance and LanceDB!"
 date: 2023-06-28
-author: LanceDB
+author: Will Jones
+
+Starting in
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/you-can-now-delete-rows-in-lance-and-lancedb-8200d885d1cb/preview-image.png
 meta_image: /assets/blog/you-can-now-delete-rows-in-lance-and-lancedb-8200d885d1cb/preview-image.png
-description: "by Will Jones."
+description: "Explore about you can now delete rows in lance and lancedb!. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Will Jones

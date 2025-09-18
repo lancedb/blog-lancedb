@@ -1,13 +1,13 @@
 ---
 title: "LanceDB + Polars"
 date: 2024-01-19
-author: LanceDB
+author: the great work of
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/lancedb-polars-2d5eb32a8aa3/preview-image.png
 meta_image: /assets/blog/lancedb-polars-2d5eb32a8aa3/preview-image.png
-description: "A (near) perfect match."
+description: "Get about lancedb + polars. Get practical steps, examples, and best practices you can use now."
 ---
 
 ### A (near) perfect match

@@ -1,13 +1,13 @@
 ---
 title: "Benchmarking New OpenAI Embedding Models with LanceDB"
 date: 2024-02-13
-author: LanceDB
+author: omitting specific numbers from
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png
 meta_image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png
-description: "A couple of weeks ago, OpenAI launched their new and most performant embedding models with higher multilingual performance and new."
+description: "A couple of weeks ago, OpenAI launched their new and most performant embedding models with higher multilingual performance and new parameters to control the overall size, updated moderation models, API usage management t."
 ---
 
 A couple of weeks ago, OpenAI launched their new and most performant embedding models with higher multilingual performance and new parameters to control the overall size, updated moderation models, API usage management tools, and reduced pricing for GPT-3.5 Turbo.

@@ -1,13 +1,13 @@
 ---
-title: "Maximizing Developer Workflows using Lance and Claude 2"
+title: "Maximizing Developer Workflows Using Lance and Claude 2"
 date: 2023-08-06
-author: LanceDB
+author: Leon Yee
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png
 meta_image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png
-description: "by Leon Yee."
+description: "Discover about maximizing developer workflows using lance and claude 2. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Leon Yee

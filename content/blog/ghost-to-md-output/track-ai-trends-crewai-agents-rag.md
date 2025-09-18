@@ -1,13 +1,13 @@
 ---
 title: "Track AI Trends: CrewAI Agents & RAG"
 date: 2024-03-25
-author: LanceDB
+author: sharing tasks. These are
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/track-ai-trends-crewai-agents-rag/preview-image.png
 meta_image: /assets/blog/track-ai-trends-crewai-agents-rag/preview-image.png
-description: "This article will teach us how to make an AI Trends Searcher using CrewAI Agents and their Tasks."
+description: "This article will teach us how to make an AI Trends Searcher using CrewAI Agents and their Tasks.  But before diving into that, let's first understand what CrewAI is and how we can use it for these applications."
 ---
 
 This article will teach us how to make an AI Trends Searcher using CrewAI Agents and their Tasks. But before diving into that, let's first understand what CrewAI is and how we can use it for these applications.

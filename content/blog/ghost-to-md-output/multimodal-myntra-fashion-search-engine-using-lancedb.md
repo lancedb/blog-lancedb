@@ -1,13 +1,15 @@
 ---
-title: "Multimodal Myntra Fashion Search Engine using LanceDB"
+title: "Multimodal Myntra Fashion Search Engine Using LanceDB"
 date: 2024-03-20
-author: LanceDB
+author: the vector database.
+
+We
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/multimodal-myntra-fashion-search-engine-using-lancedb/preview-image.png
 meta_image: /assets/blog/multimodal-myntra-fashion-search-engine-using-lancedb/preview-image.png
-description: "In this comprehensive guide, we aim to explain the process of creating a multi-modal search app and break it down into manageable steps."
+description: "Build a multimodal fashion search engine with LanceDB and CLIP embeddings. Follow a step‑by‑step workflow to register embeddings, create the table, query by text or image, and ship a Streamlit UI."
 ---
 
 In this comprehensive guide, we aim to explain the process of creating a multi-modal search app and break it down into manageable steps. The procedure involves several phases, including registering clip embeddings, setting up a data class and table, and executing a search query.

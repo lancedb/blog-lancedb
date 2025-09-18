@@ -1,13 +1,13 @@
 ---
-title: "Training a Variational AutoEncoder from scratch with Lance file format"
+title: "Training a Variational AutoEncoder from Scratch with Lance File Format"
 date: 2024-09-02
-author: LanceDB
+author: traditional autoencoders can be
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/training-a-variational-autoencoder-from-scratch-with-the-lance-file-format/preview-image.png
 meta_image: /assets/blog/training-a-variational-autoencoder-from-scratch-with-the-lance-file-format/preview-image.png
-description: "Autoencoders encode an input into a latent space and decode the latent representation into an output."
+description: "Train a Variational Autoencoder end‑to‑end using Lance for fast, scalable data handling. You’ll set up the dataset, build the VAE in PyTorch, and run training, sampling, and reconstructions."
 ---
 
 Autoencoders encode an input into a latent space and decode the latent representation into an output. The output is often referred to as **the reconstruction**, as the primary goal is to reconstruct the input from the latent code.

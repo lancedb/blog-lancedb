@@ -1,13 +1,13 @@
 ---
-title: "Multi-Lingual Search With Cohere and LanceDB"
+title: "Multi-Lingual Search with Cohere and LanceDB"
 date: 2023-12-03
-author: LanceDB
+author: Kaushal Choudhary
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/multi-lingual-search-with-cohere-and-lancedb-efaca566e30c/preview-image.png
 meta_image: /assets/blog/multi-lingual-search-with-cohere-and-lancedb-efaca566e30c/preview-image.png
-description: "by Kaushal Choudhary."
+description: "Master about multi-lingual search with cohere and lancedb. Get practical steps, examples, and best practices you can use now."
 ---
 
 by Kaushal Choudhary

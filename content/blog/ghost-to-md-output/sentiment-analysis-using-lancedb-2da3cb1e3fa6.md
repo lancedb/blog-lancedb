@@ -1,5 +1,5 @@
 ---
-title: "Sentiment Analysis powered by semantic search using LanceDB"
+title: "Sentiment Analysis Powered by Semantic Search Using LanceDB"
 date: 2023-11-19
 author: LanceDB
 categories: ["Engineering"]
@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/sentiment-analysis-using-lancedb-2da3cb1e3fa6/preview-image.png
 meta_image: /assets/blog/sentiment-analysis-using-lancedb-2da3cb1e3fa6/preview-image.png
-description: "**Sentiment Analysis** also known as Opinion Mining is a NLP technique that is used **to analyze texts for polarity, from positive to."
+description: "**Sentiment Analysis** also known as Opinion Mining is a NLP technique that is used **to analyze texts for polarity, from positive to negative**."
 ---
 
 **Sentiment Analysis** also known as Opinion Mining is a NLP technique that is used **to analyze texts for polarity, from positive to negative**. It helps businesses to monitor customer feedback, product reputation, and social media sentiment.

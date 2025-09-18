@@ -1,13 +1,13 @@
 ---
 title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
-author: LanceDB
+author: day. By night Wes
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
 meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
-description: "This is a love letter to Christoph Gohlke."
+description: "It was Spring of 2012.  After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time."
 ---
 
 It was Spring of 2012. After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time. We worked out of an apartment in Brooklyn on pandas by day. By night Wes was working on the first edition of Python for Data Analysis while I was working on what probably was the very first python package for quantitative portfolio management.

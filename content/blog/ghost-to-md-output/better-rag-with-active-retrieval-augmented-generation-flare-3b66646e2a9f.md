@@ -1,13 +1,13 @@
 ---
 title: "Better RAG with Active Retrieval Augmented Generation FLARE"
 date: 2023-11-17
-author: LanceDB
+author: "Akash Desai"
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/preview-image.png
 meta_image: /assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/preview-image.png
-description: "by Akash A. Desai."
+description: "by Akash A. Get practical steps and examples from 'Better RAG with Active Retrieval Augmented Generation FLARE'."
 ---
 
 by Akash A. Desai

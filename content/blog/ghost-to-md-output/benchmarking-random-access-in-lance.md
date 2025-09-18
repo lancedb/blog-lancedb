@@ -1,5 +1,5 @@
 ---
-title: "Benchmarking random access in Lance"
+title: "Benchmarking Random Access in Lance"
 date: 2023-03-14
 author: LanceDB
 categories: ["Engineering"]
@@ -7,7 +7,7 @@ draft: false
 featured: false
 image: /assets/blog/benchmarking-random-access-in-lance/preview-image.png
 meta_image: /assets/blog/benchmarking-random-access-in-lance/preview-image.png
-description: "In this short blog post we’ll take you through some simple benchmarks to show the random access performance of Lance format."
+description: "In this short blog post we’ll take you through some simple benchmarks to show the random access performance of Lance format. Get practical steps and examples from 'Benchmarking random access in Lance'."
 ---
 
 In this short blog post we’ll take you through some simple benchmarks to show the random access performance of Lance format.

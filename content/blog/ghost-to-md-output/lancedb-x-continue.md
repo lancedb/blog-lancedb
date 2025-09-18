@@ -1,13 +1,13 @@
 ---
 title: "Developers, Ditch the Black Box: Welcome to Continue"
 date: 2024-05-23
-author: LanceDB
+author: combining this data with
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/lancedb-x-continue/preview-image.png
 meta_image: /assets/blog/lancedb-x-continue/preview-image.png
-description: "Remember flipping through coding manuals? Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for."
+description: "Remember flipping through coding manuals?  Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for developer queries."
 ---
 
 Remember flipping through coding manuals? Those quickly became relics with the rise of Google and Stack Overflow, a one-stop shop for developer queries. Now, the tides are turning again as LLMs are rapidly becoming the primary source for coding assistance.

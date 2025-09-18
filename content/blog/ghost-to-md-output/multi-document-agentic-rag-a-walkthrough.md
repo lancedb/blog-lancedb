@@ -1,13 +1,15 @@
 ---
-title: "Multi document agentic RAG: A walkthrough"
+title: "Multi Document Agentic RAG: a Walkthrough"
 date: 2024-08-28
-author: LanceDB
+author: Vipul Maheshwari
+
+Agentic RAG
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/multi-document-agentic-rag-a-walkthrough/preview-image.png
 meta_image: /assets/blog/multi-document-agentic-rag-a-walkthrough/preview-image.png
-description: "."
+description: "Unlock about multi document agentic rag: a walkthrough. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡

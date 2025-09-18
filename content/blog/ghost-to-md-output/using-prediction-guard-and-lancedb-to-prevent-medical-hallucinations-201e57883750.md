@@ -1,13 +1,13 @@
 ---
 title: "Using Prediction Guard and LanceDB to Prevent Medical Hallucinations"
 date: 2024-01-02
-author: LanceDB
+author: labor-intensive paperwork. Envisage
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/using-prediction-guard-and-lancedb-to-prevent-medical-hallucinations-201e57883750/preview-image.png
 meta_image: /assets/blog/using-prediction-guard-and-lancedb-to-prevent-medical-hallucinations-201e57883750/preview-image.png
-description: "This is a collective work of the following authors:."
+description: "Understand about using prediction guard and lancedb to prevent medical hallucinations. Get practical steps, examples, and best practices you can use now."
 ---
 
 This is a collective work of the following authors:

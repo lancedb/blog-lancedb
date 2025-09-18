@@ -1,13 +1,13 @@
 ---
-title: "Optimizing LLMs: A Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
+title: "Optimizing LLMs: a Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
 date: 2023-09-28
-author: LanceDB
+author: creating new low-rank transformations
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/optimizing-llms-a-step-by-step-guide-to-fine-tuning-with-peft-and-qlora-22eddd13d25b/preview-image.png
 meta_image: /assets/blog/optimizing-llms-a-step-by-step-guide-to-fine-tuning-with-peft-and-qlora-22eddd13d25b/preview-image.png
-description: "**A Practical Guide to Fine-Tuning LLM using QLora**."
+description: "Understand about optimizing llms: a step-by-step guide to fine-tuning with peft and qlora. Get practical steps, examples, and best practices you can use now."
 ---
 
 **A Practical Guide to Fine-Tuning LLM using QLora**

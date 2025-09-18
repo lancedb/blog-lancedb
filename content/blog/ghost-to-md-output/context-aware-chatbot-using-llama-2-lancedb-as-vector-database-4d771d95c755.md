@@ -1,13 +1,13 @@
 ---
-title: "Context-aware chatbot using Llama 2 & lanceDB serverless vector database"
+title: "Context-Aware Chatbot Using Llama 2 & LanceDB Serverless Vector Database"
 date: 2023-09-19
-author: LanceDB
+author: Akash A. Desai
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/context-aware-chatbot-using-llama-2-lancedb-as-vector-database-4d771d95c755/preview-image.png
 meta_image: /assets/blog/context-aware-chatbot-using-llama-2-lancedb-as-vector-database-4d771d95c755/preview-image.png
-description: "Building a real chatbot using RAG method – by Akash A. Desai."
+description: "Building a real chatbot using RAG method – by Akash A. Get practical steps and examples from 'Context-aware chatbot using Llama 2 & lanceDB serverless vector database'."
 ---
 
 Building a real chatbot using RAG method – by Akash A. Desai

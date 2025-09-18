@@ -1,13 +1,13 @@
 ---
-title: "NER-powered Semantic Search using LanceDB"
+title: "NER-Powered Semantic Search Using LanceDB"
 date: 2023-11-08
-author: LanceDB
+author: comparing it with the
 categories: ["Engineering"]
 draft: false
 featured: false
 image: /assets/blog/ner-powered-semantic-search-using-lancedb-51051dc3e493/preview-image.png
 meta_image: /assets/blog/ner-powered-semantic-search-using-lancedb-51051dc3e493/preview-image.png
-description: "**NER stands for Named Entity Recognition**, a form of natural language processing (NLP) that involves extracting and identifying essential."
+description: "**NER stands for Named Entity Recognition**, a form of natural language processing (NLP) that involves extracting and identifying essential information from text."
 ---
 
 **NER stands for Named Entity Recognition**, a form of natural language processing (NLP) that involves extracting and identifying essential information from text. The information that is extracted and categorized is called an **entity**. It can be any word or a series of words that consistently refers to the same thing. Some examples of entities are:

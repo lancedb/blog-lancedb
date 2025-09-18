@@ -1,13 +1,15 @@
 ---
-title: "Zero shot image classification with vector search"
+title: "Zero Shot Image Classification with Vector Search"
 date: 2024-07-12
-author: LanceDB
+author: Vipul Maheshwari
+
+This post
 categories: ["Community"]
 draft: false
 featured: false
 image: /assets/blog/zero-shot-image-classification-with-vector-search/preview-image.png
 meta_image: /assets/blog/zero-shot-image-classification-with-vector-search/preview-image.png
-description: "."
+description: "Get about zero shot image classification with vector search. Get practical steps, examples, and best practices you can use now."
 ---
 
 💡
