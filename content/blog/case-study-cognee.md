@@ -23,22 +23,23 @@ author2_twitter: "cognee_"
 
 ## Company Overview
 
-[Cognee](https://cognee.com) helps agents retrieve, reason, and remember with context that has structure and time. It ingests sources such as files, APIs, and databases, then [chunks and embeds content](https://docs.cognee.ai/guides/adding-data), enriches entities and relations, and builds a [knowledge graph](https://docs.cognee.ai/guides/knowledge-graphs). 
+[Cognee](https://cognee.com) helps agents retrieve, reason, and remember with context that has structure and time. It ingests sources such as files, APIs, and databases, then [chunks and embeds content](https://docs.cognee.ai/), enriches entities and relations, and builds a [knowledge graph](https://docs.cognee.ai/). 
 
-Applications built on [Cognee](https://cognee.com) query both the graph and the vectors to answer multi-step questions with clearer provenance. This platform is designed for teams building [autonomous agents](https://en.wikipedia.org/wiki/Autonomous_agent), [copilots](https://en.wikipedia.org/wiki/AI_copilot), and [search in knowledge-heavy domains](https://docs.cognee.ai/guides/search-types).
+Applications built on [Cognee](https://cognee.com) query both the graph and the vectors to answer multi-step questions with clearer provenance. This platform is designed for teams building autonomous agents, copilots, and search in knowledge-heavy domains.
 
 **Figure 1:** Query and transform your LLM context anywhere using cognee's memory engine. 
+
 ![cognee](/assets/blog/case-study-cognee/cognee.jpg)
 
 *The Cognee interface enables developers to build and query AI memory systems with both graph and vector search capabilities.*
 
 ## The Challenge
 
-Agent teams often struggle with stateless context and homegrown [RAG stacks](https://en.wikipedia.org/wiki/Retrieval-augmented_generation). They juggle a graph here, a vector store there, and ad hoc rules in between. This raises reliability risks and slows iteration. [Cognee](https://cognee.com) needed a vector store that matched its [isolation model](https://docs.cognee.ai/guides/workspace-isolation), supported per-workspace development, and stayed simple for day-to-day work.
+Agent teams often struggle with stateless context and homegrown RAG stacks. They juggle a graph here, a vector store there, and ad hoc rules in between. This raises reliability risks and slows iteration. [Cognee](https://cognee.com) needed a vector store that matched its isolation model, supported per-workspace development, and stayed simple for day-to-day work.
 
 ### The Isolation Problem
 
-Cognee's [isolation model](https://docs.cognee.ai/guides/workspace-isolation) is the way it separates memory stores so that every developer, user, or test instance gets its own fully independent workspace. Instead of sharing a single vector database or graph across contexts, Cognee spins up a dedicated set of backends—most notably a [LanceDB store](https://lancedb.com/docs/)—for each workspace.
+Cognee's isolation model is the way it separates memory stores so that every developer, user, or test instance gets its own fully independent workspace. Instead of sharing a single vector database or graph across contexts, Cognee spins up a dedicated set of backends—most notably a [LanceDB store](https://lancedb.com/docs/)—for each workspace.
 
 This approach solves a critical problem in AI development: when multiple developers work on the same project, or when running tests in parallel, shared state can lead to unpredictable behavior, data corruption, and debugging nightmares. Traditional vector databases require complex orchestration to achieve this level of isolation.
 
@@ -58,31 +59,31 @@ Unlike traditional vector databases that require running servers, [LanceDB's fil
 
 ## How the Pieces Fit
 
-[Cognee](https://cognee.com) delivers a durable memory layer for AI agents by unifying a knowledge graph with high-performance vector search. It ingests files, APIs, and databases, then applies an [Extract–Cognify–Load model](https://docs.cognee.ai/guides/ecl-model) to chunk content, enrich entities and relationships, add temporal context, and write both graph structures and embeddings for retrieval.
+[Cognee](https://cognee.com) delivers a durable memory layer for AI agents by unifying a knowledge graph with high-performance vector search. It ingests files, APIs, and databases, then applies an [Extract–Cognify–Load model](https://docs.cognee.ai/) to chunk content, enrich entities and relationships, add temporal context, and write both graph structures and embeddings for retrieval.
 
 [LanceDB](https://lancedb.com) is the default vector database in this stack, which keeps embeddings and payloads close to each other and removes extra orchestration. Because [LanceDB](https://lancedb.com) is [file based](https://lancedb.com/docs/overview/), [Cognee](https://cognee.com) can provision a clean store per user, per workspace, and per test, so teams iterate quickly without shared state or heavy infrastructure.
 
 ### From Development to Production
 
-This architecture scales from a laptop to production without changing the mental model. Developers start locally with [Cognee](https://cognee.com)'s [UI](https://docs.cognee.ai/guides/local-ui), build and query memory against [LanceDB](https://lancedb.com), and validate behavior with isolated sandboxes.
+This architecture scales from a laptop to production without changing the mental model. Developers start locally with [Cognee](https://cognee.com)'s UI, build and query memory against [LanceDB](https://lancedb.com), and validate behavior with isolated sandboxes.
 
 ![Cognee architecture diagram](/assets/blog/case-study-cognee/cognee_architecture_diagram.jpg)
 
 *The Cognee architecture shows how data flows from sources through the ECL pipeline to both graph and vector storage backends.*
 
-When it is time to go live, the same project can move to Cognee's hosted service, which manages [Kuzu](https://kuzudb.com) for graph, [LanceDB](https://lancedb.com) for vectors, and [PostgreSQL](https://postgresql.org) for metadata, adding governance and autoscaling as needed. [Cognee](https://cognee.com)'s [Memify pipeline](https://docs.cognee.ai/guides/memify-quickstart) keeps memory fresh after deployment by cleaning stale nodes, strengthening associations, and reweighting important facts, which improves retrieval quality without full rebuilds.
+When it is time to go live, the same project can move to Cognee's hosted service, which manages [Kuzu](https://kuzudb.com) for graph, [LanceDB](https://lancedb.com) for vectors, and [PostgreSQL](https://postgresql.org) for metadata, adding governance and autoscaling as needed. [Cognee](https://cognee.com)'s Memify pipeline keeps memory fresh after deployment by cleaning stale nodes, strengthening associations, and reweighting important facts, which improves retrieval quality without full rebuilds.
 
 The result is a simpler and more reliable path to agent memory than piecing together separate document stores, vector databases, and graph engines.
 
 ### Local Development Workflow
 
-This diagram shows sources flowing into [Cognee](https://cognee.com) on a developer's machine, with each workspace writing to its own [LanceDB](https://lancedb.com) store. The benefit is clean isolation: tests and demos never collide, sandboxes are easy to create and discard, and engineers iterate faster without running a separate vector database service. Learn more about [workspace isolation](https://docs.cognee.ai/guides/workspace-isolation) and [LanceDB storage](https://lancedb.com/docs/storage/).
+This diagram shows sources flowing into [Cognee](https://cognee.com) on a developer's machine, with each workspace writing to its own [LanceDB](https://lancedb.com) store. The benefit is clean isolation: tests and demos never collide, sandboxes are easy to create and discard, and engineers iterate faster without running a separate vector database service.
 
 Each workspace operates independently, with its own:
 - Vector embeddings stored in [LanceDB](https://lancedb.com/docs/storage/)
-- [Knowledge graph structure](https://docs.cognee.ai/guides/knowledge-graphs)
+- Knowledge graph structure
 - Metadata and temporal context
-- [Query and retrieval capabilities](https://docs.cognee.ai/guides/search-types)
+- Query and retrieval capabilities
 
 **Figure 2:** Local-first memory with per-workspace isolation
 
@@ -124,7 +125,7 @@ flowchart LR
 ```
 ### User Interface
 
-The [Cognee Local interface](https://docs.cognee.ai/guides/local-ui) provides a workspace for building and exploring AI memory directly on a developer's machine. 
+The Cognee Local interface provides a workspace for building and exploring AI memory directly on a developer's machine. 
 
 From the sidebar, users can connect to local or cloud instances, manage datasets, and organize work into notebooks. Each notebook offers an interactive environment for running code, querying data, and visualizing results. 
 
@@ -132,18 +133,16 @@ From the sidebar, users can connect to local or cloud instances, manage datasets
 
 *The Cognee Local UI provides an intuitive interface for building and querying AI memory systems with both graph and vector search capabilities.*
 
-The UI supports [importing data from multiple sources](https://docs.cognee.ai/guides/adding-data), executing searches with graph or vector retrieval, and inspecting both natural-language answers and reasoning graphs. It is designed to make experimentation straightforward—users can ingest data, build structured memory, test retrieval strategies, and see how the system interprets and connects entities, all within a single environment. This local-first approach makes it easy to prototype, debug, and validate memory pipelines before moving them to a hosted service.
+The UI supports importing data from multiple sources, executing searches with graph or vector retrieval, and inspecting both natural-language answers and reasoning graphs. It is designed to make experimentation straightforward—users can ingest data, build structured memory, test retrieval strategies, and see how the system interprets and connects entities, all within a single environment. This local-first approach makes it easy to prototype, debug, and validate memory pipelines before moving them to a hosted service.
 
 ### Memory Processing Pipeline
 
-[Cognee](https://cognee.com) converts unstructured and structured inputs into an evolving [knowledge graph](https://docs.cognee.ai/guides/knowledge-graphs), then couples it with embeddings for retrieval. The result is a memory that improves over time and supports [graph-aware reasoning](https://docs.cognee.ai/guides/search-types).
+[Cognee](https://cognee.com) converts unstructured and structured inputs into an evolving knowledge graph, then couples it with embeddings for retrieval. The result is a memory that improves over time and supports graph-aware reasoning.
 
 This pipeline processes data through three distinct phases:
 1. **Extract**: Pull data from various sources (files, APIs, databases)
 2. **Cognify**: Transform raw data into structured knowledge with embeddings
 3. **Load**: Store both graph and vector data for efficient retrieval
-
-Learn more about the [ECL model](https://docs.cognee.ai/guides/ecl-model) and [LanceDB's data storage](https://lancedb.com/docs/storage/).
 
 **Figure 2: Cognee memory pipeline**
 
@@ -183,7 +182,7 @@ flowchart LR
   b2 --> svc
 ```
 
-Here the Extract, Cognify, and Load stages turn raw inputs into a [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph) and embeddings, then serve both graph and vector search from [Kuzu](https://kuzudb.com) and [LanceDB](https://lancedb.com). Users gain higher quality retrieval with provenance and time context, simpler pipelines because payloads and vectors stay aligned, and quicker updates as memory evolves. Explore [Cognee's search capabilities](https://docs.cognee.ai/guides/search-types) and [LanceDB's vector search](https://lancedb.com/docs/search/vector-search/).
+Here the Extract, Cognify, and Load stages turn raw inputs into a [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph) and embeddings, then serve both graph and vector search from [Kuzu](https://kuzudb.com) and [LanceDB](https://lancedb.com). Users gain higher quality retrieval with provenance and time context, simpler pipelines because payloads and vectors stay aligned, and quicker updates as memory evolves.
 
 ### Production Deployment Path
 
@@ -226,11 +225,11 @@ This figure shows a smooth promotion from the local UI to Cognee's hosted servic
 
 ### Technical Advantages
 
-Beyond isolation, LanceDB offers several technical advantages that make it ideal for Cognee's use case:
+Beyond isolation, [LanceDB](https://lancedb.com) offers several technical advantages that make it ideal for Cognee's use case:
 
 - **Unified Storage**: Original data and embeddings stored together eliminate synchronization issues
 - **Zero-Copy Evolution**: Schema changes don't require data duplication
-- **Hybrid Search**: Native support for both vector and full-text search
+- **Hybrid Search**: Native support for both [vector search](https://lancedb.com/docs/search/vector-search/) and full-text search
 - **Performance**: Optimized for both interactive queries and batch processing
 - **Deployment Flexibility**: Works locally, in containers, or in cloud environments
 
@@ -250,7 +249,7 @@ Using LanceDB has accelerated Cognee's development cycle and improved reliabilit
 
 ### Product Quality Gains
 
-At the product level, combining Cognee's knowledge graph with LanceDB's vector search has improved retrieval accuracy, particularly on multi-hop reasoning tasks like [HotPotQA](https://hotpotqa.github.io). The Memify pipeline further boosts relevance by refreshing memory without full rebuilds. Most importantly, the same local setup can scale seamlessly to Cognee's hosted service, giving teams a direct path from prototype to production without redesign.
+At the product level, combining Cognee's knowledge graph with [LanceDB's vector search](https://lancedb.com/docs/search/vector-search/) has improved retrieval accuracy, particularly on multi-hop reasoning tasks like [HotPotQA](https://hotpotqa.github.io). The Memify pipeline further boosts relevance by refreshing memory without full rebuilds. Most importantly, the same local setup can scale seamlessly to Cognee's hosted service, giving teams a direct path from prototype to production without redesign.
 
 Key benefits include:
 - **Faster development cycles** due to isolated workspaces
@@ -266,7 +265,7 @@ Key benefits include:
 
 The Memify pipeline represents a significant advancement in AI memory management, enabling continuous improvement without costly rebuilds. 
 
-Here is a typical example of the [Memify pipeline](https://docs.cognee.ai/guides/memify-quickstart) for post-processing knowledge graphs:
+Here is a typical example of the [Memify pipeline](https://docs.cognee.ai/) for post-processing knowledge graphs:
 
 ```python
 import asyncio
