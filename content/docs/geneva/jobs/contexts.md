@@ -127,3 +127,97 @@ tbl.backfill("filename_len")
 
 raycluster.__exit__()
 ```
+
+## Persistent Contexts
+
+Geneva Execution Contexts can be reused and shared with team members using persistent Clusters and Manifests.
+
+### Define a Cluster
+
+A Geneva Cluster represents the compute resources used for distributed execution. Calling `define_cluster()` stores the Cluster metadata in persistent storage. The Cluster can then be referenced by name amd provisioned when creating an Execution Context.
+```python
+import sys
+from geneva.cluster import GenevaClusterType, K8sConfigMethod
+from geneva.runners.ray.raycluster import (
+    get_ray_image,
+)
+from geneva.cluster.mgr import (
+    GenevaCluster,
+    HeadGroupConfig,
+    KubeRayConfig,
+    WorkerGroupConfig,
+)
+
+db = geneva.connect(my_db_uri)
+
+cluster_name = "kuberay-gpu-small"
+img = get_ray_image(
+    ray.__version__, f"{sys.version_info.major}{sys.version_info.minor}"
+)
+db.define_cluster(cluster_name, GenevaCluster(
+    name=cluster_name,
+    cluster_type=GenevaClusterType.KUBE_RAY,
+    kuberay=KubeRayConfig(
+        namespace="geneva",
+        head_group=HeadGroupConfig(
+            image=img,
+            service_account="geneva-service-account",
+            num_cpus=2,
+            memory="4Gi",
+            node_selector={"geneva.lancedb.com/ray-head": "true"},
+            labels={},
+            tolerations=[],
+            num_gpus=0,
+        ),
+        worker_groups=[
+            WorkerGroupConfig(
+                image=img,
+                service_account="geneva-service-account",
+                num_cpus=2,
+                memory="4Gi",
+                node_selector={"geneva.lancedb.com/ray-worker-gpu": "true"},
+                labels={},
+                tolerations=[],
+                num_gpus=2,
+            ),
+        ],
+    ),
+))
+```
+
+### Define a Manifest
+
+A Geneva Manifest represents the files and dependencies
+used in the execution environment. Calling `define_manifest()` packages files in the local environment and stores the Manifest metadata and files in persistent storage.
+The Manifest can then be referenced by name when creating an Execution Context. Persistent Manifests allow for deterministic execution environments that can be shared and reused.
+
+```python
+from geneva.manifest.mgr import GenevaManifest
+
+db = geneva.connect(my_db_uri)
+
+manifest_name="dev-manifest"
+db.define_manifest(
+    manifest_name,
+    GenevaManifest(
+        manifest_name,
+        local_zip_output_dir="/tmp/zips",
+        pip=["lancedb", "numpy"],
+        py_modules=["my_module"],
+    ),
+)
+```
+
+### Create an Execution Context
+
+An Execution Context represents the concrete execution environment used to execute a distributed Job.
+
+Calling `context` will enter a contxt manager that will provision an execution cluster and execute the Job using the Cluster and Manifest definitions provided. Once completed, the context manager will automatically de-provision the cluster.
+
+```python
+db = geneva.connect(my_db_uri)
+tbl = db.get_table("my_table")
+
+with db.context(cluster=cluster_name, manifest=manifest_name):
+    tbl.backfill("embedding", where="content is not null")
+```
