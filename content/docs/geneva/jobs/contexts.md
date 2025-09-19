@@ -34,12 +34,10 @@ This approach makes it easy to tailor resource requirements to your particular U
 You can then wrap your table backfill call with the RayCluster context.
 
 ```python
-from geneva.config import override_config, from_kv
 from geneva.runners.ray.raycluster import _HeadGroupSpec, _WorkerGroupSpec
 from geneva.runners.ray._mgr import ray_cluster
 
-# this path should be a shared path that distributed workers can reach
-override_config(from_kv({"uploader.upload_dir": images_path + "/zips"}))
+geneva.connect(my_db_uri)
 
 with ray_cluster(
         addr = "ray-head:10001"  # replace ray head with the address of your ray head node
@@ -78,7 +76,7 @@ You can then wrap your table backfill call with the RayCluster context.
 from geneva.runners.ray.raycluster import _HeadGroupSpec, _WorkerGroupSpec
 from geneva.runners._mgr import ray_cluster
 
-override_config(from_kv({"uploader.upload_dir": images_path + "/zips"}))
+geneva.connect(my_db_uri)
 
 with ray_cluster(
         name=k8s_name,  # prefix of your k8s pod
