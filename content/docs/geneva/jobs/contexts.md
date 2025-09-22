@@ -210,7 +210,7 @@ db.define_manifest(
 
 An Execution Context represents the concrete execution environment used to execute a distributed Job.
 
-Calling `context` will enter a contxt manager that will provision an execution cluster and execute the Job using the Cluster and Manifest definitions provided. Once completed, the context manager will automatically de-provision the cluster.
+Calling `context` will enter a context manager that will provision an execution cluster and execute the Job using the Cluster and Manifest definitions provided. Once completed, the context manager will automatically de-provision the cluster.
 
 ```python
 db = geneva.connect(my_db_uri)
@@ -218,4 +218,15 @@ tbl = db.get_table("my_table")
 
 with db.context(cluster=cluster_name, manifest=manifest_name):
     tbl.backfill("embedding", where="content is not null")
+```
+
+In a notebook environment, you can manually enter and exit the context manager in multiple steps like so: 
+
+```python
+ctx = db.context(cluster=cluster_name, manifest=manifest_name)
+ctx.__enter()__
+
+# ... do stuff
+
+ctx.__exit__(None,None,None)
 ```
