@@ -1,6 +1,6 @@
 ---
 title: "How Cognee Builds AI Memory Layers with LanceDB"
-date: 2025-09-19
+date: 2025-09-23
 draft: false
 featured: false
 categories: ["Case Studies"]
@@ -15,7 +15,7 @@ author_linkedin: "davidmyriel"
 author_twitter: "davidmyriel"
 author2: "Vasilije Markovic"
 author2_avatar: "/assets/authors/vasilije-markovic.jpg"
-author2_bio: ""
+author2_bio: "Founder @ Cognee"
 author2_github: "Vasilije1990"
 author2_linkedin: "vasilije-markovic-13302471"
 author2_twitter: "cognee_"
