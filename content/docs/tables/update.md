@@ -404,8 +404,8 @@ const predicate = "price = 30.0";
 await table.delete(predicate);
 {{< /code >}}
 
-{{< admonition warning "Permanent Deletion" >}}
-Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
+{{< admonition warning "Soft Deletion" >}}
+Delete operations soft delete rows. Rows are hard deleted later by compaction and cleanup operations that happen in the background on LanceDB Cloud and Enterprise. The default retention on Cloud is 30 days. During this time, these rows are still accessible to query or restore by accessing old table versions (see [Versioning & Reproducibility in LanceDB](/docs/tables/versioning/)).
 {{< /admonition >}}
 
 {{< admonition warning "Index Deletion" >}}
