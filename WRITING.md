@@ -59,6 +59,42 @@ Here is an explanation of common configuration for the front matter:
 
 Save everything. You should be able to run Hugo and see the empty blog post on the blog site.
 
+### Featured Posts Logic
+
+You can mark posts as **featured** to display them at the top of the blog.
+
+#### How to set a post as featured
+
+Add the `featured` field to the post front matter:
+
+```yaml
+featured: true
+
+```
+#### Sorting Rules:
+ - By default, featured posts are sorted by date (newest first).
+ - To control the order, set a weight value. 
+
+ ```yaml
+   featured: true
+   weight: 10
+ ```
+ *Weight Rules:*
+ - Weight must be a non-zero integer.
+ - Lower weight = higher priority (appears first).
+ - Posts without weight (or with 0) are placed after all weighted posts, sorted by date.
+
+ *Exemple:* 
+ - A post with weight: 1 will appear first.
+ - Multiple posts with weights are sorted ascending by weight.
+ - Unweighted posts follow, sorted by date.
+
+ *Limit:*
+ If there are more than 3 featured posts:
+ - Only the top 3 (after sorting) appear in the featured block.
+ - Additional featured posts are shown with the regular posts.
+
+
 ## Step 4: Add Your Images
 
 Add your preview image as `preview-image.png` (recommended: 1200x630px). Then, add any other images your post needs to this folder.
