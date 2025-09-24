@@ -26,49 +26,59 @@ What makes Lance interesting is that in the existing tooling ecosystem you eithe
 
 Here we’re going to compare the random access performance of Lance vs parquet. We’ll create 100 million records where each value is a 1000-character long randomly generated string. We then run a benchmark of 1000 queries that fetch a random set of 20–50 rows across the dataset. Both tests are done on the same Ubuntu 22.04 system:
 
-    sudo lshw -short
-    Class          Description
-    =============================================================
-    system         20M9CTO1WW (LENOVO_MT_20M9_BU_Think_FM_ThinkPad P52)
-    memory         128GiB System Memory
-    memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
-    memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
-    memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
-    memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
-    memory         384KiB L1 cache
-    memory         1536KiB L2 cache
-    memory         12MiB L3 cache
-    processor      Intel(R) Xeon(R) E-2176M  CPU @ 2.70GHz
-    storage        Samsung SSD 980 PRO 2TB
+```bash
+sudo lshw -short
+Class          Description
+=============================================================
+system         20M9CTO1WW (LENOVO_MT_20M9_BU_Think_FM_ThinkPad P52)
+memory         128GiB System Memory
+memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+memory         32GiB SODIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+memory         384KiB L1 cache
+memory         1536KiB L2 cache
+memory         12MiB L3 cache
+processor      Intel(R) Xeon(R) E-2176M  CPU @ 2.70GHz
+storage        Samsung SSD 980 PRO 2TB
+```
 
 ## Creating dataset
 
 To run this benchmark we first generate 100 million entries, each of which is a 1000 character long string.
 
-    import lance
-    import pyarrow as pa
-    import random
-    import string
+```python
+import lance
+import pyarrow as pa
+import random
+import string
 
-    batch_size = 1_000_000
+batch_size = 1_000_000
 
-    for i in range(100):
-        print(f"Creating batch {i}")
-        string_arr = pa.array([''.join(random.choices(string.ascii_letters, k=1_000))
+for i in range(100):
+    print(f"Creating batch {i}")
+    string_arr = pa.array([''.join(random.choices(string.ascii_letters, k=1_000))
                            for _ in range(batch_size)])
-        tbl = pa.Table.from_arrays([string_arr], names=["value"])
-        print(f"Writing batch {i} to lance")
-        if i == 0:
-            params = {"mode": "create"}
-        else:
-            params = {"mode": "append"}
-        lance.write_dataset(tbl, "take.lance", **params)
+    tbl = pa.Table.from_arrays([string_arr], names=["value"])
+    print(f"Writing batch {i} to lance")
+    if i == 0:
+        params = {"mode": "create"}
+    else:
+        params = {"mode": "append"}
+    lance.write_dataset(tbl, "take.lance", **params)
+```
 
 Converting from Lance to parquet is just one line:
 
-    pa.dataset.write_dataset(lance_dataset.scanner().to_reader(),
-                             "take.parquet",
-                             format="parquet")
+```python
+import lance
+import pyarrow as pa
+
+ds = lance.dataset("take.lance")
+pa.dataset.write_dataset(ds.scanner().to_reader(),
+                         "take.parquet",
+                         format="parquet")
+```
 
 ## Benchmarking Take
 
@@ -76,22 +86,27 @@ For both datasets, we run 1000 queries each. For each query, we generate 20–50
 
 The API we use is `Dataset.take`:
 
-    import time
-    tot_time = 0
-    tot_keys = 0
-    nruns = 1000
-    ds = lance.dataset("take.lance")
+```python
+import time
+import numpy as np
+import lance
 
-    for _ in range(nruns):
-        nrows = np.random.randint(20, 50, 1)
-        row_ids = np.random.randint(0, 100_000_000, nrows)
-        start = time.time()
-        tbl = ds.take(row_ids)
-        end = time.time()
-        tot_time += end - start
-        tot_keys += len(row_ids)
+tot_time = 0
+tot_keys = 0
+nruns = 1000
+ds = lance.dataset("take.lance")
 
-    print(f"Lance: mean time per key is {tot_time / tot_keys}")
+for _ in range(nruns):
+    nrows = np.random.randint(20, 50, 1)
+    row_ids = np.random.randint(0, 100_000_000, nrows)
+    start = time.time()
+    tbl = ds.take(row_ids)
+    end = time.time()
+    tot_time += end - start
+    tot_keys += len(row_ids)
+
+print(f"Lance: mean time per key is {tot_time / tot_keys}")
+```
 
 The parquet snippet is almost identical, so it’s omitted.
 
@@ -101,7 +116,7 @@ Here’s the output (in seconds):
     Parquet: mean time per key is 1.246656603929473
 
 I also benchmarked a similar setup using LMDB and plotted all on the same chart for comparison:
-![](https://miro.medium.com/v2/resize:fit:770/1*CgLqW9c8Q8UMEBWgvBI17Q.png)throughput is computed as “1 / mean time per key”
+![](/assets/blog/benchmarking-random-access-in-lance/1*CgLqW9c8Q8UMEBWgvBI17Q.png)throughput is computed as “1 / mean time per key”
 ## Key lookup
 
 If you’ve noticed we’ve only benchmarked `Dataset::Take` on row ids. On the roadmap is to make this more generic so you can lookup arbitrary keys in any column.
