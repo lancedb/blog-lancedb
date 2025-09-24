@@ -3,21 +3,18 @@
 {{ $allPosts := where .Site.RegularPages "Section" "blog" }}
 {{ $featuredPosts := where $allPosts ".Params.featured" true }}
 
-<!-- Build non-featured posts collection -->
-{{ $nonFeaturedPosts := slice }}
-{{ range $allPosts }}
-    {{ if not .Params.featured }}
-        {{ $nonFeaturedPosts = $nonFeaturedPosts | append . }}
-    {{ end }}
-{{ end }}
+{{ $topFeatured := first 3 $featuredPosts.ByWeight }}
+
+{{ $nonFeaturedPosts := $allPosts | complement $topFeatured }}
+
 
 <!-- Create paginator -->
 {{ $paginator := .Paginate $nonFeaturedPosts }}
 
 <!-- Featured Section - Only show on first page -->
 {{ if and $featuredPosts (eq $paginator.PageNumber 1) }}
-    {{ $mainFeatured := index $featuredPosts 0 }}
-    {{ $sideFeatured := after 1 $featuredPosts }}
+    {{ $mainFeatured := index $topFeatured 0 }}
+    {{ $sideFeatured := after 1 $topFeatured }}
     <div class="featured-section">
         <!-- Main Featured Post -->
         <article class="main-featured">
