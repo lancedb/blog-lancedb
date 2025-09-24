@@ -1,14 +1,14 @@
 ---
 title: "Introducing Lance Data Viewer: A Simple Way to Explore Lance Tables"
 date: 2025-09-24
-draft: true
+draft: false
 featured: false
 categories: ["Engineering"]
 image: ""
 meta_image: ""
-description: "I wanted something similar for Lance: a way to browse tables, check schemas, and quickly look at what’s inside."
+description: "A lightweight open source web UI for exploring Lance datasets, viewing schemas, and browsing table data with vector visualization support."
 author: "Gordon Murray"
-author_avatar: ""
+author_avatar: "/assets/authors/gordon-murray.png"
 author_bio: "Infrastructure Engineer with a passion for building on AWS and Terraform, and a growing interest in data engineering"
 author_twitter: "gortron"
 author_github: "gordonmurray"
@@ -19,7 +19,8 @@ As I’ve been learning Lance one thing I wanted was an easy way to see inside m
 
 ## Getting Started with Lance
 
-I first came across Lance through LinkedIn. What caught my attention was the idea of storing data in S3. Its scalable, low cost, and common in data lake architectures but I was curious whether S3-backed databases could operate quickly enough to be application or customerfacing.
+I first came across Lance through LinkedIn. What caught my attention was the idea of storing data in S3. Its scalable, low cost, and common in data lake architectures but I was curious whether S3-backed databases could operate
+ quickly enough to be application or customerfacing.
 
 Another feature that stood out was Lance’s ability to store vector data. I work with OpenSearch, and while powerful, it can be time-consuming to maintain: indexes, shards, latency tuning. I wondered whether Lance could avoid those challenges while still delivering fast search.
 
