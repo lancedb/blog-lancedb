@@ -4,8 +4,8 @@ date: 2025-09-24
 draft: false
 featured: false
 categories: ["Engineering"]
-image: ""
-meta_image: ""
+image: "/assets/blog/lance-data-viewer/lance-data-viewer.png"
+meta_image: "/assets/blog/lance-data-viewer/lance-data-viewer.png"
 description: "A lightweight open source web UI for exploring Lance datasets, viewing schemas, and browsing table data with vector visualization support."
 author: "Gordon Murray"
 author_avatar: "/assets/authors/gordon-murray.png"
