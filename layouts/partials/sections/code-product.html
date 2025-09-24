@@ -1,0 +1,58 @@
+{{ $section := .section }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $content := $section.content }}
+{{ $code := $section.code }}
+{{ $bg := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
+
+<section class="code-product u-bg-{{ $bg }} {{ if $no_padding_top }}no-padding-top{{ end }}">
+  <div class="container">
+    <div class="row items-stratch justify-space-between ">
+      {{ if or $title $description }}
+        <div class="col-12">
+          <div class="code-product__heading text-center">
+            {{ with $title }}
+              <h2 class="text-heading-small js-text-animation">{{ . }}</h2>
+            {{ end }}
+          </div>
+          {{ with $description }}
+            <p class="text-body-medium js-text-animation">{{ . }}</p>
+          {{ end }}
+        </div>
+      {{ end }}
+      <div class="col-12 col-md-5 code-product__content-wrap order-2 order-md-1">
+        {{with $content }}
+          {{ range . }}
+            <div class="code-product__content">
+              <h3 class="text-title-medium">
+                {{ .heading }}
+              </h3>
+              <p class="text-body-large code-product__content-text">
+                {{ .text }}
+              </p>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-12 col-md-6 order-1 order-md-2">
+        <div class="code-product__code-wrap">
+          <div class="code-product__code-head">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+          {{ if $code }}
+            <div class="code-product__code">
+              {{ $language := $code.language | default "python" }}
+              {{ $source := $code.source }}
+              {{ $id := "feature_engineering" }}
+              {{ partial "components/code.html" (dict "language" $language "source" $source "id" $id) }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
