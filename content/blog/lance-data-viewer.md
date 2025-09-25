@@ -39,7 +39,7 @@ As I experimented more, I was creating multiple Lance tables. With relational da
 
 That’s how Lance Data Viewer started, simply as a tool to help me debug my own datasets.
 
-![Lance Data Viewer Screenshot](/assets/images/lance_data_viewer_screenshot.png)
+![Lance Data Viewer Screenshot](/assets/blog/lance-data-viewer/lance_data_viewer_screenshot.png)
 
 ## What Lance Data Viewer Does Today
 
