@@ -6,10 +6,10 @@
       </div>
     {{ end }}
     <div class="container">
-      <div class="row justify-center">
-        <div class="col-12 col-md-8">
-          <div class="hero-main__content text-center">
-            <h1 class="hero-main__title text-heading-large js-text-animation">
+      <div class="row justify-center items-center">
+        <div class="col-12 col-md-8 col-lg-7">
+          <div class="hero-main__content">
+            <h1 class="hero-main__title text-heading-medium js-text-animation">
               {{ $title := .Title }}
               {{ with .Params.highlighted }}
                 {{ $highlighted := . }}
@@ -35,7 +35,7 @@
             {{end}}
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-lg-5">
           <div class="hero-main__media">
             <video autoplay muted loop playsinline>
               <source src="{{.Params.hero.video}}" type="video/mp4" />
