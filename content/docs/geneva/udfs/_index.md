@@ -96,6 +96,30 @@ class OpenAIEmbedding(Callable):
 
 > **Note**:  The state is will be independently managed on each distributed Worker.
 
+## UDF options
+
+The `udf` can have extra annotations that specify resource requirements and operational characteristics.
+These are just add parameters to the `udf(...)`.
+
+### Resources requirements for UDFs
+
+Some workers may require specific resources such as gpus, cpus and certain amounts of RAM.
+
+You can provide these requirements by adding `num_cpus`, `num_gpus`, and `memory` parameters to the UDF.
+
+```python
+@udf(..., num_cpus=1, num_gpus=0.5, memory = 4 * 1024**3) # require 1 CPU, 0.5 GPU, and 4GiB RAM
+def func(...):
+    ...
+```
+
+### Operational parameters for UDFs
+
+UDFs can be quite varied -- some can be simple operations where thousands of calls can be completed per second, while others may be slow and require 30s per row.
+
+In LanceDB, the default number of rows per fragment is 1024 * 1024 rows.  Conside a captioning UDF that takes 30s per row.   It could take a year (!) before any results show up! (e.g. 30s/row * 1024*1024 rows/fragment => 30M s/fragment => 8.3k hours/fragment -> 347 days/fragment).  To enable these to be parallelized, we provide a `batch_size` setting so the work can be split between workers and so that that partial results are checkpointed more frequently to enable finer-grained progress and job recovery.
+
+By default `batch_size` is 100 computed rows per checkpoint.  So for an expensive captioning UDF that can take 30s per row, you may get a checkpoint every 3000s (50mins).  With 100 gpus, our job could finish in 3.5 days!  For cheap operations that can compute 100 rows per second you'd potentially be checkpointing every second.  Tuning this can help you see progress more frequently.
 
 ## Registering Features with UDFs
 
