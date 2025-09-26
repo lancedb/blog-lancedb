@@ -97,6 +97,10 @@ with ray_cluster(
                 service_account="geneva-integ-test",
                 image="rayproject/ray:latest-py312"
                 node_selector={"geneva.lancedb.com/ray-worker-cpu":""}, # k8s label for cpu worker
+                env_vars={
+                    "LANCE_IO_THREADS": "4",
+                    "LANCE_PROCESS_IO_THREADS_LIMIT": "8", # you can pass env variables to ray workers
+                },
             ),
             _WorkerGroupSpec( # specification per worker for gpu nodes
                 name="gpu",
@@ -106,6 +110,10 @@ with ray_cluster(
                 service_account="geneva-integ-test",
                 image="rayproject/ray:latest-py312-gpu"
                 node_selector={"geneva.lancedb.com/ray-worker-gpu":""}, # k8s label for gpu worker
+                env_vars={
+                    "LANCE_IO_THREADS": "4",
+                    "LANCE_PROCESS_IO_THREADS_LIMIT": "8", # you can pass env variables to ray workers
+                },
             ),
         ],
     ):
