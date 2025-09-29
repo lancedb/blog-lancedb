@@ -17,8 +17,10 @@ Broadly, this blog covers two classes of search — *Semantic* and *keyword-base
 ### Semantic Search
 
 Semantic Search or vector similarity search relies on vector embedding to search for the most relevant results. The intuition behind this method is that a well-trained deep learning model, which performs all internal operations (or “sees” all data) as vector embeddings, has a good map of where a given query sits in its embedding space. Once the positionality of query embeddings is located, it finds the top-k nearest points to get the relevant search results.
-![](__GHOST_URL__/content/images/2024/02/1_qR4yGWg8LoO0g9vzLnrIkg.webp)
-The position of an embedding in vector space captures some semantics of the data. Points close to each other in vector space are considered similar (or appear in similar contexts), and points far away are deemed dissimilar. This means that semantic search works on the extracted *meaning* of the given docs and query and not necessarily on the keywords themselves.
+
+![Embedding space illustration](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1_qR4yGWg8LoO0g9vzLnrIkg.webp)
+
+The position of an embedding in vector space captures some semantics of the data. Points close to each other in vector space are considered similar (or appear in similar contexts), and points far away are deemed dissimilar. This means that semantic search works on the extracted meaning of the given docs and query and not necessarily on the keywords themselves.
 
 ### **Keyword-based Search**
 
@@ -26,7 +28,8 @@ This is the well-known and traditional way of searching through a knowledge base
 
 ### Hybrid Search
 
-![](__GHOST_URL__/content/images/2024/02/1_Zh4Jju6uiCYFO9HHvO5sIA.webp)
+![Hybrid search diagram](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1_Zh4Jju6uiCYFO9HHvO5sIA.webp)
+
 Hybrid Search is a broad (often misused) term. It can mean anything from combining multiple methods for searching, to applying ranking methods to better sort the results. In this blog, we use the definition of “hybrid search” to mean using a combination of keyword-based and vector search.
 
 ## The challenge of (re)ranking search results
@@ -47,18 +50,20 @@ Here’s some evaluation numbers from experiment comparing these re-rankers on a
 **With OpenAI ada2 embeddings**
 
 Vector Search baseline — `0.64`
-![](https://miro.medium.com/v2/resize:fit:1400/1*sIDZfRsg8CctGotZfZwq7w.png)
+
+![OpenAI ada2 evaluation - baseline](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*sIDZfRsg8CctGotZfZwq7w.png)
+
 Vector Search baseline — `0.59`
-![](https://miro.medium.com/v2/resize:fit:1400/1*ItP95MwqIe43veGsCqe24Q.png)
+
+![OpenAI ada2 evaluation - reranked](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*ItP95MwqIe43veGsCqe24Q.png)
+
 With this context, let us now test hybrid search with different rerankers using LanceDB.
 
 The dataset we'll query is Airbnb's financial report, which can be found [here](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001559720/8a9ebed0-815a-469a-87eb-1767d21d8cec.pdf). It’s inspired by GitHub user virattt's [GitHub gist](https://gist.github.com/virattt/9f41b2cd1e8f65e672127999ad443f15) comparing speeds of reranker models.
 
-💡
+> Note: The Colab to reproduce the results below can be found here.
 
-The Colab to reproduce the results below can be found [here](https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/hybrid_search.ipynb).
-
-[Open in Colab](https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/hybrid_search.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/hybrid_search.ipynb)
 
 ## Ingestion
 
@@ -66,21 +71,26 @@ We'll start by ingesting the entire dataset by recursively splitting the text in
 
 Using LangChain makes this a single line process. Here's how your LanceDB table would look.
 
-    table = ...
-    LanceDB.from_documents(docs, embedding_function, connection=table)
-    table.to_pandas().head()
+```python
+table = ...
+LanceDB.from_documents(docs, embedding_function, connection=table)
+table.to_pandas().head()
+```
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*Z8UCr_bNo3nCmKCafDHGlQ.png)
+![LanceDB table preview](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*Z8UCr_bNo3nCmKCafDHGlQ.png)
 In the original example, tvectorDB is queried to retrieve the specific reasons as to why Airbnb's operating costs were high for that year.
 
-    query = "What are the specific factors contributing to Airbnb's increased operational expenses in the last fiscal year?"
+```python
+query = "What are the specific factors contributing to Airbnb's increased operational expenses in the last fiscal year?"
+```
 
 ## Semantic Search
 
 Let's first take a look at the semantic search results:
 
-    vector_query = embedding_function.embed_query(query)
-    docs = table.search(vector_query).limit(5).to_pandas()
+```python
+vector_query = embedding_function.embed_query(query)
+docs = table.search(vector_query).limit(5).to_pandas()
 
     In addition, the number of listings on Airbnb may decline as a result of a number of other factors affecting Hosts, including: the COVID-19 pandemic; enforcement or threatened
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
@@ -113,6 +123,7 @@ Let's first take a look at the semantic search results:
     Costs and expenses:
     Cost of revenue 876 1,156 1,499
     ...
+```
 
 The latency is very reasonable as can be seen below:
 
@@ -126,12 +137,15 @@ Let us now compare this with hybrid search and reranking applied.
 
 In LanceDB, you can easily run a hybrid search by passing the search string and simply setting the `query_type="hybrid"` keyword argument. The string query is automatically vectorized if you've passed the `EmbeddingFunction`.
 
-    docs = table.search(query, query_type="hybrid").to_pandas()
+```python
+docs = table.search(query, query_type="hybrid").to_pandas()
+```
 
 > 71 ms ± 25.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 
 The results are shown below:
 
+```
     “Initial Delivery Date”); provided that the Pricing Certificate for any fiscal year may be delivered on any date following the Initial Delivery
     Date that is prior to the date that is 365 days following the last day of the preceding fiscal year, so long as such Pricing Certificate includes a
     certification that delivery of such Pricing Certificate on or before the Initial Delivery Date was not possible because (i) the information
@@ -160,6 +174,7 @@ The results are shown below:
     adversely affected by a number of factors discussed elsewhere in these “Risk Factors,” including:
     •events beyond our control such as the ongoing COVID-19 pandemic, other pandemics and health concerns, restrictions on travel, immigration, trade disputes, economic
     ...
+```
 
 When you don't specify any reranker, LanceDB uses the `LinearCombinationReranker` by default. This takes a weighted linear combination of the vector and full-text (keyword-based) search scores to produce the final relevance score.
 
@@ -167,11 +182,13 @@ When you don't specify any reranker, LanceDB uses the `LinearCombinationReranker
 
 By default, this method assigns a vector search score a weighting factor of `0.7 `and full-text or FTS search score a weight of `0.3`.
 
-    from lancedb.rerankers import LinearCombinationReranker
+```python
+from lancedb.rerankers import LinearCombinationReranker
 
-    reranker = LinearCombinationReranker(weight=0.9)
+reranker = LinearCombinationReranker(weight=0.9)
 
-    docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
+docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
+```
 
 This method faster than other model-based rerankers, as no model inference or API requests are made during the reranking operation.
 
@@ -179,15 +196,18 @@ This method faster than other model-based rerankers, as no model inference or AP
 
 This uses Cohere's [Rerank API](https://docs.cohere.com/docs/rerank-guide) to rerank the results. It accepts the reranking model name as a parameter. By default, it uses the `english-v3` model, but you can easily switch to a multi-lingual model if your data isn’t just in English.
 
-    from lancedb.rerankers import CohereReranker
+```python
+from lancedb.rerankers import CohereReranker
 
-    reranker = CohereReranker() # or CohereReranker(model_name="")
-    docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
+reranker = CohereReranker()  # or CohereReranker(model_name="")
+docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()
+```
 
 > 605 ms ± 78.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
 **Results**: (Only showing first three lines of each doc for brevity)
 
+```
     Increased operating expenses, decreased revenue, negative publicity, negative reaction from our Hosts and guests and other stakeholders, or other adverse impacts from any of the
     above factors or other risks related to our international operations could materially adversely affect our brand, reputation, business, results of operations, and financial condition.
     In addition, we will continue to incur significant expenses to operate our outbound business in China, and we may never achieve profitability in that market. These factors, combined
@@ -214,22 +234,28 @@ This uses Cohere's [Rerank API](https://docs.cohere.com/docs/rerank-guide) to re
     enforcement of laws and regulations, including short-term occupancy and tax laws; private groups, such as homeowners, landlords, and condominium and neighborhood
     associations, adopting and enforcing contracts that prohibit or restrict home sharing; leases, mortgages, and other agreements, or regulations that purport to ban or otherwise restrict
     ...
+```
 
 Cohere Reranker better ranks the results as it is powered by a model designed for this task, i.e., calculating the relevance of given documents in relation to the given query. This is different from the linear combination as it relies only on the existing scores of individual search algorithms (vector search and FTS). Here are the relevance scores given to each of these docs by the cohere reranker. It is evident that the first two docs are highly relevant.
-![](https://miro.medium.com/v2/resize:fit:1400/1*0U6v0riXpGC2icbD4L0kIA.png)
+
+![Cohere Reranker relevance scores](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*0U6v0riXpGC2icbD4L0kIA.png)
+
 ## ColBERT Reranker
 
 The ColBERT model powers Colbert Reranker. It uses the [Hugging Face implementation](https://huggingface.co/vjeronymo2/mColBERT) locally.
 
-    from lancedb.rerankers import ColbertReranker
+```python
+from lancedb.rerankers import ColbertReranker
 
-    reranker = ColbertReranker()
-    docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()["text"].to_list()
+reranker = ColbertReranker()
+docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pandas()["text"].to_list()
+```
 
 > 950 ms ± 5.78 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
 The results are below.
 
+```
     Made Possible by Hosts, Strangers, AirCover, Categories, and OMG marketing campaigns and launches, a $67.9 million increase in our search engine marketing and advertising
     spend, a $25.1 million increase in payroll-related expenses due to growth in headcount and increase in compensation costs, a $22.0 million increase in third-party service provider
     expenses, and a $11.1 million increase in coupon expense in line with increase in revenue and launch of AirCover for guests, partially offset by a decrease of $22.9 million related to
@@ -254,30 +280,35 @@ The results are below.
     Airbnb, Inc.
     Consolidated Statements of Operations
     ...
+```
 
 Colbert is similar to the Cohere reranker in that it doesn't use the existing scores from vector and full-text searches. The results are similar to Cohere’s, except for the top 1 result.
 
 LanceDB also supports other rerankers, including an experimental prompt-based [OpenAI reranker](https://github.com/lancedb/lancedb/blob/main/python/lancedb/rerankers/openai.py#L54), a Cross-encoder reranker, and others. Most of the results @ Top5 were found to be similar the ones shown above.
 
 Subjectively, Cohere had a slight edge in getting the most relevant result (top 1), which the others missed, and considering it also included a network roundtrip, so the speed of 600ms is pretty impressive, too. This is also consistent with the evaluation results.
-![](https://miro.medium.com/v2/resize:fit:1400/1*yWDh0Klw8Upsw1V54kkkdQ.png)Rerankers speed(ms) comparison
+
+![Rerankers speed (ms) comparison](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*yWDh0Klw8Upsw1V54kkkdQ.png)
+
 **Note**: Cohere is an API-based reranker, and the speed is subject to internet connection quality
 
 ## Bring your own reranker
 
 Recognizing that ranking is a complex problem with varying requirements for every use case, hybrid Search in LanceDB is designed to be **very** flexible. You can easily plug in your own reranking logic. To do so, you can implement the base `Reranker` class as follows:
 
-    from lancedb.rerankers import Reranker
+```python
+from lancedb.rerankers import Reranker
 
-    class MyCustomReranker(Reranker):
-        def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table)-> pa.Table:
-            combined_results = self.merge(vector_results, fts_results) # Or custom merge algo
-            # Custom Reranking logic here
+class MyCustomReranker(Reranker):
+    def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table) -> pa.Table:
+        combined_results = self.merge(vector_results, fts_results)  # Or custom merge algo
+        # Custom Reranking logic here
 
-            return combined_results
+        return combined_results
 
-    reranker = MyCustomReranker()
-    table.search((vector_query, query)).rerank(reranker=reranker).to_pandas()
+reranker = MyCustomReranker()
+table.search((vector_query, query)).rerank(reranker=reranker).to_pandas()
+```
 
 We’ve shown how you can apply reranking to significantly improve your retrieval quality with relatively small additions to your code base (by only adding a small additional latency). For RAG applications, better retrieval can significantly improve downstream generation, so it’s worth spending some time trying out this feature on your existing LanceDB workflows. We’d love to hear back from the community wwhat you build with this exciting feature!
 

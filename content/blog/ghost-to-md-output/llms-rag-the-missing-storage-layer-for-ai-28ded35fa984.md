@@ -3,7 +3,7 @@ title: "LLMs, RAG, & the Missing Storage Layer for AI"
 date: 2023-09-05
 author: Ayush Chaurasia
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png
 meta_image: /assets/blog/llms-rag-the-missing-storage-layer-for-ai-28ded35fa984/preview-image.png

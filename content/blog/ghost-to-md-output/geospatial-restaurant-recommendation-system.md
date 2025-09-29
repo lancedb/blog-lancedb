@@ -3,7 +3,7 @@ title: "Geospatial Restaurant Recommendation System"
 date: 2024-12-31
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/geospatial-restaurant-recommendation-system/preview-image.png
 meta_image: /assets/blog/geospatial-restaurant-recommendation-system/preview-image.png

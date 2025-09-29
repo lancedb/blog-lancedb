@@ -3,7 +3,7 @@ title: "Speaker Identification and Transcription Mapping Using Vector Search"
 date: 2025-02-26
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2/preview-image.png
 meta_image: /assets/blog/using-lancedb-with-azure-blob-everything-you-need-to-know-to-start-building-2/preview-image.png

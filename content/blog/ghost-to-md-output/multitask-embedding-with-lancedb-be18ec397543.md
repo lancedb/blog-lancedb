@@ -3,7 +3,7 @@ title: "Multitask Embedding with LanceDB"
 date: 2023-11-14
 author: Kaushal Choudhary
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png
 meta_image: /assets/blog/multitask-embedding-with-lancedb-be18ec397543/preview-image.png

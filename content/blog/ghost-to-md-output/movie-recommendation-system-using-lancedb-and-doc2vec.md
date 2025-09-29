@@ -3,7 +3,7 @@ title: "Movie Recommendation System Using Doc2Vec and Genre Classification"
 date: 2024-05-27
 author: Vipul Maheshwari
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/movie-recommendation-system-using-lancedb-and-doc2vec/preview-image.png
 meta_image: /assets/blog/movie-recommendation-system-using-lancedb-and-doc2vec/preview-image.png

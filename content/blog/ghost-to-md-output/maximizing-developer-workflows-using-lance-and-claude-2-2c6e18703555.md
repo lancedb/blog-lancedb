@@ -3,7 +3,7 @@ title: "Maximizing Developer Workflows Using Lance and Claude 2"
 date: 2023-08-06
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png
 meta_image: /assets/blog/maximizing-developer-workflows-using-lance-and-claude-2-2c6e18703555/preview-image.png

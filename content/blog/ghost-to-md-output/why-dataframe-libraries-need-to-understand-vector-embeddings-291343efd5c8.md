@@ -3,7 +3,7 @@ title: "Open Vector Data Lakes"
 date: 2023-05-21
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/why-dataframe-libraries-need-to-understand-vector-embeddings-291343efd5c8/preview-image.png
 meta_image: /assets/blog/why-dataframe-libraries-need-to-understand-vector-embeddings-291343efd5c8/preview-image.png

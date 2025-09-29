@@ -3,7 +3,7 @@ title: "My SIMD Is Faster than Yours"
 date: 2023-04-24
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/my-simd-is-faster-than-yours-fb2989bf25e7/preview-image.png
 meta_image: /assets/blog/my-simd-is-faster-than-yours-fb2989bf25e7/preview-image.png

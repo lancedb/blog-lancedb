@@ -3,7 +3,7 @@ title: "Lance V0.15.0"
 date: 2024-07-30
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/lance-v0-15-0/preview-image.png
 meta_image: /assets/blog/lance-v0-15-0/preview-image.png

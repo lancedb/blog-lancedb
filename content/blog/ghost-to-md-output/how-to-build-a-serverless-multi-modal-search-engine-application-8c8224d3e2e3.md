@@ -3,7 +3,7 @@ title: "Serverless Multi-Modal Search Engine Application"
 date: 2023-09-25
 author: Ayush Chaurasia
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png
 meta_image: /assets/blog/how-to-build-a-serverless-multi-modal-search-engine-application-8c8224d3e2e3/preview-image.png

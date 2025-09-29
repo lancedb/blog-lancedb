@@ -3,7 +3,7 @@ title: "Simplest Method to Improve RAG Pipeline: Re-Ranking"
 date: 2023-11-21
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544/preview-image.png
 meta_image: /assets/blog/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544/preview-image.png

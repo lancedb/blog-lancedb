@@ -3,7 +3,7 @@ title: "Lance V2 Is Now in Beta"
 date: 2024-06-05
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png
 meta_image: /assets/blog/lance-v2-is-now-in-beta/preview-image.png

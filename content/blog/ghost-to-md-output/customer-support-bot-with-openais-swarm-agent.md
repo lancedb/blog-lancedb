@@ -3,7 +3,7 @@ title: "Customer Support Bot with OpenAI's Swarm Agent"
 date: 2024-11-04
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/customer-support-bot-with-openais-swarm-agent/preview-image.png
 meta_image: /assets/blog/customer-support-bot-with-openais-swarm-agent/preview-image.png

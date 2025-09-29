@@ -3,7 +3,7 @@ title: "Practical Introduction to Adaptive-RAG"
 date: 2024-04-24
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/adaptive-rag/preview-image.png
 meta_image: /assets/blog/adaptive-rag/preview-image.png

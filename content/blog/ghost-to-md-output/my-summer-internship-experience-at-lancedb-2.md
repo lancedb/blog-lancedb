@@ -3,7 +3,7 @@ title: "My Summer Internship Experience at LanceDB"
 date: 2024-08-15
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png
 meta_image: /assets/blog/my-summer-internship-experience-at-lancedb-2/preview-image.png

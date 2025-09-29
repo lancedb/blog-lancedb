@@ -3,7 +3,7 @@ title: "Benchmarking GPT4-O"
 date: 2024-05-23
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/benchmarking-gpt4-o/preview-image.png
 meta_image: /assets/blog/benchmarking-gpt4-o/preview-image.png

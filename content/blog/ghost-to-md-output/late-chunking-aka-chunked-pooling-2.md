@@ -3,7 +3,7 @@ title: "Practical Introduction to Late Chunking or Chunked Pooling"
 date: 2024-10-29
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png
 meta_image: /assets/blog/late-chunking-aka-chunked-pooling-2/preview-image.png

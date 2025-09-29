@@ -3,7 +3,7 @@ title: "Create LLM Apps Using RAG"
 date: 2024-03-21
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/create-llm-apps-using-rag/preview-image.png
 meta_image: /assets/blog/create-llm-apps-using-rag/preview-image.png

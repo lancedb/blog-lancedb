@@ -3,7 +3,7 @@ title: "LLMs Powering Computer Vision Tasks"
 date: 2024-12-01
 author: Prashant Kumar
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png
 meta_image: /assets/blog/llms-powering-computer-vision-tasks/preview-image.png

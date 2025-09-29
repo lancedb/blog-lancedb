@@ -3,7 +3,7 @@ title: "Tokens per Second Is NOT All You Need"
 date: 2024-05-01
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
 meta_image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png

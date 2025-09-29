@@ -3,7 +3,7 @@ title: "Cambrian-1: Vision-Centric Search"
 date: 2024-07-25
 author: LanceDB
 categories: ["Community"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png
 meta_image: /assets/blog/cambrian-1-vision-centric-exploration/preview-image.png

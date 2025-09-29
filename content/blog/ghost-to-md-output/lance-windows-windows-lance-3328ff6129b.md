@@ -3,7 +3,7 @@ title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
 meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png

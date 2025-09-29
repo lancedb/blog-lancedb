@@ -3,7 +3,7 @@ title: "Context-Aware Chatbot Using Llama 2 & LanceDB Serverless Vector Database
 date: 2023-09-19
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/context-aware-chatbot-using-llama-2-lancedb-as-vector-database-4d771d95c755/preview-image.png
 meta_image: /assets/blog/context-aware-chatbot-using-llama-2-lancedb-as-vector-database-4d771d95c755/preview-image.png

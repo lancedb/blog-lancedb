@@ -3,7 +3,7 @@ title: "GTA5 Multimodal RAG Application"
 date: 2024-03-07
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/multimodal-rag-applications/preview-image.png
 meta_image: /assets/blog/multimodal-rag-applications/preview-image.png

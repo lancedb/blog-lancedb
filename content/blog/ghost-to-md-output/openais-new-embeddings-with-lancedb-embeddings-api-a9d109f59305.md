@@ -3,7 +3,7 @@ title: "Benchmarking New OpenAI Embedding Models with LanceDB"
 date: 2024-02-13
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png
 meta_image: /assets/blog/openais-new-embeddings-with-lancedb-embeddings-api-a9d109f59305/preview-image.png

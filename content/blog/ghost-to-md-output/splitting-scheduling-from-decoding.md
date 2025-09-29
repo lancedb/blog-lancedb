@@ -3,7 +3,7 @@ title: "Columnar File Readers in Depth: Scheduling vs Decoding"
 date: 2024-05-22
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/splitting-scheduling-from-decoding/preview-image.png
 meta_image: /assets/blog/splitting-scheduling-from-decoding/preview-image.png

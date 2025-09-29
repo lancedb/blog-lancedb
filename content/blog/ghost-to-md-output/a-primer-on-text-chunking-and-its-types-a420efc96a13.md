@@ -3,7 +3,7 @@ title: "A Primer on Text Chunking and Its Types"
 date: 2023-10-24
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/a-primer-on-text-chunking-and-its-types-a420efc96a13/preview-image.png
 meta_image: /assets/blog/a-primer-on-text-chunking-and-its-types-a420efc96a13/preview-image.png

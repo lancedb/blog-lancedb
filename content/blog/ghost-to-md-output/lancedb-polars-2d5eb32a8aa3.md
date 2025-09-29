@@ -3,7 +3,7 @@ title: "LanceDB + Polars"
 date: 2024-01-19
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/lancedb-polars-2d5eb32a8aa3/preview-image.png
 meta_image: /assets/blog/lancedb-polars-2d5eb32a8aa3/preview-image.png

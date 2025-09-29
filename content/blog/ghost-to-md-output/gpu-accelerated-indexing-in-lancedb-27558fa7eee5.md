@@ -3,7 +3,7 @@ title: "GPU-Accelerated Indexing in LanceDB"
 date: 2023-11-02
 author: LanceDB
 categories: ["Engineering"]
-draft: false
+draft: true
 featured: false
 image: /assets/blog/gpu-accelerated-indexing-in-lancedb-27558fa7eee5/preview-image.png
 meta_image: /assets/blog/gpu-accelerated-indexing-in-lancedb-27558fa7eee5/preview-image.png
