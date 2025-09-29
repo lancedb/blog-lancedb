@@ -2,6 +2,7 @@
 title: "Modified RAG: Parent Document & Bigger Chunk Retriever"
 date: 2023-12-15
 author: Mahesh Deshwal
+author_avatar: /assets/authors/mahesh-deshwal.jpg
 categories: ["Engineering"]
 draft: false
 featured: false

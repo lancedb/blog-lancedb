@@ -2,6 +2,7 @@
 title: "Zero Shot Image Classification with Vector Search"
 date: 2024-07-12
 author: Vipul Maheshwari
+author_avatar: /assets/authors/vipul-maheshwari.jpg
 categories: ["Community"]
 draft: false
 featured: false
@@ -10,9 +11,11 @@ meta_image: /assets/blog/zero-shot-image-classification-with-vector-search/previ
 description: "Get about zero shot image classification with vector search. Get practical steps, examples, and best practices you can use now."
 ---
 
+## Introduction
+
 This post covers the concept of zero-shot image classification with an example. It is the process where a model can classify images without being trained on a particular use case.
 
-#### Fundamentals
+## Fundamentals
 
 To make this work, we need a Multimodal embedding model and a vector database. Let's start with something called CLIP, which stands for **Contrastive Language-Image Pre-Training.**
 
@@ -24,20 +27,23 @@ Key features of CLIP include:
 - Rather than extracting features from images using traditional CNNs, CLIP leverages more detailed text descriptions, enhancing its feature extraction capabilities.
 - In performance tests, CLIP demonstrated superior zero-shot classification compared to a fine-tuned ResNet-101 model on datasets derived from ImageNet, showcasing its robust understanding of diverse datasets beyond its specific training data.
 
+
 ![CLIP architecture overview](/assets/blog/zero-shot-image-classification-with-vector-search/Untitled.png)
-#### How does CLIP work
+
+## How CLIP works
 
 In traditional CNN-based classification, images are labeled with specific classes, and the model learns to recognize features that distinguish between these classes through supervised training. In contrast, zero-shot classification utilizes a Text Encoder and an Image Encoder that produce 512-dimensional vectors for both images and text. These vectors are mapped to the same semantic space, meaning an image vector for "cat" is similar to the vector of a text description like "a photo of a cat".
 
 By leveraging this shared vector space, zero-shot classification allows the model to classify images into categories it hasn't seen during training. Instead of relying solely on predefined class labels, the model compares the vector representation of a new image to vectors representing textual descriptions of various categories, enabling it to generalize across unseen classes.
 ![Prompt engineering for labels](/assets/blog/zero-shot-image-classification-with-vector-search/recommendation_final.png)
+
 To optimize our zero-shot classification, it's beneficial to transform class labels from basic words like "cat," "dog," and "horse" into descriptive phrases such as "a photo of a cat," "a photo of a dog," or "a photo of a horse." This transformation mirrors the text-image pairs used during the model's pretraining, where prompts like "a photo of a {label}" were paired with each label to create training examples [[1]](https://openai.com/index/clip/). You can play around with the prompts and see how CLIP performs.
 
-#### Vector Index
+## Vector Index
 
 To power our zero-shot classification system, we'll use a vector database to store labels and their embeddings.
 
-#### Implementation
+## Implementation
 
 You can also follow along with this Colab:
 
@@ -64,39 +70,41 @@ print(len(labels))
 labels
 ```
 
-    100
+```text
+100
 
-    ['apple',
-     'aquarium_fish',
-     'baby',
-     'bear',
-     'beaver',
-     'bed',
-     'bee',
-     'beetle',
-     'bicycle',
-     'bottle',
-     'bowl',
-     'boy',
-     'bridge',
-     'bus',
-     'butterfly',
-     'camel',
-     'can',
-     'castle',
-     'caterpillar',
-     'cattle',
-     'chair',
-     'chimpanzee',
-     'clock',
-     'cloud',
-     'cockroach',
-    ...
-     'whale',
-     'willow_tree',
-     'wolf',
-     'woman',
-     'worm']
+['apple',
+ 'aquarium_fish',
+ 'baby',
+ 'bear',
+ 'beaver',
+ 'bed',
+ 'bee',
+ 'beetle',
+ 'bicycle',
+ 'bottle',
+ 'bowl',
+ 'boy',
+ 'bridge',
+ 'bus',
+ 'butterfly',
+ 'camel',
+ 'can',
+ 'castle',
+ 'caterpillar',
+ 'cattle',
+ 'chair',
+ 'chimpanzee',
+ 'clock',
+ 'cloud',
+ 'cockroach',
+ ...
+ 'whale',
+ 'willow_tree',
+ 'wolf',
+ 'woman',
+ 'worm']
+```
 
 Looks good! We have 100 classes to classify images from, which would require a lot of computing power if you go for traditional CNN. However, let's proceed with our zero-shot image classification approach.
 
@@ -137,11 +145,13 @@ for i in range(5):
     print(f"Token ID : {token_ids}, Text : {processor.decode(token_ids, skip_special_tokens=False)}")
 ```
 
-    Token ID : tensor([49406,   320,  1125,   539,   320,  3055, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a apple <|endoftext|><|endoftext|><|endoftext|>
-    Token ID : tensor([49406,   320,  1125,   539,   320, 16814,   318,  2759, 49407]), Text : <|startoftext|>a photo of a aquarium _ fish <|endoftext|>
-    Token ID : tensor([49406,   320,  1125,   539,   320,  1794, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a baby <|endoftext|><|endoftext|><|endoftext|>
-    Token ID : tensor([49406,   320,  1125,   539,   320,  4298, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a bear <|endoftext|><|endoftext|><|endoftext|>
-    Token ID : tensor([49406,   320,  1125,   539,   320, 22874, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a beaver <|endoftext|><|endoftext|><|endoftext|>
+```text
+Token ID : tensor([49406,   320,  1125,   539,   320,  3055, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a apple <|endoftext|><|endoftext|><|endoftext|>
+Token ID : tensor([49406,   320,  1125,   539,   320, 16814,   318,  2759, 49407]), Text : <|startoftext|>a photo of a aquarium _ fish <|endoftext|>
+Token ID : tensor([49406,   320,  1125,   539,   320,  1794, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a baby <|endoftext|><|endoftext|><|endoftext|>
+Token ID : tensor([49406,   320,  1125,   539,   320,  4298, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a bear <|endoftext|><|endoftext|><|endoftext|>
+Token ID : tensor([49406,   320,  1125,   539,   320, 22874, 49407, 49407, 49407]), Text : <|startoftext|>a photo of a beaver <|endoftext|><|endoftext|><|endoftext|>
+```
 
 Now let’s get the CLIP embeddings
 
@@ -157,7 +167,9 @@ label_emb = label_emb.detach().cpu().numpy()
 label_emb.shape
 ```
 
-    (100, 768)
+```text
+(100, 768)
+```
 
 We now have a 768-dimensional vector for each of our 100 text class sentences. However, to improve our results when calculating similarities, we need to normalize these embeddings.
 
@@ -182,6 +194,7 @@ selected_image
 ```
 
 ![Sample CIFAR image](/assets/blog/zero-shot-image-classification-with-vector-search/Screenshot-2024-07-08-at-2.34.39-PM.png)
+
 First, we'll run the image through our CLIP processor. This step ensures the image is resized first, then the pixels are normalized, then converting it into the tensor and finally adding a batch dimension.
 
 ```python
@@ -193,7 +206,9 @@ image = processor(
 image.shape
 ```
 
-    torch.Size([1, 3, 224, 224])
+```text
+torch.Size([1, 3, 224, 224])
+```
 
 Now here this shape represents a 4-dimensional tensor:
 
@@ -209,7 +224,9 @@ img_emb = model.get_image_features(image)
 img_emb.shape
 ```
 
-    torch.Size([1, 768])
+```text
+torch.Size([1, 768])
+```
 
 We'll use LanceDB to store our labels, with their corresponding embeddings to allow performing vector search across the dataset.
 
@@ -234,21 +251,21 @@ results = (table.search(query_embedding)
 print(results.head(n=10))
 ```
 
-### Results
+## Results
 
-```
-    |   label         | vector | distance |
-    |-----------------|-----------------------------------------------------------|-------------|
-    | whale           | [0.05180167, 0.008572296, -0.00027403078, -0.12351207, ...]| 447.551605  |
-    | dolphin         | [0.09493398, 0.02598409, 0.0057568997, -0.13548125, ...]| 451.570709  |
-    | aquarium_fish   | [-0.094619915, 0.13643932, 0.030785343, 0.12217164, ...]| 451.694672  |
-    | skunk           | [0.1975818, -0.04034014, 0.023241673, 0.03933424, ...]| 452.987640  |
-    | crab            | [0.05123004, 0.0696855, 0.016390173, -0.02554354, ...]| 454.392456  |
-    | chimpanzee      | [0.04187969, 0.0196794, -0.038968336, 0.10017315, ...]| 454.870697  |
-    | ray             | [0.10485967, 0.023477506, 0.06709562, -0.08323726, ...]| 454.880524  |
-    | sea             | [-0.08117988, 0.059666794, 0.09419422, -0.18542227, ...]| 454.975311  |
-    | shark           | [-0.01027703, -0.06132377, 0.060097754, -0.2388756, ...]| 455.291901  |
-    | keyboard        | [-0.18453166, 0.05200073, 0.07468183, -0.08227961, ...]| 455.424866  |
+```text
+|   label         | vector | distance |
+|-----------------|-----------------------------------------------------------|-------------|
+| whale           | [0.05180167, 0.008572296, -0.00027403078, -0.12351207, ...]| 447.551605  |
+| dolphin         | [0.09493398, 0.02598409, 0.0057568997, -0.13548125, ...]| 451.570709  |
+| aquarium_fish   | [-0.094619915, 0.13643932, 0.030785343, 0.12217164, ...]| 451.694672  |
+| skunk           | [0.1975818, -0.04034014, 0.023241673, 0.03933424, ...]| 452.987640  |
+| crab            | [0.05123004, 0.0696855, 0.016390173, -0.02554354, ...]| 454.392456  |
+| chimpanzee      | [0.04187969, 0.0196794, -0.038968336, 0.10017315, ...]| 454.870697  |
+| ray             | [0.10485967, 0.023477506, 0.06709562, -0.08323726, ...]| 454.880524  |
+| sea             | [-0.08117988, 0.059666794, 0.09419422, -0.18542227, ...]| 454.975311  |
+| shark           | [-0.01027703, -0.06132377, 0.060097754, -0.2388756, ...]| 455.291901  |
+| keyboard        | [-0.18453166, 0.05200073, 0.07468183, -0.08227961, ...]| 455.424866  |
 ```
 
 Here are the results. Our initial accurate prediction is a whale, demonstrating the closest resemblance between the label and the image with minimal distance, just as we had hoped. What's truly remarkable is that we achieved this without running a single epoch for a CNN model. That’s zero shot classification for you. Here is the Colab for your reference:
@@ -256,4 +273,3 @@ Here are the results. Our initial accurate prediction is a whale, demonstrating 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/zero-shot-image-classification/main.ipynb)
 Checkout more examples on [VectorDB-recipes](https://github.com/lancedb/vectordb-recipes?tab=readme-ov-file)
 
----

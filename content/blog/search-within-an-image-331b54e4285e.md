@@ -2,6 +2,7 @@
 title: "Search Within an Image with Segment Anything "
 date: 2023-12-12
 author: Kaushal Choudhary
+author_avatar: /assets/authors/kaushal-choudhary.jpg
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -174,7 +175,8 @@ search_image_with_user_query(tbl, img_uuid, 'a dog')
 ```
 
 ![Result](/assets/blog/search-within-an-image-331b54e4285e/1*Ob_qPZfmCfVX-J3SAXYTCA.png)
+
 Visit our [LanceDB](https://github.com/lancedb/lancedb) and if you wish to learn more about LanceDB python and Typescript library.
 For more such applied GenAI and VectorDB applications, examples and tutorials visit [**VectorDB-Recipes.**](https://github.com/lancedb/vectordb-recipes/tree/main)** **Don’t forget to leave a star at the repo.
 
-Lastly, for more information and updates, follow our** **[**LinkedIn**](https://www.linkedin.com/company/lancedb/) and [**Twitter.**](https://twitter.com/lancedb)
+Lastly, for more information and updates, follow our** **[**LinkedIn**](https://www.linkedin.com/company/lancedb/) and [**Twitter**](https://twitter.com/lancedb)

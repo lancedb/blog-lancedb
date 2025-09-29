@@ -2,6 +2,7 @@
 title: "Efficient RAG with Compression and Filtering"
 date: 2024-01-09
 author: Kaushal Choudhary
+author_avatar: /assets/authors/kaushal-choudhary.jpg
 categories: ["Engineering"]
 draft: false
 featured: false
