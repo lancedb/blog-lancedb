@@ -22,83 +22,107 @@ In contrast, while efficient for tabular data, traditional formats like Parquet 
 
 In this article, I'll walk through a Python code example that demonstrates how to convert a dataset of GTA5 images into the Lance format and subsequently load them into a Pandas DataFrame for further processing.
 
-    import os
-    import pandas as pd
-    import pyarrow as pa
-    import lance
-    import time
-    from tqdm import tqdm
+## Procedure
 
-We start by importing the necessary libraries, including *os *for directory handling, *pandas *for data manipulation, *pyarrow* for working with Arrow data formats, *lance *for interacting with the Lance format, and *tqdm *for displaying progress bars.
+### 1. Import dependencies
 
-    def process_images():
-        # Get the current directory path
-        current_dir = os.getcwd()
-        images_folder = os.path.join(current_dir, "./image")
+```python
+import os
+import pandas as pd
+import pyarrow as pa
+import lance
+import time
+from tqdm import tqdm
+```
 
-        # Define schema for RecordBatch
-        schema = pa.schema([('image', pa.binary())])
+We start by importing the necessary libraries, including *os* for directory handling, *pandas* for data manipulation, *pyarrow* for working with Arrow data formats, *lance* for interacting with the Lance format, and *tqdm* for displaying progress bars.
 
-        # Get the list of image files
-        image_files = [filename for filename in os.listdir(images_folder)
-              		 if filename.endswith((".png", ".jpg", ".jpeg"))]
+### 2. Process images
 
-        # Iterate over all images in the folder with tqdm
-        for filename in tqdm(image_files, desc="Processing Images"):
-            	# Construct the full path to the image
-            	image_path = os.path.join(images_folder, filename)
+```python
+def process_images():
+    # Get the current directory path
+    current_dir = os.getcwd()
+    images_folder = os.path.join(current_dir, "./image")
 
-            	# Read and convert the image to a binary format
-            	with open(image_path, 'rb') as f:
-                	binary_data = f.read()
+    # Define schema for RecordBatch
+    schema = pa.schema([('image', pa.binary())])
 
-            	image_array = pa.array([binary_data], type=pa.binary())
+    # Get the list of image files
+    image_files = [
+        filename for filename in os.listdir(images_folder)
+        if filename.endswith((".png", ".jpg", ".jpeg"))
+    ]
 
-            	# Yield RecordBatch for each image
-            	yield pa.RecordBatch.from_arrays([image_array], schema=schema)
+    # Iterate over all images in the folder with tqdm
+    for filename in tqdm(image_files, desc="Processing Images"):
+        # Construct the full path to the image
+        image_path = os.path.join(images_folder, filename)
+
+        # Read and convert the image to a binary format
+        with open(image_path, 'rb') as f:
+            binary_data = f.read()
+
+        image_array = pa.array([binary_data], type=pa.binary())
+
+        # Yield RecordBatch for each image
+        yield pa.RecordBatch.from_arrays([image_array], schema=schema)
+```
 
 The *process_images* function is responsible for iterating over all image files in a specified directory and converting them into PyArrow *RecordBatch *objects. It first defines the schema for the *RecordBatch*, specifying that each batch will contain a single binary column named '*image*'.
 
 It then iterates over all image files in the directory, reads each image's binary data, and yields a *RecordBatch *containing that image's binary data.
 
-    def write_to_lance():
-    	# Create an empty RecordBatchIterator
-    	schema = pa.schema([
-        	pa.field("image", pa.binary())
-    	])
+### 3. Write to Lance
 
-    	reader = pa.RecordBatchReader.from_batches(schema, process_images())
-    	lance.write_dataset(
-        	reader,
-        	"image_dataset.lance",
-        	schema,
-    	)
+```python
+def write_to_lance():
+    # Create an empty RecordBatchIterator
+    schema = pa.schema([
+        pa.field("image", pa.binary())
+    ])
+
+    reader = pa.RecordBatchReader.from_batches(schema, process_images())
+    lance.write_dataset(
+        reader,
+        "image_dataset.lance",
+        schema,
+    )
+```
 
 The *write_to_lance* function creates a *RecordBatchReader *from the *process_images* generator and writes the resulting data to a Lance dataset named "*image_dataset.lance*". This step converts the image data into the efficient, columnar Lance format, optimizing it for fast data loading and random access.
 
-    def loading_into_pandas():
-    	uri = "image_dataset.lance"
-    	ds = lance.dataset(uri)
+### 4. Load into Pandas
 
-    	# Accumulate data from batches into a list
-    	data = []
-    	for batch in ds.to_batches(columns=["image"], batch_size=10):
-        	tbl = batch.to_pandas()
-        	data.append(tbl)
+```python
+def loading_into_pandas():
+    uri = "image_dataset.lance"
+    ds = lance.dataset(uri)
 
-    	# Concatenate all DataFrames into a single DataFrame
-    	df = pd.concat(data, ignore_index=True)
-    	print("Pandas DataFrame is ready")
-    	print("Total Rows: ", df.shape[0])
+    # Accumulate data from batches into a list
+    data = []
+    for batch in ds.to_batches(columns=["image"], batch_size=10):
+        tbl = batch.to_pandas()
+        data.append(tbl)
+
+    # Concatenate all DataFrames into a single DataFrame
+    df = pd.concat(data, ignore_index=True)
+    print("Pandas DataFrame is ready")
+    print("Total Rows: ", df.shape[0])
+```
 
 The* loading_into_pandas* function demonstrates how to load the image data from the Lance dataset into a Pandas DataFrame. It first creates a Lance dataset object from the "*image_dataset.lance*" file. Then, it iterates over batches of data, converting each batch into a Pandas DataFrame and appending it to a list. Finally, it concatenates all the DataFrames in the list into a single DataFrame, making the image data accessible for further processing or analysis.
 
-    if __name__ == "__main__":
-    	start = time.time()
-    	write_to_lance()
-    	loading_into_pandas()
-    	end = time.time()
-    	print(f"Time(sec): {end - start}")
+### 5. Run and measure time
+
+```python
+if __name__ == "__main__":
+    start = time.time()
+    write_to_lance()
+    loading_into_pandas()
+    end = time.time()
+    print(f"Time(sec): {end - start}")
+```
 
 The central part of the script calls the *write_to_lance* and *loading_into_pandas* functions, measuring the total execution time for the entire process.
 
@@ -106,8 +130,11 @@ By leveraging the Lance format, this code demonstrates how to efficiently store 
 
 Moreover, Lance's random access capabilities allow for the selective loading of specific data subsets, enabling efficient data augmentation techniques and custom data loading strategies tailored to your machine learning workflow.
 
-TLDR: Lance format provides a powerful and efficient solution for handling multimodal data in machine learning pipelines, streamlining data storage, loading, and processing tasks. By adopting Lance, we can improve our machine learning projects' overall performance and resource efficiency while also benefiting from the ability to store diverse data types in a unified format and maintain data locality and privacy. Here is the whole script for your reference.
+## TL;DR
 
+Lance format provides a powerful and efficient solution for handling multimodal data in machine learning pipelines, streamlining data storage, loading, and processing tasks. By adopting Lance, we can improve our machine learning projects' overall performance and resource efficiency while also benefiting from the ability to store diverse data types in a unified format and maintain data locality and privacy. Here is the whole script for your reference.
+
+```python
     import os
     import pandas as pd
     import pyarrow as pa
@@ -177,5 +204,6 @@ TLDR: Lance format provides a powerful and efficient solution for handling multi
     	loading_into_pandas()
     	end = time.time()
     	print(f"Time(sec): {end - start}")
+```
 
 Imagine using Lance-formatted image data to accelerate machine learning and deep learning projects. Something big is coming up. Stay tuned.
