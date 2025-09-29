@@ -30,7 +30,9 @@ CRAG has three main parts:
 
 In CRAG, the **Retrieval Evaluator** links the Retriever and Generator. It keeps track of the text created, asks the generator for more, gets knowledge with updated info, scores options for both text fit and accuracy, and chooses the best one to add to the output at each step.
 
-![Pseudocode of CRAG](/assets/blog/implementing-corrective-rag-in-the-easiest-way-2/crag-pseudocode.png)Pseudocode of CRAG from paper
+![Pseudocode of CRAG](/assets/blog/implementing-corrective-rag-in-the-easiest-way-2/crag-pseudocode.png)
+
+Pseudocode of CRAG from paper
 
 ### **Implementation**
 
@@ -195,7 +197,9 @@ pprint.pprint(value["keys"]["generation"])
 ```
 
 Here is the generated answer output, illustrating each node’s functioning and their decisions, ultimately resulting in the final generated output.
+
 ![Output of implemented CRAG](/assets/blog/implementing-corrective-rag-in-the-easiest-way-2/output.png)
+
 Checkout the Colab for implementation:
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/Corrective-RAG-with_Langgraph/CRAG_with_Langgraph.ipynb)
