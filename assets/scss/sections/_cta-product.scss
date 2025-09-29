@@ -1,0 +1,60 @@
+.cta-product {
+  padding-bottom: 48px;
+  border-bottom: 1px solid palette(primary-dark, 500);
+}
+
+.cta-product__wrap {
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+
+  @include mq($md) {
+    padding: 32px 36px;
+  }
+}
+
+.cta-product__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include mq($md) {
+    max-width: 600px;
+  }
+}
+
+.cta-product__background {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  height: 314px;
+  display: none;
+  
+  @include mq($md) {
+    display: block;
+  }
+}
+
+.cta-product__title {
+  @include mq($md) {
+    font-size: 42px;
+    line-height: 50px;
+  }
+}
+
+.cta-product__vector {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 0;
+  right: 100%;
+  transform: translate(50%, -50%) rotate(45deg);
+
+  @include mq($md) {
+    width: 1000px;
+    height: 1000px;
+    top: calc(100% + 60px);
+    right: 60%;
+    transform: translate(50%, -50%) rotate(45deg);
+  }
+}

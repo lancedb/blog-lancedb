@@ -1,0 +1,61 @@
+{{ $section := .section }}
+{{ $bg_color := $section.bg_color | default "dark" }}
+{{ $no_padding_top := $section.no_padding_top }}
+{{ $title := $section.title }}
+{{ $description := $section.description }}
+{{ $items := $section.items }}
+{{ $no_padding_top := $section.no_padding_top }}
+{{ $bg_color := $section.bg_color | default "dark" }}
+
+<section class="how-it-works-product u-bg-{{ $bg_color }} js-how-it-works {{ if $no_padding_top }}no-padding-top{{ end }}">
+  <div class="how-it-works-product__vector">
+    {{ readFile "static/assets/vectors/download.svg" | safeHTML}}
+  </div>
+  <div class="container">
+    <div class="row">
+      {{ if or $title $description }}  
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="how-it-works-product__heading">
+            {{ with $title }}
+              <h2 class="how-it-works-product__title text-heading-small js-text-animation">
+                {{ . | safeHTML }}
+              </h2>
+            {{ end }}
+            {{ with $description }}
+              <p class="how-it-works-product__description text-body-large js-text-animation">
+                {{ . | safeHTML }}
+              </p>  
+            {{ end }}
+          </div>
+        </div>  
+      {{ end }}
+      {{ with $items }}
+        <div class="col-12 col-lg-6">
+          <div class="how-it-works-product__item js-how-it-works-wrapper">
+            <div class="how-it-works-product__list-wrap">
+              <div class="how-it-works-product__list-line js-how-it-works-line"></div>
+              <ul class="how-it-works-product__list">
+                {{ range $index, $li:= . }}
+                  <li class="how-it-works-product__list-item js-how-it-works-item">
+                    <div class="how-it-works-product__list-icon">
+                      {{ readFile (printf "static/assets/%s" $li.icon) | safeHTML }}
+                    </div>
+                    <div class="how-it-works-product__list-content">
+                      <p class="how-it-works-product__list-number text-body-medium text-medium">{{ printf "%02d" (add $index 1) }}</p>
+                      <h4 class="how-it-works-product__list-title text-title-medium">
+                        {{ $li.title }}
+                      </h4>
+                      <p class="how-it-works-product__list-text text-body-large">
+                        {{ $li.text | markdownify }}
+                      </p>
+                    </div>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
