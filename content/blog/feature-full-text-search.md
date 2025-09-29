@@ -211,4 +211,3 @@ You get the precision of keyword matching, the semantic understanding of embeddi
 
 We built this entire app on [LanceDB Cloud](https://accounts.lancedb.com/sign-up), which is free to try and comes with comprehensive tutorials, sample code, and documentation to help you build RAG applications, AI agents, and semantic search engines. 
 
-![Wikipedia Search Demo](/assets/blog/feature-full-text-search/outro.png)
