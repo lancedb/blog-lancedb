@@ -15,7 +15,7 @@ In the world of search engines, the quest to find the most relevant information 
 ## The Challenge of Dense Retrieval
 
 Dense retrieval, a method used by search engines to find relevant documents by comparing their semantic similarities, has shown great promise across various tasks and languages. However, building fully zero-shot dense retrieval systems without any relevant labels has been a significant challenge. Traditional methods rely on supervised learning, which requires a large dataset of labeled examples to train the model effectively.
-![](https://miro.medium.com/v2/resize:fit:770/1*mCjvp4YeeGn-T6XTfDcwgw.png)
+![HyDE overview](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*mCjvp4YeeGn-T6XTfDcwgw.png)
 ## Introducing HyDE
 
 The HyDE approach recognizes the difficulty of zero-shot learning and encoding relevance without labeled data. Instead, it leverages the power of language models and hypothetical documents. Here’s how it works:
@@ -36,39 +36,40 @@ What makes HyDE intriguing is its ability to perform effectively without the nee
 
 To utilize HyDE effectively, one needs to provide a base embedding model and an LLMChain for generating documents. The HyDE class comes with default prompts, but there’s also the flexibility to create custom prompts.
 
-Follow along with the Google Colab
-[
+> Follow along with the Colab notebook:
 
-Google Colab
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb)
 
-![](https://ssl.gstatic.com/colaboratory-static/common/005460c8a91a7de335dec68f82b6f6e5/img/favicon.ico)
-
-![](https://colab.research.google.com/img/colab_favicon_256px.png)
-](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb?source=post_page-----0946c54dfdcb--------------------------------)
-    from langchain.llms import OpenAI
-    from langchain.embeddings import OpenAIEmbeddings
-    from langchain.chains import LLMChain, HypotheticalDocumentEmbedder
-    from langchain.prompts import PromptTemplate
+```python
+from langchain.llms import OpenAI
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import LLMChain, HypotheticalDocumentEmbedder
+from langchain.prompts import PromptTemplate
+```
 
 Initialize the LLM & embedding model
 
-    # instantiate llm
-    llm = OpenAI()
-    emebeddings = OpenAIEmbeddings()
+```python
+# instantiate llm
+llm = OpenAI()
+emebeddings = OpenAIEmbeddings()
 
-    embeddings = HypotheticalDocumentEmbedder.from_llm(llm, emebeddings, "web_search")
-    # Now we can use it as any embedding class!
-    result = embeddings.embed_query("What bhagavad gita tell us?")
+embeddings = HypotheticalDocumentEmbedder.from_llm(llm, emebeddings, "web_search")
+# Now we can use it as any embedding class!
+result = embeddings.embed_query("What bhagavad gita tell us?")
+```
 
 We can also generate multiple documents and then combine the embeddings for those. By default, we combine those by taking the average. We can do this by changing the LLM we use to generate documents to return multiple things.
 
-    multi_llm = OpenAI(n=3, best_of=3)
+```python
+multi_llm = OpenAI(n=3, best_of=3)
 
-    embeddings = HypotheticalDocumentEmbedder.from_llm(
-        multi_llm, embeddings, "web_search"
-    )
+embeddings = HypotheticalDocumentEmbedder.from_llm(
+    multi_llm, embeddings, "web_search"
+)
 
-    result = embeddings.embed_query("What bhagavad gita tell us?")
+result = embeddings.embed_query("What bhagavad gita tell us?")
+```
 
 The `HypotheticalDocumentEmbedder` does not actually create full hypothetical documents. It only generates an embedding vector representing a hypothetical document. This `HypotheticalDocumentEmbedder` is used to generate "dummy" embeddings that can be inserted into a vector store index.
 
@@ -80,54 +81,61 @@ You can also make and use your own prompts when creating documents with LLMChain
 
 Let’s try this out. We’ll make a prompt which we’ll use in the next example.
 
-    prompt_template = """
-    As a knowledgeable and helpful research assistant, your task is to provide informative answers based on the given context. Use your extensive knowledge base to offer clear, concise, and accurate responses to the user's inquiries.
+```python
+prompt_template = """
+As a knowledgeable and helpful research assistant, your task is to provide informative answers based on the given context. Use your extensive knowledge base to offer clear, concise, and accurate responses to the user's inquiries.
 
-    Question: {question}
+Question: {question}
 
-    Answer:
-    """
+Answer:
+"""
 
-    prompt = PromptTemplate(input_variables=["question"], template=prompt_template)
+prompt = PromptTemplate(input_variables=["question"], template=prompt_template)
 
-    llm_chain = LLMChain(llm=llm, prompt=prompt)
+llm_chain = LLMChain(llm=llm, prompt=prompt)
 
-    embeddings = HypotheticalDocumentEmbedder(
-        llm_chain=llm_chain,
-        base_embeddings=embeddings
-    )
+embeddings = HypotheticalDocumentEmbedder(
+    llm_chain=llm_chain,
+    base_embeddings=embeddings
+)
+```
 
 loading the pdf we are using
 
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
-    from langchain.document_loaders import PyPDFLoader
+```python
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import PyPDFLoader
 
-    #Load the  multiple pdfs
-    pdf_folder_path = '/content/book'
+# Load the multiple PDFs
+pdf_folder_path = '/content/book'
 
-    from langchain.document_loaders import PyPDFDirectoryLoader
-    loader = PyPDFDirectoryLoader(pdf_folder_path)
-    docs = loader.load()
+from langchain.document_loaders import PyPDFDirectoryLoader
+loader = PyPDFDirectoryLoader(pdf_folder_path)
+docs = loader.load()
 
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=50,
-    )
-    documents = text_splitter.split_documents(docs)
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=50,
+)
+documents = text_splitter.split_documents(docs)
+```
 
 let’s create a vector store for retrieving information
 
-    from langchain.vectorstores import LanceDB
-    import lancedb# lancedb as vectorstore
+```python
+from langchain.vectorstores import LanceDB
+import lancedb  # lancedb as vectorstore
 
-    db = lancedb.connect('/tmp/lancedb')
-    table = db.create_table("documentsai", data=[
-        {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
-    ], mode="overwrite")
-    vector_store = LanceDB.from_documents(documents, embeddings, connection=table)
+db = lancedb.connect('/tmp/lancedb')
+table = db.create_table("documentsai", data=[
+    {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
+], mode="overwrite")
+vector_store = LanceDB.from_documents(documents, embeddings, connection=table)
+```
 
 the result of vector_store getting some relevant information from the doc
 
+```
     [Document(page_content='gaged in work, such a Karma -yogi is not bound by Karma. (4.22) \nThe one who is free f rom attachment, whose mind is fixed in Self -\nknowledge, who does work as a service (Sev a) to the Lord, all K ar-\nmic bonds of such a philanthropic person ( Karma -yogi) dissolve \naway. (4.23) God shall be realized by the one who considers eve-\nrything as a manifest ation or an act of God. (Also see 9.16) (4.24)  \nDifferent types of spiritual practices', metadata={'vector': array([-0.00890432, -0.01419295,  0.00024622, ..., -0.0255662 ,
              0.01837529, -0.0352935 ], dtype=float32), 'id': '849b3475-6bf5-4a6a-955c-aa9c1426cdbb', '_distance': 0.2407873421907425}),
      Document(page_content='renunciation (Samny asa) is also known as Karma -yoga . No one \nbecomes a Karma -yogi who has not renounced the selfish motive \nbehind an action. (6.02)  \nA definition of yoga and yogi  \nFor the wise who seeks to attain yoga of meditation or calm-\nness of mind, Karma -yoga  is said to be the means. For the one \nwho has attained yoga, the calmness becomes the means of Self -\nrealization. A person is said to have attained yogic perfection when', metadata={'vector': array([ 0.00463139, -0.02188308,  0.01836756, ...,  0.00026087,
@@ -136,27 +144,33 @@ the result of vector_store getting some relevant information from the doc
              0.01414126, -0.0371828 ], dtype=float32), 'id': 'a2088f52-eb0e-43bc-a93d-1023541dff9d', '_distance': 0.26249048113822937}),
      Document(page_content='the best of your ability, O Arjuna, with your mind attached to the \nLord, aba ndoning worry and attachment  to the results, and remain-\ning calm in both success and failure. The calmness of mind  is \ncalled Karma -yoga . (2.48) Work done with selfish motives is infe-\nrior by far to selfless service or Karma -yoga . Therefore, be a \nKarma -yogi, O Arjuna. Those who work only to enjoy the fruits of \ntheir labor are, in truth, unhappy. Because , one has no control over \nthe results. (2.49)', metadata={'vector': array([ 0.00598168, -0.01145132,  0.01744962, ..., -0.01556102,
              0.00799331, -0.03753265], dtype=float32), 'id': 'b3e30fff-f3a5-4665-9569-b285f8cf9c76', '_distance': 0.2726559340953827})]
+```
 
 below is a screenshot of a PDF file that has all the information related to a query.
-![](https://miro.medium.com/v2/resize:fit:770/1*YtYoBsurIhNd24xDWmtFVg.png)
+
+![PDF screenshot example](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*YtYoBsurIhNd24xDWmtFVg.png)
+
 passing the string query to get some reference
 
-    # passing in the string query to get some refrence
-    query = "which factors appear to be the major nutritional limitations of fast-food meals"
+```python
+# passing in the string query to get some reference
+query = "which factors appear to be the major nutritional limitations of fast-food meals"
 
-    vector_store.similarity_search(query)
+vector_store.similarity_search(query)
 
-    llm_chain.run("which factors appear to be the major nutritional limitations of fast-food meals")
+llm_chain.run("which factors appear to be the major nutritional limitations of fast-food meals")
 
-    The major nutritional limitations of fast-food meals
-    are typically high levels of saturated fat, trans fat, Sodium,
-    and added sugar. These ingredients can lead to an increased risk of obesity,
-     type 2 diabetes, cardiovascular disease, and other health issues.
-     Additionally, fast-food meals often lack essential vitamins, minerals,
-     and fiber, which are important for optimal nutrition.
+"""
+The major nutritional limitations of fast-food meals are typically high levels of saturated fat, trans fat, sodium, and added sugar. These ingredients can lead to an increased risk of obesity, type 2 diabetes, cardiovascular disease, and other health issues. Additionally, fast-food meals often lack essential vitamins, minerals, and fiber, which are important for optimal nutrition.
+"""
+```
 
 HyDE response: here we can see that we are getting the output. which is very good.
-![](https://miro.medium.com/v2/resize:fit:770/1*VskgpwscCiFdhKeLHNCx8g.png)![](https://miro.medium.com/v2/resize:fit:770/1*ICbqfWSAFNmWLGni7MOF7A.png)
+
+![HyDE results 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*VskgpwscCiFdhKeLHNCx8g.png)
+
+![HyDE results 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*ICbqfWSAFNmWLGni7MOF7A.png)
+
 A vanilla RAG is not able to get the correct answer because it's directly searching similar keywords in the database.
 
 ## *Normal RAG System:*
@@ -166,19 +180,13 @@ A vanilla RAG is not able to get the correct answer because it's directly search
 - The quality of the retrieved documents heavily depends on the effectiveness of the retrieval methods, which may not always capture highly relevant information.
 
 *Example Output:*
-![](https://miro.medium.com/v2/resize:fit:770/1*EZpfcbs4ssfVJ8tuXWlqIw.png)![](https://miro.medium.com/v2/resize:fit:770/1*VZfhPM515sQq70WAXU0hog.png)
+![Normal RAG result 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*EZpfcbs4ssfVJ8tuXWlqIw.png)
+![Normal RAG result 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*VZfhPM515sQq70WAXU0hog.png)
 you can check our blog for a [vanilla RAG](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/chatbot_using_Llama2_&amp;_lanceDB)
 
-Here is whole code to try
-[
+Colab to reproduce the results:
 
-Google Colab
-
-![](https://ssl.gstatic.com/colaboratory-static/common/005460c8a91a7de335dec68f82b6f6e5/img/favicon.ico)
-
-![](https://colab.research.google.com/img/colab_favicon_256px.png)
-](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb?source=post_page-----0946c54dfdcb--------------------------------)
-[Conclusion](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb?source=post_page-----0946c54dfdcb--------------------------------)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Advance-RAG-with-HyDE/main.ipynb)
 
 - HyDE uses Language Models (LLMs) to generate hypothetical documents, making information retrieval more precise.
 - It doesn’t rely on extensive labeled data, making it a valuable tool when training data is limited.

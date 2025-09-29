@@ -18,7 +18,7 @@ Hallucination in LLMs refers to generating incorrect or baseless content. This i
 
 FLARE stands for Forward-Looking Active Retrieval Augmented Generation. It’s a methodology that supplements LLMs by actively **incorporating external information as the model generates content**. This process significantly reduces the risk of hallucination, ensuring the content is continuously checked and supported by external data.
 
-**Traditional Retrieval-Augmented Generation **In traditional retrieval-augmented generation models, the approach is generally to perform a **single retrieval at the beginning of the generation process**. This method involves taking an initial query, for instance, “Summarize the Wikipedia page for Narendra Modi,” and retrieving relevant documents based on this query. The model then uses these documents to generate content. This approach, however, has its limitations, especially when dealing with long and complex texts.
+**Traditional Retrieval-Augmented Generation:** In traditional retrieval-augmented generation models, the approach is generally to perform a **single retrieval at the beginning of the generation process**. This method involves taking an initial query, for instance, “Summarize the Wikipedia page for Narendra Modi,” and retrieving relevant documents based on this query. The model then uses these documents to generate content. This approach, however, has its limitations, especially when dealing with long and complex texts.
 
 ## **Limitations of Traditional Methods:**
 
@@ -43,7 +43,8 @@ There are two types of FLARE:
 
 1. **FLARE Instruct**: This mode prompts the model to generate specific queries for information retrieval. The model pauses generation, retrieves the necessary data, and then resumes, integrating the new information. let's understand this in the figure
 
-![](https://miro.medium.com/v2/resize:fit:629/1*8jwkT_22QfxrHOp5XYhmRg.png)
+![FLARE Instruct diagram](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*8jwkT_22QfxrHOp5XYhmRg.png)
+
 Imagine a scenario where an AI model is tasked with generating a *summary about Joe Biden*, prompted by a user’s input query. Here’s how the process unfolds
 
 1. User Query: The task begins with the user’s request: “*Generate a summary about Joe Biden.*”
@@ -59,18 +60,25 @@ now let's understand FLARE Direct
 
 1. **FLARE Direct**: Here, the model uses the generated content as a direct query for retrieval when it encounters tokens with low confidence. Let’s delve into this with an example:
 
-![](https://miro.medium.com/v2/resize:fit:770/1*6J-dsF2FHLwZyp3JbtQY4w.png)
+![FLARE Direct step 1](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*6J-dsF2FHLwZyp3JbtQY4w.png)
+
 1. Initiating the Query: We start with a language model input: “*Generate a summary about Joe Biden*.”
 
 1. The model generates a response.
 
-![](https://miro.medium.com/v2/resize:fit:770/1*IBHJLCeaTprY4hNLODdXiw.png)
+![FLARE Direct step 2](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*IBHJLCeaTprY4hNLODdXiw.png)
+
 3. If the generated sentence is accurate and has high confidence, it is accepted as a correct sentence.
-![](https://miro.medium.com/v2/resize:fit:754/1*y7hGZcjkxnGV7p5IEbDg4w.png)
+
+![Accepted sentence](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*y7hGZcjkxnGV7p5IEbDg4w.png)
+
 4. let’s say the model produces a sentence but with some low confidence (elements are highlighted) “*the University of Pennsylvania*” and “*a law degree*.” The model has very low confidence for these lines
-![](https://miro.medium.com/v2/resize:fit:770/1*MxQWmvCEk3SzUDbmF-9UCA.png)
-now there are two methods to handle this issue
-![](https://miro.medium.com/v2/resize:fit:605/1*O9iJul2Xjlwvs0u7Q1m8YA.png)
+
+![Low confidence tokens](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*MxQWmvCEk3SzUDbmF-9UCA.png)
+
+now there are two methods to handle this issue\
+![Implicit vs explicit query](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*O9iJul2Xjlwvs0u7Q1m8YA.png)
+
 **Addressing Low Confidence Information:** To rectify or verify low-confidence information, FLARE Direct employs two approaches:
 
 - **Implicit Query by Masking** (Highlighted in Orange): This involves identifying keywords or phrases in the sentence, such as “Joe Biden attended” and “where he earned.” The model then searches these key terms in its database (vectorDB) to retrieve relevant and accurate information.
@@ -93,6 +101,7 @@ We can use any LLM to generate hypothetical questions for retrieval. In this not
 Below is the code for Gradio, you can run it on a local system. We are using `arvixloader `questions, so you can ask quetions to paper directly
 
 Here is an example [https://arxiv.org/pdf/2305.06983.pdf](https://arxiv.org/pdf/2305.06983.pdf).
+
 You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06983.pdf) and then you can ask any questions based on the paper.
 
 ## Other important parameters to understand:
@@ -100,81 +109,84 @@ You need to pass this number to query [2305.06983](https://arxiv.org/pdf/2305.06
 1. `max_generation_len`: The maximum number of tokens to generate before stopping to check if any are uncertain
 2. `min_prob`: Any tokens generated with probability below this will be considered uncertain
 
-    from langchain import PromptTemplate, LLMChain
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
-    from langchain.chains import RetrievalQA
-    from langchain.embeddings import HuggingFaceBgeEmbeddings
-    from langchain.document_loaders import PyPDFLoader
-    from langchain.vectorstores import LanceDB
-    from langchain.document_loaders import ArxivLoader
-    from langchain.chains import FlareChain
-    from langchain.prompts import PromptTemplate
-    from langchain.chains import LLMChain
-    import os
-    import gradio as gr
-    import lancedb
-    from io import BytesIO
-    from langchain.llms import OpenAI
-    import getpass
+```python
+from langchain import PromptTemplate, LLMChain
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.chains import RetrievalQA
+from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain.document_loaders import PyPDFLoader
+from langchain.vectorstores import LanceDB
+from langchain.document_loaders import ArxivLoader
+from langchain.chains import FlareChain
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+import os
+import gradio as gr
+import lancedb
+from io import BytesIO
+from langchain.llms import OpenAI
+import getpass
 
-    # pass your api key
-    os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
+# pass your api key
+os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
 
-    llm = OpenAI()
+llm = OpenAI()
 
-    os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
-    llm = OpenAI()
-    model_name = "BAAI/bge-large-en"
-    model_kwargs = {'device': 'cpu'}
-    encode_kwargs = {'normalize_embeddings': False}
-    embeddings = HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs
-    )
-    # here is example https://arxiv.org/pdf/2305.06983.pdf
-    # you need to pass this number to query 2305.06983
-    # fetch docs from arxiv, in this case it's the FLARE paper
-    docs = ArxivLoader(query="2305.06983", load_max_docs=2).load()
-    # instantiate text splitter
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
-    # split the document into chunks
-    doc_chunks = text_splitter.split_documents(docs)
-    # lancedb vectordb
-    db = lancedb.connect('/tmp/lancedb')
-    table = db.create_table("documentsai", data=[
-        {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
-    ], mode="overwrite")
-    vector_store = LanceDB.from_documents(doc_chunks, embeddings, connection=table)
-    vector_store_retriever = vector_store.as_retriever()
-    flare = FlareChain.from_llm(
-        llm=llm,
-        retriever=vector_store_retriever,
-        max_generation_len=300,
-        min_prob=0.45
-    )
-    # Define a function to generate FLARE output based on user input
-    def generate_flare_output(input_text):
-        output = flare.run(input_text)
-        return output
-    input = gr.Text(
-                    label="Prompt",
-                    show_label=False,
-                    max_lines=1,
-                    placeholder="Enter your prompt",
-                    container=False,
-                )
-    iface = gr.Interface(fn=generate_flare_output,
-                 inputs=input,
-                 outputs="text",
-                 title="My AI bot",
-                 description="FLARE implementation with lancedb & bge embedding.",
-                 allow_screenshot=False,
-                 allow_flagging=False
-                 )
-    iface.launch(debug=True)
+model_name = "BAAI/bge-large-en"
+model_kwargs = {'device': 'cpu'}
+encode_kwargs = {'normalize_embeddings': False}
+embeddings = HuggingFaceBgeEmbeddings(
+    model_name=model_name,
+    model_kwargs=model_kwargs,
+    encode_kwargs=encode_kwargs
+)
+# here is example https://arxiv.org/pdf/2305.06983.pdf
+# you need to pass this number to query 2305.06983
+# fetch docs from arxiv, in this case it's the FLARE paper
+docs = ArxivLoader(query="2305.06983", load_max_docs=2).load()
+# instantiate text splitter
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
+# split the document into chunks
+doc_chunks = text_splitter.split_documents(docs)
+# lancedb vectordb
+db = lancedb.connect('/tmp/lancedb')
+table = db.create_table("documentsai", data=[
+    {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
+], mode="overwrite")
+vector_store = LanceDB.from_documents(doc_chunks, embeddings, connection=table)
+vector_store_retriever = vector_store.as_retriever()
+flare = FlareChain.from_llm(
+    llm=llm,
+    retriever=vector_store_retriever,
+    max_generation_len=300,
+    min_prob=0.45
+)
+# Define a function to generate FLARE output based on user input
+def generate_flare_output(input_text):
+    output = flare.run(input_text)
+    return output
 
-![](https://miro.medium.com/v2/resize:fit:770/1*pQnW_zp1wMWgIt5DLtEaLw.png)
+input = gr.Text(
+    label="Prompt",
+    show_label=False,
+    max_lines=1,
+    placeholder="Enter your prompt",
+    container=False,
+)
+iface = gr.Interface(
+    fn=generate_flare_output,
+    inputs=input,
+    outputs="text",
+    title="My AI bot",
+    description="FLARE implementation with lancedb & bge embedding.",
+    allow_screenshot=False,
+    allow_flagging=False,
+)
+iface.launch(debug=True)
+```
+
+![FLARE Gradio demo](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*pQnW_zp1wMWgIt5DLtEaLw.png)
+
 ## Summary
 
 FLARE, short for Forward-Looking Active Retrieval Augmented Generation, improves Large Language Models (LLMs) by actively incorporating external information to minimize false information in content creation. It outperforms conventional models by dynamically retrieving information from multiple sources and adjusting to changing contexts. FLARE Instruct and FLARE Direct demonstrate their ability to produce more precise and trustworthy content. The blog also discusses key implementation details and real-world uses utilizing LanceDB and vector databases.

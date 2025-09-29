@@ -1,7 +1,7 @@
 ---
 title: "MemGPT: OS Inspired LLMs That Manage Their Own Memory"
 date: 2023-12-11
-author: LanceDB
+author: Ayush Chaurasia
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -10,12 +10,13 @@ meta_image: /assets/blog/memgpt-os-inspired-llms-that-manage-their-own-memory-79
 description: "Explore about memgpt: os inspired llms that manage their own memory. Get practical steps, examples, and best practices you can use now."
 ---
 
-by Ayush Chaurasia
-
 In the landscape of artificial intelligence, large language models (LLMs) have undeniably reshaped the game. However, a notable challenge persists — their restricted context windows limit their effectiveness in tasks requiring extended conversations and thorough document analysis.
 
 [MemGPT](https://github.com/cpacker/MemGPT), an open source python package aims to solve this problem by using a concept drawing inspiration from traditional operating systems’ hierarchical memory systems. This technique optimizes data movement between fast and slow memory, providing the illusion of expansive memory resources.
-![](https://miro.medium.com/v2/resize:fit:770/1*RvDrywTt1wbW2j0uKZ9-wQ.png)MemGPT is a system that tackles the limited context window of traditional LLMs by allowing them to manage their own memory. It does this by adding a tiered memory system and functions to a standard LLM processor. The main context is the fixed-length input, and MemGPT analyzes the outputs at each step, either yielding control or using a function call to move data between the main and external contexts. It can even chain function calls together and wait for external events before resuming. In short, MemGPT gives LLMs the ability to remember and process more information than their usual limited context allows. This opens up new possibilities for tasks that require long-term memory or complex reasoning.
+
+![](https://miro.medium.com/v2/resize:fit:770/1*RvDrywTt1wbW2j0uKZ9-wQ.png)
+
+MemGPT is a system that tackles the limited context window of traditional LLMs by allowing them to manage their own memory. It does this by adding a tiered memory system and functions to a standard LLM processor. The main context is the fixed-length input, and MemGPT analyzes the outputs at each step, either yielding control or using a function call to move data between the main and external contexts. It can even chain function calls together and wait for external events before resuming. In short, MemGPT gives LLMs the ability to remember and process more information than their usual limited context allows. This opens up new possibilities for tasks that require long-term memory or complex reasoning.
 ## Conversational agent with virtually unlimited memory!
 
 [MemGPT](https://github.com/cpacker/MemGPT) can update context and search for information from its previous interactions when needed. This allows it to perform as a powerful conversational agent with unbound context.
@@ -35,6 +36,7 @@ External data sources are vectorized and stored for the agent to perform semanti
 ## Built-in support for LanceDB
 
 ![](https://miro.medium.com/v2/resize:fit:770/1*8kW8NQPW25PJn5vFEAGbWg.png)
+
 MemGPT uses [lancedb](http://lancedb.com/) as the default archival storage for storing and retrieving external data. It not only provides a seamless setup-free experience but the persisted HDD storage allows you scale from gigabytes to terabytes to petabytes without blowing out your budget or sacrificing performance.
 
 ## MemGPT in Action
@@ -46,7 +48,9 @@ Here’s an example that configures an agent and simply adds something to the ar
 ## Using external data source
 
 Let’s ingest the intro of memGPT docs as an external data source and ask question about it. The best part is that once you load an external data it stays available for you to load it in any other agent too. And you can load multiple data sources for an agent.
+
 ![](https://miro.medium.com/v2/resize:fit:770/1*H0djUI2u0uinm50VuhWXRg.png)
+
 You can use special commands followed by a slash to perform specific actions. For example here in this example, I’ve used the `/attach` command to attach an external vectorized data source.
 
 ## Customizations

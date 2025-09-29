@@ -1,7 +1,7 @@
 ---
 title: "Hybrid Search: RAG for Real-Life Production-Grade Applications"
 date: 2024-02-18
-author: LanceDB
+author: Mahesh Deshwal
 categories: ["Engineering"]
 draft: false
 featured: false
@@ -9,8 +9,6 @@ image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-application
 meta_image: /assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/preview-image.png
 description: "Get about hybrid search: rag for real-life production-grade applications. Get practical steps, examples, and best practices you can use now."
 ---
-
-by Mahesh Deshwal
 
 ## What is Hybrid Search, and what’s the need for it?
 
@@ -47,108 +45,123 @@ You can get the BM-25 and Vector results based on different filter criteria. For
 A study of how some of these actually work in practice is [given in this blog](https://opensourceconnections.com/blog/2023/02/27/hybrid-vigor-winning-at-hybrid-search/).
 
 Apart from these approaches, you can use a Re-Ranker to re-score all of the Top-K results once again using a semantic reranker or some other approach like MinHash, SimHash, etc. To know more on Re-ranking, [read here](https://medium.com/etoai/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544).
-![](https://miro.medium.com/v2/resize:fit:242/1*Rpx35CSEiQdIbTCKYvs59A.gif)
+![Hybrid search illustration](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*Rpx35CSEiQdIbTCKYvs59A.gif)
 Let’s look at some code.
 
 LanceDB uses `tantivity` for the full text search. It also provides a Reranking API, where you can define your merge/fusion function **AND** make use of Re Ranking too. If you don’t know about Re ranking, [Visit this blog.](https://medium.com/etoai/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544)
 
-    import os
-    import lancedb
-    import re
-    import pandas as pd
-    import random
+```python
+import os
+import lancedb
+import re
+import pandas as pd
+import random
 
-    from datasets import load_dataset
+from datasets import load_dataset
 
-    import torch
-    import gc
+import torch
+import gc
 
-    import lance
+import lance
 
-    import os
+import os
 
-    import lancedb
-    import openai
-    from lancedb.embeddings import get_registry
-    from lancedb.pydantic import LanceModel, Vector
+import lancedb
+import openai
+from lancedb.embeddings import get_registry
+from lancedb.pydantic import LanceModel, Vector
 
-    os.environ["OPENAI_API_KEY"] = "sk-......." #YOUR API
-    embeddings = get_registry().get("openai").create()
+os.environ["OPENAI_API_KEY"] = "sk-......."  # YOUR API
+embeddings = get_registry().get("openai").create()
+```
 
 Now let us create a LanceDB table and load the the good old BEIR data. Remember, in this data, there is no metadata so we are creating our additional metadata as the Number of words for demo purpose
 
-    queries = load_dataset("BeIR/scidocs", "queries")["queries"].to_pandas()
-    full_docs = load_dataset('BeIR/scidocs', 'corpus')["corpus"].to_pandas().dropna(subset = "text")
+```python
+queries = load_dataset("BeIR/scidocs", "queries")["queries"].to_pandas()
+full_docs = load_dataset('BeIR/scidocs', 'corpus')["corpus"].to_pandas().dropna(subset="text")
 
-    docs = full_docs.head(64) # just random samples for faster embed demo
-    docs["num_words"] = docs["text"].apply(lambda x: len(x.split())) # Insert some Metadata for a more "HYBRID" search
-    docs.sample(3)
+docs = full_docs.head(64)  # random samples for faster embed demo
+docs["num_words"] = docs["text"].apply(lambda x: len(x.split()))  # Insert Metadata for a more HYBRID search
+docs.sample(3)
+```
 
-    class Documents(LanceModel):
-        vector: Vector(embeddings.ndims()) = embeddings.VectorField()
-        text: str = embeddings.SourceField()
-        title: str
-        num_words: int
+```python
+class Documents(LanceModel):
+    vector: Vector(embeddings.ndims()) = embeddings.VectorField()
+    text: str = embeddings.SourceField()
+    title: str
+    num_words: int
 
-    data = docs.apply(lambda row: {"title":row["title"], "text":row["text"], "num_words":row["num_words"]}, axis = 1).values.tolist()
+data = docs.apply(lambda row: {"title": row["title"], "text": row["text"], "num_words": row["num_words"]}, axis=1).values.tolist()
 
-    db = lancedb.connect("./db")
-    table = db.create_table("documents", schema=Documents)
+db = lancedb.connect("./db")
+table = db.create_table("documents", schema=Documents)
 
-    table.add(data) # ingest docs with auto-vectorization
-    table.create_fts_index("text") # Create a fts index before the hybrid search
+table.add(data)  # ingest docs with auto-vectorization
+table.create_fts_index("text")  # Create a FTS index before the hybrid search
 
-    _id title text num_words
-    8804 d2fbc1a8bcc7c252a70c524cc96c14aa807c2345 Approximating displacement with the body veloc... In this paper, we present a technique for appr... 128
-    6912 75859ac30f5444f0d9acfeff618444ae280d661d Multibiometric Cryptosystems Based on Feature-... Multibiometric systems are being increasingly ... 200
-    5797 90a2a7a3d22c58c57e3b1a4248c7420933d7fe2f An integrated approach to testing complex systems The increasing complexity of today’s testing s... 332
+```
+```text
+_id  title                                           text                                        num_words
+8804 d2fbc1a8bcc7c252a70c524cc96c14aa807c2345        Approximating displacement with the body... 128
+6912 75859ac30f5444f0d9acfeff618444ae280d661d        Multibiometric Cryptosystems Based on Fe... 200
+5797 90a2a7a3d22c58c57e3b1a4248c7420933d7fe2f        An integrated approach to testing complex... 332
+```
 
 Moment of truth? Let’s search first giving more weight to Full Text Search
 
-    from lancedb.rerankers import LinearCombinationReranker
+```python
+from lancedb.rerankers import LinearCombinationReranker
 
-    reranker = LinearCombinationReranker(weight=0.3) # Weight = 0 Means pure Text Search (BM-25) and 1 means pure Sementic (Vector) Search
+reranker = LinearCombinationReranker(weight=0.3)  # 0: pure Text (BM25), 1: pure Semantic (Vector)
 
-    table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
-                rerank(reranker=reranker).\
-                limit(5).\
-                to_pandas()
+table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
+    rerank(reranker=reranker).\
+    limit(5).\
+    to_pandas()
+```
 
-![](https://miro.medium.com/v2/resize:fit:770/1*ydtjwr-MneBC5y4p62VLmg.png)
+![Hybrid results favoring text](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*ydtjwr-MneBC5y4p62VLmg.png)
 You see, I confused the model with the query by putting random terms for text but the sense was different. Since it is `0.3` it favours more to the text search. Now let’s full throttle to `0.7` and se the results for the same query
-![](https://miro.medium.com/v2/resize:fit:770/1*8MyhbRq_96IGAWlm-EvoHw.png)
+![Hybrid results favoring vector](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*8MyhbRq_96IGAWlm-EvoHw.png)
 Whoohooo!!! Even the terms are there, it captured the meaning rather than the terms. Look at 3rd and 4th row interchanged.
 
 That’s about it. If you want to add your custom filtering and re ranking, learn more about it [here](https://lancedb.github.io/lancedb/hybrid_search/hybrid_search/#building-custom-rerankers).
 
-    from typing import List, Union
-    import pandas as pd
-    import pyarrow as pa
+```python
+from typing import List, Union
+import pandas as pd
+import pyarrow as pa
 
-    class ModifiedLinearReranker(LinearCombinationReranker):
-        def __init__(self, filters: Union[str, List[str]], **kwargs):
-            super().__init__(**kwargs)
-            filters = filters if isinstance(filters, list) else [filters]
-            self.filters = filters
+class ModifiedLinearReranker(LinearCombinationReranker):
+    def __init__(self, filters: Union[str, List[str]], **kwargs):
+        super().__init__(**kwargs)
+        filters = filters if isinstance(filters, list) else [filters]
+        self.filters = filters
 
-        def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table)-> pa.Table:
-            combined_result = super().rerank_hybrid(query, vector_results, fts_results)
-            df = combined_result.to_pandas()
-            for filter in self.filters:
-                df = df.query("(not text.str.contains(@filter)) & (num_words > 150) ") # THIS is where you implement your filters. You can hard code or pass dynamically too
+    def rerank_hybrid(self, query: str, vector_results: pa.Table, fts_results: pa.Table) -> pa.Table:
+        combined_result = super().rerank_hybrid(query, vector_results, fts_results)
+        df = combined_result.to_pandas()
+        for filter in self.filters:
+            # Implement your filters here. Hard-code or pass dynamically.
+            df = df.query("(not text.str.contains(@filter)) & (num_words > 150)")
 
-            return pa.Table.from_pandas(df)
+        return pa.Table.from_pandas(df)
 
-    modified_reranker = MofidifiedLinearReranker(filters=["dual-band"])
+modified_reranker = ModifiedLinearReranker(filters=["dual-band"])
 
-    table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
-                rerank(reranker=modified_reranker).\
-                limit(5).\
-                to_pandas()
+table.search("To confuse the AI and DNN embedding, let's put random terms from other sentences- automation training test memory?", query_type="hybrid").\
+    rerank(reranker=modified_reranker).\
+    limit(5).\
+    to_pandas()
+```
 
-![](https://miro.medium.com/v2/resize:fit:770/1*aWiwhCMyag60AZYl9x4QQw.png)
+![Custom reranker filtered results](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*aWiwhCMyag60AZYl9x4QQw.png)
 This code will implement a custom filtering criteria where only the results are there where No of words are `>150`. You can also change the merging mechanism by inheriting from built-in Rerankers and adding some custom logic!
 
-All the code for this tutorial has been put in this [Colab Notebook](https://colab.research.google.com/drive/1Y9A7OCLjx1cm224xKB6Jbk1-qD68_YCj?usp=sharing) for you to try :)
+> Colab to reproduce the results:
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Y9A7OCLjx1cm224xKB6Jbk1-qD68_YCj?usp=sharing)
 
 To learn more about LanceDB, hybrid search, or available rerankers, visit our [documentation page](https://lancedb.github.io/lancedb/hybrid_search/hybrid_search/) and chat with us on [Discord](https://discord.com/invite/zMM32dvNtd) about your use cases!
