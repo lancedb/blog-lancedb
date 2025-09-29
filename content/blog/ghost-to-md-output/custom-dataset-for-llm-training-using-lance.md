@@ -32,7 +32,7 @@ Second, we should be able to access any chunk of tokens from the dataset without
 
 ## Lance comes to the rescue
 
-This is where Lance comes to the rescue. Lance is a modern columnar data format that is optimized for ML workflows and datasets. It is written in Rust ensuring great I/O and processing speeds with the ease of using a simpler Python API. Lance using the Arrow data format in the back end. You can read more about Lance file format [here](https://lancedb.github.io/lance/format.html).
+This is where Lance comes to the rescue. Lance is a modern columnar data format that is optimized for ML workflows and datasets. It is written in Rust ensuring great I/O and processing speeds with the ease of using a simpler Python API. Lance uses the Arrow data format in the back end. You can read more about the Lance file format [here](https://lancedb.github.io/lance/format.html).
 
 One of the very nice things that lance offers is that you can access the data from a lance dataset just by specifying the indices and it will only load the data at said indices instead of the entire dataset which is exactly what our second requirement was!
 
@@ -44,34 +44,38 @@ Enough talking, let’s now see how to do this step by step!
 
 First, we’ll import all the necessary frameworks and define the tokenizer and the dataset we will be using.
 
-    import lance
-    import pyarrow as pa
+```python
+import lance
+import pyarrow as pa
 
-    from tqdm.auto import tqdm
+from tqdm.auto import tqdm
 
-    import datasets
-    from transformers import AutoTokenizer
+from datasets import load_dataset
+from transformers import AutoTokenizer
 
-    # Change based on your need
-    tokenizer = AutoTokenizer.from_pretrained(
-        "EleutherAI/gpt-neox-20b"
-    )
+# Change based on your need
+tokenizer = AutoTokenizer.from_pretrained(
+    "EleutherAI/gpt-neox-20b"
+)
 
-    # Only load the Python code files from codeparrot dataset
-    dataset = load_dataset(
-        "codeparrot/github-code",
-        streaming=True,
-        split="train",
-        languages=["Python"]
-    )
-    dataset = dataset.shuffle(seed=42)
+# Only load the Python code files from codeparrot dataset
+dataset = load_dataset(
+    "codeparrot/github-code",
+    streaming=True,
+    split="train",
+    languages=["Python"]
+)
+dataset = dataset.shuffle(seed=42)
+```
 
 **Note**: In the above code snippet, make sure that `streaming` is set to `True` in `load_dataset` function otherwise it will start downloading the entire codeparrot dataset! Learn more about the streaming mode [here](https://huggingface.co/docs/datasets/en/stream).
 
 Now, let’s define a function that tokenizes the dataset. Remember, we haven’t downloaded the whole dataset so instead of using that function with `.map()` on the dataset, we’ll just return the `input_ids` that the tokenizer returns.
 
-    def tokenize(sample):
-        return tokenizer(sample['code'])['input_ids']
+```python
+def tokenize(sample):
+    return tokenizer(sample['code'])['input_ids']
+```
 
 The actual code of each sample is in the `code` attribute.
 
@@ -79,71 +83,74 @@ Now that we have a dataset and tokenizer function ready, let’s write a functio
 
 We’ll also specify how many total samples we need in our subset. I am going ahead with 5M samples for now.
 
-    total_samples = 5_000_000 # 5 Million samples
+```python
+total_samples = 5_000_000  # 5 Million samples
 
-    def process_samples():
-        current_sample = 0
-        for sample in tqdm(dataset, total=total_samples):
-            # If we have added all 5M samples, stop
-            if current_sample == total_samples:
-                break
-            # Tokenize the current sample
-            tokenized_sample = tokenize(sample)
-            # Increement the counter
-            current_sample += 1
-            # Yield a PyArrow RecordBatch
-            yield pa.RecordBatch.from_arrays(
-                [tokenized_sample],
-                names=["value"]
-            )
+def process_samples():
+    current_sample = 0
+    for sample in tqdm(dataset, total=total_samples):
+        # If we have added all 5M samples, stop
+        if current_sample == total_samples:
+            break
+        # Tokenize the current sample
+        tokenized_sample = tokenize(sample)
+        # Increment the counter
+        current_sample += 1
+        # Yield a PyArrow RecordBatch
+        yield pa.RecordBatch.from_arrays(
+            [tokenized_sample],
+            names=["value"]
+        )
 
-    # Define the dataset schema
-    schema = pa.schema([
-        pa.field("value", pa.int64())
-    ])
+# Define the dataset schema
+schema = pa.schema([
+    pa.field("value", pa.int64())
+])
+```
 
 A few things to note from above:
 
--
-The `process_samples` function doesn’t directly receive any arguments because it will be converted to a Pyarrow `RecordBatchReader` which is a fancy way of saying an ‘iterator that follows a schema’.
+- The `process_samples` function doesn’t directly receive any arguments because it will be converted to a Pyarrow `RecordBatchReader` which is a fancy way of saying an ‘iterator that follows a schema’.
 
--
-The `names` argument just describes the name of the fields in your Batch. In this case, our batch only consists of `input_ids` but I have named it `value` to avoid any confusion.
+- The `names` argument just describes the name of the fields in your Batch. In this case, our batch only consists of `input_ids` but I have named it `value` to avoid any confusion.
 
--
-Schema describes what type of data (with what field name and data type) will be present in our Pyarrow table.
+- Schema describes what type of data (with what field name and data type) will be present in our Pyarrow table.
 
 Finally, let’s convert our `process_samples()` function to `RecordBatchReader` which can iterate over the dataset and then write that dataset to disk.
 
-    # The reader takes in a schema and the function
-    reader = pa.RecordBatchReader.from_batches(
-        schema,
-        process_samples()
-    )
+```python
+# The reader takes in a schema and the function
+reader = pa.RecordBatchReader.from_batches(
+    schema,
+    process_samples()
+)
 
-    # Write the dataset to disk
-    lance.write_dataset(
-        reader,
-        "code_parrot_5M_subset.lance",
-        schema
-    )
+# Write the dataset to disk
+lance.write_dataset(
+    reader,
+    "code_parrot_5M_subset.lance",
+    schema
+)
+```
 
 Once we run the above snippet, it will start reading the samples one by one, tokenize them and then save them to a Pyarrow table that will be saved as the Lance dataset.
 
 ### Loading the dataset
 
-Loading the dataset will require a bit of a list of trickery, the function below.
+Loading the dataset will require a bit of trickery, see the function below.
 
-    # First make a dataset descriptor and see row count
-    dataset = lance.dataset("code_parrot_5M_subset.lance")
-    print(dataset.count_rows()) # Should be 5M total samples
+```python
+# First make a dataset descriptor and see row count
+dataset = lance.dataset("code_parrot_5M_subset.lance")
+print(dataset.count_rows())  # Should be 5M total samples
 
-    def load_data(dataset, indices):
-        # Load the data at these indices
-        data = dataset.take(indices).to_pylist()
-        # A little short-cut to get the tokens in one list
-        data = list(map(lambda x: x['value'], data))
-        return data
+def load_data(dataset, indices):
+    # Load the data at these indices
+    data = dataset.take(indices).to_pylist()
+    # A little short-cut to get the tokens in one list
+    data = list(map(lambda x: x['value'], data))
+    return data
+```
 
 In the above function, we will pass in the dataset descriptor defined before it and the indices we need to fetch. These indices can be a normal list or a numpy array.
 
