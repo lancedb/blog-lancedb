@@ -37,7 +37,8 @@ These numbers aren't perfect.  It's very hard to get 5GBps on cloud storage and 
 The first thing to point out with this reasoning is that we are only looking at bandwidth.  In cloud storage, even though we are limited in how many requests we can make, the latency of those requests decreases significantly as the request size decreases, all the way down to somewhere around 4 to 32KiB.
 
 In other words, a cloud storage page-at-a-time parquet system and a random-access lance system might both be limited to the same searches per second (throughput) but the queries in the random-access system will have significantly lower latency than the queries in the page-at-a-time system, unless your data pages are 4KiB (not practical for current parquet readers but we might be moving Lance to use 4KiB pages for scalar types in the future 😉).
-![](__GHOST_URL__/content/images/2024/08/Throughput---Latency-vs.-Request-Size.png)Results of a simple benchmark on Google's cloud storage
+![Results of a simple benchmark on Google's cloud storage](/assets/blog/the-case-for-random-access-i-o/Throughput---Latency-vs.-Request-Size.png)
+Results of a simple benchmark on Google's cloud storage
 ### Rebuttal: Row size matters
 
 Note the difference in units. 4K **rows** per second and 4B **bytes** per second.  As I already pointed out, once a single row reaches 1MB the random access penalty is gone.  Now, even with multi-modal data, we are unlikely to reach 1MB per row (unless working with video).  However, it is not entirely uncommon to have something like 128KB per row (compressed images, HTML pages, source code documents, etc.)  With rows this wide, the random access penalty is much smaller and the old rationales start to quickly fall apart.  For example, modern parquet readers are starting to add late materialization for large columns because, suddenly, random access isn't so frightening anymore.
@@ -53,20 +54,21 @@ Another common refrain is that random access is more expensive.  Once again, thi
 ### Rebuttal: Selectivity thresholds don't always scale
 
 The first problem here is that we're relying on this 1% selectivity threshold which means the # of rows that matches our filter scales with the dataset.  This is important for the original argument.  For example, if we select 10 rows from 1M potential rows there is a high chance we will coalesce.  If we select 10 rows from 1B potential rows there is almost no chance we will coalesce.
-![](__GHOST_URL__/content/images/2024/08/Coalesce-vs-Selectivity.png)The odds you can coalesce I/O depend on the # of rows you want and the # of rows you have
+![The odds you can coalesce I/O depend on the # of rows you want and the # of rows you have](/assets/blog/the-case-for-random-access-i-o/Coalesce-vs-Selectivity.png)
+The odds you can coalesce I/O depend on the # of rows you want and the # of rows you have
 Of course, it seems obvious to assume that a filter scales with our data.  However, there are many operations where *the filter does not scale with the data*.  For example, workflows such as find by id, update by id, upsert, find or create, vector search and full text search all target a very narrow range of data that does not grow with dataset size.  Existing formats struggle with these workflows because they rely on coalescing for random access instead of optimizing the random access itself.
 
 ### Rebuttal: You can have your cake and eat it too
 
 The second problem with the above argument is a simple one.  We can absolutely coalesce I/O and support random access at the same time (Lance coalesces I/O within a page).  In fact, I would argue that Lance is even more likely to coalesce I/O because its default page size is very large (8MiB).
-![](__GHOST_URL__/content/images/2024/08/Coalesce-vs-Page-size.png)Large page sizes (thanks to no row groups) => lots of coalescing, even while supporting random I/O
+![Large page sizes (thanks to no row groups) => lots of coalescing, even while supporting random I/O](/assets/blog/the-case-for-random-access-i-o/Coalesce-vs-Page-size.png)
+Large page sizes (thanks to no row groups) => lots of coalescing, even while supporting random I/O
 ### Rebuttal: It costs CPU cycles to throw data away
 
 The final problem with the cost argument is that it focuses on the I/O cost (cost per IOP) and ignores the CPU cost.  For example, let's pretend we've stored 8GB of 8-byte integer data and used some kind of compression algorithm to drop that down to 6GB.  Then, we want to select 1% of our data.  We only want to return 80MB of data (10M values).  However, we need to load and decompress 8GB of data.
 
-💡
 
-In theory you could push your selection vector into the decompression algorithm but I'm not aware of any parquet reader that does this (and I don't even know if decompression algorithms would support it). In fact, many parquet readers are not even able to push the selection into the decode process so it's an even worse situation since you need to decode 8B rows as well as decompress all that data.
+> In theory you could push your selection vector into the decompression algorithm but I'm not aware of any parquet reader that does this (and I don't even know if decompression algorithms would support it). In fact, many parquet readers are not even able to push the selection into the decode process so it's an even worse situation since you need to decode 8B rows as well as decompress all that data.
 
 To give you a basic idea I ran a simple experiment with the pyarrow parquet reader.  This isn't as rigorous as I'd normally like since the pyarrow parquet reader has no way of pushing down selection vectors into the decode but it should give a rough rule of thumb.  With Lance I randomly accessed 1,000 values of the `l_partkey` (an integer) column from a scale factor 10 TPC-H dataset.  With parquet I fully read in the `l_partkey` column into memory (~60M rows, snappy compression, 30 row groups, 1MB page size).  I then repeated this query 1,000 times (to remove initialization noise).  The random access approach required 71B instructions.  The full scan approach required 1.34T instructions (approx. 19 times higher CPU cost).
 
@@ -93,7 +95,7 @@ We could, of course, store two copies of the data.  This has the obvious problem
 ### Rebuttal: Cake, eat it, keep it, do both
 
 Once again, the second rebuttal is simply that you can support both access patterns with a single format.  In Lance we've already developed a "packed struct" encoding that can be turned on, at will, to pack the fields in a struct (with all fixed length fields) into a row-based format.
-![](__GHOST_URL__/content/images/2024/08/Packed-Struct.png)
+![Packed struct encoding](/assets/blog/the-case-for-random-access-i-o/Packed-Struct.png)
 You can opt-in to this encoding on a per-struct basis using field metadata.  This allows you to selectively pack fields that are frequently accessed together.  In addition, we are planning a packed-row encoding which will allow you to pack together any set of fields (fixed or variable length) into a single variable-length data type.  Once this is in place, we can even add a boolean flag to change the top-level encoding from columnar to row which would allow Lance to be used as a 100% row-based format.
 
 This allows for simple and coarse grained switching between row & column formats as well as fine grained selection on a per-column basis.  You can now fine-tune your format to maximize performance on any set of query patterns.  If you really need both patterns for some columns then you can selectively duplicate those columns without creating a duplicate of all your other data (most importantly, avoiding duplication of expensive string and image data).
