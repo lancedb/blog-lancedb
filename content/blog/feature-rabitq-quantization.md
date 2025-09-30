@@ -44,6 +44,24 @@ Two small corrective factors are also stored:
 
 At query time your input—whether text, image, audio, or video—is transformed in the same way. Comparisons become fast binary dot products, and the corrective factors restore fidelity.
 
+Formally, RaBitQ maps a vector \(v\) to a binary vector \(v_{qb}\) and a hypercube vertex \(v_h\) on the unit sphere:
+
+$$
+v_h[i]=\begin{cases}\dfrac{1}{\sqrt{D}}, & \text{if } v_{qb}[i] = 1, \\
+-\dfrac{1}{\sqrt{D}}, & \text{if } v_{qb}[i] = 0.\end{cases}
+$$
+
+To remove bias, RaBitQ samples a random orthogonal matrix \(P\) and sets the final quantized vector to
+
+$$
+v_q = P\, v_h.
+$$
+
+During indexing, for each data vector \(v\), we compute the residual around a centroid \(c\), normalize it, map it to bits via the inverse rotation \(P^{-1}\), and store two corrective scalars alongside the bits: the centroid distance \(d_c = \|v-c\|\) and the inner product with the quantized direction \(d_s = \langle v_q, v_n \rangle\). At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
+
+Figure 1a: 2D illustration of mapping a vector to the nearest unit‑sphere hypercube vertex (RabitQ overview)
+![RabitQ 2D mapping](/assets/blog/feature-rabitq-quantization.md/plot_rq.svg)
+
 **Figure 1:** Geometry of query and data vectors in RaBitQ
 ![figure1](/assets/blog/feature-rabitq-quantization.md/figure1.png)
 
@@ -71,9 +89,10 @@ The [RaBitQ paper](https://arxiv.org/abs/2409.09913) also introduces **extended-
 
 ⚠️ **extended-RaBitQ is not yet available in LanceDB.** We mention it here only as research context. It shows the trajectory of this work, and the same principles that make RaBitQ efficient at 1 bit can be extended to higher precision when needed.
 
-*(Figure 8: Illustration of binary vs multi-bit quantization bins)*
+Figure 8: Illustration of binary vs multi-bit quantization bins
 
 ## Benchmarks
+
 ![benchmarks](/assets/blog/feature-rabitq-quantization.md/benchmarks.png)
 
 We tested IVF_PQ and RaBitQ side by side on two public datasets:
@@ -89,22 +108,22 @@ The tests were run on a consumer-grade PC:
 
 ### DBpedia (text embeddings, 768d)
 
-| Metric | IVF_PQ | RaBitQ |
-| - | - | - |
-| recall@10 | ~92% | **96%+** |
-| throughput | ~350 QPS | **495 QPS** |
-| index build time | ~85s | **~75s** |
+| Metric           | IVF_PQ   | RaBitQ      |
+| ---------------- | -------- | ----------- |
+| recall@10        | ~92%     | **96%+**    |
+| throughput       | ~350 QPS | **495 QPS** |
+| index build time | ~85s     | **~75s**    |
 
 **Figure 3:** DBpedia benchmark results (recall@10, throughput, build time)
 ![DBpedia Benchmark](/assets/blog/feature-rabitq-quantization.md/dbpedia-bench.png)
 
 ### GIST1M (image embeddings, 960d)
 
-| Metric | IVF_PQ | RaBitQ |
-| - | - | - |
-| recall@10 | ~90% | **94%** |
-| throughput | ~420 QPS | **540–765 QPS** |
-| index build time | ~130s | **~21s** |
+| Metric           | IVF_PQ   | RaBitQ          |
+| ---------------- | -------- | --------------- |
+| recall@10        | ~90%     | **94%**         |
+| throughput       | ~420 QPS | **540–765 QPS** |
+| index build time | ~130s    | **~21s**        |
 
 **Figure 4:** GIST1M benchmark results (recall@10, throughput, build time)
 ![GIST1M Benchmark](/assets/blog/feature-rabitq-quantization.md/gist-bench.png)
@@ -117,14 +136,14 @@ On CPUs, RaBitQ already outperforms IVF_PQ on our test hardware. On GPUs the gap
 
 When you use LanceDB today, the default quantization method is IVF_PQ. It works well for many workloads and gives you solid compression and recall. With RaBitQ now available, you have another option. The two approaches make very different trade-offs, especially when your vectors are high-dimensional or multimodal.
 
-| Feature | IVF_PQ (default) | RaBitQ (new) |
-| ----- | ----- | ----- |
-| **Compression ratio** | 8–16x typical | Up to 32x |
-| **Index build time** | Slower, requires codebook training | Faster, no training needed |
-| **Recall in high dimensions** | Good but drops with >512d | Stays high, error shrinks with more dimensions |
-| **Query speed** | Good, but PQ distance estimation is slower | Faster, binary dot products dominate |
-| **Update handling** | Requires re-training if distribution shifts | No retraining needed, robust to updates |
-| **Best for** | General workloads, balanced compression | Large multimodal datasets, high-dim embeddings |
+| Feature                       | IVF_PQ (default)                            | RaBitQ (new)                                   |
+| ----------------------------- | ------------------------------------------- | ---------------------------------------------- |
+| **Compression ratio**         | 8–16x typical                               | Up to 32x                                      |
+| **Index build time**          | Slower, requires codebook training          | Faster, no training needed                     |
+| **Recall in high dimensions** | Good but drops with >512d                   | Stays high, error shrinks with more dimensions |
+| **Query speed**               | Good, but PQ distance estimation is slower  | Faster, binary dot products dominate           |
+| **Update handling**           | Requires re-training if distribution shifts | No retraining needed, robust to updates        |
+| **Best for**                  | General workloads, balanced compression     | Large multimodal datasets, high-dim embeddings |
 
 What this means in practice is that you don’t have to pick one forever. IVF_PQ remains a great default for balanced workloads. But if you are working with very large datasets, embeddings above 512 dimensions, or multimodal collections where precision matters, RaBitQ can give you higher recall, faster queries, and far smaller storage footprints. Because RaBitQ does not depend on heavy codebook training, you can also update your data more easily without re-training the index.
 
