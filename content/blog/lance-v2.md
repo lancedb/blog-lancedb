@@ -22,21 +22,21 @@ Lance was invented because readers and writers for existing column formats did n
 
 A point lookup is a query that accesses a small set of rows. This is essential whenever you are using a secondary index. For example, both semantic search and full text search end up as point lookups in LanceDB. Parquet's main challenge with point lookups is that its encodings are not designed to be "sliceable" and you typically need to load an entire page of data to access a single row. This is especially bad for multi-modal workloads because our values are typically quite large and coalescing is much harder.
 
-![Parquet Point Lookups Challenge](/assets/blog/lance-v2/1*_AfJFSm8tCfrC2PjEnbBGA.png)
+![Parquet Point Lookups Challenge](/assets/blog/lance-v2/parquet-point-lookup.png)
 *Parquet faces challenges satisfying point lookups*
 
 ### Wide Columns
 
 Wide columns are columns where each value is very large. Traditional db workloads use fairly small columns (floats, doubles, etc.) Strings are often the largest column but even they are usually quite small in practice. In ML workloads we often want to store tensors like semantic search embeddings (e.g. 4KiB CLIP embeddings) or even images (much larger).
 
-![Wide Columns Challenge](/assets/blog/lance-v2/1*bPUSvi4FmGVhB1RGojPW9Q.png)
+![Wide Columns Challenge](/assets/blog/lance-v2/wide-columns-grouping.png)
 *Picking a good row group size is impossible when a file has a wide column*
 
 ### Very Wide Schemas
 
 Many user workloads involve very wide schemas. These can range from finance workloads (which sometimes have a column per ticker) to feature stores (where there can be thousands of features for a given record). Parquet and other columnar formats help by giving us powerful column projection but we still need to load the schema metadata for all columns in the file. This is a significant cost for low-latency workloads and potentially memory intensive when caching metadata across many files.
 
-![Wide Schemas Performance](/assets/blog/lance-v2/1*fnUNBpXpwYrCORxAyVvJ3w.png)
+![Wide Schemas Performance](/assets/blog/lance-v2/wide-schemas.png)
 *Many Parquet readers do not perform well on very wide schemas, even with highly selective column projection*
 
 ### Flexible Encodings
@@ -47,7 +47,7 @@ Parquet supports a powerful set of encodings, but it doesn't keep up with the de
 
 In Parquet, an encoding can only control what goes into the data page. This means that encodings have no access to the column or file metadata. For example, consider dictionary encoding, where we know the dictionary will be constant throughout a column. We would ideally like to put the dictionary in the column metadata but we are instead forced to put it into every single row group. Another use case is skip tables for run length encoded columns. If we can put these in the column metadata then we can trade slightly larger metadata for much faster point lookups into RLE encoded columns.
 
-![Metadata Flexibility Issues](/assets/blog/lance-v2/1*Hb72vvR3IVO07LOwpYBSMQ.png)
+![Metadata Flexibility Issues](/assets/blog/lance-v2/flexible-metadata-parquet.png)
 *A lack of metadata flexibility forces some unfortunate encoding decisions in various cases*
 
 ### And More
@@ -63,7 +63,7 @@ We have considered more use cases, some of them perhaps a bit esoteric, when bui
 
 Now let me describe the [Lance v2 format](https://github.com/westonpace/lance/blob/821eb0461e7e474155485db32ac589b1933ef251/protos/file2.proto) (take a look, it's less than 50 lines of protobuf) and explain how it solves the various use cases I have mentioned above.
 
-![Lance v2 Format Overview](/assets/blog/lance-v2/1*GJMimGYT_H_wycIql3l4qg.png)
+![Lance v2 Format Overview](/assets/blog/lance-v2/lance-v2-format.png)
 *A high level overview of the Lance v2 format*
 
 🥱
