@@ -5,6 +5,7 @@
 {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js"  | fingerprint }}
 {{ $searchJS := resources.Get "js/search.js" | js.Build "search.js" | fingerprint }}
 {{ $sidebarJS := resources.Get "js/sidebar.js" | js.Build "sidebar.js" | fingerprint }}
+{{ $subscribeJs := resources.Get "js/subscribe.js" | js.Build "subscribe.js" | fingerprint }}
 
 <script src="{{ $mainJS.RelPermalink }}"></script>
 <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
@@ -15,6 +16,7 @@
     <script src="{{ $searchJS.RelPermalink }}"></script>
     <script src="{{ $headingLinksJs.RelPermalink }}"></script> 
     <script src="{{ $codeTabJS.RelPermalink }}"></script> 
+    <script src="{{ $subscribeJs.RelPermalink }}"></script>
     <script src="{{ $tocJs.RelPermalink }}"></script> 
 {{ else }}
     {{ $textAniamtionJs := resources.Get "js/text-animation.js" | minify | fingerprint }}

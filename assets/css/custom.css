@@ -442,6 +442,49 @@ article img {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Specific handling for post content images - full width but respect actual image size */
+.post-content img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.7em auto;
+    /* Equal to one line of text height (1.7em based on line-height) */
+    border-radius: 24px;
+    border: 3px solid #ff734a;
+    box-shadow:
+        0 0 0 6px rgba(255, 115, 74, 0.1),
+        0 8px 32px rgba(255, 115, 74, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 0 0 6px rgba(255, 115, 74, 0.2),
+            0 12px 40px rgba(255, 115, 74, 0.25),
+            0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Handle transparent images on dark backgrounds - specifically for column shredding diagrams */
+.post-content img[src*="columnar-file-readers-in-depth-column-shredding"],
+.post-content img[src*="Rows-to-Columns"],
+.post-content img[src*="Shredding-Level"],
+.post-content img[src*="What-is-a-List"],
+.post-content img[src*="Too-Much-Shredding"],
+.post-content img[src*="Too-much-shredding"],
+.post-content img[src*="Zipped-shredding"],
+.post-content img[src*="Unshredding"],
+.post-content img[src*="Data-Spreading"] {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+
 /* Post navigation */
 .post-navigation {
   margin-top: 3rem;
@@ -486,6 +529,115 @@ article img {
 
 @media (max-width: 1024px) {
 
+    .content-wrapper>* {
+        min-width: 0;
+    }
+
+    .toc-container {
+        position: static;
+        max-height: none;
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .featured-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .main-featured h2 {
+        font-size: 1.5rem;
+    }
+
+    .side-featured {
+        margin-top: 0;
+    }
+
+    .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .main-featured h2 {
+        font-size: 1.3rem;
+    }
+
+    .main-featured .post-description {
+        font-size: 1rem;
+    }
+
+    .single-post h1 {
+        font-size: 2rem;
+    }
+
+    .single-post .preview-image {
+        height: 200px;
+    }
+
+    .post-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .toc-container {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        padding-right: 0;
+    }
+
+    .header-links {
+        gap: 1rem;
+    }
+
+    .header-link {
+        font-size: 0.9rem;
+    }
+
+    .site-logo {
+        height: 24px;
+    }
+
+    .side-featured {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer Styles */
+.site-footer {
+    background: #000000;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content .site-logo {
+    height: 24px;
+    width: auto;
+}
+
+.footer-links {
+    display: flex;
   .featured-section {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -768,7 +920,7 @@ article img {
 /* Pagination Styles - Enhanced & Stylish */
 main .pagination,
 nav.pagination {
-    margin: 2rem 0 2rem 0 !important;
+    margin: 0 !important;
     padding: 1.5rem 1rem !important;
     background: linear-gradient(135deg, rgba(35, 38, 39, 0.3) 0%, rgba(35, 43, 43, 0.5) 100%) !important;
     border-radius: 12px !important;
@@ -791,15 +943,14 @@ nav.pagination::before {
     background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
 }
 
-main .pagination-links,
-nav.pagination .pagination-links {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    flex-wrap: wrap !important;
-    width: 100% !important;
-    max-width: 100% !important;
+.pagination-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
 }
 
 main .pagination-link,
@@ -981,8 +1132,9 @@ nav.pagination .pagination-link.current {
     }
 
     .pagination-links {
-        justify-content: space-between;
-        gap: 0.4rem;
+        gap: unset;
+        column-gap: 0.4rem;
+        row-gap: 2rem;
     }
 
     .pagination-link {
@@ -1651,6 +1803,40 @@ nav.pagination .pagination-link.current {
 
 /* Image and figure styling */
 
+.post-content figure img,
+.post-content p>img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 24px;
+    border: 3px solid #ff734a;
+    box-shadow:
+        0 0 0 6px rgba(255, 115, 74, 0.1),
+        0 8px 32px rgba(255, 115, 74, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    margin: 0 auto;
+}
+
+.post-content figure img:hover,
+.post-content p>img:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 0 6px rgba(255, 115, 74, 0.2),
+        0 12px 40px rgba(255, 115, 74, 0.25),
+        0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.post-content figcaption,
+.post-content p:has(> img)+p em {
+    margin-top: 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+    display: block;
+    text-align: center;
+}
 
 
 /* Image grid for multiple images */
@@ -1866,10 +2052,6 @@ nav.pagination .pagination-link.current {
     /* Pagination mobile optimization */
     .pagination {
         margin: 2rem 0;
-    }
-
-    .pagination-links {
-        gap: 0.5rem;
     }
 
     .pagination-link {
@@ -2150,7 +2332,7 @@ nav.pagination .pagination-link.current {
     .authors-section {
         gap: 1.5rem;
     }
-    
+
     .author-section {
         flex-direction: column;
         text-align: center;
@@ -2160,5 +2342,284 @@ nav.pagination .pagination-link.current {
 
     .author-social {
         justify-content: center;
+    }
+}
+
+/* ===== PAGINATION & SUBSCRIBE CONTAINER ===== */
+
+/* Main container for side-by-side layout */
+.pagination-subscribe-container {
+    margin: 2rem 0;
+}
+
+/* Left side - Pagination section */
+.pagination-section {
+    flex: 1;
+}
+
+/* Subscribe section inside pagination */
+.subscribe-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    margin-left: 2rem;
+}
+
+/* Subscribe CTA Button - Big prominent button */
+.subscribe-cta-button {
+    background: #232627;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid rgb(249, 115, 22);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.subscribe-cta-button:hover {
+    background: #2d3133;
+    border-color: rgb(249, 115, 22);
+}
+
+.subscribe-cta-button .subscribe-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.subscribe-cta-button .subscribe-text {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Subscribe Modal Styles */
+.subscribe-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.subscribe-modal-content {
+    background: linear-gradient(135deg, #232627 0%, #2b2f30 100%);
+    border-radius: 16px;
+    border: 2px solid rgba(249, 115, 22, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.subscribe-modal-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+    text-align: center;
+}
+
+.subscribe-modal-header .modal-title-primary {
+    margin: 0;
+    background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: 'Aeonik', sans-serif;
+    text-shadow: 0 2px 4px rgba(249, 115, 22, 0.1);
+}
+
+.subscribe-modal-header .modal-subtitle {
+    margin: 0.25rem 0 0 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-family: 'Aeonik', sans-serif;
+    opacity: 0.7;
+    line-height: 1.4;
+}
+
+
+
+.subscribe-form {
+    padding: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Aeonik', sans-serif;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(35, 38, 39, 0.8) 100%);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: 'Aeonik', sans-serif;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+    outline: none;
+    border-color: rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.agreement-text {
+    margin-bottom: 2rem;
+}
+
+.agreement-text p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+.agreement-text a {
+    color: rgb(249, 115, 22);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.agreement-text a:hover {
+    color: rgb(251, 146, 60);
+    text-decoration: underline;
+}
+
+
+
+.subscribe-submit-btn {
+    width: auto;
+    padding: 0.8rem 1.5rem;
+    background: #232627;
+    border: 1px solid rgb(249, 115, 22);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Aeonik', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subscribe-submit-btn:hover {
+    background: #2d3133;
+    border-color: rgb(249, 115, 22);
+}
+
+.subscribe-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.subscribe-success {
+    text-align: center;
+    padding: 2rem 1.5rem;
+}
+
+.subscribe-success .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.subscribe-success h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: 'Aeonik', sans-serif;
+}
+
+.subscribe-success p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+/* Modal open state for body */
+body.modal-open {
+    overflow: hidden;
+}
+
+
+/* Responsive styles for side-by-side layout */
+/* Responsive styles for subscribe button */
+@media (max-width: 768px) {
+    .subscribe-section {
+        margin-left: 1rem;
+    }
+
+    .subscribe-cta-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .subscribe-section {
+        margin-left: 0.5rem;
+    }
+
+    .subscribe-cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .subscribe-submit-btn {
+        width: 100%;
+        margin-top: 24px;
+        justify-content: center;
+    }
+
+    .form-group {
+        margin-bottom: 0;
     }
 }
