@@ -1,0 +1,36 @@
+{{- $regularPages := where .Site.RegularPages "Section" "in" (slice "blog" "docs") -}}
+{{- $sectionPages := where .Site.Pages "Section" "in" (slice "blog" "docs") -}}
+{{- $sectionPages = where $sectionPages "Kind" "section" -}}
+{{- $allPages := union $regularPages $sectionPages -}}
+{{- $searchData := slice -}}
+{{- range $allPages -}}
+  {{- if and (not .Draft) (not .Params.private) -}}
+    {{- $content := .Content | plainify | htmlUnescape -}}
+    {{- $summary := .Summary | plainify | htmlUnescape -}}
+    {{- if not $summary -}}
+      {{- $summary = .Params.description | default "" -}}
+    {{- end -}}
+    {{- $tags := slice -}}
+    {{- if .Params.tags -}}
+      {{- $tags = .Params.tags -}}
+    {{- end -}}
+    {{- $section := .Section -}}
+    {{- $type := .Type | default "page" -}}
+    {{- $date := .Date.Format "2006-01-02" -}}
+    {{- if eq .Date.Unix 0 -}}
+      {{- $date = "0001-01-01" -}}
+    {{- end -}}
+    {{- $searchData = $searchData | append (dict 
+      "title" .Title 
+      "url" .RelPermalink 
+      "content" $content 
+      "summary" $summary 
+      "date" $date 
+      "tags" $tags 
+      "section" $section 
+      "type" $type
+      "id" (printf "%s-%s" .RelPermalink (.Title | urlize) | md5)
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $searchData | jsonify -}}

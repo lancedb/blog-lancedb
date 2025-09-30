@@ -1,6 +1,14 @@
 ---
 title: Why Multimodal <br> Data Needs a Better <br> Lakehouse?
 description: Today’s lakehouses were built for tables, not tensors. It’s time for a data foundation that speaks the language of multimodal AI.
+meta: # alternative meta 
+  title: "LanceDB Resources | Free White Papers, Guides & Ebooks" # alternate meta title
+  description: "Download LanceDB white papers, guides, and ebooks. Learn multimodal AI, RAG, and search with practical resources, examples, and production patterns." # alternate meta description
+  keywords: # meta keywords
+  og_title: # Open Graph title
+  og_description: # Open Graph description
+  og_image: # Open Graph image
+  og_twitter_image: # Twitter image
 highlighted: Lakehouse
 badge: Research Study
 image: images/lakehouse.png

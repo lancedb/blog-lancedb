@@ -12,6 +12,7 @@ author_bio: "Software Engineer at LanceDB specializing in cloud infrastructure, 
 author_twitter: "qianzhu56"
 author_github: "qianzhu56"
 author_linkedin: "qianzhu56"
+aliases: ["/blog/blog/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development/"]
 ---
 
 {{< admonition info "Case Study Collaboration" >}}

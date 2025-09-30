@@ -8,6 +8,12 @@ canonifyURLs: true
 # Build settings
 buildFuture: true
 
+# Output formats for search index
+outputs:
+  home:
+    - HTML
+    - JSON
+
 # Pagination settings
 pagination:
   pagerSize: 9
@@ -30,6 +36,7 @@ params:
   privacyPdfURL: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/privacy.pdf
   termsPdfUrl: https://242023405.fs1.hubspotusercontent-na2.net/hubfs/242023405/Website%20Documentation/terms.pdf
   downloadURL: https://learn.lancedb.com/hubfs/lancedb-multimodal-lakehouse.pdf
+  github_repo: https://github.com/lancedb/blog-lancedb
   socials:
     - name: Discord
       url: https://discord.com/invite/G5DcmnZWKB

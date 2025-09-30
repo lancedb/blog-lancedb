@@ -3,7 +3,7 @@ title: "Ingesting Data in LanceDB Tables"
 sidebar_title: "Working with Data"
 description: "Learn how to update and modify data in LanceDB. Includes incremental updates, batch modifications, and best practices for data maintenance."
 weight: 2
-aliases: ["/docs/concepts/tables/update/", "/docs/concepts/tables/update"]
+aliases: ["/docs/concepts/tables/update/", "/docs/concepts/tables/update", "/docs/tables/sql.md"]
 ---
 
 Once you have created a table, there are several ways to modify its data. You can:
@@ -297,6 +297,10 @@ const batch3 = Array(15).fill(0).map((_, i) => ({
 await table.add(batch3);
 {{< /code >}}
 
+{{< admonition warning "Batch size" >}}
+LanceDB Cloud is a multi-tenant environment with a 100MB payload limit. Adjust your batch size accordingly.
+{{< /admonition >}}
+
 ## Data Modification
 
 ### Update Operations
@@ -400,8 +404,12 @@ const predicate = "price = 30.0";
 await table.delete(predicate);
 {{< /code >}}
 
-{{< admonition warning "Permanent Deletion" >}}
-Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
+{{< admonition warning "Soft Deletion" >}}
+Delete operations soft delete rows. Rows are hard deleted later by compaction and cleanup operations that happen in the background on LanceDB Cloud and Enterprise. The default retention on Cloud is 30 days. During this time, these rows are still accessible to query or restore by accessing old table versions (see [Versioning & Reproducibility in LanceDB](/docs/tables/versioning/)).
+{{< /admonition >}}
+
+{{< admonition warning "Index Deletion" >}}
+If a table is emptied, its existing indexes are removed. Recreate indexes after ingesting new data.
 {{< /admonition >}}
 
 ## Merge Operations
@@ -413,6 +421,10 @@ The merge insert command is a flexible API that can be used to perform `upsert`,
 The merge insert command performs a join between the input data and the target table `on` the key you provide. This requires scanning that entire column, which can be expensive for large tables. To speed up this operation, create a scalar index on the join column, which will allow LanceDB to find matches without scanning the whole table.
 
 Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
+{{< /admonition >}}
+
+{{< admonition tip "HTTP 400 on Merge Insert" >}}
+You may receive an HTTP 400 error from merge insert: `Bad request: Merge insert cannot be performed because the number of unindexed rows exceeds the maximum of 10000`. Verify that the scalar index on the join column is up to date before retrying.
 {{< /admonition >}}
 
 {{< admonition info "Embedding Functions" >}}

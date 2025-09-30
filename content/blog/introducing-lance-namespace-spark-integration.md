@@ -2,7 +2,7 @@
 title: "Manage Lance Tables in Any Catalog using Lance Namespace and Spark"
 date: 2025-08-08
 draft: false
-featured: true
+featured: false
 categories: ["Engineering"]
 image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
 meta_image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
