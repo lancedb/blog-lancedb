@@ -14,19 +14,20 @@ author_github: "westonpace"
 author_linkedin: "westonpace"
 ---
 
-The 2.1 version of the Lance file format has been [in beta for a while now](/lance-file-2-1-smaller-and-simpler/) and we're excited to announce that it is now stable. This means we any potential breaking changes will now be part of
+The 2.1 version of the Lance file format has been [in beta](/lance-file-2-1-smaller-and-simpler/) for a while now and we're excited to announce that it is now stable. This means we any potential breaking changes will now be part of
 2.2 and we are committing to backwards compatibility of 2.1.
 
 ## Compression Without Impacting Random Access
 
-A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access performance recently and stated
-"Lance is the fastest because it does not have cascading encoding or compression like the others, enabling direct
-offset calculation for certain types (e.g., integers) and minimizing read amplification."
+A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access performance recently and stated:
 
-The primary reason behind the 2.1 format was to introduce cascading encoding and compression without sacrificing
-random access performance. We wrote more about the [structural encodings](/file-readers-in-depth-structural-encoding/) that enable this feature and studied this in more depth in our [research paper](https://arxiv.org/abs/2504.15247). I'm happy to report that we were able to achieve our goal and avoid impacts to random access performance.
+> **Lance is the fastest** because it does not have cascading encoding or compression like the others, enabling direct
+> offset calculation for certain types (e.g., integers) and minimizing read amplification."
 
-I guess this means we're still the fastest.
+The primary reason behind the 2.1 format was to introduce cascading encoding and compression _without sacrificing
+random access performance_. We wrote more about the [structural encodings](/file-readers-in-depth-structural-encoding/) that enable this feature and studied this in more depth in our [research paper](https://arxiv.org/abs/2504.15247). I'm happy to report that we were able to achieve our goal and avoid impacts to random access performance.
+
+**I guess this means we're still the fastest.**
 
 ## How to Upgrade
 
