@@ -2,7 +2,7 @@
 title: "LanceDB's Geneva: Scalable Feature Engineering"
 date: 2025-08-21
 draft: false
-featured: true
+featured: false
 categories: ["Engineering"]
 image: /assets/blog/geneva-feature-engineering/preview-image.png
 meta_image: /assets/blog/geneva-feature-engineering/preview-image.png

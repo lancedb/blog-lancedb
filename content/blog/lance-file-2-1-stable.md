@@ -2,7 +2,7 @@
 title: "Lance File 2.1 is Now Stable"
 date: 2025-10-03
 draft: false
-featured: false
+featured: true
 categories: ["Engineering"]
 image: /assets/blog/lance-file-2-1-stable/preview-image.png
 description: "The 2.1 file version is now stable, learn what that means for you and what's coming next."
@@ -18,7 +18,7 @@ The 2.1 version of the Lance file format has been [in beta](/lance-file-2-1-smal
 
 ## Compression Without Impacting Random Access
 
-A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access performance recently and stated:
+A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access performance and stated:
 
 > **Lance is the fastest** because it does not have cascading encoding or compression like the others, enabling direct
 > offset calculation for certain types (e.g., integers) and minimizing read amplification."
