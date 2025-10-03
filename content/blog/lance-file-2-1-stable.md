@@ -60,14 +60,15 @@ often make up the majority of the data in a dataset, so there may not be much to
 columns will still speed up scans of those columns but not all workflows rely on scans if they make good use of
 secondary indices.
 
-The most likely workflows to benefit will be Workflows that do a lot of scanning of smaller columns as these workloads
+The most likely workflows to benefit will be those that scan smaller columns as these workloads
 are typically bound by the disk bandwidth. You may want to try converting a subset of your data to see if there is a
 meaningful reduction in size or performance.
 
-## Ensuring a Smooth Transition
+## Ensuring a Smooth Transition (Even if you Don't Upgrade)
 
 The 0.38.0 release of Lance is the first release to fully support reading 2.1 files. You could potentially
-run into trouble if you are reading with older versions of Lance while writing 2.1 files with newer versions.
+run into trouble if you are reading dataset with older versions of Lance while writing 2.1 files with newer
+versions of Lance.
 
 As a result, we recommend upgrading all of your software to 0.38.0 or higher before you start writing 2.1
 files. To facilitate this, we are not making 2.1 the default file format in 0.38.0. You will still need to
@@ -99,7 +100,7 @@ some previews of ideas we are working on.
 ### We want to make it simpler to migrate
 
 We expect 2.1 to be the last version that will require a dataset copy to upgrade. 2.1 has established an overall
-structure for file readers that we expect to be consistent regardless of what new encodings are added. As a result,
+structure for file readers that will be consistent regardless of what new encodings are added. As a result,
 we are hoping to support [mixed-version datasets](https://github.com/lancedb/lance/issues/4870) by the time we
 release 2.2.
 
@@ -107,21 +108,24 @@ release 2.2.
 
 Our goal in 2.1 was to establish the overall strategy for compression and define nice easy-to-implement traits for
 compression algorithms. We also implemented a number of popular lightweight compression techniques. However, there
-are still gaps in our compression coverage that we hope to fill in 2.2.
+are still gaps in our compression coverage that we hope to fill in 2.2. If you love columnar compression and are
+interested in contributing, then a lot of these gaps might be nice starting issues. Look for some of the
+`good_first_issue` tags in the [2.2 milestone](https://github.com/lancedb/lance/milestone/9).
 
 ### We want to fully support struct packing
 
 We have supported struct packing for fixed-width fields for a while now. However, without support for variable-width
-fields it is difficult to use the packing feature to it's fullest potential. We hope to add support for variable-width
-fields soon. This will allow for flexible trade-offs between row-major and column-major storage. This is important
-for use cases like model training from cloud storage which can be dominated by random access read patterns on smaller
-materialized subsets of the data.
+fields it is difficult to use the packing feature to it's fullest potential. We hope to
+[add support](https://github.com/lancedb/lance/issues/2862) for variable-width fields soon. This will allow for
+flexible trade-offs between row-major and column-major storage. This is important for use cases like model
+training from cloud storage which can be dominated by random access read patterns on smaller materialized subsets
+of the data.
 
 ### We plan to investigate better JSON encoding
 
-We've been ramping up our JSON support in the table format with the addition of JSON indexes. We are also exploring
-how we can best store JSON data in the file format. Common examples include JSONB and the new Parquet Variant data
-type. We hope to have more details on this in the future.
+We've been ramping up our [JSON support](https://github.com/lancedb/lance/discussions/3841) in the table format
+with the addition of JSON indexes. We are also exploring how we can best store JSON data in the file format.
+Common examples include JSONB and the new Parquet Variant data type. We hope to have more details on this in the future.
 
 ## Join the Conversation
 
