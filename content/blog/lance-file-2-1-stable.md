@@ -1,6 +1,6 @@
 ---
 title: "Lance File 2.1 is Now Stable"
-date: 2025-10-02
+date: 2025-10-03
 draft: false
 featured: false
 categories: ["Engineering"]
