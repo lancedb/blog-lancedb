@@ -23,8 +23,11 @@ A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access 
 > **Lance is the fastest** because it does not have cascading encoding or compression like the others, enabling direct
 > offset calculation for certain types (e.g., integers) and minimizing read amplification."
 
-The primary reason behind the 2.1 format was to introduce cascading encoding and compression _without sacrificing
-random access performance_. We wrote more about the [structural encodings](/file-readers-in-depth-structural-encoding/) that enable this feature and studied this in more depth in our [research paper](https://arxiv.org/abs/2504.15247). I'm happy to report that we were able to achieve our goal and avoid impacts to random access performance.
+This lack of compression was a significant limitation of 2.0. That's why the primary reason behind the 2.1 format
+has been to introduce cascading encoding and compression _without sacrificing random access performance_. We wrote
+more about the [structural encodings](/file-readers-in-depth-structural-encoding/) that enable this feature and
+studied this in more depth in our [research paper](https://arxiv.org/abs/2504.15247). I'm happy to report that we
+were able to achieve our goal and avoid impacts to random access performance.
 
 **I guess this means we're still the fastest.**
 
