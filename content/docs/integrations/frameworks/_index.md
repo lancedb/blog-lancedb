@@ -11,6 +11,7 @@ sidebar_collapsed: true
 |:----------|:------------|
 | [LangChain](/docs/integrations/frameworks/langchain) | Build LLM applications with memory, agents, and chat models using LanceDB as a vector store |
 | [LlamaIndex](/docs/integrations/frameworks/llamaindex) | Create data-aware LLM applications with structured data retrieval and RAG pipelines |
+| [Kiln AI](/docs/integrations/frameworks/kiln) | Build and evaluate RAG pipelines with a drag-and-drop UI or Python library, deploy to LanceDB |
 | [PromptTools](/docs/integrations/frameworks/prompttools) | Evaluate and optimize LLM prompts with LanceDB for storing and retrieving evaluation results |
 | [Pydantic](/docs/integrations/frameworks/pydantic) | Define structured data models and schemas for LanceDB tables with type safety |
 | [GenKit](/docs/integrations/frameworks/genkit) | Build AI applications with Google's GenKit framework using LanceDB for vector storage |

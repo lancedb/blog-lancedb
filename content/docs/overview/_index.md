@@ -114,7 +114,7 @@ LanceDB integrates seamlessly with the modern AI ecosystem, providing connectors
 
 | Category | Integrations | Documentation |
 |:---|:---|:---|
-| **[AI Frameworks](/docs/integrations/frameworks/)** | LangChain, LlamaIndex, Haystack | [AI Frameworks](/docs/integrations/frameworks/) |
+| **[AI Frameworks](/docs/integrations/frameworks/)** | LangChain, LlamaIndex, Kiln | [AI Frameworks](/docs/integrations/frameworks/) |
 | **[Embedding Models](/docs/integrations/embedding/)** | OpenAI, Cohere, Hugging Face, Custom Models | [Embedding Models](/docs/integrations/embedding/) |
 | **[Reranking Models](/docs/integrations/reranking/)** | BGE-reranker, Cohere Rerank, Custom Models | [Reranking Models](/docs/integrations/reranking/) |
 | **[Data Platforms](/docs/integrations/platforms/)** | DuckDB, Pandas, Polars | [Data Platforms](/docs/integrations/platforms/) |

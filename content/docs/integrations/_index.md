@@ -11,6 +11,6 @@ hide_toc: true
 |:----------------|:-------------|
 | [Embedding Models](/docs/integrations/embedding/) | Connect with popular embedding models including OpenAI, Cohere, Hugging Face, and more |
 | [Reranking Models](/docs/integrations/reranking/) | Enhance search results with advanced reranking models and techniques |
-| [AI Frameworks](/docs/integrations/frameworks/) | Integrate with LangChain, LlamaIndex, Haystack, and other AI development frameworks |
+| [AI Frameworks](/docs/integrations/frameworks/) | Integrate with LangChain, LlamaIndex, Kiln, and other AI development frameworks |
 | [Data Platforms](/docs/integrations/platforms/) | Deploy LanceDB on AWS, Google Cloud, Azure, and other cloud platforms |
 
