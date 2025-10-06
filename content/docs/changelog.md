@@ -5,6 +5,137 @@ description: Track LanceDB's latest features, improvements, and bug fixes. Stay 
 weight: 302
 ---
 
+## September 2025
+
+### Highlights
+
+RabitQ quantization is now supported for vector indices.  Full-text search latencies are now reduced significantly.  Scalar indices are now supported for JSON columns with type-aware indexing.
+
+#### New Features
+
+**Vector Index Enhancements**
+- Added RabitQ quantization support for vector indices ([lance#4344](https://github.com/lancedb/lance/issues/4344))
+- Introduced `target_partition_size` parameter for vector indices, making `num_partitions` optional with sensible defaults per index type ([lance#4616](https://github.com/lancedb/lance/issues/4616))
+- Added support for nested field indexing using dot path notation (e.g., `parent.child`) for both scalar and vector indices ([lance#4682](https://github.com/lancedb/lance/issues/4682))
+
+**Full-Text Search Improvements**
+- Building FST at write time instead of read time reduces P95 latency by 32.3% (5708ms → 3863ms) and cuts token set file size in half ([lance#4811](https://github.com/lancedb/lance/issues/4811))
+- Optimized doc set loading reduces cold-start P95 latency by 18.7% (3721ms → 2940ms) ([lance#4821](https://github.com/lancedb/lance/issues/4821))
+- CPU-heavy FST building moved to blocking threads ([lance#4803](https://github.com/lancedb/lance/issues/4803))
+- Added distributed FTS index building support ([lance#4578](https://github.com/lancedb/lance/issues/4578))
+- Added UDTF for FTS queries ([lance#4684](https://github.com/lancedb/lance/issues/4684))
+- Added JSON parser for FTS queries ([lance#4605](https://github.com/lancedb/lance/issues/4605))
+
+**JSON Support**
+- Added scalar index support for JSON columns with type-aware indexing ([lance#4621](https://github.com/lancedb/lance/issues/4621), [lance#4626](https://github.com/lancedb/lance/issues/4626))
+- JSON features no longer require version 2.2 ([lance#4641](https://github.com/lancedb/lance/issues/4641))
+
+**Storage and Performance**
+- Added OpenDAL support for S3, Azure Blob, and GCS via `use_opendal=true` storage option ([lance#4597](https://github.com/lancedb/lance/issues/4597))
+- Optimized S3 throughput with improved file naming ([lance#4737](https://github.com/lancedb/lance/issues/4737))
+- Added hierarchical clustering performance improvements ([lance#4726](https://github.com/lancedb/lance/issues/4726))
+
+**Index Management**
+- Create indices from another source dataset, enabling delta indices for MemTable ([lance#4658](https://github.com/lancedb/lance/issues/4658))
+- Added support for merging indices with provided unindexed fragments ([lance#4659](https://github.com/lancedb/lance/issues/4659))
+- Distributed B-tree index creation achieving 10x build speed improvement in production testing ([lance#4667](https://github.com/lancedb/lance/issues/4667))
+- Lazy loading for bitmap indices with column projection support ([lance#4699](https://github.com/lancedb/lance/issues/4699))
+
+**Metadata and Configuration**
+- Added table metadata support separate from schema metadata, with incremental update support for all metadata types ([lance#4350](https://github.com/lancedb/lance/issues/4350))
+- Added manifest summary support accessible from `Version` ([lance#4754](https://github.com/lancedb/lance/issues/4754))
+- Added `LANCE_LOG_FILE` environment variable for file logging ([lance#4721](https://github.com/lancedb/lance/issues/4721))
+
+**Java Bindings**
+- Exposed `merge_insert` API ([lance#4685](https://github.com/lancedb/lance/issues/4685))
+- Added `compact` functionality ([lance#4703](https://github.com/lancedb/lance/issues/4703))
+- Added scalar index support ([lance#4683](https://github.com/lancedb/lance/issues/4683))
+- Added `enable_stable_row_ids` option to `WriteParams` ([lance#4674](https://github.com/lancedb/lance/issues/4674))
+- Added support for distributed compaction ([lance#4706](https://github.com/lancedb/lance/issues/4706))
+- Exposed additional `Operation::Update` fields including `fields_modified` and new fields from [lance#4589](https://github.com/lancedb/lance/issues/4589) ([lance#4788](https://github.com/lancedb/lance/issues/4788))
+- Added fragment-level merge column interface ([lance#4649](https://github.com/lancedb/lance/issues/4649))
+
+**Python Bindings**
+- Added ability to pass `Session` when opening datasets for cache reuse ([lance#3927](https://github.com/lancedb/lance/issues/3927))
+- Exposed `open_session` in Python ([lance#4581](https://github.com/lancedb/lance/issues/4581))
+- Added `use_index` option for merge insert operations ([lance#4688](https://github.com/lancedb/lance/issues/4688))
+- Bumped Python support to version 3.13 ([lance#4816](https://github.com/lancedb/lance/issues/4816))
+
+**Format Changes – Version 2.1 Encoding**
+- Added blob encoding support ([lance#4802](https://github.com/lancedb/lance/issues/4802))
+- Added support for already-dictionary encoded data ([lance#4813](https://github.com/lancedb/lance/issues/4813))
+- Applied bitpacking on rep/def for compression ([lance#4537](https://github.com/lancedb/lance/issues/4537))
+- Enabled bitpacking in zero chunk ([lance#4694](https://github.com/lancedb/lance/issues/4694))
+- Allowed out-of-line bitpacking to support tail chunks ([lance#4740](https://github.com/lancedb/lance/issues/4740))
+
+**Bloom Filter Index**
+- Added split block bloom filter support as an inexact scalar index ([lance#4530](https://github.com/lancedb/lance/issues/4530))
+- Corrected underestimate of Bloom filter epsilon for improved accuracy ([lance#4734](https://github.com/lancedb/lance/issues/4734))
+
+---
+
+### Breaking Changes
+- `Operation::UpdateConfig` and its Python/Java bindings now use different fields (backwards compatible when serialized) ([lance#4350](https://github.com/lancedb/lance/issues/4350))
+- Added `MERGED` state to MemWAL index; `mark_mem_wal_as_flushed` renamed to `mark_mem_wal_as_merged` ([lance#4673](https://github.com/lancedb/lance/issues/4673))
+- Stable row IDs: Added support for refreshing fragment bitmap for indices after updating ([lance#4589](https://github.com/lancedb/lance/issues/4589))
+- `target_partition_size` parameter added for vector indices, changing recommended configuration ([lance#4616](https://github.com/lancedb/lance/issues/4616))
+
+---
+
+### Bug Fixes
+- Fixed typo `"blfoat16"` → `"bfloat16"` in `datatypes.rs` ([lance#4852](https://github.com/lancedb/lance/issues/4852))
+- Fixed index stats reporting incorrect partition size ([lance#4847](https://github.com/lancedb/lance/issues/4847))
+- Fixed blocking call in async function ([lance#4841](https://github.com/lancedb/lance/issues/4841))
+- Fixed aggregate gauge metrics in `bytes_read` for zonemap scans ([lance#4830](https://github.com/lancedb/lance/issues/4830))
+- Fixed 64-bit offset interpretation bug in 2.1 decompression ([lance#4824](https://github.com/lancedb/lance/issues/4824))
+- Fixed handling of all-preamble chunks in mini-block scheduling ([lance#4823](https://github.com/lancedb/lance/issues/4823))
+- Fixed scalar index handling with null literals ([lance#4815](https://github.com/lancedb/lance/issues/4815))
+- Fixed multiple 2.1 list decoder bugs ([lance#4784](https://github.com/lancedb/lance/issues/4784), [lance#4840](https://github.com/lancedb/lance/issues/4840))
+- Fixed variable width full-zip reading with repetition but no definition ([lance#4698](https://github.com/lancedb/lance/issues/4698))
+- Fixed creating empty chunks when values are evenly divisible ([lance#4775](https://github.com/lancedb/lance/issues/4775))
+- Fixed duplicated source rows in merge insert ([lance#4687](https://github.com/lancedb/lance/issues/4687))
+- Fixed rechunk sequences bug ([lance#4695](https://github.com/lancedb/lance/issues/4695))
+- Fixed deadlock when multiple threads access single `LanceFileWriter` ([lance#4600](https://github.com/lancedb/lance/issues/4600))
+- Fixed FTS boolean and boost queries not supporting phrases ([lance#4766](https://github.com/lancedb/lance/issues/4766))
+- Fixed `FlatMatchQuery` to support List of Utf8 ([lance#4742](https://github.com/lancedb/lance/issues/4742))
+- Fixed circular reference in index caching causing memory leaks ([lance#4680](https://github.com/lancedb/lance/issues/4680))
+- Fixed decoding lists with all nulls ([lance#4679](https://github.com/lancedb/lance/issues/4679))
+- Fixed SIMD support detection for AArch64 on iOS/tvOS ([lance#4725](https://github.com/lancedb/lance/issues/4725))
+- Fixed preview release version handling ([lance#4750](https://github.com/lancedb/lance/issues/4750))
+- Fixed `shallow_clone` referring to wrong base path ([lance#4617](https://github.com/lancedb/lance/issues/4617))
+- Fixed GPU cosine distance training in vector index ([lance#4623](https://github.com/lancedb/lance/issues/4623))
+- Fixed inconsistent naming for `rows_per_zone` in zone map index ([lance#4692](https://github.com/lancedb/lance/issues/4692))
+
+---
+
+### Performance Improvements
+- Cached `num_cpus::get()` calls ([lance#4768](https://github.com/lancedb/lance/issues/4768))
+- Avoided per-IOP clone of filename ([lance#4714](https://github.com/lancedb/lance/issues/4714))
+- Sped up `ProjectionPlan` generation for full schema ([lance#4743](https://github.com/lancedb/lance/issues/4743))
+- Added incremental metrics in `FilteredRead` for better limit query performance ([lance#4798](https://github.com/lancedb/lance/issues/4798))
+
+---
+
+### Refactoring and Documentation
+- Renamed `lance_table::format::Index` to `IndexMetadata` to avoid confusion ([lance#4760](https://github.com/lancedb/lance/issues/4760))
+- Reworked scalar index loading, training, and parsing into plugin trait system ([lance#4584](https://github.com/lancedb/lance/issues/4584))
+- Distinguished row ID and row address terminology (part 1) ([lance#4352](https://github.com/lancedb/lance/issues/4352))
+- Added vector index specs documentation ([lance#4810](https://github.com/lancedb/lance/issues/4810))
+- Added scalar and system index spec documentation ([lance#4736](https://github.com/lancedb/lance/issues/4736))
+- Updated `performance.md` for index cache section ([lance#4738](https://github.com/lancedb/lance/issues/4738))
+- Added timestamp precision control to logging and improved logging docs ([lance#4669](https://github.com/lancedb/lance/issues/4669))
+- Split Python indexing code into smaller components ([lance#4763](https://github.com/lancedb/lance/issues/4763))
+- Refactored Java transaction JNI code for readability ([lance#4662](https://github.com/lancedb/lance/issues/4662))
+- Adjusted Java module directory structure ([lance#4668](https://github.com/lancedb/lance/issues/4668))
+
+---
+
+### Releases
+- **v0.37.0** – September 23, 2025
+- **v0.36.0** – September 12, 2025
+- **v0.35.0** – September 3, 2025
+
+
 ## Aug 2025
 
 Full-Text Search runs dramatically faster, and index creation is now easier to manage.
