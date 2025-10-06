@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.set(badge, {
           x: initialX,
           y: initialY,
+          opacity: 1,
           xPercent: -50,
           yPercent: -50,
           transformOrigin: "50% 50%",
