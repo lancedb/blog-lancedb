@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const anonncement = document.querySelector(".header__announcement");
     const headerToggle = header.querySelector(".header__toggle");
     const headerSearchToggle = header.querySelector(".header__search-toggle");
+    const navDropdowns = header.querySelectorAll(".nav__item--has-children");
     const headerHeight = header.offsetHeight;
     document.body.style.setProperty("--header-height", `${headerHeight}px`);
     
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, delay);
       };
     };
+
     if (anonncement) {
       const anonncementClose = anonncement.querySelector(
         ".header__announcement-close"
@@ -53,6 +55,33 @@ document.addEventListener("DOMContentLoaded", () => {
       searchClose.addEventListener("click", () => {
         searchContainer.classList.remove("show");
         document.body.classList.remove("overflow-hidden");
+      });
+    }
+
+    if (navDropdowns.length) {
+      var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      navDropdowns.forEach((dropdown) => {
+        let hideTimeout;
+        const link = dropdown.querySelector(".nav__link");
+
+        // Toggle submenu on click
+        link.addEventListener("click", (e) => {
+          if (e.target.closest(".nav__caret")) {
+            e.preventDefault();
+            dropdown.classList.toggle("open");
+            const expanded = dropdown.classList.contains("open");
+            link.setAttribute("aria-expanded", expanded ? "true" : "false");
+          }
+        });
+
+        dropdown.addEventListener("mouseenter", () => {
+          if (!isDesktop) return;
+          clearTimeout(hideTimeout);
+          hideTimeout = setTimeout(function () {
+            // No-op; CSS hover handles show/hide. This delay gives users time to enter submenu.
+          }, 120);
+        });
       });
     }
 

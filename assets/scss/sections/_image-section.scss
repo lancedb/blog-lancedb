@@ -1,0 +1,25 @@
+.image-section {
+  //padding: 24px 0;
+  overflow: hidden;
+}
+
+.image-section__vector,
+.image-section__image {
+  min-height: 240px;
+
+  @include mq($md) {
+    min-height: 380px;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

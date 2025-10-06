@@ -1,0 +1,28 @@
+{{ $section := .section }}
+{{ $src := $section.src }}
+{{ $src_mob := $section.src_mob }}
+
+<section class="image-section">
+{{ if and $src (in $src ".svg") }}
+  <div class="image-section__vector">
+    {{ readFile $src | safeHTML }}
+  </div>
+{{else}}
+  <div class="image-section__image">
+    {{ $alt := $.Title }}
+    {{ $image_src := $src }}
+    {{ $image_mobile_src := $src_mob | default $image_src }}
+    {{ $image := resources.GetMatch $image_src }}
+    {{ $image_mobile := resources.GetMatch $image_mobile_src }}
+    <picture>
+      <source srcset="{{ $image_mobile.Permalink | relURL }}" media="(max-width: 767px)">
+      <source srcset="{{ $image.Permalink | relURL }}" media="(min-width: 768px)">
+      <img 
+          src="{{ $image.Permalink | relURL }}" 
+          alt="{{ $alt }}" 
+          width="{{ $image.Width }}" 
+          height="{{ $image.Height }}">
+    </picture>
+  </div>
+{{ end }}
+</section>
