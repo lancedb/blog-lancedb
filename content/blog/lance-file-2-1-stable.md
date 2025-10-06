@@ -14,7 +14,7 @@ author_github: "westonpace"
 author_linkedin: "westonpace"
 ---
 
-The 2.1 version of the Lance file format has been [in beta](/lance-file-2-1-smaller-and-simpler/) for a while now and we're excited to announce that it is now stable. This means we've [documented the spec](https://lancedb.github.io/lance/format/file/encoding/) and any potential breaking changes will now be part of 2.2 and we are committing to backwards compatibility of 2.1.
+The 2.1 version of the Lance file format has been [in beta](/blog/lance-file-2-1-smaller-and-simpler/) for a while now and we're excited to announce that it is now stable. This means we've [documented the spec](https://lancedb.github.io/lance/format/file/encoding/) and any potential breaking changes will now be part of 2.2 and we are committing to backwards compatibility of 2.1.
 
 ## Compression Without Impacting Random Access
 
@@ -25,7 +25,7 @@ A [recent paper](https://dl.acm.org/doi/10.1145/3749163) measured random access 
 
 This lack of compression was a significant limitation of 2.0. That's why the primary reason behind the 2.1 format
 has been to introduce cascading encoding and compression _without sacrificing random access performance_. We wrote
-more about the [structural encodings](/file-readers-in-depth-structural-encoding/) that enable this feature and
+more about the [structural encodings](/blog/columnar-file-readers-in-depth-structural-encoding/) that enable this feature and
 studied this in more depth in our [research paper](https://arxiv.org/abs/2504.15247). I'm happy to report that we
 were able to achieve our goal and avoid impacts to random access performance.
 
