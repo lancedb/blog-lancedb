@@ -1,5 +1,5 @@
 ---
-title: "Multi-vector Needle in a Haystack"
+title: "Finding the Needle in a Haystack: Comparing Multi-Vector Search Strategies"
 sidebar_title: "Multi-vector search: Needle in a Haystack"
 description: "Technical deep dive into token-level retrieval with LanceDB multi-vector search."
 weight: 1
@@ -72,8 +72,8 @@ A full multi-vector search is powerful but computationally intensive. Here are f
 
 This is the pure, baseline late-interaction search. It offers the highest potential for accuracy by considering every token.
 
+**LanceDB also integrates with ConteXtualized Token Retriever (XTR)** , an advanced retrieval model that prioritizes the most semantically important document tokens during search. This integration enhances the quality of search results by focusing on the most relevant token matches.
 **LanceDB Implementation:**
-The key is to use a schema that supports a list of vectors for each entry.
 
 ```python
 import lancedb
