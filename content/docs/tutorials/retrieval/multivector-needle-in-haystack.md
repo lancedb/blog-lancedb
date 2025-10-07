@@ -20,7 +20,7 @@ To properly test these strategies, we need a task where precision is not just a 
 
 ### The Task: The Document Haystack Dataset
 
-Our benchmark is built on the **AmazonScience/document-haystack** dataset, which contains 25 visually complex source documents (e.g., financial reports, academic papers). To create a rigorous test, our evaluation follows a per-document methodology:
+Our benchmark is built on the **[AmazonScience/document-haystack](https://huggingface.co/datasets/AmazonScience/document-haystack)** dataset, which contains 25 visually complex source documents (e.g., financial reports, academic papers). To create a rigorous test, our evaluation follows a per-document methodology:
 
 *   We process each of the 25 source documents independently.
 *   **Table Creation:** For a single source document (e.g., "AIG"), we ingest all pages from all of its page-length variants (from 5 to 200 pages long). This creates a temporary LanceDB table containing approximately 1,230 pages.
