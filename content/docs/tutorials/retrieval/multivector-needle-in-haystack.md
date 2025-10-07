@@ -1,8 +1,8 @@
 # Multi-modal Multi-vector search: finding needles in haystacks
 
-In the development of advanced search and retrieval systems, moving from keyword matching to semantic understanding is a critical step. However, a key distinction exists between finding a relevant document and locating a specific piece of information within that document. While there are techniques that perform well for retrieving documents, even in a multimodal setting, most of them work by extracting summarized semantic meaning of the document. This can be seen as these models trying to understand the "gist" of the documents. Both single-vector search and late-interaction approaches work well for these conditions with various tradeoffs involved. But there's another type of problem where the goal is not just to understand the overall topic of a document in general, but to also specifically account for the requested detail within the document. This "needle in a haystack" problem is a significant challenge, and addressing it is essential for building high-precision retrieval systems.
+In the development of advanced search and retrieval systems, moving from keyword matching to semantic understanding is a critical step. However, a key distinction exists between finding a relevant document and locating a specific piece of information within that document with precision. While there are techniques that perform well for retrieving documents, most of them work by extracting summarized semantic meaning of the document. This can be seen as these models trying to understand the "gist" of the documents. Both single-vector search and late-interaction approaches work well for these conditions with various tradeoffs involved. But there's another type of problem where the goal is not just to understand the overall topic of a document in general, but to also specifically account for the requested detail within the document. This "needle in a haystack" problem is a significant challenge, and addressing it is essential for building high-precision retrieval systems.
 
-This guide provides a technical analysis of multi-vector search, a technology designed for high-precision information retrieval. We will examine various optimization strategies and analyze their performance. This guide should be seen as complementary to resources like the [Answer.AI blog on ColBERT pooling](https://www.answer.ai/posts/colbert-pooling.html), which explains how pooling strategies can be effective for document-level retrieval. Here, we will demonstrate why those same techniques can be counterproductive when precision at an intra-document, token level is the primary objective.
+This guide provides a technical analysis of multi-vector search for high-precision information retrieval. We will examine various optimization strategies and analyze their performance. This guide should be seen as complementary to resources like the [Answer.AI blog on ColBERT pooling](https://www.answer.ai/posts/colbert-pooling.html), which explains how pooling strategies can be effective for document-level retrieval. Here, we will demonstrate why those same techniques can be counterproductive when precision at an intra-document, token level is the primary objective.
 
 Find reproducible code [here](https://github.com/lancedb/research/tree/main/multivector-needle-haystack-bench)
 
@@ -215,7 +215,7 @@ The strategies that seem like clever optimizations for general retrieval are, in
 
 ### Latency
 
-Given the significant gap in accuracy, the speed trade-off must be re-evaluated. The "optimizations" are fast but do not produce correct results. The only effective strategy has a clear and understandable computational cost.
+ The "optimizations" are fast but do not produce correct results. The only effective strategy has a clear and understandable computational cost.
 
 | Strategy (on `vidore/colqwen2-v1.0`) | Avg. Search Latency (s) | Hit@20 Accuracy |
 | :--- | :--- | :--- |
@@ -252,10 +252,11 @@ For general-purpose, large-scale document retrieval where understanding the "gis
 
 
 
-**Match Retrieval Strategy to the Task: Document Retrieval vs. Information Localization.**
+### Conclusion
+
 This benchmark highlights the critical importance of matching your retrieval strategy to your objective. Pooling and reranking remain valid techniques for *document-level* retrieval, where the goal is to find a relevant document. However, if the goal is to find specific information *within* a document, the detail provided by full multi-vector representations is essential.
 
-In conclusion, the path to building precise retrieval systems requires preserving the fine-grained detail of the source data. For needle-in-a-haystack problems, this means utilizing the full capabilities of late-interaction, multi-vector search.
+In conclusion, building precise retrieval systems requires preserving the fine-grained detail of the source data. For needle-in-a-haystack problems, this means utilizing the full capabilities of late-interaction, multi-vector search.
 
 ## Appendix: Full Benchmark Results
 
