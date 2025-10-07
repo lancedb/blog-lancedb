@@ -3,6 +3,7 @@ title: "Finding the Needle in a Haystack: Comparing Multi-Vector Search Strategi
 sidebar_title: "Multi-vector search: Needle in a Haystack"
 description: "Technical deep dive into token-level retrieval with LanceDB multi-vector search."
 weight: 1
+image: /assets/docs/needle-haystack.png
 ---
 
 <img width="1344" height="768" alt="Image_pb7gz1pb7gz1pb7g" src="https://github.com/user-attachments/assets/a9a603fa-2cc9-4fa8-87a2-21cc665d1fbf" />
