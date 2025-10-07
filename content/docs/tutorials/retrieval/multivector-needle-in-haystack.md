@@ -52,8 +52,8 @@ Multi-vector models, pioneered by ColBERT, take a different approach. Instead of
 *   **Mechanism (MaxSim):** The search process is more sophisticated. For each token in the query, the system finds the most similar token on the page. These maximum similarity scores are then summed up to get the final relevance score. This "late-interaction" preserves fine-grained, token-level details.
 *   **The Models:** We used several vision-language models adapted for this architecture, including `ColPali`, `ColQwen2`, and `ColSmol`. While their underlying transformer backbones differ, they all share the ColBERT philosophy of representing documents as a bag of contextualized token embeddings.
 
-<img width="934" height="1084" alt="image" src="https://github.com/user-attachments/assets/563ce284-a3b3-4019-83db-4f68128baa7b" />
-[ Image credit - https://blog.dailydoseofds.com/p/visual-guide-to-bi-encoders-cross ]
+<img width="757" height="299" alt="Screenshot 2025-10-07 at 11 46 59 AM" src="https://github.com/user-attachments/assets/cf09efc3-1187-49d5-8893-aa8f0756f249" />
+
 
 ## Different Retrieval Strategies Used
 
