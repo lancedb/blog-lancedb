@@ -4,6 +4,10 @@ sidebar_title: "Multi-vector search: Needle in a Haystack"
 description: "Technical deep dive into token-level retrieval with LanceDB multi-vector search."
 weight: 1
 ---
+
+<img width="1344" height="768" alt="Image_pb7gz1pb7gz1pb7g" src="https://github.com/user-attachments/assets/a9a603fa-2cc9-4fa8-87a2-21cc665d1fbf" />
+
+
 In the development of advanced search and retrieval systems, moving from keyword matching to semantic understanding is a critical step. However, a key distinction exists between finding a relevant document and locating a specific piece of information within that document with precision. While there are techniques that perform well for retrieving documents, most of them work by extracting summarized semantic meaning of the document. This can be seen as these models trying to understand the "gist" of the documents. Both single-vector search and late-interaction approaches work well for these conditions with various tradeoffs involved. But there's another type of problem where the goal is not just to understand the overall topic of a document in general, but to also specifically account for the requested detail within the document. This "needle in a haystack" problem is a significant challenge, and addressing it is essential for building high-precision retrieval systems.
 
 This guide provides a technical analysis of multi-vector search for high-precision information retrieval. We will examine various optimization strategies and analyze their performance. This guide should be seen as complementary to resources like the [Answer.AI blog on ColBERT pooling](https://www.answer.ai/posts/colbert-pooling.html), which explains how pooling strategies can be effective for document-level retrieval. Here, we will demonstrate why those same techniques can be counterproductive when precision at an intra-document, token level is the primary objective.
