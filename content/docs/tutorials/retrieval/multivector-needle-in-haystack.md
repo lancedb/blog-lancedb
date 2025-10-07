@@ -1,6 +1,6 @@
 ---
 title: "Multi-vector Needle in a Haystack"
-sidebar_title: "Needle in a Haystack"
+sidebar_title: "Multi-vector search: Needle in a Haystack"
 description: "Technical deep dive into token-level retrieval with LanceDB multi-vector search."
 weight: 1
 ---
