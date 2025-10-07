@@ -4,6 +4,8 @@ In the development of advanced search and retrieval systems, moving from keyword
 
 This guide provides a technical analysis of multi-vector search, a technology designed for high-precision information retrieval. We will examine various optimization strategies and analyze their performance. This guide should be seen as complementary to resources like the [Answer.AI blog on ColBERT pooling](https://www.answer.ai/posts/colbert-pooling.html), which explains how pooling strategies can be effective for document-level retrieval. Here, we will demonstrate why those same techniques can be counterproductive when precision at an intra-document, token level is the primary objective.
 
+Find reproducible code [here](https://github.com/lancedb/research/tree/main/multivector-needle-haystack-bench)
+
 ## The Dataset
 
 To properly test these strategies, we need a task where precision is not just a feature, but the entire goal.
@@ -18,7 +20,19 @@ Our benchmark is built on the **AmazonScience/document-haystack** dataset, which
 *   **Measurement:** We measure both retrieval accuracy (Hit@K) and the average search latency for each query against this table.
 *   **Iteration:** Once the evaluation for one document is complete, the table is discarded, and the process repeats for the next source document.
 
-![Needle in a Haystack](https://m.media-amazon.com/images/S/amazon-blogs-prod/images/2024/05/09173511/document_haystack_figure_1.png)
+**Dataset example**
+The documents contain "text needles" like these
+
+<img width="1208" height="951" alt="Screenshot 2025-10-07 at 11 03 27 AM" src="https://github.com/user-attachments/assets/f44cd1bc-257a-4a03-9b01-5c5ca767ab45" />
+<img width="1289" height="1012" alt="Screenshot 2025-10-07 at 11 03 47 AM" src="https://github.com/user-attachments/assets/47f3a554-ff0e-4cf8-b2aa-0d4515da99c2" />
+
+During evaluation, the queries processed are somewhat like this:
+```
+What is the secret currency in the document?
+What is the secret object #3 in the document?
+```
+The intention of this task is to find the page which has the text needle that answers this questions
+
 
 ## Models and Architectures
 
@@ -38,7 +52,8 @@ Multi-vector models, pioneered by ColBERT, take a different approach. Instead of
 *   **Mechanism (MaxSim):** The search process is more sophisticated. For each token in the query, the system finds the most similar token on the page. These maximum similarity scores are then summed up to get the final relevance score. This "late-interaction" preserves fine-grained, token-level details.
 *   **The Models:** We used several vision-language models adapted for this architecture, including `ColPali`, `ColQwen2`, and `ColSmol`. While their underlying transformer backbones differ, they all share the ColBERT philosophy of representing documents as a bag of contextualized token embeddings.
 
-![Bi-Encoder vs ColBERT](https://www.answer.ai/posts/images/colbert-pooling/bi-encoder-vs-colbert.png)
+<img width="934" height="1084" alt="image" src="https://github.com/user-attachments/assets/563ce284-a3b3-4019-83db-4f68128baa7b" />
+[ Image credit - https://blog.dailydoseofds.com/p/visual-guide-to-bi-encoders-cross ]
 
 ## Different Retrieval Strategies Used
 
@@ -143,9 +158,9 @@ final_results = tbl_rerank.search(query_multi_vector, vector_column_name="vector
                           .to_list()
 ```
 
-## The Results: A Quantitative Analysis
+## The Results
 
-For a "needle in a haystack" task, retrieval accuracy is the primary metric of success. A system that is fast but inaccurate provides no value. The benchmark results reveal a significant performance gap between the full multi-vector search strategy and common optimization techniques.
+For a "needle in a haystack" task, retrieval accuracy is the primary metric of success. The benchmark results reveal a significant performance gap between the full multi-vector search strategy and common optimization techniques.
 
 ### Baseline Performance: Single-Vector Bi-Encoder
 
@@ -159,7 +174,7 @@ With a Hit@20 rate of just under 12%, the baseline model struggles to reliably l
 
 ### Multi-Vector Model Performance
 
-We now examine the performance of multi-vector models using different strategies. The following table compares the `base` (full multi-vector), `flatten` (mean pooling), and `rerank` (hybrid) strategies across several `vidore/col*` models.
+We now examine the performance of multi-vector models using different strategies. The following table compares the `base` (full multi-vector), `flatten` (mean pooling), and `rerank` (hybrid) strategies across several late-interaction models.
 
 | Model | Strategy | Hit@1 | Hit@5 | Hit@20 | Avg. Latency (s) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -173,7 +188,7 @@ We now examine the performance of multi-vector models using different strategies
 | `vidore/colSmol-256M` | `rerank` | 0.3% | 1.6% | 7.0% | 0.853 s |
 | **`vidore/colSmol-256M`** | **`base`** | **14.4%** | **64.0%** | **91.7%** | 0.848 s |
 
-The data shows a consistent pattern: the `base` strategy dramatically outperforms both `flatten` and `rerank` across all models, achieving a Hit@20 rate of over 90% in some cases. The pooling and reranking strategies perform no better than the single-vector baseline.
+The data shows a consistent pattern: the `base` strategy outperforms both `flatten` and `rerank` across all models, achieving a Hit@20 rate of over 90% in some cases. The pooling and reranking strategies perform no better than the single-vector baseline.
 
 ### In-Depth Analysis of Pooling Strategies
 
@@ -198,7 +213,7 @@ The strategies that seem like clever optimizations for general retrieval are, in
 
 3.  **The Superior Performance of `base` Search:** In our evaluation, the full, un-optimized `base` multi-vector search was the only strategy that demonstrated high performance. With a **Hit@20 of over 95%** for the best model, it shows that preserving every token vector is the most reliable way we observed to find the needle. We did not identify an effective shortcut for this class of problem.
 
-### Latency: The Cost of Accuracy
+### Latency
 
 Given the significant gap in accuracy, the speed trade-off must be re-evaluated. The "optimizations" are fast but do not produce correct results. The only effective strategy has a clear and understandable computational cost.
 
@@ -216,6 +231,9 @@ Given the significant gap in accuracy, the speed trade-off must be re-evaluated.
 While the accuracy of `base` multi-vector search is impressive, it's crucial to understand the practical limitations that come with its computational intensity. These models are not a universal replacement for traditional single-vector search but rather a specialized tool for specific problems.
 
 ### Search Latency and Computational Complexity
+
+<img width="683" height="723" alt="Screenshot 2025-10-07 at 11 40 51 AM" src="https://github.com/user-attachments/assets/aee16ab9-b7a5-4fc9-afa3-6086c173fda0" />
+
 
 As the benchmark data shows, the search latency for `base` multi-vector search is orders of magnitude higher than for single-vector (or pooled-vector) search. It's important to note that the reported ~670ms latency is an average from per-document evaluations. In this benchmark, each of the 25 documents is processed independently. All pages from a single document's variants (ranging from 5 to 200 pages) are ingested into a temporary table, resulting in a table size of approximately **1,230 rows (pages)** per evaluation. The search is performed on this table, and then the table is discarded. This highlights a significant performance cost even on a relatively small, per-document scale. This stems from a fundamental difference in computational complexity:
 
