@@ -264,7 +264,8 @@ All pooling methods perform poorly, confirming that the aggregation of token vec
 
 ### Latency:
 
-<img width="672" height="723" alt="Screenshot 2025-10-08 at 1 10 53 PM" src="https://github.com/user-attachments/assets/f77094d2-9065-4597-8509-72fb9340b135" />
+<img width="670" height="719" alt="Screenshot 2025-10-08 at 1 28 34 PM" src="https://github.com/user-attachments/assets/171bf6a9-9eb2-41c2-9b1f-9185fb0c255a" />
+
 
 The "optimizations" are not all created equal. While simple pooling is fast, its inaccuracy makes it unusable. Hierarchical pooling, however, offers a compelling balance of speed and accuracy.
 
@@ -284,8 +285,6 @@ The "optimizations" are not all created equal. While simple pooling is fast, its
 The accuracy of `base` multi-vector search is impressive, but its computational intensity has historically limited its use.  `hierarchical token pooling` as a viable strategy creates a new, practical sweet spot on the accuracy-latency curve, making high-precision search accessible for a wider range of applications.
 
 ### Search Latency and Computational Complexity
-
-<img width="683" height="723" alt="Screenshot 2025-10-07 at 11 40 51 AM" src="https://github.com/user-attachments/assets/aee16ab9-b7a5-4fc9-afa3-6086c173fda0" />
 
 
 As the benchmark data shows, the search latency for `base` multi-vector search is orders of magnitude higher than for single-vector (or pooled-vector) search. It's important to note that the reported ~670ms latency is an average from per-document evaluations. In this benchmark, each of the 25 documents is processed independently. All pages from a single document's variants (ranging from 5 to 200 pages) are ingested into a temporary table, resulting in a table size of approximately **1,230 rows (pages)** per evaluation. The search is performed on this table, and then the table is discarded. This highlights a significant performance cost even on a relatively small, per-document scale. This stems from a fundamental difference in computational complexity:
