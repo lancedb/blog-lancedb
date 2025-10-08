@@ -9,7 +9,7 @@ weight: 302
 
 ### Highlights
 
-RabitQ quantization is now supported for vector indices.  Full-text search latencies are now reduced significantly.  Scalar indices are now supported for JSON columns with type-aware indexing.
+RabitQ quantization is now supported for vector indices.  Full-text search latencies are now reduced significantly.  Scalar indices are now supported for JSON columns with type-aware indexing.  We improved the implementation of our KMeans algorithm to run ~30x faster than before, with even more gains at large k.  This results in IVF-based vector indices being built more quickly.
 
 #### New Features
 
