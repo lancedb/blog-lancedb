@@ -75,6 +75,10 @@
     position: absolute;
     pointer-events: none;
     white-space: nowrap;
+    
+    @include mq($md) {
+      opacity: 0;
+    }
 
     @include mq($max: $xs) {
       &:nth-of-type(1) {
