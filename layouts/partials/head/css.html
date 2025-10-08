@@ -9,7 +9,8 @@
 
 {{ if .Params.enableSwiper }}
   {{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | fingerprint }}
-  <link href="{{ $swiper.RelPermalink }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ $swiper.RelPermalink }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ $swiper.RelPermalink }}"></noscript>
 {{ end }}
 
 {{ $custom := resources.Get "css/custom.css" }}
@@ -25,6 +26,7 @@
       <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{ else }}
       {{ with . | minify | fingerprint }}
+        <link rel="preload" href="{{ .RelPermalink }}" as="style">
         <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{ end }}
     {{ end }}
