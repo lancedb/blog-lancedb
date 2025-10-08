@@ -343,3 +343,5 @@ Given these constraints, the choice of strategy depends on the specific requirem
 | vidore/colqwen2-v1.0_hierarchical_pooling   |       5685 |       0 |   1.75991e+09 | {'runtime': 5685}  |              0.0343824  |           0.144062   | {'1': 0.13745454545454547, '10': 0.822060606060606, '20': 0.9156363636363636, '3': 0.3856969696969697, '5': 0.6050909090909091}           | vidore/colqwen2-v1.0         | hierarchical_pooling |
        |
 </details>
+
+Update 1: Add token pooling method 
