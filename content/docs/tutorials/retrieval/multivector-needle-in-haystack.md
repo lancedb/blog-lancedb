@@ -25,8 +25,7 @@ Our benchmark is built on the **[AmazonScience/document-haystack](https://huggin
 *   We process each of the 25 source documents independently.
 *   **Table Creation:** For a single source document (e.g., "AIG"), we ingest all pages from all of its page-length variants (from 5 to 200 pages long). This creates a temporary LanceDB table containing approximately 1,230 pages.
 *   **The Task:** We then query this table using a set of "needle" questions, where the goal is to retrieve the **exact page number** containing the answer. A successful retrieval means the correct page number is within the top K results.
-*   **Measurement:** We measure both retrieval accuracy (Hit@K) and the average search latency for each query against this table.
-*   **Iteration:** Once the evaluation for one document is complete, the table is discarded, and the process repeats for the next source document.
+*   **Target metric:** We measure both retrieval accuracy (Hit@K) and the average search latency for each query against this table.
 
 **Dataset example**
 The documents contain "text needles" like these
@@ -258,7 +257,7 @@ All pooling methods perform poorly, confirming that the aggregation of token vec
 
 3.  **`hierarchical token pooling`:** By clustering and pooling tokens at indexing time, it reduces the number of vectors per page (in our case, by a factor of 4). This intelligently compresses the data, while preserving enough token-level detail in multi-vector setting. It achieves a **Hit@20 of 91.6%**, only slightly behind the `base` strategy's 95.5%, but is significantly faster.
 
-4.  **`base` multi-vector Search:** The full, un-optimized `base` multi-vector search remains the most accurate strategy. Preserving every token vector provides the highest guarantee of finding the needle, but this comes at the highest computational cost.
+4.  **`base` multi-vector Search:** The vanilla, un-optimized `base` multi-vector search remains the most accurate strategy. Preserving every token vector provides the highest guarantee of finding the needle, but this comes at the highest computational cost.
 
 ### Latency:
 
@@ -294,9 +293,9 @@ As the benchmark data shows, the search latency for `base` multi-vector search i
 
 Given these constraints, the choice of strategy depends on the specific requirements of the application.
 
-*   **For Maximum Precision (`base`):** In domains where the cost of missing the needle is extremely high (e.g., legal discovery, compliance), the full `base` search is the most reliable option.
+*   **For Maximum Precision (`base`):** In domains where the cost of missing the needle is extremely high, the full `base` search is the most reliable option.
 *   **For a Balance of Precision and Performance (`hierarchical token pooling`):** This is the ideal choice for many applications. It makes high-precision search practical for larger datasets and more interactive use cases where the sub-second latency of the `base` search may be too high. It significantly lowers the barrier to entry for adopting multi-vector search. It should still not be seen as a drop-in replacement for ANN, as it still requires more computational resources than single-vector search.
-*   **For General-Purpose Document Retrieval (`flatten` / single-vector):** For large-scale retrieval where understanding the "gist" is sufficient, single-vector search remains the most practical and scalable solution.
+*   **For General-Purpose Document Retrieval (`flatten` / single-vector):** For large-scale retrieval where understanding the "gist" is sufficient or where in cases where large-context text-based models suffice, single-vector search remains the most practical and scalable solution.
 
 
 
