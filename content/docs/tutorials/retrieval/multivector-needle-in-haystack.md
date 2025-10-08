@@ -16,8 +16,6 @@ Find reproducible code [here](https://github.com/lancedb/research/tree/main/mult
 
 ## The Dataset
 
-To properly test these strategies, we need a task where precision is not just a feature, but the entire goal.
-
 This task is different from benchmarks like BEIR, which focus on text-based doc retrieval, finding the most relevant documents from a large collection. Here, we want *intra-document localization*, where the goal is to find a precise piece of information within a single, dense document, in a multimodal setting.
 
 ### The Task: The Document Haystack Dataset
