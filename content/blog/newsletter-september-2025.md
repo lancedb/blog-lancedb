@@ -41,13 +41,17 @@ Most of the work in AI isn’t in the model. It’s in the data pipeline. Organi
 
 ## Event Recap!
 
-*   [AI_Dev Keynote recording](https://www.youtube.com/watch?v=y5g7u3sWyrk)
-*   [AI_Dev Breakout](https://www.youtube.com/watch?v=mVN1P1HvpKg&pp=0gcJCckJAYcqIYzv)
-*   [Apache Spark Connector for Lance](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
-*   OpenSource Startup Podcast
-    [https://creators.spotify.com/pod/profile/ossstartuppodcast/episodes/E181-Why-Multimodal-Is-the-Future-of-AI-Data-Workloads-e3813id/a-ac59kq5](https://creators.spotify.com/pod/profile/ossstartuppodcast/episodes/E181-Why-Multimodal-Is-the-Future-of-AI-Data-Workloads-e3813id/a-ac59kq5)
 
-<iframe src="https://creators.spotify.com/pod/profile/ossstartuppodcast/embed/episodes/E181-Why-Multimodal-Is-the-Future-of-AI-Data-Workloads-e3813id/a-ac59kq5" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/y5g7u3sWyrk?si=yobin3RePEsmnKlS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mVN1P1HvpKg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*   [Apache Spark Connector for Lance](https://www.linkedin.com/events/apachespark-andlancesparkconnec7363659816340258816/theater/)
+
+![Alt text for Apache Spark Connector for Lance image](/assets/blog/newsletter-september-2025/spark-connector.png)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AJodQHXGnCA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Good Reads
 
