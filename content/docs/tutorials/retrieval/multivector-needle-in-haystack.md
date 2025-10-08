@@ -233,11 +233,11 @@ We now examine the performance of multi-vector models using different strategies
 | `vidore/colSmol-256M` | `flatten and multi-vector rerank` | 0.3% | 1.6% | 7.0% | 0.853 s |
 | **`vidore/colSmol-256M`** | **`base`** | **14.4%** | **64.0%** | **91.7%** | 0.848 s |
 
-The data shows a consistent pattern: the `base` strategy outperforms both `flatten` and `rerank` across all models, achieving a Hit@20 rate of over 90% in some cases. The pooling and reranking strategies perform no better than the single-vector baseline.
+The data shows a consistent pattern: the `base` strategy outperforms all other techniques. The flattned pooling and reranking strategies perform no better than the single-vector baseline. However, hierarchical token pooling seems like a decent alternative to base considering speed vs accuracy tradeoff. Let's look at the numbers in detail.
 
 ### In-Depth Analysis of Pooling Strategies
 
-To further understand the failure of optimization techniques, we compared different methods for pooling token vectors into a single vector: `mean` (`flatten`), `max`, and `cls`.
+To further understand the failure of optimization techniques, we compared different methods for pooling token vectors into a single vector: `mean` (`flatten`), `max`.
 
 | Model & Pooling Strategy | Hit@1 | Hit@5 | Hit@20 | Avg. Latency (s) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -245,7 +245,7 @@ To further understand the failure of optimization techniques, we compared differ
 | `vidore/colqwen2-v1.0` (`max_pooling`) | 1.4% | 4.2% | 11.2% | 0.011 s |
 | **`vidore/colqwen2-v1.0` (`base`)** | **14.0%** | **65.4%** | **95.5%** | 0.668 s |
 
-All pooling methods perform poorly, confirming that the aggregation of token vectors into a single representation loses the fine-grained detail required for this task.
+All flattened pooling methods perform poorly, confirming that the aggregation of token vectors into a single representation loses the fine-grained detail required for this task.
 
 **Finding the Right Trade-Off**
 
