@@ -1,12 +1,6 @@
 {{ $fonts := resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "css/fonts.generated.css" . | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $fonts.RelPermalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
 
-{{/* Preload critical fonts */}}
-{{ $preloadFonts := slice "AeonikFono-Regular.woff2" "Aeonik-Pro-Regular.woff2" }}
-{{ range $preloadFonts }}
-  <link rel="preload" href="{{ "fonts/" | relURL }}{{ . }}" as="font" type="font/woff2" crossorigin="anonymous">
-{{ end }}
-
 {{ if .Params.enableSwiper }}
   {{ $swiper := resources.Get "css/vendors/swiper-bundle.min.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $swiper.RelPermalink }}" media="print" onload="this.media='all'">
