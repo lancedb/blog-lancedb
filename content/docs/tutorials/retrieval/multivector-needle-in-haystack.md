@@ -18,6 +18,8 @@ Find reproducible code [here](https://github.com/lancedb/research/tree/main/mult
 
 To properly test these strategies, we need a task where precision is not just a feature, but the entire goal.
 
+This task is different from benchmarks like BEIR, which focus on text-based doc retrieval, finding the most relevant documents from a large collection. Here, we want *intra-document localization*, where the goal is to find a precise piece of information within a single, dense document, in a multimodal setting.
+
 ### The Task: The Document Haystack Dataset
 
 Our benchmark is built on the **[AmazonScience/document-haystack](https://huggingface.co/datasets/AmazonScience/document-haystack)** dataset, which contains 25 visually complex source documents (e.g., financial reports, academic papers). To create a rigorous test, our evaluation follows a per-document methodology:
@@ -121,11 +123,11 @@ query_mean_vector = query_multi_vector.mean(axis=0)
 results = tbl_flat.search(query_mean_vector).limit(5).to_list()
 ```
 
-### 3. `max_pooling` & 4. `cls_pooling`
+### 3. `max_pooling`
 
-These are variations of `flatten`. `max_pooling` takes the element-wise max across all token vectors, while `cls_pooling` simply uses the first vector in the sequence (corresponding to the `[CLS]` token). The implementation is identical to `flatten`, just with a different aggregation method (`.max(axis=0)` or `[0]`).
+This is a variation of `flatten`. `max_pooling` takes the element-wise max across all token vectors instead of the mean. The implementation is identical to `flatten`, just with a different aggregation method (`.max(axis=0)`).
 
-### 5. `rerank`: The Hybrid "Optimization"
+### 4. `flatten and multi-vector rerank`: The Hybrid "Optimization"
 
 This two-stage strategy aims for the best of both worlds. First, use a fast, pooled-vector search to find a set of promising candidates. Then, run the full, accurate multi-vector search on *only* those candidates.
 
@@ -166,6 +168,42 @@ final_results = tbl_rerank.search(query_multi_vector, vector_column_name="vector
                           .to_list()
 ```
 
+### 5. `hierarchical token pooling`: Compressing the Haystack
+
+This is an indexing-time strategy that aims to reduce the storage footprint and computational cost of multi-vector search by reducing the number of vectors per document. Instead of using every token vector, it clusters semantically similar tokens together and replaces them with a single, averaged vector.
+
+*   **Mechanism:** For each document, it computes the similarity between all token vectors, performs hierarchical clustering to group them, and then mean-pools the vectors within each cluster. This results in a smaller, more compact set of token vectors representing the document.
+*   **Goal:** To reduce memory and disk usage while attempting to preserve the most important semantic information, potentially offering a middle ground between the high accuracy of `base` search and the speed of pooled methods.
+
+**LanceDB Implementation:**
+The schema is identical to the `base` multi-vector search, but the data is pre-processed before ingestion.
+
+```python
+from utils import pool_embeddings_hierarchical
+import numpy as np
+
+# Schema is the same as the base multi-vector schema
+schema = pa.schema([
+    pa.field("page_num", pa.int32()),
+    pa.field("vector", pa.list_(pa.list_(pa.float32(), 128)))
+])
+tbl_hierarchical = db.create_table("document_pages_hierarchical", schema=schema)
+
+# Pool the embeddings before ingestion
+# multi_token_embeddings is a NumPy array of shape (num_tokens, 128)
+pooled_embeddings = pool_embeddings_hierarchical(
+    multi_token_embeddings,
+    pool_factor=4  # Reduce vector count by a factor of 4
+)
+
+# Ingest the smaller set of multi-token embeddings
+# pooled_embeddings is now shape (approx. num_tokens / 4, 128)
+tbl_hierarchical.add([{"page_num": 1, "vector": pooled_embeddings.tolist()}])
+
+# Search is identical to the base multi-vector search
+results = tbl_hierarchical.search(query_multi_vector).limit(5).to_list()
+```
+
 ## The Results
 
 For a "needle in a haystack" task, retrieval accuracy is the primary metric of success. The benchmark results reveal a significant performance gap between the full multi-vector search strategy and common optimization techniques.
@@ -187,13 +225,15 @@ We now examine the performance of multi-vector models using different strategies
 | Model | Strategy | Hit@1 | Hit@5 | Hit@20 | Avg. Latency (s) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `vidore/colqwen2-v1.0` | `flatten` | 1.9% | 5.5% | 11.9% | 0.010 s |
-| `vidore/colqwen2-v1.0` | `rerank` | 0.3% | 1.5% | 7.3% | 0.692 s |
+| `vidore/colqwen2-v1.0` | `flatten and multi-vector rerank` | 0.3% | 1.5% | 7.3% | 0.692 s |
+| **`vidore/colqwen2-v1.0`** | **`hierarchical token pooling`** | **13.7%** | **60.5%** | **91.6%** | **0.144 s** |
 | **`vidore/colqwen2-v1.0`** | **`base`** | **14.0%** | **65.4%** | **95.5%** | 0.668 s |
 | `vidore/colpali-v1.3` | `flatten` | 1.7% | 4.5% | 9.3% | 0.008 s |
-| `vidore/colpali-v1.3` | `rerank` | 0.6% | 2.3% | 6.9% | 0.949 s |
+| `vidore/colpali-v1.3` | `flatten and multi-vector rerank` | 0.6% | 2.3% | 6.9% | 0.949 s |
+| **`vidore/colpali-v1.3`** | **`hierarchical token pooling`** | **10.8%** | **41.7%** | **64.8%** | **0.189 s** |
 | **`vidore/colpali-v1.3`** | **`base`** | **11.3%** | **42.3%** | **65.6%** | 0.936 s |
 | `vidore/colSmol-256M` | `flatten` | 1.6% | 4.7% | 10.5% | 0.008 s |
-| `vidore/colSmol-256M` | `rerank` | 0.3% | 1.6% | 7.0% | 0.853 s |
+| `vidore/colSmol-256M` | `flatten and multi-vector rerank` | 0.3% | 1.6% | 7.0% | 0.853 s |
 | **`vidore/colSmol-256M`** | **`base`** | **14.4%** | **64.0%** | **91.7%** | 0.848 s |
 
 The data shows a consistent pattern: the `base` strategy outperforms both `flatten` and `rerank` across all models, achieving a Hit@20 rate of over 90% in some cases. The pooling and reranking strategies perform no better than the single-vector baseline.
@@ -206,37 +246,42 @@ To further understand the failure of optimization techniques, we compared differ
 | :--- | :--- | :--- | :--- | :--- |
 | `vidore/colqwen2-v1.0` (`mean_pooling`) | 1.9% | 5.5% | 11.9% | 0.010 s |
 | `vidore/colqwen2-v1.0` (`max_pooling`) | 1.4% | 4.2% | 11.2% | 0.011 s |
-| `vidore/colqwen2-v1.0` (`cls_pooling`) | 0.1% | 0.6% | 2.7% | 0.008 s |
 | **`vidore/colqwen2-v1.0` (`base`)** | **14.0%** | **65.4%** | **95.5%** | 0.668 s |
 
 All pooling methods perform poorly, confirming that the aggregation of token vectors into a single representation loses the fine-grained detail required for this task.
 
-**Analysis: Why "Optimizations" are Ineffective Here**
+**Finding the Right Trade-Off**
 
-The strategies that seem like clever optimizations for general retrieval are, in fact, counterproductive for high-precision tasks.
+<img width="678" height="725" alt="Screenshot 2025-10-08 at 1 11 34 PM" src="https://github.com/user-attachments/assets/5a8d6ed4-3e5c-4342-80b8-7b4d2e3ef193" />
 
-1.  **The Failure of Pooling:** The `flatten` (mean pooling) strategy, along with `max_pooling` and `cls_pooling`, fails to improve upon the baseline. As explained in the Answer.AI blog on ColBERT pooling, pooling is a form of compression. For document-level retrieval, this compression creates a useful "summary." For our task, however, this averaging process **destroys the essential localization signal**. The subtle but critical differences between the token embeddings on one page and the next are smoothed over and lost. The resulting single vector represents the *topic* of the page, not the *specific needle* on it.
+1.  **The Failure of Simple Pooling:** The `flatten` (mean pooling) and `max_pooling` strategies fail to improve upon the baseline. This is because their aggressive compression **destroys the essential localization signal**. The resulting single vector represents the *topic* of the page, not the *specific needle* on it.
 
-2.  **The Failure of `rerank`:** The `rerank` strategy, often presented as a hybrid solution, is the *worst-performing strategy*. Its Hit@20 is consistently below 10%. The reason is a fundamental flaw in its two-stage design for this task: the first stage uses a pooled vector to retrieve candidates. Since pooling eliminates the localization signal, the initial candidate set is effectively random. The powerful second-stage multi-vector search is then applied to a list of pages that is highly unlikely to contain the correct page, exemplifying the "garbage in, garbage out" principle.
+2.  **The Failure of `flatten and multi-vector rerank`:** This hybrid strategy is the *worst-performing* of all. The reason is a fundamental flaw in its design for this task: the first stage uses a simple pooled vector to retrieve candidates. Since this pooling eliminates the localization signal, the initial candidate set is effectively random.
 
-3.  **The Superior Performance of `base` Search:** In our evaluation, the full, un-optimized `base` multi-vector search was the only strategy that demonstrated high performance. With a **Hit@20 of over 95%** for the best model, it shows that preserving every token vector is the most reliable way we observed to find the needle. We did not identify an effective shortcut for this class of problem.
+3.  **`hierarchical token pooling`:** By clustering and pooling tokens at indexing time, it reduces the number of vectors per page (in our case, by a factor of 4). This intelligently compresses the data, while preserving enough token-level detail in multi-vector setting. It achieves a **Hit@20 of 91.6%**, only slightly behind the `base` strategy's 95.5%, but is significantly faster.
 
-### Latency
+4.  **`base` multi-vector Search:** The full, un-optimized `base` multi-vector search remains the most accurate strategy. Preserving every token vector provides the highest guarantee of finding the needle, but this comes at the highest computational cost.
 
- The "optimizations" are fast but do not produce correct results. The only effective strategy has a clear and understandable computational cost.
+### Latency:
+
+<img width="672" height="723" alt="Screenshot 2025-10-08 at 1 10 53 PM" src="https://github.com/user-attachments/assets/f77094d2-9065-4597-8509-72fb9340b135" />
+
+The "optimizations" are not all created equal. While simple pooling is fast, its inaccuracy makes it unusable. Hierarchical pooling, however, offers a compelling balance of speed and accuracy.
 
 | Strategy (on `vidore/colqwen2-v1.0`) | Avg. Search Latency (s) | Hit@20 Accuracy |
 | :--- | :--- | :--- |
 | `flatten` (Fast but Ineffective) | **0.010 s** | 11.9% |
-| `rerank` (Slower and Ineffective) | 0.692 s | 7.3% |
-| `base` (Accurate) | 0.668 s | **95.5%** |
+| `flatten and multi-vector rerank` (Slower and Ineffective) | 0.692 s | 7.3% |
+| **`hierarchical token pooling` (Accurate & Fast)** | **0.144 s** | **91.6%** |
+| `base` (Most Accurate) | 0.668 s | **95.5%** |
+
 
 *(Latency measured on NVIDIA H100 GPUs)*
 
 
-## Practical Considerations: Latency, Complexity, and Scalability
+## Practical Considerations:
 
-While the accuracy of `base` multi-vector search is impressive, it's crucial to understand the practical limitations that come with its computational intensity. These models are not a universal replacement for traditional single-vector search but rather a specialized tool for specific problems.
+The accuracy of `base` multi-vector search is impressive, but its computational intensity has historically limited its use.  `hierarchical token pooling` as a viable strategy creates a new, practical sweet spot on the accuracy-latency curve, making high-precision search accessible for a wider range of applications.
 
 ### Search Latency and Computational Complexity
 
@@ -246,67 +291,56 @@ While the accuracy of `base` multi-vector search is impressive, it's crucial to 
 As the benchmark data shows, the search latency for `base` multi-vector search is orders of magnitude higher than for single-vector (or pooled-vector) search. It's important to note that the reported ~670ms latency is an average from per-document evaluations. In this benchmark, each of the 25 documents is processed independently. All pages from a single document's variants (ranging from 5 to 200 pages) are ingested into a temporary table, resulting in a table size of approximately **1,230 rows (pages)** per evaluation. The search is performed on this table, and then the table is discarded. This highlights a significant performance cost even on a relatively small, per-document scale. This stems from a fundamental difference in computational complexity:
 
 *   **Modern ANN Search (for single vectors):** Algorithms like HNSW (Hierarchical Navigable Small World) provide sub-linear search times, often close to `O(log N)`, where `N` is the number of items in the index. This allows them to scale to billions of vectors with millisecond-level latency.
-*   **Late-Interaction Search (Multi-Vector):** The search process is far more intensive. For each query, it must compute similarity scores between query tokens and the tokens of many candidate documents. The complexity is closer to `O(M * Q * D)`, where `M` is the number of candidate documents to score, `Q` is the number of query tokens, and `D` is the average number of tokens per document. While optimizations exist to reduce `M`, the core calculation is fundamentally more expensive than a single vector distance calculation.
+*   **Late-Interaction Search (Multi-Vector):** The search process is far more intensive. For each query, it must compute similarity scores between query tokens and the tokens of many candidate documents. The complexity is closer to `O(M * Q * D)`, where `M` is the number of candidate documents to score, `Q` is the number of query tokens, and `D` is the average number of tokens per document. `Hierarchical token pooling` directly attacks this problem by reducing `D`, leading to a significant reduction in search latency.
 
 ### When to Use Multi-Vector Search
 
-Given these constraints, full multi-vector search is not a drop-in replacement for single-vector ANN search. It is best suited for:
+Given these constraints, the choice of strategy depends on the specific requirements of the application.
 
-*   **Small-Scale, High-Precision Tasks:** When the corpus of documents is manageable (thousands to tens of thousands, not billions) and the value of finding the *exact* piece of information is extremely high.
-*   **Specialized Applications:** In domains like legal discovery, compliance, or scientific research, the cost of a slower, more computationally expensive search is easily justified by the need for precision. For example, finding a specific clause in one of 10,000 contracts is a perfect use case.
-*   **Post-Retrieval Re-ranking:** While our `rerank` strategy showed that a poor first stage fails, multi-vector models can be used effectively as a re-ranking step *if* the initial retrieval stage is highly capable of recalling the correct document. However, this adds complexity to the system architecture.
-
-For general-purpose, large-scale document retrieval where understanding the "gist" is sufficient, single-vector search remains the more practical and scalable solution.
+*   **For Maximum Precision (`base`):** In domains where the cost of missing the needle is extremely high (e.g., legal discovery, compliance), the full `base` search is the most reliable option.
+*   **For a Balance of Precision and Performance (`hierarchical token pooling`):** This is the ideal choice for many applications. It makes high-precision search practical for larger datasets and more interactive use cases where the sub-second latency of the `base` search may be too high. It significantly lowers the barrier to entry for adopting multi-vector search. It should still not be seen as a drop-in replacement for ANN, as it still requires more computational resources than single-vector search.
+*   **For General-Purpose Document Retrieval (`flatten` / single-vector):** For large-scale retrieval where understanding the "gist" is sufficient, single-vector search remains the most practical and scalable solution.
 
 
-
-### Conclusion
-
-This benchmark highlights the critical importance of matching your retrieval strategy to your objective. Pooling and reranking remain valid techniques for *document-level* retrieval, where the goal is to find a relevant document. However, if the goal is to find specific information *within* a document, the detail provided by full multi-vector representations is essential.
-
-In conclusion, building precise retrieval systems requires preserving the fine-grained detail of the source data. For needle-in-a-haystack problems, this means utilizing the full capabilities of late-interaction, multi-vector search.
 
 ## Appendix: Full Benchmark Results
 
 <details>
 <summary>Click to view the full benchmark data</summary>
 
-| name                               |   _runtime |   _step |    _timestamp | _wandb             |   avg_inference_latency |   avg_search_latency | hit_rates                                                                                                                                   | model_name                   | strategy    |
-|:-----------------------------------|-----------:|--------:|--------------:|:-------------------|------------------------:|---------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|:------------|
-| vidore/colqwen2-v0.1_base          |      13410 |       0 |   1.75873e+09 | {'runtime': 13410} |              0.0418646  |           0.751151   | {'1': 0.1355151515151515, '10': 0.888, '20': 0.9597575757575758, '3': 0.3936969696969697, '5': 0.6349090909090909}                          | vidore/colqwen2-v0.1         | base        |
-| vidore/colqwen2-v1.0_rerank        |      13008 |       0 |   1.75873e+09 | {'runtime': 13008} |              0.0426252  |           0.692482   | {'1': 0.003393939393939394, '10': 0.03296969696969697, '20': 0.07296969696969698, '3': 0.010666666666666666, '5': 0.015272727272727271}     | vidore/colqwen2-v1.0         | rerank      |
-| vidore/colpali-v1.3_flatten        |       2998 |       0 |   1.75872e+09 | {'runtime': 2998}  |              0.0296511  |           0.00833224 | {'1': 0.017454545454545455, '10': 0.06448484848484848, '20': 0.09333333333333334, '3': 0.034666666666666665, '5': 0.04509090909090909}      | vidore/colpali-v1.3          | flatten     |
-| vidore/colqwen2-v0.1_rerank        |      13512 |       0 |   1.75873e+09 | {'runtime': 13512} |              0.0418855  |           0.662372   | {'1': 0.002909090909090909, '10': 0.026424242424242423, '20': 0.05987878787878788, '3': 0.0075151515151515155, '5': 0.014545454545454544}   | vidore/colqwen2-v0.1         | rerank      |
-| vidore/colqwen2-v1.0_base          |      12933 |       0 |   1.75873e+09 | {'runtime': 12933} |              0.0416839  |           0.667898   | {'1': 0.14012121212121212, '10': 0.8846060606060606, '20': 0.9553939393939394, '3': 0.4111515151515152, '5': 0.6538181818181819}            | vidore/colqwen2-v1.0         | base        |
-| vidore/colpali-v1.3_rerank         |      12090 |       0 |   1.75873e+09 | {'runtime': 12090} |              0.0310783  |           0.949047   | {'1': 0.006060606060606061, '10': 0.03878787878787879, '20': 0.06933333333333333, '3': 0.014545454545454544, '5': 0.022787878787878788}     | vidore/colpali-v1.3          | rerank      |
-| vidore/colqwen2-v1.0_flatten       |       4846 |       0 |   1.75874e+09 | {'runtime': 4846}  |              0.0504031  |           0.010443   | {'1': 0.018666666666666668, '10': 0.07854545454545454, '20': 0.11903030303030304, '3': 0.041212121212121214, '5': 0.055030303030303034}     | vidore/colqwen2-v1.0         | flatten     |
-| vidore/colqwen2-v0.1_base          |      10838 |       0 |   1.75874e+09 | {'runtime': 10838} |              0.04627    |           0.692836   | {'1': 0.13575757575757577, '10': 0.8870303030303031, '20': 0.96, '3': 0.3941818181818182, '5': 0.6351515151515151}                          | vidore/colqwen2-v0.1         | base        |
-| vidore/colqwen2-v0.1_flatten       |       4828 |       0 |   1.75874e+09 | {'runtime': 4828}  |              0.0486335  |           0.0103028  | {'1': 0.018424242424242423, '10': 0.07224242424242425, '20': 0.10521212121212122, '3': 0.03903030303030303, '5': 0.05212121212121213}       | vidore/colqwen2-v0.1         | flatten     |
-| vidore/colpali-v1.3_base           |      10253 |       0 |   1.75874e+09 | {'runtime': 10253} |              0.0312334  |           0.93611    | {'1': 0.11272727272727272, '10': 0.551030303030303, '20': 0.6555151515151515, '3': 0.29987878787878786, '5': 0.4232727272727273}            | vidore/colpali-v1.3          | base        |
-| vidore/colqwen2-v0.1_flatten       |       4745 |       0 |   1.75874e+09 | {'runtime': 4745}  |              0.0472825  |           0.00990508 | {'1': 0.018424242424242423, '10': 0.07296969696969698, '20': 0.10496969696969696, '3': 0.03951515151515152, '5': 0.05236363636363636}       | vidore/colqwen2-v0.1         | flatten     |
-| vidore/colqwen2.5-v0.2_base        |      17218 |       0 |   1.75875e+09 | {'runtime': 17218} |              0.0540356  |           0.694855   | {'1': 0.11903030303030304, '10': 0.7127272727272728, '20': 0.8366060606060606, '3': 0.336, '5': 0.5258181818181819}                         | vidore/colqwen2.5-v0.2       | base        |
-| vidore/colqwen2.5-v0.2_rerank      |      16859 |       0 |   1.75875e+09 | {'runtime': 16859} |              0.0518383  |           0.71693    | {'1': 0.0026666666666666666, '10': 0.025212121212121213, '20': 0.060848484848484846, '3': 0.006787878787878788, '5': 0.01187878787878788}   | vidore/colqwen2.5-v0.2       | rerank      |
-| vidore/colqwen2-v0.1_rerank        |       9484 |       0 |   1.75875e+09 | {'runtime': 9484}  |              0.0445599  |           0.691609   | {'1': 0.005333333333333333, '10': 0.030545454545454542, '20': 0.064, '3': 0.010666666666666666, '5': 0.017696969696969697}                  | vidore/colqwen2-v0.1         | rerank      |
-| vidore/colSmol-256M_flatten        |       6822 |       0 |   1.75875e+09 | {'runtime': 6822}  |              0.0404544  |           0.00822329 | {'1': 0.01575757575757576, '10': 0.06836363636363636, '20': 0.10496969696969696, '3': 0.03442424242424243, '5': 0.04678787878787879}        | vidore/colSmol-256M          | flatten     |
-| vidore/colSmol-500M_base           |      12681 |       0 |   1.75875e+09 | {'runtime': 12681} |              0.0408026  |           0.850902   | {'1': 0.136, '10': 0.8029090909090909, '20': 0.8993939393939394, '3': 0.3806060606060606, '5': 0.5975757575757575}                          | vidore/colSmol-500M          | base        |
-| vidore/colSmol-500M_rerank         |      13066 |       0 |   1.75876e+09 | {'runtime': 13066} |              0.0440974  |           0.927632   | {'1': 0.003636363636363637, '10': 0.028606060606060607, '20': 0.07054545454545455, '3': 0.00896969696969697, '5': 0.015030303030303033}     | vidore/colSmol-500M          | rerank      |
-| vidore/colSmol-256M_rerank         |      12646 |       0 |   1.75876e+09 | {'runtime': 12646} |              0.0391553  |           0.853279   | {'1': 0.003393939393939394, '10': 0.02909090909090909, '20': 0.07006060606060606, '3': 0.008727272727272728, '5': 0.015515151515151517}     | vidore/colSmol-256M          | rerank      |
-| vidore/colqwen2.5-v0.2_flatten     |       6348 |       0 |   1.75876e+09 | {'runtime': 6348}  |              0.0509971  |           0.00772653 | {'1': 0.017696969696969697, '10': 0.06545454545454546, '20': 0.09284848484848485, '3': 0.03515151515151515, '5': 0.045575757575757575}      | vidore/colqwen2.5-v0.2       | flatten     |
-| vidore/colSmol-256M_base           |      11554 |       0 |   1.75876e+09 | {'runtime': 11554} |              0.0366467  |           0.848463   | {'1': 0.1435151515151515, '10': 0.8426666666666667, '20': 0.9173333333333332, '3': 0.40824242424242424, '5': 0.6404848484848484}            | vidore/colSmol-256M          | base        |
-| vidore/colSmol-500M_flatten        |       6395 |       0 |   1.75876e+09 | {'runtime': 6395}  |              0.0384664  |           0.00716238 | {'1': 0.018424242424242423, '10': 0.07345454545454545, '20': 0.11393939393939394, '3': 0.03903030303030303, '5': 0.05090909090909091}       | vidore/colSmol-500M          | flatten     |
-| openai/clip-vit-base-patch32_base  |        815 |       0 |   1.75876e+09 | {'runtime': 815}   |              0.00533487 |           0.00794629 | {'1': 0.016, '10': 0.07636363636363637, '20': 0.11757575757575756, '3': 0.03296969696969697, '5': 0.04703030303030303}                      | openai/clip-vit-base-patch32 | base        |
-| vidore/colqwen2-v0.1_max_pooling   |       8758 |       0 |   1.7595e+09  | {'runtime': 8758}  |              0.0985753  |           0.0106716  | {'1': 0.015515151515151517, '10': 0.07296969696969698, '20': 0.11248484848484848, '3': 0.032484848484848484, '5': 0.04703030303030303}      | vidore/colqwen2-v0.1         | max_pooling |
-| vidore/colqwen2-v0.1_cls_pooling   |       8733 |       0 |   1.7595e+09  | {'runtime': 8733}  |              0.0947586  |           0.00869903 | {'1': 0.0014545454545454545, '10': 0.013575757575757576, '20': 0.028606060606060607, '3': 0.0038787878787878783, '5': 0.006787878787878788} | vidore/colqwen2-v0.1         | cls_pooling |
-| vidore/colpali-v1.3_cls_pooling    |       4712 |       0 |   1.75949e+09 | {'runtime': 4712}  |              0.0690353  |           0.00903896 | {'1': 0.0026666666666666666, '10': 0.020363636363636365, '20': 0.04242424242424243, '3': 0.007757575757575757, '5': 0.01090909090909091}    | vidore/colpali-v1.3          | cls_pooling |
-| vidore/colpali-v1.3_max_pooling    |       4728 |       0 |   1.75949e+09 | {'runtime': 4728}  |              0.0718573  |           0.0103053  | {'1': 0.011393939393939394, '10': 0.05672727272727273, '20': 0.08872727272727272, '3': 0.02666666666666667, '5': 0.03709090909090909}       | vidore/colpali-v1.3          | max_pooling |
-| vidore/colqwen2-v1.0_max_pooling   |       8760 |       0 |   1.7595e+09  | {'runtime': 8760}  |              0.0981102  |           0.0106316  | {'1': 0.013575757575757576, '10': 0.06933333333333333, '20': 0.112, '3': 0.02812121212121212, '5': 0.041939393939393936}                    | vidore/colqwen2-v1.0         | max_pooling |
-| vidore/colqwen2-v1.0_cls_pooling   |       8702 |       0 |   1.7595e+09  | {'runtime': 8702}  |              0.0913185  |           0.00842651 | {'1': 0.0014545454545454545, '10': 0.012848484848484849, '20': 0.02739393939393939, '3': 0.0038787878787878783, '5': 0.006303030303030303}  | vidore/colqwen2-v1.0         | cls_pooling |
-| vidore/colqwen2-v0.1_max_pooling   |       7696 |       0 |   1.7595e+09  | {'runtime': 7696}  |              0.105203   |           0.011907   | {'1': 0.016242424242424242, '10': 0.07321212121212121, '20': 0.1132121212121212, '3': 0.03442424242424243, '5': 0.04945454545454545}        | vidore/colqwen2-v0.1         | max_pooling |
-| vidore/colqwen2-v0.1_cls_pooling   |       7565 |       0 |   1.7595e+09  | {'runtime': 7565}  |              0.0983301  |           0.00963176 | {'1': 0.001212121212121212, '10': 0.011151515151515152, '20': 0.02327272727272727, '3': 0.003636363636363637, '5': 0.006303030303030303}    | vidore/colqwen2-v0.1         | cls_pooling |
-| vidore/colqwen2.5-v0.2_max_pooling |        nan |     nan | nan           | nan                |            nan          |         nan          | nan                                                                                                                                         | nan                          | nan         |
-| vidore/colSmol-256M_max_pooling    |      13982 |       0 |   1.75951e+09 | {'runtime': 13982} |              0.0999708  |           0.0121211  | {'1': 0.00993939393939394, '10': 0.05818181818181818, '20': 0.09187878787878788, '3': 0.025212121212121213, '5': 0.037575757575757575}      | vidore/colSmol-256M          | max_pooling |
-| vidore/colSmol-256M_cls_pooling    |      13613 |       0 |   1.75951e+09 | {'runtime': 13613} |              0.0919328  |           0.0108457  | {'1': 0.001212121212121212, '10': 0.013575757575757576, '20': 0.028606060606060607, '3': 0.0038787878787878783, '5': 0.006787878787878788}  | vidore/colSmol-256M          | cls_pooling |
-| vidore/colSmol-500M_max_pooling    |      14191 |       0 |   1.75951e+09 | {'runtime': 14191} |              0.111858   |           0.0121703  | {'1': 0.012363636363636365, '10': 0.07539393939393939, '20': 0.13187878787878787, '3': 0.02787878787878788, '5': 0.0416969696969697}        | vidore/colSmol-500M          | max_pooling |
-| vidore/colSmol-500M_cls_pooling    |      13337 |       0 |   1.75951e+09 | {'runtime': 13337} |              0.103416   |           0.0103713  | {'1': 0.001212121212121212, '10': 0.013575757575757576, '20': 0.02787878787878788, '3': 0.0038787878787878783, '5': 0.006787878787878788}   | vidore/colSmol-500M          | cls_pooling |
-
+| name                                        |   _runtime |   _step |    _timestamp | _wandb             |   avg_inference_latency |   avg_search_latency | hit_rates                                                                                                                                 | model_name                   | strategy             |
+|:--------------------------------------------|-----------:|--------:|--------------:|:-------------------|------------------------:|---------------------:|:------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|:---------------------|
+| vidore/colqwen2-v0.1_base                   |      13410 |       0 |   1.75873e+09 | {'runtime': 13410} |              0.0418646  |           0.751151   | {'1': 0.1355151515151515, '10': 0.888, '20': 0.9597575757575758, '3': 0.3936969696969697, '5': 0.6349090909090909}                        | vidore/colqwen2-v0.1         | base                 |
+| vidore/colqwen2-v1.0_rerank                 |      13008 |       0 |   1.75873e+09 | {'runtime': 13008} |              0.0426252  |           0.692482   | {'1': 0.003393939393939394, '10': 0.03296969696969697, '20': 0.07296969696969698, '3': 0.010666666666666666, '5': 0.015272727272727271}   | vidore/colqwen2-v1.0         | rerank               |
+| vidore/colpali-v1.3_flatten                 |       2998 |       0 |   1.75872e+09 | {'runtime': 2998}  |              0.0296511  |           0.00833224 | {'1': 0.017454545454545455, '10': 0.06448484848484848, '20': 0.09333333333333334, '3': 0.034666666666666665, '5': 0.04509090909090909}    | vidore/colpali-v1.3          | flatten              |
+| vidore/colqwen2-v0.1_rerank                 |      13512 |       0 |   1.75873e+09 | {'runtime': 13512} |              0.0418855  |           0.662372   | {'1': 0.002909090909090909, '10': 0.026424242424242423, '20': 0.05987878787878788, '3': 0.0075151515151515155, '5': 0.014545454545454544} | vidore/colqwen2-v0.1         | rerank               |
+| vidore/colqwen2-v1.0_base                   |      12933 |       0 |   1.75873e+09 | {'runtime': 12933} |              0.0416839  |           0.667898   | {'1': 0.14012121212121212, '10': 0.8846060606060606, '20': 0.9553939393939394, '3': 0.4111515151515152, '5': 0.6538181818181819}          | vidore/colqwen2-v1.0         | base                 |
+| vidore/colpali-v1.3_rerank                  |      12090 |       0 |   1.75873e+09 | {'runtime': 12090} |              0.0310783  |           0.949047   | {'1': 0.006060606060606061, '10': 0.03878787878787879, '20': 0.06933333333333333, '3': 0.014545454545454544, '5': 0.022787878787878788}   | vidore/colpali-v1.3          | rerank               |
+| vidore/colqwen2-v1.0_flatten                |       4846 |       0 |   1.75874e+09 | {'runtime': 4846}  |              0.0504031  |           0.010443   | {'1': 0.018666666666666668, '10': 0.07854545454545454, '20': 0.11903030303030304, '3': 0.041212121212121214, '5': 0.055030303030303034}   | vidore/colqwen2-v1.0         | flatten              |
+| vidore/colqwen2-v0.1_base                   |      10838 |       0 |   1.75874e+09 | {'runtime': 10838} |              0.04627    |           0.692836   | {'1': 0.13575757575757577, '10': 0.8870303030303031, '20': 0.96, '3': 0.3941818181818182, '5': 0.6351515151515151}                        | vidore/colqwen2-v0.1         | base                 |
+| vidore/colqwen2-v0.1_flatten                |       4828 |       0 |   1.75874e+09 | {'runtime': 4828}  |              0.0486335  |           0.0103028  | {'1': 0.018424242424242423, '10': 0.07224242424242425, '20': 0.10521212121212122, '3': 0.03903030303030303, '5': 0.05212121212121213}     | vidore/colqwen2-v0.1         | flatten              |
+| vidore/colpali-v1.3_base                    |      10253 |       0 |   1.75874e+09 | {'runtime': 10253} |              0.0312334  |           0.93611    | {'1': 0.11272727272727272, '10': 0.551030303030303, '20': 0.6555151515151515, '3': 0.29987878787878786, '5': 0.4232727272727273}          | vidore/colpali-v1.3          | base                 |
+| vidore/colqwen2-v0.1_flatten                |       4745 |       0 |   1.75874e+09 | {'runtime': 4745}  |              0.0472825  |           0.00990508 | {'1': 0.018424242424242423, '10': 0.07296969696969698, '20': 0.10496969696969696, '3': 0.03951515151515152, '5': 0.05236363636363636}     | vidore/colqwen2-v0.1         | flatten              |
+| vidore/colqwen2.5-v0.2_base                 |      17218 |       0 |   1.75875e+09 | {'runtime': 17218} |              0.0540356  |           0.694855   | {'1': 0.11903030303030304, '10': 0.7127272727272728, '20': 0.8366060606060606, '3': 0.336, '5': 0.5258181818181819}                       | vidore/colqwen2.5-v0.2       | base                 |
+| vidore/colqwen2.5-v0.2_rerank               |      16859 |       0 |   1.75875e+09 | {'runtime': 16859} |              0.0518383  |           0.71693    | {'1': 0.0026666666666666666, '10': 0.025212121212121213, '20': 0.060848484848484846, '3': 0.006787878787878788, '5': 0.01187878787878788} | vidore/colqwen2.5-v0.2       | rerank               |
+| vidore/colqwen2-v0.1_rerank                 |       9484 |       0 |   1.75875e+09 | {'runtime': 9484}  |              0.0445599  |           0.691609   | {'1': 0.005333333333333333, '10': 0.030545454545454542, '20': 0.064, '3': 0.010666666666666666, '5': 0.017696969696969697}                | vidore/colqwen2-v0.1         | rerank               |
+| vidore/colSmol-256M_flatten                 |       6822 |       0 |   1.75875e+09 | {'runtime': 6822}  |              0.0404544  |           0.00822329 | {'1': 0.01575757575757576, '10': 0.06836363636363636, '20': 0.10496969696969696, '3': 0.03442424242424243, '5': 0.04678787878787879}      | vidore/colSmol-256M          | flatten              |
+| vidore/colSmol-500M_base                    |      12681 |       0 |   1.75875e+09 | {'runtime': 12681} |              0.0408026  |           0.850902   | {'1': 0.136, '10': 0.8029090909090909, '20': 0.8993939393939394, '3': 0.3806060606060606, '5': 0.5975757575757575}                        | vidore/colSmol-500M          | base                 |
+| vidore/colSmol-500M_rerank                  |      13066 |       0 |   1.75876e+09 | {'runtime': 13066} |              0.0440974  |           0.927632   | {'1': 0.003636363636363637, '10': 0.028606060606060607, '20': 0.07054545454545455, '3': 0.00896969696969697, '5': 0.015030303030303033}   | vidore/colSmol-500M          | rerank               |
+| vidore/colSmol-256M_rerank                  |      12646 |       0 |   1.75876e+09 | {'runtime': 12646} |              0.0391553  |           0.853279   | {'1': 0.003393939393939394, '10': 0.02909090909090909, '20': 0.07006060606060606, '3': 0.008727272727272728, '5': 0.015515151515151517}   | vidore/colSmol-256M          | rerank               |
+| vidore/colqwen2.5-v0.2_flatten              |       6348 |       0 |   1.75876e+09 | {'runtime': 6348}  |              0.0509971  |           0.00772653 | {'1': 0.017696969696969697, '10': 0.06545454545454546, '20': 0.09284848484848485, '3': 0.03515151515151515, '5': 0.045575757575757575}    | vidore/colqwen2.5-v0.2       | flatten              |
+| vidore/colSmol-256M_base                    |      11554 |       0 |   1.75876e+09 | {'runtime': 11554} |              0.0366467  |           0.848463   | {'1': 0.1435151515151515, '10': 0.8426666666666667, '20': 0.9173333333333332, '3': 0.40824242424242424, '5': 0.6404848484848484}          | vidore/colSmol-256M          | base                 |
+| vidore/colSmol-500M_flatten                 |       6395 |       0 |   1.75876e+09 | {'runtime': 6395}  |              0.0384664  |           0.00716238 | {'1': 0.018424242424242423, '10': 0.07345454545454545, '20': 0.11393939393939394, '3': 0.03903030303030303, '5': 0.05090909090909091}     | vidore/colSmol-500M          | flatten              |
+| openai/clip-vit-base-patch32_base           |        815 |       0 |   1.75876e+09 | {'runtime': 815}   |              0.00533487 |           0.00794629 | {'1': 0.016, '10': 0.07636363636363637, '20': 0.11757575757575756, '3': 0.03296969696969697, '5': 0.04703030303030303}                    | openai/clip-vit-base-patch32 | base                 |
+| vidore/colqwen2-v0.1_max_pooling            |       8758 |       0 |   1.7595e+09  | {'runtime': 8758}  |              0.0985753  |           0.0106716  | {'1': 0.015515151515151517, '10': 0.07296969696969698, '20': 0.11248484848484848, '3': 0.032484848484848484, '5': 0.04703030303030303}    | vidore/colqwen2-v0.1         | max_pooling          |
+| vidore/colpali-v1.3_max_pooling             |       4728 |       0 |   1.75949e+09 | {'runtime': 4728}  |              0.0718573  |           0.0103053  | {'1': 0.011393939393939394, '10': 0.05672727272727273, '20': 0.08872727272727272, '3': 0.02666666666666667, '5': 0.03709090909090909}     | vidore/colpali-v1.3          | max_pooling          |
+| vidore/colqwen2-v1.0_max_pooling            |       8760 |       0 |   1.7595e+09  | {'runtime': 8760}  |              0.0981102  |           0.0106316  | {'1': 0.013575757575757576, '10': 0.06933333333333333, '20': 0.112, '3': 0.02812121212121212, '5': 0.041939393939393936}                  | vidore/colqwen2-v1.0         | max_pooling          |
+| vidore/colqwen2-v0.1_max_pooling            |       7696 |       0 |   1.7595e+09  | {'runtime': 7696}  |              0.105203   |           0.011907   | {'1': 0.016242424242424242, '10': 0.07321212121212121, '20': 0.1132121212121212, '3': 0.03442424242424243, '5': 0.04945454545454545}      | vidore/colqwen2-v0.1         | max_pooling          |
+| vidore/colSmol-256M_max_pooling             |      13982 |       0 |   1.75951e+09 | {'runtime': 13982} |              0.0999708  |           0.0121211  | {'1': 0.00993939393939394, '10': 0.05818181818181818, '20': 0.09187878787878788, '3': 0.025212121212121213, '5': 0.037575757575757575}    | vidore/colSmol-256M          | max_pooling          |
+| vidore/colSmol-500M_max_pooling             |      14191 |       0 |   1.75951e+09 | {'runtime': 14191} |              0.111858   |           0.0121703  | {'1': 0.012363636363636365, '10': 0.07539393939393939, '20': 0.13187878787878787, '3': 0.02787878787878788, '5': 0.0416969696969697}      | vidore/colSmol-500M          | max_pooling          |
+| vidore/colqwen2-v0.1_hierarchical_pooling   |       4507 |       0 |   1.7599e+09  | {'runtime': 4507}  |              0.0320023  |           0.133653   | {'1': 0.1296969696969697, '10': 0.8504242424242424, '20': 0.9343030303030304, '3': 0.37527272727272726, '5': 0.6041212121212122}          | vidore/colqwen2-v0.1         | hierarchical_pooling |
+| vidore/colpali-v1.3_hierarchical_pooling    |       5816 |       0 |   1.7599e+09  | {'runtime': 5816}  |              0.0217625  |           0.188727   | {'1': 0.10763636363636364, '10': 0.5372121212121213, '20': 0.6482424242424243, '3': 0.29333333333333333, '5': 0.4167272727272727}         | vidore/colpali-v1.3          | hierarchical_pooling |
+| vidore/colqwen2.5-v0.2_hierarchical_pooling |       8430 |       0 |   1.75991e+09 | {'runtime': 8430}  |              0.043073   |           0.141276   | {'1': 0.11103030303030303, '10': 0.6892121212121212, '20': 0.8203636363636364, '3': 0.3185454545454545, '5': 0.4989090909090909}          | vidore/colqwen2.5-v0.2       | hierarchical_pooling |
+| vidore/colqwen2-v1.0_hierarchical_pooling   |       5685 |       0 |   1.75991e+09 | {'runtime': 5685}  |              0.0343824  |           0.144062   | {'1': 0.13745454545454547, '10': 0.822060606060606, '20': 0.9156363636363636, '3': 0.3856969696969697, '5': 0.6050909090909091}           | vidore/colqwen2-v1.0         | hierarchical_pooling |
+       |
 </details>
