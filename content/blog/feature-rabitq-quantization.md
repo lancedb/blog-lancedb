@@ -79,8 +79,6 @@ This figure shows the geometric relationship between a data vector **o**, its qu
 
 With IVF_PQ you first partition vectors into inverted lists, then run PQ-based comparisons inside each list. With RaBitQ the comparison step is even cheaper: a binary dot product plus small corrections. Both approaches benefit from [reranking](/docs/reranking/) with full-precision vectors.
 
-**Figure 2:** Candidate retrieval and re-ranking pipeline. Stage 1: approximate search. Stage 2: re-rank with full vectors. TODO
-
 Both approaches use a candidate set and re-ranking to ensure quality. But because RaBitQ’s approximations are tight, you often need fewer candidates to hit the same recall.
 
 For you this means recall above 95 percent with lower latency, even on large [multimodal datasets](/blog/multimodal-lakehouse/) on our test hardware.
@@ -94,8 +92,6 @@ Always re-rank candidates with full precision vectors. IVF_PQ and RaBitQ both re
 The [RaBitQ paper](https://arxiv.org/abs/2409.09913) also introduces **extended-RaBitQ**, a generalization to multi-bit quantization. Instead of limiting each coordinate to 1 bit, extended-RaBitQ allows for 2–4 bits per dimension. This reduces error further and can outperform product quantization under the same compression budget. For background on token-based search that pairs well with these methods, see [Full‑Text Search](/docs/search/full-text-search/).
 
 ⚠️ **extended-RaBitQ is not yet available in LanceDB.** We mention it here only as research context. It shows the trajectory of this work, and the same principles that make RaBitQ efficient at 1 bit can be extended to higher precision when needed.
-
-Figure 8: Illustration of binary vs multi-bit quantization bins
 
 ## Benchmarks
 
@@ -120,7 +116,7 @@ The tests were run on a consumer-grade PC:
 | throughput       | ~350 QPS | **495 QPS** |
 | index build time | ~85s     | **~75s**    |
 
-**Figure 3:** DBpedia benchmark results (recall@10, throughput, build time)
+**Figure 2:** DBpedia benchmark results (recall@10, throughput, build time)
 ![DBpedia Benchmark](/assets/blog/feature-rabitq-quantization.md/dbpedia-bench.png)
 
 ### GIST1M (image embeddings, 960d)
@@ -131,7 +127,7 @@ The tests were run on a consumer-grade PC:
 | throughput       | ~420 QPS | **540–765 QPS** |
 | index build time | ~130s    | **~21s**        |
 
-**Figure 4:** GIST1M benchmark results (recall@10, throughput, build time)
+**Figure 3:** GIST1M benchmark results (recall@10, throughput, build time)
 ![GIST1M Benchmark](/assets/blog/feature-rabitq-quantization.md/gist-bench.png)
 
 {{< admonition >}}
