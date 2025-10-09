@@ -65,11 +65,11 @@ During indexing, for each data vector **v**, we compute the residual around a ce
 
 At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
 
-Figure 1a: 2D illustration of mapping a vector to the nearest unit‑sphere hypercube vertex (RabitQ overview)
+**Figure 1a:** 2D illustration of mapping a vector to the nearest unit‑sphere hypercube vertex (RabitQ overview)
 ![RabitQ 2D mapping](/assets/blog/feature-rabitq-quantization.md/plot_rq.svg)
 
-**Figure 1:** Geometry of query and data vectors in RaBitQ
-![figure1](/assets/blog/feature-rabitq-quantization.md/figure1.png)
+**Figure 1b:** Geometry of query and data vectors in RaBitQ
+![figure1b](/assets/blog/feature-rabitq-quantization.md/figure1.png)
 
 This figure shows the geometric relationship between a data vector **o**, its quantized form **o_bar**, and a query vector **q**. The auxiliary vector **e1** lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of **o_bar** onto **e1** is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
 
