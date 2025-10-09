@@ -7,11 +7,11 @@ categories: ["Engineering"]
 image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
 meta_image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
 description: "Introducing RaBitQ quantization in LanceDB for higher compression, faster indexing, and better recall on high‑dimensional embeddings."
-author: David Myriel
+author: David Myriel, Yang Cen
 author_avatar: "/assets/authors/david-myriel.jpg"
-author_bio: "Writer."
+author_bio: "Writer, Software Engineer @ LanceDB"
 author_twitter: "davidmyriel"
-author_github: "davidmyriel"
+author_github: "davidmyriel, BubbleCal"
 author_linkedin: "davidmyriel"
 ---
 
@@ -27,7 +27,7 @@ Today we are adding **RaBitQ quantization** to LanceDB. You now have a choice. `
 
 High-dimensional vectors behave in ways that seem strange if you are used to 2D or 3D. In high dimensions almost every coordinate of a unit vector is close to zero. This is the **concentration of measure** phenomenon often discussed in [retrieval systems](/docs/search/optimize-queries/).
 
-RaBitQ takes advantage of this. It stores only the binary "sign pattern" of each normalized vector and relies on the fact that the error introduced is bounded. The RaBitQ paper proves the estimation error is **O(1/√D)**, which is asymptotically optimal. In practice, the more dimensions your embeddings have, the more RaBitQ gives you for free.
+RaBitQ takes advantage of this. It stores only the binary "sign pattern" of each normalized vector and relies on the fact that the error introduced is bounded. The RaBitQ paper proves the estimation error is **O(1/√D)** (decreases proportionally to the inverse square root of dimensions), which is asymptotically optimal. In practice, the more dimensions your embeddings have, the more RaBitQ gives you for free.
 
 {{< admonition >}}
 RaBitQ is most effective with embeddings of 512, 768, or 1024 dimensions. IVF_PQ often struggles more as dimensionality grows, making RaBitQ a strong complement.
@@ -44,20 +44,26 @@ Two small corrective factors are also stored:
 
 At query time your input—whether text, image, audio, or video—is transformed in the same way. Comparisons become fast binary dot products, and the corrective factors restore fidelity.
 
-Formally, RaBitQ maps a vector \(v\) to a binary vector \(v_{qb}\) and a hypercube vertex \(v_h\) on the unit sphere:
+Formally, RaBitQ maps a vector **v** to a binary vector **v_qb** and a hypercube vertex **v_h** on the unit sphere:
 
-$$
-v_h[i]=\begin{cases}\dfrac{1}{\sqrt{D}}, & \text{if } v_{qb}[i] = 1, \\
--\dfrac{1}{\sqrt{D}}, & \text{if } v_{qb}[i] = 0.\end{cases}
-$$
+```
+v_h[i] = +1/√D  if v_qb[i] = 1
+v_h[i] = -1/√D  if v_qb[i] = 0
+```
 
-To remove bias, RaBitQ samples a random orthogonal matrix \(P\) and sets the final quantized vector to
+where D is the number of dimensions. Each component is either a positive or negative value scaled by the square root of dimensions.
 
-$$
-v_q = P\, v_h.
-$$
+To remove bias, RaBitQ samples a random orthogonal matrix **P** and sets the final quantized vector to:
 
-During indexing, for each data vector \(v\), we compute the residual around a centroid \(c\), normalize it, map it to bits via the inverse rotation \(P^{-1}\), and store two corrective scalars alongside the bits: the centroid distance \(d_c = \|v-c\|\) and the inner product with the quantized direction \(d_s = \langle v_q, v_n \rangle\). At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
+```
+v_q = P × v_h
+```
+
+During indexing, for each data vector **v**, we compute the residual around a centroid **c**, normalize it, map it to bits via the inverse rotation **P⁻¹**, and store two corrective scalars alongside the bits:
+- **Centroid distance**: `d_c = ||v - c||` (Euclidean distance from vector to centroid)
+- **Inner product**: `d_s = ⟨v_q, v_n⟩` (dot product between quantized and normalized vectors)
+
+At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
 
 Figure 1a: 2D illustration of mapping a vector to the nearest unit‑sphere hypercube vertex (RabitQ overview)
 ![RabitQ 2D mapping](/assets/blog/feature-rabitq-quantization.md/plot_rq.svg)
@@ -65,7 +71,7 @@ Figure 1a: 2D illustration of mapping a vector to the nearest unit‑sphere hype
 **Figure 1:** Geometry of query and data vectors in RaBitQ
 ![figure1](/assets/blog/feature-rabitq-quantization.md/figure1.png)
 
-This figure shows the geometric relationship between a data vector o, its quantized form o̅, and a query vector q. The auxiliary vector e₁ lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of o̅ onto e₁ is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
+This figure shows the geometric relationship between a data vector **o**, its quantized form **o_bar**, and a query vector **q**. The auxiliary vector **e1** lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of **o_bar** onto **e1** is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
 
 **Difference with IVF_PQ**: PQ requires training a codebook and splitting vectors into subvectors. RaBitQ avoids that entirely. Indexing is faster, maintenance is simpler, and results are more stable when you update your dataset.
 
