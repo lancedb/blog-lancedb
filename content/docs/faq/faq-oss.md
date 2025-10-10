@@ -37,11 +37,11 @@ The Lance data format that powers our storage system also provides true zero-cop
 
 LanceDB and its underlying data format, Lance, are built to scale to really large amounts of data (hundreds of terabytes). We are currently working with customers who regularly perform operations on 200M+ vectors, and we're fast approaching billion scale and beyond, which are well-handled by our disk-based indexes, without you having to break the bank.
 
-### Do I need to build an ANN index to run vector search?
+### Do I need to build a vector index to run vector search?
 
-No. LanceDB is blazing fast (due to its disk-based index) for even brute force kNN search, within reason. In our benchmarks, computing 100K pairs of 1000-dimension vectors takes less than 20ms. For small datasets of ~100K records or applications that can accept ~100ms latency, an ANN index is usually not necessary.
+No. LanceDB is blazing fast (due to its disk-based index) for even brute force kNN search, within reason. In our benchmarks, computing 100K pairs of 1000-dimension vectors takes less than 20ms. For small datasets of ~100K records or applications that can accept ~100ms latency, a vector index is usually not necessary.
 
-For large-scale (>1M) or higher dimension vectors, it is beneficial to create an ANN index. See the [ANN indexes](ann_indexes.md) section for more details.
+For large-scale (>1M) or higher dimension vectors, it is beneficial to create a vector index. See the [Vector Indexes](/docs/indexing/vector-index/) section for more details.
 
 ### How can I speed up data inserts?
 

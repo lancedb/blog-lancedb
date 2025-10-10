@@ -643,8 +643,8 @@ const multiMatchBoostingResults = await table.query()
 **Recommendations for optimal FTS performance:**
 
 - Create full-text search indices on text columns that will be frequently searched
-- For hybrid search combining text and vectors, see our [hybrid search guide](./hybrid-search.md)
-- For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
+- For hybrid search combining text and vectors, see our [hybrid search guide](/docs/search/hybrid-search/)
+- For performance benchmarks, check our [benchmark results](/docs/enterprise/benchmark/)
 - For complex queries, use SQL to combine FTS with other filter conditions
 {{< /admonition >}}
 

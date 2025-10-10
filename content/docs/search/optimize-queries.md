@@ -7,9 +7,9 @@ aliases: ["/docs/guides/optimize-queries/", "/docs/guides/optimize-queries"]
 
 LanceDB provides two powerful tools for query analysis and optimization: `explain_plan` and `analyze_plan`. Let's take a better look at how they work:
 
-| Method | Purpose | Description |
-|:-------|:--------|:------------|
-| `explain_plan` | Query Analysis | Print the resolved query plan to understand how the query will be executed. Helpful for identifying slow queries or unexpected query results. |
+| Method         | Purpose            | Description                                                                                                                                                                                              |
+| :------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `explain_plan` | Query Analysis     | Print the resolved query plan to understand how the query will be executed. Helpful for identifying slow queries or unexpected query results.                                                            |
 | `analyze_plan` | Performance Tuning | Execute the query and return a physical execution plan annotated with runtime metrics including execution time, number of rows processed, and I/O stats. Essential for performance tuning and debugging. |
 
 ## Query Analysis Tools
@@ -349,12 +349,12 @@ RemoteTake:
 
 #### Index Type Selection
 
-| Data Type | Recommended Index | Use Case |
-|-----------|------------------|----------|
-| Vector | IVF_PQ/IVF_HNSW_SQ | Approximate nearest neighbor search |
-| Scalar | B-Tree | Range queries and sorting |
-| Categorical | Bitmap | Multi-value filters and set operations |
-| `List` | Label_list | Multi-label classification and filtering |
+| Data Type   | Recommended Index  | Use Case                                 |
+| ----------- | ------------------ | ---------------------------------------- |
+| Vector      | IVF_PQ/IVF_HNSW_SQ | Approximate nearest neighbor search      |
+| Scalar      | B-Tree             | Range queries and sorting                |
+| Categorical | Bitmap             | Multi-value filters and set operations   |
+| `List`      | Label_list         | Multi-label classification and filtering |
 
 !!! info "Index Coverage Monitoring"
     Use `table.index_stats()` to monitor index coverage. 
@@ -364,12 +364,12 @@ RemoteTake:
 
 #### Common Patterns and Fixes
 
-| Plan Pattern | Optimization |
-|--------------|--------------|
-| LanceScan with high _bytes_read_ or _iops_ | Add missing index |
-|  | Use `select()` to limit returned columns |
-|  | Check whether the dataset has been compacted |
-| Multiple sequential filters | Reorder filter conditions |
+| Plan Pattern                               | Optimization                                 |
+| ------------------------------------------ | -------------------------------------------- |
+| LanceScan with high _bytes_read_ or _iops_ | Add missing index                            |
+|                                            | Use `select()` to limit returned columns     |
+|                                            | Check whether the dataset has been compacted |
+| Multiple sequential filters                | Reorder filter conditions                    |
 
 !!! note "Regular Performance Analysis"
     Regularly analyze your query plans to identify and address performance bottlenecks. 
@@ -379,8 +379,8 @@ RemoteTake:
 
 For vector search performance:
 
-- Create ANN index on your vector column(s) as described in the [index guide](../guides/build-index.md#vector-index)
-- If you often filter by metadata, create [scalar indices](../guides/build-index.md#scalar-index) on those columns
+- Create ANN index on your vector column(s) as described in the [index guide](/docs/guides/build-index/#vector-index)
+- If you often filter by metadata, create [scalar indices](/docs/guides/build-index/#scalar-index) on those columns
 
 
 

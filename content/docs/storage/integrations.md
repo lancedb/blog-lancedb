@@ -5,7 +5,7 @@ description: Master LanceDB's storage capabilities for efficient data management
 aliases: ["/docs/concepts/storage/integrations/", "/docs/concepts/storage/integrations"]
 ---
 
-When using LanceDB OSS, you can choose where to store your data. The tradeoffs between different storage options are discussed in the [storage concepts guide](../concepts/storage.md). This guide shows how to configure LanceDB to use different storage options.
+When using LanceDB OSS, you can choose where to store your data. The tradeoffs between different storage options are discussed in the [storage concepts guide](/docs/concepts/storage/). This guide shows how to configure LanceDB to use different storage options.
 
 ## Object Stores
 
@@ -106,16 +106,16 @@ There are several options that can be set for all object stores, mostly related 
 
 <!-- from here: https://docs.rs/object_store/latest/object_store/enum.ClientConfigKey.html -->
 
-| Key                        | Description                                                                                      |
-|:---------------------------|:-------------------------------------------------------------------------------------------------|
-| `allow_http`               | Allow non-TLS, i.e. non-HTTPS connections. Default: `False`.                                      |
-| `allow_invalid_certificates`| Skip certificate validation on HTTPS connections. Default: `False`.                               |
-| `connect_timeout`          | Timeout for only the connect phase of a Client. Default: `5s`.                                    |
-| `timeout`                  | Timeout for the entire request, from connection until the response body has finished. Default: `30s`. |
-| `user_agent`               | User agent string to use in requests.                                                             |
-| `proxy_url`                | URL of a proxy server to use for requests. Default: `None`.                                       |
-| `proxy_ca_certificate`     | PEM-formatted CA certificate for proxy connections.                                                |
-| `proxy_excludes`           | List of hosts that bypass the proxy. This is a comma-separated list of domains and IP masks. Any subdomain of the provided domain will be bypassed. For example, `example.com, 192.168.1.0/24` would bypass `https://api.example.com`, `https://www.example.com`, and any IP in the range `192.168.1.0/24`. |
+| Key                          | Description                                                                                                                                                                                                                                                                                                 |
+| :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allow_http`                 | Allow non-TLS, i.e. non-HTTPS connections. Default: `False`.                                                                                                                                                                                                                                                |
+| `allow_invalid_certificates` | Skip certificate validation on HTTPS connections. Default: `False`.                                                                                                                                                                                                                                         |
+| `connect_timeout`            | Timeout for only the connect phase of a Client. Default: `5s`.                                                                                                                                                                                                                                              |
+| `timeout`                    | Timeout for the entire request, from connection until the response body has finished. Default: `30s`.                                                                                                                                                                                                       |
+| `user_agent`                 | User agent string to use in requests.                                                                                                                                                                                                                                                                       |
+| `proxy_url`                  | URL of a proxy server to use for requests. Default: `None`.                                                                                                                                                                                                                                                 |
+| `proxy_ca_certificate`       | PEM-formatted CA certificate for proxy connections.                                                                                                                                                                                                                                                         |
+| `proxy_excludes`             | List of hosts that bypass the proxy. This is a comma-separated list of domains and IP masks. Any subdomain of the provided domain will be bypassed. For example, `example.com, 192.168.1.0/24` would bypass `https://api.example.com`, `https://www.example.com`, and any IP in the range `192.168.1.0/24`. |
 
 ## Cloud Storage Providers
 
@@ -156,18 +156,18 @@ Alternatively, if you are using AWS SSO, you can use the `AWS_PROFILE` and `AWS_
 
 The following keys can be used as both environment variables or keys in the `storage_options` parameter:
 
-| Key                                | Description                                                                                          |
-|:-----------------------------------|:----------------------------------------------------------------------------------------------------|
-| `aws_region` / `region`             | The AWS region the bucket is in. This can be automatically detected when using AWS S3, but must be specified for S3-compatible stores. |
-| `aws_access_key_id` / `access_key_id` | The AWS access key ID to use.                                                                       |
-| `aws_secret_access_key` / `secret_access_key` | The AWS secret access key to use.                                                               |
-| `aws_session_token` / `session_token` | The AWS session token to use.                                                                     |
-| `aws_endpoint` / `endpoint`         | The endpoint to use for S3-compatible stores.                                                       |
+| Key                                                                 | Description                                                                                                                                          |
+| :------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aws_region` / `region`                                             | The AWS region the bucket is in. This can be automatically detected when using AWS S3, but must be specified for S3-compatible stores.               |
+| `aws_access_key_id` / `access_key_id`                               | The AWS access key ID to use.                                                                                                                        |
+| `aws_secret_access_key` / `secret_access_key`                       | The AWS secret access key to use.                                                                                                                    |
+| `aws_session_token` / `session_token`                               | The AWS session token to use.                                                                                                                        |
+| `aws_endpoint` / `endpoint`                                         | The endpoint to use for S3-compatible stores.                                                                                                        |
 | `aws_virtual_hosted_style_request` / `virtual_hosted_style_request` | Whether to use virtual hosted-style requests, where the bucket name is part of the endpoint. Meant to be used with `aws_endpoint`. Default: `False`. |
-| `aws_s3_express` / `s3_express`     | Whether to use S3 Express One Zone endpoints. Default: `False`. See more details below.             |
-| `aws_server_side_encryption`        | The server-side encryption algorithm to use. Must be one of `"AES256"`, `"aws:kms"`, or `"aws:kms:dsse"`. Default: `None`. |
-| `aws_sse_kms_key_id`                | The KMS key ID to use for server-side encryption. If set, `aws_server_side_encryption` must be `"aws:kms"` or `"aws:kms:dsse"`. |
-| `aws_sse_bucket_key_enabled`        | Whether to use bucket keys for server-side encryption.                                               |
+| `aws_s3_express` / `s3_express`                                     | Whether to use S3 Express One Zone endpoints. Default: `False`. See more details below.                                                              |
+| `aws_server_side_encryption`                                        | The server-side encryption algorithm to use. Must be one of `"AES256"`, `"aws:kms"`, or `"aws:kms:dsse"`. Default: `None`.                           |
+| `aws_sse_kms_key_id`                                                | The KMS key ID to use for server-side encryption. If set, `aws_server_side_encryption` must be `"aws:kms"` or `"aws:kms:dsse"`.                      |
+| `aws_sse_bucket_key_enabled`                                        | Whether to use bucket keys for server-side encryption.                                                                                               |
 
 {{< admonition tip "Automatic cleanup for failed writes" >}}
 LanceDB uses [multi-part uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html) when writing data to S3 in order to maximize write speed. LanceDB will abort these uploads when it shuts down gracefully, such as when cancelled by keyboard interrupt. However, in the rare case that LanceDB crashes, it is possible that some data will be left lingering in your account. To cleanup this data, we recommend (as AWS themselves do) that you setup a lifecycle rule to delete in-progress uploads after 7 days. See the AWS guide:
@@ -436,11 +436,11 @@ By default, GCS uses HTTP/1 for communication, as opposed to HTTP/2. This improv
 The following keys can be used as both environment variables or keys in the `storage_options` parameter:
 <!-- source: https://docs.rs/object_store/latest/object_store/gcp/enum.GoogleConfigKey.html -->
 
-| Key                                   | Description                                  |
-|:--------------------------------------|:---------------------------------------------|
-| ``google_service_account`` / `service_account` | Path to the service account JSON file.       |
-| ``google_service_account_key``        | The serialized service account key.          |
-| ``google_application_credentials``    | Path to the application credentials.         |
+| Key                                            | Description                            |
+| :--------------------------------------------- | :------------------------------------- |
+| ``google_service_account`` / `service_account` | Path to the service account JSON file. |
+| ``google_service_account_key``                 | The serialized service account key.    |
+| ``google_application_credentials``             | Path to the application credentials.   |
 
 ### Azure Blob Storage
 
@@ -475,24 +475,24 @@ These keys can be used as both environment variables or keys in the `storage_opt
 
 <!-- source: https://docs.rs/object_store/latest/object_store/azure/enum.AzureConfigKey.html -->
 
-| Key                                   | Description                                                                                      |
-|:--------------------------------------|:-------------------------------------------------------------------------------------------------|
-| ``azure_storage_account_name``        | The name of the azure storage account.                                                           |
-| ``azure_storage_account_key``         | The serialized service account key.                                                              |
-| ``azure_client_id``                   | Service principal client id for authorizing requests.                                            |
-| ``azure_client_secret``               | Service principal client secret for authorizing requests.                                        |
-| ``azure_tenant_id``                   | Tenant id used in oauth flows.                                                                   |
-| ``azure_storage_sas_key``             | Shared access signature. The signature is expected to be percent-encoded, much like they are provided in the azure storage explorer or azure portal. |
-| ``azure_storage_token``               | Bearer token.                                                                                    |
-| ``azure_storage_use_emulator``        | Use object store with azurite storage emulator.                                                  |
-| ``azure_endpoint``                    | Override the endpoint used to communicate with blob storage.                                      |
-| ``azure_use_fabric_endpoint``         | Use object store with url scheme account.dfs.fabric.microsoft.com.                               |
-| ``azure_msi_endpoint``                | Endpoint to request a imds managed identity token.                                               |
-| ``azure_object_id``                   | Object id for use with managed identity authentication.                                          |
-| ``azure_msi_resource_id``             | Msi resource id for use with managed identity authentication.                                    |
-| ``azure_federated_token_file``        | File containing token for Azure AD workload identity federation.                                 |
-| ``azure_use_azure_cli``               | Use azure cli for acquiring access token.                                                        |
-| ``azure_disable_tagging``             | Disables tagging objects. This can be desirable if not supported by the backing store.           |
+| Key                            | Description                                                                                                                                          |
+| :----------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ``azure_storage_account_name`` | The name of the azure storage account.                                                                                                               |
+| ``azure_storage_account_key``  | The serialized service account key.                                                                                                                  |
+| ``azure_client_id``            | Service principal client id for authorizing requests.                                                                                                |
+| ``azure_client_secret``        | Service principal client secret for authorizing requests.                                                                                            |
+| ``azure_tenant_id``            | Tenant id used in oauth flows.                                                                                                                       |
+| ``azure_storage_sas_key``      | Shared access signature. The signature is expected to be percent-encoded, much like they are provided in the azure storage explorer or azure portal. |
+| ``azure_storage_token``        | Bearer token.                                                                                                                                        |
+| ``azure_storage_use_emulator`` | Use object store with azurite storage emulator.                                                                                                      |
+| ``azure_endpoint``             | Override the endpoint used to communicate with blob storage.                                                                                         |
+| ``azure_use_fabric_endpoint``  | Use object store with url scheme account.dfs.fabric.microsoft.com.                                                                                   |
+| ``azure_msi_endpoint``         | Endpoint to request a imds managed identity token.                                                                                                   |
+| ``azure_object_id``            | Object id for use with managed identity authentication.                                                                                              |
+| ``azure_msi_resource_id``      | Msi resource id for use with managed identity authentication.                                                                                        |
+| ``azure_federated_token_file`` | File containing token for Azure AD workload identity federation.                                                                                     |
+| ``azure_use_azure_cli``        | Use azure cli for acquiring access token.                                                                                                            |
+| ``azure_disable_tagging``      | Disables tagging objects. This can be desirable if not supported by the backing store.                                                               |
 
 <!-- TODO: demonstrate how to configure networked file systems for optimal performance -->
 

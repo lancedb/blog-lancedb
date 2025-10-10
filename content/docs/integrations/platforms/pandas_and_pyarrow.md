@@ -41,7 +41,7 @@ We can load a Pandas `DataFrame` to LanceDB directly.
     ```
 
 Similar to the [`pyarrow.write_dataset()`](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.write_dataset.html) method, LanceDB's
-[`db.create_table()`](python.md/#lancedb.db.DBConnection.create_table) accepts data in a variety of forms.
+[`db.create_table()`](/docs/reference/python/#lancedb.db.DBConnection.create_table) accepts data in a variety of forms.
 
 If you have a dataset that is larger than memory, you can create a table with `Iterator[pyarrow.RecordBatch]` to lazily load the data:
 
@@ -63,7 +63,7 @@ If you have a dataset that is larger than memory, you can create a table with `I
     ```
 
 You will find detailed instructions of creating a LanceDB dataset in
-[Getting Started](../basic.md#quick-start) and [API](python.md/#lancedb.db.DBConnection.create_table)
+[Getting Started](/docs/quickstart/basic-usage/#quick-start) and [API](/docs/reference/python/#lancedb.db.DBConnection.create_table)
 sections.
 
 ## Vector search

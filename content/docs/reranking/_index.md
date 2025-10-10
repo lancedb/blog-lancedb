@@ -30,11 +30,11 @@ reranked_results = table.search(query).limit(10).rerank(reranker=reranker).to_df
 
 LanceDB supports several rerankers out of the box. Here are a few examples:
 
-| Reranker | Default Model |
-|---|---|
-| `CohereReranker` | `rerank-english-v2.0` |
+| Reranker               | Default Model                          |
+| ---------------------- | -------------------------------------- |
+| `CohereReranker`       | `rerank-english-v2.0`                  |
 | `CrossEncoderReranker` | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
-| `ColbertReranker` | `colbert-ir/colbertv2.0` |
+| `ColbertReranker`      | `colbert-ir/colbertv2.0`               |
 
 You can find more details about these and other rerankers in the [**Integrations**](../../integrations/) section.
 
@@ -58,4 +58,4 @@ reranked = reranker.rerank_multivector([res1, res2, res3],  deduplicate=True)
 
 ## Creating Custom Rerankers
 
-LanceDB also you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](./custom_reranker.md) section.
+LanceDB also you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](/docs/reranking/custom_reranker/) section.
