@@ -15,7 +15,7 @@ We can demonstrate this by first installing `duckdb` and `lancedb`.
 pip install duckdb lancedb
 ```
 
-We will re-use the dataset [created previously](./pandas_and_pyarrow.md):
+We will re-use the dataset [created previously](/docs/integrations/platforms/pandas_and_pyarrow/):
 
 ```python
 import lancedb

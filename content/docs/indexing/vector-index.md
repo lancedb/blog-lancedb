@@ -121,7 +121,7 @@ The above query will perform a search on the table `tbl` using the given query v
 
 * `limit`: The number of results to return
 * `nprobes`: The number of probes determines the distribution of vector space. While a higher number enhances search accuracy, it also results in slower performance. Typically, setting `nprobes` to cover 5–10% of the dataset proves effective in achieving high recall with minimal latency.
-* `refine_factor`: Refine the results by reading extra elements and re-ranking them in memory. A higher number makes the search more accurate but also slower (see the [FAQ](../faq.md#do-i-need-to-set-a-refine-factor-when-using-an-index) page for more details on this).
+* `refine_factor`: Refine the results by reading extra elements and re-ranking them in memory. A higher number makes the search more accurate but also slower (see the [FAQ](/docs/faq/#do-i-need-to-set-a-refine-factor-when-using-an-index) page for more details on this).
 * `to_pandas()`: Convert the results to a pandas DataFrame
 
 

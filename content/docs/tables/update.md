@@ -18,7 +18,7 @@ These operations allow you to keep your table data current and maintain it exact
 These examples demonstrate common usage patterns. For complete API details and advanced options, refer to our [Python](/docs/api/python/python/) and [TypeScript](/docs/js/globals/) SDK documentation.
 {{< /admonition >}}
 
-[^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](../../migration.md) for more information.
+[^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](/docs/migration/) for more information.
 
 ## Connecting to LanceDB
 
@@ -311,14 +311,14 @@ This can be used to update zero to all rows depending on how many rows match the
 Updating nested columns is not yet supported.
 {{< /admonition >}}
 
-| Parameter   | Type | Description |
-|---|---|---|
-| `where` | `str` | The SQL where clause to use when updating rows. For example, `'x = 2'` or `'x IN (1, 2, 3)'`. The filter must not be empty, or it will error. |
-| `values` | `dict` | The values to update. The keys are the column names and the values are the values to set. |
+| Parameter    | Type   | Description                                                                                                                                                                       |
+| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `where`      | `str`  | The SQL where clause to use when updating rows. For example, `'x = 2'` or `'x IN (1, 2, 3)'`. The filter must not be empty, or it will error.                                     |
+| `values`     | `dict` | The values to update. The keys are the column names and the values are the values to set.                                                                                         |
 | `values_sql` | `dict` | The values to update. The keys are the column names and the values are the SQL expressions to set. For example, `{'x': 'x + 1'}` will increment the value of the `x` column by 1. |
 
 {{< admonition info "SQL syntax" >}}
-See [SQL filters](../sql.md) for more information on the supported SQL syntax.
+See [SQL filters](/docs/tables/sql/) for more information on the supported SQL syntax.
 {{< /admonition >}}
 
 {{< code language="python" >}}
@@ -420,7 +420,7 @@ The merge insert command is a flexible API that can be used to perform `upsert`,
 {{< admonition tip "Use scalar indexes to speed up merge insert" >}}
 The merge insert command performs a join between the input data and the target table `on` the key you provide. This requires scanning that entire column, which can be expensive for large tables. To speed up this operation, create a scalar index on the join column, which will allow LanceDB to find matches without scanning the whole table.
 
-Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
+Read more about scalar indices in the [Scalar Index](/docs/indexing/scalar-index/) guide.
 {{< /admonition >}}
 
 {{< admonition tip "HTTP 400 on Merge Insert" >}}

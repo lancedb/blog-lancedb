@@ -82,7 +82,7 @@ Data is converted to Arrow before being written to disk. For maximum control ove
 {{< /admonition >}}
 
 {{< admonition info "Vector Column Type" >}}
-The **`vector`** column needs to be a [Vector](../python/pydantic.md#vector-field) (defined as [pyarrow.FixedSizeList](https://arrow.apache.org/docs/python/generated/pyarrow.list_.html)) type.
+The **`vector`** column needs to be a [Vector](/docs/python/pydantic/#vector-field) (defined as [pyarrow.FixedSizeList](https://arrow.apache.org/docs/python/generated/pyarrow.list_.html)) type.
 {{< /admonition >}}
 
 #### From a custom schema

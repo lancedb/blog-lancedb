@@ -139,7 +139,7 @@ This can delete any number of rows that match the filter.
 The deletion predicate is a SQL expression that supports the same expressions
 as the `where()` clause (`only_if()` in Rust) on a search. They can be as
 simple or complex as needed. To see what expressions are supported, see the
-[SQL filters](sql.md) section.
+[SQL filters](/docs/search/sql-queries/) section.
 
 ## 4. Vector Search
 

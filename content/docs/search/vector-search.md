@@ -20,12 +20,12 @@ Distance metrics determine how LanceDB compares vectors to find similar matches.
 
 The right metric improves both search accuracy and query performance. Currently, LanceDB supports the following metrics:
 
-| Metric | Description | Default |
-|:-------|:------------|:--------|
-| `l2` | [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) - measures the straight-line distance between two points in vector space. Calculated as the square root of the sum of squared differences between corresponding vector components. | ✓ |
-| `cosine` | [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) - measures the cosine of the angle between two vectors, ranging from -1 to 1. Computed as the dot product divided by the product of vector magnitudes. Use for unnormalized vectors. | x |
-| `dot` | [Dot product](https://en.wikipedia.org/wiki/Dot_product) - calculates the sum of products of corresponding vector components. Provides raw similarity scores without normalization, sensitive to vector magnitudes. Use for normalized vectors for best performance. | x |
-| `hamming` | [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) - counts the number of positions where corresponding bits differ between binary vectors. Only applicable to binary vectors stored as packed uint8 arrays. | x |
+| Metric    | Description                                                                                                                                                                                                                                                          | Default |
+| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| `l2`      | [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) - measures the straight-line distance between two points in vector space. Calculated as the square root of the sum of squared differences between corresponding vector components.            | ✓       |
+| `cosine`  | [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) - measures the cosine of the angle between two vectors, ranging from -1 to 1. Computed as the dot product divided by the product of vector magnitudes. Use for unnormalized vectors.            | x       |
+| `dot`     | [Dot product](https://en.wikipedia.org/wiki/Dot_product) - calculates the sum of products of corresponding vector components. Provides raw similarity scores without normalization, sensitive to vector magnitudes. Use for normalized vectors for best performance. | x       |
+| `hamming` | [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) - counts the number of positions where corresponding bits differ between binary vectors. Only applicable to binary vectors stored as packed uint8 arrays.                                         | x       |
 
 ### Configure Distance Metric
 
@@ -163,7 +163,7 @@ The `prefilter=False` parameter tells LanceDB to apply the filter after vector s
 
 In the end, you receive a pandas DataFrame with the best matches that also meet your metadata requirements.
 
-**Read more:** [Filtering](../reference/postfiltering.md)
+**Read more:** [Filtering](/docs/reference/postfiltering/)
 
 ## Multivector Search 
 
@@ -178,7 +178,7 @@ results_multi = tbl.search(query_multi).limit(5).to_pandas()
 
 Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
 
-**Read more:** [Multivector Search](../reference/multivector-search.md)
+**Read more:** [Multivector Search](/docs/reference/multivector-search/)
 
 ## Advanced Search Scenarios
 

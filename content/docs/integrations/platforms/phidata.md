@@ -14,7 +14,7 @@ weight: 6
 
 Memory & knowledge make LLMs smarter while tools make them autonomous.
 
-LanceDB is a vector database and its integration into phidata makes it easy for us to provide a **knowledge base** to LLMs. It enables us to store information as [embeddings](../embeddings/understanding_embeddings.md) and search for the **results** similar to ours using **query**. 
+LanceDB is a vector database and its integration into phidata makes it easy for us to provide a **knowledge base** to LLMs. It enables us to store information as [embeddings](/docs/embeddings/understanding-embeddings/) and search for the **results** similar to ours using **query**. 
 
 ??? Question "What is Knowledge Base?"
     Knowledge Base is a database of information that the Assistant can search to improve its responses. This information is stored in a vector database and provides LLMs with business context, which makes them respond in a context-aware manner.

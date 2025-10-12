@@ -19,7 +19,7 @@ Let's get started and see how to use **LanceDB** to create a **similarity index*
 
 ## Overview 
 
-**[Embeddings](../embeddings/understanding_embeddings.md)** are foundational to all of the **vector search** features. In FiftyOne, embeddings are managed by the [**FiftyOne Brain**](https://docs.voxel51.com/user_guide/brain.html) that provides powerful machine learning techniques designed to transform how you curate your data from an art into a measurable science. 
+**[Embeddings](/docs/embedding/)** are foundational to all of the **vector search** features. In FiftyOne, embeddings are managed by the [**FiftyOne Brain**](https://docs.voxel51.com/user_guide/brain.html) that provides powerful machine learning techniques designed to transform how you curate your data from an art into a measurable science. 
 
 !!!question "Have you ever wanted to find the images most similar to an image in your dataset?"
     The **FiftyOne Brain** makes computing **visual similarity** really easy. You can compute the similarity of samples in your dataset using an embedding model and store the results in the **brain key**. 
@@ -200,11 +200,11 @@ print(fob.brain_config)
 
 The LanceDB backend supports query parameters that can be used to customize your similarity queries. These parameters include:
 
-| Name| Purpose | Default |
-|:----|:--------|:--------|
-|**table_name**|The name of the LanceDB table to use. If none is provided, a new table will be created|`None`|
-|**metric**|The embedding distance metric to use when creating a new table. The supported values are ("cosine", "euclidean")|`"cosine"`|
-|**uri**| The database URI to use. In this Database URI, tables will be created. |`"/tmp/lancedb"`|
+| Name           | Purpose                                                                                                          | Default          |
+| :------------- | :--------------------------------------------------------------------------------------------------------------- | :--------------- |
+| **table_name** | The name of the LanceDB table to use. If none is provided, a new table will be created                           | `None`           |
+| **metric**     | The embedding distance metric to use when creating a new table. The supported values are ("cosine", "euclidean") | `"cosine"`       |
+| **uri**        | The database URI to use. In this Database URI, tables will be created.                                           | `"/tmp/lancedb"` |
 
 There are two ways to specify/customize the parameters:
 
