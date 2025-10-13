@@ -26,8 +26,17 @@
 <meta property="twitter:url" content="{{ .Permalink }}" />
 <meta property="twitter:title" content="{{ .Params.meta.og_title | default $title }}" />
 <meta property="twitter:description" content="{{ $description }}" />
+{{ $twitterImage := .Params.meta.og_twitter_image | default (.Params.image | default site.Params.meta_twitter_image) | absURL }}
+{{ if not $twitterImage }}
+  {{ $content := .Content }}
+  {{ $re := `(?i)<img[^>]+src="([^">]+)"` }}
+  {{ $match := findRE $re $content 1 }}
+  {{ if gt (len $match) 0 }}
+    {{ $twitterImage = (index (findRESubmatch $re $content 1) 0 1) | absURL }}
+  {{ end }}
+{{ end }}
 
-{{ with .Params.meta.og_twitter_image }}
+{{ with $twitterImage }}
   <meta property="twitter:image" content="{{ . | absURL }}" />
   <meta property="twitter:image:src" content="{{ . | absURL }}" />
 {{ end }}
