@@ -151,6 +151,8 @@ AI-generated visuals are everywhere, but the thrill of discovery still lives in 
 
 ## Tools used
 
+TODO - add logoss and links
+
 - **LanceDB** – Core multimodal store and retrieval engine: vectors, captions, mood keywords, and original JPEGs share one table, with hybrid search and custom rerankers stacking on top.
 - **Google Gemini** – Multimodal model powering poetic rewrites, intent classification, and on-demand captioning to keep text and image evidence aligned.
 - **Modal Labs** – Managed the backend services and batch pipelines so we could ship LanceDB UDF jobs without building new infrastructure.
@@ -158,4 +160,4 @@ AI-generated visuals are everywhere, but the thrill of discovery still lives in 
 
 ## Credits
 
-SemanticDotArt was created by Bryan Bischof, Ayush Chaurasia, and Chang She. Kelly Chong and Pavitar Saini shaped the UI, and Adam Conway supported the website build. The backend is sponsored and hosted by Modal Labs, and the AI inference runs on Google's Gemini models. LanceDB's community—and their willingness to help us push the edges of multimodal retrieval—made the whole dance possible.
+TODO
