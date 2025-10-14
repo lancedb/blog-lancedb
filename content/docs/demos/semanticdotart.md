@@ -57,15 +57,17 @@ Those ingredients seed separate full-text, vector, and keyword indexes. The corp
 
 ## Semantic Routing: Matching Feelings with Features dynamically
 
-Because each artwork is over-represented, retrieval turns into a choose-your-own-adventure. A session might start with text, an image, or both; semantic routing inspects that intent and helps us choose the dynamic search path that fits—poetic vectors when the request feels lyrical, natural-language embeddings for straightforward descriptions, visual features when a user leads with pixels, and new facets we keep layering in. When we blend or rewrite the query, mood hints drop straight into LanceDB’s SQL-style prefilters so the candidate pool shrinks in-place.
+Because each artwork is over-represented, retrieval turns into a choose-your-own-adventure. A session might start with text, an image, or both. Semantic routing inspects that intent and helps us choose the dynamic search path that fits poetic vectors when the request feels lyrical, natural-language embeddings for straightforward descriptions, visual features when a user starts with image/pixels, and new features we keep adding in. When we blend or rewrite the query, mood hint keywords are used with LanceDB’s SQL-style prefilters to narrow down the search space. Finally, a custom reranker weights the results to surface pieces that echo the emotional signature of the request.
 
-This is our remix of classic retrieval moves like query understanding, query rewriting, and multi-index routing. The agent classifies how the visitor is describing the art, rephrases the prompt so it aligns with the chosen representation, and finally selects which LanceDB indices to use. Every new representation we add becomes another branch the router can learn to take.
+This is our remix of classic retrieval moves like query understanding, query rewriting, and multi-index routing. The agent classifies how the visitor is describing the art, rephrases the prompt so it aligns with the chosen representation, and finally selects which LanceDB indices to use. Every new representation we add becomes another branch the router can learn to take.From there we can swap tactics on the fly depending on the query type and the column that seems most relevant.
 
-From there we can swap tactics on the fly depending on the query type and the column that seems most relevant. For example, based on the inputs, there can be multiple valid search paths, depending on the feature chosen, and the query type (text, vector, hybrid). The LanceDB API keeps those permutations fluent: call `.search()` with a different `vector_column_name`, add `.text()` and `.vector()` for hybrid mixes, attach `.where(prefilter=True)` for prefiltering, and finish with `.rerank(CustomKeywordRanker)` when we want emotional keyword-aware scoring. Every branch is only a few chained methods, which makes experimenting with new combinations feel like stacking Legos dynamically during query time.
+With LanceDB, a complex hybrid search with prefiltering and reranking looks like this:
 
 ```python
 results = (
-    table.search(features, query_type="hybrid", col_name="poetic_vector")
+    table.search(query_type="hybrid", vector_column_name="poetic_vector")
+         .vector(query_embedding)
+         .text(query_text)
          .where(prefilter_clause, prefilter=True)
          .limit(10)
          .rerank(CustomKeywordRanker(keywords))
@@ -144,7 +146,6 @@ AI-generated visuals are everywhere, but the thrill of discovery still lives in 
 [Try SemanticDotArt →](https://www.semantic.art/)
 
 
-![Placeholder – Closing Artwork](./assets/closing-placeholder.png)
 
 ## Tools used
 
