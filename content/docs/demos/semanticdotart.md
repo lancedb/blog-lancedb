@@ -47,9 +47,11 @@ The guiding principle is simple: over-represent the art so the we have different
 
 Take Van Gogh's Path Through a Field with Willows. We keep several parallel interpretations so that whichever language a visitor uses, there is an index ready to meet it. Here are examples of some:
 
-- *Poetic caption* — "A path winds on, beneath a vibrant sky. Sun-warmed grasses whisper secrets low. Brushstrokes dance with restless energy. Quiet fields hold deep intensity. A lonely journey, bathed in golden light. Nature breathes, both calm and wild. Colors sing a song of solitude. Hope lingers where the track ascends."
-- *Natural caption* — "A path meanders under a bright sky, where sun-warmed grasses softly rustle secrets, and energetic brushstrokes of light and shadow play across quiet fields that possess a profound intensity. This solitary journey is illuminated by a golden light, as nature around breathes with both tranquility and untamed spirit, and the colors evoke a feeling of solitude, with hope present along the upward slope of the path."
-- *Mood keywords* — `nature`, `solitude`, `dream`, `deep`, `track`, `intensity`, `path`, `field`, `willows`, `van_gogh`
+- **Poetic caption**
+  > A path winds on beneath a vibrant sky, where sun-warmed grasses whisper secrets. Brushstrokes dance with restless energy, quiet fields hold deep intensity, and a lonely journey is bathed in golden light. Nature breathes both calm and wild, colors sing a song of solitude, and hope lingers where the track ascends.
+- **Natural caption**
+  > A path meanders under a bright sky as sun-warmed grasses softly rustle and energetic brushstrokes of light and shadow play across quiet fields. The solitary journey glows with golden light, nature around it feels tranquil yet untamed, and the colors evoke solitude while hope follows the upward slope of the path.
+- **Mood keywords** — `nature`, `solitude`, `dream`, `deep`, `track`, `intensity`, `path`, `field`, `willows`, `van_gogh`
 
 Those ingredients seed separate full-text, vector, and keyword indexes. The corpus keeps expanding, but because the representations share a row we can add new features—palette embeddings, brushstroke fingerprints, provenance signals—without refactoring storage.
 
