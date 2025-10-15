@@ -150,13 +150,15 @@ AI-generated images are everywhere, but the thrill of discovery still belongs to
 
 ## Tools used
 
-TODO - add logoss and links
+<img width="794" height="116" alt="Screenshot 2025-10-15 at 10 55 17 PM" src="https://github.com/user-attachments/assets/9c4e10e6-c6ce-499f-b6be-2970496a7984" />
 
 - **LanceDB** – Core multimodal store and retrieval engine: vectors, captions, mood keywords, and original JPEGs share one table, with hybrid search and custom rerankers stacking on top.
 - **Google Gemini** – Multimodal model powering poetic rewrites, intent classification, and on-demand captioning to keep text and image evidence aligned.
-- **Modal Labs** – Managed the backend services and batch pipelines so we could ship LanceDB UDF jobs without building new infrastructure.
+- **Modal Labs** – Managed the backend services and high-throughput batch ingestion pipelines without building new infrastructure.
 
 
 ## Credits
+
+This project was created by Bryan Bischof, Ayush Chaurasia, and Chang She. Kelly Chong and Pavitar Saini designed and implemented the UI. Adam Conway assisted with the website.
 
 TODO
