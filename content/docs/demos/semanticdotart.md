@@ -161,4 +161,3 @@ AI-generated images are everywhere, but the thrill of discovery still belongs to
 
 This project was created by Bryan Bischof, Ayush Chaurasia, and Chang She. Kelly Chong and Pavitar Saini designed and implemented the UI. Adam Conway assisted with the website.
 
-TODO
