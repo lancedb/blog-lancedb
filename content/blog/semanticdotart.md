@@ -12,8 +12,6 @@ description: "SemanticDotArt turns art discovery into a multimodal search experi
 
 # SemanticDotArt: Rethinking art discovery with LanceDB
 
-[![SemanticDotArt collage](/assets/demos/sda_1.jpg)](https://www.semantic.art/)
-
 [Try it out →](https://www.semantic.art/)
 
 In an age of infinite scroll, we can browse more art than any real-world gallery could hold--yet finding a piece that feels right could still take minutes, or hours. **SemanticDotArt** began with a hunch: meaning lives not in pixels or tags, but in the mood of a painting, the rhythm of a brushstroke, or the metaphors that tie them together. From that intuition grew a multimodal retrieval system we built, with LanceDB at its core. This post traces the journey of how words meet images, and how we taught search to feel a little more human.
@@ -48,7 +46,7 @@ The guiding principle is simple: we over-represent the pieces of art so the we h
 
 ![van gogh painting](/assets/demos/sda_van_gogh.jpg)
 
-Take Van Gogh's _Path Through a Field with Willows_. We keep several parallel interpretations so that whichever language a visitor uses, there is an index ready to meet it. Here are examples of some:
+Take Van Gogh's **Path Through a Field with Willows**. We keep several parallel interpretations so that whichever language a visitor uses, there is an index ready to meet it. Here are examples of some:
 
 - **Poetic caption**
   > A path winds on beneath a vibrant sky, where sun-warmed grasses whisper secrets. Brushstrokes dance with restless energy, quiet fields hold deep intensity, and a lonely journey is bathed in golden light. Nature breathes both calm and wild, colors sing a song of solitude, and hope lingers where the track ascends.
