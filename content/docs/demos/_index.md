@@ -9,5 +9,3 @@ hide_toc: true
 Pick a demo to explore end-to-end LanceDB workflows:
 
 - [Wikipedia 41M Hybrid Search](./wikipedia-41m-hybrid-search/): ingest tens of millions of records and build lightning-fast hybrid retrieval.
-- [SemanticDotArt](./semanticdotart/): a multimodal art discovery engine that matches feelings with features.
-

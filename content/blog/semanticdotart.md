@@ -1,8 +1,13 @@
 ---
-title: "SemanticDotArt"
-sidebar_title: "SemanticDotArt"
-description: "Multimodal art discovery demo using LanceDB multimodal lakehouse features"
-weight: 2
+title: "SemanticDotArt: Rethinking Art Discovery with LanceDB"
+date: 2025-10-16
+author: Ayush Chaurasia
+categories: ["Applications"]
+draft: false
+featured: true
+image: /assets/demos/sda_1.jpg
+meta_image: /assets/demos/sda_1.jpg
+description: "SemanticDotArt turns art discovery into a multimodal search experience, matching feelings, phrases, and images with LanceDB's hybrid retrieval."
 ---
 
 # SemanticDotArt: Rethinking art discovery with LanceDB
@@ -160,4 +165,3 @@ AI-generated images are everywhere, but the thrill of discovery still belongs to
 ## Credits
 
 This project was created by Bryan Bischof, Ayush Chaurasia, and Chang She. Kelly Chong and Pavitar Saini designed and implemented the UI. Adam Conway assisted with the website.
-
