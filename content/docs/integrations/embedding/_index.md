@@ -20,5 +20,6 @@ sidebar_collapsed: true
 | [Cohere](/docs/integrations/embedding/cohere) | Multilingual text embedding models (embed-english-v3.0, embed-multilingual-v3.0) |
 | [Gemini](/docs/integrations/embedding/gemini) | Multimodal embedding models for text and image inputs |
 | [Hugging Face](/docs/integrations/embedding/huggingface) | Access to transformer-based embedding models from Hugging Face Hub |
+| [ColPali](/docs/integrations/embedding/colpali) | Multimodal multi-vector embeddings using the ColPali engine |
 | [OpenCLIP](/docs/integrations/embedding/openclip) | CLIP-based multimodal models for text-image embeddings |
 | [ImageBind](/docs/integrations/embedding/imagebind) | Unified embedding model for text, image, audio, video, depth, and thermal data |

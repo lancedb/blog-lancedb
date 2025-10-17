@@ -84,6 +84,13 @@ LanceDB supports most popular embedding providers.
 | ImageBind | `imagebind` | Text, Images, Audio, Video |
 
 
+### Multi-vector Providers
+
+| Provider | Model ID | Description |
+|----------|----------|------------------|
+| [ColPali](/docs/integrations/embedding/colpali) | `colpali` | Multimodal multi-vector embeddings using the ColPali engine |
+
+
 You can find all supported embedding models in integrations section
 
 ## Embedding function on LanceDB cloud
