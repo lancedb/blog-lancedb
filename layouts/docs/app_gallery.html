@@ -1,0 +1,135 @@
+{{ define "main" }}
+<div class="container">
+    <div class="row">
+        {{ partial "docs-sidebar.html" . }}
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="docs-content">
+                <article class="docs-article">
+                    <header class="docs-article-header">
+                        <nav class="docs-breadcrumbs">
+                          <a href="/" aria-label="Home" class="breadcrumb-home">
+                            {{ readFile "static/assets/icons/home.svg" | safeHTML }}
+                          </a>
+                          {{ $ancestors := .CurrentSection.Ancestors.Reverse }}
+                          {{ range $i, $a := $ancestors }}
+                            {{ if and (in $a.RelPermalink "/docs/") (ne $a.Title "Docs") }}
+                              <span class="breadcrumb-sep">/</span>
+                              <a href="{{ $a.RelPermalink }}">{{ $a.Params.sidebar_title | default $a.Title }}</a>
+                            {{ end }}
+                          {{ end }}
+                          <span class="breadcrumb-sep">/</span>
+                          <span class="breadcrumb-current">{{ .Params.sidebar_title | default .Title }}</span>
+                          <span class="breadcrumb-sep">/</span>
+                          <a href="{{ site.Params.github_repo }}/edit/main/content{{ if .IsPage }}{{ .RelPermalink | replaceRE "/$" "" }}.md{{ else }}{{ .RelPermalink | replaceRE "/$" "" }}/_index.md{{ end }}" target="_blank" rel="noopener" class="edit-github-link">Edit on GitHub</a>
+                        </nav>
+                        <h1>{{ .Title }}</h1>
+                        <p class="docs-article-meta">
+                          {{ .Description }}
+                        </p>
+                    </header>
+                    {{ with .Content }}
+                      <div class="docs-article-content">
+                          {{ . }}
+                      </div>
+                    {{ end }}
+                    {{- $allTags := slice -}}
+                    {{- range .Pages -}}
+                      {{- with .Params.tags -}}
+                        {{- range . -}}
+                          {{- $allTags = $allTags | append . -}}
+                        {{- end -}}
+                      {{- end -}}
+                    {{- end -}}
+                    {{- $uniqueTags := uniq $allTags -}}
+
+                    <div class="app-gallery js-app-gallery">
+                      <form class="app-gallery__tags" data-filter-group data-logic="and">
+                        <button class="app-gallery__tag app-gallery__tag--active button button--secondary button--tag" data-filter="*">All</button>
+                        {{- range $uniqueTags -}}
+                          <button class="app-gallery__tag button button--secondary button--tag" data-toggle=".{{ replace . " " "-" | lower }}">{{ replace . "-" " " | title }}</button>
+                        {{- end -}}
+                      </form>
+                      <div class="app-gallery__grid" data-filter-items>
+                        {{- range .Pages -}}
+                          {{- $tagClasses := slice -}}
+                          {{- with .Params.tags -}}
+                            {{- range . -}}
+                              {{- $tagClasses = $tagClasses | append (replace . " " "-" | lower) -}}
+                            {{- end -}}
+                          {{- end -}}
+                          {{ $thumb := .Params.thumb }}
+                          {{ if not $thumb }}
+                            {{ $content := .Content }}
+                            {{ $re := `(?i)<img[^>]+src="([^">]+)"` }}
+                            {{ $match := findRE $re $content 1 }}
+                            {{ if gt (len $match) 0 }}
+                              {{ $thumb = (index (findRESubmatch $re $content 1) 0 1) | absURL }}
+                            {{ end }}
+                          {{ end }}
+                          <div class="app-gallery__item-wrapper mix {{ delimit $tagClasses " " }}">
+                            <a href="{{ .RelPermalink }}" class="app-gallery__item text-base">
+                              <div class="app-gallery__item-thumb">
+                                <img src="{{ $thumb }}" alt="{{ .Title }}">
+                              </div>
+                              <div class="app-gallery__item-body">
+                                <h3 class="app-gallery__item-title text-title-small text-bold text-base">{{ .Title }}</h3>
+                                {{ with .Description }}
+                                  <p class="app-gallery__item-description text-body-small">{{ . }}</p>
+                                {{ end }}
+                                {{ with .Params.features }}
+                                  <ul class="app-gallery__item-features">
+                                    {{- range . -}}
+                                      <li class="text-body-medium">{{ . }}</li>
+                                    {{- end -}}
+                                  </ul>
+                                {{ end }}
+                                {{ with .Params.live_app }}
+                                  <button data-url="{{.}}" target="_blank" class="button button--primary button--tag js-live-app">Live App</button>
+                                {{ end }}
+                              </div>
+                              {{- with .Params.tags -}}
+                              <div class="app-gallery__item-tags">
+                                  {{- range . -}}
+                                    <span class="app-gallery__tag button button--secondary button--tag button--tag-small">{{ replace . "-" " " | title }}</span>
+                                  {{- end -}}
+                              </div>
+                              {{- end -}}
+                            </a>
+                          </div>
+                        {{- end -}}
+                      </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <aside class="col-12 col-md-3 col-lg-2{{ if .Params.hide_toc }} d-none{{ end }} docs-toc">
+            <div class="toc-container">
+                {{ if not .Params.hide_toc }}
+                {{ .TableOfContents }}
+                {{ end }}
+            </div>
+        </aside>
+    </div>
+</div>
+{{ end }}
+{{ define "page_js" }}
+    {{ $mixtupJS := resources.Get "js/vendors/mixitup.min.js" }}
+    {{ $mixtupMultifilterJS := resources.Get "js/vendors/mixitup-multifilter.min.js" }}
+    <script src="{{ $mixtupJS.RelPermalink }}"></script>
+    <script src="{{ $mixtupMultifilterJS.RelPermalink }}"></script>
+
+    {{ $appGalleryJS := resources.Get "js/app-gallery.js" | js.Build "appGallery.js" | fingerprint }}
+    <script src="{{ $appGalleryJS.RelPermalink }}"></script>
+    {{ $codeTabJS := resources.Get "js/code-tab.js" | js.Build "codeTab.js" | fingerprint }}
+    <script src="{{ $codeTabJS.RelPermalink }}"></script>
+    {{ $codeBlocksJS := resources.Get "js/code-blocks.js" | js.Build "codeBlocks.js" | fingerprint }}
+    <script src="{{ $codeBlocksJS.RelPermalink }}"></script>
+    {{ $tocActiveJS := resources.Get "js/toc-active.js" | js.Build "toc-active.js" | fingerprint }}
+    <script src="{{ $tocActiveJS.RelPermalink }}"></script>
+    {{ $imageExpandJS := resources.Get "js/image-expand.js" | js.Build "image-expand.js" | fingerprint }}
+    <script src="{{ $imageExpandJS.RelPermalink }}"></script>
+    {{ $imageExpandJS := resources.Get "js/image-expand.js" | js.Build "image-expand.js" | fingerprint }}
+    <script src="{{ $imageExpandJS.RelPermalink }}"></script>
+    {{ $sidebarJS := resources.Get "js/sidebar.js" | js.Build "image-expand.js" | fingerprint }}
+    <script src="{{ $sidebarJS.RelPermalink }}"></script>
+{{ end }}

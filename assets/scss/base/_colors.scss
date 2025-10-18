@@ -25,6 +25,7 @@ $_color-grey-600: #4E4B48 !default;
 $_color-grey-700: #3C3937 !default;
 
 $_color-lavende-400: #E7D2F6 !default;
+$_color-lavende-900: #272a3c !default;
 
 $_color-orange-200: #ff8c42 !default;
 $_color-orange-300: #FF8967 !default;
@@ -60,7 +61,10 @@ $palettes: (
         400: $_color-orange-400,
         500: $_color-orange-500,
     ),
-    "primary-lavende": (base: $_color-lavende-400),
+    "primary-lavende": (
+        base: $_color-lavende-400,
+        900: $_color-lavende-900
+    ),
     "primary-red": (base: $_color-red),
     "primary-grad-dark": (
         start: $_color-grad-dark-start,
