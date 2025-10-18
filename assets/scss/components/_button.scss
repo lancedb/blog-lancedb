@@ -36,7 +36,12 @@
   border: 2px solid palette(primary-orange);
   color: palette(primary-dark);
 
-  &:hover {
+  &.button--tag {
+    background-color: palette(primary-orange);
+  }
+
+  &:hover,
+  &.button--tag:hover {
     background-color: palette(primary-orange, 500);
     border-color: palette(primary-orange, 500);
   }
@@ -133,5 +138,27 @@
   &:focus {
     background-color: palette(primary-dark);
     border-color: palette(primary-dark, 400);
+  }
+}
+
+.button--tag {
+  border-radius: 100px;
+  background: palette(primary-lavende, 900);
+  color: palette(primary-white);
+  transition: all .3s ease-in-out;
+
+  &:hover,
+  &.active {
+    background: linear-gradient(135deg, #ff734a, #ff8967, #ff734a);
+    color: palette(primary-white);
+  }
+}
+
+.button--tag-small {
+  @include font(caption_mob, 10, 400);
+  padding: 10px 16px;
+
+  @include mq($md) {
+    @include font(caption, 12, 400);
   }
 }
