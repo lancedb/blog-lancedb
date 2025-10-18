@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.querySelector(".js-sidebar");
 
   sidebarToggle.addEventListener("click", function () {
+    console.log("click");
+    
     const headerHeight = document.querySelector(".js-header").offsetHeight;
     const sidebarHeaderHeight = sidebar.querySelector(
       ".js-sidebar-header"
