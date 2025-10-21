@@ -54,7 +54,7 @@ Take Van Gogh's **Path Through a Field with Willows**. We keep several parallel 
   > A path meanders under a bright sky as sun-warmed grasses softly rustle and energetic brushstrokes of light and shadow play across quiet fields. The solitary journey glows with golden light, nature around it feels tranquil yet untamed, and the colors evoke solitude while hope follows the upward slope of the path.
 - **Mood keywords** — `nature`, `solitude`, `dream`, `deep`, `track`, `intensity`, `path`, `field`, `willows`, `van_gogh`
 
-These ingredients seed separate full-text, vector, and keyword indexes. The corpus keeps expanding, but because the representations belong to the same row, we can add new features, such as palette embeddings, brushstroke fingerprints, provenance signals, without having to refactor storage.
+These ingredients seed separate full-text, vector, and keyword indexes. The corpus keeps expanding, but because the representations belong to the same row, we can add new features, such as palette embeddings, brushstroke fingerprints, provenance signals, without having to refactor our storage solution.
 
 ![Ingestion workflow diagram](/assets/demos/sda_3.png)
 
