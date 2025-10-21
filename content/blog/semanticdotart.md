@@ -24,7 +24,7 @@ We don't usually think in boolean filters when describing art. Instead, we _imag
 
 We wanted:
 - A unified art corpus that continually grows across museums, marketplaces, and open archives.
-- Metadata that captures both literal content and emotional subtext.
+- Metadata which captures both literal content and emotional subtext.
 - A retrieval engine that can handle large amounts of text and images, and knows when a query is poetic, prosaic, artistic or literal.
 - An interface that feels exploratory, rather than transactional.
 
