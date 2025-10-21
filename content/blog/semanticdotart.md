@@ -143,7 +143,7 @@ This keeps the responses feeling both relevant and surprising without drifting i
 
 ## Conclusion
 
-AI-generated images are everywhere, but the thrill of discovery still belongs to human-made art. SemanticDotArt uses AI as a bridge: drop in an image a model just imagined, or a photo you took , and it will lead you to the paintings and sculptures shaped by people who _felt_ that idea before you did. Whether you search with a poetic cue like “_a quiet optimism painted in the sky_” or with a literal description, the path ends in the same place: human creations that echo your feeling.
+AI-generated images are everywhere, but the thrill of discovery still belongs to human-made art. SemanticDotArt uses AI as a bridge: drop in an image a model just imagined, or a photo you took, and it will lead you to the paintings and sculptures shaped by people who _felt_ that idea before you did. Whether you search with a poetic cue like “_a quiet optimism painted in the sky_” or with a literal description, the path ends in the same place: human creations that echo your feeling.
 
 ![A quiet optimism](/assets/demos/sda_5.jpg)
 
