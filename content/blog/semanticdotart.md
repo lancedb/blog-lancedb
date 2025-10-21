@@ -28,7 +28,7 @@ We wanted:
 - A retrieval engine that can handle large amounts of text and images, and knows when a query is poetic, prosaic, artistic or literal.
 - An interface that feels exploratory, rather than transactional.
 
-LanceDB is used  the multimodal foundation for this system, because it offers the following key features:
+LanceDB is used as the multimodal foundation for this system, because it offers the following key features:
 - On disk index which allow building large scale multi-feature multi-index retrieval system
 - First-class hybrid & full-text search support, fast SQL-style filtering
 - Built-in support for various multimodal embedding models, and hooks for creating custom rerankers. 
