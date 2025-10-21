@@ -64,7 +64,7 @@ Because each piece of artwork is over-represented in the data, retrieval turns i
 
 This is our rendition of classic retrieval strategies like query understanding, query rewriting, and multi-index routing. The agent classifies how the visitor is describing the art, rephrases the prompt so it aligns with the chosen representation, and finally selects which LanceDB indices to use. Every new representation we add becomes another branch the router can learn to take. From there, we can switch tactics on the fly depending on the query type and the column that seems most relevant.
 
-With LanceDB, a complex hybrid search with prefiltering and reranking looks like this:
+With LanceDB, a complex hybrid search with prefiltering and reranking looks is simply:
 
 ```python
 results = (
