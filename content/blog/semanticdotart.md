@@ -18,7 +18,7 @@ In an age of infinite scroll, we can browse more art than any real-world gallery
 
 ## The Vision
 
-We don't usually think in boolean filters when describing art. Instead, we _imagine_ what we're looking for, via thoughts like: “find me something restless but hopeful,” “show me a painting that feels like a quiet storm.” SemanticDotArt is built for that kind of language. It lets you search not just with literal phrases, but with poetry, prose, or the emotions they stirs in you. Sometimes, _how_ you ask is part of what you’re looking for.
+Art discovery often begins with a mood, rather than a checklist of traits. We imagine what we're looking for through thoughts like: “find me something restless but hopeful,” “show me a painting that feels like a quiet storm.” SemanticDotArt is built for that kind of language. It lets you search not just with literal phrases, but with poetry, prose, or the emotions they stir in you. Sometimes, _how_ you ask is part of what you’re looking for.
 
 ![LanceDB table overview](/assets/demos/sda_2.jpg)
 
