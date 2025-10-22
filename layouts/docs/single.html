@@ -43,6 +43,4 @@
 {{ define "page_js" }}
     {{ $imageExpandJS := resources.Get "js/image-expand.js" | js.Build "image-expand.js" | fingerprint }}
     <script src="{{ $imageExpandJS.RelPermalink }}"></script>
-    {{ $imageExpandJS := resources.Get "js/image-expand.js" | js.Build "image-expand.js" | fingerprint }}
-    <script src="{{ $imageExpandJS.RelPermalink }}"></script>
 {{ end }}
