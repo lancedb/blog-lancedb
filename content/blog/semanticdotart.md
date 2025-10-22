@@ -5,8 +5,8 @@ author: Ayush Chaurasia
 categories: ["Applications"]
 draft: false
 featured: true
-image: /assets/demos/sda_1.jpg
-meta_image: /assets/demos/sda_1.jpg
+image: /assets/demos/sda_hero.jpg
+meta_image: /assets/demos/sda_hero.jpg
 description: "SemanticDotArt turns art discovery into a multimodal search experience, matching feelings, phrases, and images with LanceDB's hybrid retrieval."
 ---
 
