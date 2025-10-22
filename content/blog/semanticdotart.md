@@ -40,7 +40,7 @@ As with any other retrieval system, the workflow is broken down into two main pa
 
 ## Multi-representation
 
-The guiding principle is simple: we over-represent the pieces of art so the we have different ways of looking at it. For any given piece, we record multiple perspectives: poetic impressions, literal descriptions, mood tags, color palettes, and even stylistic fingerprints. Some become vector columns, some remain as text, and others live on as raw media. LanceDB lets us stitch all of that into a single row of a table so we can keep adding features as the dataset evolves without reindexing the world. The main idea is to offer maximum flexibility at query time, so that we can experiment with different search paths dynamically, as we'll see in the next section. 
+The guiding principle is simple: we create multiple representation of the artworks so the we have different ways of looking at it. For any given piece, we record multiple perspectives: poetic impressions, literal descriptions, mood tags, color palettes, and even stylistic fingerprints. Some become vector columns, some remain as text, and others live on as raw media. LanceDB lets us stitch all of that into a single row of a table so we can keep adding features as the dataset evolves without reindexing the world. The main idea is to offer maximum flexibility at query time, so that we can experiment with different search paths dynamically, as we'll see in the next section. 
 
 ### A single painting, many views
 
