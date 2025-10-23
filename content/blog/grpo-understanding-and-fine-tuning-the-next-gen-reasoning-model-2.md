@@ -7,7 +7,6 @@ categories: ["Engineering"]
 image: /assets/blog/grpo-understanding-and-fine-tuning-the-next-gen-reasoning-model-2/grpo-understanding-and-fine-tuning-the-next-gen-reasoning-model-2.png
 description: Explore rag with grpo fine-tuned reasoning model with practical insights and expert guidance from the LanceDB team.
 author: Mahesh Deshwal
-author_avatar: /assets/authors/mahesh-deshwal.jpg
 author_avatar: "/assets/authors/community.jpg"
 author_bio: "ML Engineer and researcher specializing in reinforcement learning, fine-tuning techniques, and practical AI applications."
 ---
