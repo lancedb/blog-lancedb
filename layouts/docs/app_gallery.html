@@ -99,9 +99,12 @@
                                     {{- end -}}
                                   </ul>
                                 {{ end }}
-                                {{ with .live_app }}
-                                  <button data-url="{{ . }}" target="_blank" class="button button--primary button--tag js-live-app">Live App</button>
-                                {{ end }}
+                                <div class="app-gallery__item-buttons">
+                                  <button type="button" data-url="{{ $href }}" class="button button--secondary button--tag js-learn-more">Learn how it's built</button>
+                                  {{ with .live_app }}
+                                    <button type="button" data-url="{{ . }}" class="button button--primary button--tag js-live-app">Live App</button>
+                                  {{ end }}
+                                </div>
                               </div>
                               {{- with .tags -}}
                               <div class="app-gallery__item-tags">

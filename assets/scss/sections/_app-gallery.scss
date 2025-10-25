@@ -115,13 +115,17 @@
   @include mq($md) {
     gap: 12px;
   }
+}
 
-  .button {
-    margin-top: 16px;
+.app-gallery__item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
 
-    @include mq($md) {
-      margin-top: 24px;
-    }
+  @include mq($md) {
+    gap: 12px;
+    margin-top: 24px;
   }
 }
 

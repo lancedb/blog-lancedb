@@ -20,8 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (externalLink) {
       externalLink.addEventListener("click", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const url = externalLink.getAttribute("data-url");
         window.open(url, "_blank");
+      });
+    }
+
+    const learnMoreButton = item.querySelector(".js-learn-more");
+    if (learnMoreButton) {
+      learnMoreButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const url = learnMoreButton.getAttribute("data-url");
+        if (url && url !== "#") {
+          window.location.href = url;
+        }
       });
     }
   });
