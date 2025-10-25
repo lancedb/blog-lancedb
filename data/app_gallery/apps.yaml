@@ -1,0 +1,20 @@
+- key: semanticdotart
+  title: "SemanticDotArt"
+  detail_page: "blog/semanticdotart"
+  description: "SemanticDotArt turns real, human-made art discovery into a multimodal search experience, using feelings, phrases, and images using LanceDB hybrid search and semantic routing"
+  thumb: "/assets/demos/sda_hero.jpg"
+  tags:
+    - multimodal
+    - hybrid search
+    - semantic routing
+  live_app: "https://www.semantic.art/"
+- key: wikipedia-41m
+  title: "Wikipedia 41M Hybrid Search"
+  detail_page: "blog/feature-full-text-search"
+  description: "Interactive hybrid search, FTS and vector search demo with 41M+ Wikipedia entries. Explore the power of combining FTS with vector search for enhanced search."
+  thumb: "/assets/docs/demos/wiki-search.png"
+  tags:
+    - hybrid search
+    - vector search
+    - FTS
+  live_app: "https://saas-examples-large-scale.vercel.app"
