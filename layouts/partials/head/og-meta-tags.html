@@ -1,4 +1,5 @@
-{{ $title := .Title }}
+{{ $title := .Title | replaceRE `</?[^>]+>` "" | replaceRE `\s+` " " | plainify | trim " \t\n\r" }}
+
 {{ $siteURL := .Site.BaseURL | replaceRE `^https?://` "" | replaceRE `/+$` "" }}
 
 <meta property="og:type" content="{{ .Params.open_graph.type | default "website" }}" />
