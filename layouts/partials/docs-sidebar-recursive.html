@@ -58,26 +58,61 @@
           </div>
         </div>
       {{- else }}
-        <div class="sidebar-summary">
-          <span class="sidebar-arrow-placeholder"></span>
-          <div class="sidebar-link-wrapper">
-            {{- if .Params.link }}
-              {{- if hasPrefix .Params.link "http" }}
-                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+        {{- $apps := site.Data.app_gallery.apps | default (slice) -}}
+        {{- $isGallery := and (eq .RelPermalink "/docs/demos/") (gt (len $apps) 0) -}}
+        {{- if $isGallery -}}
+          {{- $currentRel := $.current.RelPermalink -}}
+          {{- $open := eq $currentRel .RelPermalink -}}
+          {{- if not $open -}}
+            {{- range $apps -}}
+              {{- $detailPath := .detail_page -}}
+              {{- $detailPage := cond (and $detailPath (ne $detailPath "")) (site.GetPage (printf "/%s" $detailPath)) nil -}}
+              {{- $targetRel := "" -}}
+              {{- if $detailPage -}}
+                {{- $targetRel = $detailPage.RelPermalink -}}
+              {{- else if $detailPath -}}
+                {{- $targetRel = printf "/%s/" (trim $detailPath "/") -}}
+              {{- end -}}
+              {{- if and (ne $targetRel "") (eq $targetRel $currentRel) -}}
+                {{- $open = true -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+          <details {{ if $open }}open{{ end }}>
+            <summary class="sidebar-summary">
+              <span class="sidebar-arrow">
+                {{ readFile "static/assets/icons/arrow_down.svg" | safeHTML }}
+              </span>
+              <div class="sidebar-link-wrapper">
+                <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
                   {{ .Params.sidebar_title | default .Title }}
                 </a>
+              </div>
+            </summary>
+            {{ partial "docs-sidebar-app-links.html" (dict "apps" $apps "current" $.current) }}
+          </details>
+        {{- else -}}
+          <div class="sidebar-summary">
+            <span class="sidebar-arrow-placeholder"></span>
+            <div class="sidebar-link-wrapper">
+              {{- if .Params.link }}
+                {{- if hasPrefix .Params.link "http" }}
+                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                    {{ .Params.sidebar_title | default .Title }}
+                  </a>
+                {{- else }}
+                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                    {{ .Params.sidebar_title | default .Title }}
+                  </a>
+                {{- end }}
               {{- else }}
-                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
+                <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
                   {{ .Params.sidebar_title | default .Title }}
                 </a>
               {{- end }}
-            {{- else }}
-              <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}">
-                {{ .Params.sidebar_title | default .Title }}
-              </a>
-            {{- end }}
+            </div>
           </div>
-        </div>
+        {{- end }}
       {{- end }}
     </li>
   {{- end }}

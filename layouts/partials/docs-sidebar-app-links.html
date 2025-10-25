@@ -1,0 +1,31 @@
+{{- $apps := .apps | default (slice) -}}
+{{- $apps := .apps | default (slice) -}}
+{{- $current := .current -}}
+{{- if and (gt (len $apps) 0) $current -}}
+  {{- $currentRel := $current.RelPermalink -}}
+  <ul class="sidebar-list">
+    {{- range $apps -}}
+      {{- $detailPath := .detail_page -}}
+      {{- $detailPage := cond (and $detailPath (ne $detailPath "")) (site.GetPage (printf "/%s" $detailPath)) nil -}}
+      {{- $targetRel := "" -}}
+      {{- if $detailPage -}}
+        {{- $targetRel = $detailPage.RelPermalink -}}
+      {{- else if $detailPath -}}
+        {{- $targetRel = printf "/%s/" (trim $detailPath "/") -}}
+      {{- end -}}
+      {{- $href := cond (ne $targetRel "") (relURL $targetRel) "#" -}}
+      {{- $title := .title -}}
+      {{- if and (not $title) $detailPage -}}
+        {{- $title = $detailPage.Title -}}
+      {{- end -}}
+      <li>
+        <div class="sidebar-summary">
+          <span class="sidebar-arrow-placeholder"></span>
+          <div class="sidebar-link-wrapper">
+            <a class="sidebar-link{{ if eq $targetRel $currentRel }} active{{ end }}" href="{{ $href }}">{{ $title }}</a>
+          </div>
+        </div>
+      </li>
+    {{- end -}}
+  </ul>
+{{- end -}}

@@ -1,46 +1,40 @@
-# How to Add a Demo Page
+# App Gallery Guide
 
-## Steps
+The App Gallery pulls its content from `data/app_gallery/apps.yaml`. Each entry in that file renders a card on `/docs/demos/` and a matching link in the left sidebar.
 
-1. Create a new `.md` file in `content/docs/demos/`
-   - Example: `content/docs/demos/my-demo.md`
+## Add a New Demo
 
-2. Add the required front matter at the top:
+1. **Create or identify the detail page**
+   - Prefer re-using existing blog posts in `content/blog/` so the card links straight to long-form content.
+   - If you need a new post, add it under `content/blog/<slug>.md` with standard blog front matter (`title`, `description`, `image`, etc.).
 
-```yaml
----
-title: Your Demo Title
-sidebar_title: Sidebar Display Name
-description: Short one-line description of the demo
-thumb: /assets/docs/demos/your-image.png
-features:
-  - First key feature of this demo
-  - Second key feature
-  - Third key feature
-tags:
-  - tag1
-  - tag2
-  - tag3
-  - lancedb
-live_app: "https://your-demo-url.com"
----
-```
+2. **Add an entry to `data/app_gallery/apps.yaml`**
+   ```yaml
+   - key: my-demo
+     title: "My Demo Title"          # optional — falls back to the linked page title
+     detail_page: "blog/my-demo"     # path relative to `content/`
+     description: "One-line teaser"  # optional — falls back to linked page description
+     thumb: "/assets/demos/my.png"  # optional — falls back to linked page image/meta_image
+     features:
+       - Short bullets that appear under the card
+       - Aim for 2–4 callouts
+     tags:
+       - search
+       - production
+     live_app: "https://example.com" # optional
+   ```
 
-## Front Matter Fields
+3. **Sync assets (optional)**
+   - Store thumbnails in `static/assets/demos/` or reference an existing image path.
+   - When you skip `thumb`, the gallery will try `image` → `meta_image` from the linked page.
 
-- **title**: Main title displayed on the page
-- **sidebar_title**: Shorter title for sidebar navigation
-- **description**: Brief description for SEO and previews
-- **thumb**: Path to thumbnail image (store in `/assets/docs/demos/`)
-- **features**: List of 3-5 key features (bullet points)
-- **tags**: Relevant tags for filtering and categorization
-- **live_app**: URL to live demo (use `"#"` if no live app)
+4. **Run `hugo` locally** to verify the card, sidebar link, and Live App button render correctly.
 
-## Example
+## Editing or Removing Demos
+- Update the relevant entry in `data/app_gallery/apps.yaml` to change copy, links, or features.
+- Remove the entry to drop a card (the sidebar updates automatically).
 
-See `content/docs/demos/copilot.md` or `content/docs/demos/wikipedia.md` for complete examples.
-
-## After Creating
-
-3. Add your thumbnail image to `/assets/docs/demos/`
-4. Write your content below the front matter using Markdown
+## Tips
+- Keep `key` unique; it's used to differentiate entries during future automation.
+- Tags are optional but power the in-page filter chips.
+- Use full URLs for `live_app` so the "Live App" button opens in a new tab.

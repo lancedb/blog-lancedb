@@ -32,62 +32,78 @@
                           {{ . }}
                       </div>
                     {{ end }}
-                    {{- $allTags := slice -}}
-                    {{- range .Pages -}}
-                      {{- with .Params.tags -}}
-                        {{- range . -}}
-                          {{- $allTags = $allTags | append . -}}
+                    {{- $apps := site.Data.app_gallery.apps | default (slice) -}}
+                    {{- if gt (len $apps) 0 -}}
+                      {{- $allTags := slice -}}
+                      {{- range $apps -}}
+                        {{- with .tags -}}
+                          {{- range . -}}
+                            {{- $allTags = $allTags | append . -}}
+                          {{- end -}}
                         {{- end -}}
                       {{- end -}}
-                    {{- end -}}
-                    {{- $uniqueTags := uniq $allTags -}}
+                      {{- $uniqueTags := uniq $allTags -}}
 
-                    <div class="app-gallery js-app-gallery">
-                      <form class="app-gallery__tags" data-filter-group data-logic="and">
-                        <button class="app-gallery__tag app-gallery__tag--active button button--secondary button--tag" data-filter="*">All</button>
-                        {{- range $uniqueTags -}}
-                          <button class="app-gallery__tag button button--secondary button--tag" data-toggle=".{{ replace . " " "-" | lower }}">{{ replace . "-" " " | title }}</button>
-                        {{- end -}}
-                      </form>
-                      <div class="app-gallery__grid" data-filter-items>
-                        {{- range .Pages -}}
+                      <div class="app-gallery js-app-gallery">
+                        <form class="app-gallery__tags" data-filter-group data-logic="and">
+                          <button class="app-gallery__tag app-gallery__tag--active button button--secondary button--tag" data-filter="*">All</button>
+                          {{- range $uniqueTags -}}
+                            <button class="app-gallery__tag button button--secondary button--tag" data-toggle=".{{ replace . " " "-" | lower }}">{{ replace . "-" " " | title }}</button>
+                          {{- end -}}
+                        </form>
+                        <div class="app-gallery__grid" data-filter-items>
+                          {{- range $apps -}}
+                          {{- $detailPath := .detail_page -}}
+                          {{- $detailPage := cond (and $detailPath (ne $detailPath "")) (site.GetPage (printf "/%s" $detailPath)) nil -}}
+                          {{- $href := "" -}}
+                          {{- if $detailPage -}}
+                            {{- $href = $detailPage.RelPermalink -}}
+                          {{- else if $detailPath -}}
+                            {{- $href = (relURL (printf "/%s/" (trim $detailPath "/"))) -}}
+                          {{- end -}}
+                          {{- if eq $href "" -}}
+                            {{- $href = "#" -}}
+                          {{- end -}}
+                          {{- $title := .title -}}
+                          {{- if and (not $title) $detailPage -}}
+                            {{- $title = $detailPage.Title -}}
+                          {{- end -}}
+                          {{- $description := .description -}}
+                          {{- if and (not $description) $detailPage -}}
+                            {{- $description = $detailPage.Params.description | default $detailPage.Summary -}}
+                          {{- end -}}
                           {{- $tagClasses := slice -}}
-                          {{- with .Params.tags -}}
+                          {{- with .tags -}}
                             {{- range . -}}
                               {{- $tagClasses = $tagClasses | append (replace . " " "-" | lower) -}}
                             {{- end -}}
                           {{- end -}}
-                          {{ $thumb := .Params.thumb }}
-                          {{ if not $thumb }}
-                            {{ $content := .Content }}
-                            {{ $re := `(?i)<img[^>]+src="([^">]+)"` }}
-                            {{ $match := findRE $re $content 1 }}
-                            {{ if gt (len $match) 0 }}
-                              {{ $thumb = (index (findRESubmatch $re $content 1) 0 1) | absURL }}
-                            {{ end }}
-                          {{ end }}
+                          {{- $thumb := .thumb -}}
+                          {{- if and (not $thumb) $detailPage -}}
+                            {{- $thumb = $detailPage.Params.thumb | default $detailPage.Params.image | default $detailPage.Params.meta_image -}}
+                          {{- end -}}
                           <div class="app-gallery__item-wrapper mix {{ delimit $tagClasses " " }}">
-                            <a href="{{ .RelPermalink }}" class="app-gallery__item text-base">
+                            <a href="{{ $href }}" class="app-gallery__item text-base">
                               <div class="app-gallery__item-thumb">
-                                <img src="{{ $thumb }}" alt="{{ .Title }}">
+                                <img src="{{ $thumb }}" alt="{{ $title }}">
                               </div>
                               <div class="app-gallery__item-body">
-                                <h3 class="app-gallery__item-title text-title-small text-bold text-base">{{ .Title }}</h3>
-                                {{ with .Description }}
+                                <h3 class="app-gallery__item-title text-title-small text-bold text-base">{{ $title }}</h3>
+                                {{ with $description }}
                                   <p class="app-gallery__item-description text-body-small">{{ . }}</p>
                                 {{ end }}
-                                {{ with .Params.features }}
+                                {{ with .features }}
                                   <ul class="app-gallery__item-features">
                                     {{- range . -}}
                                       <li class="text-body-medium">{{ . }}</li>
                                     {{- end -}}
                                   </ul>
                                 {{ end }}
-                                {{ with .Params.live_app }}
-                                  <button data-url="{{.}}" target="_blank" class="button button--primary button--tag js-live-app">Live App</button>
+                                {{ with .live_app }}
+                                  <button data-url="{{ . }}" target="_blank" class="button button--primary button--tag js-live-app">Live App</button>
                                 {{ end }}
                               </div>
-                              {{- with .Params.tags -}}
+                              {{- with .tags -}}
                               <div class="app-gallery__item-tags">
                                   {{- range . -}}
                                     <span class="app-gallery__tag button button--secondary button--tag button--tag-small">{{ replace . "-" " " | title }}</span>
@@ -96,9 +112,12 @@
                               {{- end -}}
                             </a>
                           </div>
-                        {{- end -}}
+                          {{- end -}}
+                        </div>
                       </div>
-                    </div>
+                    {{ else }}
+                      <p>No demos available.</p>
+                    {{ end }}
                 </article>
             </div>
         </div>
