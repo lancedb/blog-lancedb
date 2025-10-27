@@ -11,6 +11,9 @@ You also need to set the `VOYAGE_API_KEY` environment variable to use the Voyage
 
 Supported models are:
 
+- voyage-context-3
+- voyage-3.5
+- voyage-3.5-lite
 - voyage-3
 - voyage-3-lite
 - voyage-finance-2
