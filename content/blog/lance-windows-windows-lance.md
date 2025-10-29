@@ -9,8 +9,8 @@ author_avatar: "/assets/authors/chang-she.jpg"
 categories: ["Engineering"]
 draft: false
 featured: false
-image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
-meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
+image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.webp
+meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.webp
 description: "It was Spring of 2012.  After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time."
 ---
 
