@@ -7,7 +7,6 @@ categories: ["Engineering"]
 image: /assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/chunking-analysis-which-is-the-right-chunking-approach-for-your-language.png
 description: "Explore chunking analysis: which is the right chunking approach for your language? with practical insights and expert guidance from the LanceDB team."
 author: Shresth Shukla
-author_avatar: /assets/authors/shresth-shukla.jpg
 author_avatar: "/assets/authors/community.jpg"
 author_bio: "AI/ML engineer passionate about multilingual NLP and retrieval systems. Contributes to the LanceDB community with practical insights on chunking strategies and RAG applications."
 author_twitter: ""

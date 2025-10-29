@@ -7,7 +7,6 @@ categories: ["Engineering"]
 image: /assets/blog/graphrag-hierarchical-approach-to-retrieval-augmented-generation/graphrag-hierarchical-approach-to-retrieval-augmented-generation.png
 description: "Explore GraphRAG: hierarchical approach to retrieval-augmented-generation with practical insights and expert guidance from the LanceDB team."
 author: Akash Desai
-author_avatar: /assets/authors/akash-desai.jpg
 author_avatar: "/assets/authors/community.jpg"
 author_bio: ""
 ---
