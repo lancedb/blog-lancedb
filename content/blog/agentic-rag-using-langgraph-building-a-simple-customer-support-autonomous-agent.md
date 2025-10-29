@@ -1,5 +1,5 @@
 ---
-title: "Agentic RAG Using LangGraph: Build Autonomous Customer Support Agent"
+title: "Agentic RAG Using LangGraph: Build an Autonomous Customer Support Agent"
 date: 2025-01-26
 author: LanceDB
 author_avatar: "/assets/authors/lancedb.jpg"
@@ -13,40 +13,40 @@ description: "Build an autonomous customer support agent using LangGraph and Lan
 
 ## What is an Agent?
 
-In the current world where everything is running with and for AI, retrieval-augmented generation (RAG) systems have become essential for handling simple queries and generating contextually relevant responses. However, as ever evolving human we are, the need for complex, autonomous problem-solving has emerged. Here I present, behold the mighty: **AI Agents** — autonomous entities that redefine how we interact with technology. In simple terms, it's a sophisticated Graph and even simpler, complex and advanced `for` loops which use LLMs as the core of working.
+In the current world where everything is running with and for AI, retrieval-augmented generation (RAG) systems have become essential for handling simple queries and generating contextually relevant responses. However, as ever evolving humans, we need complex, autonomous problem-solving methods. In this post, we present, behold: **AI agents** — autonomous entities that change how we as humans interact with technology.
 
-#### What good are these then?
+#### What are they good for?
 
-- **Autonomous Problem-Solving**: AI Agents operate independently, driven by goals rather than specific inputs, and adapt dynamically to new information and environments.
-- **Multi-Step Task Execution**: They perform complex, multi-step tasks, maintain state across interactions, and utilize tools like machine learning and rule-based systems to achieve optimal outcomes.
-- **Versatile Capabilities**: From browsing the internet and managing apps to conducting financial transactions and controlling devices, AI Agents are reshaping intelligent automation.
+- **Autonomous Problem-Solving**: AI agents operate independently, driven by goals rather than specific inputs, and adapt dynamically to new information and environments.
+- **Multi-Step Task Execution**: They perform complex, multi-step tasks, maintain state across interactions, and utilize tools like machine learning and rule-based systems to achieve the intended goals.
+- **Versatile Capabilities**: From browsing the internet and managing apps to conducting financial transactions and controlling devices, AI agents are reshaping intelligent automation.
 
-#### What's LangGraph?
+### What's LangGraph?
 
-There are many tools available in the market to build agents and among the famous ones are [LangGraph](https://www.langchain.com/langgraph), [AutoGen](https://github.com/microsoft/autogen), [Swarm](https://github.com/openai/swarm), [CrewAI](https://github.com/crewAIInc/crewAI) etc etc. You can choose any but we chose this one for granular control and Open Source. It basically create a Graph for your workflow and inside your Graph are:
+There are many tools available in the market to build agents and among the more popular, are [LangGraph](https://www.langchain.com/langgraph), [AutoGen](https://github.com/microsoft/autogen), [Swarm](https://github.com/openai/swarm), [CrewAI](https://github.com/crewAIInc/crewAI) etc. You can choose any of these but in this post, we'll cover LangGraph, because it offers more granular control and is 100% open source. LangGraph basically creates a "graph" for your workflow, with the following internal components:
 
-1. `State` : `Pydantic Models` or `Typed Dict` to hold your variables and used for message passing
-2. `Node` : It is just a function that does some work. It accepts a `State` object and modifies that State
-3. `Tools` : There are pure Python functions or `Pydantic` models which your agents can call. You use the tools to do some Retrieval, Web Search, Calculator, Cal some APIs etc etc. You just have to write the definition of what it does and model will understand which tool **CAN** be used at any point of time.
-4. `Edge` : You have pre-defined flows which tell you the execution order of functions (Nodes) in our case
-5. `Conditional Edges`  or `Routers`: Instead of fixing in previous point, we make it conditional. So If you are at `Node-N`, you decide based on a condition where you want to go to out of Nodes `N_i....N_x`
+1. `State` : Pydantic models or `TypedDict` objects to hold your variables and used for message passing
+2. `Node` : It is just a function that does some work. It accepts a `State` object and modifies that state
+3. `Tools` : There are pure Python functions or Pydantic models which your agents can call. You use the tools to do retrieval, web Search, calculator or custom API calls, etc. You just have to write the definition of what it does and a rule-based router or model will decide which tool can (but not _should_) be used at any point in time.
+4. `Edge` : You have pre-defined flows that define the execution order of functions (i.e., nodes, in our case)
+5. `Conditional Edges`  or `Routers`: Instead of fixing the workflow, we can make it conditional. So if you are at node `N`, you decide based on a condition which node to go to next (e.g. `N_i` ... `N_x`).
 
-#### Where does the RAG Come in?
+### Where does RAG Come in?
 
-You remember our `tools` and `Nodes` above? So we can use RAG either as a tool OR a Node. You'll see most of the tutorials using RAG as a tool however I want to show how can you use it as a `Node` and that too conditional.
+Remember our `tools` and `Nodes` above? We can define the RAG component of the pipeline either as a tool OR a `Node`. You'll see most tutorials online using RAG as a tool. However, in this post, we'll show how can you use it as a `Node` in a directed graph, and that too, a conditional one.
 
-### Lets build a use case: Email Agent
+### Let's build a use case: Email Agent
 
-What is does is:
+What this pipeline does is:
 
 1. Fetch the unread emails from your inbox
 2. Look at the type of email
-3. If it is a Policy related email, it'll use RAG to refer to policies to Draft the Email otherwise just create a normal draft. If it's a SPAM or something else, just discard it..
-4. Proofread the Draft. If it's good to send, send it else send it to redraft again. Ideally, you'd let the proof reader node know what are the criteria and then you'd send the reasoning why it was rejected so that Drafting model improves it. That would be out of scope of this blog (wait for next one 😄)
-5. Once you get Okay from proof reader, send a reply. Ideally, you want an `interrupt` so that the human in the loop can review and THEN you send it but again, it's too much to cover here.
+3. If it is a policy-related email, it'll use RAG to refer to the policies to draft the email -- otherwise, it just creates a normal draft. If it's spam or something else, it just discards it..
+4. Proof-read the draft. If it's good to send, send it, otherwise send it to redraft again. Ideally, you'd let the proof reader node know what are the criteria and then you'd send the reasoning why it was rejected so that the drafting model improves it. That would be out of scope of this blog (wait for a future post 😄)
+5. Once you get an "OK" from proofreader, send a reply. Ideally, you want an `interrupt` so that the human-in-the-loop (HITL) can review and THEN it gets sent. But again, HITL is a topic for another post...
 6. For sending, we just `print` for now
 
-**And yes, all of it is autonomous!**
+**Yes, all of it is autonomous!**
 
 Let's get some policies and build our RAG on top of this dataset.
 You can follow along using the notebook [here](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/customer_support_agent_langgraph/LangGraph_LanceDB.ipynb)
@@ -77,7 +77,7 @@ from lancedb.embeddings import get_registry
 import numpy as np
 from langchain_core.tools import tool
 
-# ------- Vecot DB using Lance DB ------------
+# ------- Vector DB using LanceDB ------------
 model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", device="cuda" if torch.cuda.is_available() else "cpu")
 
 class Policy(LanceModel):
@@ -103,7 +103,7 @@ class VectorStoreRetriever:
 retriever = VectorStoreRetriever("./lancedb", "company_policy", model, faq_text, Policy)
 ```
 
-Now that we have our documents, ready, let's build some helpers including a Dummy Function to fetch your email. In real world, you replace it with your logic and APIs
+Now that we have our documents ready, let's build some helpers including a dummy function to fetch your email. In the real world, you'd replace it with your own logic and APIs:
 
 ```python
 from typing import Optional, List
@@ -132,7 +132,7 @@ from google.colab import userdata # use os.environ.get()
 import os
 from colorama import Fore, Style
 
-memory = MemorySaver() # it'll save the all the states and history corresponding to a `thread_id`. We can get previous conversations if we use memory
+memory = MemorySaver() # It'll save all the states and history corresponding to a `thread_id`. We can get previous conversations if we use memory
 
 # llm = ChatOpenAI(model="gpt-3.5-turbo") # use any
 def setup_llm():
@@ -191,9 +191,9 @@ def create_dummy_random_emails():
     return [Email(id=str(i), sender="some_user@example.mail", subject=item["subject"], body=item["body"]) for i, item in enumerate(chosen_items)]
 ```
 
-#### Let's setup our Email Agent
+#### Let's set up our Email Agent
 
-First one is our `Email` object which basically tells us what an Email is. The second one is the `State` which will be used inside the graph.
+First is our `Email` object which defines what an email is. The second one is the `State` which will be used inside the graph.
 
 ```python
 class Email(BaseModel):
@@ -217,7 +217,7 @@ class EmailState(BaseModel):
     exit:bool = False # There are no unread emails left
 ```
 
-Let's setup our Agent Classes and simple functions. Names and Prompts are self explanatory.  Out **LanceDB **RAG is used in the function `lookup_policy` to fetch policies if the query requires searching the internal policies.
+Let's setup our Agent Classes and simple functions. Names and Prompts are self explanatory.  Our LanceDB-based RAG system is used in the function `lookup_policy` to fetch policies if the query requires searching the internal policies.
 
 ```python
 class EmailAgent:
@@ -259,7 +259,7 @@ class EmailAgent:
         return response.content.strip().lower() == "yes"
 ```
 
-Now let's setup our main `Workflow` which is why you came here. The below functions are Either `Nodes` or `Routers` . Which we'll get to know when we build the nodes and define edges
+Now, let's setup our main `Workflow`, which is what you've likely been waiting for. The below functions are Either `Nodes` or `Routers`, which we'll get to know when we build the nodes and define edges.
 
 ```python
 agent = EmailAgent()
@@ -373,13 +373,13 @@ for output in compiled_email_subgraph.stream(initial_state):
 
 ![](/assets/blog/agentic-rag-using-langgraph-building-a-simple-customer-support-autonomous-agent/langgraph-2.png)
 
-You see, one failed after 3 times and one got sent a `successfulAgentic` RAG message, which means that you may need to tweak your prompts, add the validator reasoning and guidance, depending on the data and use case at hand.
+You can see that one case failed after 3 attempts, and one produced a `successfulAgentic` RAG message. Having failure modes means that you may need to tweak your prompts, and/or add validations, reasoning and guidance, depending on the data and use case at hand.
 
 The full code for this workflow is [here](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/customer_support_agent_langgraph/LangGraph_LanceDB.ipynb).
 
 
 ### Final Notes
 
-So now that we've built a working agent that takes care of things for you, one thing to notice is that it relies heavily on fetching the right context. This is where LanceDB stands out as a powerful tool, because of its ability to efficiently handle (in memory) vector search thus making it an invaluable whether you're doing a quick POC or putting your workflows to production.
+So now that we've built a working agent that takes care of things for you, one thing to notice is that it relies heavily on fetching the right context. This is where LanceDB stands out as a powerful tool, because of its ability to efficiently handle large-scale vector search thus making it an invaluable tool, whether you're doing a quick PoC or taking your AI workflows to production.
 
-Stay tuned to this blog to learn some advanced Agentic concepts (like Human in the Loop, Memory, Multi Agents etc etc) further enhanced by LanceDB's powerful filtering to push RAG accuracy even further.
+Stay tuned to this blog to learn some advanced Agentic concepts (like human-in-the-loop, memory, multi-agents etc.), each of which can be further enhanced by LanceDB's powerful capabilities. Till next time!
