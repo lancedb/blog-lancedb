@@ -3,28 +3,29 @@ title: "Tokens per Second Is NOT All You Need"
 date: 2024-05-01
 author: LanceDB
 categories: ["Community"]
-draft: true
+draft: false
 featured: false
 image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
 meta_image: /assets/blog/tokens-per-second-is-not-all-you-need/preview-image.png
 description: "Explore about tokens per second is not all you need. Get practical steps, examples, and best practices you can use now."
 ---
 
-***Goodhart’s Law**: When a measure becomes a target, it ceases to be a good measure*
+> When a measure becomes a target, it ceases to be a good measure.          
+> -- Goodhart’s Law
 
 We're excited to have a guest post on our blog today on model inference performance optimization. In this post, **Mingran Wang** and **Tan Li** from [SambaNova](https://sambanova.ai/) talks about the right metrics to use when it comes to LLM inference performance.
-
----
 
 In the world of computer systems, innovation is often driven by several key metrics, and building a LLM system is no exception. However, no single metric can fully capture all system requirements. Thus, selecting metrics that balance each other is crucial for the project’s success. In this blog post, we will examine **Tokens per Second**, a common metric for evaluating LLM systems, and explore its shortcomings and potential for misleading results in real-world applications.
 
 ## Throughput vs. Latency
 
-Typically, throughput measures the number of instances processed within a time window, while latency measures the time it takes to process each instance. A common misconception about computer system performance is confusing throughput with latency. Indeed, they complement each other in a powerful balancing loop, i.e. shorter processing times for each instance lead to a higher number of instances processed within a given period, and vice versa. However, in some scenarios, particularly when optimizing for a smooth end user experience, focusing solely on throughput can be misleading. For example, in chatbot applications, users generally prefer receiving a quick initial response followed by a gradual delivery of the rest, rather than receiving all information at once. Therefore, when optimizing UX for Chatbot systems, **Time to First Token** should be prioritized a bit over **Tokens per Second**, as it better indicates *experienced *system latency, whereas the latter measures throughput.
+Typically, throughput measures the number of instances processed within a time window, while latency measures the time it takes to process each instance. A common misconception about computer system performance is confusing throughput with latency. Indeed, they complement each other in a powerful balancing loop, i.e. shorter processing times for each instance lead to a higher number of instances processed within a given period, and vice versa.
+
+However, in some scenarios, particularly when optimizing for a smooth end user experience, focusing solely on throughput can be misleading. For example, in chatbot applications, users generally prefer receiving a quick initial response followed by a gradual delivery of the rest, rather than receiving all information at once. Therefore, when optimizing UX for Chatbot systems, **Time to First Token** should be prioritized a bit over **Tokens per Second**, as it better indicates *experienced *system latency, whereas the latter measures throughput.
 
 ## Long Input with Short Output
 
-AI agentic workflows, predominantly featuring agent-to-agent interactions as opposed to agent-human interactions, might initially seem to prioritize **Tokens per Second** as the key performance metric. However, upon closer inspection, the complexity of these workflows becomes apparent. In such systems, each model call typically involves a long input for a relatively short output, as the model continually updates the context to predict the next state. Consequently, **Time to First Token** remains crucial for effective system performance, not only in these workflows but also in applications like RAG that process multiple or lengthy documents. Additionally, the current model trend in supporting super long context windows further strengthened this situation and needless to mention those mutl-turn conversational chatbot systems.
+AI agentic workflows, predominantly featuring agent-to-agent interactions as opposed to agent-human interactions, might initially seem to prioritize **Tokens per Second** as the key performance metric. However, upon closer inspection, the complexity of these workflows becomes apparent. In such systems, each model call typically involves a long input for a relatively short output, as the model continually updates the context to predict the next state. Consequently, **Time to First Token** remains crucial for effective system performance, not only in these workflows but also in applications like RAG that process multiple or lengthy documents. Additionally, the current model trend in supporting super long context windows further strengthened this situation and needless to mention those multi-turn conversational chatbot systems.
 
 ## A More Balanced Approach
 
@@ -39,7 +40,7 @@ Table - Input process time and total inference time on llama3-8B (green is bette
 ![Chart](https://lh7-us.googleusercontent.com/0kSupuOB1GpYoQN2aNuKUpYZ-HtonxZ9bxoPvqMDK8NMYGNtO5iTNPtimi8kXyIFbt0Yj8OjNwQUm_AGM1WMLhPVuHa9YOh_DA0jPfAGsGPCfwr2lWjTzCPCK0C0fOM4ko0qm8NNmnKMuQiRvg1bQuA)
 Figure - Total Inference time vs. input tokens (llama 3 8B)
 
-Leveraging these hardware advantages and innovative software techniques, such as tensor parallelism and continuous batching, we are thrilled about the limitless possibilities ahead for LLM systems. More information is available at [https://sambanova.ai/resources/tag/blog](https://sambanova.ai/resources/tag/blog).
+Leveraging these hardware advantages and innovative software techniques, such as tensor parallelism and continuous batching, we are thrilled about the limitless possibilities ahead for LLM systems. More information is available on the [SambaNova blog](https://sambanova.ai/resources/tag/blog).
 
 ## Conclusion
 
