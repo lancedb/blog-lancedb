@@ -1,12 +1,16 @@
 ---
 title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
-author: LanceDB
+author: Chang She
+author_bio: CEO and Co-founder of LanceDB
+author_github: changhiskhan
+author_twitter: changhiskhan
+author_avatar: "/assets/authors/chang-she.jpg"
 categories: ["Engineering"]
-draft: true
+draft: false
 featured: false
-image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
-meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.png
+image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.webp
+meta_image: /assets/blog/lance-windows-windows-lance-3328ff6129b/preview-image.webp
 description: "It was Spring of 2012.  After being an avid user for 2+ years, I finally decided to join Wes Mckinney and work on pandas full time."
 ---
 
