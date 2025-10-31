@@ -45,6 +45,8 @@ A new quantization technique in LanceDB engineering for high-performance search 
 
 [![Ray Summit 2025](/assets/blog/newsletter-october-2025/ray-summit-2025.png)](https://www.anyscale.com/ray-summit/2025/agenda)
 
+[Ray Summit 2025](https://www.anyscale.com/ray-summit/2025/agenda) | Wednesday, November 5, 4:00 PM
+
 LanceDB and Netflix are joining forces at Ray Summit to do a deep dive on what the Netflix Media Data Lake team is building.
 
 [![LanceDB at PyData](/assets/blog/newsletter-october-2025/pydata.png)](https://pydata.org/seattle2025/schedule)
@@ -73,6 +75,10 @@ Lu Qiu (LanceDB), Susan Wu & Ian Chakares (Google), Anant Vyas & Lucy Sweet (Ube
 [![Open Lakehouse + AI Mini Summit](/assets/blog/newsletter-october-2025/open-lakehouse-meetup.png)](https://luma.com/OLMS-1113)
 
 [Open Lakehouse + AI Mini Summit](https://luma.com/OLMS-1113) | Thursday, November 13, 12:00 PM - 4:30 PM
+
+Dive into the key capabilities of LanceDB's Multimodal Lakehouse—fast random-access at scale, vector + full-text search, and optimized schema primitives—so you can iterate rapidly without blowing your budget. 
+
+Register: [https://luma.com/OLMS-1113](https://luma.com/OLMS-1113)
 
 ## 📊 LanceDB Enterprise Product News
 
