@@ -93,49 +93,22 @@ Here's how one of those pathways can unfold when someone uploads an image and ad
 
 The reranker leans on a weighted blend of recall and precision over the keyword sets:
 
-<div class="math">
-  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-    <mrow>
-      <mi>score</mi>
-      <mo>=</mo>
-      <mi>w</mi>
-      <mo>⋅</mo>
-      <mo>(</mo>
-      <mn>0.7</mn>
-      <mo>⋅</mo>
-      <mfrac>
-        <mi>matches</mi>
-        <mrow><mo>|</mo><mi>B</mi><mo>|</mo></mrow>
-      </mfrac>
-      <mo>+</mo>
-      <mn>0.3</mn>
-      <mo>⋅</mo>
-      <mfrac>
-        <mi>matches</mi>
-        <mrow><mo>|</mo><mi>A</mi><mo>|</mo></mrow>
-      </mfrac>
-      <mo>)</mo>
-    </mrow>
-  </math>
-</div>
+\[
+\text{score} = w \cdot \left( 0.7 \cdot \frac{\text{matches}}{|B|} + 0.3 \cdot \frac{\text{matches}}{|A|} \right)
+\]
 
-Where `matches` is the overlap count between the artwork keyword set (`A`) and the query keyword set (`B`), so the recall term is represented by
+Where `matches` is the overlap count between the artwork keyword set (`A`) and the query keyword set (`B`), so the recall term is represented by:
 
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
-  <mfrac>
-    <mrow><mo>|</mo><mi>A</mi><mo>∩</mo><mi>B</mi><mo>|</mo></mrow>
-    <mrow><mo>|</mo><mi>B</mi><mo>|</mo></mrow>
-  </mfrac>
-</math>
+\[
+\frac{|A \cap B|}{|B|}
+\]
 
-and the precision term by
+and the precision term by:
 
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
-  <mfrac>
-    <mrow><mo>|</mo><mi>A</mi><mo>∩</mo><mi>B</mi><mo>|</mo></mrow>
-    <mrow><mo>|</mo><mi>A</mi><mo>|</mo></mrow>
-  </mfrac>
-</math>   
+\[
+\frac{|A \cap B|}{|A|}
+\]
+
 
 
 This keeps the responses feeling both relevant and surprising without drifting into uncanny matches. LanceDB supports custom rerankers natively, so we can plug in new ranking strategies as the dataset and features evolve.

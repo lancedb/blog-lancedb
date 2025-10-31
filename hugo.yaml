@@ -117,6 +117,17 @@ markup:
       table: true
       taskList: true
       typographer: true
+      passthrough:
+        delimiters:
+          block:
+          - - '\['
+            - '\]'
+          - - $$
+            - $$
+          inline:
+          - - '\('
+            - '\)'
+        enable: true
   highlight:
     style: github-dark
     lineNos: false
