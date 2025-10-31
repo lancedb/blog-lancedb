@@ -28,8 +28,8 @@ Powered by [LanceDB](https://www.linkedin.com/company/lancedb/). The core of the
 ## 💾 Lance File 2.1 Is Now Stable
 
 Big news from the LanceDB team — Lance File Format 2.1 is officially stable!
-This release solves one of the biggest challenges from 2.0:
-👉 adding compression without sacrificing *random access performance.
+
+This release solves one of the biggest challenges from 2.0: 👉 adding compression without sacrificing *random access performance.
 
 [![Lance File 2.1 Stable](/assets/blog/newsletter-october-2025/lance_file_2.1_stable.png)](https://lancedb.com/blog/lance-file-2-1-stable/)
 
@@ -39,9 +39,13 @@ A new quantization technique in LanceDB engineering for high-performance search 
 
 [![LanceDB's RaBitQ Quantization for Blazing Fast Vector Search](/assets/blog/feature-rabitq-quantization/preview-image.png)](https://lancedb.com/blog/feature-rabitq-quantization/)
 
-## ▶️ Catch up what you missed 
+## ▶️ Recordings you might've missed!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ga-hj7byOHw?si=8bJ9P7IwD6Q2Pqgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4iKAOCw-_AA?si=5y80LjGhaoyNpD10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VAO4407nHTM?si=1BUaAzRQp3RnPvyw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 📅 Upcoming Events
 
@@ -120,5 +124,14 @@ A heartfelt thank you to our community contributors of lance and lancedb this pa
 
 ## 🌟 Open Source Releases Spotlight
 
-| Feature | Description |
-| :------ | :---------- |
+| Feature | Version | Description |
+| :------ | :------ | :---------- |
+| LanceDB | 0.22.2 | Allow bitmap indexes on large-string, binary, large-binary, and bitmap, support namespace database in rust.|
+| Lance | 0.38.3 | Support multi-base write, allowing one Lance dataset to span across multiple buckets. Support zstd/lz4 compression. Support custom stop word in FTS index. Support shallow clone and branching in Python and Java. Support Blob API in Java. Support index against nested field. Support change data feed for inserted and updated rows. Better logging and auditing across code execution.|
+| | 0.38.2 | Fix forward compatibility of FTS index changes in 0.38.0. |
+| | 0.38.1 | Support fragment level column update. Support faster IVF-PQ indexing on GPU.
+| | 0.38.0 | ❗ As of this release, the 2.1 version of the file format is considered stable. There will be no more breaking changes and the format should be readable by future versions of lance. In an upcoming release (possibly the next release) the 2.1 version will become the default. <br><br> Blob encoding for v2.1 file format. Performance improvement of FTS index (reduces the P95 latency by 32.3%). FTS index now supports specialized JSON document tokenizer. |
+| Lance Namespace | 0.0.17-0.0.20 | Add support for Azure OneLake, refactor of rust library into main lance repo for better integration |
+| Lance Ray | 0.0.7-0.0.8 | Support distributed compaction of Lance table |
+| Lance Spark | 0.0.14-0.0.15 | Data Evolution in Apache Spark: users can run ALTER COLUMN FROM to add column and backfill column data at the same time |
+
