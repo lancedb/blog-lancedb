@@ -150,6 +150,17 @@ Use these common elements:
 - **File size**: Keep under 500KB
 - **Alt text**: Always include descriptive alt text
 
+### Writing math equations
+
+MathJax support is enabled in this blog. Write your equations by enclosing the LaTeX code
+inside a `\[ .. ]\` block as follows:
+
+```
+\[
+\frac{|A \cap B|}{|A|}
+\]
+```
+
 ### Writing notes and warnings
 
 Use admonitions for warnings and notes:
