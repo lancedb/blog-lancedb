@@ -1,0 +1,94 @@
+.blog,
+.docs {
+
+  .CtxtMenu_Menu,
+  .CtxtMenu_Info {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid;
+    border-image-source: linear-gradient(180deg, palette(primary-grad-dark, start) 3%, palette(primary-grad-dark, end) 97.81%);
+    border-image-slice: 1;
+    background: linear-gradient(180deg, palette(primary-grad-dark, start) 40%, palette(primary-dark, 700) 100%);
+    border-radius: 4px;
+
+    * {
+      @include font-family(base);
+      color: palette(primary-offwhite, 100);
+    }
+  }
+
+  .CtxtMenu_InfoContent {
+    background-color: palette(primary-dark, 700);
+  }
+
+  .CtxtMenu_InfoSignature input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 11px 19px;
+    border: 1px solid;
+    border-radius: 8px;
+
+    font-family: 'Aeonik', 'Inter', 'Segoe UI', Arial, sans-serif !important;
+    @include font(btn_mob, 21, 500);
+
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+
+    @include mq($md) {
+      padding: 14px 32px;
+      @include font(btn, 24, 500);
+    }
+
+    background-color: #181b1f;
+    border: 2px solid #ff734a;
+    background-clip: padding-box;
+    position: relative;
+    color: #fff;
+
+    &:hover {
+      color: #ff734a;
+    }
+
+    &:active,
+    &:focus {
+      background-color: #23262b;
+    }
+  }
+
+  .CtxtMenu_MenuClose {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: palette(primary-dark, 100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    &:hover {
+      background: palette(primary-dark, 200);
+
+      span {
+        background: transparent!important;
+      }
+    }
+    
+    span {
+      display: block;
+      color: palette(primary-dark, 700);
+      border: none;
+      background: transparent;
+      padding: 0;
+      @include font(btn_mob, 20, 500);
+
+      &:hover {
+        background: transparent!important;
+      }
+    }
+  }
+}

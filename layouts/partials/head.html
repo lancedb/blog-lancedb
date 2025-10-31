@@ -3,7 +3,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ .Permalink }}">
-    {{ partial "head/css.html" . }}
     {{ partial "head/seo-meta-tags.html" . }}
     {{ partial "head/og-meta-tags.html" . }}
     {{ partial "head/favicon.html" . }}
@@ -13,4 +12,8 @@
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/242023405.js"></script>
     <!-- End of HubSpot Embed Code -->
+    {{ if or (eq .Section "docs") (eq .Section "blog") }}
+      {{ partial "mathjax.html" . }}
+    {{ end }}
+    {{ partial "head/css.html" . }}
 </head>
