@@ -15,13 +15,11 @@ author_linkedin: "jasminechenwang"
 
 ## 🎨 Semantic.Art
 
-Meet [semantic.art](https://semantic.art), a multi-feature multi-index retrieval art discovery engine that lets you search with a feeling or intent rather than matching keywords.
+Meet [semantic.art](https://lancedb.com/blog/semanticdotart/), a multi-feature multi-index retrieval art discovery engine that lets you search with a feeling or intent rather than matching keywords.
 
 Powered by [LanceDB](https://www.linkedin.com/company/lancedb/). The core of the system involves dynamically understanding and inspecting a query's intent. It then chooses the best search path on the fly, blending vector, FTS, hybrid search, filtering, and custom rerankers.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TqFO9fS94to?si=NE-sdFQ1bBCLUe1b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-📖 Read the blog: [https://lancedb.com/blog/semanticdotart/](https://lancedb.com/blog/semanticdotart/)
 
 [![SemanticDotArt: Rethinking Art Discovery with LanceDB](/assets/demos/sda_hero.jpg)](https://lancedb.com/blog/semanticdotart/)
 
@@ -29,7 +27,7 @@ Powered by [LanceDB](https://www.linkedin.com/company/lancedb/). The core of the
 
 Big news from the LanceDB team — Lance File Format 2.1 is officially stable!
 
-This release solves one of the biggest challenges from 2.0: 👉 adding compression without sacrificing *random access performance.
+This release solves one of the biggest challenges from 2.0: 👉 adding compression without sacrificing random access performance.
 
 [![Lance File 2.1 Stable](/assets/blog/newsletter-october-2025/lance_file_2.1_stable.png)](https://lancedb.com/blog/lance-file-2-1-stable/)
 
@@ -41,15 +39,13 @@ A new quantization technique in LanceDB engineering for high-performance search 
 
 ## ▶️ Recordings you might've missed!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ga-hj7byOHw?si=8bJ9P7IwD6Q2Pqgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4iKAOCw-_AA?si=5y80LjGhaoyNpD10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VAO4407nHTM?si=1BUaAzRQp3RnPvyw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ga-hj7byOHw?si=8bJ9P7IwD6Q2Pqgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
 
 ## 📅 Upcoming Events
 
 [![Ray Summit 2025](/assets/blog/newsletter-october-2025/ray-summit-2025.png)](https://www.anyscale.com/ray-summit/2025/agenda)
+
+LanceDB and Netflix are joining forces at Ray Summit to do a deep dive on what the Netflix Media Data Lake team is building.
 
 [![LanceDB at PyData](/assets/blog/newsletter-october-2025/pydata.png)](https://pydata.org/seattle2025/schedule)
 
@@ -69,7 +65,7 @@ Jack Ye, Senior Software Engineer @ LanceDB | Saturday, November 8, 11:40 AM
 Check out our two sessions at [KubeCon + CloudNativeCon North America 2025](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)!
 
 🎤 [**Highly Scalable AI Search Engine and AI Data Lake With Kubernetes and LanceDB**](https://kccncna2025.sched.com/event/27FXF/highly-scalable-ai-search-engine-and-ai-data-lake-with-kubernetes-and-lancedb-lu-qiu-chanchan-mao-lancedb)<br>
-Lu Qiu, Database Engineer & ChanChan Mao, Developer Relations@ LanceDB | Tuesday, November 11, 5:45 PM
+Lu Qiu, Database Engineer & ChanChan Mao, Developer  @ LanceDB | Tuesday, November 11, 5:45 PM
 
 🎤 [**Building AI/ML Pipelines on Kubernetes**](https://kccncna2025.sched.com/event/27FdU/building-aiml-pipelines-on-kubernetes-susan-wu-ian-chakares-google-lu-qiu-lancedb-anant-vyas-lucy-sweet-uber)<br>
 Lu Qiu (LanceDB), Susan Wu & Ian Chakares (Google), Anant Vyas & Lucy Sweet (Uber) | Thursday, November 13, 11:45 AM
@@ -77,8 +73,6 @@ Lu Qiu (LanceDB), Susan Wu & Ian Chakares (Google), Anant Vyas & Lucy Sweet (Ube
 [![Open Lakehouse + AI Mini Summit](/assets/blog/newsletter-october-2025/open-lakehouse-meetup.png)](https://luma.com/OLMS-1113)
 
 [Open Lakehouse + AI Mini Summit](https://luma.com/OLMS-1113) | Thursday, November 13, 12:00 PM - 4:30 PM
-
-<!-- ## 📚 Good Reads -->
 
 ## 📊 LanceDB Enterprise Product News
 
