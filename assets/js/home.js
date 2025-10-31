@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
           startAutoRotation();
         } else {
           switchTab(tabId);
-        }infrastructure__badges
+        }
       });
     });
   })();
