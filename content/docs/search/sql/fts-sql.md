@@ -84,37 +84,38 @@ from lancedb.query import MatchQuery
 query = MatchQuery("puppy", "text")
 json_query = query.to_json()
 
-# Execute FTS query via SQL
+# Execute FTS query via SQL - returns top 5 matches in arbitrary order
 result = run_query(f"""
-    SELECT id, text, category, _score
+    SELECT id, text, category
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 2
+    LIMIT 5
 """)
 
 print(result.to_pandas())
-# Output (4 documents match "puppy", showing top 2):
-#    id                                            text category   _score
-# 0   5 Puppy training requires patience and dedication training 0.908106
-# 1   3  The puppy catches a ball with great enthusiasm   sports 0.908106
+# Output (4 documents match "puppy", showing all matches):
+#    id                                            text category
+# 0   1        The happy puppy runs merrily in the park  animals
+# 1   3  The puppy catches a ball with great enthusiasm   sports
+# 2   5 Puppy training requires patience and dedication training
+# 3   9         The fuzzy puppy loves to play with toys  animals
 {{< /code >}}
 
-{{< admonition "important" "Getting Relevance Scores and Ordering Results" >}}
-FTS queries compute a BM25 relevance score for each matching document. To use these scores effectively:
+{{< admonition "important" "Understanding Result Ordering and Relevance Scores" >}}
+FTS queries compute a BM25 relevance score for each matching document and by default return the top 5 matching results in **arbitrary order**:
 
-1. **Always select `_score`**: The `_score` column must be explicitly included in your SELECT clause
-2. **Always order by `_score DESC`**: Without explicit ordering, results are returned in arbitrary order
+**For exact ordering by relevance**, select the special `_score` column and order by it:
 
 ```sql
--- ✅ CORRECT: Select _score and order by it
-SELECT id, text, _score FROM fts('table', 'query') ORDER BY _score DESC
-
--- ❌ WRONG: No _score selected - you won't see relevance scores
-SELECT id, text FROM fts('table', 'query')
-
--- ❌ WRONG: _score selected but not ordered - results in arbitrary order
-SELECT id, text, _score FROM fts('table', 'query')
+-- ✅ Returns top 5 matching results ordered by relevance (highest first)
+SELECT id, text, _score FROM fts('my_docs', 'query')
+ORDER BY _score DESC
+LIMIT 5
 ```
+
+**Key points:**
+- Without `ORDER BY _score DESC`, you get the top matching results but in arbitrary order
+- The `_score` column is optional - include it only when you need to see or order by relevance scores
+- `_score` uses the BM25 ranking algorithm to measure relevance
 {{< /admonition >}}
 
 ## Advanced Query Types
@@ -131,20 +132,18 @@ query = MatchQuery("pupy", "text", fuzziness=2)
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, _score
+    SELECT id, text
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 
 print(result.to_pandas())
 # Output - fuzzy matching finds "puppy" despite the typo "pupy":
-#    id                                            text   _score
-# 0   9         The fuzzy puppy loves to play with toys 2.932387
-# 1   1        The happy puppy runs merrily in the park 0.908106
-# 2   5 Puppy training requires patience and dedication 0.908106
-# 3   3  The puppy catches a ball with great enthusiasm 0.908106
-# Note: Row 9 has a higher score because it contains both "fuzzy" and "puppy"
+#    id                                            text
+# 0   9         The fuzzy puppy loves to play with toys
+# 1   1        The happy puppy runs merrily in the park
+# 2   5 Puppy training requires patience and dedication
+# 3   3  The puppy catches a ball with great enthusiasm
 {{< /code >}}
 
 ### Phrase Queries
@@ -159,10 +158,9 @@ query = PhraseQuery("happy puppy", "text")
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, _score
+    SELECT id, text
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -185,10 +183,9 @@ query = PhraseQuery("puppy park", "text", slop=2)
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, _score
+    SELECT id, text
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -206,10 +203,9 @@ query = MatchQuery("puppy", "text") & MatchQuery("happy", "text")
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, _score
+    SELECT id, text
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -223,20 +219,19 @@ query = MatchQuery("puppy", "text") | MatchQuery("kitten", "text")
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, category, _score
+    SELECT id, text, category
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 
 print(result.to_pandas())
 # Output shows results matching either term:
-#    id                                            text category   _score
-# 0   2   A curious kitten jumps quickly over the fence  animals 1.874457  # Contains "kitten"
-# 1   9         The fuzzy puppy loves to play with toys  animals 0.908106  # Contains "puppy"
-# 2   5 Puppy training requires patience and dedication training 0.908106  # Contains "puppy"
-# 3   1        The happy puppy runs merrily in the park  animals 0.908106  # Contains "puppy"
-# 4   3  The puppy catches a ball with great enthusiasm   sports 0.908106  # Contains "puppy"
+#    id                                            text category
+# 0   2   A curious kitten jumps quickly over the fence  animals
+# 1   9         The fuzzy puppy loves to play with toys  animals
+# 2   5 Puppy training requires patience and dedication training
+# 3   1        The happy puppy runs merrily in the park  animals
+# 4   3  The puppy catches a ball with great enthusiasm   sports
 {{< /code >}}
 
 ### Boost Queries
@@ -255,10 +250,9 @@ query = BoostQuery(
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, _score
+    SELECT id, text
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -274,10 +268,9 @@ query = MultiMatchQuery("puppy", ["text", "category"])
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, category, _score
+    SELECT id, text, category
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -291,10 +284,9 @@ query = MultiMatchQuery("puppy", ["text", "category"], boosts=[2.0, 1.0])
 json_query = query.to_json()
 
 result = run_query(f"""
-    SELECT id, text, category, _score
+    SELECT id, text, category
     FROM fts('my_docs', '{json_query}')
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
@@ -310,11 +302,10 @@ json_query = query.to_json()
 
 # Combine FTS with WHERE clause to filter by category
 result = run_query(f"""
-    SELECT id, text, category, _score
+    SELECT id, text, category
     FROM fts('my_docs', '{json_query}')
     WHERE category = 'animals'
-    ORDER BY _score DESC
-    LIMIT 10
+    LIMIT 5
 """)
 {{< /code >}}
 
