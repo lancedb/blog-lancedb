@@ -4,7 +4,7 @@ date: 2025-09-17
 draft: false
 featured: true
 categories: ["Engineering"]
-image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
+image: "/assets/blog/feature-rabitq-quantization/preview-image.png"
 meta_image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
 description: "Introducing RaBitQ quantization in LanceDB for higher compression, faster indexing, and better recall on high‑dimensional embeddings."
 author: David Myriel, Yang Cen
@@ -66,10 +66,10 @@ During indexing, for each data vector **v**, we compute the residual around a ce
 At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
 
 **Figure 1a:** 2D illustration of mapping a vector to the nearest unit‑sphere hypercube vertex (RabitQ overview)
-![RabitQ 2D mapping](/assets/blog/feature-rabitq-quantization.md/plot_rq.svg)
+![RabitQ 2D mapping](/assets/blog/feature-rabitq-quantization/plot_rq.svg)
 
 **Figure 1b:** Geometry of query and data vectors in RaBitQ
-![figure1b](/assets/blog/feature-rabitq-quantization.md/figure1.png)
+![figure1b](/assets/blog/feature-rabitq-quantization/figure1.png)
 
 This figure shows the geometric relationship between a data vector **o**, its quantized form **o_bar**, and a query vector **q**. The auxiliary vector **e1** lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of **o_bar** onto **e1** is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
 
@@ -95,7 +95,7 @@ The [RaBitQ paper](https://arxiv.org/abs/2409.09913) also introduces **extended-
 
 ## Benchmarks
 
-![benchmarks](/assets/blog/feature-rabitq-quantization.md/benchmarks.png)
+![benchmarks](/assets/blog/feature-rabitq-quantization/benchmarks.png)
 
 We tested IVF_PQ and RaBitQ side by side on two public datasets:
 
@@ -117,7 +117,7 @@ The tests were run on a consumer-grade PC:
 | index build time | ~85s     | **~75s**    |
 
 **Figure 2:** DBpedia benchmark results (recall@10, throughput, build time)
-![DBpedia Benchmark](/assets/blog/feature-rabitq-quantization.md/dbpedia-bench.png)
+![DBpedia Benchmark](/assets/blog/feature-rabitq-quantization/dbpedia-bench.png)
 
 ### GIST1M (image embeddings, 960d)
 
@@ -128,7 +128,7 @@ The tests were run on a consumer-grade PC:
 | index build time | ~130s    | **~21s**        |
 
 **Figure 3:** GIST1M benchmark results (recall@10, throughput, build time)
-![GIST1M Benchmark](/assets/blog/feature-rabitq-quantization.md/gist-bench.png)
+![GIST1M Benchmark](/assets/blog/feature-rabitq-quantization/gist-bench.png)
 
 {{< admonition >}}
 On CPUs, RaBitQ already outperforms IVF_PQ on our test hardware. On GPUs the gap should widen further because RaBitQ operations are easier to parallelize.
@@ -164,4 +164,4 @@ RaBitQ is not theoretical. Elastic integrated it into their BBQ quantization fea
 
 Now RaBitQ is available in LanceDB alongside IVF_PQ. You can choose the method that best fits your workload, and even switch as your dataset grows. If you’re exploring LanceDB for the first time, check out our [quickstart](/docs/), the [WikiSearch demo](/blog/feature-full-text-search/), and how this ties into the [Multimodal Lakehouse](/blog/multimodal-lakehouse/).
 
-![outro](/assets/blog/feature-rabitq-quantization.md/outro.jpeg)
+![outro](/assets/blog/feature-rabitq-quantization/outro.jpeg)
