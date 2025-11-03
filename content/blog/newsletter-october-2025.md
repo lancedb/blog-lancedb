@@ -90,7 +90,7 @@ Register: [https://luma.com/OLMS-1113](https://luma.com/OLMS-1113)
 
 ## 🫶 Community Contributions
 
-- [Multi-path support](https://github.com/lancedb/lance/pull/4765) for Lance datasets, thanks to @jaystarshot from Uber. 
+- [Multi-path support](https://github.com/lancedb/lance/pull/4765) for Lance datasets, thanks to [@jaystarshot](https://github.com/jaystarshot) from Uber. 
 - [Lance-Ray now supports distributed compaction](https://github.com/lancedb/lance-ray/pull/53) of Lance table, thanks to [@yingjianwu98](https://github.com/yingjianwu98) from Netflix.
 - [Spark Data evolution](https://github.com/lancedb/lance-spark/pull/91) feature and [JSON document support in FTS index](https://github.com/lancedb/lance/pull/4752), thanks to [@fangbo](https://github.com/fangbo) & [@wojiaodoubao](https://github.com/wojiaodoubao) from Bytedance
 
