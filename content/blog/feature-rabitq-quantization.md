@@ -44,14 +44,14 @@ Two small corrective factors are also stored:
 
 At query time your input—whether text, image, audio, or video—is transformed in the same way. Comparisons become fast binary dot products, and the corrective factors restore fidelity.
 
-Formally, RaBitQ maps a vector **v** to a binary vector **v_qb** and a hypercube vertex **v_h** on the unit sphere:
+Formally, RaBitQ maps a vector \(v\) to a binary vector \(v_qb\) and a hypercube vertex \(v_h\) on the unit sphere:
 
 \[
 v_h[i] = +1/\sqrt{D} \hspace{2em} \text{if} \hspace{0.5em} v_qb[i] = 1 \\  
 v_h[i] = -1/\sqrt{D} \hspace{2em}  \text{if} \hspace{0.5em} v_qb[i] = 0
 \]  
 
-where D is the number of dimensions. Each component is either a positive or negative value scaled by the square root of dimensions.
+where \(D\) is the number of dimensions. Each component is either a positive or negative value scaled by the square root of dimensions.
 
 To remove bias, RaBitQ samples a random orthogonal matrix \(P\) and sets the final quantized vector to:
 
