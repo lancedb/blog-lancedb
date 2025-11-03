@@ -53,13 +53,13 @@ v_h[i] = -1/\sqrt{D} \hspace{2em}  \text{if} \hspace{0.5em} v_qb[i] = 0
 
 where D is the number of dimensions. Each component is either a positive or negative value scaled by the square root of dimensions.
 
-To remove bias, RaBitQ samples a random orthogonal matrix **P** and sets the final quantized vector to:
+To remove bias, RaBitQ samples a random orthogonal matrix \(P\) and sets the final quantized vector to:
 
 \[
 v_q = P × v_h
 \]
 
-During indexing, for each data vector **v**, we compute the residual around a centroid **c**, normalize it, map it to bits via the inverse rotation **P⁻¹**, and store two corrective scalars alongside the bits:
+During indexing, for each data vector \(v\), we compute the residual around a centroid **c**, normalize it, map it to bits via the inverse rotation \(P^{-1}\), and store two corrective scalars alongside the bits:
 - **Centroid distance**: \(d_c = ||v - c||\), which is the Euclidean distance from vector to centroid
 - **Inner product**: \(d_s = ⟨v_q, v_n⟩\), which is the dot product between quantized and normalized vectors
 
