@@ -14,4 +14,4 @@ aliases: ["/docs/concepts/search/", "/docs/concepts/search"]
 | [Full-Text Search](/docs/concepts/search/full-text-search/) | Keyword-based search with BM25 and pre-filtering |
 | [Hybrid Search](/docs/concepts/search/hybrid-search/) | Combines vector and full-text search with reranking |
 | [Metadata Filtering](/docs/concepts/search/filtering/) | Filter results based on metadata fields |
-| [SQL Queries](/docs/concepts/search/sql-queries/) | Traditional SQL queries for data exploration |
+| [SQL Queries](/docs/concepts/search/sql/) | SQL query capabilities for data exploration and analytics |
