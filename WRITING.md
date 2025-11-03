@@ -152,13 +152,27 @@ Use these common elements:
 
 ### Writing math equations
 
-MathJax support is enabled in this blog. Write your equations by enclosing the LaTeX code
-inside a `\[ .. ]\` block as follows:
+MathJax support is enabled in this blog. Write your equations by enclosing the LaTeX code!
+
+#### Regular (display) equations
+
+Display equations are written by wrapping the LaTeX code inside a `\[ .. ]\` block as follows:
 
 ```
 \[
 \frac{|A \cap B|}{|A|}
 \]
+```
+
+This will render the equation as center-aligned and in its own block on the page.
+
+#### Inline equations
+
+Sometimes, it makes sense to render the equations inline as part of a paragraph of text.
+This is done by enclosing the LaTeX code inside a `\(..\)` block:
+
+```
+An inline variable \(e_1\).
 ```
 
 ### Writing notes and warnings

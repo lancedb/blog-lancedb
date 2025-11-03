@@ -11,7 +11,7 @@ author: David Myriel, Yang Cen
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer, Software Engineer @ LanceDB"
 author_twitter: "davidmyriel"
-author_github: "davidmyriel, BubbleCal"
+author_github: "davidmyriel"
 author_linkedin: "davidmyriel"
 ---
 
@@ -46,22 +46,22 @@ At query time your input—whether text, image, audio, or video—is transformed
 
 Formally, RaBitQ maps a vector **v** to a binary vector **v_qb** and a hypercube vertex **v_h** on the unit sphere:
 
-```
-v_h[i] = +1/√D  if v_qb[i] = 1
-v_h[i] = -1/√D  if v_qb[i] = 0
-```
+\[
+v_h[i] = +1/\sqrt{D} \hspace{2em} \text{if} \hspace{0.5em} v_qb[i] = 1 \\  
+v_h[i] = -1/\sqrt{D} \hspace{2em}  \text{if} \hspace{0.5em} v_qb[i] = 0
+\]  
 
 where D is the number of dimensions. Each component is either a positive or negative value scaled by the square root of dimensions.
 
 To remove bias, RaBitQ samples a random orthogonal matrix **P** and sets the final quantized vector to:
 
-```
+\[
 v_q = P × v_h
-```
+\]
 
 During indexing, for each data vector **v**, we compute the residual around a centroid **c**, normalize it, map it to bits via the inverse rotation **P⁻¹**, and store two corrective scalars alongside the bits:
-- **Centroid distance**: `d_c = ||v - c||` (Euclidean distance from vector to centroid)
-- **Inner product**: `d_s = ⟨v_q, v_n⟩` (dot product between quantized and normalized vectors)
+- **Centroid distance**: \(d_c = ||v - c||\), which is the Euclidean distance from vector to centroid
+- **Inner product**: \(d_s = ⟨v_q, v_n⟩\), which is the dot product between quantized and normalized vectors
 
 At search time, the query is processed with the same rotation to enable extremely fast binary dot products plus lightweight corrections for accurate distance estimates.
 
@@ -71,7 +71,7 @@ At search time, the query is processed with the same rotation to enable extremel
 **Figure 1b:** Geometry of query and data vectors in RaBitQ
 ![figure1b](/assets/blog/feature-rabitq-quantization/figure1.png)
 
-This figure shows the geometric relationship between a data vector **o**, its quantized form **o_bar**, and a query vector **q**. The auxiliary vector **e1** lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of **o_bar** onto **e1** is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
+This figure shows the geometric relationship between a data vector \(o\), its quantized form \(\bar{o}\), and a query vector \(q\). The auxiliary vector \(e_1\) lies in the same plane. RaBitQ exploits the fact that in high-dimensional spaces, the projection of \(\bar{o}\) onto \(e_1\) is highly concentrated around zero (red region on the right). This allows us to treat it as negligible, enabling accurate distance estimation with minimal computation.
 
 **Difference with IVF_PQ**: PQ requires training a codebook and splitting vectors into subvectors. RaBitQ avoids that entirely. Indexing is faster, maintenance is simpler, and results are more stable when you update your dataset.
 
