@@ -5,14 +5,10 @@ description: Learn how to use LanceDB with Python, TypeScript, and Rust SDKs. In
 weight: 2
 ---
 
-In this section, you'll learn basic operations [in Python, TypeScript, and Rust SDKs](/docs/reference/). 
+In this section, you'll learn basic operations [in Python, TypeScript, and Rust SDKs](/docs/reference/).
+The code examples are the same, regardless of whether you use LanceDB OSS or LanceDB Cloud/Enterprise.
 
 For the LanceDB Cloud/Enterprise API Reference, check the [HTTP REST API Specification](https://docs.lancedb.com/).
-
-## Prerequisites
-
-1. [Sign up for LanceDB Cloud](https://accounts.lancedb.com/sign-up)
-2. [Follow our tutorial video to create a LanceDB Cloud Project](https://app.storylane.io/share/pudefwx54tun) 
 
 ## Installation Options
 
