@@ -32,7 +32,7 @@ the following import statement -- no servers needed!
 import lancedb
 ```
 
-### Optional: Connect to LanceDB Cloud
+### Optional: Cloud or Enterprise versions
 
 If you want a fully-managed solution, you can opt for LanceDB Cloud, which provides managed infrastructure, security, and automatic backups. The connection `uri` determines where your data is stored.
 
@@ -43,6 +43,8 @@ db = lancedb.connect(
     region="us-east-1"
 )
 ```
+
+If you're operating at enormous scale and are looking for more advanced use cases beyond just search, like feature engineering, model training and more, check out [LanceDB Enterprise](/docs/enterprise).
 
 ## 4. Obtain some data
 
