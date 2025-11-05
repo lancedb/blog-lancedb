@@ -40,15 +40,15 @@ We have come a long way from when chunking and RAG were just buzzwords. Today, t
 In case you're unaware, chunking in the context of building retrieval systems generally refers to **breaking down longer texts into smaller pieces** (chunks) and saving them as dense vector representations using techniques like transformer-based models or word embeddings. I'm assuming you already know this.
 
 ![OpenAI Chunking Example](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-3.png)
-*Image from OpenAI Blog*
+_Image from OpenAI Blog_
 
-We'll be using *sentence transformers'*,* multilingual embeddings* for this analysis, but you can definitely experiment with other multilingual embeddings available in the market for this. It maps sentences & paragraphs to a 384-dimensional dense vector space and can be used for tasks like clustering or semantic search. There's no specific reason behind choosing this model but I wanted an embedding model that I could use for these 4 languages (Hindi, English, Spanish and French), and turned out it could serve the purpose.
+We'll be using _sentence transformers'_,_ multilingual embeddings_ for this analysis, but you can definitely experiment with other multilingual embeddings available in the market for this. It maps sentences & paragraphs to a 384-dimensional dense vector space and can be used for tasks like clustering or semantic search. There's no specific reason behind choosing this model but I wanted an embedding model that I could use for these 4 languages (Hindi, English, Spanish and French), and turned out it could serve the purpose.
 
 I looked over the internet to see if there is any analysis I can read to understand how different languages behave when it comes to chunking, but sadly I wasn't able to find one. To understand why we even need such analysis, we need to understand how languages behave, and that's exactly what we'll do today. We'll see how languages behave differently, which confirms that we might need to process texts in different languages separately. Then we'll move on to trying out chunking approaches on these texts.
 
 ![Language Behavior Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-4.png)
 
-The most common approach that people use these days is.......... I think you can make a guess! It's *RecursiveCharacterTextSplitter()*. This analysis will help you understand how different languages behave when we use *RecursiveCharacterTextSplitter() *in our code and what could be the best chunk size for it. Refer to the code to do it on your text and experiment further.
+The most common approach that people use these days is.......... I think you can make a guess! It's _RecursiveCharacterTextSplitter()_. This analysis will help you understand how different languages behave when we use *RecursiveCharacterTextSplitter() *in our code and what could be the best chunk size for it. Refer to the code to do it on your text and experiment further.
 
 And while we start our analysis, it's important to know what approaches exist and when or when not to try those approaches. Overall, there are the following major chunking methods that exist, and we'll try some of them today -
 
@@ -61,12 +61,12 @@ And while we start our analysis, it's important to know what approaches exist an
 
 ### How do you find the best chunk size for RecursiveCharacterTextSplitter()?
 
-Before we understand how languages behave, let's first see in detail what happens when we use different languages with *RecursiveCharacterTextSplitter()*, and then we'll understand why it might be happening in the second section of this blog.
+Before we understand how languages behave, let's first see in detail what happens when we use different languages with _RecursiveCharacterTextSplitter()_, and then we'll understand why it might be happening in the second section of this blog.
 
 I believe, and I have seen myself, that people often use this approach directly while building their projects and then experiment with chunk sizes. I've seen people using this in production, so it seems to be the best fit for analyzing fixed character splitting. I analyzed all four languages, and things turned out interesting.
 
 ![Sample English Text](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-5.png)
-*Sample English Text Used*
+_Sample English Text Used_
 
 I used different chunk sizes for processing and stored the chunks in the LanceDB database as vectors. I stored them in different tables so that I could later query and identify which chunk gave the highest similarity score. At the time, I used a 50-character overlap for all of the chunk sizes during my analysis. The notebook is all yours to explore and experiment with other chunk overlaps!
 
@@ -90,7 +90,7 @@ def process_text(text: str,
                 model_name: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
                 db_path: str = "/content/lancedb_data",
                 language: str = "text") -> Dict:
-    
+
     # Initialize
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
     db = lancedb.connect(db_path)
@@ -119,7 +119,7 @@ def process_text(text: str,
             "char_length": [len(chunk) for chunk in chunk_texts]
         })
 
-        db.create_table(table_name, data=df, mode="overwrite") 
+        db.create_table(table_name, data=df, mode="overwrite")
         #table with same name will be overwritten when we rerun the query over another text.
 
         # Store metadata
@@ -141,7 +141,7 @@ When we used a chunk size of 100, the English text was divided into 227 chunks. 
 But what happens when we process the same text in multiple languages? Let's say we take four languages: English, Hindi, French, and Spanish. We processed the same text as in English across all these languages, and the results turned out to be quite interesting. 👀
 
 ![Language Chunk Distribution](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-9.png)
-*Distribution of no. of chunks vs chunk sizes across languages*
+_Distribution of no. of chunks vs chunk sizes across languages_
 
 {{< admonition important "Language Behavior Insight" >}}
 There's a noticeable difference with smaller chunk sizes. With a chunk size of 100, all four languages were split into multiple chunks (i.e., 227, 236, 253, and 238). The same piece of information was stored in fewer or more chunks depending on the language.
@@ -190,7 +190,7 @@ def search_chunks(query: str,
         'chunk_size': chunk_size,
         'avg_similarity': np.mean(similarities)
     }
-    
+
     return search_results
 ```
 
@@ -204,26 +204,26 @@ If we examine the combined results for a chunk size of 400 for the same question
 
 ![Cross-Language Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-13.png)
 
-Let's take a pause and look at the results we got through the retrieval. 
+Let's take a pause and look at the results we got through the retrieval.
 
 ![English Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-14.png)
-*Results for English*
+_Results for English_
 
 ![Hindi Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-15.png)
-*Results for Hindi*
+_Results for Hindi_
 
 ![French Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-16.png)
-*Results for French*
+_Results for French_
 
 ![Spanish Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-17.png)
-*Results for Spanish*
+_Results for Spanish_
 
 If you look at the retrieved results for chunk size 400, English and Hindi clearly performed better than French and Spanish. Another quick observation from here is that the first retrieved result in the case of correct answers differs greatly from the other two chunks, which do not contain relevant text and are unrelated to the question.
 
 Quick note — We are using the cosine distance metric provided by **LanceDB** to compare vectors. It also offers other distance metrics that you can use per your use case or experimentation.
 
 ![LanceDB Distance Metrics](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-18-1.png)
-*Other metrics provided by LanceDB*
+_Other metrics provided by LanceDB_
 
 Starting with the **Hindi** language, for the query — "**एजीआई क्या है?**", the similarity scores for multiple chunk sizes look like this:
 
@@ -233,7 +233,7 @@ Starting with the **Hindi** language, for the query — "**एजीआई क�
 The top (first) retrieved chunk consistently has the highest similarity score. However, **the average score reveals that smaller chunk sizes generally yield better results with higher similarity scores compared to larger chunk sizes.** This suggests that smaller chunk sizes may improve overall retrieval precision, though they risk losing context.
 {{< /admonition >}}
 
-On the other hand, larger chunks contain more context and information but might not achieve the best average similarity search score.  
+On the other hand, larger chunks contain more context and information but might not achieve the best average similarity search score.
 
 What about English? — look at this chart below.
 
@@ -259,28 +259,28 @@ In our case, if you notice, English and Hindi share certain grammatical structur
 
 While, at the same time both **French** and **Spanish** have more complex morphology compared to **English** or **Hindi**, meaning they have a larger number of word forms depending on factors such as gender, number, verb conjugation, and case. These features make chunking and text segmentation different in these languages.
 
-Let's take an example to understand this better. For the sentence, ***"I eat apples"***, in English language, the subject ("I") comes first, followed by the verb ("eat"), and then the object ("apples"). This structure is simple and consistent. In Hindi it would be — **"मैं सेब खाता हूँ।". **Here, the subject ("मैं") comes first, followed by the object ("सेब"), and finally the verb ("खाता हूँ"). The verb is always at the end, which makes it different from English. In French, it'd be — **"Je mange des pommes". **French follows the SVO order, just like English. However, when adjectives are involved, they often come **after** the noun. While in Spanish, it'd be — **"Yo como manzanas". **Spanish also follows SVO but with some flexibility. Spanish allows dropping the subject ("Yo"), while English, Hindi, and French typically do not.
+Let's take an example to understand this better. For the sentence, **_"I eat apples"_**, in English language, the subject ("I") comes first, followed by the verb ("eat"), and then the object ("apples"). This structure is simple and consistent. In Hindi it would be — **"मैं सेब खाता हूँ।". **Here, the subject ("मैं") comes first, followed by the object ("सेब"), and finally the verb ("खाता हूँ"). The verb is always at the end, which makes it different from English. In French, it'd be — **"Je mange des pommes". **French follows the SVO order, just like English. However, when adjectives are involved, they often come **after** the noun. While in Spanish, it'd be — **"Yo como manzanas". **Spanish also follows SVO but with some flexibility. Spanish allows dropping the subject ("Yo"), while English, Hindi, and French typically do not.
 
 Note that these (French and Spanish) also follow SVO, but with more frequent adjective-noun inversion and **different punctuation rules**, which can make chunking different because the chunks may need to account for these structural nuances.
 
 That's why we need something that not only splits our text using some character limit but also understands the context and what is being talked about. That's where Semantic Chunking would come into play.
 
 ![Advanced Chunking Approaches](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-25.png)
-*Things are gonna be interesting now.*
+_Things are gonna be interesting now._
 
 ## Advanced Chunking: Semantic and Clustering based approach
 
 I'm sure you'd agree with me that limiting chunking to the number of characters may result in an overall loss of information and context between chunks. I mean, it doesn't really make sense to split text randomly in between. So, we need some approach that also understands the meaning and the context of these sentences. One such way is by doing Semantic Chunking.
 
-First, we split the text into individual sentences using (not mandatory) NLTK's sentence tokenizer. This preserves natural language boundaries rather than breaking text arbitrarily using the number of characters. Here, we can experiment with different models and especially language-specific models available for tokenization. 
+First, we split the text into individual sentences using (not mandatory) NLTK's sentence tokenizer. This preserves natural language boundaries rather than breaking text arbitrarily using the number of characters. Here, we can experiment with different models and especially language-specific models available for tokenization.
 
-For example, NLTK provides the option to pass a language as a parameter while splitting into sentences. We'll use the "*sent_tokenize()*" function here. It relies on pre-trained language models to determine sentence boundaries. It not only searches for punctuations like '? , . !', but also accounts for abbreviations like "Mr." and "U.S.A" to make sure these are not interpreted as boundaries, which might happen if you use simple regex code.
+For example, NLTK provides the option to pass a language as a parameter while splitting into sentences. We'll use the "_sent_tokenize()_" function here. It relies on pre-trained language models to determine sentence boundaries. It not only searches for punctuations like '? , . !', but also accounts for abbreviations like "Mr." and "U.S.A" to make sure these are not interpreted as boundaries, which might happen if you use simple regex code.
 
 There's another alternative to NLTK, i.e., to use spaCy models. spacy also provides language-specific tokenizers, and definitely, you can experiment with that if you want to.
 
 I tried it on all 4 languages bypassing the language as a parameter and got almost similar results, so I combined approaches for those languages. In Hindi, punctuation is not like full stops (.), instead, it has "|" (danda) punctuation. I used `sent_tokenize()` for all other three languages and a simple regex splitter for Hindi.
 
-Once we split the larger text into sentences, the next step is to combine these sentences based on semantic meaning to make groups that make more sense. Ideally, there are multiple ways of doing this. Two of them are  – 
+Once we split the larger text into sentences, the next step is to combine these sentences based on semantic meaning to make groups that make more sense. Ideally, there are multiple ways of doing this. Two of them are –
 
 1. **Sequential Semantic Chunking**: One way could be grouping sentences in sequential order based on similarity. That means if the similarity between the first chunk and the second chunk is more than the threshold point, we group them together. If it's less than the threshold, we create the next group.
 2. **Semantic and Clustering Combined**: Another way could be making clusters of our sentences and then grouping those sentences together based on these clusters to form a chunk. So, we create embeddings, and based on these embedding vectors, we further divide them into a certain number of clusters, which we combine to form chunks at the end. We combine sentences in each cluster together. One argument could be around defining the number of clusters, but I have tried to find the number of clusters programmatically by passing minimum and maximum chunk sizes.
@@ -289,10 +289,10 @@ Once we split the larger text into sentences, the next step is to combine these 
 
 We'll try both of the approaches one by one. Starting with the first approach, it is recommended to use when the order of content is more important because in this approach, we combine the chunks in sequential order. Ideal use cases could be, for example, if you are processing chat messages, you might want to retain the order of your text.
 
-The high-level flow of semantic chunking would look like this – 
+The high-level flow of semantic chunking would look like this –
 
 ![Sequential Semantic Chunking](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/semantic_chunking.png)
-*Sequential Semantic Chunking*
+_Sequential Semantic Chunking_
 
 Clearly, we'll take the text and divide it into sentences. Since there are chances that many sentences will be created during the splitting of the text, we'll group those sentences in sequence if they are discussing the same topic. Remember those large number of chunks being created when we used fixed character text splitters? Around 200-something, right? What do you think will happen this time? Initially, when we split the text into sentences, we got 90 chunks for English. (Already reduced xd)
 
@@ -312,7 +312,7 @@ def store_embeddings(chunks: List[str], table_name: str, model_name: str = "sent
     db = lancedb.connect("./lancedb")
 
     # If table exists and overwrite is True, recreate it
-    
+
     if table_name in db.table_names() and overwrite:
         db.drop_table(table_name)
     # Create new table
@@ -364,9 +364,9 @@ def calculate_cosine_distances(chunks: list) -> list:
 To explain a bit about the process going on here – For each pair of consecutive embeddings, the cosine similarity is calculated. Once we get the similarity, we can calculate the distance between each sentence. Then we calculate the threshold value. The threshold is calculated as the percentile value (e.g., the 90th percentile) of the cosine distances. It is essentially a filter to identify "significant transitions" in the text, where the semantic similarity between consecutive sections drops sharply. Then we iterate over the distances and compare each one to the threshold value. If a distance exceeds the threshold, it indicates a significant semantic transition, and its position is added to crossing points.
 
 ![Semantic Chunking Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-26.png)
-*Check Colab for full code*
+_Check Colab for full code_
 
-Look at this chart above. Did you notice something? Once we do semantic chunking, we get 11 crossing points, and here we combine similar sentences together. That means these were the points where there was a slight change in context, and other things would have been discussed in the text. For each crossing point, we'll create a new chunk from there to the next crossing point. This helps in two ways– 
+Look at this chart above. Did you notice something? Once we do semantic chunking, we get 11 crossing points, and here we combine similar sentences together. That means these were the points where there was a slight change in context, and other things would have been discussed in the text. For each crossing point, we'll create a new chunk from there to the next crossing point. This helps in two ways–
 
 1. First, we have reduced the number of chunks drastically.
 2. More information related to that specific context is now available in those chunks instead of simply splitting based on character count.
@@ -374,21 +374,21 @@ Look at this chart above. Did you notice something? Once we do semantic chunking
 For English, I got 90 sentences initially and 11 chunks of different sizes. A few are very large in size, and a few are small in terms of content, which might be because we started discussing new content in the later part of our text. Still, there are multiple ways to improve the current approach, and it's important to do so because we might get chunks that are often too large in size, which may create issues later.
 
 ![Hindi Language Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-27.png)
-*Plot for Hindi Language - only 4 chunks*
+_Plot for Hindi Language - only 4 chunks_
 
 So while this approach made more sense than RecursiveCharacterTextSplitter(), it has its own issues, like very high variance in chunk sizes due to solely matching on the semantics of sentences. That means a few chunks are over 4000 characters long, while some are only 400. The good part of doing this analysis over all the languages is that there's a similar pattern being observed while processing all of these languages.
 
 ![French Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-29.png)
-*For French*
+_For French_
 
 ![English Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-30.png)
-*For English*
+_For English_
 
 ![Spanish Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-31.png)
-*For Spanish*
+_For Spanish_
 
 ![Hindi Analysis](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-34.png)
-*For Hindi*
+_For Hindi_
 
 They all behaved similarly and had 10-11 chunks at the end, which were far better than many chunks with irrelevant information. The only issue is that we haven't defined any chunk size limit here. I'll leave this experimentation to you to create chunks based on both semantics and chunk sizes and then examine the results.
 
@@ -399,11 +399,11 @@ But this approach might not work always. The reason being, what if I started tal
 I read about the clustering-based approach in this paper titled - [CRAG](https://arxiv.org/pdf/2406.00029v1).
 
 ![CRAG Paper](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-28.png)
-*It's a good read if you are looking to try it out this approach.*
+_It's a good read if you are looking to try it out this approach._
 
-This paper was introduced in May 2024 and provides a detailed insight into how using a clustering-based approach could help you ***reduce your LLM call costs*** by reducing the number of tokens being sent.
+This paper was introduced in May 2024 and provides a detailed insight into how using a clustering-based approach could help you **_reduce your LLM call costs_** by reducing the number of tokens being sent.
 
-Logically, there are various ways of doing clustering, and it depends on your use case or type of content. Ideally, if you think about it, there could be infinite ways of doing this, depending on what works and what doesn't. For example– 
+Logically, there are various ways of doing clustering, and it depends on your use case or type of content. Ideally, if you think about it, there could be infinite ways of doing this, depending on what works and what doesn't. For example–
 
 1. You can create embeddings of all the text data initially and then create clusters and divide them into chunks. (Does this remind you of any recent paper? Late chunking?)
 2. Or you can split your text into sentences and then create clusters on top of their embeddings.
@@ -413,10 +413,10 @@ I'll try the second one today. We have the text, we'll divide it into sentences,
 
 A major issue is, that we might need to define the number of chunks as a parameter while using K-means, which we can choose to find programmatically by taking minimum and maximum chunk size preferences as parameters. Another alternative could be trying different clustering approaches like DBSCAN or any other.
 
-Flow in this approach would be like this – 
+Flow in this approach would be like this –
 
 ![Clustering Based Approach](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/clustering_based_appraoch.png)
-*High level flow of this chunking approach*
+_High level flow of this chunking approach_
 
 Let's do it. We'll first take the text and divide it into sentences. I used the following code depending on the language.
 
@@ -439,7 +439,7 @@ class SemanticTransformerChunker:
         max_chunk_size: int = 2000,
         threshold_percentile: int = 90
     ):
-        
+
     def determine_optimal_clusters(
         self,
         text_length: int,
@@ -507,7 +507,7 @@ class SemanticTransformerChunker:
                 current_chunk = []
                 current_cluster = cluster
             current_chunk.append(sentence)
-            
+
         if current_chunk:
             chunks.append(" ".join(current_chunk))
         return chunks
@@ -516,15 +516,15 @@ class SemanticTransformerChunker:
 Initially, we got 87 sentences from our text. The next step is to create embeddings and pass these embeddings to the clustering function. After using this approach, we got 43 clusters for the English language, which is neither too small nor too big. I did this same analysis over other languages too. It performed a bit weirdly for Hindi, but for the rest of the languages, it performed decently.
 
 ![Hindi Clustering Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-38.png)
-*For Hindi, it only created 7 chunks*
+_For Hindi, it only created 7 chunks_
 
 ![French Clustering Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-39.png)
-*For French we got 42 chunks*
+_For French we got 42 chunks_
 
 ![Spanish Clustering Results](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-40.png)
-*For Spanish, we got 42 chunks*
+_For Spanish, we got 42 chunks_
 
-Now I'm thinking we've done enough chunk analysis; let's check retrieval over these chunks to figure out if they really make sense or not. I saved all the embedding vectors into **LanceDB** and created tables with the language in its name. You can look at the code for that. I asked 3 questions to see if I'm getting the perfect chunk or not. The first five chunks for the question "**What is AGI**" are— 
+Now I'm thinking we've done enough chunk analysis; let's check retrieval over these chunks to figure out if they really make sense or not. I saved all the embedding vectors into **LanceDB** and created tables with the language in its name. You can look at the code for that. I asked 3 questions to see if I'm getting the perfect chunk or not. The first five chunks for the question "**What is AGI**" are—
 
 ![AGI Query Results 1](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-41.png)
 
@@ -544,7 +544,7 @@ For each query asked, it got decent results in the top 3 chunks. Oh wait, I hope
 
 People often call this approach "Agentic Chunking." As the name suggests, in this approach, we utilize LLMs during the chunking process to create quality chunks, so they can provide better retrieval.
 
-Usually, there are two common approaches available on the internet– 
+Usually, there are two common approaches available on the internet–
 
 1. You give your entire text and ask it to split it into N number of chunks. (which doesn't make sense practically.)
 2. You use LLM to create propositions that add meaning to individual sentences and then you create chunks from those sentences.
@@ -556,13 +556,13 @@ For example, if our text looks like this – "Aman is a good guy. He recently me
 When we pass this text to the LLM to create propositions, it would come out like this –
 
 ![LLM Propositions Example](/assets/blog/chunking-analysis-which-is-the-right-chunking-approach-for-your-language/image-46.png)
-*Can you notice the difference?*
+_Can you notice the difference?_
 
 ['Aman is a good guy.', 'Aman met a boy named Akhil.', 'They started playing chess.', 'Aman liked chess.', 'Aman plays chess at grandmaster level.']
 
-Did you notice the second sentence in the lineup? In our text, it was "*He recently met a boy named Akhil,*" while in the propositions, it turned out to be "*Aman met a boy named Akhil,*" which does not need surrounding context to understand who is being referred to. I hope you got the point.
+Did you notice the second sentence in the lineup? In our text, it was "_He recently met a boy named Akhil,_" while in the propositions, it turned out to be "_Aman met a boy named Akhil,_" which does not need surrounding context to understand who is being referred to. I hope you got the point.
 
-Code to create propositions– 
+Code to create propositions–
 
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -611,9 +611,9 @@ We have tested multiple approaches, and we've done enough analysis to call it a 
 
 ### What could be interpreted now?
 
-From our analysis, we can see that different languages behave differently especially when it comes to chunking and retrieval. For some languages, like Hindi, smaller chunk sizes give better precision (which is nearly true for all the languages), while for languages like English, larger chunks (like 400 or more) worked better because they capture more context (not always), improving overall average retrieval accuracy in *RecursiveCharacterTextSplitter().*
+From our analysis, we can see that different languages behave differently especially when it comes to chunking and retrieval. For some languages, like Hindi, smaller chunk sizes give better precision (which is nearly true for all the languages), while for languages like English, larger chunks (like 400 or more) worked better because they capture more context (not always), improving overall average retrieval accuracy in _RecursiveCharacterTextSplitter()._
 
-We also saw how using semantic or clustering-based approaches gives better chunks than fixed character text splitters. While languages behaved similarly when it came to the chunking approach, there were a few sub-steps that were different for each language. For example, splitting text into sentences. My recommendation would be to open that notebook, make a copy of it, make some modifications, try it out on your text, and see if you find something. 
+We also saw how using semantic or clustering-based approaches gives better chunks than fixed character text splitters. While languages behaved similarly when it came to the chunking approach, there were a few sub-steps that were different for each language. For example, splitting text into sentences. My recommendation would be to open that notebook, make a copy of it, make some modifications, try it out on your text, and see if you find something.
 
 I hope this [notebook](https://colab.research.google.com/drive/1DRT5e4_up84afkCMJtP_uTUjvNvPuVWW?usp=sharing) helps you get started with your experimentation. But if you are someone who's not interested in doing research and just want to start with some approach, the following content is for you.
 
@@ -621,7 +621,7 @@ Clearly, there's no "one-size-fits-all" formula here. If you are using Recursive
 
 **What can be done:** To find the best chunk size for each language, we need to explore more (on the same notebook xd) and consider the language's structure and the type of content being processed. The way to split content depends largely on the context in which we are splitting it.
 
-The choice of embedding model also plays a big role in how well the retrieval works. Multilingual embeddings may treat different languages in different ways, leading to variations in chunking and retrieval results. I tried using another embedding model from Sentence Transformers, and *while the overall results were similar, there were slight differences in the similarity scores.* We also have some good multilingual embedding models, like those from Cohere, which we can explore further.
+The choice of embedding model also plays a big role in how well the retrieval works. Multilingual embeddings may treat different languages in different ways, leading to variations in chunking and retrieval results. I tried using another embedding model from Sentence Transformers, and _while the overall results were similar, there were slight differences in the similarity scores._ We also have some good multilingual embedding models, like those from Cohere, which we can explore further.
 
 There is a trade-off between chunk size and context. Smaller chunks give higher precision but may lose some context, while larger chunks contain more context but may not match as well for retrieval and often contains irrelevant text which might act as distraction to LLMs. We can have different segment lengths within a single database to improve overall retrieval instead of fixing any specific chunk size. That's what we did in case of semantic chunking. We didn't actually pass any chunk size parameters.
 
@@ -649,14 +649,14 @@ Here's the link to the [Colab](https://colab.research.google.com/drive/1DRT5e4_u
 
 But still, if you are someone looking for a direct answer, I'll give you a starting point. If you work on –
 
-1. **English** - If you use *RecursiveCharacterTextSplitter()* with your application. If you don't want to use Recursive, use the clustering-based approach directly. It gave the best results and is the most cost-effective approach available.
-2. **Hindi** - I'd not recommend *Recursive* here unless it's the worst case and you have no time. For this, try out different text splitters using NLTK or spaCy models and then start with the Semantic Chunk first. If it doesn't perform well, you can definitely consider clustering-based approaches.
+1. **English** - If you use _RecursiveCharacterTextSplitter()_ with your application. If you don't want to use Recursive, use the clustering-based approach directly. It gave the best results and is the most cost-effective approach available.
+2. **Hindi** - I'd not recommend _Recursive_ here unless it's the worst case and you have no time. For this, try out different text splitters using NLTK or spaCy models and then start with the Semantic Chunk first. If it doesn't perform well, you can definitely consider clustering-based approaches.
 3. **French** and **Spanish** - Notice that these languages are kind of similar when compared with English. If you are someone working on them for the first time, go with clustering-based approaches for both of them. They performed very decently.
 
 Overall, I hope this blog has given you a sense of direction to analyze and find the correct chunk size and chunk approach for your language using **LanceDB**. You can go ahead and experiment further with more questions on the same text or with your own text. Feel free to share your results and findings if you perform further analysis on other languages or different questions.
 
-#### References 
+#### References
 
-1. [Research Papers](https://arxiv.org/pdf/2406.00029v1), 
-2. [Blogs](https://towardsdatascience.com/improving-rag-chunking-with-clustering-03c1cf41f1cd), and 
+1. [Research Papers](https://arxiv.org/pdf/2406.00029v1),
+2. [Blogs](https://towardsdatascience.com/improving-rag-chunking-with-clustering-03c1cf41f1cd), and
 3. an awesome [notebook](https://github.com/FullStackRetrieval-com/RetrievalTutorials/blob/main/tutorials/LevelsOfTextSplitting/5_Levels_Of_Text_Splitting.ipynb) by Full stack retrieval.

@@ -13,7 +13,7 @@ author_bio: ""
 
 A few months ago, I wrote two articles on how the Lance format can supercharge your machine-learning workflows. In the first, I showed how Lance's columnar storage can make handling large image datasets much more efficient for ML workflows. Then, I followed up with a guide on converting datasets like [cinic](https://www.kaggle.com/datasets/vipulmaheshwarii/cinic-10-lance-dataset) and [mini-imagenet](https://www.kaggle.com/datasets/vipulmaheshwarii/mini-imagenet-lance-dataset) into Lance format using a custom Python script in [Google Colab](https://colab.research.google.com/drive/12RjdHmp6m9_Lx7YMRiat4_fYWZ2g63gx?usp=sharing). While that worked well, it was a bit manual.
 
-Some of my friends are lazy but excited enough to run the Colab and use the Lance formatted datatype for some of their experiments. Being a good friend, I'm excited to share a much easier solution: the `lancify` Python package. 
+Some of my friends are lazy but excited enough to run the Colab and use the Lance formatted datatype for some of their experiments. Being a good friend, I'm excited to share a much easier solution: the `lancify` Python package.
 
 It's literally just running one command and boom—your image datasets are in Lance format, ready to go. And, just between us, it makes my life a lot easier, too.
 
@@ -78,7 +78,7 @@ To use the CLI, all you need to do is install the package with `pip install lanc
 
 This is how it looks:
 
-*CLI usage for lancify*
+_CLI usage for lancify_
 
 ## What's happening behind the scenes?
 
@@ -114,6 +114,6 @@ Switching to the Lance format speeds up and improves your data pipelines, especi
 
 ![Lance Format Benefits](/assets/blog/python-package-to-convert-image-datasets-to-lance-type/image-5.png)
 
-Just this small change can really speed up your machine learning workflows—data loading and processing become much quicker, which means your models train faster. If you need a reference, this is a [quickie](https://vipul-maheshwari.github.io/2024/06/26/train-a-cnn-with-lancedataset) on how to use the lance formatted image datasets for training your deep learning models. And if you're looking for more ideas, there are plenty of other [deep-learning recipes](https://github.com/lancedb/lance-deeplearning-recipes) built on Lance. 
+Just this small change can really speed up your machine learning workflows—data loading and processing become much quicker, which means your models train faster. If you need a reference, this is a [quickie](https://vipul-maheshwari.github.io/2024/06/26/train-a-cnn-with-lancedataset) on how to use the lance formatted image datasets for training your deep learning models. And if you're looking for more ideas, there are plenty of other [deep-learning recipes](https://github.com/lancedb/lance-deeplearning-recipes) built on Lance.
 
 Trust me, it's worth it! 🤗

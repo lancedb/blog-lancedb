@@ -13,7 +13,7 @@ author_bio: ""
 
 ## What is RAG?
 
-**Retrieval-Augmented Generation (RAG)** is an architecture that combines traditional information retrieval systems with large language models (LLMs). By integrating external knowledge sources, RAG enhances generative AI capabilities, allowing it to provide responses that are not only more accurate and relevant but also up to date. 
+**Retrieval-Augmented Generation (RAG)** is an architecture that combines traditional information retrieval systems with large language models (LLMs). By integrating external knowledge sources, RAG enhances generative AI capabilities, allowing it to provide responses that are not only more accurate and relevant but also up to date.
 
 ## How Does Retrieval-Augmented Generation (RAG) Work?
 
@@ -85,7 +85,7 @@ We are going to see both in practice.
 
 ## Example
 
-In this section, we will walk through the practical steps of implementing RAG 
+In this section, we will walk through the practical steps of implementing RAG
 
 ```python
 import bs4
