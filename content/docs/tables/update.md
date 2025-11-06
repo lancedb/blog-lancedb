@@ -15,7 +15,7 @@ Once you have created a table, there are several ways to modify its data. You ca
 These operations allow you to keep your table data current and maintain it exactly as needed for your use case. Let's look at each of these operations in detail.
 
 {{< admonition note >}}
-These examples demonstrate common usage patterns. For complete API details and advanced options, refer to our [Python](/docs/api/python/python/) and [TypeScript](/docs/js/globals/) SDK documentation.
+These examples demonstrate common usage patterns. For complete API details and advanced options, refer to our SDK [documentation page](/docs/reference/) and navigate to your client language of choice.
 {{< /admonition >}}
 
 [^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](/docs/migration/) for more information.
@@ -64,9 +64,11 @@ const db = await lancedb.connect("./data");  // Local directory for data storage
 
 ## Data Insertion
 
-### Basic Data Insertion
+### Adding data to a table
 
-Let's start with the simplest way to insert data into a LanceDB table:
+Say you created a LanceDB table by passing in a `schema`.
+This is an _empty_ table, with no data in it. To add or append data to a table, you can use the `table.add(data)`,
+as shown below.
 
 {{< code language="python" >}}
 import lancedb
@@ -95,6 +97,7 @@ schema = pa.schema([
 
 table_name = "basic_ingestion_example"
 table = db.create_table(table_name, schema=schema, mode="overwrite")
+# Add data
 table.add(data)
 {{< /code >}}
 
@@ -152,7 +155,7 @@ await table2.add(data2);
 {{< /code >}}
 
 {{< admonition info "Vector Column Type" >}}
-The vector column needs to be a pyarrow.FixedSizeList type.
+The vector column needs to be a `pyarrow.FixedSizeList` type.
 {{< /admonition >}}
 
 ### Using Pydantic Models
@@ -318,7 +321,7 @@ Updating nested columns is not yet supported.
 | `values_sql` | `dict` | The values to update. The keys are the column names and the values are the SQL expressions to set. For example, `{'x': 'x + 1'}` will increment the value of the `x` column by 1. |
 
 {{< admonition info "SQL syntax" >}}
-See [SQL filters](/docs/tables/sql/) for more information on the supported SQL syntax.
+See the [SQL queries](/docs/search/sql/sql-queries/) page for more information on the supported SQL syntax.
 {{< /admonition >}}
 
 {{< code language="python" >}}

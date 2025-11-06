@@ -58,4 +58,4 @@ reranked = reranker.rerank_multivector([res1, res2, res3],  deduplicate=True)
 
 ## Creating Custom Rerankers
 
-LanceDB also you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](/docs/reranking/custom_reranker/) section.
+LanceDB also you to create custom rerankers by extending the base `Reranker` class. The custom reranker should implement the `rerank` method that takes a list of search results and returns a reranked list of search results. This is covered in more detail in the [Creating Custom Rerankers](/docs/reranking/custom-reranker/) section.
