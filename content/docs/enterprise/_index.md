@@ -8,7 +8,7 @@ aliases: ["/docs/overview/enterprise/", "/docs/overview/enterprise"]
 
 **LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance [vector database](/docs/overview/#the-multimodal-vector-database) or [lakehouse](/docs/overview/#the-multimodal-lakehouse) that can operate at extreme scale.
 
-With a vector database built for [lakehouse architecture](/docs/overview/enterpris/architecture/), you can serve millions of tables and tens of billions of rows in a single index, improve retrieval quality using hybrid search with blazing-fast metadata filters, and reduce costs by up to 200x with object storage.
+With a vector database built for [lakehouse architecture](/docs/overview/enterprise/architecture/), you can serve millions of tables and tens of billions of rows in a single index, improve retrieval quality using hybrid search with blazing-fast metadata filters, and reduce costs by up to 200x with object storage.
 
 {{< admonition >}}
 For private deployments, high performance at extreme scale, or if you have strict security requirements, [talk to us about LanceDB Enterprise](mailto:contact@lancedb.com).

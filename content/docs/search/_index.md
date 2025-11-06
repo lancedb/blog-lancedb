@@ -9,9 +9,9 @@ aliases: ["/docs/concepts/search/", "/docs/concepts/search"]
 
 | Feature | Description |
 |:---------------|:------------|
-| [Vector Search](/docs/concepts/search/vector-search/) | Semantic similarity search with multiple distance metrics |
-| [Multivector Search](/docs/concepts/search/multivector-search/) | Search using multiple vector embeddings per document |
-| [Full-Text Search](/docs/concepts/search/full-text-search/) | Keyword-based search with BM25 and pre-filtering |
-| [Hybrid Search](/docs/concepts/search/hybrid-search/) | Combines vector and full-text search with reranking |
-| [Metadata Filtering](/docs/concepts/search/filtering/) | Filter results based on metadata fields |
-| [SQL Queries](/docs/concepts/search/sql/) | SQL query capabilities for data exploration and analytics |
+| [Vector Search](/docs/search/vector-search/) | Semantic similarity search with multiple distance metrics |
+| [Multivector Search](/docs/search/multivector-search/) | Search using multiple vector embeddings per document |
+| [Full-Text Search](/docs/search/full-text-search/) | Keyword-based search with BM25 and pre-filtering |
+| [Hybrid Search](/docs/search/hybrid-search/) | Combines vector and full-text search with reranking |
+| [Metadata Filtering](/docs/search/filtering/) | Filter results based on metadata fields |
+| [SQL Queries](/docs/search/sql/sql-queries) | SQL query capabilities for data exploration and analytics |

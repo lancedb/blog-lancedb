@@ -46,7 +46,7 @@ await table.createIndex("text", {
 });
 {{< /code >}}
 
-Check FTS index status using the [methods above](#check-index-status).
+Check FTS index status using the methods below.
 
 {{< code language="python" >}}
 index_name = "text_idx"

@@ -82,7 +82,7 @@ Data is converted to Arrow before being written to disk. For maximum control ove
 {{< /admonition >}}
 
 {{< admonition info "Vector Column Type" >}}
-The **`vector`** column needs to be a [Vector](/docs/python/pydantic/#vector-field) (defined as [pyarrow.FixedSizeList](https://arrow.apache.org/docs/python/generated/pyarrow.list_.html)) type.
+The **`vector`** column needs to be a [Vector](/docs/integrations/frameworks/pydantic/#vector-field) (defined as [pyarrow.FixedSizeList](https://arrow.apache.org/docs/python/generated/pyarrow.list_.html)) type.
 {{< /admonition >}}
 
 #### From a custom schema
@@ -389,7 +389,7 @@ class Item(LanceModel):
 tbl = db.create_table("test_empty_table_new", schema=Item.to_arrow_schema())
 ```
 
-Once the empty table has been created, you can add data to it via the various methods listed in the [Adding to a table](#adding-to-a-table) section.
+Once the empty table has been created, you can add data to it, as explained in the next section on [working with data](/docs/tables/update).
 
 ## Drop a table
 
