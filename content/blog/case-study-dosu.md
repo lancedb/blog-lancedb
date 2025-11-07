@@ -34,9 +34,9 @@ In today's fast-moving software landscape, [Dosu](https://dosu.dev) has emerged 
 
 [Dosu](https://dosu.dev) learns your architecture, patterns, and decisions across GitHub and Slack, proactively surfacing relevant Dosu-generated documentation on PRs, answering questions, and resolving issues in context. At the core is a hybrid Retrieval-Augmented Generation (RAG) system powered by high-performance [vector search](https://lancedb.com/documentation) that weaves code, conversations, and documentation into a unified, searchable knowledge graph.
 
-For organizations, [Dosu](https://dosu.dev) is more than a productivity boost. It's a strategic layer that aligns helps to ensure knowledge stays up to date and accurate, so software teams and AI Agents can make better decisions without having to spend half their day on manual maintenance. It helps teams onboard faster, reduces maintenance overhead and preserves institutional knowledge.
+For organizations, [Dosu](https://dosu.dev) is more than a productivity boost. It's a strategic layer that helps to ensure knowledge stays up to date and accurate, so software teams and AI Agents can make better decisions without having to spend half their day on manual maintenance. It helps teams onboard faster, reduces maintenance overhead and preserves institutional knowledge.
 
-For Agents, specifically, [Dosu](https://dosu.dev) is a must have to ensure LLM systems make good decisions based on up to date information, rather than stale documentation. This is an increasingly pernicious problem where agentic AI makes more frequent codebase changes, resulting in documentation that's more difficult to keep up to date, which could lead other AI systems to have wrong or stale context and make increasingly inaccurate decisions. [Dosu](https://dosu.dev) addresses the problem ensuring documentation stays up to date as when changes in code are detected. 
+For Agents, specifically, [Dosu](https://dosu.dev) is a must have to ensure LLM systems make good decisions based on up to date information, rather than stale documentation. This is an increasingly pernicious problem where agentic AI makes more frequent codebase changes, resulting in documentation that's more difficult to keep up to date, which could lead other AI systems to have wrong or stale context and make increasingly inaccurate decisions. [Dosu](https://dosu.dev) addresses the problem ensuring documentation stays up to date when changes in code are detected. 
 
 [Dosu](https://dosu.dev) isn't just another AI copilot. It's your always-on intelligent knowledge base, keeping on top of new knowledge when it's created, maintaining context, and accelerating how software teams and the agentic systems that support them build the future.
 
@@ -78,7 +78,7 @@ Within just a few weeks, [Dosu](https://dosu.dev) successfully integrated [Lance
 
 With [LanceDB](https://lancedb.com/), [Dosu's](https://dosu.dev) engineers shifted their focus from maintaining database scaffolding to building product features that matter. The result: faster prototyping, easier local development, and rapid scaling to thousands of customers. [See how to get started.](https://lancedb.com/documentation)
 
-**Figure 3:** LanceDB as part od Dosu's architecture
+**Figure 3:** LanceDB as part of Dosu's architecture
 ![](/assets/blog/case-study-dosu/dosu-1.png)
 
 [Dosu](https://dosu.dev) ingests and synthesizes multimodal development data, including source code, GitHub activity, and documentation, to build a living knowledge graph that reflects the state and evolution of a software project. It transforms code structures like functions and classes into semantic embeddings, while also embedding context from related issues, pull requests, and discussion threads. This enriched data, tagged with structured metadata such as repository identifiers, timestamps, and file paths, is stored and indexed in [LanceDB](https://lancedb.com/) for high-performance retrieval.
@@ -93,7 +93,7 @@ LanceDB's flexible architecture allows [Dosu](https://dosu.dev) to support both 
 
 To keep internal documentation fresh and relevant, [Dosu](https://dosu.dev) continuously pulls relevant signals from [LanceDB's knowledge base](https://lancedb.com/documentation), including commits, discussions, and historical annotations. It then synthesizes accurate, up-to-date references like architecture diagrams, API guides, and changelogs, which can be auto-committed to source repositories. The entire process is powered by LanceDB's [built-in versioning](https://lancedb.com/documentation), enabling teams to audit how documentation was generated and roll back or compare versions as needed.
 
-This transparency and traceability make [Dosu](https://dosu.dev) suitable for compliance-heavy environments, while also accelerating iteration in fast-moving teams. With LanceDB's intuitive, [file-based setup](https://lancedb.com/documentation), developers can build and test locally with zero migration overhead and full reproducibility.
+This transparency and traceability makes [Dosu](https://dosu.dev) suitable for compliance-heavy environments, while also accelerating iteration in fast-moving teams. With LanceDB's intuitive, [file-based setup](https://lancedb.com/documentation), developers can build and test locally with zero migration overhead and full reproducibility.
 
 ## The Result
 
