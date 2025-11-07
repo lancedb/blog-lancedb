@@ -76,7 +76,7 @@ Within just a few weeks, [Dosu](https://dosu.dev) successfully integrated [Lance
 
 > With pgvector, every change meant a new migration. LanceDB lets us avoid the overhead and just point to a directory for local development. It's helped our developers build, test and ship faster! </br> Pavitra Bhalla, Engineer @ [Dosu](https://dosu.dev)
 
-With [LanceDB](https://lancedb.com/), [Dosu's](https://dosu.dev) engineers shifted their focus from maintaining database scaffolding to building product features that matter. The result: faster prototyping, easier local development, and rapid scaling to thousands of customers. [See how to get started.](https://lancedb.com/documentation)
+With [LanceDB](https://lancedb.com/), [Dosu's](https://dosu.dev) engineers shifted their focus from maintaining database scaffolding to building product features that matter. The result: faster prototyping, easier local development, and rapid scaling to thousands of customers. [See how to get started.](https://lancedb.com/docs/quickstart/)
 
 **Figure 3:** LanceDB as part of Dosu's architecture
 ![](/assets/blog/case-study-dosu/dosu-1.png)
@@ -97,7 +97,7 @@ This transparency and traceability makes [Dosu](https://dosu.dev) suitable for c
 
 ## The Result
 
-By simplifying everyday workflows while maintaining high-performance [hybrid search](https://lancedb.com/documentation) and [versioned storage](https://lancedb.com/documentation), LanceDB aligns perfectly with [Dosu's](https://dosu.dev) mission: to empower developers with tools that are fast, reliable, and easy to use. Integrating LanceDB-powered AI intelligence has revolutionized how engineering teams manage and scale their codebases with [Dosu](https://dosu.dev):
+By simplifying everyday workflows while maintaining high-performance [hybrid search](https://lancedb.com/docs/search/hybrid-search/) and [versioned storage](https://lancedb.com/documentation), LanceDB aligns perfectly with [Dosu's](https://dosu.dev) mission: to empower developers with tools that are fast, reliable, and easy to use. Integrating LanceDB-powered AI intelligence has revolutionized how engineering teams manage and scale their codebases with [Dosu](https://dosu.dev):
 
 | Benefit | Details |
 |---------|---------|
