@@ -8,7 +8,7 @@ weight: 6
 
 | Reference | Description |
 |:--------------|:-------------------|
-| [REST API Documentation](https://docs.lancedb.com/) | Ideal for building web applications, cross-platform integrations, serverless architectures and anguage-agnostic implementations. |
+| [REST API Documentation](https://docs.lancedb.com/) | Ideal for building web applications, cross-platform integrations, serverless architectures and language-agnostic implementations. |
 | [Python SDK Documentation](https://lancedb.github.io/lancedb/python/python/) | Full-featured Python client with pandas & numpy integration |
 | [TypeScript SDK Documentation](https://lancedb.github.io/lancedb/js/globals/) | Modern JavaScript/TypeScript SDK for Node.js and browsers |
 | [Rust Documentation](https://docs.rs/lancedb/latest/lancedb/index.html) | Native Rust implementation for high performance |

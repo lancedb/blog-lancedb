@@ -32,9 +32,14 @@ the following import statement -- no servers needed!
 import lancedb
 ```
 
+Connect to the LanceDB database:
+```python
+db = lancedb.connect(uri="ex_lancedb")
+```
+
 ### Optional: Cloud or Enterprise versions
 
-If you want a fully-managed solution, you can opt for LanceDB Cloud, which provides managed infrastructure, security, and automatic backups. The connection `uri` determines where your data is stored.
+If you want a fully-managed solution, you can opt for LanceDB Cloud, which provides managed infrastructure, security, and automatic backups. To move from LanceDB OSS to the cloud version, simply replace the connection `uri` with the relevant slug on your LanceDB cloud setup.
 
 ```python
 db = lancedb.connect(
@@ -44,7 +49,9 @@ db = lancedb.connect(
 )
 ```
 
+{{< admonition >}}
 If you're operating at enormous scale and are looking for more advanced use cases beyond just search, like feature engineering, model training and more, check out [LanceDB Enterprise](/docs/enterprise).
+{{< /admonition >}}
 
 ## 4. Obtain some data
 

@@ -6,7 +6,7 @@ description: "Learn how to build production-ready RAG systems with LanceDB's tim
 weight: 1
 ---
 
-> **Complete Code**: All the scripts and code for this tutorial are available in the [LanceDB documentation repository](https://github.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/RAG/time-travel-rag/). 
+> **Complete Code**: All the scripts and code for this tutorial are available in the [vectorDB recipes](https://github.com/lancedb/vectordb-recipes/tree/main/examples/time-travel-rag) repository. 
 
 ## Use Case: Financial Services Regulatory Knowledge Base
 
@@ -38,7 +38,7 @@ To make this use case realistic, we'll use a perfect real-world dataset: The U.S
 
 It contains all new rules, proposed rules, and notices from federal agencies. It is the canonical source for regulatory changes, and it's updated every business day. It even has a public API, allowing us to simulate the real-time ingestion of new documents.
 
-Example output of the workflow defined in [main.py](https://github.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/rag/time-travel-rag/main.py)
+Example output of the workflow defined in [main.py](https://github.com/lancedb/vectordb-recipes/blob/main/examples/time-travel-rag/main.py)
 
 ```bash
 --- Initializing Database Environment ---
