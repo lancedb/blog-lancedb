@@ -3,7 +3,7 @@ title: "Building the Future Together: Introducing Lance Community Governance"
 date: 2025-11-11
 draft: false
 featured: true
-categories: ["Engineering"]
+categories: ["Announcement"]
 image: /assets/blog/lance-community-governance/preview-image.png
 meta_image: /assets/blog/lance-community-governance/preview-image.png
 description: "Announcing the formal governance structure for the Lance community, establishing clear pathways for contribution and leadership with a three-tier system inspired by the Apache Way."
