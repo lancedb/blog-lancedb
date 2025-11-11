@@ -16,7 +16,7 @@ author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
 
 Over the last three years, Lance has created a truly unique community where data infrastructure engineers and AI/ML engineers come together to make lakehouse architectures work in the AI era. Today, we’re excited to announce the formal governance structure for the Lance community to help it thrive, even further.
 
-What started off as an idea by Chang She and Lei Xu to develop a better format for machine learning and AI has now become the fastest-growing open format with a vibrant community, spanning hundreds of contributors and dozens of companies. From top-level frontier model labs like RunwayML, Midjourney, Harvey.ai, and World Labs, to large enterprises building ML/AI applications like UBS, Netflix and Uber, to data infrastructure powerhouses like Databricks, AWS and ByteDance, Lance brings together diverse perspectives, united by a common goal: building the de facto standard format for multimodal AI.
+What started off as an idea to develop a better format for machine learning and AI has now become the fastest-growing open format with a vibrant community, spanning hundreds of contributors and dozens of companies. From top-level frontier model labs like RunwayML, Midjourney, Harvey.ai, and World Labs, to large enterprises building ML/AI applications like UBS, Netflix and Uber, to data infrastructure powerhouses like Databricks, AWS and ByteDance, Lance brings together diverse perspectives, united by a common goal: building the de facto standard format for multimodal AI.
 
 As Lance continues to mature and its adoption accelerates, we believe it's time to establish clear pathways for community involvement and leadership that reflect our collaborative, inclusive values.
 
