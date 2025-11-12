@@ -13,7 +13,7 @@ description: "In our last blog, we talked about chunking and why it is necessary
 In our last blog, we talked about chunking and why it is necessary for processing data through LLMs. We covered some simple techniques to perform text chunking.
 
 In this blog, we will comprehensively cover all the chunking techniques available in Langchain and LlamaIndex.
-![Chunking overview](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/0*FJOKBN99gTfv_9ED.jpg)
+![Chunking overview](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/0xFJOKBN99gTfv_9ED.jpg)
 > The aim is to get the data in a format where it can be used for anticipated tasks, and retrieved for value later. Rather than asking “How should I chunk my data?”, the actual question should be “What is the optimal way for me to pass data to my language model that it needs for its task?”
 
 Let's begin with Langchain first!
