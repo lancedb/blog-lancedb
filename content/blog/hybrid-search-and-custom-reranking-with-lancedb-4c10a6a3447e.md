@@ -51,11 +51,11 @@ Here’s some evaluation numbers from experiment comparing these re-rankers on a
 
 Vector Search baseline — `0.64`
 
-![OpenAI ada2 evaluation - baseline](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*sIDZfRsg8CctGotZfZwq7w.png)
+![OpenAI ada2 evaluation - baseline](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1xsIDZfRsg8CctGotZfZwq7w.png)
 
 Vector Search baseline — `0.59`
 
-![OpenAI ada2 evaluation - reranked](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*ItP95MwqIe43veGsCqe24Q.png)
+![OpenAI ada2 evaluation - reranked](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1xItP95MwqIe43veGsCqe24Q.png)
 
 With this context, let us now test hybrid search with different rerankers using LanceDB.
 
@@ -77,7 +77,7 @@ LanceDB.from_documents(docs, embedding_function, connection=table)
 table.to_pandas().head()
 ```
 
-![LanceDB table preview](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*Z8UCr_bNo3nCmKCafDHGlQ.png)
+![LanceDB table preview](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1xZ8UCr_bNo3nCmKCafDHGlQ.png)
 In the original example, tvectorDB is queried to retrieve the specific reasons as to why Airbnb's operating costs were high for that year.
 
 ```python
@@ -238,7 +238,7 @@ docs = table.search(query, query_type="hybrid").rerank(reranker=reranker).to_pan
 
 Cohere Reranker better ranks the results as it is powered by a model designed for this task, i.e., calculating the relevance of given documents in relation to the given query. This is different from the linear combination as it relies only on the existing scores of individual search algorithms (vector search and FTS). Here are the relevance scores given to each of these docs by the cohere reranker. It is evident that the first two docs are highly relevant.
 
-![Cohere Reranker relevance scores](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*0U6v0riXpGC2icbD4L0kIA.png)
+![Cohere Reranker relevance scores](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1x0U6v0riXpGC2icbD4L0kIA.png)
 
 ## ColBERT Reranker
 
@@ -288,7 +288,7 @@ LanceDB also supports other rerankers, including an experimental prompt-based [O
 
 Subjectively, Cohere had a slight edge in getting the most relevant result (top 1), which the others missed, and considering it also included a network roundtrip, so the speed of 600ms is pretty impressive, too. This is also consistent with the evaluation results.
 
-![Rerankers speed (ms) comparison](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1*yWDh0Klw8Upsw1V54kkkdQ.png)
+![Rerankers speed (ms) comparison](/assets/blog/hybrid-search-and-custom-reranking-with-lancedb-4c10a6a3447e/1xyWDh0Klw8Upsw1V54kkkdQ.png)
 
 **Note**: Cohere is an API-based reranker, and the speed is subject to internet connection quality
 

@@ -15,7 +15,7 @@ In the world of search engines, the quest to find the most relevant information 
 ## The Challenge of Dense Retrieval
 
 Dense retrieval, a method used by search engines to find relevant documents by comparing their semantic similarities, has shown great promise across various tasks and languages. However, building fully zero-shot dense retrieval systems without any relevant labels has been a significant challenge. Traditional methods rely on supervised learning, which requires a large dataset of labeled examples to train the model effectively.
-![HyDE overview](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*mCjvp4YeeGn-T6XTfDcwgw.png)
+![HyDE overview](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xmCjvp4YeeGn-T6XTfDcwgw.png)
 ## Introducing HyDE
 
 The HyDE approach recognizes the difficulty of zero-shot learning and encoding relevance without labeled data. Instead, it leverages the power of language models and hypothetical documents. Here’s how it works:
@@ -148,7 +148,7 @@ the result of vector_store getting some relevant information from the doc
 
 below is a screenshot of a PDF file that has all the information related to a query.
 
-![PDF screenshot example](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*YtYoBsurIhNd24xDWmtFVg.png)
+![PDF screenshot example](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xYtYoBsurIhNd24xDWmtFVg.png)
 
 passing the string query to get some reference
 
@@ -167,9 +167,9 @@ The major nutritional limitations of fast-food meals are typically high levels o
 
 HyDE response: here we can see that we are getting the output. which is very good.
 
-![HyDE results 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*VskgpwscCiFdhKeLHNCx8g.png)
+![HyDE results 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xVskgpwscCiFdhKeLHNCx8g.png)
 
-![HyDE results 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*ICbqfWSAFNmWLGni7MOF7A.png)
+![HyDE results 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xICbqfWSAFNmWLGni7MOF7A.png)
 
 A vanilla RAG is not able to get the correct answer because it's directly searching similar keywords in the database.
 
@@ -180,8 +180,8 @@ A vanilla RAG is not able to get the correct answer because it's directly search
 - The quality of the retrieved documents heavily depends on the effectiveness of the retrieval methods, which may not always capture highly relevant information.
 
 *Example Output:*
-![Normal RAG result 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*EZpfcbs4ssfVJ8tuXWlqIw.png)
-![Normal RAG result 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1*VZfhPM515sQq70WAXU0hog.png)
+![Normal RAG result 1](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xEZpfcbs4ssfVJ8tuXWlqIw.png)
+![Normal RAG result 2](/assets/blog/advanced-rag-precise-zero-shot-dense-retrieval-with-hyde-0946c54dfdcb/1xVZfhPM515sQq70WAXU0hog.png)
 you can check our blog for a [vanilla RAG](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/chatbot_using_Llama2_&amp;_lanceDB)
 
 Colab to reproduce the results:

@@ -76,7 +76,7 @@ One of the most popular LLM applications is question-answering on documents via 
 
 ## Built-in Support for LanceDB
 
-![](https://miro.medium.com/v2/resize:fit:500/1*1aHRaS2KR9jqGJlLiTo6CQ.jpeg)
+![](https://miro.medium.com/v2/resize:fit:500/1x1aHRaS2KR9jqGJlLiTo6CQ.jpeg)
 Langroid uses LanceDB as the default vector store for its DocChatAgent.
 
 Langroid’s DocChatAgent uses the LanceDB serverless vector database by default. Since LanceDB uses file storage, it is easy to set up and use (no need for docker or cloud services), and due to its use of the Lance columnar format, it is highly performant and scalable. In addition, Langroid has a specialized `LanceDocChatAgent` that leverages LanceDB's unique features such as Full-text search, SQL-like filtering, and pandas dataframe interop. Setting up a basic RAG chatbot is as simple as (assume the previous imports):

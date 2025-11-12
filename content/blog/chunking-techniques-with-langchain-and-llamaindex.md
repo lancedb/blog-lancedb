@@ -13,14 +13,14 @@ description: "In our last blog, we talked about chunking and why it is necessary
 In our last blog, we talked about chunking and why it is necessary for processing data through LLMs. We covered some simple techniques to perform text chunking.
 
 In this blog, we will comprehensively cover all the chunking techniques available in Langchain and LlamaIndex.
-![Chunking overview](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/0*FJOKBN99gTfv_9ED.jpg)
+![Chunking overview](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/0xFJOKBN99gTfv_9ED.jpg)
 > The aim is to get the data in a format where it can be used for anticipated tasks, and retrieved for value later. Rather than asking “How should I chunk my data?”, the actual question should be “What is the optimal way for me to pass data to my language model that it needs for its task?”
 
 Let's begin with Langchain first!
 
 ## Chunking Techniques in Langchain
 
-![LangChain text splitters](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/1*LlJfztZOhVrryfG5uRouiQ.png)
+![LangChain text splitters](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/1xLlJfztZOhVrryfG5uRouiQ.png)
 
 Before jumping into chunking, make sure to first install **Langchain-text-splitters**
 
@@ -235,7 +235,7 @@ These are the most important text-splitting/ chunking techniques using Langchain
 
 ## LlamaIndex Chunking Techniques with Implementation
 
-![](https://cdn-images-1.medium.com/max/800/1*Xl9yLVVAarsdC-sbXJSr3g.png)
+![](https://cdn-images-1.medium.com/max/800/1xXl9yLVVAarsdC-sbXJSr3g.png)
 
 Make sure to install `llama_index` package.
 

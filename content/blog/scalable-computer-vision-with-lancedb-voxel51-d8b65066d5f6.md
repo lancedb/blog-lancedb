@@ -17,7 +17,7 @@ Dataset analysis is an essential step in any computer vision project. It allows 
 Voxel51 is a set of open-source tools for computer vision. The FiftyOne query language allows you to explore and analyze your data in a variety of ways. You can use the query language to find specific images, objects, or features.
 
 With this integration with LanceDB, Voxel51 can leverage its fast, robust, and setup-free vector search capabilities.
-![](/assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/1*RFtus4W8XVeoG0Bc08IHdg.jpg)
+![](/assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/1xRFtus4W8XVeoG0Bc08IHdg.jpg)
 ## LanceDB: The serverless vectorDB
 
 LanceDB is an open-source, serverless, multi-modal vector database.
@@ -41,7 +41,7 @@ fob.compute_similarity(
 
 ## Sort dataset by similarity
 
-![](/assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/1*WIKrLZEtkYGwlXaCDdctJQ.gif)
+![](/assets/blog/scalable-computer-vision-with-lancedb-voxel51-d8b65066d5f6/1xWIKrLZEtkYGwlXaCDdctJQ.gif)
 ## Get similar images to a given id
 
 ```python

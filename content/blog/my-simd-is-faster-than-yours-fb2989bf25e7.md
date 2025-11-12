@@ -237,7 +237,7 @@ This NEON-accelerate L2 implementation only takes `0.299s` to compute 1 million 
 
 For the sake of completeness in benchmarking, we also ran the same numpy script on a Macbook Pro using the Apple Accelerate Framework for BLAS. We’ve seen similar 3–15x speed ups by manually tuning the SIMD instructions across the CPU architectures ( `x86_64` and `apple-silicon (aarch64)` ).
 
-![](https://miro.medium.com/v2/resize:fit:770/1*eylFuCRjMSnm2MPyN7t4MA.png)Relative speed-up on X86_64(AVX2) and Apple Silicon (NEON). Numpy uses intel MKL on AWS EC2 c6in.4xlarge instance, and Apple Accelerate Framework on a M2 Max Macbook Pro.
+![](https://miro.medium.com/v2/resize:fit:770/1xeylFuCRjMSnm2MPyN7t4MA.png)Relative speed-up on X86_64(AVX2) and Apple Silicon (NEON). Numpy uses intel MKL on AWS EC2 c6in.4xlarge instance, and Apple Accelerate Framework on a M2 Max Macbook Pro.
 
 ## What the future of LanceDB will look like
 

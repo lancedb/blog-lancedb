@@ -182,7 +182,7 @@ Querying the database using text search.
     0  A cinema, also known as a movie theater or mov...   0.131036
 
 You can find various types of instructions for your use case. Check out the official project page of [Instruct](https://instructor-embedding.github.io/).
-![](https://miro.medium.com/v2/resize:fit:770/1*wOgP--ufAxpis3ysuZI_rw.png)Instruction examples
+![](https://miro.medium.com/v2/resize:fit:770/1xwOgP--ufAxpis3ysuZI_rw.png)Instruction examples
 Visit our [GitHub ](https://github.com/lancedb)and if you wish to learn more about LanceDB python and Typescript library
 For more such applied GenAI and VectorDB applications, examples and tutorials visit [VectorDB-Recipes.](https://github.com/lancedb/vectordb-recipes/tree/main)
 

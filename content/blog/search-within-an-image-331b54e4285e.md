@@ -23,7 +23,7 @@ Enabling semantic search within an image requires multiple steps. This process i
 
 Here’s a visual representation of the process
 
-![Architecture for Search Engine](/assets/blog/search-within-an-image-331b54e4285e/1*32siuOjQamsOWzxmH1ZxDg.png)
+![Architecture for Search Engine](/assets/blog/search-within-an-image-331b54e4285e/1x32siuOjQamsOWzxmH1ZxDg.png)
 
 The process consists of four key steps:
 
@@ -80,7 +80,7 @@ Get the Image segmentation
 ```
 
 Display the Segmentation Masks
-![Segmentation Masks](/assets/blog/search-within-an-image-331b54e4285e/1*P-c2e5YZk2Z_AUnmyMsnfw.png)
+![Segmentation Masks](/assets/blog/search-within-an-image-331b54e4285e/1xP-c2e5YZk2Z_AUnmyMsnfw.png)
 **II**. **Convert the entities into embeddings**
 
 To convert the entities into embeddings, we will be using **CLIP** model.Get the embeddings of the segmented images.
@@ -174,7 +174,7 @@ tbl = index_images_to_lancedb(img_uuid)
 search_image_with_user_query(tbl, img_uuid, 'a dog')
 ```
 
-![Result](/assets/blog/search-within-an-image-331b54e4285e/1*Ob_qPZfmCfVX-J3SAXYTCA.png)
+![Result](/assets/blog/search-within-an-image-331b54e4285e/1xOb_qPZfmCfVX-J3SAXYTCA.png)
 
 Visit our [LanceDB](https://github.com/lancedb/lancedb) and if you wish to learn more about LanceDB python and Typescript library.
 For more such applied GenAI and VectorDB applications, examples and tutorials visit [**VectorDB-Recipes.**](https://github.com/lancedb/vectordb-recipes/tree/main)** **Don’t forget to leave a star at the repo.

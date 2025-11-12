@@ -22,7 +22,7 @@ We’ll also see the performance of PQ and IVFPQ in terms of memory and cover an
 
 Quantization is a process used for dimensional reduction without losing important information.
 
-![Quantization: Dimensionality Reduction](/assets/blog/benchmarking-lancedb-92b01032874a-2/1*9ibrbi3Gox6nMDda8oL7yg.png)
+![Quantization: Dimensionality Reduction](/assets/blog/benchmarking-lancedb-92b01032874a-2/1x9ibrbi3Gox6nMDda8oL7yg.png)
 ## How does Product Quantization work?
 
 Product Quantization can be broken down into steps listed below:
@@ -31,7 +31,7 @@ Product Quantization can be broken down into steps listed below:
 2. Identify the nearest centroid for each subvector, referring to it as reproduction or reconstruction values.
 3. Replace these reproduction values with unique IDs that represent the corresponding centroids.
 
-![Product Quantization](/assets/blog/benchmarking-lancedb-92b01032874a-2/1*5EyBpJ2H0jQkKFpIDIPhAg.png)
+![Product Quantization](/assets/blog/benchmarking-lancedb-92b01032874a-2/1x5EyBpJ2H0jQkKFpIDIPhAg.png)
 Let's see how it works in the implementation; for that we’ll create a random array of size 12 and keep the chunk size as 3.
 
 ```python
@@ -175,11 +175,11 @@ tbl.create_index(num_partitions=256, num_sub_vectors=96)
 
 Now let's see what this IVF Index does to reduce the scope of vectors. An inverted file is an index structure that is used to map database vectors to their respective partitions where these vectors reside.
 
-![PQ vectors](/assets/blog/benchmarking-lancedb-92b01032874a-2/1*sqiTUncKKCVBOTks7XtvIw.png)
+![PQ vectors](/assets/blog/benchmarking-lancedb-92b01032874a-2/1xsqiTUncKKCVBOTks7XtvIw.png)
 
-![Vectors assigned to Voronoi cells via IVF](/assets/blog/benchmarking-lancedb-92b01032874a-2/1*dolXJIJ4YVubaREDPSxFww.png)
+![Vectors assigned to Voronoi cells via IVF](/assets/blog/benchmarking-lancedb-92b01032874a-2/1xdolXJIJ4YVubaREDPSxFww.png)
 This is Voronoi's Representation of vectors using IVF, they’re simply a set of partitions each containing vectors close to each other, and when it comes to search — When we introduce our query vector, it restricts our search to the nearest cells only because of which searching becomes way faster compared to PQ.
-![Query Vector searches closest cell](/assets/blog/benchmarking-lancedb-92b01032874a-2/1*07pM49ui5dtkCeRYQLbmlQ.png)
+![Query Vector searches closest cell](/assets/blog/benchmarking-lancedb-92b01032874a-2/1x07pM49ui5dtkCeRYQLbmlQ.png)
 Afterwards, PQ needs to be applied as we have seen above.
 
 All of this can be applied using the IVF+PQ Index using [LanceDB](https://github.com/lancedb/vectordb-recipes) in minimal lines of code

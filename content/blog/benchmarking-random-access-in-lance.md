@@ -116,7 +116,7 @@ Here’s the output (in seconds):
     Parquet: mean time per key is 1.246656603929473
 
 I also benchmarked a similar setup using LMDB and plotted all on the same chart for comparison:
-![](/assets/blog/benchmarking-random-access-in-lance/1*CgLqW9c8Q8UMEBWgvBI17Q.png)throughput is computed as “1 / mean time per key”
+![](/assets/blog/benchmarking-random-access-in-lance/1xCgLqW9c8Q8UMEBWgvBI17Q.png)throughput is computed as “1 / mean time per key”
 ## Key lookup
 
 If you’ve noticed we’ve only benchmarked `Dataset::Take` on row ids. On the roadmap is to make this more generic so you can lookup arbitrary keys in any column.
