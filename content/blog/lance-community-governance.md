@@ -92,10 +92,10 @@ The [maintainers](https://lance.org/community/maintainers) and [PMC members](htt
 
 We're excited about this next chapter for Lance. If you're interested in getting more involved, here's how:
 
-- Visit the new Lance documentation website at [lance.org](https://lance.org/) (or [fast.af](https://fast.af/) if you prefer 😎!)
-- Join our new [Lance Format Discord server](https://discord.gg/msY9kdwSYw) for day-to-day discussions
+- Visit the new Lance documentation website at [lance.org](https://lance.org/)
+- Join our new [Lance Format Discord server](https://discord.gg/lance) for day-to-day discussions
 - Read the [Community Governance documentation](https://lance.org/community) to understand the structure and how to get involved
-- Check out the [community event calendar](https://lance.org/community/communication) to join upcoming meetups and discussions
+- Subscribe to the [community event calendar](https://calendar.google.com/calendar/u/0?cid=Y29tbXVuaXR5QGxhbmNlLm9yZw) to join upcoming meetups and discussions
 - All Lance-related projects have been moved to the [lance-format GitHub organization](https://github.com/lance-format) — remember to update your bookmarks, and don't forget to give us a star!
 - Start contributing today in whatever way fits your skills and interests
 
