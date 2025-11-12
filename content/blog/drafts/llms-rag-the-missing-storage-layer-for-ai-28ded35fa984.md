@@ -21,13 +21,13 @@ Let’s set the context with an LLM refresher. Here are some of the highlights w
 LLMs and the derivative works have the potential to revolutionise many industries and fields of research. For example, they can be used to create more natural and engaging user interfaces, develop new educational tools, and improve the accuracy of machine translation. They can also be used to generate new ideas and insights, and to create new forms of art and literature which opens up a new direction in the field of language and linguistics.
 
 These models have crushed human levels on benchmarks faster than ever seen before:
-![](https://miro.medium.com/v2/resize:fit:770/1*zLnFwvljMZRAKtSe4_9jVA.png)[Kiela et all. 2021](https://aclanthology.org/2021.naacl-main.324/)
+![](https://miro.medium.com/v2/resize:fit:770/1xzLnFwvljMZRAKtSe4_9jVA.png)[Kiela et all. 2021](https://aclanthology.org/2021.naacl-main.324/)
 ## These systems lie confidently
 
 Although LLMs are highly advanced and in most cases it is almost impossible to distinguish a generated text from human response, these systems suffer from various levels of hallucination. Another way to put this would be that these systems lie confidently, and because of human level proficiency in generation, these lies are pretty convincing.
 
 Consider this interaction with ChatGPT
-![](https://miro.medium.com/v2/resize:fit:770/1*jgdr6vS5oYMwqXDEnISL0Q.png)Originally posted [hackernews](https://news.ycombinator.com/item?id=33841672)
+![](https://miro.medium.com/v2/resize:fit:770/1xjgdr6vS5oYMwqXDEnISL0Q.png)Originally posted [hackernews](https://news.ycombinator.com/item?id=33841672)
 At a glance, these results seem impressive but once you follow the links, they all lead to 404s. This is dangerous on various levels:
 
 - First, because these links look convincing, one might just take them for citations without checking
@@ -39,7 +39,7 @@ This just one example of hallucination, there are many others that are subtler, 
 ## The most powerful LLMs continue to be a black box
 
 Personally I don’t like the term “black box” thrown at all of deep learning because most of these models can be easily dissected and modified. In fact, in most cases the modified versions of originally published models have been more popular and useful. Interpretability has historically been challenging but that is not enough to call these models black boxes. But this is different for LLMs. The most powerful LLMs are closed source and are only accessible via API requests. Additionally, due to the high cost of training and proprietary datasets, there aren’t enough resources or engineering expertise to reproduce the result. These do fit the definition of a black box.
-![](https://miro.medium.com/v2/resize:fit:770/1*roOanTKp6futZWH3_VIFpQ.png)Originally published on [cohere blog](https://docs.cohere.com/docs/prompt-engineering)
+![](https://miro.medium.com/v2/resize:fit:770/1xroOanTKp6futZWH3_VIFpQ.png)Originally published on [cohere blog](https://docs.cohere.com/docs/prompt-engineering)
 ## Response Vs Representation based systems
 
 In prompt based approach, you rely on LLMs to generate responses directly from your (or your users’) queries. Using LLMs to generate responses if pretty powerful, and simple to get started with. But it gets scary soon enough when you realise that you don’t(can’t) control any aspect of the lifecycle of these systems. Combined with objective truths discussed above, this can soon become a recipe for disaster.
@@ -47,13 +47,13 @@ In prompt based approach, you rely on LLMs to generate responses directly from y
 ## Using LLMs for representation
 
 How about instead of using LLMs end-to-end, we simply use it to represent our knowledge base? The obvious way to do that would be to embed our database using these powerful models. You can have a numerical representation of your unstructured data that captures semantic meaning.
-![](https://miro.medium.com/v2/resize:fit:770/1*CPAo9M4pILESmlNvuJ6XLQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xCPAo9M4pILESmlNvuJ6XLQ.png)
 These vectors capture the relationship between entities in a high dimensional space. For example, here’s an example word embeddings where similar words in meaning are close by.
-![](https://miro.medium.com/v2/resize:fit:770/1*WxJ3c67UTfTf5_W6tqKI_A.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xWxJ3c67UTfTf5_W6tqKI_A.png)
 ## Retrieval Augmented Generation(RAG)
 
 We have all the pieces needed to build a RAG system. In a RAG setting, instead of using LLMs to generate responses from the prompts, we retrieve relevant representations using a retriever and sew them together by prompting the LLM to form the response.
-![](https://miro.medium.com/v2/resize:fit:770/1*_ahHXf5Hf-TgFIf3KwHuDg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1x_ahHXf5Hf-TgFIf3KwHuDg.png)
 Now, you can provide exact citations from the knowledge base documents that were used to generate the response. It becomes possible to trace back response to its source
 
 ## A change in domain
@@ -82,7 +82,7 @@ Costs depend on a lot of factors. Let us now shift our attention to common probl
 - **(Re) Training Cost **— The biggest problem with LLMs (including local models) is the massive data and infra requirements. This makes almost unfeasible to re-train them as new data comes in.
 
 For example, let us consider an example of a recent event that that occurs after the training finishes (or more specifically dataset creation date cutoff). Here are some questions related to events that occurred a few days ago to some that occurred a few months ago, asked to ChatGPT.
-![](https://miro.medium.com/v2/resize:fit:770/1*mCuFr1TW1PL50h1zfa9Pkw.png)Missing 23rd August soft landing of chandrayaan-3![](https://miro.medium.com/v2/resize:fit:770/1*MYbBSk1Wq3eAR_g5c0oGbw.png)Missing 2022 world cup results
+![](https://miro.medium.com/v2/resize:fit:770/1xmCuFr1TW1PL50h1zfa9Pkw.png)Missing 23rd August soft landing of chandrayaan-3![](https://miro.medium.com/v2/resize:fit:770/1xMYbBSk1Wq3eAR_g5c0oGbw.png)Missing 2022 world cup results
 The rate of change of information in a sub-domain of business for which an LLM is fine tuned could be much higher, making these models out of date very quickly.
 
 **If the same system relied on RAG system, it would simply need to update the knowledge base**, i.e, run the new events/information through the embedding model and the rest would be handled by the retriever. On the other hand, the LLM would require retraining on new data in a direct response based system.

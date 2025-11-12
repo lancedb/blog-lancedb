@@ -17,7 +17,7 @@ Building a real chatbot using RAG method – by Akash A. Desai
 Many people know about OpenAI’s cool AI models like GPT-3.5 and GPT-4, but they’re usually not free to use. But here’s some good news: Meta has introduced a free, super-smart model called [Llama-2](https://ai.meta.com/llama/). In this blog, we’re going to explore Llama-2 and use it to create a chatbot that can work with PDF files from scratch. Let’s break down the important parts step by step.
 
 **The Key Components for Building RAG based applications:**
-![](https://miro.medium.com/v2/resize:fit:770/1*3ktrnp7Wh2V-Js-crF2ENw.png)
+![](https://miro.medium.com/v2/resize:fit:770/1x3ktrnp7Wh2V-Js-crF2ENw.png)
 1. **Large Language Model**: The cornerstone of our project is the Llama-2 Large Language Model. It boasts a multitude of applications and is ideal for our endeavor.
 2. **Embedding Model**: To enhance our chatbot’s performance, we employ the Huggingface embedding model, namely “[sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).”
 3. **Vector Store Database**: Efficiently managing data is paramount. To achieve this, we rely on a Vector Store database. We are using [Lance](https://github.com/lancedb/lancedb)DB vector base for this example

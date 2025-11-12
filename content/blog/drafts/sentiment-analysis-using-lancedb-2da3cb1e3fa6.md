@@ -29,7 +29,7 @@ In this Blog, We’ll see an example to *analyze sentiments toward the Hotel Ind
 3.*** Query the LanceDB table on selected areas and understand customer opinions.***
 
 You can check out the attached [Google Colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/tutorials/Sentiment-Analysis-Analyse-Hotel-Reviews/Sentiment-Analysis-using-LanceDB.ipynb?source=post_page-----2da3cb1e3fa6--------------------------------) where you can find all codes and easy-to-quick-start steps.
-![](https://miro.medium.com/v2/resize:fit:770/1*9DUEPiPEd5sdZ1YKQFiy0g.png)**Flowchart of Implementation**
+![](https://miro.medium.com/v2/resize:fit:770/1x9DUEPiPEd5sdZ1YKQFiy0g.png)**Flowchart of Implementation**
 ## Implementation
 
 In the Implementation section, we see the step-by-step implementation of NER on the Medium dataset. We are starting with the first step of ***loading the hotel reviews dataset from huggingface*.**
@@ -234,7 +234,7 @@ Plotting the results for better analysis
     sns.barplot(x=list(sentiment.keys()), y = list(sentiment.values()))
 
 The resultant graph looks like this
-![](https://miro.medium.com/v2/resize:fit:597/1*GVb41Yp9y7lOemhJtbMtaQ.png)**Room Size Reviews in London**
+![](https://miro.medium.com/v2/resize:fit:597/1xGVb41Yp9y7lOemhJtbMtaQ.png)**Room Size Reviews in London**
 ***The customers are generally satisfied with the room sizes, although many are still neutral and positive*.**
 
 **Analyzing Room Size Reviews in a Specific Period**
@@ -257,7 +257,7 @@ The resultant graph looks like this
     sns.barplot(x=list(sentiment.keys()), y = list(sentiment.values()))
 
 The Resultant graph shows
-![](https://miro.medium.com/v2/resize:fit:587/1*gtosgyDd2neMimWBNi3wZQ.png)**Room Size Reviews in a Specific Period**
+![](https://miro.medium.com/v2/resize:fit:587/1xgtosgyDd2neMimWBNi3wZQ.png)**Room Size Reviews in a Specific Period**
 ***We have a slightly different result now. Almost the same number of customers had either a neutral or positive view of the room size during the selected period.***
 
 Further Basic Analysis is done in the attached Google Colab notebook at the end of this blog, which you can refer to.
@@ -344,7 +344,7 @@ We may now plot the final data to make inferences.
     plt.show()
 
 This will plot results for all 5 hotels on all 5 grounds from which we’ll analyze it.
-![](https://miro.medium.com/v2/resize:fit:770/1*DKa8gF4gMj3SYS-EBE1PGQ.png)**Analyzing Multiple hotels at Multiple Grounds**
+![](https://miro.medium.com/v2/resize:fit:770/1xDKa8gF4gMj3SYS-EBE1PGQ.png)**Analyzing Multiple hotels at Multiple Grounds**
 This can be better seen on Google Colab, which is attached at the end of this blog.
 
 The following observations can be made for the hotels based on the sentiment analysis:

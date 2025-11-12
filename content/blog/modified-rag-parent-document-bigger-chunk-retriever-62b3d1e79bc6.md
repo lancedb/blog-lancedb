@@ -21,7 +21,7 @@ There are some cases when your users want to have a task done by providing just 
 
 There are 2 approaches to tackle that. Let’s go one by one from theory to code starting from **Parent Document Retriever**.
 
-![Parent Document retriever diagram](/assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/1*0JHJPrAuvalxOsywuNxJqg.jpg)
+![Parent Document retriever diagram](/assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/1x0JHJPrAuvalxOsywuNxJqg.jpg)
 
 Given a text, find the most related chunk first (you can fetch N and then use additional logic based on Count etc too). Then instead of passing that chunk, get the Parent Document itself whose part was this chunk and pass THAT to the LLM as context. Let’s jump to the code quickly. Install and get all the required imports like LanceDB, LangChain etc. For the Embedding function, I’m using BAAI encoder but you can use any one.
 
@@ -172,4 +172,4 @@ You can [find the whole code (and lot more examples like this) HERE.](https://gi
 
 Until next time, happy parenting :)
 
-![Bigger chunk retriever diagram](/assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/1*lkDfUDQXYMUsnje8fM331Q.jpg)
+![Bigger chunk retriever diagram](/assets/blog/modified-rag-parent-document-bigger-chunk-retriever-62b3d1e79bc6/1xlkDfUDQXYMUsnje8fM331Q.jpg)

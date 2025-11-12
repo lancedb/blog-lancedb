@@ -21,7 +21,7 @@ This is where a comes into play. You can efficiently retrieve relevant informati
 Let’s discuss these concepts hands-on using sample export-import data for demonstration purposes. We will take sample export-import data for the demo.
 
 Below is sample data related to export import which has HS codes
-![Sample export-import data](/assets/blog/chat-with-csv-excel-using-lancedb/1*BqcZKYB3XLQLJSWAheGUrQ.png)
+![Sample export-import data](/assets/blog/chat-with-csv-excel-using-lancedb/1xBqcZKYB3XLQLJSWAheGUrQ.png)
 Our objective is to extract the HS code for each commodity while also considering the share and percentage. You can choose any columns that suit your use case. Now, let's proceed to use LanceDB for storing and indexing this data.
 
 ## Full-Text Search (FTS) for Commodity

@@ -19,9 +19,9 @@ Just a few days ago, I went to Anthropic’s Hackathon, where hackers utilized t
 However, I’m not here to showcase our hackathon project; I’m excited to delve deeper into the fascinating ways to utilize these technologies.
 
 Currently, large language models (LLMs) have a limited context window, requiring a sacrifice of important material in order to make room for context. In these kinds of situations, dynamic context retrieval can be difficult, because of how little you can input. But in the war between retrieval augmented generation and context windows, why don’t we choose both? Claude and LanceDB allow us to do just this, retrieving relevant information from embedded vector stores, and providing this context into Claude’s 100k token context window. In our case, we fetched parts of the documentation for each line in the codebase to fill up this large context window.
-![A slide on what our program will do](https://miro.medium.com/v2/resize:fit:770/1*g5aRvV-C5zLKMfR3zZ4iCQ.png)
+![A slide on what our program will do](https://miro.medium.com/v2/resize:fit:770/1xg5aRvV-C5zLKMfR3zZ4iCQ.png)
 **A breakdown**
-![A workflow of our hackathon project.](https://miro.medium.com/v2/resize:fit:770/1*fU1jpXgKYO5VIzpOWM1FUg.png)Our project workflow
+![A workflow of our hackathon project.](https://miro.medium.com/v2/resize:fit:770/1xfU1jpXgKYO5VIzpOWM1FUg.png)Our project workflow
 As an example, I’ll take the program that we worked on during Anthropic’s Hackathon. This is the workflow of how it operates:
 
 1. **drcode **first downloads all the documentation of a certain programming language, and passes it through **Claude **to summarize each of the files. For our project, we only downloaded the Python documentation.
@@ -265,7 +265,7 @@ Finally, our last step is to input our `python_files.txt` back into Claude, with
     -    st.session_state.memory = ""
 
 With this XML unified diff file, we can now open a pull request on GitHub, displaying all the code improvements that Claude has generated.
-![Github page of the output of our code](https://miro.medium.com/v2/resize:fit:770/1*bGsQowl23H0dN-eLwXJ0PQ.png)The open PR
+![Github page of the output of our code](https://miro.medium.com/v2/resize:fit:770/1xbGsQowl23H0dN-eLwXJ0PQ.png)The open PR
 **Conclusion**
 
 I hope that this implementation of these technologies has been insightful for you! I believe that combining retrieval augmented generation and large context windows can lead to substantial leaps in the field of natural language processing. Of course, LLMs still have a long way to go before they can fully emulate human-like comprehension, so not everything will be fully accurate. But using vector databases to fetch context, such as **LanceDB**, and a large context window LLM, such as **Claude**, can definitely unlock new possibilities in all sorts of domains.

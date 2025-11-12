@@ -27,10 +27,10 @@ Since the beginning of LanceDB, users managing embeddings at scale have asked fo
 
 > Using a GPU in LanceDB is as simple as specifying the **accelerator parameter** on **create_index()**.
 
-![](https://miro.medium.com/v2/resize:fit:770/1*lZQRY7ed3FDGw-h3Sd1rTg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xlZQRY7ed3FDGw-h3Sd1rTg.png)
 Creating index using Nvidia GPU (cuda)
 
-![](https://miro.medium.com/v2/resize:fit:770/1*ANrOLSEGd2XXy5vv5h1_WQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xANrOLSEGd2XXy5vv5h1_WQ.png)
 Creating Index using Apple Silicon GPU (mps)
 
 Under the hood, LanceDB uses [PyTorch](https://pytorch.org/) to train the IVF clusters, and passes the kmeans centroids to the Rust core for index serialization. Thanks to the high-quality support of Cuda and [MPS](https://pytorch.org/docs/stable/notes/mps.html) from the PyTorch community, it allows us to quickly deliver on two of the most popular developer platforms (Linux and Mac). Combined with other recent improvements in the LanceDB indexing process, for instance, out-of-memory shuffling, batched KMeans training in GPU, LanceDB can reliably train over tens of millions vectors without worrying about CPU or GPU Out of Memory (OOM).
@@ -49,7 +49,7 @@ In general, GPU acceleration offers up to 20–26x speed up compared to their CP
 - Linux VM: 323s on CPU, and 12.5s on GPU
 - Macbook Pro: 397s on CPU, and 21s on GPU
 
-![](https://miro.medium.com/v2/resize:fit:770/1*9tRrnjLVnasYS1E9d1PRvA.png)
+![](https://miro.medium.com/v2/resize:fit:770/1x9tRrnjLVnasYS1E9d1PRvA.png)
 IVF 4096 on 1 Million 1536D vectors. BLUE is CPU; RED is GPU.
 
 ## What’s next

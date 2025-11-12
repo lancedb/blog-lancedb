@@ -43,7 +43,7 @@ There are two types of FLARE:
 
 1. **FLARE Instruct**: This mode prompts the model to generate specific queries for information retrieval. The model pauses generation, retrieves the necessary data, and then resumes, integrating the new information. let's understand this in the figure
 
-![FLARE Instruct diagram](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*8jwkT_22QfxrHOp5XYhmRg.png)
+![FLARE Instruct diagram](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1x8jwkT_22QfxrHOp5XYhmRg.png)
 
 Imagine a scenario where an AI model is tasked with generating a *summary about Joe Biden*, prompted by a user’s input query. Here’s how the process unfolds
 
@@ -60,24 +60,24 @@ now let's understand FLARE Direct
 
 1. **FLARE Direct**: Here, the model uses the generated content as a direct query for retrieval when it encounters tokens with low confidence. Let’s delve into this with an example:
 
-![FLARE Direct step 1](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*6J-dsF2FHLwZyp3JbtQY4w.png)
+![FLARE Direct step 1](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1x6J-dsF2FHLwZyp3JbtQY4w.png)
 
 1. Initiating the Query: We start with a language model input: “*Generate a summary about Joe Biden*.”
 
 1. The model generates a response.
 
-![FLARE Direct step 2](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*IBHJLCeaTprY4hNLODdXiw.png)
+![FLARE Direct step 2](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1xIBHJLCeaTprY4hNLODdXiw.png)
 
 3. If the generated sentence is accurate and has high confidence, it is accepted as a correct sentence.
 
-![Accepted sentence](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*y7hGZcjkxnGV7p5IEbDg4w.png)
+![Accepted sentence](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1xy7hGZcjkxnGV7p5IEbDg4w.png)
 
 4. let’s say the model produces a sentence but with some low confidence (elements are highlighted) “*the University of Pennsylvania*” and “*a law degree*.” The model has very low confidence for these lines
 
-![Low confidence tokens](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*MxQWmvCEk3SzUDbmF-9UCA.png)
+![Low confidence tokens](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1xMxQWmvCEk3SzUDbmF-9UCA.png)
 
 now there are two methods to handle this issue\
-![Implicit vs explicit query](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*O9iJul2Xjlwvs0u7Q1m8YA.png)
+![Implicit vs explicit query](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1xO9iJul2Xjlwvs0u7Q1m8YA.png)
 
 **Addressing Low Confidence Information:** To rectify or verify low-confidence information, FLARE Direct employs two approaches:
 
@@ -185,7 +185,7 @@ iface = gr.Interface(
 iface.launch(debug=True)
 ```
 
-![FLARE Gradio demo](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1*pQnW_zp1wMWgIt5DLtEaLw.png)
+![FLARE Gradio demo](/assets/blog/better-rag-with-active-retrieval-augmented-generation-flare-3b66646e2a9f/1xpQnW_zp1wMWgIt5DLtEaLw.png)
 
 ## Summary
 

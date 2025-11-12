@@ -10,7 +10,7 @@ meta_image: /assets/blog/adaptive-rag/preview-image.png
 description: "Traditional LLMs provide answers based on a fixed knowledge database on which they are trained.  This limits their ability to respond with current or specific information."
 ---
 
-![](https://cdn-images-1.medium.com/max/1200/1*dK5Kkum58gauwytt3PkQtg.png)[Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf)
+![](https://cdn-images-1.medium.com/max/1200/1xdK5Kkum58gauwytt3PkQtg.png)[Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf)
 Traditional LLMs provide answers based on a fixed knowledge database on which they are trained. This limits their ability to respond with current or specific information. While methods like Retrieval-Augmented Generation (RAG) try to solve this by combining LLMs with external data retrieval, they need additional help to handle queries of different complexities effectively.
 
 [Adaptive RAG](https://arxiv.org/pdf/2403.14403.pdf) presents a method that chooses the best strategy for answering questions, from a direct LLM response to single or multiple retrieval steps. This selection is based on the query’s complexity, as determined by a classifier. The 3 strategies for answering are:
@@ -30,7 +30,7 @@ Moreover, the ability of Adaptive-RAG to adapt based on the complexity of the qu
 The accuracy of Adaptive-RAG is unparalleled, thanks to its ability to discern and adapt to the complexity of each query. By dynamically aligning the retrieval strategy with the query’s needs, Adaptive-RAG ensures that responses are not only relevant but also incorporate the most up-to-date information available. This adaptiveness significantly reduces the likelihood of outdated or overly generic answers, setting a new standard for accuracy automated question-answering.
 
 The image below shows the comparison of different RAG approaches & adaptive rag is in terms of speed & performance
-![](https://cdn-images-1.medium.com/max/1200/1*hSctN7sLv90qDybT5Ej9VQ.png)[https://arxiv.org/pdf/2403.14403.pdf](https://arxiv.org/pdf/2403.14403.pdf)
+![](https://cdn-images-1.medium.com/max/1200/1xhSctN7sLv90qDybT5Ej9VQ.png)[https://arxiv.org/pdf/2403.14403.pdf](https://arxiv.org/pdf/2403.14403.pdf)
 Let's create RAG app based on the discussed strategy.
 
 Our RAG application is structured to route user queries to the most relevant data source, depending on the nature of the query. Here’s how we’ve set it up:
@@ -38,7 +38,7 @@ Our RAG application is structured to route user queries to the most relevant dat
 1. **Web Search**: This route is selected for questions related to recent events, utilizing the Tavily Search API for real-time information retrieval.
 2. **Self-Corrective RAG**: For more specialized queries that pertain to our indexed data, we use a self-corrective mechanism that leverages our own curated knowledge base.
 
-![](https://cdn-images-1.medium.com/max/1200/1*okNdKS-83oBKEGGFeSDr4w.png)source from langchain
+![](https://cdn-images-1.medium.com/max/1200/1xokNdKS-83oBKEGGFeSDr4w.png)source from langchain
 implementation Details:
 
 - **Indexing Documents:** We begin by indexing documents using LanceDB, a vector database within the LangChain suite. This setup allows us to quickly retrieve relevant documents based on the user’s query.

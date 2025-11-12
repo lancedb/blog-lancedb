@@ -51,7 +51,7 @@ Hybrid search can be imagined as a magnifying glass that doesn’t just look at 
 - **Keyword Search:** This is the age-old method we’re most familiar with. Input a word or a phrase, and this search hones in on those exact terms or closely related ones in the database or document collection.
 - **Vector Search:** Unlike its counterpart, vector search isn’t content with mere words. It works using semantic meaning, aiming to discern the query’s underlying context or meaning. This ensures that even if your words don’t match a document exactly if the meaning is relevant, it’ll be fetched.
 
-![Hybrid search overview](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1*hfEfKvvNg2rVG-X_vr_V1g.png)
+![Hybrid search overview](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1xhfEfKvvNg2rVG-X_vr_V1g.png)
 > Follow along with the Colab notebook:
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Hybrid_search_bm25_lancedb/main.ipynb)
@@ -138,11 +138,11 @@ qa.run(query)
 
 again, here it's searching the keyword — “ nutrition pregnant women” in the database using bm25 & returning the best matching results & similarly, at the same time, we are using lancedb for this. this is how it's more powerful to extract text.
 
-![Hybrid search answers (ensemble)](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1*TEEE2ok0rvgMiK5-3vskGA.png)
+![Hybrid search answers (ensemble)](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1xTEEE2ok0rvgMiK5-3vskGA.png)
 
 below are answers from the traditional rag, you can check this in[ our repo](https://github.com/lancedb/vectordb-recipes/tree/main/tutorials/chatbot_using_Llama2_%26_lanceDB) the answers may vary based on different parameters, models, etc.
 
-![Traditional RAG answers](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1*u37w8rgemau1bJN5Hw0RWA.png)
+![Traditional RAG answers](/assets/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe7e6/1xu37w8rgemau1bJN5Hw0RWA.png)
 
 you can try this on Google Colab with your PDF & use case. This is how you can use hybrid search to improve your search quality.
 

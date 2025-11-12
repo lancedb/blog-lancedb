@@ -14,7 +14,7 @@ In the landscape of artificial intelligence, large language models (LLMs) have u
 
 [MemGPT](https://github.com/cpacker/MemGPT), an open source python package aims to solve this problem by using a concept drawing inspiration from traditional operating systems’ hierarchical memory systems. This technique optimizes data movement between fast and slow memory, providing the illusion of expansive memory resources.
 
-![](https://miro.medium.com/v2/resize:fit:770/1*RvDrywTt1wbW2j0uKZ9-wQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xRvDrywTt1wbW2j0uKZ9-wQ.png)
 
 MemGPT is a system that tackles the limited context window of traditional LLMs by allowing them to manage their own memory. It does this by adding a tiered memory system and functions to a standard LLM processor. The main context is the fixed-length input, and MemGPT analyzes the outputs at each step, either yielding control or using a function call to move data between the main and external contexts. It can even chain function calls together and wait for external events before resuming. In short, MemGPT gives LLMs the ability to remember and process more information than their usual limited context allows. This opens up new possibilities for tasks that require long-term memory or complex reasoning.
 ## Conversational agent with virtually unlimited memory!
@@ -26,7 +26,7 @@ The authors assess MemGPT, on these two criteria:
 • Does MemGPT leverage its memory to improve conversation consistency? Can it remember relevant facts, preferences, and events from past interactions to maintain coherence?
 
 • Does MemGPT produce more engaging dialogue by taking advantage of memory? Does it spontaneously incorporate long-range user information to personalize messages?
-![](https://miro.medium.com/v2/resize:fit:770/1*kZhTIVAmMLlPM5CGqiwm4A.png)The above example illustrates a deep memory retrieval task. The user asks a question that can only be answered using information from a prior session (no longer in-context). Even though the answer is not immediately answerable using the in-context information, MemGPT can search through its recall storage containing prior conversations to retrieve the answer.
+![](https://miro.medium.com/v2/resize:fit:770/1xkZhTIVAmMLlPM5CGqiwm4A.png)The above example illustrates a deep memory retrieval task. The user asks a question that can only be answered using information from a prior session (no longer in-context). Even though the answer is not immediately answerable using the in-context information, MemGPT can search through its recall storage containing prior conversations to retrieve the answer.
 ## External Data Sources
 
 MemGPT supports pre-loading data into archival memory. In order to make data accessible to your agent, you must load data and then attach the data source to your agent.
@@ -35,7 +35,7 @@ External data sources are vectorized and stored for the agent to perform semanti
 
 ## Built-in support for LanceDB
 
-![](https://miro.medium.com/v2/resize:fit:770/1*8kW8NQPW25PJn5vFEAGbWg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1x8kW8NQPW25PJn5vFEAGbWg.png)
 
 MemGPT uses [lancedb](http://lancedb.com/) as the default archival storage for storing and retrieving external data. It not only provides a seamless setup-free experience but the persisted HDD storage allows you scale from gigabytes to terabytes to petabytes without blowing out your budget or sacrificing performance.
 
@@ -49,7 +49,7 @@ Here’s an example that configures an agent and simply adds something to the ar
 
 Let’s ingest the intro of memGPT docs as an external data source and ask question about it. The best part is that once you load an external data it stays available for you to load it in any other agent too. And you can load multiple data sources for an agent.
 
-![](https://miro.medium.com/v2/resize:fit:770/1*H0djUI2u0uinm50VuhWXRg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xH0djUI2u0uinm50VuhWXRg.png)
 
 You can use special commands followed by a slash to perform specific actions. For example here in this example, I’ve used the `/attach` command to attach an external vectorized data source.
 

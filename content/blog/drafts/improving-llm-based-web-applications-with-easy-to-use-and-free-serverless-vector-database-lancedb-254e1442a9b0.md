@@ -17,7 +17,7 @@ I believe that there are currently two major challenges using LLMs. (1) outdated
 **Retrieval augmented generation (RAG)** is the key to helping LLMs provide the best and up-to-date results for specific use cases and contexts. It gives LLMs context from a knowledge base by augmenting its prompts, and thus, allows it to retrieve knowledge-grounded information. Such generation technique have been [shown to help reduce hallucinations.](https://arxiv.org/pdf/2104.07567.pdf)
 
 With the help of a serverless vector database like LanceDB that has native JS support, we are able to integrate retrieval augmented generation directly in serverless functions on-prem. No api keys for the database needed. This is great for web-based AI applications, like a chatbot agent that works with website sitemaps to retrieve context and provide information about that website.
-![](https://miro.medium.com/v2/resize:fit:770/1*6J1xo4qiwuAaP4gYoTqypA.png)LanceDB Website Chatbot Template
+![](https://miro.medium.com/v2/resize:fit:770/1x6J1xo4qiwuAaP4gYoTqypA.png)LanceDB Website Chatbot Template
 Let’s take a look at how this works in Next.js. The full source code for the website chatbot template can be found in this [Github repo](https://github.com/lancedb/lancedb-vercel-chatbot). You can also deploy this template to Vercel in one [click](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flancedb%2Flancedb-vercel-chatbot&amp;env=OPENAI_API_KEY&amp;envDescription=OpenAI+API+Key+for+chat+completion.&amp;project-name=lancedb-vercel-chatbot&amp;repository-name=lancedb-vercel-chatbot&amp;demo-title=LanceDB+Chatbot+Demo&amp;demo-description=Demo+website+chatbot+with+LanceDB.&amp;demo-url=https%3A%2F%2Flancedb.vercel.app&amp;demo-image=https%3A%2F%2Fi.imgur.com%2FazVJtvr.png).
 
 There are two main functions needed for the chatbot:
@@ -28,7 +28,7 @@ There are two main functions needed for the chatbot:
 ## Insertion
 
 We start by using a simple form to gather the url for the website sitemap:
-![](https://miro.medium.com/v2/resize:fit:730/1*apsoc5GUuTAfr8yNO9USPQ.png)You can find code for this element [here](https://github.com/lancedb/lancedb-vercel-chatbot/blob/main/src/app/components/Form.tsx).
+![](https://miro.medium.com/v2/resize:fit:730/1xapsoc5GUuTAfr8yNO9USPQ.png)You can find code for this element [here](https://github.com/lancedb/lancedb-vercel-chatbot/blob/main/src/app/components/Form.tsx).
 We then send a POST request to a serverless function with this information.
 
         const response = await fetch("/api/context", {
@@ -117,9 +117,9 @@ Finally, we’ll batch insert our text entries into a Table, which is the primar
 ## Retrieval
 
 We start with a chat interface provided by the Vercel AI SDK, which allows for a streaming UI experience for chat models. You can test out the Vercel AI SDK at [https://sdk.vercel.ai](https://sdk.vercel.ai/).
-![](https://miro.medium.com/v2/resize:fit:770/1*AOq8wdNz6bVymYTIAsr6Hw.png)[https://sdk.vercel.ai](https://sdk.vercel.ai/)
+![](https://miro.medium.com/v2/resize:fit:770/1xAOq8wdNz6bVymYTIAsr6Hw.png)[https://sdk.vercel.ai](https://sdk.vercel.ai/)
 Here is LanceDB’s chat page that appears after insertion is finished.
-![](https://miro.medium.com/v2/resize:fit:770/1*1iIM-h5HttfjtaxDdwYCWA.png)You can find code for the chat page [here](https://github.com/lancedb/lancedb-vercel-chatbot/blob/main/src/app/components/Chat.tsx).
+![](https://miro.medium.com/v2/resize:fit:770/1x1iIM-h5HttfjtaxDdwYCWA.png)You can find code for the chat page [here](https://github.com/lancedb/lancedb-vercel-chatbot/blob/main/src/app/components/Chat.tsx).
 Once a text query is recieved, we send a request to `/api/chat` with the following router, which uses the Edge runtime.
 
     import { OpenAIStream, StreamingTextResponse } from 'ai'
@@ -198,7 +198,7 @@ Finally, we ask for chat completion from OpenAI.
     return new StreamingTextResponse(stream)
 
 And here are the results of the query `Tell me about Vercel`.
-![](https://miro.medium.com/v2/resize:fit:770/1*WvLW81xuU4m9tBQ6U9J9cQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xWvLW81xuU4m9tBQ6U9J9cQ.png)
 ## Summary
 
 - **Retrieval augmented generation (RAG)** is a great way to provide LLMs relevant context from a knowledge base.

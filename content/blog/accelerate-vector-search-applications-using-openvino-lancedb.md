@@ -32,11 +32,11 @@ These results*are on 13th Gen Intel(R) Core(TM) i5–13420H** using OpenVINO=202
 CLIP is a multi-modal model, which means it can process both text and images. This capability allows it to embed different types of inputs in a shared multi-modal space, where the positions of images and text have semantic meaning, regardless of their format.
 
 The following image presents a visualization of the pre-training procedure
-![Combining Image and Text Embeddings (Source: OpenAI)](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1*oKfC-Vyc3r85W06yLH2y_g.png)
+![Combining Image and Text Embeddings (Source: OpenAI)](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1xoKfC-Vyc3r85W06yLH2y_g.png)
 ## OpenVINO by Intel
 
 OpenVINO toolkit is a free toolkit facilitating the optimization of a deep learning model from a framework and deploying an inference engine onto Intel hardware. We’ll use the FP16 and INT8 formats using the OpenVINO CLIP model.
-![OpenVINO diagram](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1*950zBYcU5-9hySxX8d9Yng.png)
+![OpenVINO diagram](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1x950zBYcU5-9hySxX8d9Yng.png)
 This write-up uses OpenVINO to accelerate the LanceDB embedding pipeline.
 
 ## Implementation

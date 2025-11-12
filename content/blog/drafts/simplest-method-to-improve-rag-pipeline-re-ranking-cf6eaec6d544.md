@@ -27,7 +27,7 @@ Out of all the methods available, Re-ranking is the simplest. Idea is pretty sim
 Would your search results be better if you were searching in 100 vs 100000 documents? Yes, so no matter how big of a model you use, you’ll always have some irrelevent results because of the huge domain.
 
 Smaller model with efficient searching algo does the work of searching in a bigger domain to get more number of elements while the larger model is precise and because it just works on `K`, there is a bit more overhead but improved relevancy.
-![](https://miro.medium.com/v2/resize:fit:369/1*GHOR7e1JM0GkUBRdGGr9cA.jpeg)All Fluff No Code
+![](https://miro.medium.com/v2/resize:fit:369/1xGHOR7e1JM0GkUBRdGGr9cA.jpeg)All Fluff No Code
 Follow along with this [colab](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/RAG_re_ranking/main.ipynb?source=post_page-----cf6eaec6d544--------------------------------)
 
     !pip install -U lancedb transformers datasets FlagEmbedding unstructured -qq
@@ -117,4 +117,4 @@ Visit the[ LanceDB (YC W22) ](https://github.com/lancedb/lancedb)repo to learn m
 To discover more applied GenAI and vectorDB applications, examples, & tutorials, visit[ vectordb-recipes](https://github.com/lancedb/vectordb-recipes)
 
 Adios Amigos! Until next time …….
-![](https://miro.medium.com/v2/resize:fit:548/1*S6wSYo7DdFRWF0ZKvqn4jg.gif)Adios Amigos
+![](https://miro.medium.com/v2/resize:fit:548/1xS6wSYo7DdFRWF0ZKvqn4jg.gif)Adios Amigos

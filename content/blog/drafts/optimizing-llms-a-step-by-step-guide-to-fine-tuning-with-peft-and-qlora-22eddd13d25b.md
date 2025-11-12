@@ -77,11 +77,11 @@ Now we’ll delve into specific PEFT techniques QLora, a deeper understanding of
 ## LoRA (Low-rank Adaptation): Reducing Memory for LLM Fine-Tuning
 
 Low-rank Adaptation, or LoRA, is a parameter-efficient fine-tuning technique categorized under re-parameterization methods. LoRA aims to drastically cut down the number of trainable parameters while fine-tuning large language models (LLMs). Here’s a closer look at how LoRA works:
-![](https://miro.medium.com/v2/resize:fit:770/1*iGTsCbqOE_RuaqE_mBYapg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xiGTsCbqOE_RuaqE_mBYapg.png)
 Understanding the Transformer Architecture: To appreciate LoRA, let’s revisit the fundamental architecture of a transformer model. The transformer architecture consists of an encoder and/or decoder part, each containing self-attention and feedforward networks. These components have weights that are initially learned during pre-training.
 
 **Reducing Parameters with LoRA**: LoRA employs a smart strategy — that freezes all the original model parameters and introduces a pair of rank decomposition matrices alongside the existing weights. The key steps in LoRA are as follows:
-![](https://miro.medium.com/v2/resize:fit:660/1*U1pDAeIrj9Hxh4DnFZMsAw.gif)
+![](https://miro.medium.com/v2/resize:fit:660/1xU1pDAeIrj9Hxh4DnFZMsAw.gif)
 1. Low-Rank Matrices: LoRA introduces two low-rank matrices, Matrix A and Matrix B, alongside the original LLM weights.
 2. Matrix Dimensions: The dimensions of these smaller matrices are carefully set so that their product results in a matrix of the same dimensions as the weights they’re modifying.
 3. Training Low-Rank Matrices: During fine-tuning, you keep the original LLM weights frozen while training Matrix A and Matrix B using supervised learning, a process you’re already familiar with.
@@ -185,7 +185,7 @@ Check the few samples of data. we are using [pprint](https://docs.python.org/3/l
 
 below is a data format of our FAQ-based dataset.
 This structured dataset provides answers to common queries, ensuring a seamless shopping experience for our valued customers. & we are fine-tuning the model based on this data.
-![](https://miro.medium.com/v2/resize:fit:770/1*Q8V61c3byNfGdT4cp3QqDg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xQ8V61c3byNfGdT4cp3QqDg.png)
     with open("dataset.json", "w") as f:
         json.dump(data["questions"], f)
 
@@ -338,7 +338,7 @@ Below are several training parameters. To explore all of them, please refer to t
     model.config.use_cache = False
     trainer.train()
 
-![](https://miro.medium.com/v2/resize:fit:770/1*Kjbl5JFQ6k2sXyluT3KXCQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xKjbl5JFQ6k2sXyluT3KXCQ.png)
 Trained model for a few epochs. now save the trained model
 
     model.save_pretrained("trained-lama_model")

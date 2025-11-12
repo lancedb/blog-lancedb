@@ -20,7 +20,7 @@ Let's begin with Langchain first!
 
 ## Chunking Techniques in Langchain
 
-![LangChain text splitters](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/1*LlJfztZOhVrryfG5uRouiQ.png)
+![LangChain text splitters](/assets/blog/chunking-techniques-with-langchain-and-llamaindex/1xLlJfztZOhVrryfG5uRouiQ.png)
 
 Before jumping into chunking, make sure to first install **Langchain-text-splitters**
 
@@ -235,7 +235,7 @@ These are the most important text-splitting/ chunking techniques using Langchain
 
 ## LlamaIndex Chunking Techniques with Implementation
 
-![](https://cdn-images-1.medium.com/max/800/1*Xl9yLVVAarsdC-sbXJSr3g.png)
+![](https://cdn-images-1.medium.com/max/800/1xXl9yLVVAarsdC-sbXJSr3g.png)
 
 Make sure to install `llama_index` package.
 
