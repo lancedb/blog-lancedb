@@ -1,0 +1,15 @@
+.category-hero {
+  padding: 80px 0 40px;
+
+  @include mq($md) {
+    padding: 120px 0 40px;
+  }
+
+  &__badge {
+    color: palette(primary-offwhite, 100);
+  }
+
+  &__title {
+    color: palette(primary-white);
+  }
+}

@@ -22,7 +22,7 @@
             <h1>{{ .Title }}</h1>
             <div class="post-meta">
                 {{ if .Params.categories }}
-                    <span class="post-category">{{ index .Params.categories 0 }}</span>
+                    <a href="/blog/category/{{ index .Params.categories 0 | urlize }}" class="post-category">{{ index .Params.categories 0 }}</a>
                     <span class="meta-divider">•</span>
                 {{ end }}
                 <span class="post-author">

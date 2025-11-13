@@ -98,4 +98,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   })();
+
+  (() => {
+    const blogCategories = document.querySelector(".js-blog-categories");
+    if (!blogCategories) return;
+
+    const activeLink = blogCategories.querySelector(".active");
+    if (activeLink) {
+      activeLink.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    }
+  })();
 });

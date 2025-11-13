@@ -1,0 +1,9 @@
+{{ with .Site.Taxonomies.categories }}
+<!-- Categories Section -->
+    <div class="blog-categories js-blog-categories">
+        <a class="filter-link{{ if eq page.RelPermalink "/blog/" }} active{{ end }}" href="/blog">All posts</a>
+    {{ range . }}
+        <a class="filter-link{{ if eq $.RelPermalink .Page.RelPermalink }} active{{ end }}" href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+    {{ end }}
+</div>
+{{ end }}

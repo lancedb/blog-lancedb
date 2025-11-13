@@ -1,0 +1,87 @@
+{{ define "main" }}
+    {{ $paginator := .Paginate .Pages }}
+    <main>
+        <section class="category-hero">
+            <div class="container">
+                <p class="category-hero__badge text-caption">
+                    Blog category:
+                </p>
+                <h2 class="category-hero__title text-heading-large">
+                    {{ .Title }}
+                </h2>
+            </div>
+        </section>
+        <div class="container">
+            {{ partial "components/blog-categories.html" . }}
+        </div>
+
+        <div class="category-posts">
+            <div class="container">
+                <div class="category-posts__wrap">
+                    {{ range .Pages }}
+                        <a href="{{ .RelPermalink }}" class="category-posts__card">
+                            {{ with .Params.image }}
+                            <div class="category-posts__card-image">
+                                <img src="{{ . }}" alt="{{ $.Title }}">
+                            </div>
+                            {{ end }}
+                            <div class="category-posts__card-content">
+                                <h3 class="category-posts__card-title text-title-large">{{ .Title }}</h3>
+                                <div class="category-posts__card-meta text-body-extra-small">
+                                    {{- if .Params.author2 -}}
+                                        {{- .Params.author }} & {{ .Params.author2 -}}
+                                    {{- else -}}
+                                        {{- .Params.author -}}
+                                    {{ end }} / {{ .Date.Format "January 2, 2006" -}}
+                                </div>
+                                <p class="category-posts__card-description text-body-medium">{{ .Description | default (truncate 100 .Summary) }}</p>
+                            </div>
+                        </a>
+                    {{ end }}
+                </div>
+            </div>
+
+            {{ if gt $paginator.TotalPages 1 }}
+            <div class="pagination-subscribe-container">
+                <nav class="pagination">
+                    <div class="pagination-links">
+                        {{ if $paginator.HasPrev }}
+                            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                                <span class="pagination-arrow">←</span>
+                                <span class="pagination-text">Previous</span>
+                            </a>
+                        {{ end }}
+                        
+                        <!-- All page numbers -->
+                        {{ range $paginator.Pagers }}
+                            {{ if eq .PageNumber $paginator.PageNumber }}
+                                <span class="pagination-link current">{{ .PageNumber }}</span>
+                            {{ else }}
+                                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+                            {{ end }}
+                        {{ end }}
+                        
+                        {{ if $paginator.HasNext }}
+                            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                                <span class="pagination-text">Next</span>
+                                <span class="pagination-arrow">→</span>
+                            </a>
+                        {{ end }}
+                    </div>
+                </nav>
+            </div>
+            {{ end }}
+        </div>
+
+        
+
+        {{ if eq (len .Pages) 0 }}
+            <div class="empty-state">
+                <h3>No posts found in this category</h3>
+                <p>Check back later for new content!</p>
+                <a href="/" class="back-link">← Back to all posts</a>
+            </div>
+        {{ end }}
+    </main>
+
+{{ end }}
