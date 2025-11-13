@@ -15,7 +15,7 @@
               {{ range site.Params.socials }}
                 {{ if eq .name $social }}
                   <li>
-                    <a href="{{ .url }}" target="_blank" class="nav__social-link">
+                    <a href="{{ .url }}" rel="noreferer, ,noopener" target="_blank" class="nav__social-link">
                       {{ readFile (printf "static/assets/socials/%s.svg" .icon) | safeHTML }}
                     </a>
                   </li>

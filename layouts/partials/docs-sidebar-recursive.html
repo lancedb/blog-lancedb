@@ -16,7 +16,7 @@
             <div class="sidebar-link-wrapper">
               {{- if .Params.link }}
                 {{- if hasPrefix .Params.link "http" }}
-                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" rel="noreferer, ,noopener" target="_blank" >
                     {{ .Params.sidebar_title | default .Title }}
                   </a>
                 {{- else }}
@@ -42,7 +42,7 @@
           <div class="sidebar-link-wrapper">
             {{- if .Params.link }}
               {{- if hasPrefix .Params.link "http" }}
-                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" rel="noreferer, ,noopener" target="_blank" >
                   {{ .Params.sidebar_title | default .Title }}
                 </a>
               {{- else }}
@@ -97,7 +97,7 @@
             <div class="sidebar-link-wrapper">
               {{- if .Params.link }}
                 {{- if hasPrefix .Params.link "http" }}
-                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" target="_blank" rel="noopener">
+                  <a href="{{ .Params.link }}" class="sidebar-link{{ if eq .RelPermalink $.current.RelPermalink }} active{{ end }}" rel="noreferer, ,noopener" target="_blank" >
                     {{ .Params.sidebar_title | default .Title }}
                   </a>
                 {{- else }}

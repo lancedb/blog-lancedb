@@ -3,7 +3,7 @@
 {{ $title := .Title }}
 
 {{ if hasPrefix $url "http" }}
-  <a href="{{ $url }}"{{ if $title }} title="{{ $title }}"{{ end }} target="_blank" rel="noopener noreferrer">{{ $text }}</a>
+  <a href="{{ $url }}"{{ if $title }} title="{{ $title }}"{{ end }} rel="noreferer, ,noopener" target="_blank" rel="noopener noreferrer">{{ $text }}</a>
 {{ else }}
   <a href="{{ $url }}"{{ if $title }} title="{{ $title }}"{{ end }}>{{ $text }}</a>
 {{ end }} 

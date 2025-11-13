@@ -41,7 +41,7 @@
             <div class="cta__buttons">
               {{ range . }}
               <a class="button button--{{.version | default " primary"}}" href="{{.href}}" {{ if in
-                site.Params.header.button.url "http" }} target="_blank" rel="noopener" {{ end }}>
+                site.Params.header.button.url "http" }} rel="noreferer, ,noopener" target="_blank"  {{ end }}>
                 {{ .text }}
                 {{ if .icon }}
                 <span class="button__icon">

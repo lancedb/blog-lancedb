@@ -86,7 +86,7 @@
         </div>
         {{ with .button }}
         <div class="form__success-button">
-          <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+          <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
             {{ .text }}
             {{ if .icon }}
               <span class="button__icon">
