@@ -1,0 +1,30 @@
+.blog-categories {
+  padding: 20px 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: palette(primary-orange, 400) transparent;
+  margin-bottom: 20px;
+
+  .filter-link {
+    display: block;
+    min-width: 0;
+    width: fit-content;
+    padding: 8px 12px;
+    white-space: nowrap;
+    height: auto;
+    flex-shrink: 0;
+
+    @include mq($md) {
+      padding: 16px 20px;
+    }
+
+    &.active {
+      animation: none;
+      box-shadow: none;
+      scale: 1;
+    }
+  }
+}

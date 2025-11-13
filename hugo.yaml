@@ -22,6 +22,10 @@ pagination:
 
 # Permalinks Configuration
 permalinks:
+  taxonomy:
+    categories: /blog/:slug/
+  term:
+    categories: /blog/category/:slug/
 
 # Taxonomy Configuration
 taxonomies:
