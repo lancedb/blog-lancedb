@@ -16,5 +16,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/rss", "destination": "/index.xml", "permanent": true },
+    { "source": "/rss.xml", "destination": "/index.xml", "permanent": true },
+    { "source": "/feed", "destination": "/index.xml", "permanent": true },
+    { "source": "/blog/rss", "destination": "/blog/index.xml", "permanent": true },
+    { "source": "/blog/rss.xml", "destination": "/blog/index.xml", "permanent": true }
   ]
-} 
+}
