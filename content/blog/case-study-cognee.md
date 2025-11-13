@@ -3,7 +3,7 @@ title: "How Cognee Builds AI Memory Layers with LanceDB"
 date: 2025-09-23
 draft: false
 featured: false
-categories: ["Case Studies"]
+categories: ["Case Study"]
 image: /assets/blog/case-study-cognee/preview-image.jpg
 meta_image: /assets/blog/case-study-cognee/preview-image.jpg
 description: "How Cognee uses LanceDB to deliver durable, isolated, and low-ops AI memory from local development to managed production."

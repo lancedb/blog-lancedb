@@ -3,7 +3,7 @@ title: "Second Dinner's Secret Weapon: LanceDB-Powered RAG for Faster, Smarter G
 date: 2025-03-25
 draft: false
 featured: false
-categories: ["Case Studies", "Gaming"]
+categories: ["Case Study", "Gaming"]
 image: /assets/blog/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development.png
 description: "Discover how Second Dinner, creators of Marvel Snap, leveraged LanceDB Cloud to transform game development workflows, reducing prototyping time from months to hours and automating QA test generation with 81% better results."
 author: Qian Zhu
