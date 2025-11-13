@@ -77,8 +77,8 @@ Architecturally, we want Lance to remain a pure format specification with its co
 
 To make this distinction clear, we've created dedicated infrastructure for each project:
 
-- Lance now has its own website ([lance.org](https://lance.org/)), GitHub organization ([lance-format](https://github.com/lance-format)), and Discord server [Lance Format](https://discord.gg/msY9kdwSYw)
-- LanceDB maintains its separate website ([lancedb.com](https://lancedb.com/)), GitHub organization ([lancedb](https://github.com/lancedb)), and Discord server [LanceDB](https://discord.gg/zMM32dvNtd)
+- Lance now has its own website ([lance.org](https://lance.org/)), GitHub organization ([lance-format](https://github.com/lance-format)), and even a Discord server [Lance Format](https://discord.gg/lance)
+- LanceDB will still maintain its own website separately ([lancedb.com](https://lancedb.com/)), GitHub organization ([lancedb](https://github.com/lancedb)), and Discord server [LanceDB](https://discord.gg/zMM32dvNtd), catering to LanceDB's user community.
 
 As for LanceDB's community development, we're taking it one step at a time. Right now, the LanceDB community is still growing, with by far the most contributions coming from LanceDB Inc. (the company). As the project matures and attracts more diverse contributors, the governance work we've done for Lance provides a clear pathway for how we can evolve LanceDB's community structure in the future.
 
