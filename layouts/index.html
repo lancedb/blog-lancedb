@@ -22,7 +22,7 @@
             {{ with .Params.hero.cta}}
             <div class="hero-main__cta">
               {{ range . }}
-                <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+                <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in .href "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                   {{ .text }}
                   {{ if .icon }}
                     <span class="button__icon">
@@ -204,7 +204,7 @@
           {{ end }}
         </div>
         {{ with .cta }}
-          <a href="{{.href}}" {{if in .href "http" }} target="_blank"{{end}} class="button button--{{.version}} solution__cta">
+          <a href="{{.href}}" {{if in .href "http" }} rel="noreferer, ,noopener" target="_blank"{{end}} class="button button--{{.version}} solution__cta">
             {{ .text }}
             {{ with .icon }}
               <span class="button__icon">
@@ -260,7 +260,7 @@
                   </ul>
                 </div>
                 {{ with .cta }}
-                  <a href="{{.href}}" {{if in .href "http" }} target="_blank"{{end}} class="button button--{{.version}} how-it-works__cta">
+                  <a href="{{.href}}" {{if in .href "http" }} rel="noreferer, ,noopener" target="_blank"{{end}} class="button button--{{.version}} how-it-works__cta">
                     {{ .text }}
                     {{ with .icon }}
                       <span class="button__icon">

@@ -54,7 +54,7 @@
               </div>
               {{ with $plan.link }}  
                 <div class="pricing-plan__actions">
-                  <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+                  <a class="button button--{{.version | default "primary"}}" href="{{.href}}" {{ if in .href "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                     {{ .text }}
                     {{ if .icon }}
                       <span class="button__icon">
@@ -169,7 +169,7 @@
             </div>
             <div class="pricing-calculator__actions">
               {{ range .actions }}
-                <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} target="_blank" rel="noopener"{{ end }}>
+                <a class="button button--{{.version}}" href="{{.href}}" {{ if in .href "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                   {{ .text }}
                   {{ if .icon }}
                     <span class="button__icon">

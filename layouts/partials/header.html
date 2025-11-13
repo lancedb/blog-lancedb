@@ -3,7 +3,7 @@
         {{ with site.Params.header.top}}
         <div class="header__announcement">
             <div class="container container-fluid">
-                <a class="header__announcement-link" href="{{.link.url}}" {{- if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{- end }}>
+                <a class="header__announcement-link" href="{{.link.url}}" {{- if in site.Params.header.button.url "http" }} rel="noreferer, ,noopener" target="_blank" {{- end }}>
                     <span class="header__announcement-link__text">
                         {{.link.text}}
                     </span>
@@ -37,13 +37,13 @@
                                 {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
                                     <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
                                     href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                    {{ if in .URL "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ else }}
                                     <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
                                     href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                    {{ if in .URL "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ end }}
@@ -102,7 +102,7 @@
                                         {{ range site.Params.socials }}
                                         {{ if eq .name $social }}
                                                 <li>
-                                                    <a href="{{ .url }}" target="_blank" class="nav__social-link">
+                                                    <a href="{{ .url }}" rel="noreferer, ,noopener" target="_blank" class="nav__social-link">
                                                         {{ readFile (printf "static/assets/socials/%s.svg" .icon) | safeHTML }}
                                                     </a>
                                                 </li>
@@ -112,13 +112,13 @@
                                 </ul>
                             </div>
                             <!-- Log in link -->
-                            <a class="nav__link nav__link--right" href="https://cloud.lancedb.com/sign-in" target="_blank" rel="noopener">
+                            <a class="nav__link nav__link--right" href="https://cloud.lancedb.com/sign-in" rel="noreferer, ,noopener" target="_blank" >
                                 Log in
                             </a>
                             <a 
                                 href="{{ site.Params.header.button.url }}" 
                                 class="button button--secondary"
-                                {{ if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{ end }}
+                                {{ if in site.Params.header.button.url "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}
                                 >
                                 {{ site.Params.header.button.text }}
                                 {{ if site.Params.header.button.icon }}
@@ -145,13 +145,13 @@
                                 {{ if or ($current.IsMenuCurrent .Menu .) ($current.HasMenuCurrent .Menu .) }}
                                     <a class="nav__link active{{ with .Params.class }} {{ . }}{{ end }}"
                                     href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                    {{ if in .URL "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ else }}
                                     <a class="nav__link{{ with .Params.class }} {{ . }}{{ end }}"
                                     href="{{ .URL }}"
-                                    {{ if in .URL "http" }} target="_blank" rel="noopener"{{ end }}>
+                                    {{ if in .URL "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}>
                                     {{ .Name }}
                                     </a>
                                 {{ end }}
@@ -172,7 +172,7 @@
                                         {{ range site.Params.socials }}
                                         {{ if eq .name $social }}
                                                 <li>
-                                                    <a href="{{ .url }}" target="_blank" class="nav__social-link">
+                                                    <a href="{{ .url }}" rel="noreferer, ,noopener" target="_blank" class="nav__social-link">
                                                         {{ readFile (printf "static/assets/socials/%s.svg" .icon) | safeHTML }}
                                                     </a>
                                                 </li>
@@ -184,7 +184,7 @@
                             <a 
                                 href="{{ site.Params.header.button.url }}" 
                                 class="button button--secondary"
-                                {{ if in site.Params.header.button.url "http" }} target="_blank" rel="noopener"{{ end }}
+                                {{ if in site.Params.header.button.url "http" }} rel="noreferer, ,noopener" target="_blank" {{ end }}
                                 >
                                 {{ site.Params.header.button.text }}
                                 {{ if site.Params.header.button.icon }}
