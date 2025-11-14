@@ -3,7 +3,7 @@ title: "Case Study: Meet Dosu - the Intelligent Knowledge Base for Software Team
 date: 2025-07-31
 draft: false
 featured: false
-categories: ["Case Studies"]
+categories: ["Case Study"]
 image: /assets/blog/case-study-dosu/preview-image.png
 meta_image: /assets/blog/case-study-dosu/preview-image.png
 description: "How Dosu uses LanceDB to transform codebases into living knowledge bases with real-time search and versioning."

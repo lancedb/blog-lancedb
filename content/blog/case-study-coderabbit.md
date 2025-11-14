@@ -3,7 +3,7 @@ title: "Case Study: How CodeRabbit Leverages LanceDB for AI-Powered Code Reviews
 date: 2025-09-03
 draft: false
 featured: false
-categories: ["Case Studies"]
+categories: ["Case Study"]
 image: /assets/blog/case-study-coderabbit/preview-image.png
 meta_image: /assets/blog/case-study-coderabbit/preview-image.png
 description: "How CodeRabbit leverages LanceDB-powered context engineering turns every review into a quality breakthrough."
