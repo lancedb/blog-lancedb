@@ -1,6 +1,6 @@
 ---
 title: "Building the Future Together: Introducing Lance Community Governance"
-date: 2025-11-11
+date: 2025-11-18
 draft: false
 featured: true
 categories: ["Announcement"]
