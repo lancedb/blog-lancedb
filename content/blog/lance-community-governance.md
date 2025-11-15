@@ -11,7 +11,7 @@ author: Jack Ye
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"
-author_linkedin: "https://www.linkedin.com/in/yezhaoqin"
+author_linkedin: "yezhaoqin"
 ---
 
 Over the last three years, Lance has created a truly unique community where data infrastructure engineers and AI/ML engineers come together to make lakehouse architectures work in the AI era. Today, we’re excited to announce the formal governance structure for the Lance community to help it thrive, even further.
