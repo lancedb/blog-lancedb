@@ -62,7 +62,7 @@ A **`shallow_clone`** is a metadata-only operation that creates a new, writable 
 
 When you perform a shallow clone, Lance creates a new manifest for the target dataset. This new manifest includes a new entry in its `base_paths` map that points to the URI of the source dataset. All the file metadata from the source version is copied into the new manifest, and the `base_id` of each file is updated to point to this new entry. The result is a new dataset that starts at the exact same version as the source but is ready for new, independent writes:
 
-![preview](/assets/blog/dive-deep-clone-primitives/shallow_clone.png)
+![shallow_clone diagram](/assets/blog/dive-deep-clone-primitives/shallow_clone.png)
 
 Each cloned dataset begins its independent version history starting from the version it was cloned. It references the source dataset's data, deletion, and index files. Lance datasets also supports nested shallow_clone operations.
 
