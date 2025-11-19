@@ -1,10 +1,11 @@
 ---
 title: 🛡️ Newly Knighted Lancelot, ▶️TwelveLabs Semantic Video Recommendations, 🧠Cognee's AI Memory Layer with LanceDB
-date: 2025-10-08T00:00:00Z
+date: 2025-10-08
 draft: false
 featured: false
 categories: ["Newsletter"]
 image: "/assets/blog/newsletter-september-2025/september-newsletter-image-3.png"
+description: "Our September newsletter welcomes new Lancelot members, highlights TwelveLabs semantic video recommendations, Cognee’s AI memory layer, and shares the latest product and community updates."
 author: "Jasmine Wang"
 author_avatar: "/assets/authors/jasmine-wang.png"
 author_bio: "Ecosystem Engagement, Partnership, Community, DevRel"
