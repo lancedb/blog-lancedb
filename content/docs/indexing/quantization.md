@@ -8,20 +8,19 @@ aliases: ["/docs/concepts/indexing/rabitq/"]
 ---
 
 Quantization compresses high‑dimensional float vectors into a smaller, approximate representation, where instead of storing every vector as a float32 or float64, it's stored in compressed form, without too much of a compromise in search quality.
-
 Quantization is helpful when:
 - You have a large dataset of relatively high-dimensional vectors (512, 768, 1024+)
 - Index build time and query latency matter
 
 LanceDB currently exposes multiple quantized vector index types, including:
-- `IVF_PQ` – Inverted File with Product Quantization (default)
-- `IVF_RQ` – Inverted File with **RaBitQ** quantization (binary, 1 bit per dimension)
+- `IVF_PQ` – Inverted File index with Product Quantization (default). See the [vector indexing](/docs/indexing/vector-index/) page for examples on `IVF_PQ`
+- `IVF_RQ` – Inverted File index with **RaBitQ** quantization (binary, 1 bit per dimension). See [below](#rabitq-quantization) for examples
 
-`IVF_PQ` works well in many cases, but comes with trade-offs: building PQ codebooks is expensive, re-training is required when data distribution shifts, and distance estimation can be slow.
+`IVF_PQ` is the default indexing option in LanceDB, coming with quantization by default, and works well in many cases. However, in cases where more drastic compression is needed, RaBitQ is also a reasonable option.
 
 ## RaBitQ quantization
 
-RaBitQ is a binary quantization method that represents each normalized embedding using **1 bit per dimension**, plus a couple of small corrective scalars. In practice, a 1024‑dimensional `float32` vector that would normally take 4 KB can be compressed to roughly a few hundred bytes with RaBitQ, while keeping recall high.
+RaBitQ is a binary quantization method that represents each normalized embedding using **1 bit per dimension**, plus a couple of small corrective scalars. In practice, a 1024‑dimensional `float32` vector that would normally take 4 KB can be compressed to roughly a few hundred bytes with RaBitQ, while still maintaining reasonable recall.
 
 ### How RaBitQ works
 
@@ -51,7 +50,6 @@ You can create an RaBitQ‑backed vector index by setting `index_type="IVF_RQ"` 
 
 {{< code language="python" >}}
 import lancedb
-
 
 # Connect to LanceDB
 db = lancedb.connect("/path/to/db")
