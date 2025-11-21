@@ -36,7 +36,7 @@ LanceDB supports several rerankers out of the box. Here are a few examples:
 | `CrossEncoderReranker` | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
 | `ColbertReranker`      | `colbert-ir/colbertv2.0`               |
 
-You can find more details about these and other rerankers in the [**Integrations**](../../integrations/) section.
+You can find more details about these and other rerankers in the [**Integrations**](/docs/integrations/reranking) section.
 
 
 ### Multi-vector reranking
