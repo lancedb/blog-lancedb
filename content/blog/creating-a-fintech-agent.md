@@ -15,6 +15,7 @@ AI agents are popping up everywhere, and they're only going to become more commo
 
 These days, many frameworks are out there to help you with AI agents quickly. Honestly, it feels like a new "low-code" tool shows up every other day, promising to make building agents a breeze. They're all over the place—simple drag-and-drop setups or text boxes where you plug in a few prompts and some data, and just like that, your agent's ready to go.
 
+
 ## The Architecture
 
 Every AI agent has three main pieces at its core: the Model, the Tools, and the Reasoning Loop.
@@ -83,7 +84,7 @@ class Tool(ABC):
         pass
 
 # Initialize Mistral and Embedder
-api_key = os.environ.get("MISTRAL_API_KEY", "xxxxxxxxxxxxx")
+api_key = os.environ.get("MISTRAL_API_KEY", "xxxxxxxxxxxxx")  
 if not api_key:
     raise ValueError("Please set the MISTRAL_API_KEY environment variable.")
 
@@ -100,7 +101,7 @@ For the quick demonstration, I am going to use `mistral-large-latest` a model fr
 
 ## Step 2: Loan Agent - Predictive Analysis with ML
 
-As soon as a query comes in, the Loan Agent uses its ML tool to spin up the predictions. I am using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) here.
+As soon as a query comes in, the Loan Agent uses its ML tool to spin up the predictions. I am using the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) here. 
 
 ### Loading the Demo Data
 
@@ -168,7 +169,7 @@ Now comes the agent itself:
 class PredictiveMLTool:
     def __init__(self):
         self.model = joblib.load('loan_approval_model.pkl')
-
+    
     def use(self, intent, age, income, loan_amount):
         input_data = pd.DataFrame(
             [[age, income, loan_amount, intent]],
@@ -182,14 +183,14 @@ class LoanAgent:
     def __init__(self):
         self.tools = [PredictiveMLTool()]
         self.llm = llm
-
+    
     def process(self, query, params):
         intent = self.extract_intent(query)
         age = params.get('age')
         income = params.get('income')
         loan_amount = params.get('loan_amount')
         return self.tools[0].use(intent, age, income, loan_amount)
-
+    
     def extract_intent(self, query):
         valid_intents = ['DEBTCONSOLIDATION', 'EDUCATION', 'HOMEIMPROVEMENT', 'MEDICAL', 'PERSONAL', 'VENTURE']
         prompt = f"Given the query: '{query}', classify the intent into one of: {', '.join(valid_intents)}. Respond with only the intent in uppercase (e.g., 'HOMEIMPROVEMENT'). If unsure, respond with 'PERSONAL'."
@@ -208,7 +209,7 @@ To make things more smoother, let's introduce our Kernel Agent which will be use
 class KernelAgent:
     def __init__(self, loan_agent):
         self.loan_agent = loan_agent
-
+    
     def process_query(self, query, params):
         return self.loan_agent.process(query, params)
 ```
