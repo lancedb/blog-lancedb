@@ -17,4 +17,4 @@
     - hybrid search
     - vector search
     - FTS
-  live_app: "https://saas-examples-large-scale.vercel.app"
+  live_app: "https://lancedb-demos.vercel.app/demo/wikipedia-search"
