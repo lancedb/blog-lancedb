@@ -10,7 +10,7 @@ aliases: ["/docs/concepts/indexing/rabitq/"]
 Quantization compresses high‑dimensional float vectors into a smaller, approximate representation, where instead of storing every vector as a float32 or float64, it's stored in compressed form, without too much of a compromise in search quality.
 
 Quantization is helpful when:
-- You have a large dataset of relatively high-dimensional (512, 768, 1024+)
+- You have a large dataset of relatively high-dimensional vectors (512, 768, 1024+)
 - Index build time and query latency matter
 
 LanceDB currently exposes multiple quantized vector index types, including:
@@ -51,7 +51,7 @@ You can create an RaBitQ‑backed vector index by setting `index_type="IVF_RQ"` 
 
 {{< code language="python" >}}
 import lancedb
-from lancedb.index import FTS, IvfRq
+
 
 # Connect to LanceDB
 db = lancedb.connect("/path/to/db")
@@ -110,9 +110,15 @@ similar to how you would do in `IVF_PQ`.
 The full list of parameters to the algorithm
 are listed below.
 
-- `distance_type`: Literal["l2", "cosine", "dot"], defaults to "l2"
-- `num_partitions`: Optional[int], defaults to None
-- `num_bits`: int, defaults to 1
-- `max_iterations`: int, defaults to 50
-- `sample_rate`: int, defaults to 256
-- `target_partition_size`: Optional[int], defaults to None
+- `distance_type`: Literal["l2", "cosine", "dot"], defaults to "l2"  
+  The distance metric to use for similarity comparison. Choose "l2" for Euclidean, "cosine" for cosine similarity, or "dot" for dot product.
+- `num_partitions`: Optional[int], defaults to None  
+  Number of IVF partitions (affects index build time and query accuracy). More partitions can improve recall but may increase build time.
+- `num_bits`: int, defaults to 1  
+  Bits per dimension for quantization (1 is standard RaBitQ). Higher values improve fidelity at the cost of more storage and computation.
+- `max_iterations`: int, defaults to 50  
+  Maximum number of iterations for training the quantizer. Increase for larger datasets or to improve quantization quality.
+- `sample_rate`: int, defaults to 256  
+  Number of samples per partition during training. Higher values may improve accuracy but increase training time.
+- `target_partition_size`: Optional[int], defaults to None  
+  Target number of vectors per partition. Adjust to control partition granularity and memory usage.
