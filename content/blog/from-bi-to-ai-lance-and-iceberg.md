@@ -139,7 +139,7 @@ Iceberg has years of battle-hardening from production usage and is well-integrat
 
 Iceberg's catalog-dependent design means the catalog is aware of *all* table operations, enabling centralized monitoring and powerful automated optimization triggers. It also enable an easy-to-maintain unified audit log across all tables, with coordinated data lineage tracking.
 
-Lance tables, like Delta Lake, can be **modified directly in storage** without catalog awareness**.** This storage-first design gives Lance a portability advantage but complicates activity tracking — downstream operations must rely on pull-based polling or storage event notifications (S3 Events, GCS Pub/Sub) rather than semantic catalog events. Over time, Lance’s approach to address this will be to offer managed solutions like LanceDB Enterprise (which has knowledge of all read/write traffic), and to onboard all operations onto open observability frameworks like OpenTelemetry.
+Lance tables, like Delta Lake, can be **modified directly in storage** without catalog awareness. This storage-first design gives Lance a portability advantage but complicates activity tracking — downstream operations must rely on pull-based polling or storage event notifications (S3 Events, GCS Pub/Sub) rather than semantic catalog events. Over time, Lance’s approach to address this will be to offer managed solutions like LanceDB Enterprise (which has knowledge of all read/write traffic), and to onboard all operations onto open observability frameworks like OpenTelemetry.
 
 ## Takeaways from the comparison
 
