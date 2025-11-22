@@ -13,7 +13,7 @@ author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"
 author_linkedin: "yezhaoqin"
 author2: "Prashanth Rao"
-author2_avatar: "/assets/authors/prashanth.png"
+author2_avatar: "/assets/authors/prashanth.jpg"
 author2_bio: "AI Engineer @ LanceDB"
 author2_github: "prrao87"
 author2_linkedin: "prrao87"
@@ -170,4 +170,4 @@ From an Iceberg perspective, leveraging the parts of the lakehouse stack that ar
 
 From a Lance perspective, leveraging the file-level benefits of Lance (faster random access, multimodal blob handling, Arrow-native integrations) and its table-level benefits (fragment design allowing zero-copy data evolution and a pluggable index framework) allows enterprises to rapidly move forward with their AI workloads and keep up with upcoming paradigms. All of this, built on top of the same data foundation.
 
-These emerging architectural patterns reflects a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds.These emerging architectural patterns reflects a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds.
+These emerging architectural patterns reflects a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds. These emerging architectural patterns reflects a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds.
