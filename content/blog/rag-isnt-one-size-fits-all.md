@@ -14,11 +14,11 @@ author_linkedin: leonardqmarcq
 ---
 
 **TL;DR**
-* RAG quality is limited by your iteration loop, not a single “magic” component.
+* Start by building a rapid eval loop — skipping this means you can't see what's working
 * Fix layers in order: data → chunking → embeddings/retrieval → generation.
-* Prefer hybrid retrieval and tune top-k empirically.
+* Hybrid retrieval + tuned top-k usually wins.
 * Measure with answer-level metrics, Correct-Call Rate, and latency/cost/drift.
-* Using [Kiln](https://kiln.tech) x [LanceDB](https://lancedb.com): iterate locally in Kiln on LanceDB, then promote to LanceDB Cloud when a config wins.
+* Using [Kiln](https://kiln.tech) &times; [LanceDB](https://lancedb.com) gives you a fast local loop and a clean path to promote configs to Cloud.
 
 ## Introduction
 
@@ -42,9 +42,7 @@ Once you have that, the rest becomes mechanical — an ordered process of improv
 
 Kiln makes it easy to create RAG evals in just a few minutes. Our synthetic data generator creates Q&A-style eval datasets, automatically, derived from your documents, in an interactive UI. Once complete, comparing RAG configuration options is fast and easy.
 
-Video showing creating a RAG eval. Subtitle: "Creating a RAG Correctness Eval in Kiln UI".
-
-<iframe src="https://player.vimeo.com/video/1137040663?h=8bf862f2d4" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen title="Evaluate RAG Accuracy: Q&A Evals in Kiln"></iframe>
+<iframe src="https://player.vimeo.com/video/1137040663?h=8bf862f2d4" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen title="Interactive Q&A dataset generation for RAG evaluations"></iframe>
 
 ## Part 1: Optimize Layer by Layer
 
@@ -107,7 +105,7 @@ Query the extracted corpus for a few deterministic fields:
 * Turkey Sandwich
 In Kiln, you can pick from many different vision-language models for extraction and design your own prompts to steer how data is parsed before it’s embedded and stored in your local LanceDB. Getting clean, well-structured text at this stage makes every downstream step (chunking, embedding, and retrieval) far easier to tune.
 
-<iframe src="https://player.vimeo.com/video/1138970149?h=2965d6cc55" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen title="Guiding RAG Document Extraction with Prompts in Kiln"></iframe>
+<iframe src="https://player.vimeo.com/video/1138970149?h=2965d6cc55" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen title="Guiding document extraction with prompts"></iframe>
 
 ### Optimize Chunking
 
@@ -138,9 +136,9 @@ There’s no universal best value, only trade-offs you can measure.
 
 **Guiding principle:** treat chunking as an empirical choice, not a belief system. Pick a few candidate strategies, run evaluations, and compare results. Iteration will reveal the sweet spot faster than theory ever will.
 
-In practice this is a two-click experiment in Kiln: swap chunkers (semantic vs. fixed-size, overlap on/off), index into local LanceDB, and run your evals!
+This experiment only takes a few clicks in Kiln: swap chunkers (semantic vs. fixed-size, overlap on/off), index into local LanceDB, and run your evals!
 
-<iframe src="https://player.vimeo.com/video/1139016025?h=d0e700b722" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen title="Semantic Chunking in Kiln"></iframe>
+<iframe src="https://player.vimeo.com/video/1139016025?h=d0e700b722" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen title="Comparing semantic vs. fixed-size chunking"></iframe>
 
 ### Embedding, Indexing & Retrieval
 
@@ -247,8 +245,12 @@ Once quality stabilizes, you can start tracking operational metrics too:
 
 These don’t replace quality metrics; they ensure you don’t trade off usability or economics for marginal gains.
 
+## Conclusion & How to Get Started
+
 Once you have a fast evaluation loop, you can evolve faster than anyone manually tuning prompts. You’ll stop fearing changes, because you can measure them. You’ll know which layer actually limits performance. And when new models, retrievers, or architectures appear, you’ll be able to test them in hours instead of weeks.
 
-That’s what turns a RAG from “working” into *great*. A system that improves itself through evidence, not intuition. To go further, you can also explore advanced techniques—re-ranking, GraphRAG, and others.
+That’s what turns a RAG from “working” into great. A system that improves itself through evidence, not intuition.
 
-Use [Kiln](https://kiln.tech) to measure every change on your local LanceDB instance, and when your configuration achieves great results, use our provided loader to seamlessly promote the entire dataset and configuration to [LanceDB Cloud](https://lancedb.com) for production-grade scaling.
+**Ready to get started with RAG evals and optimization?**
+- [Download Kiln](https://kiln.tech/download) for free from Github to build RAG evals and create your iteration loop.
+- When you're ready to promote your RAG configuration to production, use our provided [loader](https://docs.kiln.tech/docs/documents-and-search-rag#deploying-your-rag) to seamlessly promote the entire dataset and configuration to [LanceDB Cloud](https://lancedb.com) for production-grade scaling.
