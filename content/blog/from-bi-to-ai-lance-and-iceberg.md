@@ -1,6 +1,6 @@
 ---
 title: "From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg"
-date: 2025-11-21
+date: 2025-11-24
 draft: false
 featured: true
 categories: ["Engineering"]
