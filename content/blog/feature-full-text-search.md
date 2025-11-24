@@ -7,12 +7,12 @@ categories: ["Engineering"]
 image: /assets/blog/feature-full-text-search/preview-image.png
 meta_image: /assets/blog/feature-full-text-search/preview-image.png
 description: "No more Tantivy! We stress-tested native full-text search in our latest massive-scale search demo. Let's break down how it works and what we did to scale it."
-author: "Ayush Chaurasia"
-author_avatar: "/assets/authors/ayush-chaurasia.jpg"
-author_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods."
-author_twitter: "ayushchaurasia"
-author_github: "ayushchaurasia"
-author_linkedin: "ayushchaurasia"
+author: David Myriel
+author_avatar: "/assets/authors/david-myriel.jpg"
+author_bio: "Writer, Software Engineer @ LanceDB"
+author_twitter: "davidmyriel"
+author_github: "davidmyriel"
+author_linkedin: "davidmyriel"
 ---
 
 > It's not about the vectors. It's about getting the right result.
