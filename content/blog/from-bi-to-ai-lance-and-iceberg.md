@@ -1,6 +1,6 @@
 ---
 title: "From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg"
-date: 2025-11-21
+date: 2025-11-24
 draft: false
 featured: true
 categories: ["Engineering"]
@@ -116,9 +116,11 @@ A common need as the dataset scales in size is **data evolution,** i.e., changes
 
 In Lance, adding a new column **is essentially a zero-copy operation**. Lance's fragment design allows independent column files per fragment (though multiple columns can share a data file), meaning that adding or updating a column simply appends new column files without touching existing data. This avoids duplication on petabytes of data, as noted by [Netflix](https://lancedb.com/blog/case-study-netflix) as they built out their media data lake incorporating LanceDB.
 
-The ability to continuously or incrementally add features, without duplicating or rewriting unaffected data, makes Lance a compelling choice for teams working with petabytes of data.
-
 ![](/assets/blog/from-bi-to-ai-lance-and-iceberg/data_evolution.png)
+
+The space savings can be tremendous -- say you have an existing table that's 100 GB in size. If
+you update the table schema and add a new column that's only 1% this size (1 GB) -- in Iceberg, performing
+a backfill operation on the new column would require a **full table copy** amounting to 101 GB of writes. In LanceDB, it would just be 1 GB of writes. The larger the dataset, the more this matters. The ability to continuously or incrementally add features, without duplicating or rewriting unaffected data, makes Lance a compelling choice for teams working with petabytes of data.
 
 ## When Iceberg is beneficial
 
