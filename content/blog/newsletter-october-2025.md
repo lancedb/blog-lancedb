@@ -2,7 +2,7 @@
 title: 🎨 Semantic.Art, 💾 Stable Lance 2.1, 🎥 Ray+LanceDB powers Netflix
 date: 2025-10-31
 draft: false 
-featured: true 
+featured: false 
 categories: ["Newsletter"]
 image: "/assets/blog/newsletter-october-2025/newsletter-october-2025.png"
 description: "Our October newsletter highlights Semantic.Art, Lance File 2.1, RaBitQ Quantization, upcoming events, latest product and community updates."
