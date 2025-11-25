@@ -377,23 +377,23 @@ nncf.set_log_level(logging.ERROR)
 int8_model_path = 'clip-vit-base-patch16_int8.xml'
 calibration_data = prepare_dataset()
 ov_model = core.read_model(fp16_model_path)
-```
 
-    if len(calibration_data) == 0:
-        raise RuntimeError(
-            'Calibration dataset is empty. Please check internet connection and try to download images manually.'
-        )
-
-    #Quantize CLIP fp16 model using NNCF
-    calibration_dataset = nncf.Dataset(calibration_data)
-    quantized_model = nncf.quantize(
-        model=ov_model,
-        calibration_dataset=calibration_dataset,
-        model_type=nncf.ModelType.TRANSFORMER,
+if len(calibration_data) == 0:
+    raise RuntimeError(
+        'Calibration dataset is empty. Please check internet connection and try to download images manually.'
     )
 
-    #Saving Quantized model
-    serialize(quantized_model, int8_model_path)
+#Quantize CLIP fp16 model using NNCF
+calibration_dataset = nncf.Dataset(calibration_data)
+quantized_model = nncf.quantize(
+    model=ov_model,
+    calibration_dataset=calibration_dataset,
+    model_type=nncf.ModelType.TRANSFORMER,
+)
+
+#Saving Quantized model
+serialize(quantized_model, int8_model_path)
+```
 
 ### Compiling the INT8 model and Helper function for extracting features
 
