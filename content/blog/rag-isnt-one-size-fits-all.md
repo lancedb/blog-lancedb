@@ -1,10 +1,10 @@
 ---
-title: "RAG Isn't One Size Fits All: Here's How to Tune It for Your Use Case"
+title: "RAG isn't one size fits all: Here's how to tune it for your use case"
 date: 2025-11-24
 draft: false
-featured: false
+featured: true
 categories: ["Community"]
-image: https://placehold.co/1200x630
+image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.jpg
 description: Great RAG comes from a tight iteration loop. Learn how to systematically improve each layer of your RAG system using Kiln and LanceDB.
 author: Leonard Marcq
 author_avatar: "/assets/authors/leonard-marcq.jpg"
@@ -13,26 +13,29 @@ author_github: leonardmq
 author_linkedin: leonardqmarcq
 ---
 
-**TL;DR**
+{{< admonition >}}
+**TL;DR:**
 * Start by building a rapid eval loop — skipping this means you can't see what's working
 * Fix layers in order: data → chunking → embeddings/retrieval → generation.
 * Hybrid retrieval + tuned top-k usually wins.
 * Measure with answer-level metrics, Correct-Call Rate, and latency/cost/drift.
 * Using [Kiln](https://kiln.tech) &times; [LanceDB](https://lancedb.com) gives you a fast local loop and a clean path to promote configs to Cloud.
 
+{{< /admonition >}}
+
 ## Introduction
 
 Retrieval-Augmented Generation (RAG) systems are deceptively complex. On paper, they’re just pipelines: chunk some data, embed it, retrieve the best matches, and generate an answer. In practice, though, every part interacts. Changing chunk size might alter retrieval behavior; switching embedding models might make recall better or worse; a slightly different extractor model or prompt might silently add noise into the data you index.
 
-A lot of knobs, all interconnected. Manual tuning to iterate over every possible combination quickly reaches a dead end, or worse, leads to regressions that are hard to notice until users complain. You can spend days “improving” a component only to find accuracy dropping in other cases.
+A lot of knobs, all interconnected. Manual tuning to iterate over every possible combination quickly reaches a dead end, or worse, leads to regressions that are hard to notice until users complain. You can spend days "improving" a component only to find accuracy dropping in other cases.
 
 That’s why the single biggest unlock in RAG optimization isn’t a single knob tweak, but setting yourself up to iterate *fast* and *safely*. Before you chase specific optimizations, you need a tight feedback loop: the ability to try many configurations quickly, evaluate them systematically, and compare results across runs with confidence. Without that, every tweak is guesswork.
 
 [Kiln AI](https://kiln.tech) and [LanceDB](https://lancedb.com) have been cooking some new projects to make this process easy and fast. In one interface you can create Kiln RAG evals, compare hybrid vs. vector retrieval from LanceDB, and iterate critical RAG parameters like chunking strategy, embedding models, and document extraction methods. Let’s walk through the process of optimizing your RAG system.
 
-## Setup: Enable Rapid Evaluation
+## Setup: Enable rapid evaluation
 
-The first step to taking a RAG system from “good” to “great” is to make experimentation easy and fast.
+The first step to taking a RAG system from "good" to "great" is to make experimentation easy and fast.
 
 You should be able to quickly compare RAG configurations (different chunk size, retriever, or prompt), run them over your evaluation set, and see which performs best, both quantitatively (accuracy, recall, latency) and qualitatively (examples where it fails).
 
@@ -44,13 +47,13 @@ Kiln makes it easy to create RAG evals in just a few minutes. Our synthetic data
 
 <iframe src="https://player.vimeo.com/video/1137040663?h=8bf862f2d4" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen title="Interactive Q&A dataset generation for RAG evaluations"></iframe>
 
-## Part 1: Optimize Layer by Layer
+## Part 1: Optimize layer by layer
 
 Once you can evaluate changes quickly, optimization stops being guesswork and becomes a scientific process. Don’t tweak everything at once. Go layer by layer instead, fixing the highest-leverage parts first. Each layer depends on the previous one being solid.
 
-### Improve Your Document Extraction
+### Improve your document extraction
 
-The old adage “Garbage in, garbage out” definitely applies to RAG. An LLM can’t compensate for poor source material or messy extraction. If documents are inconsistent, noisy, or unstructured – no chunking or embedding tricks will save you.
+The old adage of *"garbage in, garbage out"* definitely applies to RAG. An LLM can’t compensate for poor source material or messy extraction. If documents are inconsistent, noisy, or unstructured – no chunking or embedding tricks will save you.
 
 Data cleanup used to be a slow, manual, and tedious task. Today, most document extraction pipelines have transitioned from library-based approaches like Tesseract to vision-language models (VLLMs) such as Gemini and Qwen3-VL, enabling data cleaning and formatting through prompt-based automation.
 
@@ -62,7 +65,7 @@ Try adding these methods to your document extraction prompts to improve your RAG
 
 #### Example: Receipts
 
-Prefer model-prompted extraction that produces structured text. Retrieval “understands” this far better:
+Prefer model-prompted extraction that produces structured text. Retrieval "understands" this far better:
 
 ```
 Order ID: 5821 
@@ -76,7 +79,7 @@ Subtotal: $24.00
 Tax (HST 13%): $3.12 
 Total: $27.12 
 Payment Method: Visa 
-```
+``` 
 
 Contrast with an unstructured dump where signal is buried in noise and broken layout:
 
@@ -94,20 +97,22 @@ tip not included…
 follow us @example 
 ``` 
 
-The issue isn’t missing information but structure and signal-to-noise. Slogans, tip notes, and social handles get embedded alongside totals, diluting retrieval. If you’re answering accounting queries (“totals over $25,” “Visa payments,” “coffee orders”), clutter makes results brittle. Worse, a slogan like “Fuel Your Morning!” can cause irrelevant hits for “fuel receipts.”
+The issue isn’t missing information but structure and signal-to-noise. Slogans, tip notes, and social handles get embedded alongside totals, diluting retrieval quality. If you’re answering accounting queries (`totals over $25`, `visa payments` or `coffee orders`), clutter makes your results brittle. Worse, an irrelevant slogan like `Fuel Your Morning!` can result in hits for a valid query `fuel receipts`.
 
 #### Quick sanity check before moving on
 
 Query the extracted corpus for a few deterministic fields:
 
-* Payment Method: Visa 
-* Tax (HST 13%) 
-* Turkey Sandwich
+- Payment Method: Visa 
+- Tax (HST 13%) 
+- Turkey Sandwich
+
+
 In Kiln, you can pick from many different vision-language models for extraction and design your own prompts to steer how data is parsed before it’s embedded and stored in your local LanceDB. Getting clean, well-structured text at this stage makes every downstream step (chunking, embedding, and retrieval) far easier to tune.
 
 <iframe src="https://player.vimeo.com/video/1138970149?h=2965d6cc55" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen title="Guiding document extraction with prompts"></iframe>
 
-### Optimize Chunking
+### Optimize chunking
 
 Chunking defines the boundaries of the data that will be embedded. Each chunk should encapsulate a coherent idea so it can be retrieved independently. During retrieval, these chunks are surfaced and fed into the model’s prompt for answer synthesis.
 
@@ -128,23 +133,28 @@ There’s no universal best value, only trade-offs you can measure.
 * **Overlap** preserves continuity but increases index size and retrieval latency. 
 * **Semantic chunking**: splitting at natural topic or section boundaries, usually beats naïve token counts, but still needs testing.
 
-#### Examples:
+#### Examples
 
 * A *novel* may need ~800-token chunks with overlap for narrative continuity. 
 * A *research paper* often performs best around 300 tokens, semantically split such that each chunk covers one semantic concept. 
 * An *invoice/receipt* may need no chunking at all; one structured record per file is plenty.
 
-**Guiding principle:** treat chunking as an empirical choice, not a belief system. Pick a few candidate strategies, run evaluations, and compare results. Iteration will reveal the sweet spot faster than theory ever will.
+{{< admonition >}}
+**Guiding principle:**
+
+Treat chunking as an empirical choice, not a belief system. Pick a few candidate strategies, run evaluations, and compare results. Iteration will reveal the sweet spot faster than theory ever will.
+
+{{< /admonition >}}
 
 This experiment only takes a few clicks in Kiln: swap chunkers (semantic vs. fixed-size, overlap on/off), index into local LanceDB, and run your evals!
 
 <iframe src="https://player.vimeo.com/video/1139016025?h=d0e700b722" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen title="Comparing semantic vs. fixed-size chunking"></iframe>
 
-### Embedding, Indexing & Retrieval
+### Embedding, indexing & retrieval
 
 This is where performance differences can be dramatic. The same RAG pipeline can swing from mediocre to excellent simply by changing the embedding model or retrieval strategy. However, if the previous steps were bad, there's very little you can do now!
 
-Once data and chunking are stable, this layer determines how effectively your system surfaces the *right* context. It’s the heart of the “R” in RAG, precision and recall in action.
+Once data and chunking are stable, this layer determines how effectively your system surfaces the *right* context. It’s the heart of the "R" in RAG, precision and recall in action.
 
 **Key levers:**
 
@@ -156,7 +166,7 @@ Once data and chunking are stable, this layer determines how effectively your sy
 
 * **Hybrid search**: Combine vector retrieval with keyword-based search (usually an algorithm called BM25). BM25 catches literal string matches, such as entity names, IDs, acronyms, while vectors capture semantics. This blend reliably boosts both factual recall and contextual relevance. 
 
-Consider a query searching for “Dunkin' Donuts”. BM25 would immediately match documents mentioning that exact name, while a pure embedding search might also surface results about other coffee shops or bakeries in general and competitors such as Tim Hortons or Starbucks, since it treats “Dunkin' Donuts” as conceptually similar to other restaurants. In this case, BM25 captures the precise intent better than the embedding search. 
+Consider a query searching for `Dunkin' Donuts`. BM25 would immediately match documents mentioning that exact name, while a pure embedding search might also surface results about other coffee shops or bakeries in general and competitors such as Tim Hortons or Starbucks, since it treats `Dunkin' Donuts` as conceptually similar to other restaurants. In this case, BM25 captures the precise intent better than the embedding search. 
 
 In Kiln you can toggle hybrid / vector-only / BM25 to compare different LanceDB query configurations and keep whichever wins your evals.
 
@@ -166,13 +176,16 @@ In Kiln you can toggle hybrid / vector-only / BM25 to compare different LanceDB 
 
 * **Tool naming & descriptions**: It’s surprisingly important to nail the RAG tool name and description. Your agents need to call the right RAG tools at the right moment, and they won’t know when to use an ambiguously named tool like  `search()`. Names/descriptions like `search_company_invoices()` clearly signal intent and improves tool-use reliability. Kiln evals will evaluate the agent end to end, including choosing the right search tool for the task.
 
+{{< admonition >}}
 **Guiding principle:**
 
 Treat retrieval as a *system-level tuning problem*, not just swapping out the embedding model and hoping for the best. Measure each change, embeddings, k-values, retrieval modes, in the same evaluation loop. Small configuration shifts here often drive the largest quality jumps in the entire RAG stack.
 
-### What Not to Grid-Search (At Least Not Yet)
+{{< /admonition >}}
 
-Many teams burn time brute-forcing hyperparameters that don’t matter early on. Resist that urge. Until your pipeline is stable, most “optimizations” are noise.
+### What not to grid-search (at least not yet)
+
+Many teams burn time brute-forcing hyperparameters that don’t matter early on. Resist that urge. Until your pipeline is stable, most "optimizations" are noise.
 
 **Common traps:**
 
@@ -180,9 +193,14 @@ Many teams burn time brute-forcing hyperparameters that don’t matter early on.
 * **Threshold obsession.** Retrieval thresholds only make sense once your **evaluation set** reflects *real user queries*. Otherwise, you’re tuning to synthetic patterns. 
 * **Latency micro-gains.** Shaving milliseconds off retrieval or generation doesn’t help if accuracy is still moving. Optimize *correctness first, performance later.*
 
-**Guiding principle:** early in RAG development, focus on correctness. Once your quality stabilizes and metrics are trustworthy, then move down the stack. Tune indexes, thresholds, and latency trade-offs with confidence that they reflect real improvement.
+{{< admonition >}}
+**Guiding principle:** 
 
-## Part 2: How to Measure & Iterate
+Early in RAG development, focus on correctness. Once your quality stabilizes and metrics are trustworthy, then move down the stack. Tune indexes, thresholds, and latency trade-offs with confidence that they reflect real improvement.
+
+{{< /admonition >}}
+
+## Part 2: How to measure & iterate
 
 You can’t optimize what you can’t measure.
 
@@ -192,7 +210,7 @@ The goal of evaluation isn’t to produce a perfect metric, but to make iteratio
 
 There are three main categories of evaluations to use for RAG systems:
 
-### RAG Accuracy - Answer-Level Evaluation
+### RAG accuracy: Answer-level evaluation
 
 The most direct way to measure progress is to ask: *Did the RAG give the right answer?*
 
@@ -217,9 +235,9 @@ You can start small. Dozens or hundreds of examples, but make them diverse.
 
 The key is consistency: always evaluate with the same setup so comparisons are meaningful. When you run into an edge case on production that does not quite give the result you hoped for, add it to your evaluation dataset, tune and evaluate again. If you change your eval, always be sure to backfill previous eval results.
 
-### Correct-Call Evaluation – Is RAG called at the correct times?
+### Correct-call evaluation: Is RAG called only when needed?
 
-Not every query needs retrieval. Some answers are already within the model’s base knowledge (e.g., *“What is 2 + 2?”*), while others absolutely depend on external context (e.g., *“What’s in the 2023 HR handbook?”*).
+Not every query needs retrieval. Some answers are already within the model’s base knowledge (e.g., *"What is 2 + 2?"*), while others absolutely depend on external context (e.g., *"What’s in the 2023 HR handbook?"*).
 
 If your system decides dynamically when to call retrieval, you should measure how often it makes the *right* call. In Kiln, every RAG configuration is exposed as a callable tool, and we provide a dedicated eval template for checking that tools are called at appropriate times.
 
@@ -235,7 +253,7 @@ If your system decides dynamically when to call retrieval, you should measure ho
 
 **How to measure it:** label a subset of your evaluation queries as **"RAG needed"** or **"not needed."** Then compute how often your system made the correct decision. Even a small labeled set here pays off disproportionately. Once you can **trust** when RAG triggers, every downstream evaluation (accuracy, latency, cost) becomes far more meaningful.
 
-### Latency, Cost, and Drift
+### Latency, cost, and drift
 
 Once quality stabilizes, you can start tracking operational metrics too:
 
@@ -245,12 +263,12 @@ Once quality stabilizes, you can start tracking operational metrics too:
 
 These don’t replace quality metrics; they ensure you don’t trade off usability or economics for marginal gains.
 
-## Conclusion & How to Get Started
+## Conclusions & how to get started
 
 Once you have a fast evaluation loop, you can evolve faster than anyone manually tuning prompts. You’ll stop fearing changes, because you can measure them. You’ll know which layer actually limits performance. And when new models, retrievers, or architectures appear, you’ll be able to test them in hours instead of weeks.
 
-That’s what turns a RAG from “working” into great. A system that improves itself through evidence, not intuition.
+That’s what turns a RAG pipeline from "just working" into a *great one*. A system that improves itself through evidence, not intuition.
 
-**Ready to get started with RAG evals and optimization?**
+Ready to get started with RAG evals and optimization?
 - [Download Kiln](https://kiln.tech/download) for free from Github to build RAG evals and create your iteration loop.
 - When you're ready to promote your RAG configuration to production, use our provided [loader](https://docs.kiln.tech/docs/documents-and-search-rag#deploying-your-rag) to seamlessly promote the entire dataset and configuration to [LanceDB Cloud](https://lancedb.com) for production-grade scaling.
