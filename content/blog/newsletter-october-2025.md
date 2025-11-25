@@ -29,7 +29,7 @@ Big news from the LanceDB team — Lance File Format 2.1 is officially stable!
 
 This release solves one of the biggest challenges from 2.0: 👉 adding compression without sacrificing random access performance.
 
-[![Lance File 2.1 Stable](/assets/blog/newsletter-october-2025/lance_file_2.1_stable.png)](https://lancedb.com/blog/lance-file-2-1-stable/)
+[![Lance File 2.1 Stable](/assets/blog/lance-file-2-1-stable/preview-image.png)](https://lancedb.com/blog/lance-file-2-1-stable/)
 
 ## LanceDB's 🐰RaBitQ Quantization for Blazing Fast Vector Search ⚡️
 
