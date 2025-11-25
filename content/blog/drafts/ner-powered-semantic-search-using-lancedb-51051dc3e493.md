@@ -32,7 +32,7 @@ In this blog, we’ll see an example of Named Entity Recognition using the Deep 
 To extract named entities, we will use a*** NER model finetuned on a BERT-base model***.
 
 The flow will look like this
-![](https://miro.medium.com/v2/resize:fit:1100/1*xicHs6pPkpR9e9gXT-M4gg.png)
+![](https://miro.medium.com/v2/resize:fit:1100/1xxicHs6pPkpR9e9gXT-M4gg.png)
 In short, we use the NER model to further filter the semantic search results. The predicted named entities are used as “post filters” to filter the vector search results.
 
 ## Implementation

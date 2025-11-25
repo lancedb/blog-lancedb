@@ -45,7 +45,7 @@ You can get the BM-25 and Vector results based on different filter criteria. For
 A study of how some of these actually work in practice is [given in this blog](https://opensourceconnections.com/blog/2023/02/27/hybrid-vigor-winning-at-hybrid-search/).
 
 Apart from these approaches, you can use a Re-Ranker to re-score all of the Top-K results once again using a semantic reranker or some other approach like MinHash, SimHash, etc. To know more on Re-ranking, [read here](https://medium.com/etoai/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544).
-![Hybrid search illustration](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*Rpx35CSEiQdIbTCKYvs59A.gif)
+![Hybrid search illustration](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1xRpx35CSEiQdIbTCKYvs59A.gif)
 Let’s look at some code.
 
 LanceDB uses `tantivity` for the full text search. It also provides a Reranking API, where you can define your merge/fusion function **AND** make use of Re Ranking too. If you don’t know about Re ranking, [Visit this blog.](https://medium.com/etoai/simplest-method-to-improve-rag-pipeline-re-ranking-cf6eaec6d544)
@@ -122,9 +122,9 @@ table.search("To confuse the AI and DNN embedding, let's put random terms from o
     to_pandas()
 ```
 
-![Hybrid results favoring text](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*ydtjwr-MneBC5y4p62VLmg.png)
+![Hybrid results favoring text](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1xydtjwr-MneBC5y4p62VLmg.png)
 You see, I confused the model with the query by putting random terms for text but the sense was different. Since it is `0.3` it favours more to the text search. Now let’s full throttle to `0.7` and se the results for the same query
-![Hybrid results favoring vector](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*8MyhbRq_96IGAWlm-EvoHw.png)
+![Hybrid results favoring vector](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1x8MyhbRq_96IGAWlm-EvoHw.png)
 Whoohooo!!! Even the terms are there, it captured the meaning rather than the terms. Look at 3rd and 4th row interchanged.
 
 That’s about it. If you want to add your custom filtering and re ranking, learn more about it [here](https://lancedb.github.io/lancedb/hybrid_search/hybrid_search/#building-custom-rerankers).
@@ -157,7 +157,7 @@ table.search("To confuse the AI and DNN embedding, let's put random terms from o
     to_pandas()
 ```
 
-![Custom reranker filtered results](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1*aWiwhCMyag60AZYl9x4QQw.png)
+![Custom reranker filtered results](/assets/blog/hybrid-search-rag-for-real-life-production-grade-applications-e1e727b3965a/1xaWiwhCMyag60AZYl9x4QQw.png)
 This code will implement a custom filtering criteria where only the results are there where No of words are `>150`. You can also change the merging mechanism by inheriting from built-in Rerankers and adding some custom logic!
 
 > Colab to reproduce the results:

@@ -23,27 +23,27 @@ Let’s walk through a simple example of how the LanceDB-polars integration work
 ## ‍️ Read raw data into Polars
 
 For this walkthrough, we’ll be retrieving Rick and Morty quotes to answer user questions. Let’s start with reading the raw data in CSV format using polars:
-![](https://miro.medium.com/v2/resize:fit:770/1*DCpIahADQbISYT0NzzLt0w.png)Raw input data is a csv file with the quote id, the quote, and the quote author
+![](https://miro.medium.com/v2/resize:fit:770/1xDCpIahADQbISYT0NzzLt0w.png)Raw input data is a csv file with the quote id, the quote, and the quote author
 ## Setup embedding model
 
 Next, we’re going to set up a LanceDB table for retrieval. For this table, we’ll use the `sentence-transformers` model from [HuggingFace](https://huggingface.co/sentence-transformers). It is integrated as one of the default embedding models in LanceDB. To keep the installation footprint small, HuggingFace is an *optional* dependency for LanceDB, so if you’re starting from a fresh environment, you’ll want to first run `pip install -U sentence-transformers`.
-![](https://miro.medium.com/v2/resize:fit:770/1*5WCj3ewbNe-N5HADxjAbeg.png)Creating an embedding function
+![](https://miro.medium.com/v2/resize:fit:770/1x5WCj3ewbNe-N5HADxjAbeg.png)Creating an embedding function
 You can refer to other API’s or pretrained embedding models by name like “openai”, “cohere”, “openclip”, and more. You can see all of the [available functions here](https://lancedb.github.io/lancedb/embeddings/default_embedding_functions/), or you can extend it with your own.
 
 ## Ingest Polars into LanceDB
 
 Next, we’re ready to create a LanceDB table for semantic search. We can use pydantic to make creating the table schema easier by creating a `LanceModel` (subclass of `pydantic.BaseModel`). As you can see below, the table schema matches the polars dataframe schema, with the exception of an additional `vector` column. The embedding function we created can be configured to automatically create the vectors at ingestion time. We’re using pydantic annotations to indicate that `quote` is the source column for embeddings and `vector` is to be generated from the source column using the sentence-transformers model we set up.
-![](https://miro.medium.com/v2/resize:fit:770/1*2VbkYnesnJUC1ivWeFhL0g.png)Table schema matches the input data, with the exception of a vector column
+![](https://miro.medium.com/v2/resize:fit:770/1x2VbkYnesnJUC1ivWeFhL0g.png)Table schema matches the input data, with the exception of a vector column
 Now we can put it together. We’ll create the table under the `~/.lancedb` directory. We then use the `Quotes` pydantic model to create the table by using the `schema` parameter. And finally, we add the polars dataframe `df` to the LanceDB table. Note that the embedding generation is handled automatically by LanceDB.
-![](https://miro.medium.com/v2/resize:fit:770/1*42oY_hBjRATPkITTzWOyVQ.png)
+![](https://miro.medium.com/v2/resize:fit:770/1x42oY_hBjRATPkITTzWOyVQ.png)
 ## Querying the table
 
 Now we can ask Rick and Morty some really deep philosophical questions, like “What is the purpose of existence?”, and we can export the results as a polars dataframe. As you would expect, the top answer seems to be that “Nobody exists on purpose”.
-![](https://miro.medium.com/v2/resize:fit:770/1*sLid0_9Uhz1vw0MmwBN_Fg.png)This show is pretty dark
+![](https://miro.medium.com/v2/resize:fit:770/1xsLid0_9Uhz1vw0MmwBN_Fg.png)This show is pretty dark
 ## Reading the whole table into Polars
 
 As you iterate on your application, you’ll likely need to work with the whole table’s data pretty frequently. LanceDB tables can also be converted directly into a polars `LazyFrame` . The reason why we don’t convert it to a DataFrame is because LanceDB tables can potentially be very large, like way bigger than memory, and LazyFrames allows us to work with large datasets easily.
-![](https://miro.medium.com/v2/resize:fit:770/1*Wrrj0-K7vDgQ35JwibpTpA.png)let’s be lazy
+![](https://miro.medium.com/v2/resize:fit:770/1xWrrj0-K7vDgQ35JwibpTpA.png)let’s be lazy
 [UsageWith the lazy API, Polars doesn't run each query line-by-line but instead processes the full query end-to-end.docs.pola.rs](https://docs.pola.rs/user-guide/lazy/using/?source=post_page-----2d5eb32a8aa3--------------------------------)
 
 Of course, if you know your table will fit into memory, it’s pretty easy to do `lancedb_table.to_polars().collect()` to turn the LazyFrame into a DataFrame.
@@ -55,7 +55,7 @@ LanceDB and polars work really well with each other, but there are many places w
 ## Batch ingestion of LazyFrame
 
 Currently, you can ingest a DataFrame but not a LazyFrame. And if you try to pass in a LazyFrame anyway, you’ll get a TypeError:
-![](https://miro.medium.com/v2/resize:fit:770/1*VTV1hT5-rZbdG2izwcxl2w.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xVTV1hT5-rZbdG2izwcxl2w.png)
 This means that if you have a large dataset, you’ll have to manually read data in batches. The reason for this is that polars does not have an API to iterate over batches of a LazyFrame.
 
 > polars does not have an API to iterate over batches of a LazyFrame

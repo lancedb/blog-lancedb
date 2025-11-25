@@ -202,7 +202,7 @@ Remember our question was, “Which training method should I use for sentence tr
 “NLI with multiple negative ranking loss”
 
 And since Lance allows you to retrieve additional columns easily, I can not only show the most relevant YouTube video, but start it at the right place in the video:
-![](https://miro.medium.com/v2/resize:fit:770/1*vy3vdkL1aYOtH_a0OF1s_g.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xvy3vdkL1aYOtH_a0OF1s_g.png)
 ## Conclusions
 
 In this post, we saw how to use Lance as a critical component to power an LLM-based app. In addition, we went through an end-to-end workflow peeling back the covers. For these types of search workflows, Lance is a great fit because 1) it’s super easy to use for ANN, 2) it’s columnar so you can add a ton of additional features, and 3) it has [lightning fast random access](https://medium.com/etoai/benchmarking-random-access-in-lance-ed690757a826) speed so the index can be disk-based and extremely scalable.

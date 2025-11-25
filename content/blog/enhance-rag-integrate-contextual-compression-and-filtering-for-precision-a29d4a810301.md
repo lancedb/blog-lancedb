@@ -23,7 +23,7 @@ Filtering is a process that further cleans the data after compression from the l
 
 ## Working of Contextual Compression
 
-![Contextual compression diagram](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1*WZToanVYGWBLlaI00seH4A.png)
+![Contextual compression diagram](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1xWZToanVYGWBLlaI00seH4A.png)
 
 RAG (Retrieval Augmented Generation) lacks transparency in revealing what it retrieves, making it uncertain which questions the system will encounter. This results in valuable information getting lost amid a mass of irrelevant text, which is not ideal for a production-grade application.
 
@@ -91,7 +91,7 @@ docs = retriever.get_relevant_documents(query="What is Wetlands?")
 pretty_print_docs(docs)
 ```
 
-![Initial retrieval results](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1*mw-3Vvk7wplgsFVp7b68rQ.png)
+![Initial retrieval results](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1xmw-3Vvk7wplgsFVp7b68rQ.png)
 
 We can see that the first two results are the most relevant to the query.
 
@@ -148,7 +148,7 @@ qa = RetrievalQA.from_chain_type(
 qa("What is Environment?")
 ```
 
-![RetrievalQA output](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1*D7rXwGlKsdelh5NlYrlt6w.png)
+![RetrievalQA output](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1xD7rXwGlKsdelh5NlYrlt6w.png)
 
 ## Pipelines
 
@@ -182,7 +182,7 @@ compressed_docs = comp_pipe_retrieve.get_relevant_documents(query="What is Envir
 pretty_print_docs(compressed_docs)
 ```
 
-![Compression pipeline results](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1*ilN4dlfQPy-RJ-Oj2cS3Gw.png)
+![Compression pipeline results](/assets/blog/enhance-rag-integrate-contextual-compression-and-filtering-for-precision-a29d4a810301/1xilN4dlfQPy-RJ-Oj2cS3Gw.png)
 
 We can see that it tries to gather the most relevant documents to query.
 

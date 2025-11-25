@@ -15,16 +15,16 @@ In this writeup, you’ll learn the process of building a multi-modal search eng
 By the end of this, you should be able to build something like this, a search engine that can search images using text or other images
 
 Full implementation can be found [here](https://github.com/lancedb/vectordb-recipes/tree/main/applications/multimodal-search)
-![](https://miro.medium.com/v2/resize:fit:651/1*CkRyPrIi5OXiqxh82Jl3Wg.gif)
+![](https://miro.medium.com/v2/resize:fit:651/1xCkRyPrIi5OXiqxh82Jl3Wg.gif)
 Let’s get started!
 
 ## CLIP
 
 CLIP (Contrastive Language-Image Pre-Training) is a neural network trained on a variety of (image, text) pairs. It can be instructed in natural language to predict the most relevant text snippet, given an image, without directly optimizing for the task, similarly to the zero-shot capabilities of GPT-2 and 3
-![](https://miro.medium.com/v2/resize:fit:770/1*JZey6K72V64VOxoVw7drbQ.png)[source](https://towardsdatascience.com/simple-implementation-of-openai-clip-model-a-tutorial-ace6ff01d9f2)
+![](https://miro.medium.com/v2/resize:fit:770/1xJZey6K72V64VOxoVw7drbQ.png)[source](https://towardsdatascience.com/simple-implementation-of-openai-clip-model-a-tutorial-ace6ff01d9f2)
 ## LanceDB: Serverless VectorDB in browser
 
-![](https://miro.medium.com/v2/resize:fit:770/1*QWz_uromVPB5LKAgfrfKIg.png)
+![](https://miro.medium.com/v2/resize:fit:770/1xQWz_uromVPB5LKAgfrfKIg.png)
 Let us now set up the vector database. We’ll use nextjs serverless functions.
 
 LanceDB is an open-source database for vector-search built with persistent storage, which greatly simplifies retrieval, filtering and management of embeddings. LanceDB has native support for both python and javascript/Typescript. As this is a web application, we’ll use the node package.

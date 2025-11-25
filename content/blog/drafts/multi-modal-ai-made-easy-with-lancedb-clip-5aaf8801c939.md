@@ -18,7 +18,7 @@ One of the most exciting areas of research in deep learning currently is multi-m
 - Turning that into Gradio application
 - Multi-Modal Video Search
 
-![](https://miro.medium.com/v2/resize:fit:770/1*goBzf9Hb8abalCmIiheffQ.jpeg)CLIP model from OpenAI
+![](https://miro.medium.com/v2/resize:fit:770/1xgoBzf9Hb8abalCmIiheffQ.jpeg)CLIP model from OpenAI
 ## Overview
 
 In the above picture you can see the CLIP model(**Contrastive Language-Image Pre-Training**), which is trained on humongous corpus of image-text pairs. This is model on which we are going to focus on this blog.
@@ -126,7 +126,7 @@ Let’s append the data to the table.
     #converting to pandas for better visibility
     tbl.to_pandas()
 
-![the dataset after loading it into vector database](https://miro.medium.com/v2/resize:fit:578/1*zpG2IW7dtbu948jAdJirWg.png)Table after loading the Data
+![the dataset after loading it into vector database](https://miro.medium.com/v2/resize:fit:578/1xzpG2IW7dtbu948jAdJirWg.png)Table after loading the Data
 Now to test the image search, a good practice would be to check with the validation set first.
 
     #load the dataset
@@ -138,7 +138,7 @@ Now to test the image search, a good practice would be to check with the validat
     test[100]['img']
 
 the results should be something like this:
-![](https://miro.medium.com/v2/resize:fit:770/1*Ks1p9_UURkVI41Qw4RCelA.png)Image search using CLIP model with LanceDB
+![](https://miro.medium.com/v2/resize:fit:770/1xKs1p9_UURkVI41Qw4RCelA.png)Image search using CLIP model with LanceDB
 To search the table, we can use this way
 
 - Embed the image(s) we want
@@ -151,7 +151,7 @@ To search the table, we can use this way
     res = tbl.search(embs).limit(1).to_df()
     res
 
-![](https://miro.medium.com/v2/resize:fit:635/1*wEBX_KgeQT2zG2thXVqHLw.png)
+![](https://miro.medium.com/v2/resize:fit:635/1xwEBX_KgeQT2zG2thXVqHLw.png)
 We can also put everything into a function for easier inference.
 
     #creating an image search function
@@ -191,7 +191,7 @@ Searching the table
     data_id = int(res['id'][0])
     display(dataset[data_id]['img'])
 
-![](https://miro.medium.com/v2/resize:fit:710/1*VbO8D0QwqqNhbOg7zjqviw.png)Irish Terrier(French Bulldog)
+![](https://miro.medium.com/v2/resize:fit:710/1xVbO8D0QwqqNhbOg7zjqviw.png)Irish Terrier(French Bulldog)
 Again, let’s combine everything into a function.
 
     #making a text_search function to streamline the process
@@ -210,7 +210,7 @@ Great, we have used CLIP model for SQL, keyword, image and text search.
 > Follow along with this* *[**Colab**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/multimodal_clip/main.ipynb#scrollTo=b6f40300).
 
 Loading the data. We will use diffusiondb data already stored in a S3 bucket.
-![](https://miro.medium.com/v2/resize:fit:1100/1*ertaYy_ta5Y2iKMpZ8MEyA.png)DiffusionDB Dataset Preview
+![](https://miro.medium.com/v2/resize:fit:1100/1xertaYy_ta5Y2iKMpZ8MEyA.png)DiffusionDB Dataset Preview
     !wget https://eto-public.s3.us-west-2.amazonaws.com/datasets/diffusiondb_lance.tar.gz
     !tar -xvf diffusiondb_lance.tar.gz
     !mv diffusiondb_test rawdata.lance
@@ -250,7 +250,7 @@ Let’s see the schema, and the data inside the LanceDB table.
     tbl.schema
     tbl.to_pandas().head()
 
-![](https://miro.medium.com/v2/resize:fit:1100/1*iIv9UPWBo8ixfgAhDJqRgg.png)
+![](https://miro.medium.com/v2/resize:fit:1100/1xiIv9UPWBo8ixfgAhDJqRgg.png)
 Now, to properly visualize our embeddings and data, we will create a Gradio Interface. Let’s build some utility search functions beforehand.
 
     #find the image vectors from the database
@@ -322,7 +322,7 @@ Let’s set up the Gradio Interface.
 
     demo.launch()
 
-![](https://miro.medium.com/v2/resize:fit:1100/1*fjcthhO2vBIPHSi0aG6OLg.gif)Gradio Interface for MultiModal Search using CLIP
+![](https://miro.medium.com/v2/resize:fit:1100/1xfjcthhO2vBIPHSi0aG6OLg.gif)Gradio Interface for MultiModal Search using CLIP
 We can also search through **Image** and **Text.**
 
 ## Example III : Multi-Modal Video Search
@@ -446,7 +446,7 @@ Setting up the Gradio Interface
 
     demo.launch()
 
-![](https://miro.medium.com/v2/resize:fit:1100/1*Dkb4OdnXSOVncfgzhRbqAw.gif)MultiModal Video search using CLIP and LanceDB
+![](https://miro.medium.com/v2/resize:fit:1100/1xDkb4OdnXSOVncfgzhRbqAw.gif)MultiModal Video search using CLIP and LanceDB
 Phew, that was a long learning session. Hope you guys were as excited as I was while writing this.
 
 Visit our [GitHub ](https://github.com/lancedb)and if you wish to learn more about LanceDB python and Typescript library.
