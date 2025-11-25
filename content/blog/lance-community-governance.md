@@ -4,7 +4,7 @@ date: 2025-11-18
 draft: false
 featured: true
 categories: ["Announcement"]
-image: /assets/blog/lance-community-governance/preview-image.png
+image: /assets/blog/lance-community-governance/lance-governance.png
 meta_image: /assets/blog/lance-community-governance/preview-image.png
 description: "Announcing the formal governance structure for the Lance community, establishing clear pathways for contribution and leadership with a three-tier system of contributors, maintainers and PMC."
 author: Jack Ye
