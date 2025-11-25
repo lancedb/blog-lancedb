@@ -4,7 +4,7 @@ date: 2025-10-03
 draft: false
 featured: true
 categories: ["Engineering"]
-image: /assets/blog/lance-file-2-1-stable/preview-image.png
+image: /assets/blog/lance-file-2-1-stable/lance-file-2-1-stable.png
 description: "The 2.1 file version is now stable, learn what that means for you and what's coming next."
 author: Weston Pace
 author_avatar: "/assets/authors/weston-pace.jpg"
