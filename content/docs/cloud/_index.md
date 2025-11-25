@@ -50,4 +50,4 @@ When your application requires a managed deployment for production, you can seam
 
 LanceDB Cloud enables you to scale your AI applications from development to production without code changes or infrastructure management overhead.
 
-[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://lancedb.com/cloud)
+[![LanceDB Cloud](/assets/docs/main-cloud-cta.png)](https://cloud.lancedb.com)
