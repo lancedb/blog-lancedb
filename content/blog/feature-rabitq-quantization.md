@@ -8,7 +8,7 @@ image: "/assets/blog/feature-rabitq-quantization/preview-image.png"
 # meta_image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
 params:
   meta:
-    og_image: "/assets/blog/feature-rabitq-quantization/preview-image.png"
+    og_image: "/assets/blog/feature-rabitq-quantization/rabitq-meta.png"
     og_twitter_image: "/assets/blog/feature-rabitq-quantization/rabitq-meta.png"
 description: "Introducing RaBitQ quantization in LanceDB for higher compression, faster indexing, and better recall on high‑dimensional embeddings."
 author: David Myriel, Yang Cen
