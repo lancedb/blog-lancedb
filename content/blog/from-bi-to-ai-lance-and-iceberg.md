@@ -161,14 +161,15 @@ Lance is relatively new, and so it has had the opportunity to build and iterate 
 
 ## A unified data platform with Lance and Iceberg
 
-Looking at the trade-offs involved when choosing between Lance and Iceberg, especially for analytics vs. ML/AI workloads, we’re seeing a dual-format strategy in which large organizations are beginning to adopt Lance. Companies like Netflix are now [using Lance tables](https://lancedb.com/blog/case-study-netflix/) for their AI and multimodal workloads, alongside Iceberg, which has long been their primary table format for BI and analytics workloads.
+Looking at the trade-offs involved when choosing between Lance and Iceberg, especially for analytics vs. ML/AI workloads, we’re seeing a dual-format strategy in which large organizations are beginning to adopt Lance. Companies like Netflix are now [adopting LanceDB](https://lancedb.com/blog/case-study-netflix/) for their AI and multimodal workloads alongside Iceberg, which has long been their primary table format for BI and analytics workloads.
 
 The figure below envisions how a unified lakehouse platform built on top of Lance and Iceberg might look, as more organizations build out their lakehouses on top of modern infrastructure.
+The unification occurs at the compute layers both above (catalog services and compute engines) and below (i.e., the object stores) the storage formats.
 
 ![](/assets/blog/from-bi-to-ai-lance-and-iceberg/unified_lakehouse_platform.png)
 
-From an Iceberg perspective, leveraging the parts of the lakehouse stack that are optimized for large analytics-style workloads allows enterprises to benefit from mature compute engine and catalog integrations in the Iceberg ecosystem.
+Existing catalog specifications and metadata services like Glue, Hive metadata store (HMS), Unity REST catalog and Polaris are already integrated with Lance via [lance-namespace](https://lance.org/format/namespace/impls/), an open specification built on top of Lance that standardizes access to a collection of Lance tables.
+On the compute engine side, there are numerous integrations in the [Lance format](https://github.com/lance-format) ecosystem (such as `lance-ray`, `lance-spark`, etc.) that are gaining adoption in open source.
+The main takeaway from this section is that developers who do not want the burden of maintaining multiple catalog services can choose to build on top of Lance and leveraging its integration to the compute ecosystem, while developers who are already using Iceberg can interplay with Lance for use cases that benefit from the Lance format.
 
-From a Lance perspective, leveraging the file-level benefits of Lance (faster random access, multimodal blob handling, Arrow-native integrations) and its table-level benefits (fragment design allowing zero-copy data evolution and a pluggable index framework) allows enterprises to rapidly move forward with their AI workloads and keep up with new paradigms. All of this, built on top of the same data foundation.
-
-These emerging architectural patterns reflect a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds.
+These emerging architectural patterns and open source projects reflect a broader trend: managing the separate needs of analytics and AI workloads with two distinct but interoperable formats — Iceberg for BI, and Lance for AI and multimodal data, bridging the best of both worlds.
