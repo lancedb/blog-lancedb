@@ -7,43 +7,38 @@ draft: false
 featured: false
 image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
 meta_image: /assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/preview-image.png
-description: "In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the Pytorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup."
+description: "We show how to use the CLIP from OpenAI for Text-to-Image and Image-to-Image searching. We’ll also do a comparative analysis of the PyTorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup."
 ---
 
-In this article, We use CLIP from OpenAI for Text-to-Image and Image-to-Image searching and we’ll also do a comparative analysis of the Pytorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup.
+In this article, we'll show how to use the CLIP model from OpenAI for Text-to-Image and Image-to-Image searching. We’ll also do a comparative analysis of the PyTorch model, FP16 OpenVINO format, and INT8 OpenVINO format in terms of speedup.
 
-Here are a few Key points converted in this article.
-
-**Text-to-Image and Image-to-Image Search using CLIP**
-
-1. ***Using the Pytorch model***
+Here's a summary of what's covered:
+1. ***Using the PyTorch model***
 2. ***Using OpenVINO conversion to speed up by 70%***
 3. ***Using Quantization with OpenVINO NNCF to speed up by 400%***
 
-These results*are on 13th Gen Intel(R) Core(TM) i5–13420H** using OpenVINO=2023.2 and NNCF=2.7.0 version.***
+All results reported below are from a *13th Gen Intel(R) Core(TM) i5–13420H** using OpenVINO=2023.2 and NNCF=2.7.0 version.***
 
-> Colab with full code and quick-start:
+If you'd like to code along, here's a [Colab notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Accelerate-Vector-Search-Applications-Using-OpenVINO/clip_text_image_search.ipynb) with all the code you need to get started!
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Accelerate-Vector-Search-Applications-Using-OpenVINO/clip_text_image_search.ipynb)
 ## CLIP from OpenAI
 
 ***CLIP (Contrastive Language–Image Pre-training) is a neural network capable of processing both images and text.***
 
-CLIP is a multi-modal model, which means it can process both text and images. This capability allows it to embed different types of inputs in a shared multi-modal space, where the positions of images and text have semantic meaning, regardless of their format.
+CLIP is a multimodal model, which means it can process both text and images. This capability allows it to embed different types of inputs in a shared multimodal space, where the positions of images and text have semantic meaning, regardless of their format.
 
 The following image presents a visualization of the pre-training procedure
 ![Combining Image and Text Embeddings (Source: OpenAI)](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1*oKfC-Vyc3r85W06yLH2y_g.png)
+
 ## OpenVINO by Intel
 
 OpenVINO toolkit is a free toolkit facilitating the optimization of a deep learning model from a framework and deploying an inference engine onto Intel hardware. We’ll use the FP16 and INT8 formats using the OpenVINO CLIP model.
-![OpenVINO diagram](/assets/blog/accelerate-vector-search-applications-using-openvino-lancedb/1*950zBYcU5-9hySxX8d9Yng.png)
-This write-up uses OpenVINO to accelerate the LanceDB embedding pipeline.
+This post demonstrates how to use OpenVINO to accelerate an embedding pipeline in LanceDB.
 
 ## Implementation
 
-In the Implementation section, we see the ***comparative implementation of the CLIP model from Hugging Face and OpenVINO formats, using the conceptual caption dataset***.
-
-We are starting with the first step of ***loading the conceptual caption dataset from Hugging Face*.**
+In the implementation section, we see the comparative implementation of the CLIP model from Hugging Face and OpenVINO formats, using the conceptual caption dataset.
+We start with the first step of loading the conceptual caption dataset from Hugging Face.
 
 ```python
 # https://huggingface.co/datasets/conceptual_captions
@@ -91,9 +86,9 @@ image_data_df.head()
 
 Now we have prepared the dataset and we are ready to start with CLIP using Hugging Face and OpenVINO and their performance comparative analysis in terms of speed.
 
-## **Pytorch CLIP using Hugging Face**
+### PyTorch CLIP using Hugging Face
 
-We’ll start with ***CLIP using Hugging Face ***and the time taken to extract embeddings and ***search using the LanceDB vector database***.
+We’ll start with CLIP using Hugging Face and report the time taken to extract embeddings and search using LanceDB.
 
 ```python
 def get_model_info(model_ID, device):
@@ -119,7 +114,7 @@ model_ID = "openai/clip-vit-base-patch16"
 model, processor, tokenizer = get_model_info(model_ID, device)
 ```
 
-Let’s write a **Helper Function to extract Text and Image Embeddings**
+Let’s write a helper function to extract text and image embeddings:
 
 ```python
 def get_single_text_embedding(text):
@@ -151,7 +146,7 @@ def get_all_images_embedding(df, img_column):
     return df
 ```
 
-**Connect LanceDB to store extracted embeddings and search**
+### Use LanceDB for storing the embeddings & search
 
 ```python
 import lancedb
@@ -165,12 +160,11 @@ start_time = time.time()
 image_data_df = get_all_images_embedding(image_data_df, "image")
 print(f"Time Taken to extract Embeddings of {len(image_data_df)} Images(in seconds): ", time.time()-start_time)
 ```
+This pipeline to extract embeddings of 83 images took **55.79 sec**.
 
-Here are the results:
+### Data ingestion and creating embeddings in LanceDB
 
-Time Taken to extract Embeddings of 83 Images(in seconds):  55.79
-
-**Ingesting Images and their Embeddings in LanceDB **for querying
+Next, we show how to create the embeddings and ingest them into LanceDB.
 
 ```python
 def create_and_ingest(image_data_df, table_name):
@@ -190,19 +184,16 @@ def create_and_ingest(image_data_df, table_name):
     # Create a Table
     tbl = db.create_table(name=table_name, data=data, mode="overwrite")
     return tbl
-```
 
-    #create and ingest embeddings for pt model
-```python
+# Create and ingest embeddings for pt model
 pt_tbl = create_and_ingest(image_data_df, "pt_table")
 ```
 
-**Query the stored embeddings**
+### Query the embeddings
 
-Time taken to extract embeddings of all the images and query the stored embeddings
-
-    # Get the image embedding and query for each caption
+You can easily query the embeddings via similarity in LanceDB as follows:
 ```python
+# Get the image embedding and query for each caption
 pt_img_results = {}
 
 start_time = time.time()
@@ -215,9 +206,9 @@ for i in range(len(image_data_df)):
     pt_img_results[str(i)] = result
 ```
 
-***CLIP model using FP16 ***OpenVINO*** format***
+## CLIP model using FP16 OpenVINO format
 
-Now we’ll start with ***CLIP F16 OpenVINO format ***and the time taken to extract embeddings and ***ingesting in the LanceDB vector database***.
+Next, we’ll show the results from the same pipeline with the CLIP F16 OpenVINO format.
 
 ```python
 import openvino as ov
@@ -245,7 +236,7 @@ compiled_model = core.compile_model(ov_model, device_name="AUTO", config={"PERFO
 # obtain output tensor for getting predictions
 ```
 
-**Extracting Embeddings of 83 images using CLIP FP16 OpenVINO model **and time taken to extract embeddings.
+Extracting the embeddings of 83 images using CLIP FP16 OpenVINO model now takes **31.79** seconds -- this is a 43% reduction!
 
 ```python
 import time
@@ -256,11 +247,7 @@ image_embeddings = extract_openvino_embeddings(image_data_df)
 print(f"Time Taken to extract Embeddings of {len(image_data_df)} Images(in seconds): ", time.time()-start_time)
 ```
 
-Here are the results:
-
-Time Taken to extract Embeddings of 83 Images(in seconds):  31.79
-
-**Ingesting Images and their Embeddings in LanceDB **for querying
+The embeddings can be ingested to LanceDB the same as before:
 
 ```python
 def create_and_ingest_openvino(image_url, image_embeddings, table_name):
@@ -277,18 +264,13 @@ def create_and_ingest_openvino(image_url, image_embeddings, table_name):
     # Create a Table
     tbl = db.create_table(name=table_name, data=data, mode="overwrite")
     return tbl
-```
 
-    # create and ingest embeddings for OpenVINO fp16 model
-```python
+# create and ingest embeddings for OpenVINO fp16 model
 ov_tbl = create_and_ingest_openvino(image_url, image_embeddings, "ov_tbl")
 ```
-Query the stored embeddings
-
-Time taken to extract embeddings of all the images and query the stored embeddings
-
-    # Get the image embedding and query for each caption
+We query the embeddings and run search just like before:
 ```python
+# Get the image embedding and query for each caption
 ov_img_results = {}
 start_time = time.time()
 for i in range(len(image_data_df)):
@@ -304,7 +286,7 @@ for i in range(len(image_data_df)):
 
 ## NNCF INT 8-bit Quantization
 
-Using 8-bit Post Training Optimization from NNCF (Neural Network Compression Framework) and infer quantized model via OpenVINO Toolkit.
+You can also use 8-bit Post Training Optimization from NNCF (Neural Network Compression Framework) and run inference on the quantized model via OpenVINO Toolkit.
 
 ```bash
 pip install -q datasets
@@ -314,16 +296,15 @@ pip install -q "nncf>=2.7.0"
 ```python
 import os
 from transformers import CLIPProcessor, CLIPModel
+
+fp16_model_path = 'clip-vit-base-patch16.xml'
+
+#inputs preparation for conversion and creating processor
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch16")
+max_length = model.config.text_config.max_position_embeddings
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch16")
 ```
-
-    fp16_model_path = 'clip-vit-base-patch16.xml'
-
-    #inputs preparation for conversion and creating processor
-    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch16")
-    max_length = model.config.text_config.max_position_embeddings
-    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch16")
-
-**Helper Functions to convert into Int8 format using NNCF**
+Here's a helper function to convert into `Int8` format using NNCF:
 
 ```python
 import requests
@@ -332,56 +313,56 @@ import numpy as np
 from PIL import Image
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+def check_text_data(data):
+    """
+    Check if the given data is text-based.
+    """
+    if isinstance(data, str):
+        return True
+    if isinstance(data, list):
+        return all(isinstance(x, str) for x in data)
+    return False
+
+def get_pil_from_url(url):
+    """
+    Downloads and converts an image from a URL to a PIL Image object.
+    """
+    response = requests.get(url, verify=False, timeout=20)
+    image = Image.open(BytesIO(response.content))
+    return image.convert("RGB")
+
+def collate_fn(example, image_column="image_url", text_column="caption"):
+    """
+    Preprocesses an example by loading and transforming image and text data.
+    Checks if the text data in the example is valid by calling the `check_text_data` function.
+    Downloads the image specified by the URL in the image_column by calling the `get_pil_from_url` function.
+    If there is any error during the download process, returns None.
+    Returns the preprocessed inputs with transformed image and text data.
+    """
+    assert len(example) == 1
+    example = example[0]
+
+    if not check_text_data(example[text_column]):
+        raise ValueError("Text data is not valid")
+
+    url = example[image_column]
+    try:
+        image = get_pil_from_url(url)
+        h, w = image.size
+        if h == 1 or w == 1:
+            return None
+    except Exception:
+        return None
+
+    #preparing inputs for processor
+    inputs = processor(text=example[text_column], images=[image], return_tensors="pt", padding=True)
+    if inputs['input_ids'].shape[1] > max_length:
+        return None
+    return inputs
 ```
 
-    def check_text_data(data):
-        """
-        Check if the given data is text-based.
-        """
-        if isinstance(data, str):
-            return True
-        if isinstance(data, list):
-            return all(isinstance(x, str) for x in data)
-        return False
-
-    def get_pil_from_url(url):
-        """
-        Downloads and converts an image from a URL to a PIL Image object.
-        """
-        response = requests.get(url, verify=False, timeout=20)
-        image = Image.open(BytesIO(response.content))
-        return image.convert("RGB")
-
-    def collate_fn(example, image_column="image_url", text_column="caption"):
-        """
-        Preprocesses an example by loading and transforming image and text data.
-        Checks if the text data in the example is valid by calling the `check_text_data` function.
-        Downloads the image specified by the URL in the image_column by calling the `get_pil_from_url` function.
-        If there is any error during the download process, returns None.
-        Returns the preprocessed inputs with transformed image and text data.
-        """
-        assert len(example) == 1
-        example = example[0]
-
-        if not check_text_data(example[text_column]):
-            raise ValueError("Text data is not valid")
-
-        url = example[image_column]
-        try:
-            image = get_pil_from_url(url)
-            h, w = image.size
-            if h == 1 or w == 1:
-                return None
-        except Exception:
-            return None
-
-        #preparing inputs for processor
-        inputs = processor(text=example[text_column], images=[image], return_tensors="pt", padding=True)
-        if inputs['input_ids'].shape[1] > max_length:
-            return None
-        return inputs
-
-**Initializing NNCF and Saving the Quantized Model**
+### Initializing NNCF and Saving the Quantized Model
 
 ```python
 import logging
@@ -414,7 +395,7 @@ ov_model = core.read_model(fp16_model_path)
     #Saving Quantized model
     serialize(quantized_model, int8_model_path)
 
-**Compiling the INT8 model and Helper function for extracting features**
+### Compiling the INT8 model and Helper function for extracting features
 
 ```python
 import numpy as np
@@ -454,21 +435,18 @@ image_embeddings = extract_quantized_openvino_embeddings(image_data_df, compiled
 print(f"Time Taken to extract Embeddings of {len(image_data_df)} Images(in seconds): ", time.time()-start_time)
 ```
 
-Here are the results
+With the updated pipeline using CLIP OpenVINO format, the time taken to extract embeddings of 83 images is brought down to just 13.70 sec! That's a 75.4% reduction from
+the original CLIP model!
 
-Time Taken to extract Embeddings of 83 Images(in seconds):  13.70
-
-Ingest embeddings into LanceDB
+We can ingest the embeddings into LanceDB as follows:
 
 ```python
 # create and ingest embeddings for OpenVINO int8 model format
 qov_tbl = create_and_ingest_openvino(image_url, image_embeddings, "qov_tbl")
 ```
 
-Time taken to extract embeddings of all the images and query the stored embeddings
-
-    # Get the image embedding and query for each caption
 ```python
+# Get the image embedding and query for each caption
 ov_img_results = {}
 start_time = time.time()
 for i in range(len(image_data_df)):
@@ -482,26 +460,21 @@ for i in range(len(image_data_df)):
     ov_img_results[str(i)] = result
 ```
 
-Now we have the performance throughput of all the CLIP model formats Pytorch from Hugging Face, FP16 OpenVINO, and INT8 OpenVINO.
+We've now shown the performance improvement using all the CLIP model formats PyTorch from Hugging Face, FP16 OpenVINO, and INT8 OpenVINO.
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Accelerate-Vector-Search-Applications-Using-OpenVINO/clip_text_image_search.ipynb)
-## Conclusion
+## Conclusions
 
-All these results are on CPU for comparison of the Pytorch model with the OpenVINO model formats(FP16/ INT8)
+All these results are on CPU for comparison of the PyTorch model with the OpenVINO model formats(FP16/ INT8)
 
-***The time taken to extract Embeddings for 83 Images using CLIP in different formats are***
+| Format | Time (s) |
+| --- | --- |
+| PyTorch model from Hugging Face | 55.26 |
+| OpenVINO FP16 format | 31.79 |
+| OpenVINO INT8 format | 13.70 |
 
-1. ***Pytorch model from Hugging Face*** — 55.26 seconds
+The performance acceleration achieved with an `FP16` model is **1.73** times the PyTorch model, which is a relatively modest (yet decent) increase in speed.
+However, when switching to the `INT8` OpenVINO format, there is a **4.03** times increase in speed compared to the PyTorch model.
 
-2. ***OpenVINO FP16 format*** — 31.79 seconds
-
-3. ***OpenVINO INT8 format*** — 13.70 seconds
-
-***The Performance acceleration achieved with the FP16 model is 1.73 times, representing a relatively modest increase in speed compared to expectations.***
-
-***Conversely, when considering the INT8 OpenVINO format, there is a 4.03 times increase in speed compared to the PyTorch model.***
-
-Visit our [**GitHub** ](https://github.com/lancedb)if you wish to learn more about LanceDB python and Typescript library.
-For more such applied GenAI and VectorDB applications, examples and tutorials visit[ **vectordb-recipes**](https://github.com/lancedb/vectordb-recipes/tree/main)** . **Don’t forget to leave a star at the repo.
-
-Lastly, for more information and updates, follow our** **[**LinkedIn**](https://www.linkedin.com/company/lancedb/) and [**Twitter.**](https://twitter.com/lancedb)
+Visit the LanceDB [GitHub](https://github.com/lancedb) to learn more about how to
+work with vector search at scale, and for more such tutorials and demo applications, visit the [vectordb-recipes](https://github.com/lancedb/vectordb-recipes/tree/main) repo.
+For the latest updates from LanceDB, follow our [LinkedIn](https://www.linkedin.com/company/lancedb/) and [X](https://twitter.com/lancedb) pages.
