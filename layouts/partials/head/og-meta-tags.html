@@ -23,10 +23,10 @@
 <meta property="article:modified_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
 <meta name="twitter:domain" content="{{ $siteURL }}" />
 
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="{{ .Permalink }}" />
-<meta property="twitter:title" content="{{ .Params.meta.og_title | default $title }}" />
-<meta property="twitter:description" content="{{ $description }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta name="twitter:title" content="{{ .Params.meta.og_title | default $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
 {{ $twitterImage := .Params.meta.og_twitter_image | default (.Params.image | default site.Params.meta_twitter_image) | absURL }}
 {{ if not $twitterImage }}
   {{ $content := .Content }}
