@@ -4,7 +4,7 @@ date: 2025-11-24
 draft: false
 featured: true
 categories: ["Community"]
-image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.jpg
+image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.jpeg
 description: Great RAG comes from a tight iteration loop. Learn how to systematically improve each layer of your RAG system using Kiln and LanceDB.
 author: Leonard Marcq
 author_avatar: "/assets/authors/leonard-marcq.jpg"
