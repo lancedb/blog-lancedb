@@ -168,7 +168,7 @@ The unification occurs at the compute layers both above (catalog services and co
 
 ![](/assets/blog/from-bi-to-ai-lance-and-iceberg/unified_lakehouse_platform.png)
 
-Existing catalog specifications and metadata services like Glue, Hive metadata store (HMS), Unity REST catalog and Polaris are already integrated with Lance via [lance-namespace](https://github.com/lance-format/lance-namespace), an open specification built on top of Lance that standardizes access to a collection of Lance tables.
+Existing catalog specifications and metadata services like Glue, Hive metadata store (HMS), Unity REST catalog and Polaris are already integrated with Lance via [lance-namespace](https://lance.org/format/namespace/impls/), an open specification built on top of Lance that standardizes access to a collection of Lance tables.
 On the compute engine side, there are numerous integrations in the [Lance format](https://github.com/lance-format) ecosystem (such as lance-ray, lance-spark, etc.) that are gaining adoption in open source.
 Over time, as these tools mature, we expect to see more and more ML/AI workloads leverage the same familiar compute engines, but operating on top of Lance tables.
 
