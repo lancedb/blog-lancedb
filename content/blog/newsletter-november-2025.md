@@ -19,7 +19,7 @@ We’ve launched a dedicated Lance discord focused entirely on the format, featu
 
 - Read the announcement here: [https://lancedb.com/blog/lance-community-governance/](https://lancedb.com/blog/lance-community-governance/)
 - Learn more about the community: [https://lance.org/community/](https://lance.org/community/)
-- Join the new Lance discord: [discord.gg/lance](discord.gg/lance)
+- Join the new Lance discord: [discord.gg/lance](https://discord.gg/lance)
 - Give Lance format a star: [https://github.com/lance-format](https://github.com/lance-format)
 
 [![Lance Community Governance](/assets/blog/lance-community-governance/preview-image.png)](https://lancedb.com/blog/lance-community-governance/)
