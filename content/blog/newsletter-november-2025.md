@@ -1,11 +1,11 @@
 ---
-title: to be set
+title: 🛡️Lance Community Governance, Lance + Iceberg 🧊, Netflix’s Multimodal Search 🔍
 date: 2025-12-03
 draft: false 
 featured: false 
 categories: ["Newsletter"]
 image: "/assets/blog/newsletter-november-2025/preview-image.png"
-description: "Our November newsletter highlights..."
+description: "Our November newsletter highlights Lance community governance, a deep dive on Lance and Iceberg, a demo of Netflix's multimodal search, previous talk recordings, and the latest product and community updates."
 author: "ChanChan Mao"
 author_avatar: "/assets/authors/chanchan-mao.jpg"
 author_bio: "DevRel"
@@ -34,6 +34,13 @@ Together, both formats can coexist in the same lakehouse stack: Iceberg for BI, 
 
 [![Lance and Iceberg](/assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png)](https://lancedb.com/blog/from-bi-to-ai-lance-and-iceberg/)
 
+## Multimodal Search at Netflix Powered by LanceDB
+
+Here is a demo that Pablo Delgado from Netflix put together for Netflix and LanceDB's joint talk at Ray Summit 2025 (you can find the session recording below). This video highlights how to search through hundreds of terabytes of multimodal data with negligible latency and perform multimodal data understanding at scale.
+
+The demonstration showcases a sophisticated multimodal embedding system that enables semantic search across Netflix's vast video catalog. The system supports multiple embedding modes (text-to-text, text-to-image, image-to-image, and image-to-text) allowing researchers to query content using either natural language descriptions or visual references. Each video frame is enriched with metadata that captures not only visual content but also contextual details like scene composition, lighting, mood, and subject matter.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XK4L53z6eso?si=XcHc7Uu1hgCwESkU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## ▶️ Recordings you might've missed!
 
