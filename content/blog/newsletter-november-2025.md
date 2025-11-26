@@ -7,7 +7,7 @@ categories: ["Newsletter"]
 image: "/assets/blog/newsletter-november-2025/preview-image.png"
 description: "Our November newsletter highlights..."
 author: "ChanChan Mao"
-author_avatar: "/assets/authors/chanchan-mao.png"
+author_avatar: "/assets/authors/chanchan-mao.jpg"
 author_bio: "DevRel"
 author_github: "ccmao1130"
 author_linkedin: "chanchanmao"
@@ -21,10 +21,10 @@ We’ve launched a dedicated Lance discord focused entirely on the format, featu
 - Join the new Lance discord: [discord.gg/lance](discord.gg/lance)
 - Give Lance format a star: [https://github.com/lance-format](https://github.com/lance-format)
 
-[![Lance Community Governance](/static/assets/blog/lance-community-governance/preview-image.png)](https://lancedb.com/blog/lance-community-governance/)
+[![Lance Community Governance](/assets/blog/lance-community-governance/preview-image.png)](https://lancedb.com/blog/lance-community-governance/)
 
 
-## From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg
+## From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg 🧊
 
 The modern lakehouse stack is composed of six layers. File formats, table formats, and catalog specs are just storage definitions. All compute power actually lives in the object store, catalog services, and compute engines. What makes Lance different is that it spans all three storage layers at once: file format, table format, and catalog spec. Iceberg operates at two: table format and catalog spec.
 
@@ -32,7 +32,7 @@ Iceberg remains a strong choice for large-scale OLAP and BI workloads. Lance com
 
 Together, both formats can coexist in the same lakehouse stack: Iceberg for BI, Lance for AI. 
 
-[![Lance and Iceberg](/static/assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png)](https://lancedb.com/blog/from-bi-to-ai-lance-and-iceberg/)
+[![Lance and Iceberg](/assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png)](https://lancedb.com/blog/from-bi-to-ai-lance-and-iceberg/)
 
 
 ## ▶️ Recordings you might've missed!
