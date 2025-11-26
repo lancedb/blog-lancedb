@@ -27,7 +27,11 @@ We’ve launched a dedicated Lance discord focused entirely on the format, featu
 
 ## From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg 🧊
 
-The modern lakehouse stack is composed of six layers. File formats, table formats, and catalog specs are just storage definitions. All compute power actually lives in the object store, catalog services, and compute engines. What makes Lance different is that it spans all three storage layers at once: file format, table format, and catalog spec. Iceberg operates at two: table format and catalog spec.
+The modern lakehouse stack is composed of six layers. File formats, table formats, and catalog specs are just storage definitions. All compute power actually lives in the object store, catalog services, and compute engines.
+
+![Lakehouse stack](/assets/blog/from-bi-to-ai-lance-and-iceberg/lakehouse_stack.png)
+
+What makes Lance different is that it spans all three storage layers at once: file format, table format, and catalog spec. Iceberg operates at two: table format and catalog spec.
 
 Iceberg remains a strong choice for large-scale OLAP and BI workloads. Lance complements it by addressing AI and multimodal data requirements with an Arrow-native layout, high-performance indexing, and built-in interop with Parquet.
 
