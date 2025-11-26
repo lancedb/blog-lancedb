@@ -21,7 +21,7 @@ When you start a machine learning project, your first challenge usually isn’t 
 [LanceDB's Geneva](/docs/geneva/) is designed to take that pain away. Instead of writing ad hoc scripts that don’t scale, you define feature transformations once as Python functions, run them locally or on a distributed cluster, and Geneva materializes the results as typed, queryable columns.
 
 {{< admonition type="Note" title="Python Notebook" >}}
-[All the code in this tutorial is in our Python notebook.](https://githubtocolab.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine.
+[All the code in this tutorial is in our Python notebook.](https://githubtocolab.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine. This tutorial is not updated, but we have [another updated Geneva feature engineering tutorial here.](/docs/tutorials/mmlh/) 
 {{< /admonition >}}
 
 In this walkthrough, you’ll load [a dataset of cats and dogs](https://www.robots.ox.ac.uk/~vgg/data/pets/), define four feature extractors, and run them at scale: file size, dimensions, captions with BLIP, and embeddings with OpenCLIP. Along the way, you’ll see how Geneva keeps the process consistent whether you’re running on your laptop or across a Ray cluster.
@@ -306,5 +306,5 @@ And perhaps most importantly, you don’t have to change your code when you scal
 Once you’ve experienced how quickly you can go from raw pixels to searchable features, you’ll see why Geneva changes the way you approach feature engineering.
 
 {{< admonition type="Note" title="Python Notebook" >}}
-[All the code in this tutorial is in our Python notebook.](https://githubtocolab.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine.
+[All the code in this tutorial is in our Python notebook.](https://githubtocolab.com/lancedb/blog-lancedb/blob/main/content/docs/tutorials/geneva/geneva-feature-engineering.ipynb) We ran this from Google Vertex AI, so you will have to setup your own machine. This tutorial is not updated, but we have [another updated Geneva feature engineering tutorial here.](/docs/tutorials/mmlh/)
 {{< /admonition >}}

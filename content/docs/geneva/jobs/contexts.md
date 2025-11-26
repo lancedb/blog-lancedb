@@ -74,7 +74,7 @@ You can then wrap your table backfill call with the RayCluster context.
 
 ```python
 from geneva.runners.ray.raycluster import _HeadGroupSpec, _WorkerGroupSpec
-from geneva.runners._mgr import ray_cluster
+from geneva.runners.ray._mgr import ray_cluster
 
 geneva.connect(my_db_uri)
 
@@ -85,7 +85,7 @@ with ray_cluster(
         use_portforwarding=True,  # required for kuberay to expose ray ports
         head_group=_HeadGroupSpec(
             service_account="geneva-integ-test", # k8s service account bound geneva runs as
-            image="rayproject/ray:latest-py312" # optionally specified custom docker image
+            image="rayproject/ray:latest-py312", # optionally specified custom docker image
             num_cpus=8,
             node_selector={"geneva.lancedb.com/ray-head":""}, # k8s label required for head
         ),
@@ -95,7 +95,7 @@ with ray_cluster(
                 num_cpus=60,
                 memory="120G",
                 service_account="geneva-integ-test",
-                image="rayproject/ray:latest-py312"
+                image="rayproject/ray:latest-py312",
                 node_selector={"geneva.lancedb.com/ray-worker-cpu":""}, # k8s label for cpu worker
                 env_vars={
                     "LANCE_IO_THREADS": "4",
@@ -108,7 +108,7 @@ with ray_cluster(
                 memory="32G",
                 num_gpus=1,
                 service_account="geneva-integ-test",
-                image="rayproject/ray:latest-py312-gpu"
+                image="rayproject/ray:latest-py312-gpu",
                 node_selector={"geneva.lancedb.com/ray-worker-gpu":""}, # k8s label for gpu worker
                 env_vars={
                     "LANCE_IO_THREADS": "4",
