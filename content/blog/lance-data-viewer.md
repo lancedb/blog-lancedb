@@ -3,7 +3,7 @@ title: "Introducing Lance Data Viewer: A Simple Way to Explore Lance Tables"
 date: 2025-09-24
 draft: false
 featured: false
-categories: ["Engineering"]
+categories: ["Community"]
 image: /assets/blog/lance-data-viewer/preview-image.png
 meta_image: /assets/blog/lance-data-viewer/preview-image.png
 description: "A lightweight open source web UI for exploring Lance datasets, viewing schemas, and browsing table data with vector visualization support."
