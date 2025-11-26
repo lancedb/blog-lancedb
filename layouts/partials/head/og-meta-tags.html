@@ -26,6 +26,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content="{{ .Permalink }}" />
 <meta name="twitter:title" content="{{ .Params.meta.og_title | default $title }}" />
+<meta name="twitter:text:title" content="{{ .Params.meta.og_title | default $title }}" />
 {{ $twitterImage := .Params.meta.og_twitter_image | default (.Params.image | default site.Params.meta_twitter_image) | absURL }}
 {{ if not $twitterImage }}
   {{ $content := .Content }}
