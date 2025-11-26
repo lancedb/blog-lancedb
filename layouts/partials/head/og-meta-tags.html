@@ -1,4 +1,5 @@
-{{ $title := .Title | replaceRE `</?[^>]+>` "" | replaceRE `\s+` " " | plainify | trim " \t\n\r" }}
+{{ $title := .Title }}
+{{ $title = replace $title "<br>" "" }}
 
 {{ $siteURL := .Site.BaseURL | replaceRE `^https?://` "" | replaceRE `/+$` "" }}
 
