@@ -23,7 +23,6 @@ We’ve launched a dedicated Lance discord focused entirely on the format, featu
 
 [![Lance Community Governance](/static/assets/blog/lance-community-governance/preview-image.png)](https://lancedb.com/blog/lance-community-governance/)
 
-[![SemanticDotArt: Rethinking Art Discovery with LanceDB](/assets/demos/sda_hero.jpg)](https://lancedb.com/blog/semanticdotart/)
 
 ## From BI to AI: A Modern Lakehouse Stack with Lance and Iceberg
 
@@ -57,6 +56,35 @@ Together, both formats can coexist in the same lakehouse stack: Iceberg for BI, 
 
 A heartfelt thank you to our community contributors of lance and lancedb this past month:    
 
+[@mykolaskrynnyk](https://github.com/mykolaskrynnyk) 
+[@valkum](https://github.com/valkum) 
+[@fzowl](https://github.com/fzowl)
+[@rm-dr](https://github.com/rm-dr)
+[@ozkatz](https://github.com/ozkatz)
+[@ddupg](https://github.com/ddupg)
+[@majin1102](https://github.com/majin1102)
+[@shiyajuan123](https://github.com/shiyajuan123)
+[@jaystarshot](https://github.com/jaystarshot)
+[@wojiaodoubao](https://github.com/wojiaodoubao)
+[@zhangyue19921010](https://github.com/zhangyue19921010)
+[@fenfeng9](https://github.com/fenfeng9)
+[@fangyinc](https://github.com/fangyinc)
+[@HaochengLIU](https://github.com/HaochengLIU)
+[@Pmathsun](https://github.com/Pmathsun)
+[@ztorchan](https://github.com/ztorchan)
+[@yanghua](https://github.com/yanghua)
+[@timsaucer](https://github.com/timsaucer)
+[@fangbo](https://github.com/fangbo)
+[@steFaiz](https://github.com/steFaiz)
+[@niyue](https://github.com/niyue)
+[@xloya](https://github.com/xloya)
+[@oceanusxiv](https://github.com/oceanusxiv)
+[@luohao](https://github.com/luohao)
+[@rahil-c](https://github.com/rahil-c)
+[@BorenTsai](https://github.com/BorenTsai)
+[@Maxwell-Guo](https://github.com/Maxwell-Guo)
+[@teh-cmc](https://github.com/teh-cmc)
+[@camilesing](https://github.com/camilesing)
 
 
 ## 🌟 Open Source Releases Spotlight
