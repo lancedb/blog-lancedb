@@ -1,5 +1,5 @@
 ---
-title: 🛡️Lance Community Governance, Lance + Iceberg 🧊, Netflix’s Multimodal Search 🔍
+title: 🛡️Lance Community Governance, Lance + Iceberg 🧊, Netflix’s Multimodal Search Demo 🔍
 date: 2025-12-03
 draft: false 
 featured: false 
@@ -18,6 +18,7 @@ author_linkedin: "chanchanmao"
 We’ve launched a dedicated Lance discord focused entirely on the format, feature discussions, proposals, and real-world use cases. In addition, Lance now also has its own website and GitHub organization to maintain its own ecosystem for its user community.
 
 - Read the announcement here: [https://lancedb.com/blog/lance-community-governance/](https://lancedb.com/blog/lance-community-governance/)
+- Learn more about the community: [https://lance.org/community/](https://lance.org/community/)
 - Join the new Lance discord: [discord.gg/lance](discord.gg/lance)
 - Give Lance format a star: [https://github.com/lance-format](https://github.com/lance-format)
 
@@ -34,7 +35,7 @@ Together, both formats can coexist in the same lakehouse stack: Iceberg for BI, 
 
 [![Lance and Iceberg](/assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png)](https://lancedb.com/blog/from-bi-to-ai-lance-and-iceberg/)
 
-## Multimodal Search at Netflix Powered by LanceDB
+## Netflix's Multimodal Search Demo
 
 Here is a demo that Pablo Delgado from Netflix put together for Netflix and LanceDB's joint talk at Ray Summit 2025 (you can find the session recording below). This video highlights how to search through hundreds of terabytes of multimodal data with negligible latency and perform multimodal data understanding at scale.
 
