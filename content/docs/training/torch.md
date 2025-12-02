@@ -37,7 +37,7 @@ a table `Permutation` is more efficient for training.
 ## Selecting Columns
 
 By default, the `Table` class will return all columns in the table when used as input to PyTorch. If you only need
-a subset of columns, you can significnatly reduce your I/O requirements by selecting only the columns you need.
+a subset of columns, you can significantly reduce your I/O requirements by selecting only the columns you need.
 
 ```python
 from lancedb.permutation import Permutation
