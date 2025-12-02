@@ -1,10 +1,11 @@
 ---
-title: "RAG isn't one size fits all: Here's how to tune it for your use case"
-date: 2025-11-24
+title: "RAG Isn't One-Size-Fits-All: Here's How to Tune It for Your Use Case"
+date: 2025-12-01
 draft: false
 featured: true
 categories: ["Community"]
-image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.jpg
+image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.png
+meta_image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.png
 description: Great RAG comes from a tight iteration loop. Learn how to systematically improve each layer of your RAG system using Kiln and LanceDB.
 author: Leonard Marcq
 author_avatar: "/assets/authors/leonard-marcq.jpg"
@@ -174,7 +175,7 @@ In Kiln you can toggle hybrid / vector-only / BM25 to compare different LanceDB 
 
 * **Query reformulation**: Let the model rephrase underspecified or ambiguous queries before retrieval, either through a tool call or an internal expansion step. This often unlocks major gains in recall for free-form, human queries. You may even let the model run multiple searches with different queries.
 
-* **Tool naming & descriptions**: It’s surprisingly important to nail the RAG tool name and description. Your agents need to call the right RAG tools at the right moment, and they won’t know when to use an ambiguously named tool like  `search()`. Names/descriptions like `search_company_invoices()` clearly signal intent and improves tool-use reliability. Kiln evals will evaluate the agent end to end, including choosing the right search tool for the task.
+* **Tool naming & descriptions**: It’s surprisingly important to nail the RAG tool name and description. Your agents need to call the right RAG tools at the right moment, and they won’t know when to use an ambiguously named tool like  `search()`. Names/descriptions like `search_company_invoices()` clearly signal intent and improve tool-use reliability. Kiln evals will evaluate the agent end to end, including choosing the right search tool for the task.
 
 {{< admonition >}}
 **Guiding principle:**
@@ -251,7 +252,7 @@ If your system decides dynamically when to call retrieval, you should measure ho
 
 * **Under-retrieval:** The model tries to answer from memory when it shouldn’t, producing unsupported or incomplete responses.
 
-**How to measure it:** label a subset of your evaluation queries as **"RAG needed"** or **"not needed."** Then compute how often your system made the correct decision. Even a small labeled set here pays off disproportionately. Once you can **trust** when RAG triggers, every downstream evaluation (accuracy, latency, cost) becomes far more meaningful.
+**How to measure it:** Label a subset of your evaluation queries as **"RAG needed"** or **"not needed."** Then compute how often your system made the correct decision. Even a small labeled set here pays off disproportionately. Once you can **trust** when RAG triggers, every downstream evaluation (accuracy, latency, cost) becomes far more meaningful.
 
 ### Latency, cost, and drift
 
@@ -270,5 +271,5 @@ Once you have a fast evaluation loop, you can evolve faster than anyone manually
 That’s what turns a RAG pipeline from "just working" into a *great one*. A system that improves itself through evidence, not intuition.
 
 Ready to get started with RAG evals and optimization?
-- [Download Kiln](https://kiln.tech/download) for free from Github to build RAG evals and create your iteration loop.
+- [Download Kiln](https://kiln.tech/download) for free from GitHub to build RAG evals and create your iteration loop.
 - When you're ready to promote your RAG configuration to production, use our provided [loader](https://docs.kiln.tech/docs/documents-and-search-rag#deploying-your-rag) to seamlessly promote the entire dataset and configuration to [LanceDB Cloud](https://lancedb.com) for production-grade scaling.
