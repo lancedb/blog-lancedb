@@ -55,7 +55,6 @@ The demonstration showcases a sophisticated multimodal embedding system that ena
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pt_v-x0pT2Y?si=BrLjpo9fv6XJoA_t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-
 ## 📊 LanceDB Enterprise Product News
 
 | Feature | Description |
@@ -64,7 +63,8 @@ The demonstration showcases a sophisticated multimodal embedding system that ena
 
 ## 🫶 Community Contributions
 
-- tbd
+* VoyageAI integration ([documentation](https://lancedb.com/docs/integrations/embedding/voyageai), [#2713](https://github.com/lancedb/lancedb/pull/2713))
+* Manifest summary support in Java API (AntGroup) ([#5092](https://github.com/lance-format/lance/pull/5092))
 
 A heartfelt thank you to our community contributors of lance and lancedb this past month:    
 
@@ -103,5 +103,7 @@ A heartfelt thank you to our community contributors of lance and lancedb this pa
 
 | Feature | Version | Description |
 | :------ | :------ | :---------- |
-| tbd | | |
+| LanceDB | 0.22.2 | IVF_RQ index type ([#2687](https://github.com/lancedb/lancedb/pull/2687)) <br><br> Support creating permutation view for PyTorch Data Loader ([#2552](https://github.com/lancedb/lancedb/pull/2552)) <br><br> Add FTS UDTF support ([#2755](https://github.com/lancedb/lancedb/pull/2755)) <br><br> Expand support for multivector colpali models ([#2719](https://github.com/lancedb/lancedb/pull/2719)) |
+| Lance | 0.39.0 | Incremental Vector Indexing with SPFresh ([#4837](https://github.com/lance-format/lance/pull/4837)) <br><br> Dynamic AWS Credentials vending for Lance datasets ([#4905](https://github.com/lance-format/lance/pull/4905)) | 
+| Lance Namespace | 0.0.21-0.2.1 | DirectoryNamespace v2 which supports multi-level namespace, with REST namespace adapter in rust, python and java (note that the features have been refactored into the main lance repository and released with the main lance SDKs going forward) ([#5292](https://github.com/lance-format/lance/pull/5292)) |
 
