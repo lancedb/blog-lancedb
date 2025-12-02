@@ -7,7 +7,7 @@ categories: ["Case Study"]
 image: /assets/blog/case-study-cognee/preview-image.jpg
 meta_image: /assets/blog/case-study-cognee/preview-image.jpg
 description: "How Cognee uses LanceDB to deliver durable, isolated, and low-ops AI memory from local development to managed production."
-author: "David Myriel"
+author: ["David Myriel", "Vasilije Markovic"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer."
 author_github: "davidmyriel"

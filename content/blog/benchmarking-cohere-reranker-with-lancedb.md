@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking Cohere Rerankers with LanceDB"
 date: 2024-05-07
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

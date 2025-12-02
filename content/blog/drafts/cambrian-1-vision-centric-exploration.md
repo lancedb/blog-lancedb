@@ -1,7 +1,7 @@
 ---
 title: "Cambrian-1: Vision-Centric Search"
 date: 2024-07-25
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: true
 featured: false

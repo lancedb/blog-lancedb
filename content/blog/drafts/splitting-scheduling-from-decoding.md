@@ -1,7 +1,7 @@
 ---
 title: "Columnar File Readers in Depth: Scheduling vs Decoding"
 date: 2024-05-22
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: "Open Vector Data Lakes"
 date: 2023-05-21
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

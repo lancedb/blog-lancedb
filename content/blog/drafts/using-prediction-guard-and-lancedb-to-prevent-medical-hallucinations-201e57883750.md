@@ -1,7 +1,7 @@
 ---
 title: "Using Prediction Guard and LanceDB to Prevent Medical Hallucinations"
 date: 2024-01-02
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

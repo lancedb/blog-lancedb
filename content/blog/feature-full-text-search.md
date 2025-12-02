@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/feature-full-text-search/preview-image.png
 meta_image: /assets/blog/feature-full-text-search/preview-image.png
 description: "No more Tantivy! We stress-tested native full-text search in our latest massive-scale search demo. Let's break down how it works and what we did to scale it."
-author: David Myriel
+author: ["David Myriel"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer, Software Engineer @ LanceDB"
 author_twitter: "davidmyriel"

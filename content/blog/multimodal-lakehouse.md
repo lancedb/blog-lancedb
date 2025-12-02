@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/multimodal-lakehouse/preview-image.png
 description: "Introducing the Multimodal Lakehouse - a unified platform for managing AI data from raw files to production-ready features, now part of LanceDB Enterprise."
-author: David Myriel
+author: ["David Myriel"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer."
 author_github: "davidmyriel"

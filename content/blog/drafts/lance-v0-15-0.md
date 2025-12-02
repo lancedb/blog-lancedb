@@ -1,7 +1,7 @@
 ---
 title: "Lance V0.15.0"
 date: 2024-07-30
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

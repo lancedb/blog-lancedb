@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/lance-namespace-lancedb-and-ray/preview-image.png
 meta_image: /assets/blog/lance-namespace-lancedb-and-ray/preview-image.png
 description: "Learn how to productionalize AI workloads with Lance Namespace's enterprise stack integration and the scalability of LanceDB and Ray for end-to-end ML pipelines."
-author: Jack Ye
+author: ["Jack Ye"]
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"

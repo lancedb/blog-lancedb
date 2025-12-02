@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/file-readers-in-depth-parallelism-without-row-groups/file-readers-in-depth-parallelism-without-row-groups.png
 description: "Explore columnar file readers in depth: column shredding with practical insights and expert guidance from the LanceDB team."
-author: Weston Pace
+author: ["Weston Pace"]
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
 author_twitter: "westonpace"

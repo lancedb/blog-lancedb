@@ -7,7 +7,7 @@ categories: ["Case Study"]
 image: /assets/blog/case-study-coderabbit/preview-image.png
 meta_image: /assets/blog/case-study-coderabbit/preview-image.png
 description: "How CodeRabbit leverages LanceDB-powered context engineering turns every review into a quality breakthrough."
-author: "Qian Zhu"
+author: ["Qian Zhu"]
 author_avatar: "/assets/authors/qian-zhu.jpg"
 author_bio: "Software Engineer at LanceDB specializing in cloud infrastructure, AI-powered development tools, and knowledge management systems."
 author_github: "QianZhu"

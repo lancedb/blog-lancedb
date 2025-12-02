@@ -1,7 +1,7 @@
 ---
 title: "Improve (almost) Every Retriever with LanceDB Hybrid Search and Reranking"
 date: 2024-08-26
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

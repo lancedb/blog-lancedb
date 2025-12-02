@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/geneva-twelvelabs/preview-image.png
 meta_image: /assets/blog/geneva-twelvelabs/preview-image.png
 description: "Build semantic video recommendations using TwelveLabs embeddings, LanceDB storage, and Geneva pipelines with Ray."
-author: David Myriel
+author: ["David Myriel"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer"
 author_github: "davidmyriel"

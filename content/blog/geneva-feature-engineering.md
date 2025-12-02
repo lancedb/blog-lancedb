@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/geneva-feature-engineering/preview-image.png
 meta_image: /assets/blog/geneva-feature-engineering/preview-image.png
 description: "Learn how to build scalable feature engineering pipelines with Geneva and LanceDB. This demo transforms image data into rich features including captions, embeddings, and metadata using distributed Ray clusters."
-author: "Jonathan Hsieh"
+author: ["Jonathan Hsieh"]
 author_avatar: "/assets/authors/jonathan-hsieh.jpg"
 author_bio: "Software Engineer & Geneva Project Lead."
 author_twitter: "jmhsieh"

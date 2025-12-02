@@ -7,7 +7,7 @@ categories: ["Announcement"]
 image: /assets/blog/lance-community-governance/preview-image.png
 meta_image: /assets/blog/lance-community-governance/preview-image.png
 description: "Announcing the formal governance structure for the Lance community, establishing clear pathways for contribution and leadership with a three-tier system of contributors, maintainers and PMC."
-author: Jack Ye
+author: ["Jack Ye"]
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"

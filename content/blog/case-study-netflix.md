@@ -7,7 +7,7 @@ categories: ["Case Study"]
 image: /assets/blog/case-study-netflix/preview-image.png
 meta_image: /assets/blog/case-study-netflix/preview-image.png
 description: "How Netflix built a Media Data Lake powered by LanceDB and the Multimodal Lakehouse to unify petabytes of media assets for machine learning pipelines."
-author: David Myriel
+author: ["David Myriel"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer."
 author_twitter: "davidmyriel"

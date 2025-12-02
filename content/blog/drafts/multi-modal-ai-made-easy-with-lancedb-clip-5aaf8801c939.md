@@ -1,7 +1,7 @@
 ---
 title: "Multi-Modal AI Made Easy with LanceDB & CLIP"
 date: 2023-11-27
-author: Kaushal Choudhary
+author: ["Kaushal Choudhary"]
 categories: ["Engineering"]
 draft: true
 featured: false

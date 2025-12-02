@@ -1,7 +1,7 @@
 ---
 title: "Multi-Lingual Search with Cohere and LanceDB"
 date: 2023-12-03
-author: Kaushal Choudhary
+author: ["Kaushal Choudhary"]
 categories: ["Engineering"]
 draft: true
 featured: false

@@ -6,7 +6,7 @@ featured: false
 categories: ["Case Study"]
 image: /assets/blog/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution/the-future-of-ai-native-development-is-local-inside-continues-lancedb-powered-evolution.png
 description: "Discover how Continue revolutionized AI-native development with LanceDB's embedded TypeScript library, enabling lightning-fast semantic code search while maintaining complete developer privacy and offline capability."
-author: Ty Dunn
+author: ["Ty Dunn"]
 author_avatar: "/assets/authors/ty-dunn.jpg"
 author_bio: ""
 ---

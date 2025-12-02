@@ -1,7 +1,7 @@
 ---
 title: "Tokens per Second Is NOT All You Need"
 date: 2024-05-01
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: false
 featured: false

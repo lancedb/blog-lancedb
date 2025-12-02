@@ -1,7 +1,7 @@
 ---
 title: "Create LLM Apps Using RAG"
 date: 2024-03-21
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

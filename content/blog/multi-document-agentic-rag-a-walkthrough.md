@@ -1,7 +1,7 @@
 ---
 title: "Multi Document Agentic RAG: a Walkthrough"
 date: 2024-08-28
-author: Vipul Maheshwari
+author: ["Vipul Maheshwari"]
 categories: ["Community"]
 draft: false
 featured: false

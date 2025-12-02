@@ -1,7 +1,7 @@
 ---
 title: "Inverted File Product Quantization (IVF_PQ): Accelerate Vector Search by Creating Indices"
 date: 2023-12-17
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

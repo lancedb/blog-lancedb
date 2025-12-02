@@ -1,7 +1,7 @@
 ---
 title: "Multimodal Myntra Fashion Search Engine Using LanceDB"
 date: 2024-03-20
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

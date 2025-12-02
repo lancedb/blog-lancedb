@@ -1,7 +1,7 @@
 ---
 title: "GPU-Accelerated Indexing in LanceDB"
 date: 2023-11-02
-author: LanceDB
+author: ["LanceDB"]
 author_avatar: "/assets/authors/lancedb.jpg"
 categories: ["Engineering"]
 draft: false

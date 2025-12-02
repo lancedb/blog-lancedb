@@ -8,7 +8,7 @@ image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-i
 meta_image: /assets/blog/columnar-file-readers-in-depth-structural-encoding/preview-image.png
 description: "Deep dive into LanceDB's dual structural encoding approach - mini-block for small data types and full-zip for large multimodal data. Learn how this optimizes compression and random access performance compared to Parquet."
 keywords: ["structural encoding", "columnar file format", "LanceDB", "mini-block encoding", "full-zip encoding", "Parquet comparison", "data compression", "random access performance", "vector database", "multimodal data", "columnar storage", "Arrow format", "data engineering"]
-author: Weston Pace
+author: ["Weston Pace"]
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
 author_twitter: "westonpace"

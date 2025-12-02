@@ -1,7 +1,7 @@
 ---
 title: "Agentic RAG Using LangGraph: Build an Autonomous Customer Support Agent"
 date: 2025-01-26
-author: LanceDB
+author: ["LanceDB"]
 author_avatar: "/assets/authors/lancedb.jpg"
 categories: ["Engineering"]
 draft: false

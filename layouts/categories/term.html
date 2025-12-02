@@ -13,34 +13,30 @@
         </section>
         <div class="container">
             {{ partial "components/blog-categories.html" . }}
-        </div>
-
-        <div class="category-posts">
-            <div class="container">
-                <div class="category-posts__wrap">
-                    {{ range .Pages }}
-                        <a href="{{ .RelPermalink }}" class="category-posts__card">
-                            {{ with .Params.image }}
-                            <div class="category-posts__card-image">
-                                <img src="{{ . }}" alt="{{ $.Title }}">
-                            </div>
-                            {{ end }}
-                            <div class="category-posts__card-content">
-                                <h3 class="category-posts__card-title text-title-large">{{ .Title }}</h3>
-                                <div class="category-posts__card-meta text-body-extra-small">
-                                    {{- if .Params.author2 -}}
-                                        {{- .Params.author }} & {{ .Params.author2 -}}
-                                    {{- else -}}
-                                        {{- .Params.author -}}
-                                    {{ end }} / {{ .Date.Format "January 2, 2006" -}}
-                                </div>
-                                <p class="category-posts__card-description text-body-medium">{{ .Description | default (truncate 100 .Summary) }}</p>
-                            </div>
+            <div class="post-grid">
+                {{ range $paginator.Pages }}
+                    <article class="post-card">
+                        <a href="{{ .RelPermalink }}">
+                            <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
                         </a>
-                    {{ end }}
-                </div>
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        <div class="post-meta">
+                            {{- range $index, $category := .Params.categories -}}
+                                {{- if $index }} / {{ end -}}
+                                {{- $category -}}
+                            {{- end -}}
+                            {{- if .Params.categories }} / {{ end -}}
+                            {{- if .Params.author2 -}}
+                                {{- .Params.author }} & {{ .Params.author2 -}}
+                            {{- else -}}
+                                {{- .Params.author -}}
+                            {{ end }} / {{ .Date.Format "January 2, 2006" -}}
+                        </div>
+                        <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
+                    </article>
+                {{ end }}
             </div>
-
+    
             {{ if gt $paginator.TotalPages 1 }}
             <div class="pagination-subscribe-container">
                 <nav class="pagination">
@@ -71,17 +67,16 @@
                 </nav>
             </div>
             {{ end }}
+    
+            {{ if eq (len .Pages) 0 }}
+                <div class="empty-state">
+                    <h3>No posts found in this category</h3>
+                    <p>Check back later for new content!</p>
+                    <a href="/" class="back-link">← Back to all posts</a>
+                </div>
+            {{ end }}
         </div>
 
-        
-
-        {{ if eq (len .Pages) 0 }}
-            <div class="empty-state">
-                <h3>No posts found in this category</h3>
-                <p>Check back later for new content!</p>
-                <a href="/" class="back-link">← Back to all posts</a>
-            </div>
-        {{ end }}
     </main>
 
 {{ end }}

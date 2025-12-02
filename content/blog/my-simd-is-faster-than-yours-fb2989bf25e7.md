@@ -1,7 +1,7 @@
 ---
 title: "My SIMD Is Faster than Yours"
 date: 2023-04-24
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

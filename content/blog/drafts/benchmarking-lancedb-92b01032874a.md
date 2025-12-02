@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking LanceDB"
 date: 2023-12-18
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

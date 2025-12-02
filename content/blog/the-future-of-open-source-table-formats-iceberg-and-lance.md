@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/the-future-of-open-source-table-formats-iceberg-and-lance/the-future-of-open-source-table-formats-iceberg-and-lance.png
 description: "Explore the future of open source table formats: apache iceberg and lance with practical insights and expert guidance from the LanceDB team."
-author: Jack Ye
+author: ["Jack Ye"]
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Data engineer and table format specialist, working on distributed systems and modern data lake architectures."
 author_twitter: "jackye"

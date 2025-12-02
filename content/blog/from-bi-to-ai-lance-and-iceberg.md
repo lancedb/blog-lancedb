@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png
 meta_image: /assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png
 description: "A comparison of where Iceberg and Lance sit in the modern lakehouse stack. We highlight emerging architectures that are bridging the worlds of analytics and AI/ML workloads using these two formats, while being built on the same data foundation."
-author: Jack Ye
+author: ["Jack Ye", "Prashanth Rao"]
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"

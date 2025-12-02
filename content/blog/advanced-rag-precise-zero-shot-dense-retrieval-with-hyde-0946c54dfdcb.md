@@ -1,7 +1,7 @@
 ---
 title: "Advanced RAG: Precise Zero-Shot Dense Retrieval with HyDE"
 date: 2023-11-27
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

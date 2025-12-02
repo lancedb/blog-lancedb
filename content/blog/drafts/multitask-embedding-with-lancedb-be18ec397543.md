@@ -1,7 +1,7 @@
 ---
 title: "Multitask Embedding with LanceDB"
 date: 2023-11-14
-author: Kaushal Choudhary
+author: ["Kaushal Choudhary"]
 categories: ["Engineering"]
 draft: true
 featured: false

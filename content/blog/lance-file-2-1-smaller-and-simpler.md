@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/lance-file-2-1-smaller-and-simpler/lance-file-2-1-smaller-and-simpler.png
 description: "Explore lance file 2.1: smaller and simpler with practical insights and expert guidance from the LanceDB team."
-author: Weston Pace
+author: ["Weston Pace"]
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
 author_twitter: "westonpace"

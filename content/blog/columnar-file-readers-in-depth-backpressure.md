@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/columnar-file-readers-in-depth-backpressure/columnar-file-readers-in-depth-backpressure.png
 description: "Streaming data applications can be tricky. When you can read data faster than you can process the data then bad things tend to happen. The various solutions to this problem are largely classified as backpressure."
-author: Weston Pace
+author: ["Weston Pace"]
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
 author_twitter: "westonpace"

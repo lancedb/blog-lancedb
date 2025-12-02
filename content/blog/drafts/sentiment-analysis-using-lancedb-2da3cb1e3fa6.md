@@ -1,7 +1,7 @@
 ---
 title: "Sentiment Analysis Powered by Semantic Search Using LanceDB"
 date: 2023-11-19
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

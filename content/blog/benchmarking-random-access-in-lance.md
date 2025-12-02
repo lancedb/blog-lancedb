@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking Random Access in Lance"
 date: 2023-03-14
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: "Practical Introduction to Adaptive-RAG"
 date: 2024-04-24
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: true
 featured: false

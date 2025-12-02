@@ -1,7 +1,7 @@
 ---
 title: "Movie Recommendation System Using Doc2Vec and Genre Classification"
 date: 2024-05-27
-author: Vipul Maheshwari
+author: ["Vipul Maheshwari"]
 categories: ["Community"]
 draft: true
 featured: false

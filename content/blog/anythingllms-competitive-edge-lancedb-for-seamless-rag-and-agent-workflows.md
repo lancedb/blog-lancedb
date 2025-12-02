@@ -6,7 +6,7 @@ featured: false
 categories: ["Case Study"]
 image: /assets/blog/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows/anythingllms-competitive-edge-lancedb-for-seamless-rag-and-agent-workflows.png
 description: "Discover how AnythingLLM leveraged LanceDB's serverless architecture to eliminate vector database setup complexity, enabling seamless cross-platform RAG and agent workflows with zero configuration required."
-author: Ayush Chaurasia
+author: ["Ayush Chaurasia"]
 author_avatar: "/assets/authors/ayush-chaurasia.jpg"
 author_bio: "AI Engineer and technical writer specializing in RAG systems, vector databases, and enterprise AI applications."
 author_twitter: "ayushchaurasia"

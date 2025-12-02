@@ -1,7 +1,7 @@
 ---
 title: "Substrait Powered Filter Pushdown in Lance"
 date: 2024-01-31
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

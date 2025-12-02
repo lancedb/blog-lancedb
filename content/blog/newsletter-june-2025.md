@@ -6,7 +6,7 @@ featured: false
 categories: ["Announcement"]
 image: /assets/blog/newsletter-june-2025/social_preview.png
 description: "LanceDB's June 2025 newsletter covering latest company news, product updates, open source releases, and community highlights."
-author: David Myriel
+author: ["David Myriel"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer"
 author_github: "davidmyriel"

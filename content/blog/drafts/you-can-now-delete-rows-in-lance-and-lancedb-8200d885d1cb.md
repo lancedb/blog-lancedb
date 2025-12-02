@@ -1,7 +1,7 @@
 ---
 title: "You Can Now Delete Rows in Lance and LanceDB!"
 date: 2023-06-28
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

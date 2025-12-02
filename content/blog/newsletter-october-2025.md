@@ -6,7 +6,7 @@ featured: false
 categories: ["Newsletter"]
 image: "/assets/blog/newsletter-october-2025/newsletter-october-2025.png"
 description: "Our October newsletter highlights Semantic.Art, Lance File 2.1, RaBitQ Quantization, upcoming events, latest product and community updates."
-author: "Jasmine Wang"
+author: ["Jasmine Wang"]
 author_avatar: "/assets/authors/jasmine-wang.png"
 author_bio: "Ecosystem Engagement, Partnership, Community, DevRel"
 author_github: "onigiriisabunny"

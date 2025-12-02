@@ -1,7 +1,7 @@
 ---
 title: "Custom Datasets for Efficient LLM Training Using Lance"
 date: 2024-03-08
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false
