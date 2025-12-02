@@ -24,12 +24,15 @@ pagination:
 permalinks:
   taxonomy:
     categories: /blog/:slug/
+    author: /blog/author/:slug/
   term:
     categories: /blog/category/:slug/
+    author: /blog/author/:slug/
 
 # Taxonomy Configuration
 taxonomies:
   category: categories
+  authors: author
 
 # Category Configuration
 params:

@@ -6,7 +6,7 @@ featured: false
 categories: ["Case Study", "Gaming"]
 image: /assets/blog/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development/second-dinners-secret-weapon-lancedb-powered-rag-for-faster-smarter-game-development.png
 description: "Discover how Second Dinner, creators of Marvel Snap, leveraged LanceDB Cloud to transform game development workflows, reducing prototyping time from months to hours and automating QA test generation with 81% better results."
-author: Qian Zhu
+author: ["Qian Zhu"]
 author_avatar: "/assets/authors/qian-zhu.jpg"
 author_bio: "Software Engineer at LanceDB specializing in cloud infrastructure, game development workflows, and AI-powered development tools."
 author_twitter: "qianzhu56"

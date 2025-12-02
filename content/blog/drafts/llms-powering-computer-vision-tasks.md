@@ -1,7 +1,7 @@
 ---
 title: "LLMs Powering Computer Vision Tasks"
 date: 2024-12-01
-author: Prashant Kumar
+author: ["Prashant Kumar"]
 categories: ["Community"]
 draft: true
 featured: false

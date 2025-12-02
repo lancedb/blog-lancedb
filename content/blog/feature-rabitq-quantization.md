@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: "/assets/blog/feature-rabitq-quantization/preview-image.png"
 meta_image: "/assets/blog/feature-rabitq-quantization.md/preview-image.png"
 description: "Introducing RaBitQ quantization in LanceDB for higher compression, faster indexing, and better recall on high‑dimensional embeddings."
-author: David Myriel, Yang Cen
+author: ["David Myriel", "Yang Cen"]
 author_avatar: "/assets/authors/david-myriel.jpg"
 author_bio: "Writer, Software Engineer @ LanceDB"
 author_twitter: "davidmyriel"

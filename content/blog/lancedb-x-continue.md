@@ -1,7 +1,7 @@
 ---
 title: "Developers, Ditch the Black Box: Welcome to Continue"
 date: 2024-05-23
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

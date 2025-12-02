@@ -1,7 +1,7 @@
 ---
 title: "Chat with Your Stats Using Langchain Dataframe Agent & LanceDB Hybrid Search"
 date: 2024-06-30
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: false
 featured: false

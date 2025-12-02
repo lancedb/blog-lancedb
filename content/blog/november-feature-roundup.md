@@ -5,7 +5,7 @@ draft: false
 featured: false
 image: /assets/blog/november-feature-roundup/november-feature-roundup.png
 description: Explore november feature roundup with practical insights and expert guidance from the LanceDB team.
-author: Will Jones
+author: ["Will Jones"]
 ---
 ## Lance
 

@@ -1,0 +1,135 @@
+{{ define "main" }}
+    {{ $paginator := .Paginate .Pages }}
+    {{ $authorInfo := slice }}
+    {{ $authorName := .Title }}
+    {{ range .Pages }}  
+        {{ if eq $authorName (index .Params.author 0) }}
+            {{ $author_avatar := .Params.author_avatar }}
+            {{ $author_bio := .Params.author_bio }}
+            {{ $author_github := .Params.author_github }}
+            {{ $author_linkedin := .Params.author_linkedin }}
+            {{ $author_twitter := .Params.author_twitter }}
+            {{ $author := dict "name" .Params.author "avatar" $author_avatar "bio" $author_bio "github" $author_github "linkedin" $author_linkedin "twitter" $author_twitter }}
+            {{ if not (in $authorInfo $author) }}
+                {{ $authorInfo = $authorInfo | append $author }}
+            {{ end }}
+
+        {{ else }}
+            {{ $author_avatar := .Params.author2_avatar }}
+            {{ $author_bio := .Params.author2_bio }}
+            {{ $author_github := .Params.author2_github }}
+            {{ $author_linkedin := .Params.author2_linkedin }}
+            {{ $author_twitter := .Params.author2_twitter }}
+            {{ $author := dict "name" .Params.author2 "avatar" $author_avatar "bio" $author_bio "github" $author_github "linkedin" $author_linkedin "twitter" $author_twitter }}
+            {{ if not (in $authorInfo $author) }}
+                {{ $authorInfo = $authorInfo | append $author }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    <main>
+        <section class="category-hero">
+            <div class="container">
+                <div class="author-section">
+                    <img src="{{ index $authorInfo 0 "avatar" | default "/assets/authors/default-avatar.png" }}" alt="{{ .Title }}" class="author-avatar">
+                    <div class="author-info">
+                        <h3 class="author-name">{{ .Title }}</h3>
+                        {{ if index $authorInfo 0 "bio" }}
+                        <p class="author-bio">{{ index $authorInfo 0 "bio" }}</p>
+                        {{ end }}
+                        <div class="author-social">
+                            {{ if index $authorInfo 0 "twitter" }}
+                            <a href="https://twitter.com/{{ index $authorInfo 0 "twitter" }}" rel="noreferer, ,noopener" target="_blank" >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                                Twitter
+                            </a>
+                            {{ end }}
+                            {{ if index $authorInfo 0 "github" }}
+                            <a href="https://github.com/{{ index $authorInfo 0 "github" }}" rel="noreferer, ,noopener" target="_blank" >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub
+                            </a>
+                            {{ end }}
+                            {{ if index $authorInfo 0 "linkedin" }}
+                            <a href="https://linkedin.com/in/{{ index $authorInfo 0 "linkedin" }}" rel="noreferer, ,noopener" target="_blank" >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                LinkedIn
+                            </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <div class="post-grid">
+                {{ range $paginator.Pages }}
+                    <article class="post-card">
+                        <div class="post-card__categories">
+                                {{ range .Params.categories }}
+                                    <a href="{{ (printf "/blog/category/%s" .) | lower }}" class="button button--badge button--badge-small">{{ . }}</a>
+                            {{ end }}
+                        </div>
+                        <a href="{{ .RelPermalink }}">
+                            <img src="{{ .Params.image | default "/assets/blog/preview.png" }}" alt="{{ .Title }}" class="preview-image">
+                        </a>
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        <div class="post-meta">
+                            {{- range $index, $category := .Params.categories -}}
+                                {{- if $index }} / {{ end -}}
+                                {{- $category -}}
+                            {{- end -}}
+                            {{- if .Params.categories }} / {{ end -}}
+                            {{- if .Params.author2 -}}
+                                {{- .Params.author }} & {{ .Params.author2 -}}
+                            {{- else -}}
+                                {{- .Params.author -}}
+                            {{ end }} / {{ .Date.Format "January 2, 2006" -}}
+                        </div>
+                        <p class="post-description">{{ .Description | default (truncate 100 .Summary) }}</p>
+                    </article>
+                {{ end }}
+            </div>
+    
+            {{ if gt $paginator.TotalPages 1 }}
+            <div class="pagination-subscribe-container">
+                <nav class="pagination">
+                    <div class="pagination-links">
+                        {{ if $paginator.HasPrev }}
+                            <a href="{{ $paginator.Prev.URL }}" class="pagination-link prev" rel="prev">
+                                <span class="pagination-arrow">←</span>
+                                <span class="pagination-text">Previous</span>
+                            </a>
+                        {{ end }}
+                        
+                        <!-- All page numbers -->
+                        {{ range $paginator.Pagers }}
+                            {{ if eq .PageNumber $paginator.PageNumber }}
+                                <span class="pagination-link current">{{ .PageNumber }}</span>
+                            {{ else }}
+                                <a href="{{ .URL }}" class="pagination-link page-number">{{ .PageNumber }}</a>
+                            {{ end }}
+                        {{ end }}
+                        
+                        {{ if $paginator.HasNext }}
+                            <a href="{{ $paginator.Next.URL }}" class="pagination-link next" rel="next">
+                                <span class="pagination-text">Next</span>
+                                <span class="pagination-arrow">→</span>
+                            </a>
+                        {{ end }}
+                    </div>
+                </nav>
+            </div>
+            {{ end }}
+    
+            {{ if eq (len .Pages) 0 }}
+                <div class="empty-state">
+                    <h3>No posts found in this category</h3>
+                    <p>Check back later for new content!</p>
+                    <a href="/" class="back-link">← Back to all posts</a>
+                </div>
+            {{ end }}
+        </div>
+
+    </main>
+
+{{ end }}

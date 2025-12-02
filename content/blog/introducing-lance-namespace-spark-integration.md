@@ -7,7 +7,7 @@ categories: ["Engineering"]
 image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
 meta_image: /assets/blog/introducing-lance-namespace-spark-integration/preview-image.png
 description: "Access and manage your Lance tables in Hive, Glue, Unity Catalog, or any catalog service using Lance Namespace with the latest Lance Spark connector."
-author: Jack Ye
+author: ["Jack Ye"]
 author_avatar: "/assets/authors/jack-ye.jpg"
 author_bio: "Software Engineer @ LanceDB"
 author_github: "jackye1995"

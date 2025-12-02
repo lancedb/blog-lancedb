@@ -1,7 +1,7 @@
 ---
 title: "Hybrid Search: RAG for Real-Life Production-Grade Applications"
 date: 2024-02-18
-author: Mahesh Deshwal
+author: ["Mahesh Deshwal"]
 categories: ["Engineering"]
 draft: false
 featured: false

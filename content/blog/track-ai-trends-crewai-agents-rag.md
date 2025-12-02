@@ -1,7 +1,7 @@
 ---
 title: "Track AI Trends: CrewAI Agents & RAG"
 date: 2024-03-25
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

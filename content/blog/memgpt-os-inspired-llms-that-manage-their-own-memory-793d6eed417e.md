@@ -1,7 +1,12 @@
 ---
 title: "MemGPT: OS Inspired LLMs That Manage Their Own Memory"
 date: 2023-12-11
-author: Ayush Chaurasia
+author: ["Ayush Chaurasia"]
+author_avatar: "/assets/authors/ayush-chaurasia.jpg"
+author_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods."
+author_twitter: "ayushchaurasia"
+author_github: "ayushchaurasia"
+author_linkedin: "ayushchaurasia"
 categories: ["Engineering"]
 draft: false
 featured: false

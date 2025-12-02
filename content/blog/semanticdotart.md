@@ -1,7 +1,12 @@
 ---
 title: "SemanticDotArt: Rethinking Art Discovery with LanceDB"
 date: 2025-10-16
-author: Ayush Chaurasia
+author: ["Ayush Chaurasia"]
+author_avatar: "/assets/authors/ayush-chaurasia.jpg"
+author_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods."
+author_twitter: "ayushchaurasia"
+author_github: "ayushchaurasia"
+author_linkedin: "ayushchaurasia"
 categories: ["Applications"]
 draft: false
 featured: true

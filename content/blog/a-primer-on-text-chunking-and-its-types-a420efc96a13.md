@@ -1,7 +1,7 @@
 ---
 title: "A Primer on Text Chunking and Its Types"
 date: 2023-10-24
-author: Prashant Kumar
+author: ["Prashant Kumar"]
 categories: ["Community"]
 draft: false
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: "Accelerate Vector Search Applications Using OpenVINO & LanceDB"
 date: 2023-12-06
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

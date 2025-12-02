@@ -7,7 +7,7 @@ categories: ["Community"]
 image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.png
 meta_image: /assets/blog/rag-isnt-one-size-fits-all/preview-image.png
 description: Great RAG comes from a tight iteration loop. Learn how to systematically improve each layer of your RAG system using Kiln and LanceDB.
-author: Leonard Marcq
+author: ["Leonard Marcq"]
 author_avatar: "/assets/authors/leonard-marcq.jpg"
 author_bio: "RAG Lead at Kiln. Prior to Kiln, was CTO at Fabric.so, a consumer RAG startup."
 author_github: leonardmq

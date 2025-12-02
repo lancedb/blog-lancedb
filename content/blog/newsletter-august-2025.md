@@ -6,7 +6,7 @@ featured: false
 categories: ["Newsletter"]
 image: "/assets/blog/newsletter-august-2025/JulyNews.png"
 description: "Our August newsletter features a new case study with Dosu, recaps from events with Harvey and Databricks, and the latest product and community updates."
-author: "Jasmine Wang"
+author: ["Jasmine Wang"]
 author_avatar: "/assets/authors/jasmine-wang.png"
 author_bio: "Ecosystem Engagement, Partnership, Community, DevRel"
 author_github: "onigiriisabunny"

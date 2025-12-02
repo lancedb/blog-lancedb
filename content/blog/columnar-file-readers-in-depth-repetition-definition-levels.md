@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/columnar-file-readers-in-depth-repetition-definition-levels/columnar-file-readers-in-depth-repetition-definition-levels.png
 description: "Explore columnar file readers in depth: repetition & definition levels with practical insights and expert guidance from the LanceDB team."
-author: Weston Pace
+author: ["Weston Pace"]
 author_avatar: "/assets/authors/weston-pace.jpg"
 author_bio: "Data engineer from the open source space, working on LanceDB, Arrow, Substrait."
 author_twitter: "westonpace"

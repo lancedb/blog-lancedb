@@ -1,7 +1,7 @@
 ---
 title: "Optimizing LLMs: a Step-by-Step Guide to Fine-Tuning with PEFT and QLoRA"
 date: 2023-09-28
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

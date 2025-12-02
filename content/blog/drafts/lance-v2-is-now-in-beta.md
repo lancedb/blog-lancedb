@@ -1,7 +1,7 @@
 ---
 title: "Lance V2 Is Now in Beta"
 date: 2024-06-05
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

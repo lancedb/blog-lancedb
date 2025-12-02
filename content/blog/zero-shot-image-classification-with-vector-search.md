@@ -1,7 +1,7 @@
 ---
 title: "Zero Shot Image Classification with Vector Search"
 date: 2024-07-12
-author: Vipul Maheshwari
+author: ["Vipul Maheshwari"]
 author_avatar: /assets/authors/vipul-maheshwari.jpg
 categories: ["Community"]
 draft: false

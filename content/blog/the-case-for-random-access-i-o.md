@@ -1,7 +1,7 @@
 ---
 title: "The Case for Random Access I/O"
 date: 2024-08-20
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

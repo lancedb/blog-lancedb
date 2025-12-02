@@ -1,7 +1,7 @@
 ---
 title: "Building RAG on codebases: Part 2"
 date: 2024-11-07
-author: Sankalp Shubham
+author: ["Sankalp Shubham"]
 author_bio: "Applied AI + Backend Engineer. Currently working on agentic codegen. Interested in all things AI and distributed systems."
 author_twitter: "dejavucoder"
 author_github: "sankalp1999"

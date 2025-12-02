@@ -6,7 +6,7 @@ featured: false
 categories: ["Newsletter"]
 image: "/assets/blog/netflix-mediadata-lake-coderabbit-case-study-lance-namespace/image5.png"
 description: "Our September newsletter highlights LanceDB powering Netflix's Media Data Lake, a case study on CodeRabbit's AI-powered code reviews, and updates on Lance Namespace and Spark integration."
-author: "Jasmine Wang"
+author: ["Jasmine Wang"]
 author_avatar: "/assets/authors/jasmine-wang.png"
 author_bio: "Ecosystem Engagement, Partnership, Community, DevRel"
 author_github: "onigiriisabunny"

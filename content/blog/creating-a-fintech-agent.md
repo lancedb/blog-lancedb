@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering", "FinTech"]
 image: /assets/blog/creating-a-fintech-agent/creating-a-fintech-agent.png
 description: "Explore fintech ai agent from scratch with practical insights and expert guidance from the LanceDB team."
-author: Vipul Maheshwari
+author: ["Vipul Maheshwari"]
 author_avatar: "/assets/authors/community.jpg"
 author_bio: "ML Engineer and FinTech enthusiast specializing in AI agents, predictive modeling, and financial technology applications."
 ---

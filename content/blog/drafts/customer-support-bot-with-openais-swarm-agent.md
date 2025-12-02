@@ -1,7 +1,7 @@
 ---
 title: "Customer Support Bot with OpenAI's Swarm Agent"
 date: 2024-11-04
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: true
 featured: false

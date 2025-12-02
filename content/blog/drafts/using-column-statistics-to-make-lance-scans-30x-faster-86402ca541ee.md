@@ -1,7 +1,7 @@
 ---
 title: "Using Column Statistics to Make Lance Scans 30x Faster"
 date: 2023-12-20
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

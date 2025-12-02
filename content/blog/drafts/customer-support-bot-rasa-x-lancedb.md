@@ -1,7 +1,7 @@
 ---
 title: "Customer Support Bot : RASA X LanceDB"
 date: 2024-12-31
-author: Rithik Kumar
+author: ["Rithik Kumar"]
 categories: ["Engineering"]
 draft: true
 featured: false

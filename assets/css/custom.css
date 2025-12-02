@@ -256,6 +256,24 @@
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.post-card .post-card__categories {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.8rem 0.8rem 0.3rem 0.8rem;
+    gap: 4px;
+    z-index: 10;
+    width: 100%;
+}
+
+.post-card .post-card__categories .button {
+    background: linear-gradient(120deg, #232627 60%, #232b2b 100%);
 }
 
 .post-card:hover {
@@ -727,6 +745,7 @@ article img {
 
 .post-meta .post-author {
     text-align: left;
+    color: var(--text-accent);
 }
 
 .post-meta .post-date {

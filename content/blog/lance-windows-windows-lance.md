@@ -1,7 +1,7 @@
 ---
 title: "Lance, Windows. Windows, Lance"
 date: 2023-05-31
-author: Chang She
+author: ["Chang She"]
 author_bio: CEO and Co-founder of LanceDB
 author_github: changhiskhan
 author_twitter: changhiskhan

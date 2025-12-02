@@ -7,7 +7,7 @@ categories: ["Announcement"]
 image: /assets/blog/series-a-funding/preview-image.png
 meta_image: /assets/blog/series-a-funding/preview-image.png
 description: "We have closed another funding round to accelerate development of the Multimodal Lakehouse - a unified platform for AI data infrastructure."
-author: Chang She
+author: ["Chang She"]
 author_avatar: "/assets/authors/chang-she.jpg"
 author_bio: "CEO and Co-Founder of LanceDB."
 author_twitter: "changhiskhan"

@@ -1,7 +1,7 @@
 ---
 title: "Implement Contextual Retrieval and Prompt Caching with LanceDB"
 date: 2024-10-08
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: false
 featured: false

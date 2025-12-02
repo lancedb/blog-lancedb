@@ -25,14 +25,13 @@
                     <a href="/blog/category/{{ index .Params.categories 0 | urlize }}" class="post-category">{{ index .Params.categories 0 }}</a>
                     <span class="meta-divider">•</span>
                 {{ end }}
-                <span class="post-author">
-                    {{- if .Params.author2 -}}
-                        {{- .Params.author }} & {{ .Params.author2 -}}
-                    {{- else -}}
-                        {{- .Params.author -}}
-                    {{- end -}}
-                </span>
-                <span class="meta-divider">•</span>
+                {{range .Params.author}}
+                     <a href="{{ printf "/blog/author/%s" (replace . " " "-") | lower | safeURL }}"
+                    class="post-author">
+                        {{ .}}
+                    </a>
+                    <span class="meta-divider">•</span>
+                {{ end }}
                 <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
             </div>
             <article class="single-post">
@@ -53,7 +52,11 @@
                 <div class="author-section">
                     <img src="{{ .Params.author_avatar | default "/assets/authors/default-avatar.png" }}" alt="{{ .Params.author }}" class="author-avatar">
                     <div class="author-info">
-                        <h3 class="author-name">{{ .Params.author }}</h3>
+                        <a href="{{ printf "/blog/author/%s" (replace (index .Params.author 0) " " "-") | lower | safeURL }}"
+                        class="author-name">
+                            {{ index .Params.author 0 }}
+                        </a>
+
                         {{ if .Params.author_bio }}
                         <p class="author-bio">{{ .Params.author_bio }}</p>
                         {{ end }}
@@ -86,7 +89,10 @@
                 <div class="author-section">
                     <img src="{{ .Params.author2_avatar | default "/assets/authors/default-avatar.png" }}" alt="{{ .Params.author2 }}" class="author-avatar">
                     <div class="author-info">
-                        <h3 class="author-name">{{ .Params.author2 }}</h3>
+                        <a href="{{ printf "/blog/author/%s" (replace .Params.author2 " " "-") | lower | safeURL }}"
+                        class="author-name">
+                            {{ .Params.author2 }}
+                        </a>
                         {{ if .Params.author2_bio }}
                         <p class="author-bio">{{ .Params.author2_bio }}</p>
                         {{ end }}

@@ -1,7 +1,7 @@
 ---
 title: "LanceDB + Polars"
 date: 2024-01-19
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

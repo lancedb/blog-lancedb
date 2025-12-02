@@ -1,7 +1,7 @@
 ---
 title: "Benchmarking New OpenAI Embedding Models with LanceDB"
 date: 2024-02-13
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

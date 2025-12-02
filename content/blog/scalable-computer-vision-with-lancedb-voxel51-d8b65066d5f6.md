@@ -1,7 +1,7 @@
 ---
 title: "Scalable Computer Vision with LanceDB & Voxel51"
 date: 2023-07-13
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

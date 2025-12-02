@@ -1,7 +1,7 @@
 ---
 title: "Hybrid Search: Combining BM25 and Semantic Search for Better Results with Langchain"
 date: 2023-12-09
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

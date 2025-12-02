@@ -1,7 +1,7 @@
 ---
 title: "Simplest Method to Improve RAG Pipeline: Re-Ranking"
 date: 2023-11-21
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

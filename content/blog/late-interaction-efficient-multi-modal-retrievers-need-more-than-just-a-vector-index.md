@@ -6,7 +6,7 @@ featured: false
 categories: ["Engineering"]
 image: /assets/blog/late-interaction-efficient-multi-modal-retrievers-need-more-than-just-a-vector-index/late-interaction-efficient-multi-modal-retrievers-need-more-than-just-a-vector-index.jpg
 description: "Explore late interaction & efficient multi-modal retrievers need more than a vector index with practical insights and expert guidance from the LanceDB team."
-author: Ayush Chaurasia
+author: ["Ayush Chaurasia"]
 author_avatar: "/assets/authors/ayush-chaurasia.jpg"
 author_bio: "ML Engineer and researcher focused on multi-modal AI systems and efficient retrieval methods."
 author_twitter: "ayushchaurasia"

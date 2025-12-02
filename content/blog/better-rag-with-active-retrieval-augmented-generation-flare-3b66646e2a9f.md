@@ -1,7 +1,7 @@
 ---
 title: "Better RAG with Active Retrieval Augmented Generation FLARE"
 date: 2023-11-17
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: false
 featured: false

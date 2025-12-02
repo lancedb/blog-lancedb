@@ -1,7 +1,7 @@
 ---
 title: "Lance V0.16.1 Feature Roundup"
 date: 2024-08-26
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Engineering"]
 draft: true
 featured: false

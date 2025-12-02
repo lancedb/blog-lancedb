@@ -7,7 +7,7 @@ categories: ["Community"]
 image: /assets/blog/lance-data-viewer/preview-image.png
 meta_image: /assets/blog/lance-data-viewer/preview-image.png
 description: "A lightweight open source web UI for exploring Lance datasets, viewing schemas, and browsing table data with vector visualization support."
-author: "Gordon Murray"
+author: ["Gordon Murray"]
 author_avatar: "/assets/authors/gordon-murray.png"
 author_bio: "Infrastructure Engineer with a passion for building on AWS and Terraform, and a growing interest in data engineering"
 author_twitter: "gortron"

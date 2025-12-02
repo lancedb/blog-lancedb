@@ -1,7 +1,7 @@
 ---
 title: "Advanced RAG with Context Enrichment Window"
 date: 2024-10-17
-author: LanceDB
+author: ["LanceDB"]
 categories: ["Community"]
 draft: true
 featured: false

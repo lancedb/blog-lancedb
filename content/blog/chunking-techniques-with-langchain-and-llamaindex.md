@@ -1,7 +1,7 @@
 ---
 title: "Chunking Techniques with Langchain and LlamaIndex"
 date: 2024-04-20
-author: Prashant Kumar
+author: ["Prashant Kumar"]
 categories: ["Community"]
 draft: false
 featured: false
