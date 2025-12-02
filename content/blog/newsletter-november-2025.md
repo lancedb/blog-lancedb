@@ -39,7 +39,7 @@ Together, both formats can coexist in the same lakehouse stack: Iceberg for BI, 
 
 [![Lance and Iceberg](/assets/blog/from-bi-to-ai-lance-and-iceberg/preview-image.png)](https://lancedb.com/blog/from-bi-to-ai-lance-and-iceberg/)
 
-## Netflix's Multimodal Search Demo
+## Netflix's Multimodal Search Demo 🔍
 
 Here is a demo that Pablo Delgado from Netflix put together for Netflix and LanceDB's joint talk at Ray Summit 2025 (you can find the session recording below). This video highlights how to search through hundreds of terabytes of multimodal data with negligible latency and perform multimodal data understanding at scale.
 
