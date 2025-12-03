@@ -164,6 +164,12 @@ If you prefer Pandas, you can use the `to_pandas()` method to display the result
 results = table.search(query_vector).limit(2).to_pandas()
 {{< /code >}}
 
+{{< code language="typescript" >}}
+// In TypeScript, results are returned as an array of objects
+const results = await table.search(queryVector).limit(2).toArray();
+console.table(results);
+{{< /code >}}
+
 ## 7. Add data and run more queries
 
 If you obtain more data, it's simple to add it to an existing table. In the same script or a new one, you

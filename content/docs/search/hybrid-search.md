@@ -57,7 +57,7 @@ db = lancedb.connect(uri)
 import * as lancedb from "@lancedb/lancedb";
 import * as arrow from "apache-arrow";
 
-const db = await lancedb.connect(databaseDir);
+const db = await lancedb.connect("data/sample-lancedb");
 {{< /code >}}
 
 For LanceDB Enterprise, set the host override to your private cloud endpoint:
@@ -80,8 +80,9 @@ Set up the any embedding model that will convert text into vector representation
 embeddings = get_registry().get("sentence-transformers").create()
 {{< /code >}}
 {{< code language="typescript" >}}
+import { getRegistry } from "@lancedb/lancedb/embedding";
 
-const embedFunc = lancedb.embedding.getRegistry().get("openai")?.create({
+const embedFunc = getRegistry().get("openai")?.create({
   model: "text-embedding-ada-002",
 }) as lancedb.embedding.EmbeddingFunction;
 {{< /code >}}
@@ -98,7 +99,9 @@ table_name = "hybrid_search_example"
 table = db.create_table(table_name, schema=Documents, mode="overwrite")
 {{< /code >}}
 {{< code language="typescript" >}}
-const documentSchema = lancedb.embedding.LanceSchema({
+import { LanceSchema } from "@lancedb/lancedb/embedding";
+
+const documentSchema = LanceSchema({
   text: embedFunc.sourceField(new Utf8()),
   vector: embedFunc.vectorField(),
 });
@@ -144,7 +147,7 @@ console.log("Creating full-text search index...");
 await table.createIndex("text", {
   config: lancedb.Index.fts(),
 });
-await waitForIndex(table as any, "text_idx");
+await table.waitForIndex("text_idx");
 {{< /code >}}
 
 ### 7. Set Reranker [Optional]

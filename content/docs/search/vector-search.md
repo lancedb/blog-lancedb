@@ -39,6 +39,8 @@ tbl.search(np.random.random((1536))).distance_type("cosine").limit(10).to_list()
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+
 const results2 = await (
   tbl.search(Array(128).fill(1.2)) as lancedb.VectorQuery
 )
@@ -146,6 +148,8 @@ print("Vector search results with post-filter:")
 print(results_post_filtered)
 {{< /code >}}
 {{< code language="typescript" >}}
+import { VectorQuery } from "@lancedb/lancedb";
+
 const vectorResultsWithPostFilter = await (table.search(queryEmbed) as VectorQuery)
   .where("label > 2")
   .postfilter()
@@ -328,6 +332,8 @@ batch_results = table.search(query_embeds).limit(5).to_pandas()
 print(batch_results)
 {{< /code >}}
 {{< code language="typescript" >}}
+import { VectorQuery } from "@lancedb/lancedb";
+
  // Batch query
 console.log("Performing batch vector search...");
 const batchSize = 5;

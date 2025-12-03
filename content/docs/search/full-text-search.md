@@ -126,6 +126,14 @@ For example, to enable stemming for English:
 table.create_fts_index("text", language="English", replace=True)
 {{< /code >}}
 
+{{< code language="typescript" >}}
+await table.createIndex("text", {
+    config: lancedb.Index.fts({
+        language: "English",
+    }),
+});
+{{< /code >}}
+
 The following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
 
 The tokenizer is customizable, you can specify how the tokenizer splits the text, and how it filters out words, etc.
@@ -150,6 +158,16 @@ table.create_fts_index(
         ascii_folding=True,
         replace=True,
     )
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await table.createIndex("text", {
+    config: lancedb.Index.fts({
+        language: "French",
+        stem: true,
+        asciiFolding: true,
+    }),
+});
 {{< /code >}}
 
 ### Filtering Options
@@ -222,6 +240,14 @@ To search for a phrase, the index must be created with `with_position=True` and 
 
 {{< code language="python" >}}
 table.create_fts_index("text", with_position=True, replace=True)
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await table.createIndex("text", {
+    config: lancedb.Index.fts({
+        withPosition: true,
+    }),
+});
 {{< /code >}}
 
 This will allow you to search for phrases, but it will also significantly increase the index size and indexing time.
@@ -381,8 +407,8 @@ wait_for_index(table, "text_idx")
 
 {{< code language="typescript" >}}
 // Create FTS index on first text column
-await table.createIndex("text", { config: Index.fts() });
-await waitForIndex(table, "text_idx");
+await table.createIndex("text", { config: lancedb.Index.fts() });
+await table.waitForIndex("text_idx");
 {{< /code >}}
 
 Then, create an index on the second text column:
@@ -395,8 +421,8 @@ wait_for_index(table, "text2_idx")
 
 {{< code language="typescript" >}}
 // Create FTS index on second text column
-await table.createIndex("text2", { config: Index.fts() });
-await waitForIndex(table, "text2_idx");
+await table.createIndex("text2", { config: lancedb.Index.fts() });
+await table.waitForIndex("text2_idx");
 {{< /code >}}
 
 ### Basic and Fuzzy Search
@@ -754,6 +780,24 @@ table = db.create_table("test", data=data)
 table.create_fts_index("text", base_tokenizer="ngram")
 {{< /code >}}
 
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import * as arrow from "apache-arrow";
+
+const db = await lancedb.connect(":memory:");
+const data = lancedb.makeArrowTable([
+    { text: "hello world" },
+    { text: "lance database" },
+    { text: "lance is cool" },
+]);
+const table = await db.createTable("test", data);
+await table.createIndex("text", {
+    config: lancedb.Index.fts({
+        baseTokenizer: "ngram",
+    }),
+});
+{{< /code >}}
+
 ### Basic Substring Search
 
 With the default n-gram settings (minimum length of 3), you can search for substrings of length 3 or more:
@@ -770,6 +814,15 @@ assert len(results) == 2
 assert set(r["text"] for r in results) == {"lance database", "lance is cool"}
 {{< /code >}}
 
+{{< code language="typescript" >}}
+let results = await table.search("lan", "fts").limit(10).toArray();
+// assert results.length === 2
+// assert results contain "lance database" and "lance is cool"
+
+results = await table.search("nce", "fts").limit(10).toArray();
+// assert results.length === 2
+{{< /code >}}
+
 ### Handling Short Substrings
 
 By default, the minimum n-gram length is 3, so shorter substrings like "la" won't match:
@@ -777,6 +830,11 @@ By default, the minimum n-gram length is 3, so shorter substrings like "la" won'
 {{< code language="python" >}}
 results = table.search("la", query_type="fts").limit(10).to_list()
 assert len(results) == 0
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const results = await table.search("la", "fts").limit(10).toArray();
+// assert results.length === 0
 {{< /code >}}
 
 ### Customizing N-gram Parameters
@@ -791,6 +849,16 @@ table.create_fts_index(
     ngram_min_length=2,
     prefix_only=True,
 )
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await table.createIndex("text", {
+    config: lancedb.Index.fts({
+        baseTokenizer: "ngram",
+        ngramMinLength: 2,
+        prefixOnly: true,
+    }),
+});
 {{< /code >}}
 
 ### Testing Custom N-gram Settings

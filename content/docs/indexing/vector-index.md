@@ -141,6 +141,12 @@ There are three key parameters to set when constructing an HNSW index:
 tbl.create_index(index_type=IVF_HNSW_SQ)
 {{< /code >}}
 
+{{< code language="typescript" >}}
+await table.createIndex("vector", {
+    config: lancedb.Index.ivfHnswSq(),
+});
+{{< /code >}}
+
 ### 2. Query HNSW Index
 Search using a random 1536-dimensional embedding
 
@@ -148,6 +154,12 @@ Search using a random 1536-dimensional embedding
 tbl.search(np.random.random((1536))) \
     .limit(2) \
     .to_pandas()
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await table.search(Array(1536).fill(0).map(() => Math.random()))
+    .limit(2)
+    .toArray();
 {{< /code >}}
 
 ## Example: Construct the Binary Vector Index
@@ -179,6 +191,8 @@ table = db.create_table(table_name, schema=schema, mode="overwrite")
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import { Schema, Field, Int32, FixedSizeList, Uint8 } from "apache-arrow";
+
 const binaryTableName = "test-hamming-ts";
 const ndim = 256;
 const bytesPerVector = ndim / 8; // 32 bytes for 256 bits
@@ -203,10 +217,10 @@ table.add(data)
 {{< /code >}}
 
 {{< code language="typescript" >}}
-const data = makeArrowTable(
+const data = lancedb.makeArrowTable(
   Array(1_000).fill(0).map((_, i) => ({
     id: i,
-    vector: packBits(Array(ndim).fill(0).map(() => Math.floor(Math.random() * 2))),
+    vector: lancedb.packBits(Array(ndim).fill(0).map(() => Math.floor(Math.random() * 2))),
   })),
   { schema: binarySchema },
 );
@@ -231,14 +245,14 @@ table.create_index(
 {{< code language="typescript" >}}
 console.log("Creating binary vector index...");
 await table.createIndex("vector", {
-  config: Index.ivfFlat({
+  config: lancedb.Index.ivfFlat({
     distanceType: "hamming",
   }),
 });
 
 // Wait for index
 const binaryIndexName = "vector_idx";
-await table.waitForIndex([binaryIndexName], 60)
+await table.waitForIndex(binaryIndexName);
 {{< /code >}}
 
 ### 4. Vector Search
@@ -252,7 +266,7 @@ df.vector = df.vector.apply(np.unpackbits)
 {{< /code >}}
 
 {{< code language="typescript" >}}
-const query = packBits(Array(ndim).fill(0).map(() => Math.floor(Math.random() * 2)));
+const query = lancedb.packBits(Array(ndim).fill(0).map(() => Math.floor(Math.random() * 2)));
 console.log("Performing binary vector search...");
 const binaryResults = await table
   .query()

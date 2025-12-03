@@ -51,6 +51,9 @@ db["test_table"].head()
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("data/sample-lancedb");
+
 const _tbl = await db.createTable(
   "myTable",
   [
@@ -102,13 +105,15 @@ tbl = db.create_table("my_table_custom_schema", data, schema=custom_schema)
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
 import {
   Schema,
   Field,
   Float32,
   FixedSizeList,
-  makeTable,
 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
 
 const customSchema = new Schema([
   new Field("vector", new FixedSizeList(4, new Field("item", new Float32()))),
@@ -169,7 +174,10 @@ tbl = db.create_table("f16_tbl", data, schema=schema)
 {{< /code >}}
 
 {{< code language="typescript" >}}
-const db = await lancedb.connect(databaseDir);
+import * as lancedb from "@lancedb/lancedb";
+import { Schema, Field, Int32, Float16, FixedSizeList } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
 const dim = 16;
 const total = 10;
 const f16Schema = new Schema([
@@ -265,6 +273,10 @@ const schema = new Schema([
     ])
   ),
 ]);
+
+const data = [
+    { id: "1", vector: Array(1536).fill(0), document: { content: "foo", source: "bar" } },
+];
 
 const table = await db.createTable("nested_table", data, { schema });
 {{< /code >}}
@@ -385,6 +397,7 @@ const schema = new Schema([
   new Field("price", new Float32()),
 ]);
 
+const db = await lancedb.connect("data/sample-lancedb");
 await db.createTable("batched_table", makeBatches(), { schema });
 {{< /code >}}
 
