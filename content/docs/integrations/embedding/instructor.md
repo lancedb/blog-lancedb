@@ -29,7 +29,7 @@ More information about the model can be found at the [source URL](https://github
 
 
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
@@ -53,4 +53,48 @@ texts = [
 ]
 
 tbl.add(texts)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/instructor";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("instructor")
+  ?.create({
+    source_instruction: "represent the document for retrieval",
+    query_instruction:
+      "represent the document for retrieving the most similar documents",
+  }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "test",
+  [
+    {
+      text: "Capitalism has been dominant in the Western world since the end of feudalism.",
+    },
+    {
+      text: "The disparate impact theory is especially controversial under the Fair Housing Act.",
+    },
+    {
+      text: "Disparate impact in United States labor law refers to practices in employment.",
+    },
+  ],
+  {
+    schema,
+  },
+);
+{{< /code >}}

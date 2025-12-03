@@ -41,23 +41,20 @@ export WATSONX_API_KEY="YOUR_WATSONX_API_KEY"
 export WATSONX_PROJECT_ID="YOUR_WATSONX_PROJECT_ID"
 ```
 
-```python
+{{< code language="python" >}}
 import os
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import EmbeddingFunctionRegistry
 
-watsonx_embed = EmbeddingFunctionRegistry
-  .get_instance()
-  .get("watsonx")
-  .create(
+watsonx_embed = EmbeddingFunctionRegistry.get_instance().get("watsonx").create(
     name="ibm/slate-125m-english-rtrvr",
     # Uncomment and set these if not using environment variables
     # api_key="your_api_key_here",
     # project_id="your_project_id_here",
     # url="your_watsonx_url_here",
     # params={...},
-  )
+)
 
 class TextModel(LanceModel):
     text: str = watsonx_embed.SourceField()
@@ -75,4 +72,41 @@ tbl.add(data)
 
 rs = tbl.search("hello").limit(1).to_pandas()
 print(rs)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/watsonx";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("watsonx")
+  ?.create({
+    name: "ibm/slate-125m-english-rtrvr",
+    // api_key: "your_api_key_here",
+    // project_id: "your_project_id_here",
+  }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "watsonx_test",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+
+const results = await table.search("hello").limit(1).toArray();
+console.log(results);
+{{< /code >}}

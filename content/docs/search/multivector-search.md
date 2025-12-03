@@ -50,7 +50,7 @@ The vector value type can be `float16`, `float32` or `float64`.
 
 Connect to LanceDB and import required libraries for data management.
 
-```python
+{{< code language="python" >}}
 import lancedb
 import numpy as np
 import pyarrow as pa
@@ -60,7 +60,18 @@ db = lancedb.connect(
     api_key="your-api-key",
     region="your-cloud-region"
 )
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import * as arrow from "apache-arrow";
+
+const db = await lancedb.connect({
+    uri: "db://your-project-slug",
+    apiKey: "your-api-key",
+    region: "your-cloud-region"
+});
+{{< /code >}}
 
 ### 2. Define Schema
 
@@ -72,7 +83,7 @@ Define a schema that specifies a multivector field. A multivector field is a nes
    - Each inner list is a 256-dimensional vector
    - Using float32 for memory efficiency while maintaining precision
 
-```python
+{{< code language="python" >}}
 db = lancedb.connect("data/multivector_demo")
 schema = pa.schema(
     [
@@ -81,7 +92,19 @@ schema = pa.schema(
         pa.field("vector", pa.list_(pa.list_(pa.float32(), 256))),
     ]
 )
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const db = await lancedb.connect("data/multivector_demo");
+const schema = new arrow.Schema([
+    new arrow.Field("id", new arrow.Int64()),
+    new arrow.Field("vector", new arrow.List(
+        new arrow.Field("item", new arrow.FixedSizeList(256,
+            new arrow.Field("item", new arrow.Float32())
+        ))
+    )),
+]);
+{{< /code >}}
 
 ### 3. Generate Multivectors
 
@@ -89,7 +112,7 @@ Generate sample data where each document contains multiple vector embeddings, wh
 
 In this example, we create **1024 documents** where each document has **2 random vectors** of **dimension 256**, simulating a real-world scenario where you might have multiple embeddings per item.
 
-```python
+{{< code language="python" >}}
 data = [
     {
         "id": i,
@@ -97,42 +120,75 @@ data = [
     }
     for i in range(1024)
 ]
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const data = Array.from({ length: 1024 }, (_, i) => ({
+    id: i,
+    vector: Array.from({ length: 2 }, () => 
+        Array.from({ length: 256 }, () => Math.random())
+    ),
+}));
+{{< /code >}}
 
 ### 4. Create a Table
 
 Create a table with the defined schema and sample data, which will store multiple vectors per document for similarity search.
 
-```python
+{{< code language="python" >}}
 tbl = db.create_table("multivector_example", data=data, schema=schema)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const table = await db.createTable("multivector_example", data, { schema });
+{{< /code >}}
 
 ### 5. Build an Index
 
 Only cosine similarity is supported as the distance metric for multivector search operations. 
 For faster search, build the standard `IVF_PQ` index over your vectors:
 
-```python
+{{< code language="python" >}}
 tbl.create_index(metric="cosine", vector_column_name="vector")
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+await table.createIndex("vector", {
+    config: lancedb.Index.ivfPq({
+        metricType: "cosine",
+    }),
+});
+{{< /code >}}
 
 ### 6. Query a Single Vector
 
 When searching with a single query vector, it will be compared against all vectors in each document, and the similarity scores will be aggregated to find the most relevant documents.
 
-```python
+{{< code language="python" >}}
 query = np.random.random(256)
 results_single = tbl.search(query).limit(5).to_pandas()
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const query = Array.from({ length: 256 }, () => Math.random());
+const resultsSingle = await table.search(query).limit(5).toArray();
+{{< /code >}}
 
 ### 7. Query Multiple Vectors
 
 With multiple vector queries, LanceDB calculates similarity using late interaction - a technique that computes relevance by finding the best matching pairs between query and document vectors. This approach provides more nuanced matching while maintaining fast retrieval speeds.
 
-```python
+{{< code language="python" >}}
 query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const queryMulti = Array.from({ length: 2 }, () => 
+    Array.from({ length: 256 }, () => Math.random())
+);
+const resultsMulti = await table.search(queryMulti).limit(5).toArray();
+{{< /code >}}
 
 ## What's Next?
 

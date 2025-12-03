@@ -18,30 +18,60 @@ Supported parameters (to be passed in `create` method) are:
 
 Usage Example:
 
-```python
-    import os
-    import lancedb
-    from lancedb.pydantic import LanceModel, Vector
-    from lancedb.embeddings import EmbeddingFunctionRegistry
+{{< code language="python" >}}
+import os
+import lancedb
+from lancedb.pydantic import LanceModel, Vector
+from lancedb.embeddings import EmbeddingFunctionRegistry
 
-    os.environ['JINA_API_KEY'] = 'jina_*'
+os.environ['JINA_API_KEY'] = 'jina_*'
 
-    jina_embed = EmbeddingFunctionRegistry.get_instance().get("jina").create(name="jina-embeddings-v2-base-en")
-
-
-    class TextModel(LanceModel):
-        text: str = jina_embed.SourceField()
-        vector: Vector(jina_embed.ndims()) = jina_embed.VectorField()
+jina_embed = EmbeddingFunctionRegistry.get_instance().get("jina").create(name="jina-embeddings-v2-base-en")
 
 
-    data = [{"text": "hello world"},
-            {"text": "goodbye world"}]
+class TextModel(LanceModel):
+    text: str = jina_embed.SourceField()
+    vector: Vector(jina_embed.ndims()) = jina_embed.VectorField()
 
-    db = lancedb.connect("~/.lancedb-2")
-    tbl = db.create_table("test", schema=TextModel, mode="overwrite")
 
-    tbl.add(data)
-```
+data = [{"text": "hello world"},
+        {"text": "goodbye world"}]
+
+db = lancedb.connect("~/.lancedb-2")
+tbl = db.create_table("test", schema=TextModel, mode="overwrite")
+
+tbl.add(data)
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/jina";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("jina")
+  ?.create({ name: "jina-embeddings-v2-base-en" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "test",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+{{< /code >}}
 
 ## Multimodal Embedding Models
 
@@ -56,41 +86,67 @@ Supported parameters (to be passed in `create` method) are:
 
 Usage Example:
 
-```python
-    import os
-    import requests
-    import lancedb
-    from lancedb.pydantic import LanceModel, Vector
-    from lancedb.embeddings import get_registry
-    import pandas as pd
+{{< code language="python" >}}
+import os
+import requests
+import lancedb
+from lancedb.pydantic import LanceModel, Vector
+from lancedb.embeddings import get_registry
+import pandas as pd
 
-    os.environ['JINA_API_KEY'] = 'jina_*'
+os.environ['JINA_API_KEY'] = 'jina_*'
 
-    db = lancedb.connect("~/.lancedb")
-    func = get_registry().get("jina").create()
-
-
-    class Images(LanceModel):
-        label: str
-        image_uri: str = func.SourceField()  # image uri as the source
-        image_bytes: bytes = func.SourceField()  # image bytes as the source
-        vector: Vector(func.ndims()) = func.VectorField()  # vector column
-        vec_from_bytes: Vector(func.ndims()) = func.VectorField()  # Another vector column
+db = lancedb.connect("~/.lancedb")
+func = get_registry().get("jina").create()
 
 
-    table = db.create_table("images", schema=Images)
-    labels = ["cat", "cat", "dog", "dog", "horse", "horse"]
-    uris = [
-        "http://farm1.staticflickr.com/53/167798175_7c7845bbbd_z.jpg",
-        "http://farm1.staticflickr.com/134/332220238_da527d8140_z.jpg",
-        "http://farm9.staticflickr.com/8387/8602747737_2e5c2a45d4_z.jpg",
-        "http://farm5.staticflickr.com/4092/5017326486_1f46057f5f_z.jpg",
-        "http://farm9.staticflickr.com/8216/8434969557_d37882c42d_z.jpg",
-        "http://farm6.staticflickr.com/5142/5835678453_4f3a4edb45_z.jpg",
+class Images(LanceModel):
+    label: str
+    image_uri: str = func.SourceField()  # image uri as the source
+    image_bytes: bytes = func.SourceField()  # image bytes as the source
+    vector: Vector(func.ndims()) = func.VectorField()  # vector column
+    vec_from_bytes: Vector(func.ndims()) = func.VectorField()  # Another vector column
+
+
+table = db.create_table("images", schema=Images)
+labels = ["cat", "cat", "dog", "dog", "horse", "horse"]
+uris = [
+    "http://farm1.staticflickr.com/53/167798175_7c7845bbbd_z.jpg",
+    "http://farm1.staticflickr.com/134/332220238_da527d8140_z.jpg",
+    "http://farm9.staticflickr.com/8387/8602747737_2e5c2a45d4_z.jpg",
+    "http://farm5.staticflickr.com/4092/5017326486_1f46057f5f_z.jpg",
+    "http://farm9.staticflickr.com/8216/8434969557_d37882c42d_z.jpg",
+    "http://farm6.staticflickr.com/5142/5835678453_4f3a4edb45_z.jpg",
     ]
-    # get each uri as bytes
-    image_bytes = [requests.get(uri).content for uri in uris]
-    table.add(
-      pd.DataFrame({"label": labels, "image_uri": uris, "image_bytes": image_bytes})
-    )
-```
+# get each uri as bytes
+image_bytes = [requests.get(uri).content for uri in uris]
+table.add(
+    pd.DataFrame({"label": labels, "image_uri": uris, "image_bytes": image_bytes})
+)
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/jina";
+import { Utf8, Binary } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry().get("jina")?.create() as EmbeddingFunction;
+
+const schema = LanceSchema({
+  label: new Utf8(),
+  image_uri: func.sourceField(new Utf8()),
+  image_bytes: func.sourceField(new Binary()),
+  vector: func.vectorField(),
+  vec_from_bytes: func.vectorField(),
+});
+
+const table = await db.createTable("images", [], { schema });
+// Add data with image URIs and bytes...
+{{< /code >}}

@@ -176,6 +176,13 @@ query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
 {{< /code >}}
 
+{{< code language="typescript" >}}
+const queryMulti = Array.from({ length: 2 }, () => 
+    Array.from({ length: 256 }, () => Math.random())
+);
+const resultsMulti = await table.search(queryMulti).limit(5).toArray();
+{{< /code >}}
+
 Here you can see how to take 2 query vectors and find the best matching pairs between them and document vectors using late interaction. The `np.random.random(size=(2, 256))` creates a 2×256 array with two random query vectors, `.limit(5)` returns the top 5 best document-query combinations, and `.to_pandas()` provides results in a DataFrame format. 
 
 **Read more:** [Multivector Search](/docs/reference/multivector-search/)

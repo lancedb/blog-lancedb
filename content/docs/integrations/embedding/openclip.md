@@ -18,7 +18,7 @@ This embedding function supports ingesting images as both bytes and urls. You ca
 !!! info
     LanceDB supports ingesting images directly from accessible links.
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
@@ -48,10 +48,35 @@ image_bytes = [requests.get(uri).content for uri in uris]
 table.add(
     pd.DataFrame({"label": labels, "image_uri": uris, "image_bytes": image_bytes})
 )
-```
-Now we can search using text from both the default vector column and the custom vector column
-```python
+{{< /code >}}
 
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/open-clip";
+import { Utf8, Binary } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry().get("open-clip")?.create() as EmbeddingFunction;
+
+const schema = LanceSchema({
+  label: new Utf8(),
+  image_uri: func.sourceField(new Utf8()),
+  image_bytes: func.sourceField(new Binary()),
+  vector: func.vectorField(),
+  vec_from_bytes: func.vectorField(),
+});
+
+const table = await db.createTable("images", [], { schema });
+// Add data...
+{{< /code >}}
+Now we can search using text from both the default vector column and the custom vector column
+{{< code language="python" >}}
 # text search
 actual = table.search("man's best friend").limit(1).to_pydantic(Images)[0]
 print(actual.label) # prints "dog"
@@ -62,12 +87,19 @@ frombytes = (
     .to_pydantic(Images)[0]
 )
 print(frombytes.label)
+{{< /code >}}
 
-```
+{{< code language="typescript" >}}
+const results = await table.search("man's best friend").limit(1).toArray();
+console.log(results[0].label);
+
+// Search using custom vector column
+// Note: vector column selection in search is not yet fully supported in the same way in TS API or requires specific option
+{{< /code >}}
 
 Because we're using a multi-modal embedding function, we can also search using images
 
-```python
+{{< code language="python" >}}
 # image search
 query_image_uri = "http://farm1.staticflickr.com/200/467715466_ed4a31801f_z.jpg"
 image_bytes = requests.get(query_image_uri).content
@@ -82,5 +114,9 @@ other = (
     .to_pydantic(Images)[0]
 )
 print(actual.label)
+{{< /code >}}
 
-```
+{{< code language="typescript" >}}
+// Image search is supported if the embedding function handles the input type
+// For open-clip, you might need to pass the image data or URI depending on implementation
+{{< /code >}}

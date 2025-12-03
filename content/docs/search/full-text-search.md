@@ -122,9 +122,9 @@ Stemming is useful for improving search results by reducing words to their root 
 
 For example, to enable stemming for English:
 
-```python
+{{< code language="python" >}}
 table.create_fts_index("text", language="English", replace=True)
-```
+{{< /code >}}
 
 The following [languages](https://docs.rs/tantivy/latest/tantivy/tokenizer/enum.Language.html) are currently supported.
 
@@ -142,7 +142,7 @@ The tokenizer is customizable, you can specify how the tokenizer splits the text
 
 For example, for language with accents, you can specify the tokenizer to use `ascii_folding` to remove accents, e.g. 'é' to 'e':
 
-```python
+{{< code language="python" >}}
 table.create_fts_index(
         "text",
         language="French",
@@ -150,7 +150,7 @@ table.create_fts_index(
         ascii_folding=True,
         replace=True,
     )
-```
+{{< /code >}}
 
 ### Filtering Options
 
@@ -220,9 +220,9 @@ or a **terms** search query like `old man sea`.
 
 To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 
-```python
+{{< code language="python" >}}
 table.create_fts_index("text", with_position=True, replace=True)
-```
+{{< /code >}}
 
 This will allow you to search for phrases, but it will also significantly increase the index size and indexing time.
 
@@ -657,12 +657,12 @@ In Python, you can combine two MatchQuery objects using either the `and` functio
 
 In TypeScript, boolean queries are constructed using the `BooleanQuery` class with a list of [Occur, subquery] pairs. For example, to perform an AND query:
 
-```sql
+{{< code language="sql" >}}
           BooleanQuery([
             [Occur.Must, new MatchQuery("puppy", "text")],
             [Occur.Must, new MatchQuery("merrily", "text")],
           ])
-```
+{{< /code >}}
 
 This approach allows you to specify complex boolean logic by combining multiple subqueries with different Occur values (such as `Must`, `Should`, or `MustNot`).
 

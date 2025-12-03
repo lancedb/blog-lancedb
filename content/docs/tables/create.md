@@ -63,7 +63,7 @@ const _tbl = await db.createTable(
 
 ### From a Pandas DataFrame
 
-```python
+{{< code language="python" >}}
 import pandas as pd
 
 data = pd.DataFrame(
@@ -75,7 +75,7 @@ data = pd.DataFrame(
 )
 db.create_table("my_table_pandas", data)
 db["my_table_pandas"].head()
-```
+{{< /code >}}
 
 {{< admonition info "Note" >}}
 Data is converted to Arrow before being written to disk. For maximum control over how data is saved, either provide the PyArrow schema to convert to or else provide a PyArrow Table directly.
@@ -87,7 +87,7 @@ The **`vector`** column needs to be a [Vector](/docs/integrations/frameworks/pyd
 
 #### From a custom schema
 
-```python
+{{< code language="python" >}}
 import pyarrow as pa
 
 custom_schema = pa.schema(
@@ -99,7 +99,27 @@ custom_schema = pa.schema(
 )
 
 tbl = db.create_table("my_table_custom_schema", data, schema=custom_schema)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import {
+  Schema,
+  Field,
+  Float32,
+  FixedSizeList,
+  makeTable,
+} from "apache-arrow";
+
+const customSchema = new Schema([
+  new Field("vector", new FixedSizeList(4, new Field("item", new Float32()))),
+  new Field("lat", new Float32()),
+  new Field("long", new Float32()),
+]);
+
+const table = await db.createTable("my_table_custom_schema", data, {
+  schema: customSchema,
+});
+{{< /code >}}
 
 ### From a Polars DataFrame
 
@@ -108,7 +128,7 @@ written in Rust. Just like in Pandas, the Polars integration is enabled by PyArr
 under the hood. A deeper integration between LanceDB Tables and Polars DataFrames
 is on the way.
 
-```python
+{{< code language="python" >}}
 import polars as pl
 
 data = pl.DataFrame(
@@ -119,7 +139,7 @@ data = pl.DataFrame(
     }
 )
 tbl = db.create_table("my_table_pl", data)
-```
+{{< /code >}}
 
 ### From an Arrow Table
 You can also create LanceDB tables directly from Arrow tables.
@@ -184,7 +204,7 @@ can be configured with the vector dimensions. It is also important to note that
 LanceDB only understands subclasses of `lancedb.pydantic.LanceModel`
 (which itself derives from `pydantic.BaseModel`).
 
-```python
+{{< code language="python" >}}
 from lancedb.pydantic import Vector, LanceModel
 
 import pyarrow as pa
@@ -202,7 +222,7 @@ class Content(LanceModel):
 
 
 tbl = db.create_table("movielens_small", schema=Content)
-```
+{{< /code >}}
 
 #### Nested schemas
 
@@ -218,7 +238,7 @@ class Document(BaseModel):
 
 This can be used as the type of a LanceDB table column:
 
-```python
+{{< code language="python" >}}
 class NestedSchema(LanceModel):
     id: str
     vector: Vector(1536)
@@ -226,12 +246,33 @@ class NestedSchema(LanceModel):
 
 
 tbl = db.create_table("nested_table", schema=NestedSchema)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import { Struct, Utf8 } from "apache-arrow";
+
+const schema = new Schema([
+  new Field("id", new Utf8()),
+  new Field(
+    "vector",
+    new FixedSizeList(1536, new Field("item", new Float32()))
+  ),
+  new Field(
+    "document",
+    new Struct([
+      new Field("content", new Utf8()),
+      new Field("source", new Utf8()),
+    ])
+  ),
+]);
+
+const table = await db.createTable("nested_table", data, { schema });
+{{< /code >}}
 
 This creates a struct column called "document" that has two subfields
 called "content" and "source":
 
-```bash
+{{< code language="bash" >}}
 In [28]: tbl.schema
 Out[28]:
 id: string not null
@@ -240,14 +281,14 @@ vector: fixed_size_list<item: float>[1536] not null
 document: struct<content: string not null, source: string not null> not null
     child 0, content: string not null
     child 1, source: string not null
-```
+{{< /code >}}
 
 #### Validators
 
 Note that neither Pydantic nor PyArrow automatically validates that input data
 is of the correct timezone, but this is easy to add as a custom field validator:
 
-```python
+{{< code language="python" >}}
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -274,7 +315,7 @@ try:
 except ValidationError:
     print("A ValidationError was raised.")
     pass
-```
+{{< /code >}}
 
 When you run this code it should print "A ValidationError was raised."
 
@@ -291,7 +332,7 @@ LanceDB additionally supports PyArrow's `RecordBatch` Iterators or other generat
 
 Here's an example using using `RecordBatch` iterator for creating tables.
 
-```python
+{{< code language="python" >}}
 import pyarrow as pa
 
 def make_batches():
@@ -317,7 +358,35 @@ schema = pa.schema(
     ]
 )
 db.create_table("batched_tale", make_batches(), schema=schema)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import { RecordBatch, Vector, Utf8, Float32, List } from "apache-arrow";
+
+async function* makeBatches() {
+  for (let i = 0; i < 5; i++) {
+    yield new RecordBatch({
+      vector: Vector.from({
+        values: [
+          [3.1, 4.1, 5.1, 6.1],
+          [5.9, 26.5, 4.7, 32.8],
+        ],
+        type: new List(new Float32()),
+      }),
+      item: Vector.from({ values: ["foo", "bar"], type: new Utf8() }),
+      price: Vector.from({ values: [10.0, 20.0], type: new Float32() }),
+    });
+  }
+}
+
+const schema = new Schema([
+  new Field("vector", new FixedSizeList(4, new Field("item", new Float32()))),
+  new Field("item", new Utf8()),
+  new Field("price", new Float32()),
+]);
+
+await db.createTable("batched_table", makeBatches(), { schema });
+{{< /code >}}
 
 You can also use iterators of other types like Pandas DataFrame or Pylists directly in the above example.
 
@@ -375,7 +444,7 @@ Alternatively, you can also use Pydantic to specify the schema for the empty tab
 directly import `pydantic` but instead use `lancedb.pydantic` which is a subclass of `pydantic.BaseModel`
 that has been extended to support LanceDB specific types like `Vector`.
 
-```python
+{{< code language="python" >}}
 import lancedb
 
 from lancedb.pydantic import Vector, LanceModel
@@ -387,7 +456,7 @@ class Item(LanceModel):
 
 
 tbl = db.create_table("test_empty_table_new", schema=Item.to_arrow_schema())
-```
+{{< /code >}}
 
 Once the empty table has been created, you can add data to it, as explained in the next section on [working with data](/docs/tables/update).
 

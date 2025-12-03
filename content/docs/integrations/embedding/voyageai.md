@@ -33,25 +33,52 @@ Supported parameters (to be passed in `create` method) are:
 
 Usage Example:
     
-```python
-    import lancedb
-    from lancedb.pydantic import LanceModel, Vector
-    from lancedb.embeddings import EmbeddingFunctionRegistry
+{{< code language="python" >}}
+import lancedb
+from lancedb.pydantic import LanceModel, Vector
+from lancedb.embeddings import EmbeddingFunctionRegistry
 
-    voyageai = EmbeddingFunctionRegistry
-        .get_instance()
-        .get("voyageai")
-        .create(name="voyage-3")
+voyageai = EmbeddingFunctionRegistry.get_instance().get("voyageai").create(name="voyage-3")
 
-    class TextModel(LanceModel):
-        text: str = voyageai.SourceField()
-        vector: Vector(voyageai.ndims()) =  voyageai.VectorField()
+class TextModel(LanceModel):
+    text: str = voyageai.SourceField()
+    vector: Vector(voyageai.ndims()) =  voyageai.VectorField()
 
-    data = [ { "text": "hello world" },
-            { "text": "goodbye world" }]
+data = [ { "text": "hello world" },
+        { "text": "goodbye world" }]
 
-    db = lancedb.connect("~/.lancedb")
-    tbl = db.create_table("test", schema=TextModel, mode="overwrite")
+db = lancedb.connect("~/.lancedb")
+tbl = db.create_table("test", schema=TextModel, mode="overwrite")
 
-    tbl.add(data)
-```
+tbl.add(data)
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/voyageai";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("voyageai")
+  ?.create({ name: "voyage-3" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "test",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+{{< /code >}}
