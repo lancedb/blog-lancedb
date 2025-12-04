@@ -103,7 +103,7 @@ A heartfelt thank you to our community contributors of lance and lancedb this pa
 
 | Feature | Version | Description |
 | :------ | :------ | :---------- |
-| LanceDB | 0.22.2 | IVF_RQ index type ([#2687](https://github.com/lancedb/lancedb/pull/2687)) <br><br> Support creating permutation view for PyTorch Data Loader ([#2552](https://github.com/lancedb/lancedb/pull/2552)) <br><br> Add FTS UDTF support ([#2755](https://github.com/lancedb/lancedb/pull/2755)) <br><br> Expand support for multivector colpali models ([#2719](https://github.com/lancedb/lancedb/pull/2719)) |
+| LanceDB | 0.22.3 | IVF_RQ index type ([#2687](https://github.com/lancedb/lancedb/pull/2687)) <br><br> Support creating permutation view for PyTorch Data Loader ([#2552](https://github.com/lancedb/lancedb/pull/2552)) <br><br> Add FTS UDTF support ([#2755](https://github.com/lancedb/lancedb/pull/2755)) <br><br> Expand support for multivector colpali models ([#2719](https://github.com/lancedb/lancedb/pull/2719)) |
 | Lance | 0.39.0 | Incremental Vector Indexing with SPFresh ([#4837](https://github.com/lance-format/lance/pull/4837)) <br><br> Dynamic AWS Credentials vending for Lance datasets ([#4905](https://github.com/lance-format/lance/pull/4905)) | 
 | Lance Namespace | 0.0.21-0.2.1 | DirectoryNamespace v2 which supports multi-level namespace, with REST namespace adapter in rust, python and java (note that the features have been refactored into the main lance repository and released with the main lance SDKs going forward) ([#5292](https://github.com/lance-format/lance/pull/5292)) |
 
