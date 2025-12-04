@@ -47,7 +47,7 @@ The demonstration showcases a sophisticated multimodal embedding system that ena
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XK4L53z6eso?si=XcHc7Uu1hgCwESkU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## ▶️ Recordings you might've missed!
+## 📺 Recordings you missed!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1hBesu2Erg0?si=KSwMvVm9BivJ5XC7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -57,9 +57,7 @@ The demonstration showcases a sophisticated multimodal embedding system that ena
 
 ## 📊 LanceDB Enterprise Product News
 
-| Feature | Description |
-| :------ | :---------- |
-| tbd | |
+We have enabled full-text search in SQL to reach parity with our Python API capabilities. We have also introduced incremental indexing using SPFresh, eliminating the need for full reindexing while maintaining centroid freshness and reducing cold latency significantly.
 
 ## 🫶 Community Contributions
 
@@ -103,7 +101,7 @@ A heartfelt thank you to our community contributors of lance and lancedb this pa
 
 | Feature | Version | Description |
 | :------ | :------ | :---------- |
-| LanceDB | 0.22.3 | IVF_RQ index type ([#2687](https://github.com/lancedb/lancedb/pull/2687)) <br><br> Support creating permutation view for PyTorch Data Loader ([#2552](https://github.com/lancedb/lancedb/pull/2552)) <br><br> Add FTS UDTF support ([#2755](https://github.com/lancedb/lancedb/pull/2755)) <br><br> Expand support for multivector colpali models ([#2719](https://github.com/lancedb/lancedb/pull/2719)) |
-| Lance | 0.39.0 | Incremental Vector Indexing with SPFresh ([#4837](https://github.com/lance-format/lance/pull/4837)) <br><br> Dynamic AWS Credentials vending for Lance datasets ([#4905](https://github.com/lance-format/lance/pull/4905)) | 
-| Lance Namespace | 0.0.21-0.2.1 | DirectoryNamespace v2 which supports multi-level namespace, with REST namespace adapter in rust, python and java (note that the features have been refactored into the main lance repository and released with the main lance SDKs going forward) ([#5292](https://github.com/lance-format/lance/pull/5292)) |
+| LanceDB | 0.22.3 | IVF_RQ index type ([lancedb#2687](https://github.com/lancedb/lancedb/pull/2687)) <br><br> Support creating permutation view for PyTorch Data Loader ([lancedb#2552](https://github.com/lancedb/lancedb/pull/2552)) <br><br> Add FTS UDTF support ([lancedb#2755](https://github.com/lancedb/lancedb/pull/2755)) <br><br> Expand support for multivector colpali models ([lancedb#2719](https://github.com/lancedb/lancedb/pull/2719)) |
+| Lance | 0.39.0 | Incremental Vector Indexing with SPFresh ([lance#4837](https://github.com/lance-format/lance/pull/4837)) <br><br> Dynamic AWS Credentials vending for Lance datasets ([lance#4905](https://github.com/lance-format/lance/pull/4905)) | 
+| Lance Namespace | 0.0.21-0.2.1 | DirectoryNamespace v2 which supports multi-level namespace, with REST namespace adapter in rust, python and java (note that the features have been refactored into the main lance repository and released with the main lance SDKs going forward) ([lance#5292](https://github.com/lance-format/lance/pull/5292)) |
 
