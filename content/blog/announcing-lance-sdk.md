@@ -52,4 +52,28 @@ The updated release process is intended to:
 
 For more details, see [Lance release process](https://lance.org/community/project-specific/lance/release/) in the documentation.
 
-## How LanceDB votes for the release
+## What about Lance 2.1?
+
+A few months ago, we wrote on this blog about updates to Lance 2.0 / 2.1. These refer to the **file format** version of Lance, not the SDK.
+
+Below, we further clarify the difference between the file format and SDK version numbers.
+
+**Lance File Format (currently 2.1):** This version tracks on-disk binary compatibility, similar to Parquet format versions. It is not tied to the SDK version. It evolves independently and at a slower cadence. See [Lance File Format Versioning](https://lance.org/format/file/versioning/) for more.
+
+**Lance Table Format:** The table format maintains full backward compatibility and avoids the use of linear version numbers, instead relying on feature flags for new table-level features. This ensures that we never break existing data or metadata. See [Lance Table Format Versioning](https://lance.org/format/table/versioning/) for details.
+
+**Lance Namespace Spec:** Each namespace operation is versioned individually. It follows an upgrade strategy similar to the APIs in Iceberg REST Catalog spec. It also evolves independently of the SDK. See [Lance Namespace Spec Versioning](https://lance.org/format/namespace/operations/#operation-list) for more.
+
+In summary, **only the SDK** is adopting SemVer 1.0.0. The file format, table format, and namespace spec continue to follow their own established versioning strategies.
+
+## Cadence of Breaking Changes
+
+Moving forward, breaking changes to the SDKs may occur multiple times per year, and will be introduced through a new major version bump (e.g., 2.0.0, 3.0.0).
+
+Importantly:
+
+- No breaking changes will ever invalidate or require rewriting existing Lance data.
+- Only SDK-level (user-facing) APIs may change.
+- Migration steps, if any, will remain straightforward, and published in the [Migration Guide](https://lance.org/guide/migration/).
+
+This cadence allows the SDK to evolve rapidly while ensuring long-term stability of data on disk.
