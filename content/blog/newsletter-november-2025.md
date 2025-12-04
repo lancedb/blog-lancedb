@@ -1,6 +1,6 @@
 ---
 title: 🛡️Lance Community Governance, Lance + Iceberg 🧊, Netflix’s Multimodal Search Demo 🔍
-date: 2025-12-03
+date: 2025-12-04
 draft: false 
 featured: false 
 categories: ["Newsletter"]
@@ -8,7 +8,7 @@ image: "/assets/blog/newsletter-november-2025/preview-image.png"
 description: "Our November newsletter highlights Lance community governance, a deep dive on Lance and Iceberg, a demo of Netflix's multimodal search, previous talk recordings, and the latest product and community updates."
 author: "ChanChan Mao"
 author_avatar: "/assets/authors/chanchan-mao.jpg"
-author_bio: "DevRel"
+author_bio: "Developer Relations"
 author_github: "ccmao1130"
 author_linkedin: "chanchanmao"
 ---
@@ -17,10 +17,10 @@ author_linkedin: "chanchanmao"
 
 We’ve launched a dedicated Lance discord focused entirely on the format, feature discussions, proposals, and real-world use cases. In addition, Lance now also has its own website and GitHub organization to maintain its own ecosystem for its user community.
 
-- Read the announcement here: [https://lancedb.com/blog/lance-community-governance/](https://lancedb.com/blog/lance-community-governance/)
-- Learn more about the community: [https://lance.org/community/](https://lance.org/community/)
-- Join the new Lance discord: [discord.gg/lance](https://discord.gg/lance)
-- Give Lance format a star: [https://github.com/lance-format](https://github.com/lance-format)
+- Read the announcement here: https://lancedb.com/blog/lance-community-governance/
+- Learn more about the community: https://lance.org/community/
+- Join the new Lance discord: https://discord.gg/lance
+- Give Lance format a star: https://github.com/lance-format
 
 [![Lance Community Governance](/assets/blog/lance-community-governance/preview-image.png)](https://lancedb.com/blog/lance-community-governance/)
 
