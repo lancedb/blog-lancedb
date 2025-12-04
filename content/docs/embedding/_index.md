@@ -30,7 +30,7 @@ class MySchema(LanceModel):
 # Create a LanceDB table with the schema
 import lancedb
 db = lancedb.connect("./mydb")
-table = db.create_table("mytable", MySchema)
+table = db.create_table("mytable", schema=MySchema)
 # Insert data - embeddings are generated automatically
 table.add([
     {"text": "This is a test."},
@@ -101,7 +101,7 @@ class MySchema(LanceModel):
     text: str = func.SourceField()
     vector: Vector(func.ndims()) = func.VectorField()
 
-table = db.create_table("mytable", MySchema)
+table = db.create_table("mytable", schema=MySchema)
 table.add([
     {"text": "This is a test."},
     {"text": "Another example."}
