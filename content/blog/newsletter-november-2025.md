@@ -61,8 +61,8 @@ We have enabled full-text search in SQL to reach parity with our Python API capa
 
 ## 🫶 Community Contributions
 
-* VoyageAI integration ([documentation](https://lancedb.com/docs/integrations/embedding/voyageai), [#2713](https://github.com/lancedb/lancedb/pull/2713))
-* Manifest summary support in Java API (AntGroup) ([#5092](https://github.com/lance-format/lance/pull/5092))
+* VoyageAI integration ([documentation](https://lancedb.com/docs/integrations/embedding/voyageai), [lancedb#2713](https://github.com/lancedb/lancedb/pull/2713))
+* Manifest summary support in Java API (AntGroup) ([lance#5092](https://github.com/lance-format/lance/pull/5092))
 
 A heartfelt thank you to our community contributors of lance and lancedb this past month:    
 
