@@ -150,29 +150,63 @@ Allows you to set parameters when registering a `sentence-transformers` object.
 
 !!! note "BAAI Embeddings example"
     Here is an example that uses BAAI embedding model from the HuggingFace Hub [supported models](https://huggingface.co/models?library=sentence-transformers)
-    ```python
-    import lancedb
-    from lancedb.pydantic import LanceModel, Vector
-    from lancedb.embeddings import get_registry
+    {{< code language="python" >}}
+import lancedb
+from lancedb.pydantic import LanceModel, Vector
+from lancedb.embeddings import get_registry
 
-    db = lancedb.connect("/tmp/db")
-    model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", device="cpu")
+db = lancedb.connect("/tmp/db")
+model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", device="cpu")
 
-    class Words(LanceModel):
-        text: str = model.SourceField()
-        vector: Vector(model.ndims()) = model.VectorField()
+class Words(LanceModel):
+    text: str = model.SourceField()
+    vector: Vector(model.ndims()) = model.VectorField()
 
-    table = db.create_table("words", schema=Words)
-    table.add(
-        [
-            {"text": "hello world"},
-            {"text": "goodbye world"}
-        ]
-    )
+table = db.create_table("words", schema=Words)
+table.add(
+    [
+        {"text": "hello world"},
+        {"text": "goodbye world"}
+    ]
+)
 
-    query = "greetings"
-    actual = table.search(query).limit(1).to_pydantic(Words)[0]
-    print(actual.text)
-    ```
+query = "greetings"
+actual = table.search(query).limit(1).to_pydantic(Words)[0]
+print(actual.text)
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/sentence-transformers";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("sentence-transformers")
+  ?.create({ name: "BAAI/bge-small-en-v1.5", device: "cpu" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "words",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+
+const query = "greetings";
+const results = await table.search(query).limit(1).toArray();
+console.log(results[0].text);
+{{< /code >}}
 Visit sentence-transformers [HuggingFace HUB](https://huggingface.co/sentence-transformers) page for more information on the available models.
 

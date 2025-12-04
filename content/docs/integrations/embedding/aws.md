@@ -33,7 +33,7 @@ Supported parameters (to be passed in `create` method) are:
 
 Usage Example:
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
@@ -51,4 +51,29 @@ tbl = db.create_table("test", schema=TextModel, mode="overwrite")
 
 tbl.add(df)
 rs = tbl.search("hello").limit(1).to_pandas()
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/bedrock";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry().get("bedrock-text")?.create() as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable("test", [{ text: "hello world" }], {
+  schema,
+});
+const results = await table.search("hello").limit(1).toArray();
+{{< /code >}}

@@ -16,7 +16,7 @@ Generate embeddings via the [ollama](https://github.com/ollama/ollama-python) py
 | `keep_alive`           | `float` or `str`           | `"5m"`                   | Controls how long the model will stay loaded into memory following the request.                                                                |
 | `ollama_client_kwargs` | `dict`                     | `{}`                     | kwargs that can be past to the `ollama.Client`.                                                                                                |
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
@@ -37,4 +37,38 @@ table.add([
 query = "greetings"
 actual = table.search(query).limit(1).to_pydantic(Words)[0]
 print(actual.text)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/ollama";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("ollama")
+  ?.create({ name: "nomic-embed-text" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "words",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+
+const query = "greetings";
+const results = await table.search(query).limit(1).toArray();
+console.log(results[0].text);
+{{< /code >}}

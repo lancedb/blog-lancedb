@@ -77,6 +77,9 @@ table = db.create_table(table_name, data, mode="overwrite")
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("data/sample-lancedb");
+
 const tableName = "schema_evolution_add_example";
 
 const data = [
@@ -235,6 +238,9 @@ table = db.create_table(table_name, data, schema=schema, mode="overwrite")
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("data/sample-lancedb");
+
 const tableName = "schema_evolution_alter_example";
 
 const data = [
@@ -400,6 +406,9 @@ table = db.create_table(table_name, data, mode="overwrite")
 {{< /code >}}
 
 {{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+const db = await lancedb.connect("data/sample-lancedb");
+
 const tableName = "schema_evolution_drop_example";
 
 const data = [
@@ -472,8 +481,13 @@ Vector columns (used for embeddings) have special considerations. When altering 
 
 A common schema evolution task is converting a generic list column to a fixed-size list for performance:
 
-```python
+{{< code language="python" >}}
 vector_dim = 768  # Your embedding dimension
 table.alter_columns(dict(path="embedding", data_type=pa.list_(pa.float32(), vector_dim)))
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+// TypeScript support for changing column types is limited in the current version.
+// Please refer to the API documentation for the latest updates.
+{{< /code >}}
 

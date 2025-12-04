@@ -61,7 +61,7 @@ table.create_index(
     num_bits=1,
 )
 {{< /code >}}
-{{< code language="TypeScript" >}}
+{{< code language="typescript" >}}
 import * as lancedb from "@lancedb/lancedb";
 
 async function createIvfRqIndex() {

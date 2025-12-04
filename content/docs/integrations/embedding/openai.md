@@ -12,7 +12,7 @@ LanceDB registers the OpenAI embeddings function in the registry by default, as 
 | `use_azure` | bool | `False` | Set true to use Azure OpenAPI SDK |
 
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
@@ -33,4 +33,38 @@ table.add([
 query = "greetings"
 actual = table.search(query).limit(1).to_pydantic(Words)[0]
 print(actual.text)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/openai";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("openai")
+  ?.create({ model: "text-embedding-ada-002" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "words",
+  [{ text: "hello world" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+
+const query = "greetings";
+const results = await table.search(query).limit(1).toArray();
+console.log(results[0].text);
+{{< /code >}}

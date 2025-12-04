@@ -7,7 +7,7 @@ We offer support for all Hugging Face models (which can be loaded via [transform
 
 Example usage:
 
-```python
+{{< code language="python" >}}
 import lancedb
 import pandas as pd
 from lancedb.embeddings import get_registry
@@ -26,4 +26,38 @@ table.add(df)
 query = "old greeting"
 actual = table.search(query).limit(1).to_pydantic(Words)[0]
 print(actual.text)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import "@lancedb/lancedb/embedding/huggingface";
+import { Utf8 } from "apache-arrow";
+
+const db = await lancedb.connect("data/sample-lancedb");
+const func = getRegistry()
+  .get("huggingface")
+  ?.create({ name: "facebook/bart-base" }) as EmbeddingFunction;
+
+const schema = LanceSchema({
+  text: func.sourceField(new Utf8()),
+  vector: func.vectorField(),
+});
+
+const table = await db.createTable(
+  "greets",
+  [{ text: "hi hello sayonara" }, { text: "goodbye world" }],
+  {
+    schema,
+  },
+);
+
+const query = "old greeting";
+const results = await table.search(query).limit(1).toArray();
+console.log(results[0].text);
+{{< /code >}}

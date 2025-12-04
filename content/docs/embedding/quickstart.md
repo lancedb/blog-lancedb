@@ -13,11 +13,22 @@ We support most popular embedding models like OpenAI, Hugging Face, Sentence Tra
 
 First, import the necessary LanceDB components:
 
-```python
+{{< code language="python" >}}
 import lancedb
 from lancedb.pydantic import LanceModel, Vector
 from lancedb.embeddings import get_registry
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+import * as lancedb from "@lancedb/lancedb";
+import {
+  LanceSchema,
+  getRegistry,
+  register,
+  EmbeddingFunction,
+} from "@lancedb/lancedb/embedding";
+import { Utf8 } from "apache-arrow";
+{{< /code >}}
 
 - `lancedb`: The main database connection and operations
 - `LanceModel`: Pydantic model for defining table schemas
@@ -28,17 +39,30 @@ from lancedb.embeddings import get_registry
 
 Establish a connection to your LanceDB instance:
 
-```python
+{{< code language="python" >}}
 db = lancedb.connect(...)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const db = await lancedb.connect("...");
+{{< /code >}}
 
 ## Step 3: Initialize the Embedding Function
 
 Choose and configure your embedding model:
 
-```python
+{{< code language="python" >}}
 model = get_registry().get("sentence-transformers").create(name="BAAI/bge-small-en-v1.5", )
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+// You need to register the embedding function first
+import "@lancedb/lancedb/embedding/sentence-transformers";
+
+const model = getRegistry()
+  .get("sentence-transformers")
+  ?.create({ model: "BAAI/bge-small-en-v1.5" }) as EmbeddingFunction;
+{{< /code >}}
 
 This creates a Sentence Transformers embedding function using the BGE model. You can:
 - Change `"sentence-transformers"` to other providers like `"openai"`, `"cohere"`, etc.
@@ -49,11 +73,18 @@ This creates a Sentence Transformers embedding function using the BGE model. You
 
 Create a Pydantic model that defines your table structure:
 
-```python
+{{< code language="python" >}}
 class Words(LanceModel):
     text: str = model.SourceField()  
     vector: Vector(model.ndims()) = model.VectorField()  
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const schema = LanceSchema({
+  text: model.sourceField(new Utf8()),
+  vector: model.vectorField(),
+});
+{{< /code >}}
 
 - `SourceField()`: This field will be embedded
 - `VectorField()`: This stores the embeddings
@@ -67,13 +98,20 @@ Go back to LanceDB Cloud and check that the table and schema were created:
 
 Create a table with your schema and add data:
 
-```python
+{{< code language="python" >}}
 table = db.create_table("words", schema=Words)
 table.add([
     {"text": "hello world"},
     {"text": "goodbye world"}
 ])
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const table = await db.createTable("words", [{ text: "hello world" }], {
+  schema,
+});
+await table.add([{ text: "goodbye world" }]);
+{{< /code >}}
 
 The `table.add()` call automatically:
 - Takes the text from each document
@@ -86,11 +124,17 @@ Note: On LanceDB cloud, automatic query embedding is not supported. You need to 
 
 Search your data using natural language queries:
 
-```python
+{{< code language="python" >}}
 query = "greetings"
 actual = table.search(query).limit(1).to_pydantic(Words)[0]
 print(actual.text)
-```
+{{< /code >}}
+
+{{< code language="typescript" >}}
+const query = "greetings";
+const actual = (await table.search(query).limit(1).toArray())[0];
+console.log(actual.text);
+{{< /code >}}
 
 The search process:
 1. Automatically converts your query text to embeddings
