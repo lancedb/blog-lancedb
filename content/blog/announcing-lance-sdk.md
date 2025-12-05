@@ -74,6 +74,6 @@ This cadence allows the SDK to evolve rapidly while ensuring long-term stability
 
 ## Closing Thoughts
 
-The release of Lance SDK 1.0.0 is more than a version bump—it signifies the maturity of the format, the strength of the community, and a commitment to sustainable, collaborative evolution across the entire Lance ecosystem.
+The release of Lance SDK 1.0.0 is more than a version bump — it signifies the maturity of the format, the strength of the community, and a commitment to sustainable, collaborative evolution across the entire Lance ecosystem.
 
 If you rely on Lance in production or are considering adopting it, this new release model ensures you’ll benefit from both reliability and innovation, with clear guarantees at every layer of the stack.
