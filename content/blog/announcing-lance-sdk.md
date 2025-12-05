@@ -1,5 +1,5 @@
 ---
-title: "Announcing Lance SDK 1.0.0: What This Milestone Means for Developers and the Community"
+title: "Announcing Lance SDK 1.0.0: What This Milestone Means for the Community"
 date: 2025-12-10
 draft: false
 featured: true
