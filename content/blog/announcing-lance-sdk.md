@@ -42,13 +42,7 @@ This new approach is designed to improve clarity and empower both individual con
 The updated release process is intended to:
 
 1. Enable community voting on stable release candidates before an official release.
-2. Support patch releases for specific major/minor branches, allowing downstream teams to lock onto a stable version if needed.
-
-{{< admonition >}}
-
-**Note**: While release branches exist, the Lance project does not currently plan to actively backport patches unless they are critical.
-
-{{< /admonition >}}
+2. Support patch release for the latest stable branch for critical fixes identified by community maintainers.
 
 For more details, see [Lance release process](https://lance.org/community/project-specific/lance/release/) in the documentation.
 
@@ -77,3 +71,9 @@ Importantly:
 - Migration steps, if any, will remain straightforward, and published in the [Migration Guide](https://lance.org/guide/migration/).
 
 This cadence allows the SDK to evolve rapidly while ensuring long-term stability of data on disk.
+
+## Closing Thoughts
+
+The release of Lance SDK 1.0.0 is more than a version bump—it signifies the maturity of the format, the strength of the community, and a commitment to sustainable, collaborative evolution across the entire Lance ecosystem.
+
+If you rely on Lance in production or are considering adopting it, this new release model ensures you’ll benefit from both reliability and innovation, with clear guarantees at every layer of the stack.
