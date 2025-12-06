@@ -27,7 +27,7 @@ Here’s a closer look at the steps involved in building the Wikipedia search en
 
 ### Step 1: Data Preparation
 
-We start with a sample of the Wikipedia dataset. The data is pre-processed and cleaned to ensure it's in a consistent format. Each document in our dataset has a `title` and `text` field, which we'll use for semantic and full-text search, respectively. There are total ~41M entries in the dataset.
+We start with a sample of the Wikipedia dataset. The data is pre-processed and cleaned to ensure it's in a consistent format. Each document in our dataset has a `title` and `text` field, which we'll use for semantic and full-text search, respectively. There are a total of ~41M entries in the dataset.
 
 ### Step 2: Embedding Generation & Ingestion
 
