@@ -31,6 +31,10 @@ We start with a sample of the Wikipedia dataset. The data is pre-processed and c
 
 ### Step 2: Embedding Generation & Ingestion
 
+{{< admonition >}}
+**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tool, [geneva](https://lancedb.com/docs/geneva/). You can find the exact details in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
+{{< /admonition >}}
+
 To enable semantic search, we first need to convert our text data into a machine-readable format. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
 
 ```python
@@ -48,9 +52,6 @@ Here are the key performance metrics we achieved across an 8-GPU cluster:
 |**Indexing**|We built vector indexes on 41M documents in just 30 minutes|
 |**Write Bandwidth**|We sustained 4 GB/s peak write rates for real-time applications|
 
-{{< admonition >}}
-**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tools for its ingestion pipeline. You can find the exact details of these advanced techniques in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
-{{< /admonition >}}
 
 ### Step 3: Creating the LanceDB Table and Indexes
 
@@ -112,6 +113,19 @@ vector = model.encode(text)
 hybrid_results = table.search(query_type="hybrid").vector(vector).text(text).limit(5).to_pandas()
 ```
 
+### Analyzing the Query 
+
+To help debug search issues and optimize performance, LanceDB provides a valuable `explain_plan` and `analyse_plans` feature. This gives you a structured trace of how LanceDB executed your query.
+
+**Figure 5:** The `analyse_plan` can be shown for Semantic & Full Text Search. Hybrid Search will be added soon, with detailed outline of the reranker and its effect.
+![Wikipedia Search Demo](/assets/demos/wiki_analyse.png)
+
+[The Plan](/docs/search/optimize-queries/) shows:
+
+*   Which indexes were used (FTS and/or vector) and with what parameters
+*   Candidate counts from each stage (text and vector), plus the final returned set
+*   Filters that applied early vs. at re‑rank
+*   Timings per stage so you know where to optimize
 
 {{< admonition >}}
 To learn more about Hybrid Search, [give this example a try](/docs/search/hybrid-search/).
