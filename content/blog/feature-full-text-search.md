@@ -1,5 +1,5 @@
 ---
-title: "Building a Wikipedia Search Engine with LanceDB's Full-Text Search"
+title: "LanceDB WikiSearch: Native Full-Text Search on 41M Wikipedia Docs"
 date: 2025-08-11
 draft: false
 featured: false
@@ -35,7 +35,7 @@ We start with a sample of the Wikipedia dataset. The data is pre-processed and c
 **Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tool, [geneva](https://lancedb.com/docs/geneva/). You can find the exact details in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
 {{< /admonition >}}
 
-To enable semantic search, we first need to convert our text data into a machine-readable format. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
+To enable semantic search, we first need to convert our text data into their vector representations. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
 
 ```python
 from sentence_transformers import SentenceTransformer
