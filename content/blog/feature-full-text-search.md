@@ -29,12 +29,7 @@ Here’s a closer look at the steps involved in building the Wikipedia search en
 
 We start with a sample of the Wikipedia dataset. The data is pre-processed and cleaned to ensure it's in a consistent format. Each document in our dataset has a `title` and `text` field, which we'll use for semantic and full-text search, respectively. There are total ~41M entries in the dataset.
 
-
 ### Step 2: Embedding Generation & Ingestion
-
-{{< admonition >}}
-**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tools for its ingestion pipeline. You can find the exact details of these advanced techniques in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
-{{< /admonition >}}
 
 To enable semantic search, we first need to convert our text data into a machine-readable format. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
 
@@ -44,6 +39,18 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer('all-MiniLM-L6-v2')
 embeddings = model.encode(df['title'])
 ```
+
+Here are the key performance metrics we achieved across an 8-GPU cluster:
+
+|Metric|Performance|
+|-|-|
+|**Ingestion**|We processed 60,000+ documents per second with distributed GPU processing|
+|**Indexing**|We built vector indexes on 41M documents in just 30 minutes|
+|**Write Bandwidth**|We sustained 4 GB/s peak write rates for real-time applications|
+
+{{< admonition >}}
+**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tools for its ingestion pipeline. You can find the exact details of these advanced techniques in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
+{{< /admonition >}}
 
 ### Step 3: Creating the LanceDB Table and Indexes
 
@@ -86,7 +93,6 @@ Now that our data is indexed, we can perform various types of queries. LanceDB's
 
 
 Here are examples of how to perform each type of search using LanceDB's intuitive API:
-
 
 **Full-Text Search:**
 ```python
