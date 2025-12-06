@@ -27,15 +27,15 @@ Here’s a closer look at the steps involved in building the Wikipedia search en
 
 ### Step 1: Data Preparation
 
-We start with a sample of the Wikipedia dataset. The data is pre-processed and cleaned to ensure it's in a consistent format. Each document in our dataset has a `title` and `text` field, which we'll use for semantic and full-text search, respectively. There are total ~41M entries in the dataset.
+We start with a sample of the Wikipedia dataset. The data is pre-processed and cleaned to ensure it's in a consistent format. Each document in our dataset has a `title` and `text` field, which we'll use for semantic and full-text search, respectively. There are a total of ~41M entries in the dataset.
 
 ### Step 2: Embedding Generation & Ingestion
 
 {{< admonition >}}
-**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes advanced, enterprise-ready LanceDB feature engineering tool, [geneva](https://lancedb.com/docs/geneva/). You can find the exact details in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
+**Note on Ingestion:** For brevity, the ingestion process described here is a basic version. The live demo app utilizes an advanced, enterprise-ready LanceDB feature engineering tool, [geneva](https://lancedb.com/docs/geneva/). You can find the exact details in the "How This Works" section of the [live demo app](https://lancedb-demos.vercel.app/demo/wikipedia-search).
 {{< /admonition >}}
 
-To enable semantic search, we first need to convert our text data into their vector representations. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
+To enable semantic search, we first need to convert our text data into its vector representations. This is done by generating vector embeddings, which are numerical representations of the text that capture its underlying meaning. We use the popular `sentence-transformers` library for this task. The resulting vectors allow us to find conceptually related content, even if the exact keywords don't match.
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -110,11 +110,11 @@ vector_results = table.search(query_vector=query_vector).limit(5).to_pandas()
 ```python
 text = "history of space exploration"
 vector = model.encode(text)
-hybrid_results = table.search(query_type="hybrid")
-                .vector(vector)
-                .text(text)
-                .limit(5)
-                .to_pandas()
+hybrid_results = table.search(query_type="hybrid")\
+    .vector(vector)\
+    .text(text)\
+    .limit(5)\
+    .to_pandas()
 ```
 
 ### Analyzing the Query 
