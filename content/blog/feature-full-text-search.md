@@ -110,7 +110,11 @@ vector_results = table.search(query_vector=query_vector).limit(5).to_pandas()
 ```python
 text = "history of space exploration"
 vector = model.encode(text)
-hybrid_results = table.search(query_type="hybrid").vector(vector).text(text).limit(5).to_pandas()
+hybrid_results = table.search(query_type="hybrid")
+                .vector(vector)
+                .text(text)
+                .limit(5)
+                .to_pandas()
 ```
 
 ### Analyzing the Query 
