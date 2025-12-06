@@ -12,9 +12,18 @@
   title: "Wikipedia 41M Hybrid Search"
   detail_page: "blog/feature-full-text-search"
   description: "Interactive hybrid search, FTS and vector search demo with 41M+ Wikipedia entries. Explore the power of combining FTS with vector search for enhanced search."
-  thumb: "/assets/docs/demos/wiki-search.png"
+  thumb: "/assets/demos/wiki.png"
   tags:
     - hybrid search
     - vector search
     - FTS
   live_app: "https://lancedb-demos.vercel.app/demo/wikipedia-search"
+- key: video-search
+  title: "Video Search"
+  description: "Search through a library of videos using natural language queries. This demo showcases how to use LanceDB to perform semantic search on video content."
+  thumb: "/assets/demos/video_search.png"
+  tags:
+    - video search
+    - multimodal
+    - semantic search
+  live_app: "https://lancedb-demos.vercel.app/demo/video-search"
